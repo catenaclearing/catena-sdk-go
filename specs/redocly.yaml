@@ -1,0 +1,20 @@
+# Redocly configuration for combining and validating OpenAPI specs
+# https://redocly.com/docs/cli/configuration/
+
+apis:
+  catena-combined@v2:
+    root: combined/openapi.json
+
+lint:
+  extends:
+    - recommended
+  rules:
+    operation-operationId: error
+    no-unresolved-refs: error
+    no-identical-paths: error
+    path-not-include-query: error
+    spec: error
+
+# Customize rules if needed
+# decorators:
+#   remove-x-internal: off

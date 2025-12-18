@@ -1,0 +1,2942 @@
+openapi: 3.1.0
+info:
+  description: Integrations Service REST API.
+  title: Telematics Integrations Service - REST API
+  version: 0.1.0
+servers:
+- description: Catena Telematics API
+  url: https://api.catenatelematics.com
+tags:
+- description: "Endpoints for managing connections between Fleets and TSPs, including\
+    \ their nested schedules and executions. A connection has schedules, and each\
+    \ schedule has executions."
+  name: Connections
+paths:
+  /v2/integrations/connections:
+    get:
+      description: Get a paginated list of all connections accessible to your organization.
+      operationId: list_connections
+      parameters:
+      - explode: true
+        in: query
+        name: tsp_id
+        required: false
+        schema:
+          format: uuid
+          nullable: true
+          type: string
+        style: form
+      - description: Cursor for the next page
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 300
+          description: Page size
+          maximum: 1000
+          minimum: 1
+          title: Size
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_CursorPage_TypeVar_Customized_ConnectionRead_'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - connection:read
+      summary: List Connections
+      tags:
+      - Connections
+    post:
+      description: |-
+        Create a new connection.
+
+        This will validate the credentials with the TSP before creating the connection.
+        If the credentials are invalid, the connection will not be created and an error will be returned.
+
+        It also creates a schedule to refresh or exchanged the coneection details
+        for a short lived credential, shuch as an access token.
+      operationId: create_connection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - connection:create
+      summary: Create Connection
+      tags:
+      - Connections
+      x-excluded: "true"
+      x-mint:
+        content: <Info>Creating connections is only available to fleets.</Info>
+  /v2/integrations/connections/{connection_id}:
+    delete:
+      description: Delete a connection by its ID.
+      operationId: delete_connection
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - connection:delete
+      summary: Delete Connection
+      tags:
+      - Connections
+      x-excluded: "true"
+      x-mint:
+        content: <Info>Deleting connections is only available to fleets.</Info>
+    get:
+      description: Get detailed information about a specific connection.
+      operationId: get_connection
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - connection:read
+      summary: Get Connection
+      tags:
+      - Connections
+    patch:
+      description: |-
+        Update a connection by its ID.
+
+        The repository handles validation, authentication, and SLC creation when credentials are updated.
+      operationId: update_connection
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - connection:update
+      summary: Update Connection
+      tags:
+      - Connections
+      x-excluded: "true"
+      x-mint:
+        content: <Info>Updating connections is only available to fleets.</Info>
+  /v2/integrations/connections/{connection_id}/schedules:
+    get:
+      description: Get a paginated list of all schedules for a given connection.
+      operationId: list_schedules
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: resource
+        required: false
+        schema:
+          $ref: '#/components/schemas/ResourceEnum'
+        style: form
+      - description: Cursor for the next page
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 300
+          description: Page size
+          maximum: 1000
+          minimum: 1
+          title: Size
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_CursorPage_TypeVar_Customized_ScheduleRead_'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - schedule:read
+      summary: List Schedules
+      tags:
+      - Connections
+    post:
+      description: |-
+        Create a new schedule.
+
+        This will create a schedule to fetch data from the TSP.
+
+        It also creates a schedule to refresh or exchange the connection details
+        for a short lived credential, such as an access token.
+
+        For now only Catena admins can create schedules.
+      operationId: create_schedule
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - schedule:create
+      summary: Create Schedule
+      tags:
+      - Connections
+      x-excluded: "true"
+  /v2/integrations/connections/{connection_id}/schedules/{schedule_id}:
+    delete:
+      description: Delete a schedule by its ID.
+      operationId: delete_schedule
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          format: uuid
+          title: Schedule Id
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - schedule:delete
+      summary: Delete Schedule
+      tags:
+      - Connections
+      x-excluded: "true"
+    get:
+      description: Get detailed information about a specific schedule.
+      operationId: get_schedule
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          format: uuid
+          title: Schedule Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - schedule:read
+      summary: Get Schedule
+      tags:
+      - Connections
+    patch:
+      description: Update a schedule by its ID.
+      operationId: update_schedule
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          format: uuid
+          title: Schedule Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - schedule:update
+      summary: Update Schedule
+      tags:
+      - Connections
+      x-excluded: "true"
+  /v2/integrations/connections/{connection_id}/schedules/{schedule_id}/executions:
+    get:
+      description: Get a paginated list of all executions for a given schedule.
+      operationId: list_executions
+      parameters:
+      - explode: false
+        in: path
+        name: connection_id
+        required: true
+        schema:
+          format: uuid
+          title: Connection Id
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          format: uuid
+          title: Schedule Id
+          type: string
+        style: simple
+      - description: Cursor for the next page
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 300
+          description: Page size
+          maximum: 1000
+          minimum: 1
+          title: Size
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_CursorPage_TypeVar_Customized_ExecutionRead_'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - execution:read
+      summary: List Executions
+      tags:
+      - Connections
+components:
+  schemas:
+    AccessTokenCreds-Input:
+      description: Access Token Credentials
+      properties:
+        access_token:
+          title: Access Token
+          type: string
+        token_type:
+          title: Token Type
+          type: string
+        expires_in:
+          nullable: true
+          type: integer
+        refresh_token:
+          nullable: true
+          type: string
+        scope:
+          nullable: true
+          type: string
+        user_id:
+          nullable: true
+          type: string
+        host:
+          nullable: true
+          type: string
+      required:
+      - access_token
+      - token_type
+      title: AccessTokenCreds
+    AccessTokenCreds-Output:
+      description: Access Token Credentials
+      properties:
+        access_token: {}
+        token_type:
+          title: Token Type
+          type: string
+        expires_in:
+          nullable: true
+          type: integer
+        refresh_token: {}
+        scope:
+          nullable: true
+          type: string
+        user_id:
+          nullable: true
+          type: string
+        host: {}
+      required:
+      - access_token
+      - token_type
+      title: AccessTokenCreds
+    ApiBasicCreds-Input:
+      description: API Basic Connection model
+      properties:
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+        url:
+          nullable: true
+          type: string
+        auth_code:
+          nullable: true
+          type: string
+        host:
+          nullable: true
+          type: string
+      required:
+      - password
+      - username
+      title: ApiBasicCreds
+    ApiBasicCreds-Output:
+      description: API Basic Connection model
+      properties:
+        username: {}
+        password: {}
+        url:
+          nullable: true
+          type: string
+        auth_code: {}
+        host: {}
+      required:
+      - password
+      - username
+      title: ApiBasicCreds
+    ApiKeyCreds-Input:
+      description: API Key Connection model
+      properties:
+        api_key:
+          title: Api Key
+          type: string
+        url:
+          nullable: true
+          type: string
+        user_id:
+          nullable: true
+          type: string
+      required:
+      - api_key
+      title: ApiKeyCreds
+    ApiKeyCreds-Output:
+      description: API Key Connection model
+      properties:
+        api_key: {}
+        url:
+          nullable: true
+          type: string
+        user_id:
+          nullable: true
+          type: string
+      required:
+      - api_key
+      title: ApiKeyCreds
+    AzugaSLC-Input:
+      description: Azuga Short-lived Credentials model
+      properties:
+        api_key:
+          title: Api Key
+          type: string
+        token:
+          title: Token
+          type: string
+      required:
+      - api_key
+      - token
+      title: AzugaSLC
+    AzugaSLC-Output:
+      description: Azuga Short-lived Credentials model
+      properties:
+        api_key: {}
+        token: {}
+      required:
+      - api_key
+      - token
+      title: AzugaSLC
+    BadRequest:
+      example:
+        code: 0
+        detail: detail
+        message: Bad Request
+      properties:
+        code:
+          default: 400
+          title: Code
+          type: integer
+        message:
+          default: Bad Request
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: BadRequest
+    BouncieCreds-Input:
+      description: Bouncie Credentials model
+      properties:
+        auth_code:
+          title: Auth Code
+          type: string
+        redirect_uri:
+          title: Redirect Uri
+          type: string
+        client_id:
+          nullable: true
+          type: string
+        client_secret:
+          nullable: true
+          type: string
+      required:
+      - auth_code
+      - redirect_uri
+      title: BouncieCreds
+    BouncieCreds-Output:
+      description: Bouncie Credentials model
+      properties:
+        auth_code: {}
+        redirect_uri:
+          title: Redirect Uri
+          type: string
+        client_id:
+          nullable: true
+          type: string
+        client_secret: {}
+      required:
+      - auth_code
+      - redirect_uri
+      title: BouncieCreds
+    ClientIdSecretCreds-Input:
+      description: Client ID Secret Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret:
+          title: Client Secret
+          type: string
+        url:
+          title: Url
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - url
+      title: ClientIdSecretCreds
+    ClientIdSecretCreds-Output:
+      description: Client ID Secret Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret: {}
+        url:
+          title: Url
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - url
+      title: ClientIdSecretCreds
+    CompanyAccessCreds-Input:
+      description: Company Access Credentials model
+      properties:
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+        company_id:
+          title: Company Id
+          type: string
+      required:
+      - company_id
+      - password
+      - username
+      title: CompanyAccessCreds
+    CompanyAccessCreds-Output:
+      description: Company Access Credentials model
+      properties:
+        username: {}
+        password: {}
+        company_id: {}
+      required:
+      - company_id
+      - password
+      - username
+      title: CompanyAccessCreds
+    CompanyIdCreds-Input:
+      description: Company ID Credentials model
+      properties:
+        company_id:
+          title: Company Id
+          type: string
+      required:
+      - company_id
+      title: CompanyIdCreds
+    CompanyIdCreds-Output:
+      description: Company ID Credentials model
+      properties:
+        company_id: {}
+      required:
+      - company_id
+      title: CompanyIdCreds
+    Conflict:
+      example:
+        code: 5
+        detail: detail
+        message: Conflict
+      properties:
+        code:
+          default: 409
+          title: Code
+          type: integer
+        message:
+          default: Conflict
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: Conflict
+    ConnectionCreate:
+      description: API Model for creating a connection
+      example:
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        credentials:
+          password: password
+          database: database
+          drivername: postgresql+psycopg2
+          port: 0
+          host: host
+          username: username
+        description: description
+      properties:
+        tsp_id:
+          description: The ID of the Telematics Service Provider (TSP) that the fleet
+            uses.
+          format: uuid
+          title: TSP ID
+          type: string
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        description:
+          nullable: true
+          type: string
+      required:
+      - credentials
+      - tsp_id
+      title: ConnectionCreate
+    ConnectionRead:
+      description: API Model for reading a connection
+      example:
+        credentials:
+          api_key: '*****'
+        description: Eroad connection for fleet 1234
+        source_name: eroad
+      properties:
+        id:
+          description: Unique identifier for the connection.
+          format: uuid
+          title: Connection ID
+          type: string
+        created_at:
+          description: Timestamp when the connection was created.
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: Timestamp when the connection was last updated.
+          format: date-time
+          title: Updated At
+          type: string
+        fleet_id:
+          description: The Catena ID of the fleet that owns this connection.
+          format: uuid
+          title: Fleet ID
+          type: string
+        tsp_id:
+          description: The ID of the Telematics Service Provider (TSP).
+          format: uuid
+          title: TSP ID
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
+        credentials:
+          $ref: '#/components/schemas/Credentials_1'
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        description:
+          nullable: true
+          type: string
+      required:
+      - created_at
+      - credentials
+      - description
+      - fleet_id
+      - id
+      - source_name
+      - status
+      - tsp_id
+      - updated_at
+      title: ConnectionRead
+    ConnectionUpdate:
+      description: API Model for updating a connection
+      example:
+        credentials:
+          password: password
+          database: database
+          drivername: postgresql+psycopg2
+          port: 0
+          host: host
+          username: username
+        description: description
+        status: active
+      properties:
+        credentials:
+          $ref: '#/components/schemas/Credentials_2'
+        description:
+          nullable: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+      title: ConnectionUpdate
+    DatabaseCreds-Input:
+      description: Database Connection model
+      example:
+        password: password
+        database: database
+        drivername: postgresql+psycopg2
+        port: 0
+        host: host
+        username: username
+      properties:
+        drivername:
+          $ref: '#/components/schemas/DatabaseDriverEnum'
+        host:
+          title: Host
+          type: string
+        port:
+          title: Port
+          type: integer
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+        database:
+          title: Database
+          type: string
+      required:
+      - database
+      - drivername
+      - host
+      - password
+      - port
+      - username
+      title: DatabaseCreds
+    DatabaseCreds-Output:
+      description: Database Connection model
+      properties:
+        drivername:
+          $ref: '#/components/schemas/DatabaseDriverEnum'
+        host: {}
+        port:
+          title: Port
+          type: integer
+        username: {}
+        password: {}
+        database:
+          title: Database
+          type: string
+      required:
+      - database
+      - drivername
+      - host
+      - password
+      - port
+      - username
+      title: DatabaseCreds
+    DatabaseDriverEnum:
+      description: Database Driver
+      enum:
+      - postgresql+psycopg2
+      - cockroachdb
+      - mongodb
+      - mysql
+      - mariadb
+      - snowflake
+      - clickhouse
+      title: DatabaseDriverEnum
+      type: string
+    ExecutionRead:
+      description: API Model for reading an execution
+      example:
+        resource: vehicle
+        source_name: geotab
+        status: success
+      properties:
+        id:
+          description: Unique identifier for the execution. Use this ID to trace which
+            execution ingested specific data.
+          format: uuid
+          title: Execution ID
+          type: string
+        created_at:
+          description: Timestamp when the execution was created.
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: Timestamp when the execution was last updated.
+          format: date-time
+          title: Updated At
+          type: string
+        schedule_id:
+          description: The ID of the schedule that this execution belongs to.
+          format: uuid
+          title: Schedule ID
+          type: string
+        connection_id:
+          description: The ID of the connection used for this execution.
+          format: uuid
+          title: Connection ID
+          type: string
+        fleet_id:
+          description: The ID of the fleet that owns this execution.
+          format: uuid
+          title: Fleet ID
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
+        resource:
+          $ref: '#/components/schemas/ResourceEnum'
+      required:
+      - connection_id
+      - created_at
+      - fleet_id
+      - id
+      - resource
+      - schedule_id
+      - source_name
+      - status
+      - updated_at
+      title: ExecutionRead
+    EzlogzCreds:
+      description: Ezlogz Connection model
+      properties:
+        app_id:
+          title: App Id
+          type: string
+        app_key:
+          title: App Key
+          type: string
+        client_key:
+          title: Client Key
+          type: string
+      required:
+      - app_id
+      - app_key
+      - client_key
+      title: EzlogzCreds
+    FactorEldCreds-Input:
+      description: Factor ELD Connection model
+      properties:
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+        api_key:
+          title: Api Key
+          type: string
+      required:
+      - api_key
+      - password
+      - username
+      title: FactorEldCreds
+    FactorEldCreds-Output:
+      description: Factor ELD Connection model
+      properties:
+        username: {}
+        password: {}
+        api_key: {}
+      required:
+      - api_key
+      - password
+      - username
+      title: FactorEldCreds
+    FleetupCreds-Input:
+      description: Fleetup Connection model
+      properties:
+        account_id:
+          title: Account Id
+          type: string
+        secret_key:
+          title: Secret Key
+          type: string
+        api_key:
+          title: Api Key
+          type: string
+      required:
+      - account_id
+      - api_key
+      - secret_key
+      title: FleetupCreds
+    FleetupCreds-Output:
+      description: Fleetup Connection model
+      properties:
+        account_id:
+          title: Account Id
+          type: string
+        secret_key: {}
+        api_key: {}
+      required:
+      - account_id
+      - api_key
+      - secret_key
+      title: FleetupCreds
+    FleetupSLC-Input:
+      description: Fleetup SLC Connection model
+      properties:
+        account_id:
+          title: Account Id
+          type: string
+        api_key:
+          title: Api Key
+          type: string
+        token:
+          title: Token
+          type: string
+      required:
+      - account_id
+      - api_key
+      - token
+      title: FleetupSLC
+    FleetupSLC-Output:
+      description: Fleetup SLC Connection model
+      properties:
+        account_id:
+          title: Account Id
+          type: string
+        api_key: {}
+        token: {}
+      required:
+      - account_id
+      - api_key
+      - token
+      title: FleetupSLC
+    Forbidden:
+      example:
+        code: 1
+        detail: detail
+        message: Forbidden
+      properties:
+        code:
+          default: 403
+          title: Code
+          type: integer
+        message:
+          default: Forbidden
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: Forbidden
+    GatewayTimeout:
+      example:
+        code: 3
+        detail: detail
+        message: Gateway Timeout
+      properties:
+        code:
+          default: 504
+          title: Code
+          type: integer
+        message:
+          default: Gateway Timeout
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: GatewayTimeout
+    GeotabCreds-Input:
+      description: Geotab Connection model
+      properties:
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+        database:
+          title: Database
+          type: string
+        session_id:
+          nullable: true
+          type: string
+      required:
+      - database
+      - password
+      - username
+      title: GeotabCreds
+    GeotabCreds-Output:
+      description: Geotab Connection model
+      properties:
+        username: {}
+        password: {}
+        database:
+          title: Database
+          type: string
+        session_id:
+          nullable: true
+          type: string
+      required:
+      - database
+      - password
+      - username
+      title: GeotabCreds
+    InternalServerError:
+      example:
+        message: Internal Server Error
+      properties:
+        message:
+          default: Internal Server Error
+          title: Message
+          type: string
+      title: InternalServerError
+    IsaacCreds-Input:
+      description: Isaac Connection model
+      properties:
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+        auth_code:
+          title: Auth Code
+          type: string
+        host:
+          title: Host
+          type: string
+      required:
+      - auth_code
+      - host
+      - password
+      - username
+      title: IsaacCreds
+    IsaacCreds-Output:
+      description: Isaac Connection model
+      properties:
+        username: {}
+        password: {}
+        auth_code: {}
+        host: {}
+      required:
+      - auth_code
+      - host
+      - password
+      - username
+      title: IsaacCreds
+    MotiveCreds-Input:
+      description: Motive Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret:
+          title: Client Secret
+          type: string
+        auth_code:
+          title: Auth Code
+          type: string
+        redirect_uri:
+          title: Redirect Uri
+          type: string
+      required:
+      - auth_code
+      - client_id
+      - client_secret
+      - redirect_uri
+      title: MotiveCreds
+    MotiveCreds-Output:
+      description: Motive Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret: {}
+        auth_code: {}
+        redirect_uri:
+          title: Redirect Uri
+          type: string
+      required:
+      - auth_code
+      - client_id
+      - client_secret
+      - redirect_uri
+      title: MotiveCreds
+    NotFound:
+      example:
+        code: 5
+        detail: detail
+        message: Not Found
+      properties:
+        code:
+          default: 404
+          title: Code
+          type: integer
+        message:
+          default: Not Found
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: NotFound
+    OAuth1Creds-Input:
+      description: OAuth1 Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret:
+          title: Client Secret
+          type: string
+        resource_owner_id:
+          title: Resource Owner Id
+          type: string
+        resource_owner_secret:
+          title: Resource Owner Secret
+          type: string
+        signature_method:
+          title: Signature Method
+          type: string
+        realm:
+          title: Realm
+          type: string
+        url:
+          title: Url
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - realm
+      - resource_owner_id
+      - resource_owner_secret
+      - signature_method
+      - url
+      title: OAuth1Creds
+    OAuth1Creds-Output:
+      description: OAuth1 Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret: {}
+        resource_owner_id:
+          title: Resource Owner Id
+          type: string
+        resource_owner_secret: {}
+        signature_method:
+          title: Signature Method
+          type: string
+        realm:
+          title: Realm
+          type: string
+        url:
+          title: Url
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - realm
+      - resource_owner_id
+      - resource_owner_secret
+      - signature_method
+      - url
+      title: OAuth1Creds
+    OAuth2Creds-Input:
+      description: OAuth2 Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret:
+          title: Client Secret
+          type: string
+        scope:
+          nullable: true
+          type: string
+        refresh_token:
+          nullable: true
+          type: string
+        token_url:
+          title: Token Url
+          type: string
+        url:
+          title: Url
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - token_url
+      - url
+      title: OAuth2Creds
+    OAuth2Creds-Output:
+      description: OAuth2 Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret: {}
+        scope:
+          nullable: true
+          type: string
+        refresh_token: {}
+        token_url:
+          title: Token Url
+          type: string
+        url:
+          title: Url
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - token_url
+      - url
+      title: OAuth2Creds
+    OAuth2InitiateCreds-Input:
+      description: OAuth2 Initiate Connection model
+      properties:
+        code:
+          title: Code
+          type: string
+        grant_type:
+          nullable: true
+          type: string
+        token_url:
+          nullable: true
+          type: string
+        redirect_uri:
+          nullable: true
+          type: string
+      required:
+      - code
+      title: OAuth2InitiateCreds
+    OAuth2InitiateCreds-Output:
+      description: OAuth2 Initiate Connection model
+      properties:
+        code: {}
+        grant_type:
+          nullable: true
+          type: string
+        token_url:
+          nullable: true
+          type: string
+        redirect_uri:
+          nullable: true
+          type: string
+      required:
+      - code
+      title: OAuth2InitiateCreds
+    OAuth2PrivateKeyCreds-Input:
+      description: OAuth2 Private Key Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        private_key:
+          title: Private Key
+          type: string
+        scope:
+          nullable: true
+          type: string
+        token_url:
+          title: Token Url
+          type: string
+        url:
+          title: Url
+          type: string
+      required:
+      - client_id
+      - private_key
+      - token_url
+      - url
+      title: OAuth2PrivateKeyCreds
+    OAuth2PrivateKeyCreds-Output:
+      description: OAuth2 Private Key Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        private_key: {}
+        scope:
+          nullable: true
+          type: string
+        token_url:
+          title: Token Url
+          type: string
+        url:
+          title: Url
+          type: string
+      required:
+      - client_id
+      - private_key
+      - token_url
+      - url
+      title: OAuth2PrivateKeyCreds
+    OntimeEldCreds-Input:
+      description: Ontime ELD Connection model
+      properties:
+        api_key:
+          title: Api Key
+          type: string
+        provider_token:
+          title: Provider Token
+          type: string
+        dot_number:
+          title: Dot Number
+          type: string
+      required:
+      - api_key
+      - dot_number
+      - provider_token
+      title: OntimeEldCreds
+    OntimeEldCreds-Output:
+      description: Ontime ELD Connection model
+      properties:
+        api_key: {}
+        provider_token: {}
+        dot_number:
+          title: Dot Number
+          type: string
+      required:
+      - api_key
+      - dot_number
+      - provider_token
+      title: OntimeEldCreds
+    PrivateKeyCreds-Input:
+      description: Private Key Connection model
+      properties:
+        private_key:
+          title: Private Key
+          type: string
+        consumer_key:
+          title: Consumer Key
+          type: string
+        username:
+          title: Username
+          type: string
+        url:
+          nullable: true
+          type: string
+        token_url:
+          nullable: true
+          type: string
+      required:
+      - consumer_key
+      - private_key
+      - username
+      title: PrivateKeyCreds
+    PrivateKeyCreds-Output:
+      description: Private Key Connection model
+      properties:
+        private_key: {}
+        consumer_key: {}
+        username: {}
+        url:
+          nullable: true
+          type: string
+        token_url:
+          nullable: true
+          type: string
+      required:
+      - consumer_key
+      - private_key
+      - username
+      title: PrivateKeyCreds
+    ResourceEnum:
+      description: Enum for resources
+      enum:
+      - asset
+      - driver_event_log
+      - driver_safety_event
+      - dvir_log
+      - dvir_log_defect
+      - hos_availability
+      - hos_daily_snapshot
+      - hos_event
+      - hos_log
+      - hos_log_annotation
+      - hos_log_attachment
+      - hos_violation
+      - ifta_summary
+      - location_segment
+      - user
+      - vehicle
+      - vehicle_location
+      - vehicle_sensor
+      - trailer
+      title: ResourceEnum
+      type: string
+    RetryAfterDetail:
+      example:
+        retry_after_seconds: 9
+        message: message
+      properties:
+        retry_after_seconds:
+          title: Retry After Seconds
+          type: integer
+        message:
+          title: Message
+          type: string
+      required:
+      - message
+      - retry_after_seconds
+      title: RetryAfterDetail
+    S3Creds-Input:
+      description: S3 Connection model
+      properties:
+        access_key:
+          title: Access Key
+          type: string
+        secret_key:
+          title: Secret Key
+          type: string
+        bucket_name:
+          title: Bucket Name
+          type: string
+        region:
+          title: Region
+          type: string
+      required:
+      - access_key
+      - bucket_name
+      - region
+      - secret_key
+      title: S3Creds
+    S3Creds-Output:
+      description: S3 Connection model
+      properties:
+        access_key:
+          title: Access Key
+          type: string
+        secret_key: {}
+        bucket_name:
+          title: Bucket Name
+          type: string
+        region:
+          title: Region
+          type: string
+      required:
+      - access_key
+      - bucket_name
+      - region
+      - secret_key
+      title: S3Creds
+    SamsaraCreds-Input:
+      description: Samsara Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret:
+          title: Client Secret
+          type: string
+        auth_code:
+          title: Auth Code
+          type: string
+      required:
+      - auth_code
+      - client_id
+      - client_secret
+      title: SamsaraCreds
+    SamsaraCreds-Output:
+      description: Samsara Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret: {}
+        auth_code: {}
+      required:
+      - auth_code
+      - client_id
+      - client_secret
+      title: SamsaraCreds
+    ScheduleCreate:
+      description: API Model for creating a schedule
+      example:
+        max_concurrent_executions: 1
+        resource: asset
+        execution_interval_seconds: 0
+        consecutive_error_threshold: 6
+        status: active
+      properties:
+        resource:
+          $ref: '#/components/schemas/ResourceEnum'
+        execution_interval_seconds:
+          default: 600
+          description: The interval between scheduled executions in seconds. Defaults
+            to 10 minutes (600 seconds).
+          title: Execution Interval
+          type: integer
+        consecutive_error_threshold:
+          default: 15
+          description: The number of consecutive errors allowed before the schedule
+            is automatically set to INACTIVE. Defaults to 15.
+          title: Consecutive Error Threshold
+          type: integer
+        max_concurrent_executions:
+          default: 1
+          description: The maximum number of concurrent executions allowed for this
+            schedule. Defaults to 1.
+          title: Max Concurrent Executions
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+      required:
+      - resource
+      title: ScheduleCreate
+    ScheduleRead:
+      description: API Model for reading a schedule
+      example:
+        consecutive_error_count: 0
+        consecutive_error_threshold: 15
+        execution_interval_seconds: 600
+        max_concurrent_executions: 1
+        resource: vehicle
+      properties:
+        id:
+          description: Unique identifier for the schedule.
+          format: uuid
+          title: Schedule ID
+          type: string
+        connection_id:
+          description: The ID of the connection that this schedule belongs to.
+          format: uuid
+          title: Connection ID
+          type: string
+        resource:
+          $ref: '#/components/schemas/ResourceEnum'
+        execution_interval_seconds:
+          description: The interval between scheduled executions in seconds.
+          title: Execution Interval
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        consecutive_error_count:
+          description: The number of consecutive errors that have occurred for this
+            schedule.
+          title: Consecutive Error Count
+          type: integer
+        consecutive_error_threshold:
+          description: The number of consecutive errors allowed before the schedule
+            is automatically set to INACTIVE.
+          title: Consecutive Error Threshold
+          type: integer
+        max_concurrent_executions:
+          description: The maximum number of concurrent executions allowed for this
+            schedule.
+          title: Max Concurrent Executions
+          type: integer
+      required:
+      - connection_id
+      - consecutive_error_count
+      - consecutive_error_threshold
+      - execution_interval_seconds
+      - id
+      - max_concurrent_executions
+      - resource
+      - status
+      title: ScheduleRead
+    ScheduleUpdate:
+      description: API Model for updating a schedule
+      example:
+        consecutive_error_count: 1
+        max_concurrent_executions: 5
+        next_execution_at: 2000-01-23T04:56:07.000+00:00
+        execution_interval_seconds: 0
+        consecutive_error_threshold: 6
+        status: active
+      properties:
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        execution_interval_seconds:
+          nullable: true
+          type: integer
+        consecutive_error_threshold:
+          nullable: true
+          type: integer
+        consecutive_error_count:
+          nullable: true
+          type: integer
+        max_concurrent_executions:
+          nullable: true
+          type: integer
+        next_execution_at:
+          format: date-time
+          nullable: true
+          type: string
+      title: ScheduleUpdate
+    SftpCreds-Input:
+      description: SFTP Connection model
+      properties:
+        host:
+          title: Host
+          type: string
+        port:
+          nullable: true
+          type: integer
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+      required:
+      - host
+      - password
+      - username
+      title: SftpCreds
+    SftpCreds-Output:
+      description: SFTP Connection model
+      properties:
+        host: {}
+        port:
+          nullable: true
+          type: integer
+        username: {}
+        password: {}
+      required:
+      - host
+      - password
+      - username
+      title: SftpCreds
+    SpireonSLC-Input:
+      description: Spireon Short-lived Credentials model
+      properties:
+        access_token:
+          title: Access Token
+          type: string
+        auth_code:
+          title: Auth Code
+          type: string
+      required:
+      - access_token
+      - auth_code
+      title: SpireonSLC
+    SpireonSLC-Output:
+      description: Spireon Short-lived Credentials model
+      properties:
+        access_token: {}
+        auth_code: {}
+      required:
+      - access_token
+      - auth_code
+      title: SpireonSLC
+    StatusEnum:
+      description: Enum for statuses
+      enum:
+      - active
+      - inactive
+      - paused
+      - expired
+      - cancelled
+      - pending
+      - deleted
+      - stale
+      - success
+      - failed
+      - scheduled
+      - accepted
+      - declined
+      title: StatusEnum
+      type: string
+    TTCreds-Input:
+      description: Trucking Technologies Credentials model
+      properties:
+        api_key:
+          title: Api Key
+          type: string
+        provider_token:
+          title: Provider Token
+          type: string
+        dot_number:
+          title: Dot Number
+          type: string
+      required:
+      - api_key
+      - dot_number
+      - provider_token
+      title: TTCreds
+    TTCreds-Output:
+      description: Trucking Technologies Credentials model
+      properties:
+        api_key: {}
+        provider_token: {}
+        dot_number:
+          title: Dot Number
+          type: string
+      required:
+      - api_key
+      - dot_number
+      - provider_token
+      title: TTCreds
+    TokenCreds-Input:
+      description: Token Connection model
+      properties:
+        token:
+          title: Token
+          type: string
+        url:
+          nullable: true
+          type: string
+      required:
+      - token
+      title: TokenCreds
+    TokenCreds-Output:
+      description: Token Connection model
+      properties:
+        token: {}
+        url:
+          nullable: true
+          type: string
+      required:
+      - token
+      title: TokenCreds
+    TooManyRequests:
+      example:
+        code: 7
+        detail:
+          retry_after_seconds: 9
+          message: message
+        message: Too Many Requests
+      properties:
+        code:
+          default: 429
+          title: Code
+          type: integer
+        message:
+          default: Too Many Requests
+          title: Message
+          type: string
+        detail:
+          $ref: '#/components/schemas/RetryAfterDetail'
+      title: TooManyRequests
+    TruckXCreds-Input:
+      description: TruckX Short-lived Credentials model
+      properties:
+        dot_number:
+          title: Dot Number
+          type: string
+        token:
+          title: Token
+          type: string
+      required:
+      - dot_number
+      - token
+      title: TruckXCreds
+    TruckXCreds-Output:
+      description: TruckX Short-lived Credentials model
+      properties:
+        dot_number:
+          title: Dot Number
+          type: string
+        token: {}
+      required:
+      - dot_number
+      - token
+      title: TruckXCreds
+    TruckXSLC-Input:
+      description: TruckX Short-lived Credentials model
+      properties:
+        token:
+          title: Token
+          type: string
+        carrier_id:
+          title: Carrier Id
+          type: string
+      required:
+      - carrier_id
+      - token
+      title: TruckXSLC
+    TruckXSLC-Output:
+      description: TruckX Short-lived Credentials model
+      properties:
+        token: {}
+        carrier_id:
+          title: Carrier Id
+          type: string
+      required:
+      - carrier_id
+      - token
+      title: TruckXSLC
+    TspEnum:
+      description: Enum for TSPs
+      enum:
+      - ada
+      - ai_eld
+      - apollo
+      - ascend
+      - azuga
+      - bigroad
+      - blueinktech
+      - bouncie
+      - budgetgps
+      - cyntrx
+      - driver_tech
+      - dsg_elogs
+      - dynamic_eld
+      - eld_mandate
+      - eroad
+      - evo_eld
+      - ezlogz
+      - factor_eld
+      - fleetcomplete
+      - fleetcompletehub
+      - fleethunt
+      - fleetsharp
+      - fleetup
+      - fm
+      - forwardthinking
+      - geotab
+      - gpsinsight
+      - gpstab
+      - gpstrackit
+      - greenlight
+      - hcss
+      - hosconnect
+      - hos247
+      - hutch
+      - intellishift
+      - isaac
+      - jjkeller
+      - knight_eld
+      - konexial
+      - linxup
+      - lucid_eld
+      - lytx
+      - mapon
+      - matrack
+      - maven
+      - mobilefleet
+      - motive
+      - my_logs_eld
+      - nero
+      - netradyne
+      - new_eld_world
+      - nextraq
+      - onestep
+      - ontime_eld
+      - optima
+      - orbcomm
+      - orient_eld
+      - payd
+      - peoplenet
+      - phoenix
+      - pop_eld
+      - randmcnally
+      - rastrac
+      - routemate
+      - samsara
+      - selectivedrive
+      - smart_elds
+      - sparkle_eld
+      - omnitracs
+      - spireon
+      - surfsight
+      - swift
+      - switchboard
+      - teletracnavman
+      - teletracnavman_director
+      - telogis
+      - tenna
+      - think
+      - tive
+      - traccar
+      - transflo
+      - trimble
+      - truckx
+      - tt
+      - us_fast_eld
+      - verizon
+      - verizon_reveal
+      - vista_eld
+      - vistracks
+      - webfleet
+      - xplore_eld
+      - zonar
+      - zubie
+      title: TspEnum
+      type: string
+    Unauthorized:
+      example:
+        code: 6
+        detail: detail
+        message: Unauthorized
+      properties:
+        code:
+          default: 401
+          title: Code
+          type: integer
+        message:
+          default: Unauthorized
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: Unauthorized
+    UnprocessableEntity:
+      example:
+        code: 2
+        detail:
+        - path: path
+          input: input
+          error_type: error_type
+          message: message
+        - path: path
+          input: input
+          error_type: error_type
+          message: message
+        message: Invalid Request Body
+      properties:
+        code:
+          default: 422
+          title: Code
+          type: integer
+        message:
+          default: Invalid Request Body
+          title: Message
+          type: string
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationErrorDetail'
+          nullable: true
+          type: array
+      title: UnprocessableEntity
+    ValidationErrorDetail:
+      example:
+        path: path
+        input: input
+        error_type: error_type
+        message: message
+      properties:
+        path:
+          title: Path
+          type: string
+        input:
+          title: Input
+          type: string
+        message:
+          title: Message
+          type: string
+        error_type:
+          title: Error Type
+          type: string
+      required:
+      - error_type
+      - input
+      - message
+      - path
+      title: ValidationErrorDetail
+    ZubieCreds-Input:
+      description: Motive Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret:
+          title: Client Secret
+          type: string
+        auth_code:
+          title: Auth Code
+          type: string
+        redirect_uri:
+          title: Redirect Uri
+          type: string
+      required:
+      - auth_code
+      - client_id
+      - client_secret
+      - redirect_uri
+      title: ZubieCreds
+    ZubieCreds-Output:
+      description: Motive Connection model
+      properties:
+        client_id:
+          title: Client Id
+          type: string
+        client_secret: {}
+        auth_code: {}
+        redirect_uri:
+          title: Redirect Uri
+          type: string
+      required:
+      - auth_code
+      - client_id
+      - client_secret
+      - redirect_uri
+      title: ZubieCreds
+    _CursorPage_TypeVar_Customized_ConnectionRead_:
+      example:
+        next_page: next_page
+        current_page_backwards: current_page_backwards
+        previous_page: previous_page
+        items:
+        - credentials:
+            api_key: '*****'
+          description: Eroad connection for fleet 1234
+          source_name: eroad
+        - credentials:
+            api_key: '*****'
+          description: Eroad connection for fleet 1234
+          source_name: eroad
+        current_page: current_page
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ConnectionRead'
+          type: array
+        current_page:
+          nullable: true
+          type: string
+        current_page_backwards:
+          nullable: true
+          type: string
+        previous_page:
+          nullable: true
+          type: string
+        next_page:
+          nullable: true
+          type: string
+      required:
+      - items
+      title: "_CursorPage[TypeVar]Customized[ConnectionRead]"
+    _CursorPage_TypeVar_Customized_ExecutionRead_:
+      example:
+        next_page: next_page
+        current_page_backwards: current_page_backwards
+        previous_page: previous_page
+        items:
+        - resource: vehicle
+          source_name: geotab
+          status: success
+        - resource: vehicle
+          source_name: geotab
+          status: success
+        current_page: current_page
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ExecutionRead'
+          type: array
+        current_page:
+          nullable: true
+          type: string
+        current_page_backwards:
+          nullable: true
+          type: string
+        previous_page:
+          nullable: true
+          type: string
+        next_page:
+          nullable: true
+          type: string
+      required:
+      - items
+      title: "_CursorPage[TypeVar]Customized[ExecutionRead]"
+    _CursorPage_TypeVar_Customized_ScheduleRead_:
+      example:
+        next_page: next_page
+        current_page_backwards: current_page_backwards
+        previous_page: previous_page
+        items:
+        - consecutive_error_count: 0
+          consecutive_error_threshold: 15
+          execution_interval_seconds: 600
+          max_concurrent_executions: 1
+          resource: vehicle
+        - consecutive_error_count: 0
+          consecutive_error_threshold: 15
+          execution_interval_seconds: 600
+          max_concurrent_executions: 1
+          resource: vehicle
+        current_page: current_page
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ScheduleRead'
+          type: array
+        current_page:
+          nullable: true
+          type: string
+        current_page_backwards:
+          nullable: true
+          type: string
+        previous_page:
+          nullable: true
+          type: string
+        next_page:
+          nullable: true
+          type: string
+      required:
+      - items
+      title: "_CursorPage[TypeVar]Customized[ScheduleRead]"
+    Credentials:
+      anyOf:
+      - $ref: '#/components/schemas/DatabaseCreds-Input'
+      - $ref: '#/components/schemas/ApiKeyCreds-Input'
+      - $ref: '#/components/schemas/ApiBasicCreds-Input'
+      - $ref: '#/components/schemas/AzugaSLC-Input'
+      - $ref: '#/components/schemas/BouncieCreds-Input'
+      - $ref: '#/components/schemas/CompanyIdCreds-Input'
+      - $ref: '#/components/schemas/FactorEldCreds-Input'
+      - $ref: '#/components/schemas/OAuth1Creds-Input'
+      - $ref: '#/components/schemas/OAuth2Creds-Input'
+      - $ref: '#/components/schemas/OAuth2PrivateKeyCreds-Input'
+      - $ref: '#/components/schemas/SftpCreds-Input'
+      - $ref: '#/components/schemas/TokenCreds-Input'
+      - $ref: '#/components/schemas/PrivateKeyCreds-Input'
+      - $ref: '#/components/schemas/S3Creds-Input'
+      - $ref: '#/components/schemas/ClientIdSecretCreds-Input'
+      - $ref: '#/components/schemas/AccessTokenCreds-Input'
+      - $ref: '#/components/schemas/GeotabCreds-Input'
+      - $ref: '#/components/schemas/IsaacCreds-Input'
+      - $ref: '#/components/schemas/OAuth2InitiateCreds-Input'
+      - $ref: '#/components/schemas/EzlogzCreds'
+      - $ref: '#/components/schemas/FleetupCreds-Input'
+      - $ref: '#/components/schemas/FleetupSLC-Input'
+      - $ref: '#/components/schemas/SpireonSLC-Input'
+      - $ref: '#/components/schemas/TTCreds-Input'
+      - $ref: '#/components/schemas/SamsaraCreds-Input'
+      - $ref: '#/components/schemas/TruckXCreds-Input'
+      - $ref: '#/components/schemas/TruckXSLC-Input'
+      - $ref: '#/components/schemas/MotiveCreds-Input'
+      - $ref: '#/components/schemas/CompanyAccessCreds-Input'
+      - $ref: '#/components/schemas/OntimeEldCreds-Input'
+      - $ref: '#/components/schemas/ZubieCreds-Input'
+      description: The connection credentials required to authenticate with the TSP
+        on behalf of the fleet.
+      title: Credentials
+    Credentials_1:
+      anyOf:
+      - $ref: '#/components/schemas/DatabaseCreds-Output'
+      - $ref: '#/components/schemas/ApiKeyCreds-Output'
+      - $ref: '#/components/schemas/ApiBasicCreds-Output'
+      - $ref: '#/components/schemas/AzugaSLC-Output'
+      - $ref: '#/components/schemas/BouncieCreds-Output'
+      - $ref: '#/components/schemas/CompanyIdCreds-Output'
+      - $ref: '#/components/schemas/FactorEldCreds-Output'
+      - $ref: '#/components/schemas/OAuth1Creds-Output'
+      - $ref: '#/components/schemas/OAuth2Creds-Output'
+      - $ref: '#/components/schemas/OAuth2PrivateKeyCreds-Output'
+      - $ref: '#/components/schemas/SftpCreds-Output'
+      - $ref: '#/components/schemas/TokenCreds-Output'
+      - $ref: '#/components/schemas/PrivateKeyCreds-Output'
+      - $ref: '#/components/schemas/S3Creds-Output'
+      - $ref: '#/components/schemas/ClientIdSecretCreds-Output'
+      - $ref: '#/components/schemas/AccessTokenCreds-Output'
+      - $ref: '#/components/schemas/GeotabCreds-Output'
+      - $ref: '#/components/schemas/IsaacCreds-Output'
+      - $ref: '#/components/schemas/OAuth2InitiateCreds-Output'
+      - $ref: '#/components/schemas/EzlogzCreds'
+      - $ref: '#/components/schemas/FleetupCreds-Output'
+      - $ref: '#/components/schemas/FleetupSLC-Output'
+      - $ref: '#/components/schemas/SpireonSLC-Output'
+      - $ref: '#/components/schemas/TTCreds-Output'
+      - $ref: '#/components/schemas/SamsaraCreds-Output'
+      - $ref: '#/components/schemas/TruckXCreds-Output'
+      - $ref: '#/components/schemas/TruckXSLC-Output'
+      - $ref: '#/components/schemas/MotiveCreds-Output'
+      - $ref: '#/components/schemas/CompanyAccessCreds-Output'
+      - $ref: '#/components/schemas/OntimeEldCreds-Output'
+      - $ref: '#/components/schemas/ZubieCreds-Output'
+      description: The connection credentials used to authenticate with the TSP.
+      title: Credentials
+    Credentials_2:
+      anyOf:
+      - $ref: '#/components/schemas/DatabaseCreds-Input'
+      - $ref: '#/components/schemas/ApiKeyCreds-Input'
+      - $ref: '#/components/schemas/ApiBasicCreds-Input'
+      - $ref: '#/components/schemas/AzugaSLC-Input'
+      - $ref: '#/components/schemas/BouncieCreds-Input'
+      - $ref: '#/components/schemas/CompanyIdCreds-Input'
+      - $ref: '#/components/schemas/FactorEldCreds-Input'
+      - $ref: '#/components/schemas/OAuth1Creds-Input'
+      - $ref: '#/components/schemas/OAuth2Creds-Input'
+      - $ref: '#/components/schemas/OAuth2PrivateKeyCreds-Input'
+      - $ref: '#/components/schemas/SftpCreds-Input'
+      - $ref: '#/components/schemas/TokenCreds-Input'
+      - $ref: '#/components/schemas/PrivateKeyCreds-Input'
+      - $ref: '#/components/schemas/S3Creds-Input'
+      - $ref: '#/components/schemas/ClientIdSecretCreds-Input'
+      - $ref: '#/components/schemas/AccessTokenCreds-Input'
+      - $ref: '#/components/schemas/GeotabCreds-Input'
+      - $ref: '#/components/schemas/IsaacCreds-Input'
+      - $ref: '#/components/schemas/OAuth2InitiateCreds-Input'
+      - $ref: '#/components/schemas/EzlogzCreds'
+      - $ref: '#/components/schemas/FleetupCreds-Input'
+      - $ref: '#/components/schemas/FleetupSLC-Input'
+      - $ref: '#/components/schemas/SpireonSLC-Input'
+      - $ref: '#/components/schemas/TTCreds-Input'
+      - $ref: '#/components/schemas/SamsaraCreds-Input'
+      - $ref: '#/components/schemas/TruckXCreds-Input'
+      - $ref: '#/components/schemas/TruckXSLC-Input'
+      - $ref: '#/components/schemas/MotiveCreds-Input'
+      - $ref: '#/components/schemas/CompanyAccessCreds-Input'
+      - $ref: '#/components/schemas/OntimeEldCreds-Input'
+      - $ref: '#/components/schemas/ZubieCreds-Input'
+      description: The connection credentials to authenticate with the TSP. Update
+        these if the fleet's TSP account credentials have changed.
+      nullable: true
+      title: Credentials
+  securitySchemes:
+    Bearer:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.catenatelematics.com/realms/catena/protocol/openid-connect/auth
+          refreshUrl: https://auth.catenatelematics.com/realms/catena/protocol/openid-connect/token
+          scopes: {}
+          tokenUrl: https://auth.catenatelematics.com/realms/catena/protocol/openid-connect/token
+        clientCredentials:
+          refreshUrl: https://auth.catenatelematics.com/realms/catena/protocol/openid-connect/token
+          scopes: {}
+          tokenUrl: https://auth.catenatelematics.com/realms/catena/protocol/openid-connect/token
+      type: oauth2

@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  description: |
+    OpenAPI definition for the Keycloak OpenID Connect/OAuth2 endpoints
+    for the "catena" realm at https://auth.catenatelematics.com/realms/catena.
+  title: Keycloak OIDC Auth API
+  version: 1.0.0
+servers:
+- description: Catena Telematics Authentication Server
+  url: https://auth.catenatelematics.com/realms/catena
+tags:
+- description: OAuth 2.0 token generation and management endpoints for API authentication
+  name: OAuth 2.0
+paths:
+  /protocol/openid-connect/token:
+    post:
+      description: |
+        Exchange your credentials for an OAuth2 token to access the Catena Telematics API endpoints.
+      operationId: token
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/token_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+          description: Token response
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_client:
+                  summary: Invalid client credentials
+                  value:
+                    error: invalid_client
+                    error_description: Invalid client or Invalid client credentials
+                invalid_grant:
+                  summary: Invalid refresh token
+                  value:
+                    error: invalid_grant
+                    error_description: Invalid refresh token
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid authentication
+      summary: Get Token
+      tags:
+      - OAuth 2.0
+  /protocol/openid-connect/revoke:
+    post:
+      description: |
+        Revokes an access or refresh token.
+      operationId: revokeToken
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/revokeToken_request'
+        required: true
+      responses:
+        "200":
+          description: Token successfully revoked (body may be empty).
+        "401":
+          content:
+            application/json:
+              example:
+                error: invalid_client
+                error_description: Invalid client or Invalid client credentials
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid client authentication
+      summary: Revoke Token
+      tags:
+      - OAuth 2.0
+components:
+  schemas:
+    TokenResponse:
+      description: OAuth2 token response from Keycloak.
+      example:
+        access_token: eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiS...
+        refresh_token: eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiS...
+        refresh_expires_in: 6
+        not-before-policy: 0
+        scope: fleet:read share-agreement:read telematics:read
+        token_type: Bearer
+        session_state: 123e4567-e89b-12d3-a456-426614174000
+        expires_in: 0
+      properties:
+        access_token:
+          example: eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiS...
+          type: string
+        expires_in:
+          type: integer
+        refresh_expires_in:
+          type: integer
+        refresh_token:
+          example: eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiS...
+          type: string
+        token_type:
+          example: Bearer
+          type: string
+        session_state:
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        not-before-policy:
+          example: 0
+          type: integer
+        scope:
+          example: fleet:read share-agreement:read telematics:read
+          type: string
+      required:
+      - access_token
+      - expires_in
+      - token_type
+    ErrorResponse:
+      description: Error response from the authentication server.
+      example:
+        error_description: error_description
+        error: error
+      properties:
+        error:
+          description: Error code.
+          type: string
+        error_description:
+          description: Human-readable error description.
+          type: string
+      required:
+      - error
+    token_request:
+      properties:
+        grant_type:
+          default: client_credentials
+          description: Grant type for token request. Must be "client_credentials"
+          enum:
+          - client_credentials
+          type: string
+        client_id:
+          description: Your client identifier
+          example: ""
+          type: string
+        client_secret:
+          description: Your client secret
+          example: ""
+          format: password
+          type: string
+        scope:
+          default: organization
+          description: Required scope for API access. Must be "organization"
+          enum:
+          - organization
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - grant_type
+      - scope
+    revokeToken_request:
+      properties:
+        token:
+          description: The token to revoke.
+          example: ""
+          type: string
+        client_id:
+          description: Your client identifier.
+          example: ""
+          type: string
+        client_secret:
+          description: Your client secret.
+          example: ""
+          format: password
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - token
+  securitySchemes:
+    clientAuth:
+      description: |
+        HTTP Basic authentication using client_id as username and client_secret as password.
+      scheme: basic
+      type: http
