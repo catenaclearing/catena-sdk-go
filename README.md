@@ -38,6 +38,8 @@ go get github.com/catenaclearing/catena-sdk-go/gen/notifications
 
 ## Quick Start
 
+> **Note:** For more comprehensive examples, please check the [examples/](examples/) directory.
+
 ### Basic Usage
 
 The SDK provides a unified client that handles authentication (OAuth2 Client Credentials), token refreshing, and access to all API services.
@@ -77,8 +79,8 @@ func main() {
     // The client automatically injects the Authorization header
     // and refreshes the token if it expires.
     
-    // Example: List integrations
-    resp, httpResp, err := client.Integrations().DefaultApi.ListIntegrations(ctx).Execute()
+    // Example: List connections
+    resp, httpResp, err := client.Integrations().ConnectionsAPI.ListConnections(ctx).Execute()
     if err != nil {
         log.Fatalf("Error calling API: %v", err)
     }
@@ -115,7 +117,7 @@ func ptr[T any](v T) *T { return &v }
 
 // List connections with pagination
 opts := pagination.ListConnectionsPaginationOptions{
-    Limit: ptr(100), // Optional: set page size
+    Size: ptr(100), // Optional: set page size
 }
 
 err := pagination.ListConnectionsEach(client, ctx, opts, func(conn integrationsapi.ConnectionRead) error {
