@@ -1,0 +1,242 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Keycloak OIDC Auth API",
+    "version": "1.0.0",
+    "description": "OpenAPI definition for the Keycloak OpenID Connect/OAuth2 endpoints\nfor the \"catena\" realm at https://auth.catenatelematics.com/realms/catena.\n"
+  },
+  "servers": [
+    {
+      "url": "https://auth.catenatelematics.com/realms/catena",
+      "description": "Catena Telematics Authentication Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "OAuth 2.0",
+      "description": "OAuth 2.0 token generation and management endpoints for API authentication"
+    }
+  ],
+  "paths": {
+    "/protocol/openid-connect/token": {
+      "post": {
+        "summary": "Get Token",
+        "description": "Exchange your credentials for an OAuth2 token to access the Catena Telematics API endpoints.\n",
+        "operationId": "token",
+        "tags": [
+          "OAuth 2.0"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grant_type": {
+                    "type": "string",
+                    "const": "client_credentials",
+                    "description": "Grant type for token request. Must be \"client_credentials\"",
+                    "default": "client_credentials"
+                  },
+                  "client_id": {
+                    "type": "string",
+                    "description": "Your client identifier",
+                    "example": ""
+                  },
+                  "client_secret": {
+                    "type": "string",
+                    "format": "password",
+                    "description": "Your client secret",
+                    "example": ""
+                  },
+                  "scope": {
+                    "type": "string",
+                    "description": "Required scope for API access. Must be \"organization\"",
+                    "const": "organization",
+                    "default": "organization"
+                  }
+                },
+                "required": [
+                  "grant_type",
+                  "client_id",
+                  "client_secret",
+                  "scope"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalid_client": {
+                    "summary": "Invalid client credentials",
+                    "value": {
+                      "error": "invalid_client",
+                      "error_description": "Invalid client or Invalid client credentials"
+                    }
+                  },
+                  "invalid_grant": {
+                    "summary": "Invalid refresh token",
+                    "value": {
+                      "error": "invalid_grant",
+                      "error_description": "Invalid refresh token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protocol/openid-connect/revoke": {
+      "post": {
+        "summary": "Revoke Token",
+        "description": "Revokes an access or refresh token.\n",
+        "operationId": "revokeToken",
+        "tags": [
+          "OAuth 2.0"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "description": "The token to revoke.",
+                    "example": ""
+                  },
+                  "client_id": {
+                    "type": "string",
+                    "description": "Your client identifier.",
+                    "example": ""
+                  },
+                  "client_secret": {
+                    "type": "string",
+                    "format": "password",
+                    "description": "Your client secret.",
+                    "example": ""
+                  }
+                },
+                "required": [
+                  "token",
+                  "client_id",
+                  "client_secret"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token successfully revoked (body may be empty)."
+          },
+          "401": {
+            "description": "Invalid client authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "invalid_client",
+                  "error_description": "Invalid client or Invalid client credentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "clientAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "HTTP Basic authentication using client_id as username and client_secret as password.\n"
+      }
+    },
+    "schemas": {
+      "TokenResponse": {
+        "type": "object",
+        "description": "OAuth2 token response from Keycloak.",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiS..."
+          },
+          "expires_in": {
+            "type": "integer"
+          },
+          "refresh_expires_in": {
+            "type": "integer"
+          },
+          "refresh_token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiS..."
+          },
+          "token_type": {
+            "type": "string",
+            "example": "Bearer"
+          },
+          "session_state": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "not-before-policy": {
+            "type": "integer",
+            "example": 0
+          },
+          "scope": {
+            "type": "string",
+            "example": "fleet:read share-agreement:read telematics:read"
+          }
+        },
+        "required": [
+          "access_token",
+          "expires_in",
+          "token_type"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Error response from the authentication server.",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error code."
+          },
+          "error_description": {
+            "type": "string",
+            "description": "Human-readable error description."
+          }
+        },
+        "required": [
+          "error"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# Don't generate these files
+.travis.yml
+git_push.sh
+.gitlab-ci.yml
+.gitignore

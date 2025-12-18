@@ -1,0 +1,269 @@
+# HosRulesetCodeEnum
+
+## Enum
+
+
+* `US_INT_PROP_60_7` (value: `"US_INT_PROP_60_7"`)
+
+* `US_INT_PROP_60_7_BIG` (value: `"US_INT_PROP_60_7_BIG"`)
+
+* `US_INT_PROP_60_7_BIG_SLP` (value: `"US_INT_PROP_60_7_BIG_SLP"`)
+
+* `US_INT_PROP_60_7_NORST` (value: `"US_INT_PROP_60_7_NORST"`)
+
+* `US_INT_PROP_60_7_NORST_SLP` (value: `"US_INT_PROP_60_7_NORST_SLP"`)
+
+* `US_INT_PROP_60_7_NOBRK` (value: `"US_INT_PROP_60_7_NOBRK"`)
+
+* `US_INT_PROP_60_7_NOBRK_BIG` (value: `"US_INT_PROP_60_7_NOBRK_BIG"`)
+
+* `US_INT_PROP_60_7_NOBRK_BIG_SLP` (value: `"US_INT_PROP_60_7_NOBRK_BIG_SLP"`)
+
+* `US_INT_PROP_60_7_NOBRK_SLP` (value: `"US_INT_PROP_60_7_NOBRK_SLP"`)
+
+* `US_INT_PROP_60_7_SH` (value: `"US_INT_PROP_60_7_SH"`)
+
+* `US_INT_PROP_60_7_SH_NORST` (value: `"US_INT_PROP_60_7_SH_NORST"`)
+
+* `US_INT_PROP_70_8` (value: `"US_INT_PROP_70_8"`)
+
+* `US_INT_PROP_70_8_BIG` (value: `"US_INT_PROP_70_8_BIG"`)
+
+* `US_INT_PROP_70_8_BIG_SLP` (value: `"US_INT_PROP_70_8_BIG_SLP"`)
+
+* `US_INT_PROP_70_8_NORST` (value: `"US_INT_PROP_70_8_NORST"`)
+
+* `US_INT_PROP_70_8_NORST_SLP` (value: `"US_INT_PROP_70_8_NORST_SLP"`)
+
+* `US_INT_PROP_70_8_NOBRK` (value: `"US_INT_PROP_70_8_NOBRK"`)
+
+* `US_INT_PROP_70_8_NOBRK_BIG` (value: `"US_INT_PROP_70_8_NOBRK_BIG"`)
+
+* `US_INT_PROP_70_8_NOBRK_BIG_SLP` (value: `"US_INT_PROP_70_8_NOBRK_BIG_SLP"`)
+
+* `US_INT_PROP_70_8_NOBRK_SLP` (value: `"US_INT_PROP_70_8_NOBRK_SLP"`)
+
+* `US_INT_PROP_70_8_SH` (value: `"US_INT_PROP_70_8_SH"`)
+
+* `US_INT_PROP_70_8_SH_14_H` (value: `"US_INT_PROP_70_8_SH_14H"`)
+
+* `US_INT_PROP_70_8_SH_NORST` (value: `"US_INT_PROP_70_8_SH_NORST"`)
+
+* `US_INT_PROP_SH_14_H` (value: `"US_INT_PROP_SH_14H"`)
+
+* `US_INT_PAX_60_7` (value: `"US_INT_PAX_60_7"`)
+
+* `US_INT_PAX_60_7_SH` (value: `"US_INT_PAX_60_7_SH"`)
+
+* `US_INT_PAX_70_8` (value: `"US_INT_PAX_70_8"`)
+
+* `US_INT_PAX_70_8_SH` (value: `"US_INT_PAX_70_8_SH"`)
+
+* `US_INT_SALESP` (value: `"US_INT_SALESP"`)
+
+* `US_INT_SALESP_NCDL_SH` (value: `"US_INT_SALESP_NCDL_SH"`)
+
+* `US_INT_OILTR_60_7` (value: `"US_INT_OILTR_60_7"`)
+
+* `US_INT_OILTR_70_8` (value: `"US_INT_OILTR_70_8"`)
+
+* `US_INT_OILWL_60_7` (value: `"US_INT_OILWL_60_7"`)
+
+* `US_INT_OILWL_70_8` (value: `"US_INT_OILWL_70_8"`)
+
+* `US_INT_RAIL_EX` (value: `"US_INT_RAIL_EX"`)
+
+* `US_INT_PROP_SLPVAR` (value: `"US_INT_PROP_SLPVAR"`)
+
+* `US_INT_PROP_60_7_SLPVAR` (value: `"US_INT_PROP_60_7_SLPVAR"`)
+
+* `US_INT_PROP_70_8_SLPVAR` (value: `"US_INT_PROP_70_8_SLPVAR"`)
+
+* `US_INT_CARRIER_EX` (value: `"US_INT_CARRIER_EX"`)
+
+* `US_INT_NOHOS_7` (value: `"US_INT_NOHOS_7"`)
+
+* `US_INT_NOHOS_8` (value: `"US_INT_NOHOS_8"`)
+
+* `US_TX_INTRA_PROP_70_7` (value: `"US_TX_INTRA_PROP_70_7"`)
+
+* `US_TX_INTRA_SH_70_7` (value: `"US_TX_INTRA_SH_70_7"`)
+
+* `US_TX_INTRA_SH_70_8` (value: `"US_TX_INTRA_SH_70_8"`)
+
+* `US_CA_INTRA_PROP_80_8` (value: `"US_CA_INTRA_PROP_80_8"`)
+
+* `US_CA_INTRA_PAX_80_8` (value: `"US_CA_INTRA_PAX_80_8"`)
+
+* `US_CA_INTRA_FARM_112_8` (value: `"US_CA_INTRA_FARM_112_8"`)
+
+* `US_CA_INTRA_FARM_BRK` (value: `"US_CA_INTRA_FARM_BRK"`)
+
+* `US_CA_INTRA_FLAM_80_8` (value: `"US_CA_INTRA_FLAM_80_8"`)
+
+* `US_CA_INTRA_FLAM_BRK` (value: `"US_CA_INTRA_FLAM_BRK"`)
+
+* `US_CA_INTRA_SCH_80_8` (value: `"US_CA_INTRA_SCH_80_8"`)
+
+* `US_CA_INTRA_SCH_BRK` (value: `"US_CA_INTRA_SCH_BRK"`)
+
+* `US_AK_INTRA_PROP_70_7` (value: `"US_AK_INTRA_PROP_70_7"`)
+
+* `US_AK_INTRA_PROP_80_8` (value: `"US_AK_INTRA_PROP_80_8"`)
+
+* `US_AK_INTRA_PAX_70_7` (value: `"US_AK_INTRA_PAX_70_7"`)
+
+* `US_AK_INTRA_PAX_80_8` (value: `"US_AK_INTRA_PAX_80_8"`)
+
+* `US_AK_INTRA_PROP_70_7_SLP` (value: `"US_AK_INTRA_PROP_70_7_SLP"`)
+
+* `US_AK_INTRA_PROP_80_8_SLP` (value: `"US_AK_INTRA_PROP_80_8_SLP"`)
+
+* `US_FL_INTRA_PROP_70_7` (value: `"US_FL_INTRA_PROP_70_7"`)
+
+* `US_FL_INTRA_PROP_80_8` (value: `"US_FL_INTRA_PROP_80_8"`)
+
+* `US_FL_INTRA_SH_70_7` (value: `"US_FL_INTRA_SH_70_7"`)
+
+* `US_FL_INTRA_SH_80_8` (value: `"US_FL_INTRA_SH_80_8"`)
+
+* `US_OR_INTRA_PROP_70_7` (value: `"US_OR_INTRA_PROP_70_7"`)
+
+* `US_OR_INTRA_PROP_80_8` (value: `"US_OR_INTRA_PROP_80_8"`)
+
+* `US_MD_INTRA_SH_70_7` (value: `"US_MD_INTRA_SH_70_7"`)
+
+* `US_MD_INTRA_SH_80_8` (value: `"US_MD_INTRA_SH_80_8"`)
+
+* `US_NE_INTRA_PROP_70_7` (value: `"US_NE_INTRA_PROP_70_7"`)
+
+* `US_NE_INTRA_PROP_80_8` (value: `"US_NE_INTRA_PROP_80_8"`)
+
+* `US_ND_INTRA_PROP_70_7` (value: `"US_ND_INTRA_PROP_70_7"`)
+
+* `US_ND_INTRA_SH_70_7` (value: `"US_ND_INTRA_SH_70_7"`)
+
+* `US_SC_INTRA_PROP_70_7` (value: `"US_SC_INTRA_PROP_70_7"`)
+
+* `US_SC_INTRA_PROP_80_8` (value: `"US_SC_INTRA_PROP_80_8"`)
+
+* `US_WA_INTRA_PROP_70_7` (value: `"US_WA_INTRA_PROP_70_7"`)
+
+* `US_WA_INTRA_PROP_80_8` (value: `"US_WA_INTRA_PROP_80_8"`)
+
+* `CA_FED_C1_70_7` (value: `"CA_FED_C1_70_7"`)
+
+* `CA_FED_C2_120_14` (value: `"CA_FED_C2_120_14"`)
+
+* `CA_FED_C1_TEAM` (value: `"CA_FED_C1_TEAM"`)
+
+* `CA_FED_C2_TEAM` (value: `"CA_FED_C2_TEAM"`)
+
+* `CA_FED_NOHOS` (value: `"CA_FED_NOHOS"`)
+
+* `CA_N60_C1_80_7` (value: `"CA_N60_C1_80_7"`)
+
+* `CA_N60_C2_120_14` (value: `"CA_N60_C2_120_14"`)
+
+* `CA_N60_C1_TEAM` (value: `"CA_N60_C1_TEAM"`)
+
+* `CA_N60_C2_TEAM` (value: `"CA_N60_C2_TEAM"`)
+
+* `CA_N60_NOHOS` (value: `"CA_N60_NOHOS"`)
+
+* `CA_N60_OIL` (value: `"CA_N60_OIL"`)
+
+* `CA_N60_OIL_TEAM` (value: `"CA_N60_OIL_TEAM"`)
+
+* `CA_AB_PROV_PROP_70_7` (value: `"CA_AB_PROV_PROP_70_7"`)
+
+* `CA_SK_PROV_PROP_70_7` (value: `"CA_SK_PROV_PROP_70_7"`)
+
+* `CA_SK_PROV_FERT_EX` (value: `"CA_SK_PROV_FERT_EX"`)
+
+* `CA_BC_PROV_LOG` (value: `"CA_BC_PROV_LOG"`)
+
+* `CA_S60_OIL` (value: `"CA_S60_OIL"`)
+
+* `CA_OIL_TEAM` (value: `"CA_OIL_TEAM"`)
+
+* `US_INT_OILTR_60_7_BIG` (value: `"US_INT_OILTR_60_7_BIG"`)
+
+* `US_INT_OILTR_60_7_BIG_SLP` (value: `"US_INT_OILTR_60_7_BIG_SLP"`)
+
+* `US_INT_OILTR_60_7_SLP` (value: `"US_INT_OILTR_60_7_SLP"`)
+
+* `US_INT_OILTR_70_8_BIG` (value: `"US_INT_OILTR_70_8_BIG"`)
+
+* `US_INT_OILTR_70_8_BIG_SLP` (value: `"US_INT_OILTR_70_8_BIG_SLP"`)
+
+* `US_INT_OILTR_70_8_SLP` (value: `"US_INT_OILTR_70_8_SLP"`)
+
+* `US_CA_INTRA_OILTR_80_8` (value: `"US_CA_INTRA_OILTR_80_8"`)
+
+* `US_CA_INTRA_OILTR_PROP` (value: `"US_CA_INTRA_OILTR_PROP"`)
+
+* `US_INT_OILTR_60_7_NOBRK` (value: `"US_INT_OILTR_60_7_NOBRK"`)
+
+* `US_INT_OILTR_60_7_NOBRK_BIG` (value: `"US_INT_OILTR_60_7_NOBRK_BIG"`)
+
+* `US_INT_OILTR_60_7_NOBRK_BIG_SLP` (value: `"US_INT_OILTR_60_7_NOBRK_BIG_SLP"`)
+
+* `US_INT_OILTR_60_7_NOBRK_SLP` (value: `"US_INT_OILTR_60_7_NOBRK_SLP"`)
+
+* `US_INT_OILTR_70_8_NOBRK` (value: `"US_INT_OILTR_70_8_NOBRK"`)
+
+* `US_INT_OILTR_70_8_NOBRK_BIG` (value: `"US_INT_OILTR_70_8_NOBRK_BIG"`)
+
+* `US_INT_OILTR_70_8_NOBRK_BIG_SLP` (value: `"US_INT_OILTR_70_8_NOBRK_BIG_SLP"`)
+
+* `US_INT_OILTR_70_8_NOBRK_SLP` (value: `"US_INT_OILTR_70_8_NOBRK_SLP"`)
+
+* `US_INT_OILTR_SH_12_H` (value: `"US_INT_OILTR_SH_12H"`)
+
+* `US_INT_OILTR_SH_14_H` (value: `"US_INT_OILTR_SH_14H"`)
+
+* `US_INT_OILTR_70_8_SH_12_H` (value: `"US_INT_OILTR_70_8_SH_12H"`)
+
+* `US_INT_OILTR_70_8_SH_14_H` (value: `"US_INT_OILTR_70_8_SH_14H"`)
+
+* `US_TX_INTRA_OILTR_70_7` (value: `"US_TX_INTRA_OILTR_70_7"`)
+
+* `US_INT_OILWL_60_7_BIG` (value: `"US_INT_OILWL_60_7_BIG"`)
+
+* `US_INT_OILWL_60_7_BIG_SLP` (value: `"US_INT_OILWL_60_7_BIG_SLP"`)
+
+* `US_INT_OILWL_60_7_SLP` (value: `"US_INT_OILWL_60_7_SLP"`)
+
+* `US_INT_OILWL_70_8_BIG` (value: `"US_INT_OILWL_70_8_BIG"`)
+
+* `US_INT_OILWL_70_8_BIG_SLP` (value: `"US_INT_OILWL_70_8_BIG_SLP"`)
+
+* `US_INT_OILWL_70_8_SLP` (value: `"US_INT_OILWL_70_8_SLP"`)
+
+* `US_CA_INTRA_OILWL_80_8` (value: `"US_CA_INTRA_OILWL_80_8"`)
+
+* `US_CA_INTRA_OILWL_PROP` (value: `"US_CA_INTRA_OILWL_PROP"`)
+
+* `US_INT_OILWL_60_7_NOBRK` (value: `"US_INT_OILWL_60_7_NOBRK"`)
+
+* `US_INT_OILWL_60_7_NOBRK_BIG` (value: `"US_INT_OILWL_60_7_NOBRK_BIG"`)
+
+* `US_INT_OILWL_60_7_NOBRK_BIG_SLP` (value: `"US_INT_OILWL_60_7_NOBRK_BIG_SLP"`)
+
+* `US_INT_OILWL_60_7_NOBRK_SLP` (value: `"US_INT_OILWL_60_7_NOBRK_SLP"`)
+
+* `US_INT_OILWL_70_8_NOBRK` (value: `"US_INT_OILWL_70_8_NOBRK"`)
+
+* `US_INT_OILWL_70_8_NOBRK_BIG` (value: `"US_INT_OILWL_70_8_NOBRK_BIG"`)
+
+* `US_INT_OILWL_70_8_NOBRK_BIG_SLP` (value: `"US_INT_OILWL_70_8_NOBRK_BIG_SLP"`)
+
+* `US_INT_OILWL_70_8_NOBRK_SLP` (value: `"US_INT_OILWL_70_8_NOBRK_SLP"`)
+
+* `US_TX_INTRA_OILWL_70_7` (value: `"US_TX_INTRA_OILWL_70_7"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
