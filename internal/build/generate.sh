@@ -138,12 +138,28 @@ echo "==> Webhooks generated."
 
 echo ""
 echo "==> Running goimports on generated code..."
+goimports_bin=""
 if command -v goimports &> /dev/null; then
-    find "${GEN_DIR}" -name "*.go" -exec goimports -w -local "${MODULE_NAME}" {} \;
-    find "${REPO_ROOT}/webhooks_gen" -name "*.go" -exec goimports -w -local "${MODULE_NAME}" {} \;
-    find "${REPO_ROOT}/pagination" -name "*.go" -exec goimports -w -local "${MODULE_NAME}" {} \;
+    goimports_bin="$(command -v goimports)"
 else
-    echo "Warning: goimports not found, skipping import formatting"
+    echo "goimports not found, installing..."
+    go install golang.org/x/tools/cmd/goimports@latest
+    gobin="$(go env GOBIN)"
+    if [ -z "${gobin}" ]; then
+        gopath="$(go env GOPATH)"
+        gobin="${gopath}/bin"
+    fi
+    if [ -n "${gobin}" ] && [ -x "${gobin}/goimports" ]; then
+        goimports_bin="${gobin}/goimports"
+    fi
+fi
+
+if [ -n "${goimports_bin}" ]; then
+    find "${GEN_DIR}" -name "*.go" -exec "${goimports_bin}" -w -local "${MODULE_NAME}" {} \;
+    find "${REPO_ROOT}/webhooks_gen" -name "*.go" -exec "${goimports_bin}" -w -local "${MODULE_NAME}" {} \;
+    find "${REPO_ROOT}/pagination" -name "*.go" -exec "${goimports_bin}" -w -local "${MODULE_NAME}" {} \;
+else
+    echo "Warning: goimports still not available, skipping import formatting"
 fi
 
 echo ""

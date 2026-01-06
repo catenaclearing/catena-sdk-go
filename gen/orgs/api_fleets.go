@@ -36,15 +36,15 @@ type FleetsAPI interface {
 	CreateFleetExecute(r ApiCreateFleetRequest) (*FleetRead, *http.Response, error)
 
 	/*
-		CreateFleetProperties Create Fleet Properties
+			CreateFleetProperties Create Fleet Properties
 
-		Create new fleet properties.
+			Create new fleet properties.
 
-	You can only create properties for the fleet if you are the fleet owner.
+		You can only create properties for the fleet if you are the fleet owner.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param fleetId
-		@return ApiCreateFleetPropertiesRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@param fleetId
+			@return ApiCreateFleetPropertiesRequest
 	*/
 	CreateFleetProperties(ctx context.Context, fleetId string) ApiCreateFleetPropertiesRequest
 

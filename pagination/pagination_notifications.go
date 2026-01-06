@@ -11,12 +11,9 @@ import (
 	"github.com/catenaclearing/catena-sdk-go/internal/pagination"
 )
 
-// GetWebhookSubscriptionLogsPaginationOptions holds the options for the GetWebhookSubscriptionLogs paginated operation.
-type GetWebhookSubscriptionLogsPaginationOptions struct {
-	// WebhookId is a required parameter.
-	WebhookId string
-	StartDate *time.Time
-	EndDate   *time.Time
+// ListWebhookSubscriptionsPaginationOptions holds the options for the ListWebhookSubscriptions paginated operation.
+type ListWebhookSubscriptionsPaginationOptions struct {
+	EventName *string
 	Status    *string
 	// Cursor is the cursor for the next page.
 	Cursor string
@@ -24,18 +21,15 @@ type GetWebhookSubscriptionLogsPaginationOptions struct {
 	Size *int
 }
 
-// GetWebhookSubscriptionLogsEach iterates over all items in the GetWebhookSubscriptionLogs operation.
-func GetWebhookSubscriptionLogsEach(c *catena.Client, ctx context.Context, opts GetWebhookSubscriptionLogsPaginationOptions, yield func(notificationsapi.WebhookLogRead) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]notificationsapi.WebhookLogRead, string, error) {
-		req := c.Notifications().WebhookSubscriptionsAPI.GetWebhookSubscriptionLogs(ctx, opts.WebhookId)
-		if opts.StartDate != nil {
-			req = req.StartDate(*opts.StartDate)
-		}
-		if opts.EndDate != nil {
-			req = req.EndDate(*opts.EndDate)
+// ListWebhookSubscriptionsEach iterates over all items in the ListWebhookSubscriptions operation.
+func ListWebhookSubscriptionsEach(c *catena.Client, ctx context.Context, opts ListWebhookSubscriptionsPaginationOptions, yield func(notificationsapi.WebhookRead) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]notificationsapi.WebhookRead, string, error) {
+		req := c.Notifications().WebhookSubscriptionsAPI.ListWebhookSubscriptions(ctx)
+		if opts.EventName != nil {
+			req = req.EventName(notificationsapi.WebhookEventName(*opts.EventName))
 		}
 		if opts.Status != nil {
-			req = req.Status(*opts.Status)
+			req = req.Status(notificationsapi.StatusEnum(*opts.Status))
 		}
 		if cursor != "" {
 			req = req.Cursor(cursor)
@@ -66,9 +60,12 @@ func GetWebhookSubscriptionLogsEach(c *catena.Client, ctx context.Context, opts 
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListWebhookSubscriptionsPaginationOptions holds the options for the ListWebhookSubscriptions paginated operation.
-type ListWebhookSubscriptionsPaginationOptions struct {
-	EventName *string
+// GetWebhookSubscriptionLogsPaginationOptions holds the options for the GetWebhookSubscriptionLogs paginated operation.
+type GetWebhookSubscriptionLogsPaginationOptions struct {
+	// WebhookId is a required parameter.
+	WebhookId string
+	StartDate *time.Time
+	EndDate   *time.Time
 	Status    *string
 	// Cursor is the cursor for the next page.
 	Cursor string
@@ -76,15 +73,18 @@ type ListWebhookSubscriptionsPaginationOptions struct {
 	Size *int
 }
 
-// ListWebhookSubscriptionsEach iterates over all items in the ListWebhookSubscriptions operation.
-func ListWebhookSubscriptionsEach(c *catena.Client, ctx context.Context, opts ListWebhookSubscriptionsPaginationOptions, yield func(notificationsapi.WebhookRead) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]notificationsapi.WebhookRead, string, error) {
-		req := c.Notifications().WebhookSubscriptionsAPI.ListWebhookSubscriptions(ctx)
-		if opts.EventName != nil {
-			req = req.EventName(notificationsapi.WebhookEventName(*opts.EventName))
+// GetWebhookSubscriptionLogsEach iterates over all items in the GetWebhookSubscriptionLogs operation.
+func GetWebhookSubscriptionLogsEach(c *catena.Client, ctx context.Context, opts GetWebhookSubscriptionLogsPaginationOptions, yield func(notificationsapi.WebhookLogRead) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]notificationsapi.WebhookLogRead, string, error) {
+		req := c.Notifications().WebhookSubscriptionsAPI.GetWebhookSubscriptionLogs(ctx, opts.WebhookId)
+		if opts.StartDate != nil {
+			req = req.StartDate(*opts.StartDate)
+		}
+		if opts.EndDate != nil {
+			req = req.EndDate(*opts.EndDate)
 		}
 		if opts.Status != nil {
-			req = req.Status(notificationsapi.StatusEnum(*opts.Status))
+			req = req.Status(*opts.Status)
 		}
 		if cursor != "" {
 			req = req.Cursor(cursor)

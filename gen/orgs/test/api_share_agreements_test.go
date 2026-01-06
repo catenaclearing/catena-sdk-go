@@ -11,10 +11,12 @@ package orgsapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
+
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
 )
 
 func Test_orgsapi_ShareAgreementsAPIService(t *testing.T) {

@@ -11,10 +11,12 @@ package notificationsapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
+
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func Test_notificationsapi_WebhookEventsAPIService(t *testing.T) {

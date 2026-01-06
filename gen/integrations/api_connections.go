@@ -22,18 +22,18 @@ import (
 type ConnectionsAPI interface {
 
 	/*
-		CreateConnection Create Connection
+			CreateConnection Create Connection
 
-		Create a new connection.
+			Create a new connection.
 
-	This will validate the credentials with the TSP before creating the connection.
-	If the credentials are invalid, the connection will not be created and an error will be returned.
+		This will validate the credentials with the TSP before creating the connection.
+		If the credentials are invalid, the connection will not be created and an error will be returned.
 
-	It also creates a schedule to refresh or exchanged the coneection details
-	for a short lived credential, shuch as an access token.
+		It also creates a schedule to refresh or exchanged the coneection details
+		for a short lived credential, shuch as an access token.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiCreateConnectionRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiCreateConnectionRequest
 	*/
 	CreateConnection(ctx context.Context) ApiCreateConnectionRequest
 
@@ -42,20 +42,20 @@ type ConnectionsAPI interface {
 	CreateConnectionExecute(r ApiCreateConnectionRequest) (*ConnectionRead, *http.Response, error)
 
 	/*
-		CreateSchedule Create Schedule
+			CreateSchedule Create Schedule
 
-		Create a new schedule.
+			Create a new schedule.
 
-	This will create a schedule to fetch data from the TSP.
+		This will create a schedule to fetch data from the TSP.
 
-	It also creates a schedule to refresh or exchange the connection details
-	for a short lived credential, such as an access token.
+		It also creates a schedule to refresh or exchange the connection details
+		for a short lived credential, such as an access token.
 
-	For now only Catena admins can create schedules.
+		For now only Catena admins can create schedules.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param connectionId
-		@return ApiCreateScheduleRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@param connectionId
+			@return ApiCreateScheduleRequest
 	*/
 	CreateSchedule(ctx context.Context, connectionId string) ApiCreateScheduleRequest
 
@@ -169,15 +169,15 @@ type ConnectionsAPI interface {
 	ListSchedulesExecute(r ApiListSchedulesRequest) (*CursorPageTypeVarCustomizedScheduleRead, *http.Response, error)
 
 	/*
-		UpdateConnection Update Connection
+			UpdateConnection Update Connection
 
-		Update a connection by its ID.
+			Update a connection by its ID.
 
-	The repository handles validation, authentication, and SLC creation when credentials are updated.
+		The repository handles validation, authentication, and SLC creation when credentials are updated.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param connectionId
-		@return ApiUpdateConnectionRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@param connectionId
+			@return ApiUpdateConnectionRequest
 	*/
 	UpdateConnection(ctx context.Context, connectionId string) ApiUpdateConnectionRequest
 
