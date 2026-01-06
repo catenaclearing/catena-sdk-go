@@ -30,10 +30,7 @@ jobs:
         run: npm install -g @redocly/cli
       
       - name: Install golangci-lint
-        uses: golangci/golangci-lint-action@v4
-        with:
-          version: latest
-          args: --version
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8
       
       - name: Install goimports
         run: go install golang.org/x/tools/cmd/goimports@latest
