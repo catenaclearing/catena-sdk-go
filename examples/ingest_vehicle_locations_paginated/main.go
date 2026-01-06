@@ -26,7 +26,8 @@ func main() {
 	defer cancel()
 
 	if err := c.Authenticate(ctx, clientID, clientSecret); err != nil {
-		log.Fatalf("Failed to authenticate: %v", err)
+		log.Printf("Failed to authenticate: %v", err)
+		return
 	}
 
 	fmt.Println("Successfully authenticated!")
@@ -65,7 +66,8 @@ func main() {
 	)
 
 	if err != nil {
-		log.Fatalf("Error listing vehicle locations: %v", err)
+		log.Printf("Error listing vehicle locations: %v", err)
+		return
 	}
 
 	fmt.Printf("\nTotal locations ingested: %d\n", count)

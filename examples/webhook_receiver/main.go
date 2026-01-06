@@ -47,6 +47,7 @@ func main() {
 	// The router implements http.Handler, so you can pass it directly to ListenAndServe
 	// or mount it on a subpath using http.Handle("/webhooks", router).
 	if err := http.ListenAndServe(":"+port, router); err != nil {
-		log.Fatalf("Server failed: %v", err)
+		log.Printf("Server failed: %v", err)
+		return
 	}
 }

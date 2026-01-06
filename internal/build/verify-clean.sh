@@ -18,12 +18,18 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
     exit 0
 fi
 
-# Check for uncommitted changes in generated code
-if ! git diff --exit-code gen/ specs/combined/; then
+# Check for uncommitted changes in tracked generated code
+mapfile -t tracked_files < <(git ls-files gen/ specs/combined/)
+if [ ${#tracked_files[@]} -eq 0 ]; then
+    echo "No tracked generated files found in gen/ or specs/combined; skipping verification."
+    exit 0
+fi
+
+if ! git diff --exit-code -- "${tracked_files[@]}"; then
     echo ""
     echo "ERROR: Generated code has uncommitted changes!"
     echo ""
-    echo "The generated code in gen/ or specs/combined/ doesn't match what's committed."
+    echo "Tracked generated files in gen/ or specs/combined/ don't match what's committed."
     echo "This usually means:"
     echo "  1. You modified generated code manually (don't do this), or"
     echo "  2. You need to run 'make generate' and commit the changes, or"

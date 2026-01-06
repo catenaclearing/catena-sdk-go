@@ -106,30 +106,36 @@ func discoverPaginatedOperations(specsDir string) ([]PaginatedOperation, error) 
 					}
 
 					// Simple type mapping
-					if schema.Type == "integer" {
+					switch schema.Type {
+					case "integer":
 						p.Type = "int"
 						p.IsPointer = !param.Required
-					} else if schema.Type == "boolean" {
+					case "boolean":
 						p.Type = "bool"
 						p.IsPointer = !param.Required
-					} else if schema.Type == "array" {
+					case "array":
 						p.Type = "[]string"
 						p.IsPointer = !param.Required
-					} else if schema.Type == "string" && schema.Format == "date-time" {
-						p.Type = "time.Time"
+					case "string":
+						if schema.Format == "date-time" {
+							p.Type = "time.Time"
+						} else {
+							p.Type = "string"
+						}
 						p.IsPointer = !param.Required
-					} else {
+					default:
 						p.Type = "string"
 						p.IsPointer = !param.Required
 					}
 
-					if param.Name == "cursor" || param.Name == "page" || param.Name == "next_page" || param.Name == "page_token" || param.Name == "after" {
+					switch param.Name {
+					case "cursor", "page", "next_page", "page_token", "after":
 						cursorParam = param.Name
 						hasCursor = true
-					} else if param.Name == "size" || param.Name == "limit" || param.Name == "page_size" || param.Name == "pageSize" || param.Name == "per_page" || param.Name == "perPage" {
+					case "size", "limit", "page_size", "pageSize", "per_page", "perPage":
 						limitParam = param.Name
 						hasLimit = true
-					} else {
+					default:
 						if param.Required {
 							requiredParams = append(requiredParams, p)
 						} else {

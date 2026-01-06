@@ -29,7 +29,8 @@ func main() {
 	defer cancel()
 
 	if err := c.Authenticate(ctx, clientID, clientSecret); err != nil {
-		log.Fatalf("Failed to authenticate: %v", err)
+		log.Printf("Failed to authenticate: %v", err)
+		return
 	}
 
 	fmt.Println("Successfully authenticated!")
@@ -52,7 +53,8 @@ func main() {
 	)
 
 	if err != nil && err != ErrStop {
-		log.Fatalf("Error listing connections: %v", err)
+		log.Printf("Error listing connections: %v", err)
+		return
 	}
 
 	if connectionID == "" {
@@ -78,7 +80,8 @@ func main() {
 	)
 
 	if err != nil && err != ErrStop {
-		log.Fatalf("Error listing schedules: %v", err)
+		log.Printf("Error listing schedules: %v", err)
+		return
 	}
 
 	if scheduleID == "" {
@@ -110,7 +113,8 @@ func main() {
 	)
 
 	if err != nil {
-		log.Fatalf("Error listing executions: %v", err)
+		log.Printf("Error listing executions: %v", err)
+		return
 	}
 
 	fmt.Printf("\nTotal executions listed: %d\n", count)

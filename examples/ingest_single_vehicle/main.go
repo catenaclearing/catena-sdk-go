@@ -29,7 +29,8 @@ func main() {
 	defer cancel()
 
 	if err := c.Authenticate(ctx, clientID, clientSecret); err != nil {
-		log.Fatalf("Failed to authenticate: %v", err)
+		log.Printf("Failed to authenticate: %v", err)
+		return
 	}
 
 	fmt.Println("Successfully authenticated!")
@@ -51,7 +52,8 @@ func main() {
 	)
 
 	if err != nil && err != ErrStop {
-		log.Fatalf("Error listing vehicles: %v", err)
+		log.Printf("Error listing vehicles: %v", err)
+		return
 	}
 
 	if vehicleID == "" {
@@ -68,7 +70,8 @@ func main() {
 		Execute()
 
 	if err != nil {
-		log.Fatalf("Error getting vehicle details: %v\nResponse: %v", err, resp)
+		log.Printf("Error getting vehicle details: %v\nResponse: %v", err, resp)
+		return
 	}
 
 	fmt.Printf("Vehicle ID: %s\n", vehicle.GetId())

@@ -24,7 +24,8 @@ func main() {
 	// Example: list connections
 	resp, httpResp, err := client.Integrations().ConnectionsAPI.ListConnections(ctx).Execute()
 	if err != nil {
-		log.Fatalf("API error: %v", err)
+		log.Printf("API error: %v", err)
+		return
 	}
 	defer httpResp.Body.Close()
 

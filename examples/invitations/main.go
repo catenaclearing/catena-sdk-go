@@ -30,7 +30,8 @@ func main() {
 	defer cancel()
 
 	if err := c.Authenticate(ctx, clientID, clientSecret); err != nil {
-		log.Fatalf("Failed to authenticate: %v", err)
+		log.Printf("Failed to authenticate: %v", err)
+		return
 	}
 
 	fmt.Println("Successfully authenticated!")
@@ -48,7 +49,8 @@ func main() {
 		Execute()
 
 	if err != nil {
-		log.Fatalf("Error creating invitation: %v\nResponse: %v", err, resp)
+		log.Printf("Error creating invitation: %v\nResponse: %v", err, resp)
+		return
 	}
 
 	fmt.Printf("Created Invitation ID: %s\n", invitation.GetId())
@@ -70,6 +72,7 @@ func main() {
 	)
 
 	if err != nil {
-		log.Fatalf("Error listing invitations: %v", err)
+		log.Printf("Error listing invitations: %v", err)
+		return
 	}
 }

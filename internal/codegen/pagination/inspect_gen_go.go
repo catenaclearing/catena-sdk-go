@@ -24,7 +24,7 @@ func inspectGeneratedCode(rootDir string, ops []PaginatedOperation) ([]Paginated
 			return nil, fmt.Errorf("failed to parse dir %s: %w", genDir, err)
 		}
 
-		var pkg *ast.Package
+		var pkg *ast.Package //nolint:staticcheck // parser.ParseDir returns ast.Package; acceptable for codegen inspection.
 		for _, p := range pkgs {
 			if strings.HasSuffix(p.Name, "api") { // e.g. integrationsapi
 				pkg = p

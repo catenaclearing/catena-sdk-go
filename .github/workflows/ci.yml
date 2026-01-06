@@ -18,7 +18,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.23'
+          go-version: '1.24.11'
           cache: true
       
       - name: Set up Node.js (for Redocly CLI)
@@ -45,11 +45,6 @@ jobs:
       
       - name: Run linters
         run: make lint
-      
-      - name: Fetch and combine specs
-        run: |
-          make specs.fetch
-          make specs.combine
       
       - name: Generate client code
         run: make generate
