@@ -45,7 +45,7 @@ lint: ## Run golangci-lint
 
 test: ## Run Go tests
 	@echo "==> Running tests..."
-	@$(GOTEST) -v -race -cover ./...
+	@$(GOTEST) -v -race -coverprofile=coverage.out -covermode=atomic ./...
 
 specs.fetch: ## Download OpenAPI specifications from remote URLs
 	@echo "==> Fetching specs..."
