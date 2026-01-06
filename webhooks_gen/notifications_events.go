@@ -4,7 +4,8 @@ package webhooks_gen
 
 import (
 	"encoding/json"
-	"github.com/catenaclearing/catena-sdk-go/gen/notifications"
+
+	notificationsapi "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 var NotificationsDecoders = map[string]func(json.RawMessage) (any, error){

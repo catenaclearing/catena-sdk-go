@@ -1,8 +1,8 @@
 package pagination
 
 import (
-"context"
-"errors"
+	"context"
+	"errors"
 )
 
 // PageFetcher is a function that fetches a page of items.
