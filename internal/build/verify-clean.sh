@@ -19,7 +19,11 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
 fi
 
 # Check for uncommitted changes in tracked generated code
-mapfile -t tracked_files < <(git ls-files gen/ specs/combined/)
+tracked_files=()
+while IFS= read -r tracked; do
+    tracked_files+=("${tracked}")
+done < <(git ls-files gen/ specs/combined/)
+
 if [ ${#tracked_files[@]} -eq 0 ]; then
     echo "No tracked generated files found in gen/ or specs/combined; skipping verification."
     exit 0

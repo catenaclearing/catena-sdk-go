@@ -10,53 +10,6 @@ import (
 	"github.com/catenaclearing/catena-sdk-go/internal/pagination"
 )
 
-// ListSchedulesPaginationOptions holds the options for the ListSchedules paginated operation.
-type ListSchedulesPaginationOptions struct {
-	// ConnectionId is a required parameter.
-	ConnectionId string
-	Resource     *string
-	// Cursor is the cursor for the next page.
-	Cursor string
-	// Size is the maximum number of items to return per page.
-	Size *int
-}
-
-// ListSchedulesEach iterates over all items in the ListSchedules operation.
-func ListSchedulesEach(c *catena.Client, ctx context.Context, opts ListSchedulesPaginationOptions, yield func(integrationsapi.ScheduleRead) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]integrationsapi.ScheduleRead, string, error) {
-		req := c.Integrations().ConnectionsAPI.ListSchedules(ctx, opts.ConnectionId)
-		if opts.Resource != nil {
-			req = req.Resource(integrationsapi.ResourceEnum(*opts.Resource))
-		}
-		if cursor != "" {
-			req = req.Cursor(cursor)
-		} else if opts.Cursor != "" {
-			req = req.Cursor(opts.Cursor)
-		}
-		if opts.Size != nil {
-			req = req.Size(int32(*opts.Size))
-		}
-
-		resp, _, err := req.Execute()
-		if err != nil {
-			return nil, "", err
-		}
-
-		if resp == nil {
-			return nil, "", nil
-		}
-
-		var next string
-		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
-			next = *resp.NextPage.Get()
-		}
-
-		return resp.Items, next, nil
-	}
-
-	return pagination.Each(ctx, opts.Cursor, fetch, yield)
-}
-
 // ListExecutionsPaginationOptions holds the options for the ListExecutions paginated operation.
 type ListExecutionsPaginationOptions struct {
 	// ConnectionId is a required parameter.
@@ -117,6 +70,53 @@ func ListConnectionsEach(c *catena.Client, ctx context.Context, opts ListConnect
 		req := c.Integrations().ConnectionsAPI.ListConnections(ctx)
 		if opts.TspId != nil {
 			req = req.TspId(*opts.TspId)
+		}
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		} else if opts.Cursor != "" {
+			req = req.Cursor(opts.Cursor)
+		}
+		if opts.Size != nil {
+			req = req.Size(int32(*opts.Size))
+		}
+
+		resp, _, err := req.Execute()
+		if err != nil {
+			return nil, "", err
+		}
+
+		if resp == nil {
+			return nil, "", nil
+		}
+
+		var next string
+		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
+			next = *resp.NextPage.Get()
+		}
+
+		return resp.Items, next, nil
+	}
+
+	return pagination.Each(ctx, opts.Cursor, fetch, yield)
+}
+
+// ListSchedulesPaginationOptions holds the options for the ListSchedules paginated operation.
+type ListSchedulesPaginationOptions struct {
+	// ConnectionId is a required parameter.
+	ConnectionId string
+	Resource     *string
+	// Cursor is the cursor for the next page.
+	Cursor string
+	// Size is the maximum number of items to return per page.
+	Size *int
+}
+
+// ListSchedulesEach iterates over all items in the ListSchedules operation.
+func ListSchedulesEach(c *catena.Client, ctx context.Context, opts ListSchedulesPaginationOptions, yield func(integrationsapi.ScheduleRead) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]integrationsapi.ScheduleRead, string, error) {
+		req := c.Integrations().ConnectionsAPI.ListSchedules(ctx, opts.ConnectionId)
+		if opts.Resource != nil {
+			req = req.Resource(integrationsapi.ResourceEnum(*opts.Resource))
 		}
 		if cursor != "" {
 			req = req.Cursor(cursor)
