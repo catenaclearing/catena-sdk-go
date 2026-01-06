@@ -11,7 +11,7 @@ package authenticationapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/authenticationapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/authentication"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"

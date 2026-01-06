@@ -11,7 +11,7 @@ package notificationsapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"

@@ -11,7 +11,7 @@ package telematicsapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"

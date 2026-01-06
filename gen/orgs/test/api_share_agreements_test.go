@@ -11,7 +11,7 @@ package orgsapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/orgsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"

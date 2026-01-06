@@ -64,7 +64,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -130,7 +130,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -196,7 +196,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -262,7 +262,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -328,7 +328,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -394,7 +394,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -460,7 +460,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -526,7 +526,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -592,7 +592,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -658,7 +658,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -724,7 +724,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -790,7 +790,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -856,7 +856,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -922,7 +922,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -988,7 +988,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1054,7 +1054,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1120,7 +1120,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1186,7 +1186,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1252,7 +1252,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1318,7 +1318,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1384,7 +1384,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1450,7 +1450,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1516,7 +1516,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1582,7 +1582,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1648,7 +1648,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1714,7 +1714,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1780,7 +1780,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1846,7 +1846,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1912,7 +1912,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -1978,7 +1978,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2044,7 +2044,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2110,7 +2110,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2176,7 +2176,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2242,7 +2242,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2308,7 +2308,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2374,7 +2374,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2440,7 +2440,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2506,7 +2506,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2572,7 +2572,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {
@@ -2638,7 +2638,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 )
 
 func main() {

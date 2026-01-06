@@ -31,7 +31,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 )
 
 func main() {
@@ -103,7 +103,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 )
 
 func main() {
@@ -175,7 +175,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 )
 
 func main() {
@@ -255,7 +255,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 )
 
 func main() {
@@ -332,7 +332,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 )
 
 func main() {
@@ -417,7 +417,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 )
 
 func main() {
@@ -497,7 +497,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 )
 
 func main() {

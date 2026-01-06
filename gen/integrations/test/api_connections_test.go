@@ -11,7 +11,7 @@ package integrationsapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"

@@ -23,7 +23,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import notificationsapi "github.com/catenaclearing/catena-sdk-go/notificationsapi"
+import notificationsapi "github.com/catenaclearing/catena-sdk-go/gen/notifications"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:

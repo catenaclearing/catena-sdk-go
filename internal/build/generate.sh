@@ -69,7 +69,6 @@ EOF
         --additional-properties=packageName="${package_name}" \
         --additional-properties=enumClassPrefix=true \
         --additional-properties=generateInterfaces=true \
-        --additional-properties=isGoSubmodule=true \
         --git-user-id=catenaclearing \
         --git-repo-id=catena-sdk-go \
         --package-name="${package_name}"

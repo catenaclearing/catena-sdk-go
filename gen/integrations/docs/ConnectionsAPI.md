@@ -35,7 +35,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -101,7 +101,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -173,7 +173,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -241,7 +241,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -312,7 +312,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -382,7 +382,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -455,7 +455,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -525,7 +525,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -602,7 +602,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -678,7 +678,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {
@@ -750,7 +750,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func main() {

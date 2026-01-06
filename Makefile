@@ -62,11 +62,7 @@ generate: specs.combine ## Generate Go client code from OpenAPI specs
 	@chmod +x $(BUILD_DIR)/generate.sh
 	@$(BUILD_DIR)/generate.sh
 	@echo "==> Running go mod tidy..."
-	@cd $(GEN_DIR)/integrations && $(GOCMD) mod tidy || true
-	@cd $(GEN_DIR)/orgs && $(GOCMD) mod tidy || true
-	@cd $(GEN_DIR)/telematics && $(GOCMD) mod tidy || true
-	@cd $(GEN_DIR)/notifications && $(GOCMD) mod tidy || true
-	@cd $(GEN_DIR)/authentication && $(GOCMD) mod tidy || true
+	@$(GOCMD) mod tidy || true
 
 verify-clean: ## Verify generated code matches committed code
 	@chmod +x $(BUILD_DIR)/verify-clean.sh
