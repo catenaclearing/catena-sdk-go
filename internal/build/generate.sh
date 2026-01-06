@@ -62,6 +62,7 @@ EOF
     
     # Run OpenAPI Generator
     docker run --rm \
+        --user "$(id -u):$(id -g)" \
         -v "${REPO_ROOT}:/local" \
         "${OPENAPI_GENERATOR_IMAGE}" generate \
         -i "/local/specs/${api_name}/openapi.json" \
