@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 
 	catena "github.com/catenaclearing/catena-sdk-go"
 )
@@ -13,11 +14,23 @@ import (
 func main() {
 	ctx := context.Background()
 
+	clientID := os.Getenv("CATENA_CLIENT_ID")
+	if clientID == "" {
+		clientID = os.Getenv("CLIENT_ID")
+	}
+	clientSecret := os.Getenv("CATENA_CLIENT_SECRET")
+	if clientSecret == "" {
+		clientSecret = os.Getenv("CLIENT_SECRET")
+	}
+	if clientID == "" || clientSecret == "" {
+		log.Fatal("Please set CLIENT_ID/CLIENT_SECRET or CATENA_CLIENT_ID/CATENA_CLIENT_SECRET")
+	}
+
 	client := catena.NewClient(
 		catena.WithBaseURL("https://api.catenatelematics.com"),
 	)
 
-	if err := client.Authenticate(ctx, "your-client-id", "your-client-secret"); err != nil {
+	if err := client.Authenticate(ctx, clientID, clientSecret); err != nil {
 		log.Fatal(err)
 	}
 
