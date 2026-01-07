@@ -35,15 +35,15 @@ type WebhookEventsAPI interface {
 	ConnectionCreatedconnectionCreatedPostExecute(r ApiConnectionCreatedconnectionCreatedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		ConnectionStaledconnectionStaledPost Connection Staled
+			ConnectionStaledconnectionStaledPost Connection Staled
 
-		Emitted when a connection is staled.
+			Emitted when a connection is staled.
 
-	We mark a connection as staled and automatically stop fetching data if we can't authenticate with the TSP for an adjustable threshold.
-	It usually means that the credentials are no longer valid and the fleet must reauthenticate with the TSP.
+		We mark a connection as staled and automatically stop fetching data if we can't authenticate with the TSP for an adjustable threshold.
+		It usually means that the credentials are no longer valid and the fleet must reauthenticate with the TSP.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiConnectionStaledconnectionStaledPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiConnectionStaledconnectionStaledPostRequest
 	*/
 	ConnectionStaledconnectionStaledPost(ctx context.Context) ApiConnectionStaledconnectionStaledPostRequest
 
@@ -80,14 +80,14 @@ type WebhookEventsAPI interface {
 	ExecutionStaledexecutionStaledPostExecute(r ApiExecutionStaledexecutionStaledPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosAvailabilityAddedhosAvailabilityAddedPost Hos Availability Added
+			HosAvailabilityAddedhosAvailabilityAddedPost Hos Availability Added
 
-		Emitted when a new HOS availability is added to our database.
+			Emitted when a new HOS availability is added to our database.
 
-	e.g. The record fetched from the TSP is new and generated a new record in our database.
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosAvailabilityAddedhosAvailabilityAddedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosAvailabilityAddedhosAvailabilityAddedPostRequest
 	*/
 	HosAvailabilityAddedhosAvailabilityAddedPost(ctx context.Context) ApiHosAvailabilityAddedhosAvailabilityAddedPostRequest
 
@@ -96,14 +96,14 @@ type WebhookEventsAPI interface {
 	HosAvailabilityAddedhosAvailabilityAddedPostExecute(r ApiHosAvailabilityAddedhosAvailabilityAddedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosAvailabilityModifiedhosAvailabilityModifiedPost Hos Availability Modified
+			HosAvailabilityModifiedhosAvailabilityModifiedPost Hos Availability Modified
 
-		Emitted when an HOS availability is modified in our database.
+			Emitted when an HOS availability is modified in our database.
 
-	e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosAvailabilityModifiedhosAvailabilityModifiedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosAvailabilityModifiedhosAvailabilityModifiedPostRequest
 	*/
 	HosAvailabilityModifiedhosAvailabilityModifiedPost(ctx context.Context) ApiHosAvailabilityModifiedhosAvailabilityModifiedPostRequest
 
@@ -112,14 +112,14 @@ type WebhookEventsAPI interface {
 	HosAvailabilityModifiedhosAvailabilityModifiedPostExecute(r ApiHosAvailabilityModifiedhosAvailabilityModifiedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosAvailabilityRemovedhosAvailabilityRemovedPost Hos Availability Removed
+			HosAvailabilityRemovedhosAvailabilityRemovedPost Hos Availability Removed
 
-		Emitted when an HOS availability is removed from our database.
+			Emitted when an HOS availability is removed from our database.
 
-	e.g. The record was deleted from the TSP and we removed it from our database.
+		e.g. The record was deleted from the TSP and we removed it from our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosAvailabilityRemovedhosAvailabilityRemovedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosAvailabilityRemovedhosAvailabilityRemovedPostRequest
 	*/
 	HosAvailabilityRemovedhosAvailabilityRemovedPost(ctx context.Context) ApiHosAvailabilityRemovedhosAvailabilityRemovedPostRequest
 
@@ -128,14 +128,14 @@ type WebhookEventsAPI interface {
 	HosAvailabilityRemovedhosAvailabilityRemovedPostExecute(r ApiHosAvailabilityRemovedhosAvailabilityRemovedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosEventAddedhosEventAddedPost Hos Event Added
+			HosEventAddedhosEventAddedPost Hos Event Added
 
-		Emitted when a new HOS event is added to our database.
+			Emitted when a new HOS event is added to our database.
 
-	e.g. The record fetched from the TSP is new and generated a new record in our database.
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosEventAddedhosEventAddedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosEventAddedhosEventAddedPostRequest
 	*/
 	HosEventAddedhosEventAddedPost(ctx context.Context) ApiHosEventAddedhosEventAddedPostRequest
 
@@ -144,14 +144,14 @@ type WebhookEventsAPI interface {
 	HosEventAddedhosEventAddedPostExecute(r ApiHosEventAddedhosEventAddedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosEventModifiedhosEventModifiedPost Hos Event Modified
+			HosEventModifiedhosEventModifiedPost Hos Event Modified
 
-		Emitted when an HOS event is modified in our database.
+			Emitted when an HOS event is modified in our database.
 
-	e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosEventModifiedhosEventModifiedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosEventModifiedhosEventModifiedPostRequest
 	*/
 	HosEventModifiedhosEventModifiedPost(ctx context.Context) ApiHosEventModifiedhosEventModifiedPostRequest
 
@@ -160,14 +160,14 @@ type WebhookEventsAPI interface {
 	HosEventModifiedhosEventModifiedPostExecute(r ApiHosEventModifiedhosEventModifiedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosEventRemovedhosEventRemovedPost Hos Event Removed
+			HosEventRemovedhosEventRemovedPost Hos Event Removed
 
-		Emitted when an HOS event is removed from our database.
+			Emitted when an HOS event is removed from our database.
 
-	e.g. The record was deleted from the TSP and we removed it from our database.
+		e.g. The record was deleted from the TSP and we removed it from our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosEventRemovedhosEventRemovedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosEventRemovedhosEventRemovedPostRequest
 	*/
 	HosEventRemovedhosEventRemovedPost(ctx context.Context) ApiHosEventRemovedhosEventRemovedPostRequest
 
@@ -176,14 +176,14 @@ type WebhookEventsAPI interface {
 	HosEventRemovedhosEventRemovedPostExecute(r ApiHosEventRemovedhosEventRemovedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosViolationAddedhosViolationAddedPost Hos Violation Added
+			HosViolationAddedhosViolationAddedPost Hos Violation Added
 
-		Emitted when a new HOS violation is added to our database.
+			Emitted when a new HOS violation is added to our database.
 
-	e.g. The record fetched from the TSP is new and generated a new record in our database.
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosViolationAddedhosViolationAddedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosViolationAddedhosViolationAddedPostRequest
 	*/
 	HosViolationAddedhosViolationAddedPost(ctx context.Context) ApiHosViolationAddedhosViolationAddedPostRequest
 
@@ -192,14 +192,14 @@ type WebhookEventsAPI interface {
 	HosViolationAddedhosViolationAddedPostExecute(r ApiHosViolationAddedhosViolationAddedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosViolationModifiedhosViolationModifiedPost Hos Violation Modified
+			HosViolationModifiedhosViolationModifiedPost Hos Violation Modified
 
-		Emitted when an HOS violation is modified in our database.
+			Emitted when an HOS violation is modified in our database.
 
-	e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosViolationModifiedhosViolationModifiedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosViolationModifiedhosViolationModifiedPostRequest
 	*/
 	HosViolationModifiedhosViolationModifiedPost(ctx context.Context) ApiHosViolationModifiedhosViolationModifiedPostRequest
 
@@ -208,14 +208,14 @@ type WebhookEventsAPI interface {
 	HosViolationModifiedhosViolationModifiedPostExecute(r ApiHosViolationModifiedhosViolationModifiedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		HosViolationRemovedhosViolationRemovedPost Hos Violation Removed
+			HosViolationRemovedhosViolationRemovedPost Hos Violation Removed
 
-		Emitted when an HOS violation is removed from our database.
+			Emitted when an HOS violation is removed from our database.
 
-	e.g. The record was deleted from the TSP and we removed it from our database.
+		e.g. The record was deleted from the TSP and we removed it from our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiHosViolationRemovedhosViolationRemovedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosViolationRemovedhosViolationRemovedPostRequest
 	*/
 	HosViolationRemovedhosViolationRemovedPost(ctx context.Context) ApiHosViolationRemovedhosViolationRemovedPostRequest
 
@@ -224,14 +224,14 @@ type WebhookEventsAPI interface {
 	HosViolationRemovedhosViolationRemovedPostExecute(r ApiHosViolationRemovedhosViolationRemovedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		IftaSummaryAddediftaSummaryAddedPost Ifta Summary Added
+			IftaSummaryAddediftaSummaryAddedPost Ifta Summary Added
 
-		Emitted when a new IFTA summary is added to our database.
+			Emitted when a new IFTA summary is added to our database.
 
-	e.g. The record fetched from the TSP is new and generated a new record in our database.
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiIftaSummaryAddediftaSummaryAddedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiIftaSummaryAddediftaSummaryAddedPostRequest
 	*/
 	IftaSummaryAddediftaSummaryAddedPost(ctx context.Context) ApiIftaSummaryAddediftaSummaryAddedPostRequest
 
@@ -240,14 +240,14 @@ type WebhookEventsAPI interface {
 	IftaSummaryAddediftaSummaryAddedPostExecute(r ApiIftaSummaryAddediftaSummaryAddedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		IftaSummaryModifiediftaSummaryModifiedPost Ifta Summary Modified
+			IftaSummaryModifiediftaSummaryModifiedPost Ifta Summary Modified
 
-		Emitted when an IFTA summary is modified in our database.
+			Emitted when an IFTA summary is modified in our database.
 
-	e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiIftaSummaryModifiediftaSummaryModifiedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiIftaSummaryModifiediftaSummaryModifiedPostRequest
 	*/
 	IftaSummaryModifiediftaSummaryModifiedPost(ctx context.Context) ApiIftaSummaryModifiediftaSummaryModifiedPostRequest
 
@@ -256,14 +256,14 @@ type WebhookEventsAPI interface {
 	IftaSummaryModifiediftaSummaryModifiedPostExecute(r ApiIftaSummaryModifiediftaSummaryModifiedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		IftaSummaryRemovediftaSummaryRemovedPost Ifta Summary Removed
+			IftaSummaryRemovediftaSummaryRemovedPost Ifta Summary Removed
 
-		Emitted when an IFTA summary is removed from our database.
+			Emitted when an IFTA summary is removed from our database.
 
-	e.g. The record was deleted from the TSP and we removed it from our database.
+		e.g. The record was deleted from the TSP and we removed it from our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiIftaSummaryRemovediftaSummaryRemovedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiIftaSummaryRemovediftaSummaryRemovedPostRequest
 	*/
 	IftaSummaryRemovediftaSummaryRemovedPost(ctx context.Context) ApiIftaSummaryRemovediftaSummaryRemovedPostRequest
 
@@ -342,17 +342,17 @@ type WebhookEventsAPI interface {
 	InvitationExpiredinvitationExpiredPostExecute(r ApiInvitationExpiredinvitationExpiredPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		InvitationRejectedinvitationRejectedPost Invitation Rejected
+			InvitationRejectedinvitationRejectedPost Invitation Rejected
 
-		Emitted when an invitation is rejected.
+			Emitted when an invitation is rejected.
 
-	.. deprecated:: 2.0
-	    Use `invitation.declined` instead.
+		.. deprecated:: 2.0
+		    Use `invitation.declined` instead.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiInvitationRejectedinvitationRejectedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiInvitationRejectedinvitationRejectedPostRequest
 
-		Deprecated
+			Deprecated
 	*/
 	InvitationRejectedinvitationRejectedPost(ctx context.Context) ApiInvitationRejectedinvitationRejectedPostRequest
 
@@ -460,14 +460,14 @@ type WebhookEventsAPI interface {
 	TspCreatedtspCreatedPostExecute(r ApiTspCreatedtspCreatedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		UserAddeduserAddedPost User Added
+			UserAddeduserAddedPost User Added
 
-		Emitted when a new user is added to our database.
+			Emitted when a new user is added to our database.
 
-	e.g. The record fetched from the TSP is new and generated a new record in our database.
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiUserAddeduserAddedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiUserAddeduserAddedPostRequest
 	*/
 	UserAddeduserAddedPost(ctx context.Context) ApiUserAddeduserAddedPostRequest
 
@@ -476,14 +476,14 @@ type WebhookEventsAPI interface {
 	UserAddeduserAddedPostExecute(r ApiUserAddeduserAddedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		UserModifieduserModifiedPost User Modified
+			UserModifieduserModifiedPost User Modified
 
-		Emitted when a user is modified in our database.
+			Emitted when a user is modified in our database.
 
-	e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiUserModifieduserModifiedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiUserModifieduserModifiedPostRequest
 	*/
 	UserModifieduserModifiedPost(ctx context.Context) ApiUserModifieduserModifiedPostRequest
 
@@ -492,14 +492,14 @@ type WebhookEventsAPI interface {
 	UserModifieduserModifiedPostExecute(r ApiUserModifieduserModifiedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		UserRemoveduserRemovedPost User Removed
+			UserRemoveduserRemovedPost User Removed
 
-		Emitted when a user is removed from our database.
+			Emitted when a user is removed from our database.
 
-	e.g. The record was deleted from the TSP and we removed it from our database.
+		e.g. The record was deleted from the TSP and we removed it from our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiUserRemoveduserRemovedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiUserRemoveduserRemovedPostRequest
 	*/
 	UserRemoveduserRemovedPost(ctx context.Context) ApiUserRemoveduserRemovedPostRequest
 
@@ -508,14 +508,14 @@ type WebhookEventsAPI interface {
 	UserRemoveduserRemovedPostExecute(r ApiUserRemoveduserRemovedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		VehicleAddedvehicleAddedPost Vehicle Added
+			VehicleAddedvehicleAddedPost Vehicle Added
 
-		Emitted when a new vehicle is added to our database.
+			Emitted when a new vehicle is added to our database.
 
-	e.g. The record fetched from the TSP is new and generated a new record in our database.
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiVehicleAddedvehicleAddedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiVehicleAddedvehicleAddedPostRequest
 	*/
 	VehicleAddedvehicleAddedPost(ctx context.Context) ApiVehicleAddedvehicleAddedPostRequest
 
@@ -524,14 +524,14 @@ type WebhookEventsAPI interface {
 	VehicleAddedvehicleAddedPostExecute(r ApiVehicleAddedvehicleAddedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		VehicleLocationAddedvehicleLocationAddedPost Vehicle Location Added
+			VehicleLocationAddedvehicleLocationAddedPost Vehicle Location Added
 
-		Emitted when a new vehicle location is added to our database.
+			Emitted when a new vehicle location is added to our database.
 
-	e.g. The record fetched from the TSP is new and generated a new record in our database.
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiVehicleLocationAddedvehicleLocationAddedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiVehicleLocationAddedvehicleLocationAddedPostRequest
 	*/
 	VehicleLocationAddedvehicleLocationAddedPost(ctx context.Context) ApiVehicleLocationAddedvehicleLocationAddedPostRequest
 
@@ -540,14 +540,14 @@ type WebhookEventsAPI interface {
 	VehicleLocationAddedvehicleLocationAddedPostExecute(r ApiVehicleLocationAddedvehicleLocationAddedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		VehicleModifiedvehicleModifiedPost Vehicle Modified
+			VehicleModifiedvehicleModifiedPost Vehicle Modified
 
-		Emitted when a vehicle is modified in our database.
+			Emitted when a vehicle is modified in our database.
 
-	e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiVehicleModifiedvehicleModifiedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiVehicleModifiedvehicleModifiedPostRequest
 	*/
 	VehicleModifiedvehicleModifiedPost(ctx context.Context) ApiVehicleModifiedvehicleModifiedPostRequest
 
@@ -556,14 +556,14 @@ type WebhookEventsAPI interface {
 	VehicleModifiedvehicleModifiedPostExecute(r ApiVehicleModifiedvehicleModifiedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		VehicleRemovedvehicleRemovedPost Vehicle Removed
+			VehicleRemovedvehicleRemovedPost Vehicle Removed
 
-		Emitted when a vehicle is removed from our database.
+			Emitted when a vehicle is removed from our database.
 
-	e.g. The record was deleted from the TSP and we removed it from our database.
+		e.g. The record was deleted from the TSP and we removed it from our database.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiVehicleRemovedvehicleRemovedPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiVehicleRemovedvehicleRemovedPostRequest
 	*/
 	VehicleRemovedvehicleRemovedPost(ctx context.Context) ApiVehicleRemovedvehicleRemovedPostRequest
 
@@ -600,18 +600,18 @@ type WebhookEventsAPI interface {
 	WebhookDeletedwebhookDeletedPostExecute(r ApiWebhookDeletedwebhookDeletedPostRequest) (interface{}, *http.Response, error)
 
 	/*
-		WebhookStaledwebhookStaledPost Webhook Staled
+			WebhookStaledwebhookStaledPost Webhook Staled
 
-		Emitted when a webhook subscription is staled.
+			Emitted when a webhook subscription is staled.
 
-	We mark a subscription as staled and automatically stop sending events
-	to the webhook if the success rate for the last 6 hours is below 90%.
+		We mark a subscription as staled and automatically stop sending events
+		to the webhook if the success rate for the last 6 hours is below 90%.
 
-	After fixing the issue, you must patch the webhook changing the status to active.
-	If the success rate is still below 90%, the webhook will be marked as stale again.
+		After fixing the issue, you must patch the webhook changing the status to active.
+		If the success rate is still below 90%, the webhook will be marked as stale again.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiWebhookStaledwebhookStaledPostRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiWebhookStaledwebhookStaledPostRequest
 	*/
 	WebhookStaledwebhookStaledPost(ctx context.Context) ApiWebhookStaledwebhookStaledPostRequest
 

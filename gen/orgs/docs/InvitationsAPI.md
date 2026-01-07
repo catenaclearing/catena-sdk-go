@@ -30,7 +30,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/orgsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
 )
 
 func main() {
@@ -102,7 +102,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/orgsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
 )
 
 func main() {
@@ -168,7 +168,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/orgsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
 )
 
 func main() {
@@ -240,7 +240,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/orgsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
 )
 
 func main() {
@@ -308,7 +308,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/orgsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
 )
 
 func main() {
@@ -378,7 +378,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/orgsapi"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
 )
 
 func main() {

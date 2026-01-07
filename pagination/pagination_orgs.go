@@ -51,6 +51,47 @@ func ListPartnersEach(c *catena.Client, ctx context.Context, opts ListPartnersPa
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
+// ListFleetsPaginationOptions holds the options for the ListFleets paginated operation.
+type ListFleetsPaginationOptions struct {
+	// Cursor is the cursor for the next page.
+	Cursor string
+	// Size is the maximum number of items to return per page.
+	Size *int
+}
+
+// ListFleetsEach iterates over all items in the ListFleets operation.
+func ListFleetsEach(c *catena.Client, ctx context.Context, opts ListFleetsPaginationOptions, yield func(orgsapi.FleetRead) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]orgsapi.FleetRead, string, error) {
+		req := c.Orgs().FleetsAPI.ListFleets(ctx)
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		} else if opts.Cursor != "" {
+			req = req.Cursor(opts.Cursor)
+		}
+		if opts.Size != nil {
+			req = req.Size(int32(*opts.Size))
+		}
+
+		resp, _, err := req.Execute()
+		if err != nil {
+			return nil, "", err
+		}
+
+		if resp == nil {
+			return nil, "", nil
+		}
+
+		var next string
+		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
+			next = *resp.NextPage.Get()
+		}
+
+		return resp.Items, next, nil
+	}
+
+	return pagination.Each(ctx, opts.Cursor, fetch, yield)
+}
+
 // ListInvitationsPaginationOptions holds the options for the ListInvitations paginated operation.
 type ListInvitationsPaginationOptions struct {
 	FleetRef *string
@@ -120,47 +161,6 @@ func ListShareAgreementsEach(c *catena.Client, ctx context.Context, opts ListSha
 		if opts.ShareAgreementStatus != nil {
 			req = req.ShareAgreementStatus(orgsapi.StatusEnum(*opts.ShareAgreementStatus))
 		}
-		if cursor != "" {
-			req = req.Cursor(cursor)
-		} else if opts.Cursor != "" {
-			req = req.Cursor(opts.Cursor)
-		}
-		if opts.Size != nil {
-			req = req.Size(int32(*opts.Size))
-		}
-
-		resp, _, err := req.Execute()
-		if err != nil {
-			return nil, "", err
-		}
-
-		if resp == nil {
-			return nil, "", nil
-		}
-
-		var next string
-		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
-			next = *resp.NextPage.Get()
-		}
-
-		return resp.Items, next, nil
-	}
-
-	return pagination.Each(ctx, opts.Cursor, fetch, yield)
-}
-
-// ListFleetsPaginationOptions holds the options for the ListFleets paginated operation.
-type ListFleetsPaginationOptions struct {
-	// Cursor is the cursor for the next page.
-	Cursor string
-	// Size is the maximum number of items to return per page.
-	Size *int
-}
-
-// ListFleetsEach iterates over all items in the ListFleets operation.
-func ListFleetsEach(c *catena.Client, ctx context.Context, opts ListFleetsPaginationOptions, yield func(orgsapi.FleetRead) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]orgsapi.FleetRead, string, error) {
-		req := c.Orgs().FleetsAPI.ListFleets(ctx)
 		if cursor != "" {
 			req = req.Cursor(cursor)
 		} else if opts.Cursor != "" {

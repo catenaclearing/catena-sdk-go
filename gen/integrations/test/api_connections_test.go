@@ -11,10 +11,12 @@ package integrationsapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/integrationsapi"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
+
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
 )
 
 func Test_integrationsapi_ConnectionsAPIService(t *testing.T) {

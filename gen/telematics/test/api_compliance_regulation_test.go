@@ -11,10 +11,12 @@ package telematicsapi
 
 import (
 	"context"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/telematicsapi"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
+
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 )
 
 func Test_telematicsapi_ComplianceRegulationAPIService(t *testing.T) {

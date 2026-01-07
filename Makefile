@@ -38,14 +38,24 @@ fmt: ## Format Go code with gofmt and goimports
 lint: ## Run golangci-lint
 	@echo "==> Running linters..."
 	@if command -v $(GOLINT) >/dev/null 2>&1; then \
-		$(GOLINT) run --timeout=5m; \
+		dirs=$$($(GOCMD) list -f '{{.Dir}}' ./... | grep -v '/gen/'); \
+		if [ -z "$$dirs" ]; then \
+			echo "No packages to lint"; \
+		else \
+			$(GOLINT) run --timeout=5m $$dirs; \
+		fi; \
 	else \
 		echo "golangci-lint not found, skipping lint"; \
 	fi
 
 test: ## Run Go tests
 	@echo "==> Running tests..."
-	@$(GOTEST) -v -race -cover ./...
+	@pkgs=$$($(GOCMD) list ./... | grep -v '/gen/'); \
+	if [ -z "$$pkgs" ]; then \
+		echo "No packages to test"; \
+	else \
+		$(GOTEST) -v -race -coverprofile=coverage.out -covermode=atomic $$pkgs; \
+	fi
 
 specs.fetch: ## Download OpenAPI specifications from remote URLs
 	@echo "==> Fetching specs..."
@@ -62,17 +72,13 @@ generate: specs.combine ## Generate Go client code from OpenAPI specs
 	@chmod +x $(BUILD_DIR)/generate.sh
 	@$(BUILD_DIR)/generate.sh
 	@echo "==> Running go mod tidy..."
-	@cd $(GEN_DIR)/integrations && $(GOCMD) mod tidy || true
-	@cd $(GEN_DIR)/orgs && $(GOCMD) mod tidy || true
-	@cd $(GEN_DIR)/telematics && $(GOCMD) mod tidy || true
-	@cd $(GEN_DIR)/notifications && $(GOCMD) mod tidy || true
-	@cd $(GEN_DIR)/authentication && $(GOCMD) mod tidy || true
+	@$(GOCMD) mod tidy || true
 
 verify-clean: ## Verify generated code matches committed code
 	@chmod +x $(BUILD_DIR)/verify-clean.sh
 	@$(BUILD_DIR)/verify-clean.sh
 
-ci: tools specs.fetch generate fmt lint verify-clean test ## Run all CI checks (fetch, generate, format, lint, verify, test)
+ci: tools generate fmt lint verify-clean test ## Run all CI checks (generate, format, lint, verify, test)
 	@echo "==> CI checks passed!"
 
 clean: ## Remove generated files

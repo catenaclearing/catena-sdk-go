@@ -29,7 +29,8 @@ func main() {
 	defer cancel()
 
 	if err := c.Authenticate(ctx, clientID, clientSecret); err != nil {
-		log.Fatalf("Failed to authenticate: %v", err)
+		log.Printf("Failed to authenticate: %v", err)
+		return
 	}
 
 	fmt.Println("Successfully authenticated!")
@@ -50,7 +51,8 @@ func main() {
 	)
 
 	if err != nil && err != ErrStop {
-		log.Fatalf("Error listing webhooks: %v", err)
+		log.Printf("Error listing webhooks: %v", err)
+		return
 	}
 
 	if webhookID == "" {
@@ -66,7 +68,8 @@ func main() {
 		Execute()
 
 	if err != nil {
-		log.Fatalf("Error getting webhook metrics: %v\nResponse: %v", err, resp)
+		log.Printf("Error getting webhook metrics: %v\nResponse: %v", err, resp)
+		return
 	}
 
 	successAttempts := metrics.GetHttpSuccessAttempts()

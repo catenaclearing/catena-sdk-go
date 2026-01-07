@@ -33,7 +33,8 @@ func main() {
 	defer cancel()
 
 	if err := c.Authenticate(ctx, clientID, clientSecret); err != nil {
-		log.Fatalf("Failed to authenticate: %v", err)
+		log.Printf("Failed to authenticate: %v", err)
+		return
 	}
 
 	fmt.Println("Successfully authenticated!")
@@ -45,7 +46,7 @@ func main() {
 	// Define the event we want to subscribe to.
 	// We use the catch-all event for vehicle locations ("vehicle_location.*").
 	catchAllEvent := notificationsapi.WEBHOOKCATCHALLEVENTS_VEHICLE_LOCATION
-	eventName := notificationsapi.WebhookEventName{
+	eventName := notificationsapi.WebhookEventNameUnion{
 		WebhookCatchAllEvents: &catchAllEvent,
 	}
 
@@ -63,11 +64,13 @@ func main() {
 		Execute()
 
 	if err != nil {
-		log.Fatalf("Error creating webhook: %v\nResponse: %v", err, resp)
+		log.Printf("Error creating webhook: %v\nResponse: %v", err, resp)
+		return
 	}
 
 	if createdWebhook.Webhook == nil {
-		log.Fatalf("Unexpected response format: %v", createdWebhook)
+		log.Printf("Unexpected response format: %v", createdWebhook)
+		return
 	}
 
 	fmt.Printf("Created Webhook ID: %s\n", createdWebhook.Webhook.GetId())

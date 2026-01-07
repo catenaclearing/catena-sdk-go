@@ -68,7 +68,10 @@ func (c *Client) refreshToken(ctx context.Context) error {
 			ClientSecret(clientSecret).
 			Scope("organization")
 
-		resp, _, err := req.Execute()
+		resp, httpResp, err := req.Execute()
+		if httpResp != nil && httpResp.Body != nil {
+			defer httpResp.Body.Close()
+		}
 		if err != nil {
 			return nil, &AuthError{Op: "token_exchange", Err: err}
 		}
@@ -86,7 +89,7 @@ func (c *Client) refreshToken(ctx context.Context) error {
 		defer c.mu.Unlock()
 		c.accessToken = resp.AccessToken
 		// Set expiration with a safety buffer of 30 seconds
-		c.expiresAt = time.Unix(int64(claims.Exp), 0).Add(-30 * time.Second)
+		c.expiresAt = time.Unix(claims.Exp, 0).Add(-30 * time.Second)
 		c.tokenClaims = claims
 
 		return nil, nil

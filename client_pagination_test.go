@@ -47,7 +47,8 @@ func TestListConnectionsPagination(t *testing.T) {
 
 		var resp map[string]interface{}
 
-		if cursor == "" {
+		switch cursor {
+		case "":
 			// First page
 			resp = map[string]interface{}{
 				"items": []map[string]interface{}{
@@ -56,7 +57,7 @@ func TestListConnectionsPagination(t *testing.T) {
 				},
 				"next_page": "page2",
 			}
-		} else if cursor == "page2" {
+		case "page2":
 			// Second page
 			resp = map[string]interface{}{
 				"items": []map[string]interface{}{
@@ -64,7 +65,7 @@ func TestListConnectionsPagination(t *testing.T) {
 				},
 				"next_page": "", // End
 			}
-		} else {
+		default:
 			http.Error(w, "Invalid cursor", http.StatusBadRequest)
 			return
 		}

@@ -18,7 +18,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.23'
+          go-version: '1.24.11'
           cache: true
       
       - name: Set up Node.js (for Redocly CLI)
@@ -30,10 +30,7 @@ jobs:
         run: npm install -g @redocly/cli
       
       - name: Install golangci-lint
-        uses: golangci/golangci-lint-action@v4
-        with:
-          version: latest
-          args: --version
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8
       
       - name: Install goimports
         run: go install golang.org/x/tools/cmd/goimports@latest
@@ -48,11 +45,6 @@ jobs:
       
       - name: Run linters
         run: make lint
-      
-      - name: Fetch and combine specs
-        run: |
-          make specs.fetch
-          make specs.combine
       
       - name: Generate client code
         run: make generate

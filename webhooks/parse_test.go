@@ -45,7 +45,7 @@ func TestParseBytes(t *testing.T) {
 		"data": [{"foo": "bar"}]
 	}`
 
-	env, payload, err = ParseBytes([]byte(unknownJSON))
+	_, payload, err = ParseBytes([]byte(unknownJSON))
 	if err != nil {
 		t.Fatalf("ParseBytes failed for unknown event: %v", err)
 	}

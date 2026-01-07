@@ -37,16 +37,16 @@ type InvitationsAPI interface {
 	AcceptInvitationV2OrgsInvitationsInvitationIdAcceptPostExecute(r ApiAcceptInvitationV2OrgsInvitationsInvitationIdAcceptPostRequest) (*InvitationRead, *http.Response, error)
 
 	/*
-		CreateInvitation Create Invitation
+			CreateInvitation Create Invitation
 
-		Create an invitation with a magic link to onboard a fleet.
+			Create an invitation with a magic link to onboard a fleet.
 
-	Returns an invitation object with a unique ID that serves as the magic link token.
-	Share this link with the fleet to begin the onboarding process.
-	Once accepted, a share agreement is automatically created to enable data sharing.
+		Returns an invitation object with a unique ID that serves as the magic link token.
+		Share this link with the fleet to begin the onboarding process.
+		Once accepted, a share agreement is automatically created to enable data sharing.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiCreateInvitationRequest
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiCreateInvitationRequest
 	*/
 	CreateInvitation(ctx context.Context) ApiCreateInvitationRequest
 

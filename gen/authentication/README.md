@@ -24,7 +24,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import authenticationapi "github.com/catenaclearing/catena-sdk-go/authenticationapi"
+import authenticationapi "github.com/catenaclearing/catena-sdk-go/gen/authentication"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
