@@ -6,8 +6,6 @@ configuration.go
 docs/ErrorResponse.md
 docs/OAuth20API.md
 docs/TokenResponse.md
-go.mod
-go.sum
 model_error_response.go
 model_token_response.go
 response.go
