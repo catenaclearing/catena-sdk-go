@@ -68,45 +68,31 @@ func ListUsersEach(c *catena.Client, ctx context.Context, opts ListUsersPaginati
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListHosEventsPaginationOptions holds the options for the ListHosEvents paginated operation.
-type ListHosEventsPaginationOptions struct {
+// GetDvirLogDefectsPaginationOptions holds the options for the GetDvirLogDefects paginated operation.
+type GetDvirLogDefectsPaginationOptions struct {
+	// DvirLogId is a required parameter.
+	DvirLogId         string
 	FleetIds          *[]string
 	FleetRefs         *[]string
-	FromDatetime      *time.Time
-	ToDatetime        *time.Time
 	IncludeSourceData *bool
-	DriverIds         *[]string
-	VehicleIds        *[]string
 	// Cursor is the cursor for the next page.
 	Cursor string
 	// Size is the maximum number of items to return per page.
 	Size *int
 }
 
-// ListHosEventsEach iterates over all items in the ListHosEvents operation.
-func ListHosEventsEach(c *catena.Client, ctx context.Context, opts ListHosEventsPaginationOptions, yield func(telematicsapi.HosEvent) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.HosEvent, string, error) {
-		req := c.Telematics().ComplianceRegulationAPI.ListHosEvents(ctx)
+// GetDvirLogDefectsEach iterates over all items in the GetDvirLogDefects operation.
+func GetDvirLogDefectsEach(c *catena.Client, ctx context.Context, opts GetDvirLogDefectsPaginationOptions, yield func(telematicsapi.DvirLogDefect) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.DvirLogDefect, string, error) {
+		req := c.Telematics().ComplianceRegulationAPI.GetDvirLogDefects(ctx, opts.DvirLogId)
 		if opts.FleetIds != nil {
 			req = req.FleetIds(*opts.FleetIds)
 		}
 		if opts.FleetRefs != nil {
 			req = req.FleetRefs(*opts.FleetRefs)
 		}
-		if opts.FromDatetime != nil {
-			req = req.FromDatetime(*opts.FromDatetime)
-		}
-		if opts.ToDatetime != nil {
-			req = req.ToDatetime(*opts.ToDatetime)
-		}
 		if opts.IncludeSourceData != nil {
 			req = req.IncludeSourceData(*opts.IncludeSourceData)
-		}
-		if opts.DriverIds != nil {
-			req = req.DriverIds(*opts.DriverIds)
-		}
-		if opts.VehicleIds != nil {
-			req = req.VehicleIds(*opts.VehicleIds)
 		}
 		if cursor != "" {
 			req = req.Cursor(cursor)
@@ -202,18 +188,38 @@ func ListDvirLogDefectsEach(c *catena.Client, ctx context.Context, opts ListDvir
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListRulesetsReferencePaginationOptions holds the options for the ListRulesetsReference paginated operation.
-type ListRulesetsReferencePaginationOptions struct {
+// ListHosAvailabilitiesPaginationOptions holds the options for the ListHosAvailabilities paginated operation.
+type ListHosAvailabilitiesPaginationOptions struct {
+	FleetIds          *[]string
+	FleetRefs         *[]string
+	IncludeSourceData *bool
+	DriverIds         *[]string
+	VehicleIds        *[]string
 	// Cursor is the cursor for the next page.
 	Cursor string
 	// Size is the maximum number of items to return per page.
 	Size *int
 }
 
-// ListRulesetsReferenceEach iterates over all items in the ListRulesetsReference operation.
-func ListRulesetsReferenceEach(c *catena.Client, ctx context.Context, opts ListRulesetsReferencePaginationOptions, yield func(telematicsapi.RefHosRuleset) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosRuleset, string, error) {
-		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListRulesetsReference(ctx)
+// ListHosAvailabilitiesEach iterates over all items in the ListHosAvailabilities operation.
+func ListHosAvailabilitiesEach(c *catena.Client, ctx context.Context, opts ListHosAvailabilitiesPaginationOptions, yield func(telematicsapi.HosAvailability) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.HosAvailability, string, error) {
+		req := c.Telematics().ComplianceRegulationAPI.ListHosAvailabilities(ctx)
+		if opts.FleetIds != nil {
+			req = req.FleetIds(*opts.FleetIds)
+		}
+		if opts.FleetRefs != nil {
+			req = req.FleetRefs(*opts.FleetRefs)
+		}
+		if opts.IncludeSourceData != nil {
+			req = req.IncludeSourceData(*opts.IncludeSourceData)
+		}
+		if opts.DriverIds != nil {
+			req = req.DriverIds(*opts.DriverIds)
+		}
+		if opts.VehicleIds != nil {
+			req = req.VehicleIds(*opts.VehicleIds)
+		}
 		if cursor != "" {
 			req = req.Cursor(cursor)
 		} else if opts.Cursor != "" {
@@ -243,18 +249,18 @@ func ListRulesetsReferenceEach(c *catena.Client, ctx context.Context, opts ListR
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListHosMalfunctionCodesReferencePaginationOptions holds the options for the ListHosMalfunctionCodesReference paginated operation.
-type ListHosMalfunctionCodesReferencePaginationOptions struct {
+// ListHosRecordOriginsReferencePaginationOptions holds the options for the ListHosRecordOriginsReference paginated operation.
+type ListHosRecordOriginsReferencePaginationOptions struct {
 	// Cursor is the cursor for the next page.
 	Cursor string
 	// Size is the maximum number of items to return per page.
 	Size *int
 }
 
-// ListHosMalfunctionCodesReferenceEach iterates over all items in the ListHosMalfunctionCodesReference operation.
-func ListHosMalfunctionCodesReferenceEach(c *catena.Client, ctx context.Context, opts ListHosMalfunctionCodesReferencePaginationOptions, yield func(telematicsapi.RefHosMalfunctionCode) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosMalfunctionCode, string, error) {
-		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListHosMalfunctionCodesReference(ctx)
+// ListHosRecordOriginsReferenceEach iterates over all items in the ListHosRecordOriginsReference operation.
+func ListHosRecordOriginsReferenceEach(c *catena.Client, ctx context.Context, opts ListHosRecordOriginsReferencePaginationOptions, yield func(telematicsapi.RefHosRecordOrigin) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosRecordOrigin, string, error) {
+		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListHosRecordOriginsReference(ctx)
 		if cursor != "" {
 			req = req.Cursor(cursor)
 		} else if opts.Cursor != "" {
@@ -284,18 +290,18 @@ func ListHosMalfunctionCodesReferenceEach(c *catena.Client, ctx context.Context,
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListHosRecordStatusesReferencePaginationOptions holds the options for the ListHosRecordStatusesReference paginated operation.
-type ListHosRecordStatusesReferencePaginationOptions struct {
+// ListTimezonesReferencePaginationOptions holds the options for the ListTimezonesReference paginated operation.
+type ListTimezonesReferencePaginationOptions struct {
 	// Cursor is the cursor for the next page.
 	Cursor string
 	// Size is the maximum number of items to return per page.
 	Size *int
 }
 
-// ListHosRecordStatusesReferenceEach iterates over all items in the ListHosRecordStatusesReference operation.
-func ListHosRecordStatusesReferenceEach(c *catena.Client, ctx context.Context, opts ListHosRecordStatusesReferencePaginationOptions, yield func(telematicsapi.RefHosRecordStatus) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosRecordStatus, string, error) {
-		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListHosRecordStatusesReference(ctx)
+// ListTimezonesReferenceEach iterates over all items in the ListTimezonesReference operation.
+func ListTimezonesReferenceEach(c *catena.Client, ctx context.Context, opts ListTimezonesReferencePaginationOptions, yield func(telematicsapi.RefTimezoneCode) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefTimezoneCode, string, error) {
+		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListTimezonesReference(ctx)
 		if cursor != "" {
 			req = req.Cursor(cursor)
 		} else if opts.Cursor != "" {
@@ -382,6 +388,47 @@ func ListIftaSummariesEach(c *catena.Client, ctx context.Context, opts ListIftaS
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
+// ListRulesetsReferencePaginationOptions holds the options for the ListRulesetsReference paginated operation.
+type ListRulesetsReferencePaginationOptions struct {
+	// Cursor is the cursor for the next page.
+	Cursor string
+	// Size is the maximum number of items to return per page.
+	Size *int
+}
+
+// ListRulesetsReferenceEach iterates over all items in the ListRulesetsReference operation.
+func ListRulesetsReferenceEach(c *catena.Client, ctx context.Context, opts ListRulesetsReferencePaginationOptions, yield func(telematicsapi.RefHosRuleset) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosRuleset, string, error) {
+		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListRulesetsReference(ctx)
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		} else if opts.Cursor != "" {
+			req = req.Cursor(opts.Cursor)
+		}
+		if opts.Size != nil {
+			req = req.Size(int32(*opts.Size))
+		}
+
+		resp, _, err := req.Execute()
+		if err != nil {
+			return nil, "", err
+		}
+
+		if resp == nil {
+			return nil, "", nil
+		}
+
+		var next string
+		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
+			next = *resp.NextPage.Get()
+		}
+
+		return resp.Items, next, nil
+	}
+
+	return pagination.Each(ctx, opts.Cursor, fetch, yield)
+}
+
 // ListHosEventCodesReferencePaginationOptions holds the options for the ListHosEventCodesReference paginated operation.
 type ListHosEventCodesReferencePaginationOptions struct {
 	// Cursor is the cursor for the next page.
@@ -423,114 +470,18 @@ func ListHosEventCodesReferenceEach(c *catena.Client, ctx context.Context, opts 
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListHosRegionsReferencePaginationOptions holds the options for the ListHosRegionsReference paginated operation.
-type ListHosRegionsReferencePaginationOptions struct {
+// ListHosMalfunctionCodesReferencePaginationOptions holds the options for the ListHosMalfunctionCodesReference paginated operation.
+type ListHosMalfunctionCodesReferencePaginationOptions struct {
 	// Cursor is the cursor for the next page.
 	Cursor string
 	// Size is the maximum number of items to return per page.
 	Size *int
 }
 
-// ListHosRegionsReferenceEach iterates over all items in the ListHosRegionsReference operation.
-func ListHosRegionsReferenceEach(c *catena.Client, ctx context.Context, opts ListHosRegionsReferencePaginationOptions, yield func(telematicsapi.RefHosRegion) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosRegion, string, error) {
-		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListHosRegionsReference(ctx)
-		if cursor != "" {
-			req = req.Cursor(cursor)
-		} else if opts.Cursor != "" {
-			req = req.Cursor(opts.Cursor)
-		}
-		if opts.Size != nil {
-			req = req.Size(int32(*opts.Size))
-		}
-
-		resp, _, err := req.Execute()
-		if err != nil {
-			return nil, "", err
-		}
-
-		if resp == nil {
-			return nil, "", nil
-		}
-
-		var next string
-		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
-			next = *resp.NextPage.Get()
-		}
-
-		return resp.Items, next, nil
-	}
-
-	return pagination.Each(ctx, opts.Cursor, fetch, yield)
-}
-
-// ListTimezonesReferencePaginationOptions holds the options for the ListTimezonesReference paginated operation.
-type ListTimezonesReferencePaginationOptions struct {
-	// Cursor is the cursor for the next page.
-	Cursor string
-	// Size is the maximum number of items to return per page.
-	Size *int
-}
-
-// ListTimezonesReferenceEach iterates over all items in the ListTimezonesReference operation.
-func ListTimezonesReferenceEach(c *catena.Client, ctx context.Context, opts ListTimezonesReferencePaginationOptions, yield func(telematicsapi.RefTimezoneCode) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefTimezoneCode, string, error) {
-		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListTimezonesReference(ctx)
-		if cursor != "" {
-			req = req.Cursor(cursor)
-		} else if opts.Cursor != "" {
-			req = req.Cursor(opts.Cursor)
-		}
-		if opts.Size != nil {
-			req = req.Size(int32(*opts.Size))
-		}
-
-		resp, _, err := req.Execute()
-		if err != nil {
-			return nil, "", err
-		}
-
-		if resp == nil {
-			return nil, "", nil
-		}
-
-		var next string
-		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
-			next = *resp.NextPage.Get()
-		}
-
-		return resp.Items, next, nil
-	}
-
-	return pagination.Each(ctx, opts.Cursor, fetch, yield)
-}
-
-// GetVehicleSensorEventsPaginationOptions holds the options for the GetVehicleSensorEvents paginated operation.
-type GetVehicleSensorEventsPaginationOptions struct {
-	// VehicleId is a required parameter.
-	VehicleId         string
-	FleetIds          *[]string
-	FleetRefs         *[]string
-	IncludeSourceData *bool
-	// Cursor is the cursor for the next page.
-	Cursor string
-	// Size is the maximum number of items to return per page.
-	Size *int
-}
-
-// GetVehicleSensorEventsEach iterates over all items in the GetVehicleSensorEvents operation.
-func GetVehicleSensorEventsEach(c *catena.Client, ctx context.Context, opts GetVehicleSensorEventsPaginationOptions, yield func(telematicsapi.VehicleSensor) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.VehicleSensor, string, error) {
-		req := c.Telematics().FleetOperationsTrackingAPI.GetVehicleSensorEvents(ctx, opts.VehicleId)
-		if opts.FleetIds != nil {
-			req = req.FleetIds(*opts.FleetIds)
-		}
-		if opts.FleetRefs != nil {
-			req = req.FleetRefs(*opts.FleetRefs)
-		}
-		if opts.IncludeSourceData != nil {
-			req = req.IncludeSourceData(*opts.IncludeSourceData)
-		}
+// ListHosMalfunctionCodesReferenceEach iterates over all items in the ListHosMalfunctionCodesReference operation.
+func ListHosMalfunctionCodesReferenceEach(c *catena.Client, ctx context.Context, opts ListHosMalfunctionCodesReferencePaginationOptions, yield func(telematicsapi.RefHosMalfunctionCode) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosMalfunctionCode, string, error) {
+		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListHosMalfunctionCodesReference(ctx)
 		if cursor != "" {
 			req = req.Cursor(cursor)
 		} else if opts.Cursor != "" {
@@ -595,6 +546,132 @@ func ListHosDailySnapshotsEach(c *catena.Client, ctx context.Context, opts ListH
 		}
 		if opts.DriverIds != nil {
 			req = req.DriverIds(*opts.DriverIds)
+		}
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		} else if opts.Cursor != "" {
+			req = req.Cursor(opts.Cursor)
+		}
+		if opts.Size != nil {
+			req = req.Size(int32(*opts.Size))
+		}
+
+		resp, _, err := req.Execute()
+		if err != nil {
+			return nil, "", err
+		}
+
+		if resp == nil {
+			return nil, "", nil
+		}
+
+		var next string
+		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
+			next = *resp.NextPage.Get()
+		}
+
+		return resp.Items, next, nil
+	}
+
+	return pagination.Each(ctx, opts.Cursor, fetch, yield)
+}
+
+// ListTrailersPaginationOptions holds the options for the ListTrailers paginated operation.
+type ListTrailersPaginationOptions struct {
+	FleetIds          *[]string
+	FleetRefs         *[]string
+	IncludeSourceData *bool
+	TrailerIds        *[]string
+	// Cursor is the cursor for the next page.
+	Cursor string
+	// Size is the maximum number of items to return per page.
+	Size *int
+}
+
+// ListTrailersEach iterates over all items in the ListTrailers operation.
+func ListTrailersEach(c *catena.Client, ctx context.Context, opts ListTrailersPaginationOptions, yield func(telematicsapi.Trailer) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.Trailer, string, error) {
+		req := c.Telematics().FleetOperationsTrackingAPI.ListTrailers(ctx)
+		if opts.FleetIds != nil {
+			req = req.FleetIds(*opts.FleetIds)
+		}
+		if opts.FleetRefs != nil {
+			req = req.FleetRefs(*opts.FleetRefs)
+		}
+		if opts.IncludeSourceData != nil {
+			req = req.IncludeSourceData(*opts.IncludeSourceData)
+		}
+		if opts.TrailerIds != nil {
+			req = req.TrailerIds(*opts.TrailerIds)
+		}
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		} else if opts.Cursor != "" {
+			req = req.Cursor(opts.Cursor)
+		}
+		if opts.Size != nil {
+			req = req.Size(int32(*opts.Size))
+		}
+
+		resp, _, err := req.Execute()
+		if err != nil {
+			return nil, "", err
+		}
+
+		if resp == nil {
+			return nil, "", nil
+		}
+
+		var next string
+		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
+			next = *resp.NextPage.Get()
+		}
+
+		return resp.Items, next, nil
+	}
+
+	return pagination.Each(ctx, opts.Cursor, fetch, yield)
+}
+
+// ListHosEventsPaginationOptions holds the options for the ListHosEvents paginated operation.
+type ListHosEventsPaginationOptions struct {
+	FleetIds          *[]string
+	FleetRefs         *[]string
+	FromDatetime      *time.Time
+	ToDatetime        *time.Time
+	IncludeSourceData *bool
+	DriverIds         *[]string
+	VehicleIds        *[]string
+	// Cursor is the cursor for the next page.
+	Cursor string
+	// Size is the maximum number of items to return per page.
+	Size *int
+}
+
+// ListHosEventsEach iterates over all items in the ListHosEvents operation.
+func ListHosEventsEach(c *catena.Client, ctx context.Context, opts ListHosEventsPaginationOptions, yield func(telematicsapi.HosEvent) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.HosEvent, string, error) {
+		req := c.Telematics().ComplianceRegulationAPI.ListHosEvents(ctx)
+		if opts.FleetIds != nil {
+			req = req.FleetIds(*opts.FleetIds)
+		}
+		if opts.FleetRefs != nil {
+			req = req.FleetRefs(*opts.FleetRefs)
+		}
+		if opts.FromDatetime != nil {
+			req = req.FromDatetime(*opts.FromDatetime)
+		}
+		if opts.ToDatetime != nil {
+			req = req.ToDatetime(*opts.ToDatetime)
+		}
+		if opts.IncludeSourceData != nil {
+			req = req.IncludeSourceData(*opts.IncludeSourceData)
+		}
+		if opts.DriverIds != nil {
+			req = req.DriverIds(*opts.DriverIds)
+		}
+		if opts.VehicleIds != nil {
+			req = req.VehicleIds(*opts.VehicleIds)
 		}
 		if cursor != "" {
 			req = req.Cursor(cursor)
@@ -698,195 +775,18 @@ func ListVehicleLocationsEach(c *catena.Client, ctx context.Context, opts ListVe
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListTrailersPaginationOptions holds the options for the ListTrailers paginated operation.
-type ListTrailersPaginationOptions struct {
-	FleetIds          *[]string
-	FleetRefs         *[]string
-	IncludeSourceData *bool
-	TrailerIds        *[]string
+// ListHosRegionsReferencePaginationOptions holds the options for the ListHosRegionsReference paginated operation.
+type ListHosRegionsReferencePaginationOptions struct {
 	// Cursor is the cursor for the next page.
 	Cursor string
 	// Size is the maximum number of items to return per page.
 	Size *int
 }
 
-// ListTrailersEach iterates over all items in the ListTrailers operation.
-func ListTrailersEach(c *catena.Client, ctx context.Context, opts ListTrailersPaginationOptions, yield func(telematicsapi.Trailer) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.Trailer, string, error) {
-		req := c.Telematics().FleetOperationsTrackingAPI.ListTrailers(ctx)
-		if opts.FleetIds != nil {
-			req = req.FleetIds(*opts.FleetIds)
-		}
-		if opts.FleetRefs != nil {
-			req = req.FleetRefs(*opts.FleetRefs)
-		}
-		if opts.IncludeSourceData != nil {
-			req = req.IncludeSourceData(*opts.IncludeSourceData)
-		}
-		if opts.TrailerIds != nil {
-			req = req.TrailerIds(*opts.TrailerIds)
-		}
-		if cursor != "" {
-			req = req.Cursor(cursor)
-		} else if opts.Cursor != "" {
-			req = req.Cursor(opts.Cursor)
-		}
-		if opts.Size != nil {
-			req = req.Size(int32(*opts.Size))
-		}
-
-		resp, _, err := req.Execute()
-		if err != nil {
-			return nil, "", err
-		}
-
-		if resp == nil {
-			return nil, "", nil
-		}
-
-		var next string
-		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
-			next = *resp.NextPage.Get()
-		}
-
-		return resp.Items, next, nil
-	}
-
-	return pagination.Each(ctx, opts.Cursor, fetch, yield)
-}
-
-// GetDvirLogDefectsPaginationOptions holds the options for the GetDvirLogDefects paginated operation.
-type GetDvirLogDefectsPaginationOptions struct {
-	// DvirLogId is a required parameter.
-	DvirLogId         string
-	FleetIds          *[]string
-	FleetRefs         *[]string
-	IncludeSourceData *bool
-	// Cursor is the cursor for the next page.
-	Cursor string
-	// Size is the maximum number of items to return per page.
-	Size *int
-}
-
-// GetDvirLogDefectsEach iterates over all items in the GetDvirLogDefects operation.
-func GetDvirLogDefectsEach(c *catena.Client, ctx context.Context, opts GetDvirLogDefectsPaginationOptions, yield func(telematicsapi.DvirLogDefect) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.DvirLogDefect, string, error) {
-		req := c.Telematics().ComplianceRegulationAPI.GetDvirLogDefects(ctx, opts.DvirLogId)
-		if opts.FleetIds != nil {
-			req = req.FleetIds(*opts.FleetIds)
-		}
-		if opts.FleetRefs != nil {
-			req = req.FleetRefs(*opts.FleetRefs)
-		}
-		if opts.IncludeSourceData != nil {
-			req = req.IncludeSourceData(*opts.IncludeSourceData)
-		}
-		if cursor != "" {
-			req = req.Cursor(cursor)
-		} else if opts.Cursor != "" {
-			req = req.Cursor(opts.Cursor)
-		}
-		if opts.Size != nil {
-			req = req.Size(int32(*opts.Size))
-		}
-
-		resp, _, err := req.Execute()
-		if err != nil {
-			return nil, "", err
-		}
-
-		if resp == nil {
-			return nil, "", nil
-		}
-
-		var next string
-		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
-			next = *resp.NextPage.Get()
-		}
-
-		return resp.Items, next, nil
-	}
-
-	return pagination.Each(ctx, opts.Cursor, fetch, yield)
-}
-
-// ListHosViolationsPaginationOptions holds the options for the ListHosViolations paginated operation.
-type ListHosViolationsPaginationOptions struct {
-	FleetIds          *[]string
-	FleetRefs         *[]string
-	FromDatetime      *time.Time
-	ToDatetime        *time.Time
-	IncludeSourceData *bool
-	DriverIds         *[]string
-	// Cursor is the cursor for the next page.
-	Cursor string
-	// Size is the maximum number of items to return per page.
-	Size *int
-}
-
-// ListHosViolationsEach iterates over all items in the ListHosViolations operation.
-func ListHosViolationsEach(c *catena.Client, ctx context.Context, opts ListHosViolationsPaginationOptions, yield func(telematicsapi.HosViolation) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.HosViolation, string, error) {
-		req := c.Telematics().ComplianceRegulationAPI.ListHosViolations(ctx)
-		if opts.FleetIds != nil {
-			req = req.FleetIds(*opts.FleetIds)
-		}
-		if opts.FleetRefs != nil {
-			req = req.FleetRefs(*opts.FleetRefs)
-		}
-		if opts.FromDatetime != nil {
-			req = req.FromDatetime(*opts.FromDatetime)
-		}
-		if opts.ToDatetime != nil {
-			req = req.ToDatetime(*opts.ToDatetime)
-		}
-		if opts.IncludeSourceData != nil {
-			req = req.IncludeSourceData(*opts.IncludeSourceData)
-		}
-		if opts.DriverIds != nil {
-			req = req.DriverIds(*opts.DriverIds)
-		}
-		if cursor != "" {
-			req = req.Cursor(cursor)
-		} else if opts.Cursor != "" {
-			req = req.Cursor(opts.Cursor)
-		}
-		if opts.Size != nil {
-			req = req.Size(int32(*opts.Size))
-		}
-
-		resp, _, err := req.Execute()
-		if err != nil {
-			return nil, "", err
-		}
-
-		if resp == nil {
-			return nil, "", nil
-		}
-
-		var next string
-		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
-			next = *resp.NextPage.Get()
-		}
-
-		return resp.Items, next, nil
-	}
-
-	return pagination.Each(ctx, opts.Cursor, fetch, yield)
-}
-
-// ListHosRecordOriginsReferencePaginationOptions holds the options for the ListHosRecordOriginsReference paginated operation.
-type ListHosRecordOriginsReferencePaginationOptions struct {
-	// Cursor is the cursor for the next page.
-	Cursor string
-	// Size is the maximum number of items to return per page.
-	Size *int
-}
-
-// ListHosRecordOriginsReferenceEach iterates over all items in the ListHosRecordOriginsReference operation.
-func ListHosRecordOriginsReferenceEach(c *catena.Client, ctx context.Context, opts ListHosRecordOriginsReferencePaginationOptions, yield func(telematicsapi.RefHosRecordOrigin) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosRecordOrigin, string, error) {
-		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListHosRecordOriginsReference(ctx)
+// ListHosRegionsReferenceEach iterates over all items in the ListHosRegionsReference operation.
+func ListHosRegionsReferenceEach(c *catena.Client, ctx context.Context, opts ListHosRegionsReferencePaginationOptions, yield func(telematicsapi.RefHosRegion) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosRegion, string, error) {
+		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListHosRegionsReference(ctx)
 		if cursor != "" {
 			req = req.Cursor(cursor)
 		} else if opts.Cursor != "" {
@@ -957,41 +857,31 @@ func ListHosViolationCodesReferenceEach(c *catena.Client, ctx context.Context, o
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListVehicleSensorEventsPaginationOptions holds the options for the ListVehicleSensorEvents paginated operation.
-type ListVehicleSensorEventsPaginationOptions struct {
+// GetVehicleSensorEventsPaginationOptions holds the options for the GetVehicleSensorEvents paginated operation.
+type GetVehicleSensorEventsPaginationOptions struct {
+	// VehicleId is a required parameter.
+	VehicleId         string
 	FleetIds          *[]string
 	FleetRefs         *[]string
-	FromDatetime      *time.Time
-	ToDatetime        *time.Time
 	IncludeSourceData *bool
-	VehicleIds        *[]string
 	// Cursor is the cursor for the next page.
 	Cursor string
 	// Size is the maximum number of items to return per page.
 	Size *int
 }
 
-// ListVehicleSensorEventsEach iterates over all items in the ListVehicleSensorEvents operation.
-func ListVehicleSensorEventsEach(c *catena.Client, ctx context.Context, opts ListVehicleSensorEventsPaginationOptions, yield func(telematicsapi.VehicleSensor) error) error {
+// GetVehicleSensorEventsEach iterates over all items in the GetVehicleSensorEvents operation.
+func GetVehicleSensorEventsEach(c *catena.Client, ctx context.Context, opts GetVehicleSensorEventsPaginationOptions, yield func(telematicsapi.VehicleSensor) error) error {
 	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.VehicleSensor, string, error) {
-		req := c.Telematics().FleetOperationsTrackingAPI.ListVehicleSensorEvents(ctx)
+		req := c.Telematics().FleetOperationsTrackingAPI.GetVehicleSensorEvents(ctx, opts.VehicleId)
 		if opts.FleetIds != nil {
 			req = req.FleetIds(*opts.FleetIds)
 		}
 		if opts.FleetRefs != nil {
 			req = req.FleetRefs(*opts.FleetRefs)
 		}
-		if opts.FromDatetime != nil {
-			req = req.FromDatetime(*opts.FromDatetime)
-		}
-		if opts.ToDatetime != nil {
-			req = req.ToDatetime(*opts.ToDatetime)
-		}
 		if opts.IncludeSourceData != nil {
 			req = req.IncludeSourceData(*opts.IncludeSourceData)
-		}
-		if opts.VehicleIds != nil {
-			req = req.VehicleIds(*opts.VehicleIds)
 		}
 		if cursor != "" {
 			req = req.Cursor(cursor)
@@ -1203,12 +1093,119 @@ func ListDvirLogsEach(c *catena.Client, ctx context.Context, opts ListDvirLogsPa
 	return pagination.Each(ctx, opts.Cursor, fetch, yield)
 }
 
-// ListHosAvailabilitiesPaginationOptions holds the options for the ListHosAvailabilities paginated operation.
-type ListHosAvailabilitiesPaginationOptions struct {
+// ListHosViolationsPaginationOptions holds the options for the ListHosViolations paginated operation.
+type ListHosViolationsPaginationOptions struct {
 	FleetIds          *[]string
 	FleetRefs         *[]string
+	FromDatetime      *time.Time
+	ToDatetime        *time.Time
 	IncludeSourceData *bool
 	DriverIds         *[]string
+	// Cursor is the cursor for the next page.
+	Cursor string
+	// Size is the maximum number of items to return per page.
+	Size *int
+}
+
+// ListHosViolationsEach iterates over all items in the ListHosViolations operation.
+func ListHosViolationsEach(c *catena.Client, ctx context.Context, opts ListHosViolationsPaginationOptions, yield func(telematicsapi.HosViolation) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.HosViolation, string, error) {
+		req := c.Telematics().ComplianceRegulationAPI.ListHosViolations(ctx)
+		if opts.FleetIds != nil {
+			req = req.FleetIds(*opts.FleetIds)
+		}
+		if opts.FleetRefs != nil {
+			req = req.FleetRefs(*opts.FleetRefs)
+		}
+		if opts.FromDatetime != nil {
+			req = req.FromDatetime(*opts.FromDatetime)
+		}
+		if opts.ToDatetime != nil {
+			req = req.ToDatetime(*opts.ToDatetime)
+		}
+		if opts.IncludeSourceData != nil {
+			req = req.IncludeSourceData(*opts.IncludeSourceData)
+		}
+		if opts.DriverIds != nil {
+			req = req.DriverIds(*opts.DriverIds)
+		}
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		} else if opts.Cursor != "" {
+			req = req.Cursor(opts.Cursor)
+		}
+		if opts.Size != nil {
+			req = req.Size(int32(*opts.Size))
+		}
+
+		resp, _, err := req.Execute()
+		if err != nil {
+			return nil, "", err
+		}
+
+		if resp == nil {
+			return nil, "", nil
+		}
+
+		var next string
+		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
+			next = *resp.NextPage.Get()
+		}
+
+		return resp.Items, next, nil
+	}
+
+	return pagination.Each(ctx, opts.Cursor, fetch, yield)
+}
+
+// ListHosRecordStatusesReferencePaginationOptions holds the options for the ListHosRecordStatusesReference paginated operation.
+type ListHosRecordStatusesReferencePaginationOptions struct {
+	// Cursor is the cursor for the next page.
+	Cursor string
+	// Size is the maximum number of items to return per page.
+	Size *int
+}
+
+// ListHosRecordStatusesReferenceEach iterates over all items in the ListHosRecordStatusesReference operation.
+func ListHosRecordStatusesReferenceEach(c *catena.Client, ctx context.Context, opts ListHosRecordStatusesReferencePaginationOptions, yield func(telematicsapi.RefHosRecordStatus) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.RefHosRecordStatus, string, error) {
+		req := c.Telematics().ReferenceDataSupportingTablesAPI.ListHosRecordStatusesReference(ctx)
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		} else if opts.Cursor != "" {
+			req = req.Cursor(opts.Cursor)
+		}
+		if opts.Size != nil {
+			req = req.Size(int32(*opts.Size))
+		}
+
+		resp, _, err := req.Execute()
+		if err != nil {
+			return nil, "", err
+		}
+
+		if resp == nil {
+			return nil, "", nil
+		}
+
+		var next string
+		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
+			next = *resp.NextPage.Get()
+		}
+
+		return resp.Items, next, nil
+	}
+
+	return pagination.Each(ctx, opts.Cursor, fetch, yield)
+}
+
+// ListVehicleSensorEventsPaginationOptions holds the options for the ListVehicleSensorEvents paginated operation.
+type ListVehicleSensorEventsPaginationOptions struct {
+	FleetIds          *[]string
+	FleetRefs         *[]string
+	FromDatetime      *time.Time
+	ToDatetime        *time.Time
+	IncludeSourceData *bool
 	VehicleIds        *[]string
 	// Cursor is the cursor for the next page.
 	Cursor string
@@ -1216,21 +1213,24 @@ type ListHosAvailabilitiesPaginationOptions struct {
 	Size *int
 }
 
-// ListHosAvailabilitiesEach iterates over all items in the ListHosAvailabilities operation.
-func ListHosAvailabilitiesEach(c *catena.Client, ctx context.Context, opts ListHosAvailabilitiesPaginationOptions, yield func(telematicsapi.HosAvailability) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.HosAvailability, string, error) {
-		req := c.Telematics().ComplianceRegulationAPI.ListHosAvailabilities(ctx)
+// ListVehicleSensorEventsEach iterates over all items in the ListVehicleSensorEvents operation.
+func ListVehicleSensorEventsEach(c *catena.Client, ctx context.Context, opts ListVehicleSensorEventsPaginationOptions, yield func(telematicsapi.VehicleSensor) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]telematicsapi.VehicleSensor, string, error) {
+		req := c.Telematics().FleetOperationsTrackingAPI.ListVehicleSensorEvents(ctx)
 		if opts.FleetIds != nil {
 			req = req.FleetIds(*opts.FleetIds)
 		}
 		if opts.FleetRefs != nil {
 			req = req.FleetRefs(*opts.FleetRefs)
 		}
+		if opts.FromDatetime != nil {
+			req = req.FromDatetime(*opts.FromDatetime)
+		}
+		if opts.ToDatetime != nil {
+			req = req.ToDatetime(*opts.ToDatetime)
+		}
 		if opts.IncludeSourceData != nil {
 			req = req.IncludeSourceData(*opts.IncludeSourceData)
-		}
-		if opts.DriverIds != nil {
-			req = req.DriverIds(*opts.DriverIds)
 		}
 		if opts.VehicleIds != nil {
 			req = req.VehicleIds(*opts.VehicleIds)

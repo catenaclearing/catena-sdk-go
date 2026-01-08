@@ -88,8 +88,6 @@ docs/ValidationErrorDetail.md
 docs/Vehicle.md
 docs/VehicleLocation.md
 docs/VehicleSensor.md
-go.mod
-go.sum
 model__cursor_page_type_var_customized_driver_safety_event_.go
 model__cursor_page_type_var_customized_hos_availability_.go
 model__cursor_page_type_var_customized_hos_daily_snapshot_.go

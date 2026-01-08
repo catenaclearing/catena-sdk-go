@@ -54,8 +54,6 @@ docs/TspUpdate.md
 docs/Unauthorized.md
 docs/UnprocessableEntity.md
 docs/ValidationErrorDetail.md
-go.mod
-go.sum
 model__cursor_page_customized_fleet_read_.go
 model__cursor_page_customized_invitation_read_.go
 model__cursor_page_customized_partner_read_.go

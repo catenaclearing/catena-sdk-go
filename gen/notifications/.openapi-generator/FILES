@@ -108,8 +108,6 @@ docs/WebhookStaled.md
 docs/WebhookSubscriptionsAPI.md
 docs/WebhookUpdate.md
 docs/WebhookUpdated.md
-go.mod
-go.sum
 model__cursor_page_type_var_customized_webhook_log_read_.go
 model__cursor_page_type_var_customized_webhook_read_.go
 model_bad_request.go

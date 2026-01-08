@@ -58,6 +58,8 @@ generate_client() {
 git_push.sh
 .gitlab-ci.yml
 .gitignore
+go.mod
+go.sum
 EOF
     
     # Run OpenAPI Generator

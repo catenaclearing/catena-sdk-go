@@ -93,8 +93,6 @@ docs/UnprocessableEntity.md
 docs/ValidationErrorDetail.md
 docs/ZubieCredsInput.md
 docs/ZubieCredsOutput.md
-go.mod
-go.sum
 model__cursor_page_type_var_customized_connection_read_.go
 model__cursor_page_type_var_customized_execution_read_.go
 model__cursor_page_type_var_customized_schedule_read_.go
