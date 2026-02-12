@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Internal unique identifier for the telematics event record (Catena PK). | 
 **FleetId** | **string** | The Catena fleet this record belongs to (multi-tenant scope). | 
+**FleetRef** | **NullableString** |  | 
 **SourceName** | [**TspEnum**](TspEnum.md) | The name of the source | 
 **ConnectionId** | **string** | The specific fleet↔TSP connection through which this record was sourced. | 
 **SourceId** | **string** | The ID of the record in the TSP or a deterministic ID/Hash generated from a composite unique key | 
@@ -18,8 +19,6 @@ Name | Type | Description | Notes
 **DriverId** | Pointer to **NullableString** |  | [optional] 
 **VehicleId** | Pointer to **NullableString** |  | [optional] 
 **HosRulesetCode** | Pointer to [**NullableHosRulesetCodeEnum**](HosRulesetCodeEnum.md) |  | [optional] 
-**RegionCode** | Pointer to [**NullableHosRegionCodeEnum**](HosRegionCodeEnum.md) |  | [optional] 
-**TimezoneCode** | Pointer to [**NullableTimezoneCodeEnum**](TimezoneCodeEnum.md) |  | [optional] 
 **DutyStatusCode** | Pointer to [**NullableDutyStatusCodeEnum**](DutyStatusCodeEnum.md) |  | [optional] 
 **CycleStartedAt** | Pointer to **NullableTime** |  | [optional] 
 **CycleEndsAt** | Pointer to **NullableTime** |  | [optional] 
@@ -58,7 +57,7 @@ Name | Type | Description | Notes
 
 ### NewBaseHosAvailability
 
-`func NewBaseHosAvailability(id string, fleetId string, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time, ) *BaseHosAvailability`
+`func NewBaseHosAvailability(id string, fleetId string, fleetRef NullableString, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time, ) *BaseHosAvailability`
 
 NewBaseHosAvailability instantiates a new BaseHosAvailability object
 This constructor will assign default values to properties that have it defined,
@@ -113,6 +112,36 @@ and a boolean to check if the value has been set.
 SetFleetId sets FleetId field to given value.
 
 
+### GetFleetRef
+
+`func (o *BaseHosAvailability) GetFleetRef() string`
+
+GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
+
+### GetFleetRefOk
+
+`func (o *BaseHosAvailability) GetFleetRefOk() (*string, bool)`
+
+GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetRef
+
+`func (o *BaseHosAvailability) SetFleetRef(v string)`
+
+SetFleetRef sets FleetRef field to given value.
+
+
+### SetFleetRefNil
+
+`func (o *BaseHosAvailability) SetFleetRefNil(b bool)`
+
+ SetFleetRefNil sets the value for FleetRef to be an explicit nil
+
+### UnsetFleetRef
+`func (o *BaseHosAvailability) UnsetFleetRef()`
+
+UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 ### GetSourceName
 
 `func (o *BaseHosAvailability) GetSourceName() TspEnum`
@@ -443,76 +472,6 @@ HasHosRulesetCode returns a boolean if a field has been set.
 `func (o *BaseHosAvailability) UnsetHosRulesetCode()`
 
 UnsetHosRulesetCode ensures that no value is present for HosRulesetCode, not even an explicit nil
-### GetRegionCode
-
-`func (o *BaseHosAvailability) GetRegionCode() HosRegionCodeEnum`
-
-GetRegionCode returns the RegionCode field if non-nil, zero value otherwise.
-
-### GetRegionCodeOk
-
-`func (o *BaseHosAvailability) GetRegionCodeOk() (*HosRegionCodeEnum, bool)`
-
-GetRegionCodeOk returns a tuple with the RegionCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRegionCode
-
-`func (o *BaseHosAvailability) SetRegionCode(v HosRegionCodeEnum)`
-
-SetRegionCode sets RegionCode field to given value.
-
-### HasRegionCode
-
-`func (o *BaseHosAvailability) HasRegionCode() bool`
-
-HasRegionCode returns a boolean if a field has been set.
-
-### SetRegionCodeNil
-
-`func (o *BaseHosAvailability) SetRegionCodeNil(b bool)`
-
- SetRegionCodeNil sets the value for RegionCode to be an explicit nil
-
-### UnsetRegionCode
-`func (o *BaseHosAvailability) UnsetRegionCode()`
-
-UnsetRegionCode ensures that no value is present for RegionCode, not even an explicit nil
-### GetTimezoneCode
-
-`func (o *BaseHosAvailability) GetTimezoneCode() TimezoneCodeEnum`
-
-GetTimezoneCode returns the TimezoneCode field if non-nil, zero value otherwise.
-
-### GetTimezoneCodeOk
-
-`func (o *BaseHosAvailability) GetTimezoneCodeOk() (*TimezoneCodeEnum, bool)`
-
-GetTimezoneCodeOk returns a tuple with the TimezoneCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimezoneCode
-
-`func (o *BaseHosAvailability) SetTimezoneCode(v TimezoneCodeEnum)`
-
-SetTimezoneCode sets TimezoneCode field to given value.
-
-### HasTimezoneCode
-
-`func (o *BaseHosAvailability) HasTimezoneCode() bool`
-
-HasTimezoneCode returns a boolean if a field has been set.
-
-### SetTimezoneCodeNil
-
-`func (o *BaseHosAvailability) SetTimezoneCodeNil(b bool)`
-
- SetTimezoneCodeNil sets the value for TimezoneCode to be an explicit nil
-
-### UnsetTimezoneCode
-`func (o *BaseHosAvailability) UnsetTimezoneCode()`
-
-UnsetTimezoneCode ensures that no value is present for TimezoneCode, not even an explicit nil
 ### GetDutyStatusCode
 
 `func (o *BaseHosAvailability) GetDutyStatusCode() DutyStatusCodeEnum`

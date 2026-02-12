@@ -26,6 +26,32 @@ paths:
           nullable: true
           type: string
         style: form
+      - description: Limit results to specific fleets. **Maximum:** 100 IDs
+        explode: true
+        in: query
+        name: fleet_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: Limit results to specific fleet references. **Maximum:** 100
+          references
+        explode: true
+        in: query
+        name: fleet_refs
+        required: false
+        schema:
+          items:
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
       - description: Cursor for the next page
         explode: true
         in: query
@@ -79,6 +105,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -162,6 +194,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -242,6 +280,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -325,6 +369,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -414,6 +464,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -453,6 +509,113 @@ paths:
       x-excluded: "true"
       x-mint:
         content: <Info>Updating connections is only available to fleets.</Info>
+  /v2/integrations/connections/schedules/backfill:
+    post:
+      description: |-
+        Backfill schedules for existing connections when new resources are added to the system.
+
+        When a new resource type is registered in the integrations service (e.g., a new TSP adapter
+        is deployed or an existing adapter adds support for a new resource), existing connections
+        don't automatically receive schedules for that resource. This creates a gap where connections
+        can't collect data for newly supported resource types until schedules are manually created.
+
+        This endpoint addresses that operational gap by creating the missing schedules across all
+        affected connections in a single atomic operation, ensuring fleets can immediately benefit
+        from newly supported resources without recreating connections or manual schedule management.
+
+        The endpoint only creates schedules where none currently exist - deleted or disabled schedules
+        are intentionally ignored to preserve deliberate administrative decisions (e.g., a fleet may
+        have explicitly disabled a resource they don't need).
+
+        Args:
+            request: Backfill request containing resource type and optional filters
+            session: Database session
+            eventbridge: EventBridge client
+            is_catena_admin: Admin authorization check
+
+        Returns:
+            ScheduleBackfillResponse: List of connection IDs where schedules were created
+      operationId: backfill_schedules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleBackfillRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleBackfillResponse'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "504":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeout'
+          description: Gateway Timeout
+      security:
+      - Bearer:
+        - schedule:create
+      summary: Backfill Schedules
+      tags:
+      - Connections
+      x-excluded: "true"
   /v2/integrations/connections/{connection_id}/schedules:
     get:
       description: Get a paginated list of all schedules for a given connection.
@@ -527,6 +690,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -621,6 +790,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -708,6 +883,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -798,6 +979,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -893,6 +1080,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1006,6 +1199,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1094,6 +1293,34 @@ components:
       - access_token
       - token_type
       title: AccessTokenCreds
+    ApiAuthCreds-Input:
+      description: API Auth Connection model
+      properties:
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+        api_key:
+          title: Api Key
+          type: string
+      required:
+      - api_key
+      - password
+      - username
+      title: ApiAuthCreds
+    ApiAuthCreds-Output:
+      description: API Auth Connection model
+      properties:
+        username: {}
+        password: {}
+        api_key: {}
+      required:
+      - api_key
+      - password
+      - username
+      title: ApiAuthCreds
     ApiBasicCreds-Input:
       description: API Basic Connection model
       properties:
@@ -1310,7 +1537,7 @@ components:
       title: CompanyIdCreds
     Conflict:
       example:
-        code: 5
+        code: 2
         detail: detail
         message: Conflict
       properties:
@@ -1378,9 +1605,11 @@ components:
           title: Updated At
           type: string
         fleet_id:
-          description: The Catena ID of the fleet that owns this connection.
           format: uuid
-          title: Fleet ID
+          nullable: true
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         tsp_id:
           description: The ID of the Telematics Service Provider (TSP).
@@ -1541,6 +1770,9 @@ components:
           $ref: '#/components/schemas/TspEnum'
         resource:
           $ref: '#/components/schemas/ResourceEnum'
+        cursor:
+          nullable: true
+          type: string
       required:
       - connection_id
       - created_at
@@ -1677,7 +1909,7 @@ components:
       title: Forbidden
     GatewayTimeout:
       example:
-        code: 3
+        code: 2
         detail: detail
         message: Gateway Timeout
       properties:
@@ -1772,6 +2004,24 @@ components:
       - password
       - username
       title: IsaacCreds
+    MethodNotAllowed:
+      example:
+        code: 5
+        detail: detail
+        message: Method Not Allowed
+      properties:
+        code:
+          default: 405
+          title: Code
+          type: integer
+        message:
+          default: Method Not Allowed
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: MethodNotAllowed
     MotiveCreds-Input:
       description: Motive Connection model
       properties:
@@ -2101,22 +2351,23 @@ components:
       - hos_availability
       - hos_daily_snapshot
       - hos_event
-      - hos_log
-      - hos_log_annotation
-      - hos_log_attachment
+      - hos_event_annotation
+      - hos_event_attachment
       - hos_violation
       - ifta_summary
       - location_segment
+      - reefer_status
       - user
       - vehicle
       - vehicle_location
       - vehicle_sensor
       - trailer
+      - trailer_location
       title: ResourceEnum
       type: string
     RetryAfterDetail:
       example:
-        retry_after_seconds: 9
+        retry_after_seconds: 3
         message: message
       properties:
         retry_after_seconds:
@@ -2199,9 +2450,50 @@ components:
       - client_id
       - client_secret
       title: SamsaraCreds
+    ScheduleBackfillRequest:
+      description: API Model for backfilling schedules across connections
+      example:
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resource: asset
+        fleet_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        resource:
+          $ref: '#/components/schemas/ResourceEnum'
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        fleet_ids:
+          items:
+            format: uuid
+            type: string
+          nullable: true
+          type: array
+      required:
+      - resource
+      title: ScheduleBackfillRequest
+    ScheduleBackfillResponse:
+      description: API Model for backfill response
+      example:
+        connection_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        connection_ids:
+          description: List of connection IDs where schedules were created.
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - connection_ids
+      title: ScheduleBackfillResponse
     ScheduleCreate:
       description: API Model for creating a schedule
       example:
+        cursor: cursor
         max_concurrent_executions: 1
         resource: asset
         execution_interval_seconds: 0
@@ -2230,6 +2522,9 @@ components:
           type: integer
         status:
           $ref: '#/components/schemas/StatusEnum'
+        cursor:
+          nullable: true
+          type: string
       required:
       - resource
       title: ScheduleCreate
@@ -2238,6 +2533,7 @@ components:
       example:
         consecutive_error_count: 0
         consecutive_error_threshold: 15
+        cursor: cursor-1
         execution_interval_seconds: 600
         max_concurrent_executions: 1
         resource: vehicle
@@ -2275,6 +2571,9 @@ components:
             schedule.
           title: Max Concurrent Executions
           type: integer
+        cursor:
+          nullable: true
+          type: string
       required:
       - connection_id
       - consecutive_error_count
@@ -2288,6 +2587,7 @@ components:
     ScheduleUpdate:
       description: API Model for updating a schedule
       example:
+        cursor: cursor
         consecutive_error_count: 1
         max_concurrent_executions: 5
         next_execution_at: 2000-01-23T04:56:07.000+00:00
@@ -2311,6 +2611,9 @@ components:
           type: integer
         next_execution_at:
           format: date-time
+          nullable: true
+          type: string
+        cursor:
           nullable: true
           type: string
       title: ScheduleUpdate
@@ -2388,6 +2691,30 @@ components:
       - declined
       title: StatusEnum
       type: string
+    SwitchBoardCreds-Input:
+      description: SwitchBoard Connection model
+      properties:
+        api_id:
+          title: Api Id
+          type: string
+        api_key:
+          title: Api Key
+          type: string
+      required:
+      - api_id
+      - api_key
+      title: SwitchBoardCreds
+    SwitchBoardCreds-Output:
+      description: SwitchBoard Connection model
+      properties:
+        api_id:
+          title: Api Id
+          type: string
+        api_key: {}
+      required:
+      - api_id
+      - api_key
+      title: SwitchBoardCreds
     TTCreds-Input:
       description: Trucking Technologies Credentials model
       properties:
@@ -2442,9 +2769,9 @@ components:
       title: TokenCreds
     TooManyRequests:
       example:
-        code: 7
+        code: 9
         detail:
-          retry_after_seconds: 9
+          retry_after_seconds: 3
           message: message
         message: Too Many Requests
       properties:
@@ -2512,22 +2839,46 @@ components:
       enum:
       - ada
       - ai_eld
+      - air_eld
+      - alfa_eld
+      - alpha_eld
+      - als
+      - anytrek
+      - apex_eld
       - apollo
+      - apollocloud
       - ascend
+      - att
+      - awaregps
       - azuga
       - bigroad
+      - bluehorse_eld
       - blueinktech
       - bouncie
       - budgetgps
+      - captain_eld
+      - carrier_lynx
+      - club_eld
       - cyntrx
+      - digital_eld
+      - dragon_eld
+      - drive_hos
       - driver_tech
       - dsg_elogs
       - dynamic_eld
+      - eighteighteight_eld
+      - eld_88
+      - eld_books
       - eld_mandate
+      - eld_mandate_prime
       - eroad
+      - eva_eld
       - evo_eld
+      - expressway_eld
+      - extreme_eld
       - ezlogz
       - factor_eld
+      - firstgate
       - fleetcomplete
       - fleetcompletehub
       - fleethunt
@@ -2535,72 +2886,107 @@ components:
       - fleetup
       - fm
       - forwardthinking
+      - forza_eld
       - geotab
       - gpsinsight
       - gpstab
       - gpstrackit
+      - grand_eld
       - greenlight
+      - groundhog
       - hcss
-      - hosconnect
       - hos247
       - hutch
       - intellishift
+      - ironman_eld
       - isaac
       - jjkeller
+      - kinexaiot
       - knight_eld
       - konexial
+      - lioneight
       - linxup
       - lucid_eld
+      - luna_eld
       - lytx
+      - lytxv3
       - mapon
       - matrack
       - maven
       - mobilefleet
+      - moonlight_eld
+      - motion_eld
       - motive
       - my_logs_eld
       - nero
       - netradyne
       - new_eld_world
+      - nextgen_eld
       - nextraq
+      - omnitracs
       - onestep
       - ontime_eld
       - optima
       - orbcomm
       - orient_eld
+      - panda_eld
       - payd
+      - peak_eld
       - peoplenet
+      - phillips_connect
       - phoenix
       - pop_eld
+      - prologs
+      - proride_eld
+      - qualitylogs_eld
       - randmcnally
       - rastrac
+      - redfox
+      - regulog_eld
+      - ridehub
+      - rock_eld
       - routemate
+      - royal_eld
       - samsara
       - selectivedrive
+      - simba_eld
+      - skybitz
       - smart_elds
       - sparkle_eld
-      - omnitracs
       - spireon
       - surfsight
       - swift
       - switchboard
+      - synergy_eld
       - teletracnavman
       - teletracnavman_director
       - telogis
       - tenna
+      - thermo_king
       - think
       - tive
+      - topcompliance_eld
       - traccar
+      - trackease_eld
+      - trackpro
+      - traclog
       - transflo
       - trimble
+      - truckford
+      - truckspy
       - truckx
+      - trueroad_eld
       - tt
       - us_fast_eld
       - verizon
-      - verizon_reveal
       - vista_eld
       - vistracks
+      - vlog_eld
+      - vulcansols_eld
+      - wialon
       - webfleet
       - xplore_eld
+      - zms_eld
       - zonar
       - zubie
       title: TspEnum
@@ -2625,7 +3011,7 @@ components:
       title: Unauthorized
     UnprocessableEntity:
       example:
-        code: 2
+        code: 7
         detail:
         - path: path
           input: input
@@ -2790,11 +3176,13 @@ components:
         items:
         - consecutive_error_count: 0
           consecutive_error_threshold: 15
+          cursor: cursor-1
           execution_interval_seconds: 600
           max_concurrent_executions: 1
           resource: vehicle
         - consecutive_error_count: 0
           consecutive_error_threshold: 15
+          cursor: cursor-1
           execution_interval_seconds: 600
           max_concurrent_executions: 1
           resource: vehicle
@@ -2822,6 +3210,7 @@ components:
     Credentials:
       anyOf:
       - $ref: '#/components/schemas/DatabaseCreds-Input'
+      - $ref: '#/components/schemas/ApiAuthCreds-Input'
       - $ref: '#/components/schemas/ApiKeyCreds-Input'
       - $ref: '#/components/schemas/ApiBasicCreds-Input'
       - $ref: '#/components/schemas/AzugaSLC-Input'
@@ -2846,6 +3235,7 @@ components:
       - $ref: '#/components/schemas/SpireonSLC-Input'
       - $ref: '#/components/schemas/TTCreds-Input'
       - $ref: '#/components/schemas/SamsaraCreds-Input'
+      - $ref: '#/components/schemas/SwitchBoardCreds-Input'
       - $ref: '#/components/schemas/TruckXCreds-Input'
       - $ref: '#/components/schemas/TruckXSLC-Input'
       - $ref: '#/components/schemas/MotiveCreds-Input'
@@ -2858,6 +3248,7 @@ components:
     Credentials_1:
       anyOf:
       - $ref: '#/components/schemas/DatabaseCreds-Output'
+      - $ref: '#/components/schemas/ApiAuthCreds-Output'
       - $ref: '#/components/schemas/ApiKeyCreds-Output'
       - $ref: '#/components/schemas/ApiBasicCreds-Output'
       - $ref: '#/components/schemas/AzugaSLC-Output'
@@ -2882,6 +3273,7 @@ components:
       - $ref: '#/components/schemas/SpireonSLC-Output'
       - $ref: '#/components/schemas/TTCreds-Output'
       - $ref: '#/components/schemas/SamsaraCreds-Output'
+      - $ref: '#/components/schemas/SwitchBoardCreds-Output'
       - $ref: '#/components/schemas/TruckXCreds-Output'
       - $ref: '#/components/schemas/TruckXSLC-Output'
       - $ref: '#/components/schemas/MotiveCreds-Output'
@@ -2893,6 +3285,7 @@ components:
     Credentials_2:
       anyOf:
       - $ref: '#/components/schemas/DatabaseCreds-Input'
+      - $ref: '#/components/schemas/ApiAuthCreds-Input'
       - $ref: '#/components/schemas/ApiKeyCreds-Input'
       - $ref: '#/components/schemas/ApiBasicCreds-Input'
       - $ref: '#/components/schemas/AzugaSLC-Input'
@@ -2917,6 +3310,7 @@ components:
       - $ref: '#/components/schemas/SpireonSLC-Input'
       - $ref: '#/components/schemas/TTCreds-Input'
       - $ref: '#/components/schemas/SamsaraCreds-Input'
+      - $ref: '#/components/schemas/SwitchBoardCreds-Input'
       - $ref: '#/components/schemas/TruckXCreds-Input'
       - $ref: '#/components/schemas/TruckXSLC-Input'
       - $ref: '#/components/schemas/MotiveCreds-Input'

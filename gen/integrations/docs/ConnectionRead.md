@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **Id** | **string** | Unique identifier for the connection. | 
 **CreatedAt** | **time.Time** | Timestamp when the connection was created. | 
 **UpdatedAt** | **time.Time** | Timestamp when the connection was last updated. | 
-**FleetId** | **string** | The Catena ID of the fleet that owns this connection. | 
+**FleetId** | **NullableString** |  | 
+**FleetRef** | Pointer to **NullableString** |  | [optional] 
 **TspId** | **string** | The ID of the Telematics Service Provider (TSP). | 
 **SourceName** | [**TspEnum**](TspEnum.md) | The name of the TSP integration used for this connection. | 
 **Credentials** | [**Credentials1**](Credentials1.md) |  | 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewConnectionRead
 
-`func NewConnectionRead(id string, createdAt time.Time, updatedAt time.Time, fleetId string, tspId string, sourceName TspEnum, credentials Credentials1, status StatusEnum, description NullableString, ) *ConnectionRead`
+`func NewConnectionRead(id string, createdAt time.Time, updatedAt time.Time, fleetId NullableString, tspId string, sourceName TspEnum, credentials Credentials1, status StatusEnum, description NullableString, ) *ConnectionRead`
 
 NewConnectionRead instantiates a new ConnectionRead object
 This constructor will assign default values to properties that have it defined,
@@ -113,6 +114,51 @@ and a boolean to check if the value has been set.
 SetFleetId sets FleetId field to given value.
 
 
+### SetFleetIdNil
+
+`func (o *ConnectionRead) SetFleetIdNil(b bool)`
+
+ SetFleetIdNil sets the value for FleetId to be an explicit nil
+
+### UnsetFleetId
+`func (o *ConnectionRead) UnsetFleetId()`
+
+UnsetFleetId ensures that no value is present for FleetId, not even an explicit nil
+### GetFleetRef
+
+`func (o *ConnectionRead) GetFleetRef() string`
+
+GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
+
+### GetFleetRefOk
+
+`func (o *ConnectionRead) GetFleetRefOk() (*string, bool)`
+
+GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetRef
+
+`func (o *ConnectionRead) SetFleetRef(v string)`
+
+SetFleetRef sets FleetRef field to given value.
+
+### HasFleetRef
+
+`func (o *ConnectionRead) HasFleetRef() bool`
+
+HasFleetRef returns a boolean if a field has been set.
+
+### SetFleetRefNil
+
+`func (o *ConnectionRead) SetFleetRefNil(b bool)`
+
+ SetFleetRefNil sets the value for FleetRef to be an explicit nil
+
+### UnsetFleetRef
+`func (o *ConnectionRead) UnsetFleetRef()`
+
+UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 ### GetTspId
 
 `func (o *ConnectionRead) GetTspId() string`

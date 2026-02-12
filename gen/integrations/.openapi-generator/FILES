@@ -5,6 +5,8 @@ client.go
 configuration.go
 docs/AccessTokenCredsInput.md
 docs/AccessTokenCredsOutput.md
+docs/ApiAuthCredsInput.md
+docs/ApiAuthCredsOutput.md
 docs/ApiBasicCredsInput.md
 docs/ApiBasicCredsOutput.md
 docs/ApiKeyCredsInput.md
@@ -49,6 +51,7 @@ docs/GeotabCredsOutput.md
 docs/InternalServerError.md
 docs/IsaacCredsInput.md
 docs/IsaacCredsOutput.md
+docs/MethodNotAllowed.md
 docs/MotiveCredsInput.md
 docs/MotiveCredsOutput.md
 docs/NotFound.md
@@ -70,6 +73,8 @@ docs/S3CredsInput.md
 docs/S3CredsOutput.md
 docs/SamsaraCredsInput.md
 docs/SamsaraCredsOutput.md
+docs/ScheduleBackfillRequest.md
+docs/ScheduleBackfillResponse.md
 docs/ScheduleCreate.md
 docs/ScheduleRead.md
 docs/ScheduleUpdate.md
@@ -78,6 +83,8 @@ docs/SftpCredsOutput.md
 docs/SpireonSLCInput.md
 docs/SpireonSLCOutput.md
 docs/StatusEnum.md
+docs/SwitchBoardCredsInput.md
+docs/SwitchBoardCredsOutput.md
 docs/TTCredsInput.md
 docs/TTCredsOutput.md
 docs/TokenCredsInput.md
@@ -98,6 +105,8 @@ model__cursor_page_type_var_customized_execution_read_.go
 model__cursor_page_type_var_customized_schedule_read_.go
 model_access_token_creds_input.go
 model_access_token_creds_output.go
+model_api_auth_creds_input.go
+model_api_auth_creds_output.go
 model_api_basic_creds_input.go
 model_api_basic_creds_output.go
 model_api_key_creds_input.go
@@ -138,6 +147,7 @@ model_geotab_creds_output.go
 model_internal_server_error.go
 model_isaac_creds_input.go
 model_isaac_creds_output.go
+model_method_not_allowed.go
 model_motive_creds_input.go
 model_motive_creds_output.go
 model_not_found.go
@@ -159,6 +169,8 @@ model_s3_creds_input.go
 model_s3_creds_output.go
 model_samsara_creds_input.go
 model_samsara_creds_output.go
+model_schedule_backfill_request.go
+model_schedule_backfill_response.go
 model_schedule_create.go
 model_schedule_read.go
 model_schedule_update.go
@@ -167,6 +179,8 @@ model_sftp_creds_output.go
 model_spireon_slc_input.go
 model_spireon_slc_output.go
 model_status_enum.go
+model_switch_board_creds_input.go
+model_switch_board_creds_output.go
 model_token_creds_input.go
 model_token_creds_output.go
 model_too_many_requests.go

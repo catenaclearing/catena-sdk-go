@@ -24,6 +24,18 @@ func Test_integrationsapi_ConnectionsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test ConnectionsAPIService BackfillSchedules", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ConnectionsAPI.BackfillSchedules(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ConnectionsAPIService CreateConnection", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

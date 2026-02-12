@@ -297,6 +297,7 @@ func inspectGeneratedCode(rootDir string, ops []PaginatedOperation) ([]Paginated
 			// Refine OptionalParams types
 			for i, p := range op.OptionalParams {
 				methodName := toPascalCase(p.Name)
+				paramHandled := false
 				for _, m := range methods {
 					if m.Name.Name == methodName {
 						if len(m.Type.Params.List) > 0 {
@@ -325,8 +326,41 @@ func inspectGeneratedCode(rootDir string, ops []PaginatedOperation) ([]Paginated
 									}
 								}
 							}
+							if arrayType, ok := argType.(*ast.ArrayType); ok {
+								if ident, ok := arrayType.Elt.(*ast.Ident); ok && !isBasicType(ident.Name) {
+									op.OptionalParams[i].IsEnum = true
+									op.OptionalParams[i].IsEnumSlice = true
+									op.OptionalParams[i].EnumType = pkg.Name + "." + ident.Name
+								}
+							}
 						}
+						paramHandled = true
 						break
+					}
+				}
+
+				// Fallback: inspect request struct field type directly.
+				if !paramHandled && requestStruct != nil {
+					if structType, ok := requestStruct.Type.(*ast.StructType); ok {
+						fieldName := toCamelCase(p.Name)
+						for _, field := range structType.Fields.List {
+							if len(field.Names) == 0 || field.Names[0].Name != fieldName {
+								continue
+							}
+
+							fieldType := field.Type
+							if starExpr, ok := fieldType.(*ast.StarExpr); ok {
+								fieldType = starExpr.X
+							}
+							if arrayType, ok := fieldType.(*ast.ArrayType); ok {
+								if ident, ok := arrayType.Elt.(*ast.Ident); ok && !isBasicType(ident.Name) {
+									op.OptionalParams[i].IsEnum = true
+									op.OptionalParams[i].IsEnumSlice = true
+									op.OptionalParams[i].EnumType = pkg.Name + "." + ident.Name
+								}
+							}
+							break
+						}
 					}
 				}
 			}

@@ -18,6 +18,7 @@ import (
 // Credentials The connection credentials required to authenticate with the TSP on behalf of the fleet.
 type Credentials struct {
 	AccessTokenCredsInput      *AccessTokenCredsInput
+	ApiAuthCredsInput          *ApiAuthCredsInput
 	ApiBasicCredsInput         *ApiBasicCredsInput
 	ApiKeyCredsInput           *ApiKeyCredsInput
 	AzugaSLCInput              *AzugaSLCInput
@@ -43,6 +44,7 @@ type Credentials struct {
 	SamsaraCredsInput          *SamsaraCredsInput
 	SftpCredsInput             *SftpCredsInput
 	SpireonSLCInput            *SpireonSLCInput
+	SwitchBoardCredsInput      *SwitchBoardCredsInput
 	TTCredsInput               *TTCredsInput
 	TokenCredsInput            *TokenCredsInput
 	TruckXCredsInput           *TruckXCredsInput
@@ -64,6 +66,19 @@ func (dst *Credentials) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.AccessTokenCredsInput = nil
+	}
+
+	// try to unmarshal JSON data into ApiAuthCredsInput
+	err = json.Unmarshal(data, &dst.ApiAuthCredsInput)
+	if err == nil {
+		jsonApiAuthCredsInput, _ := json.Marshal(dst.ApiAuthCredsInput)
+		if string(jsonApiAuthCredsInput) == "{}" { // empty struct
+			dst.ApiAuthCredsInput = nil
+		} else {
+			return nil // data stored in dst.ApiAuthCredsInput, return on the first match
+		}
+	} else {
+		dst.ApiAuthCredsInput = nil
 	}
 
 	// try to unmarshal JSON data into ApiBasicCredsInput
@@ -391,6 +406,19 @@ func (dst *Credentials) UnmarshalJSON(data []byte) error {
 		dst.SpireonSLCInput = nil
 	}
 
+	// try to unmarshal JSON data into SwitchBoardCredsInput
+	err = json.Unmarshal(data, &dst.SwitchBoardCredsInput)
+	if err == nil {
+		jsonSwitchBoardCredsInput, _ := json.Marshal(dst.SwitchBoardCredsInput)
+		if string(jsonSwitchBoardCredsInput) == "{}" { // empty struct
+			dst.SwitchBoardCredsInput = nil
+		} else {
+			return nil // data stored in dst.SwitchBoardCredsInput, return on the first match
+		}
+	} else {
+		dst.SwitchBoardCredsInput = nil
+	}
+
 	// try to unmarshal JSON data into TTCredsInput
 	err = json.Unmarshal(data, &dst.TTCredsInput)
 	if err == nil {
@@ -463,6 +491,10 @@ func (dst *Credentials) UnmarshalJSON(data []byte) error {
 func (src Credentials) MarshalJSON() ([]byte, error) {
 	if src.AccessTokenCredsInput != nil {
 		return json.Marshal(&src.AccessTokenCredsInput)
+	}
+
+	if src.ApiAuthCredsInput != nil {
+		return json.Marshal(&src.ApiAuthCredsInput)
 	}
 
 	if src.ApiBasicCredsInput != nil {
@@ -563,6 +595,10 @@ func (src Credentials) MarshalJSON() ([]byte, error) {
 
 	if src.SpireonSLCInput != nil {
 		return json.Marshal(&src.SpireonSLCInput)
+	}
+
+	if src.SwitchBoardCredsInput != nil {
+		return json.Marshal(&src.SwitchBoardCredsInput)
 	}
 
 	if src.TTCredsInput != nil {

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## ListDriverSafetyEvents
 
-> CursorPageTypeVarCustomizedDriverSafetyEvent ListDriverSafetyEvents(ctx).FleetIds(fleetIds).FleetRefs(fleetRefs).FromDatetime(fromDatetime).ToDatetime(toDatetime).IncludeSourceData(includeSourceData).DriverIds(driverIds).VehicleIds(vehicleIds).Cursor(cursor).Size(size).Execute()
+> CursorPageDriverSafetyEventRead ListDriverSafetyEvents(ctx).FleetIds(fleetIds).FleetRefs(fleetRefs).FromDatetime(fromDatetime).ToDatetime(toDatetime).IncludeSourceData(includeSourceData).DriverIds(driverIds).VehicleIds(vehicleIds).SortBy(sortBy).SortOrder(sortOrder).Cursor(cursor).Size(size).Execute()
 
 List Driver Safety Events
 
@@ -32,22 +32,24 @@ import (
 func main() {
 	fleetIds := []string{"Inner_example"} // []string | Limit results to specific fleets using Catena's fleet IDs. *For your own fleet identifiers, use `fleet_refs` instead* (optional)
 	fleetRefs := []string{"Inner_example"} // []string | Limit results to specific fleets using your organization's fleet reference identifiers (optional)
-	fromDatetime := time.Now() // time.Time | Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 15 days (optional)
-	toDatetime := time.Now() // time.Time | Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 15 days (optional)
+	fromDatetime := time.Now() // time.Time | Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days (optional)
+	toDatetime := time.Now() // time.Time | Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days (optional)
 	includeSourceData := true // bool | Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena* (optional) (default to false)
 	driverIds := []string{"Inner_example"} // []string | Limit results to specific drivers. **Maximum:** 100 IDs (optional)
 	vehicleIds := []string{"Inner_example"} // []string | Limit results to specific vehicles. **Maximum:** 100 IDs (optional)
+	sortBy := "sortBy_example" // string | The name of the field to sort results by. If not provided, results will be ordered by `occurred_at`.  (optional)
+	sortOrder := "sortOrder_example" // string | The order of sorting, either `asc` for ascending or `desc` for descending. Defaults to `asc` if `sort_by` is provided without `sort_order`. (optional) (default to "asc")
 	cursor := "cursor_example" // string | Cursor for the next page (optional)
 	size := int32(56) // int32 | Page size (optional) (default to 300)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SafetyDriverBehaviorAPI.ListDriverSafetyEvents(context.Background()).FleetIds(fleetIds).FleetRefs(fleetRefs).FromDatetime(fromDatetime).ToDatetime(toDatetime).IncludeSourceData(includeSourceData).DriverIds(driverIds).VehicleIds(vehicleIds).Cursor(cursor).Size(size).Execute()
+	resp, r, err := apiClient.SafetyDriverBehaviorAPI.ListDriverSafetyEvents(context.Background()).FleetIds(fleetIds).FleetRefs(fleetRefs).FromDatetime(fromDatetime).ToDatetime(toDatetime).IncludeSourceData(includeSourceData).DriverIds(driverIds).VehicleIds(vehicleIds).SortBy(sortBy).SortOrder(sortOrder).Cursor(cursor).Size(size).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SafetyDriverBehaviorAPI.ListDriverSafetyEvents``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListDriverSafetyEvents`: CursorPageTypeVarCustomizedDriverSafetyEvent
+	// response from `ListDriverSafetyEvents`: CursorPageDriverSafetyEventRead
 	fmt.Fprintf(os.Stdout, "Response from `SafetyDriverBehaviorAPI.ListDriverSafetyEvents`: %v\n", resp)
 }
 ```
@@ -65,17 +67,19 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetIds** | **[]string** | Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* | 
  **fleetRefs** | **[]string** | Limit results to specific fleets using your organization&#39;s fleet reference identifiers | 
- **fromDatetime** | **time.Time** | Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days | 
- **toDatetime** | **time.Time** | Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days | 
+ **fromDatetime** | **time.Time** | Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days | 
+ **toDatetime** | **time.Time** | Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days | 
  **includeSourceData** | **bool** | Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena* | [default to false]
  **driverIds** | **[]string** | Limit results to specific drivers. **Maximum:** 100 IDs | 
  **vehicleIds** | **[]string** | Limit results to specific vehicles. **Maximum:** 100 IDs | 
+ **sortBy** | **string** | The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.  | 
+ **sortOrder** | **string** | The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;. | [default to &quot;asc&quot;]
  **cursor** | **string** | Cursor for the next page | 
  **size** | **int32** | Page size | [default to 300]
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedDriverSafetyEvent**](CursorPageTypeVarCustomizedDriverSafetyEvent.md)
+[**CursorPageDriverSafetyEventRead**](CursorPageDriverSafetyEventRead.md)
 
 ### Authorization
 

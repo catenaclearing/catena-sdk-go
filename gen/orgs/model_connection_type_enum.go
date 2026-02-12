@@ -21,6 +21,7 @@ type ConnectionTypeEnum string
 // List of ConnectionTypeEnum
 const (
 	CONNECTIONTYPEENUM_ACCESS_TOKEN       ConnectionTypeEnum = "access_token"
+	CONNECTIONTYPEENUM_API_AUTH           ConnectionTypeEnum = "api_auth"
 	CONNECTIONTYPEENUM_API_BASIC          ConnectionTypeEnum = "api_basic"
 	CONNECTIONTYPEENUM_API_KEY            ConnectionTypeEnum = "api_key"
 	CONNECTIONTYPEENUM_AZUGA_SLC          ConnectionTypeEnum = "azuga_slc"
@@ -44,6 +45,7 @@ const (
 	CONNECTIONTYPEENUM_PRIVATE_KEY        ConnectionTypeEnum = "private_key"
 	CONNECTIONTYPEENUM_S3                 ConnectionTypeEnum = "s3"
 	CONNECTIONTYPEENUM_SAMSARA            ConnectionTypeEnum = "samsara"
+	CONNECTIONTYPEENUM_SWITCHBOARD        ConnectionTypeEnum = "switchboard"
 	CONNECTIONTYPEENUM_SPIREON_SLC        ConnectionTypeEnum = "spireon_slc"
 	CONNECTIONTYPEENUM_SFTP               ConnectionTypeEnum = "sftp"
 	CONNECTIONTYPEENUM_TOKEN              ConnectionTypeEnum = "token"
@@ -55,6 +57,7 @@ const (
 // All allowed values of ConnectionTypeEnum enum
 var AllowedConnectionTypeEnumEnumValues = []ConnectionTypeEnum{
 	"access_token",
+	"api_auth",
 	"api_basic",
 	"api_key",
 	"azuga_slc",
@@ -78,6 +81,7 @@ var AllowedConnectionTypeEnumEnumValues = []ConnectionTypeEnum{
 	"private_key",
 	"s3",
 	"samsara",
+	"switchboard",
 	"spireon_slc",
 	"sftp",
 	"token",

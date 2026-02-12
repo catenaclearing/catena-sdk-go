@@ -20,25 +20,26 @@ type ResourceEnum string
 
 // List of ResourceEnum
 const (
-	RESOURCEENUM_ASSET               ResourceEnum = "asset"
-	RESOURCEENUM_DRIVER_EVENT_LOG    ResourceEnum = "driver_event_log"
-	RESOURCEENUM_DRIVER_SAFETY_EVENT ResourceEnum = "driver_safety_event"
-	RESOURCEENUM_DVIR_LOG            ResourceEnum = "dvir_log"
-	RESOURCEENUM_DVIR_LOG_DEFECT     ResourceEnum = "dvir_log_defect"
-	RESOURCEENUM_HOS_AVAILABILITY    ResourceEnum = "hos_availability"
-	RESOURCEENUM_HOS_DAILY_SNAPSHOT  ResourceEnum = "hos_daily_snapshot"
-	RESOURCEENUM_HOS_EVENT           ResourceEnum = "hos_event"
-	RESOURCEENUM_HOS_LOG             ResourceEnum = "hos_log"
-	RESOURCEENUM_HOS_LOG_ANNOTATION  ResourceEnum = "hos_log_annotation"
-	RESOURCEENUM_HOS_LOG_ATTACHMENT  ResourceEnum = "hos_log_attachment"
-	RESOURCEENUM_HOS_VIOLATION       ResourceEnum = "hos_violation"
-	RESOURCEENUM_IFTA_SUMMARY        ResourceEnum = "ifta_summary"
-	RESOURCEENUM_LOCATION_SEGMENT    ResourceEnum = "location_segment"
-	RESOURCEENUM_USER                ResourceEnum = "user"
-	RESOURCEENUM_VEHICLE             ResourceEnum = "vehicle"
-	RESOURCEENUM_VEHICLE_LOCATION    ResourceEnum = "vehicle_location"
-	RESOURCEENUM_VEHICLE_SENSOR      ResourceEnum = "vehicle_sensor"
-	RESOURCEENUM_TRAILER             ResourceEnum = "trailer"
+	RESOURCEENUM_ASSET                ResourceEnum = "asset"
+	RESOURCEENUM_DRIVER_EVENT_LOG     ResourceEnum = "driver_event_log"
+	RESOURCEENUM_DRIVER_SAFETY_EVENT  ResourceEnum = "driver_safety_event"
+	RESOURCEENUM_DVIR_LOG             ResourceEnum = "dvir_log"
+	RESOURCEENUM_DVIR_LOG_DEFECT      ResourceEnum = "dvir_log_defect"
+	RESOURCEENUM_HOS_AVAILABILITY     ResourceEnum = "hos_availability"
+	RESOURCEENUM_HOS_DAILY_SNAPSHOT   ResourceEnum = "hos_daily_snapshot"
+	RESOURCEENUM_HOS_EVENT            ResourceEnum = "hos_event"
+	RESOURCEENUM_HOS_EVENT_ANNOTATION ResourceEnum = "hos_event_annotation"
+	RESOURCEENUM_HOS_EVENT_ATTACHMENT ResourceEnum = "hos_event_attachment"
+	RESOURCEENUM_HOS_VIOLATION        ResourceEnum = "hos_violation"
+	RESOURCEENUM_IFTA_SUMMARY         ResourceEnum = "ifta_summary"
+	RESOURCEENUM_LOCATION_SEGMENT     ResourceEnum = "location_segment"
+	RESOURCEENUM_REEFER_STATUS        ResourceEnum = "reefer_status"
+	RESOURCEENUM_USER                 ResourceEnum = "user"
+	RESOURCEENUM_VEHICLE              ResourceEnum = "vehicle"
+	RESOURCEENUM_VEHICLE_LOCATION     ResourceEnum = "vehicle_location"
+	RESOURCEENUM_VEHICLE_SENSOR       ResourceEnum = "vehicle_sensor"
+	RESOURCEENUM_TRAILER              ResourceEnum = "trailer"
+	RESOURCEENUM_TRAILER_LOCATION     ResourceEnum = "trailer_location"
 )
 
 // All allowed values of ResourceEnum enum
@@ -51,17 +52,18 @@ var AllowedResourceEnumEnumValues = []ResourceEnum{
 	"hos_availability",
 	"hos_daily_snapshot",
 	"hos_event",
-	"hos_log",
-	"hos_log_annotation",
-	"hos_log_attachment",
+	"hos_event_annotation",
+	"hos_event_attachment",
 	"hos_violation",
 	"ifta_summary",
 	"location_segment",
+	"reefer_status",
 	"user",
 	"vehicle",
 	"vehicle_location",
 	"vehicle_sensor",
 	"trailer",
+	"trailer_location",
 }
 
 func (v *ResourceEnum) UnmarshalJSON(src []byte) error {

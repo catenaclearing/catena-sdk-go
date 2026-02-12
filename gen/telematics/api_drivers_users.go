@@ -34,8 +34,8 @@ type DriversUsersAPI interface {
 	GetUser(ctx context.Context, userId string) ApiGetUserRequest
 
 	// GetUserExecute executes the request
-	//  @return User
-	GetUserExecute(r ApiGetUserRequest) (*User, *http.Response, error)
+	//  @return UserRead
+	GetUserExecute(r ApiGetUserRequest) (*UserRead, *http.Response, error)
 
 	/*
 		ListUsers List Users
@@ -48,8 +48,8 @@ type DriversUsersAPI interface {
 	ListUsers(ctx context.Context) ApiListUsersRequest
 
 	// ListUsersExecute executes the request
-	//  @return CursorPageTypeVarCustomizedUser
-	ListUsersExecute(r ApiListUsersRequest) (*CursorPageTypeVarCustomizedUser, *http.Response, error)
+	//  @return CursorPageUserRead
+	ListUsersExecute(r ApiListUsersRequest) (*CursorPageUserRead, *http.Response, error)
 }
 
 // DriversUsersAPIService DriversUsersAPI service
@@ -68,7 +68,7 @@ func (r ApiGetUserRequest) IncludeSourceData(includeSourceData bool) ApiGetUserR
 	return r
 }
 
-func (r ApiGetUserRequest) Execute() (*User, *http.Response, error) {
+func (r ApiGetUserRequest) Execute() (*UserRead, *http.Response, error) {
 	return r.ApiService.GetUserExecute(r)
 }
 
@@ -91,13 +91,13 @@ func (a *DriversUsersAPIService) GetUser(ctx context.Context, userId string) Api
 
 // Execute executes the request
 //
-//	@return User
-func (a *DriversUsersAPIService) GetUserExecute(r ApiGetUserRequest) (*User, *http.Response, error) {
+//	@return UserRead
+func (a *DriversUsersAPIService) GetUserExecute(r ApiGetUserRequest) (*UserRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *User
+		localVarReturnValue *UserRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DriversUsersAPIService.GetUser")
@@ -201,6 +201,28 @@ func (a *DriversUsersAPIService) GetUserExecute(r ApiGetUserRequest) (*User, *ht
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -262,12 +284,22 @@ func (a *DriversUsersAPIService) GetUserExecute(r ApiGetUserRequest) (*User, *ht
 type ApiListUsersRequest struct {
 	ctx               context.Context
 	ApiService        DriversUsersAPI
+	isDriver          *bool
 	fleetIds          *[]string
 	fleetRefs         *[]string
 	includeSourceData *bool
 	userIds           *[]string
+	sourceIds         *[]string
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
+}
+
+// Filter users by whether they are drivers or not.
+func (r ApiListUsersRequest) IsDriver(isDriver bool) ApiListUsersRequest {
+	r.isDriver = &isDriver
+	return r
 }
 
 // Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
@@ -294,6 +326,24 @@ func (r ApiListUsersRequest) UserIds(userIds []string) ApiListUsersRequest {
 	return r
 }
 
+// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs
+func (r ApiListUsersRequest) SourceIds(sourceIds []string) ApiListUsersRequest {
+	r.sourceIds = &sourceIds
+	return r
+}
+
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListUsersRequest) SortBy(sortBy string) ApiListUsersRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListUsersRequest) SortOrder(sortOrder string) ApiListUsersRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // Cursor for the next page
 func (r ApiListUsersRequest) Cursor(cursor string) ApiListUsersRequest {
 	r.cursor = &cursor
@@ -306,7 +356,7 @@ func (r ApiListUsersRequest) Size(size int32) ApiListUsersRequest {
 	return r
 }
 
-func (r ApiListUsersRequest) Execute() (*CursorPageTypeVarCustomizedUser, *http.Response, error) {
+func (r ApiListUsersRequest) Execute() (*CursorPageUserRead, *http.Response, error) {
 	return r.ApiService.ListUsersExecute(r)
 }
 
@@ -327,13 +377,13 @@ func (a *DriversUsersAPIService) ListUsers(ctx context.Context) ApiListUsersRequ
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedUser
-func (a *DriversUsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*CursorPageTypeVarCustomizedUser, *http.Response, error) {
+//	@return CursorPageUserRead
+func (a *DriversUsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*CursorPageUserRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedUser
+		localVarReturnValue *CursorPageUserRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DriversUsersAPIService.ListUsers")
@@ -347,6 +397,9 @@ func (a *DriversUsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*Curso
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.isDriver != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_driver", r.isDriver, "form", "")
+	}
 	if r.fleetIds != nil {
 		t := *r.fleetIds
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
@@ -385,6 +438,26 @@ func (a *DriversUsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*Curso
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "user_ids", t, "form", "multi")
 		}
+	}
+	if r.sourceIds != nil {
+		t := *r.sourceIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "source_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "source_ids", t, "form", "multi")
+		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -469,6 +542,28 @@ func (a *DriversUsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*Curso
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

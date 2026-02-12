@@ -79,6 +79,7 @@ All URIs are relative to *https://api.catenatelematics.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*ConnectionsAPI* | [**BackfillSchedules**](docs/ConnectionsAPI.md#backfillschedules) | **Post** /v2/integrations/connections/schedules/backfill | Backfill Schedules
 *ConnectionsAPI* | [**CreateConnection**](docs/ConnectionsAPI.md#createconnection) | **Post** /v2/integrations/connections | Create Connection
 *ConnectionsAPI* | [**CreateSchedule**](docs/ConnectionsAPI.md#createschedule) | **Post** /v2/integrations/connections/{connection_id}/schedules | Create Schedule
 *ConnectionsAPI* | [**DeleteConnection**](docs/ConnectionsAPI.md#deleteconnection) | **Delete** /v2/integrations/connections/{connection_id} | Delete Connection
@@ -96,6 +97,8 @@ Class | Method | HTTP request | Description
 
  - [AccessTokenCredsInput](docs/AccessTokenCredsInput.md)
  - [AccessTokenCredsOutput](docs/AccessTokenCredsOutput.md)
+ - [ApiAuthCredsInput](docs/ApiAuthCredsInput.md)
+ - [ApiAuthCredsOutput](docs/ApiAuthCredsOutput.md)
  - [ApiBasicCredsInput](docs/ApiBasicCredsInput.md)
  - [ApiBasicCredsOutput](docs/ApiBasicCredsOutput.md)
  - [ApiKeyCredsInput](docs/ApiKeyCredsInput.md)
@@ -139,6 +142,7 @@ Class | Method | HTTP request | Description
  - [InternalServerError](docs/InternalServerError.md)
  - [IsaacCredsInput](docs/IsaacCredsInput.md)
  - [IsaacCredsOutput](docs/IsaacCredsOutput.md)
+ - [MethodNotAllowed](docs/MethodNotAllowed.md)
  - [MotiveCredsInput](docs/MotiveCredsInput.md)
  - [MotiveCredsOutput](docs/MotiveCredsOutput.md)
  - [NotFound](docs/NotFound.md)
@@ -160,6 +164,8 @@ Class | Method | HTTP request | Description
  - [S3CredsOutput](docs/S3CredsOutput.md)
  - [SamsaraCredsInput](docs/SamsaraCredsInput.md)
  - [SamsaraCredsOutput](docs/SamsaraCredsOutput.md)
+ - [ScheduleBackfillRequest](docs/ScheduleBackfillRequest.md)
+ - [ScheduleBackfillResponse](docs/ScheduleBackfillResponse.md)
  - [ScheduleCreate](docs/ScheduleCreate.md)
  - [ScheduleRead](docs/ScheduleRead.md)
  - [ScheduleUpdate](docs/ScheduleUpdate.md)
@@ -168,6 +174,8 @@ Class | Method | HTTP request | Description
  - [SpireonSLCInput](docs/SpireonSLCInput.md)
  - [SpireonSLCOutput](docs/SpireonSLCOutput.md)
  - [StatusEnum](docs/StatusEnum.md)
+ - [SwitchBoardCredsInput](docs/SwitchBoardCredsInput.md)
+ - [SwitchBoardCredsOutput](docs/SwitchBoardCredsOutput.md)
  - [TTCredsInput](docs/TTCredsInput.md)
  - [TTCredsOutput](docs/TTCredsOutput.md)
  - [TokenCredsInput](docs/TokenCredsInput.md)

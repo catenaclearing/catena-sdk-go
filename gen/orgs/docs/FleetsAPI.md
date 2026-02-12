@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 
 ## ListFleets
 
-> CursorPageCustomizedFleetRead ListFleets(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageCustomizedFleetRead ListFleets(ctx).FleetRefs(fleetRefs).Cursor(cursor).Size(size).Execute()
 
 List Fleets
 
@@ -453,12 +453,13 @@ import (
 )
 
 func main() {
+	fleetRefs := []string{"Inner_example"} // []string | Limit results to specific fleets using your organization's fleet reference identifiers (optional)
 	cursor := "cursor_example" // string | Cursor for the next page (optional)
 	size := int32(56) // int32 | Page size (optional) (default to 500)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FleetsAPI.ListFleets(context.Background()).Cursor(cursor).Size(size).Execute()
+	resp, r, err := apiClient.FleetsAPI.ListFleets(context.Background()).FleetRefs(fleetRefs).Cursor(cursor).Size(size).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FleetsAPI.ListFleets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -479,6 +480,7 @@ Other parameters are passed through a pointer to a apiListFleetsRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **fleetRefs** | **[]string** | Limit results to specific fleets using your organization&#39;s fleet reference identifiers | 
  **cursor** | **string** | Cursor for the next page | 
  **size** | **int32** | Page size | [default to 500]
 

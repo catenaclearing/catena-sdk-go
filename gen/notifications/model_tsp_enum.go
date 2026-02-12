@@ -22,22 +22,46 @@ type TspEnum string
 const (
 	TSPENUM_ADA                     TspEnum = "ada"
 	TSPENUM_AI_ELD                  TspEnum = "ai_eld"
+	TSPENUM_AIR_ELD                 TspEnum = "air_eld"
+	TSPENUM_ALFA_ELD                TspEnum = "alfa_eld"
+	TSPENUM_ALPHA_ELD               TspEnum = "alpha_eld"
+	TSPENUM_ALS                     TspEnum = "als"
+	TSPENUM_ANYTREK                 TspEnum = "anytrek"
+	TSPENUM_APEX_ELD                TspEnum = "apex_eld"
 	TSPENUM_APOLLO                  TspEnum = "apollo"
+	TSPENUM_APOLLOCLOUD             TspEnum = "apollocloud"
 	TSPENUM_ASCEND                  TspEnum = "ascend"
+	TSPENUM_ATT                     TspEnum = "att"
+	TSPENUM_AWAREGPS                TspEnum = "awaregps"
 	TSPENUM_AZUGA                   TspEnum = "azuga"
 	TSPENUM_BIGROAD                 TspEnum = "bigroad"
+	TSPENUM_BLUEHORSE_ELD           TspEnum = "bluehorse_eld"
 	TSPENUM_BLUEINKTECH             TspEnum = "blueinktech"
 	TSPENUM_BOUNCIE                 TspEnum = "bouncie"
 	TSPENUM_BUDGETGPS               TspEnum = "budgetgps"
+	TSPENUM_CAPTAIN_ELD             TspEnum = "captain_eld"
+	TSPENUM_CARRIER_LYNX            TspEnum = "carrier_lynx"
+	TSPENUM_CLUB_ELD                TspEnum = "club_eld"
 	TSPENUM_CYNTRX                  TspEnum = "cyntrx"
+	TSPENUM_DIGITAL_ELD             TspEnum = "digital_eld"
+	TSPENUM_DRAGON_ELD              TspEnum = "dragon_eld"
+	TSPENUM_DRIVE_HOS               TspEnum = "drive_hos"
 	TSPENUM_DRIVER_TECH             TspEnum = "driver_tech"
 	TSPENUM_DSG_ELOGS               TspEnum = "dsg_elogs"
 	TSPENUM_DYNAMIC_ELD             TspEnum = "dynamic_eld"
+	TSPENUM_EIGHTEIGHTEIGHT_ELD     TspEnum = "eighteighteight_eld"
+	TSPENUM_ELD_88                  TspEnum = "eld_88"
+	TSPENUM_ELD_BOOKS               TspEnum = "eld_books"
 	TSPENUM_ELD_MANDATE             TspEnum = "eld_mandate"
+	TSPENUM_ELD_MANDATE_PRIME       TspEnum = "eld_mandate_prime"
 	TSPENUM_EROAD                   TspEnum = "eroad"
+	TSPENUM_EVA_ELD                 TspEnum = "eva_eld"
 	TSPENUM_EVO_ELD                 TspEnum = "evo_eld"
+	TSPENUM_EXPRESSWAY_ELD          TspEnum = "expressway_eld"
+	TSPENUM_EXTREME_ELD             TspEnum = "extreme_eld"
 	TSPENUM_EZLOGZ                  TspEnum = "ezlogz"
 	TSPENUM_FACTOR_ELD              TspEnum = "factor_eld"
+	TSPENUM_FIRSTGATE               TspEnum = "firstgate"
 	TSPENUM_FLEETCOMPLETE           TspEnum = "fleetcomplete"
 	TSPENUM_FLEETCOMPLETEHUB        TspEnum = "fleetcompletehub"
 	TSPENUM_FLEETHUNT               TspEnum = "fleethunt"
@@ -45,72 +69,107 @@ const (
 	TSPENUM_FLEETUP                 TspEnum = "fleetup"
 	TSPENUM_FM                      TspEnum = "fm"
 	TSPENUM_FORWARDTHINKING         TspEnum = "forwardthinking"
+	TSPENUM_FORZA_ELD               TspEnum = "forza_eld"
 	TSPENUM_GEOTAB                  TspEnum = "geotab"
 	TSPENUM_GPSINSIGHT              TspEnum = "gpsinsight"
 	TSPENUM_GPSTAB                  TspEnum = "gpstab"
 	TSPENUM_GPSTRACKIT              TspEnum = "gpstrackit"
+	TSPENUM_GRAND_ELD               TspEnum = "grand_eld"
 	TSPENUM_GREENLIGHT              TspEnum = "greenlight"
+	TSPENUM_GROUNDHOG               TspEnum = "groundhog"
 	TSPENUM_HCSS                    TspEnum = "hcss"
-	TSPENUM_HOSCONNECT              TspEnum = "hosconnect"
 	TSPENUM_HOS247                  TspEnum = "hos247"
 	TSPENUM_HUTCH                   TspEnum = "hutch"
 	TSPENUM_INTELLISHIFT            TspEnum = "intellishift"
+	TSPENUM_IRONMAN_ELD             TspEnum = "ironman_eld"
 	TSPENUM_ISAAC                   TspEnum = "isaac"
 	TSPENUM_JJKELLER                TspEnum = "jjkeller"
+	TSPENUM_KINEXAIOT               TspEnum = "kinexaiot"
 	TSPENUM_KNIGHT_ELD              TspEnum = "knight_eld"
 	TSPENUM_KONEXIAL                TspEnum = "konexial"
+	TSPENUM_LIONEIGHT               TspEnum = "lioneight"
 	TSPENUM_LINXUP                  TspEnum = "linxup"
 	TSPENUM_LUCID_ELD               TspEnum = "lucid_eld"
+	TSPENUM_LUNA_ELD                TspEnum = "luna_eld"
 	TSPENUM_LYTX                    TspEnum = "lytx"
+	TSPENUM_LYTXV3                  TspEnum = "lytxv3"
 	TSPENUM_MAPON                   TspEnum = "mapon"
 	TSPENUM_MATRACK                 TspEnum = "matrack"
 	TSPENUM_MAVEN                   TspEnum = "maven"
 	TSPENUM_MOBILEFLEET             TspEnum = "mobilefleet"
+	TSPENUM_MOONLIGHT_ELD           TspEnum = "moonlight_eld"
+	TSPENUM_MOTION_ELD              TspEnum = "motion_eld"
 	TSPENUM_MOTIVE                  TspEnum = "motive"
 	TSPENUM_MY_LOGS_ELD             TspEnum = "my_logs_eld"
 	TSPENUM_NERO                    TspEnum = "nero"
 	TSPENUM_NETRADYNE               TspEnum = "netradyne"
 	TSPENUM_NEW_ELD_WORLD           TspEnum = "new_eld_world"
+	TSPENUM_NEXTGEN_ELD             TspEnum = "nextgen_eld"
 	TSPENUM_NEXTRAQ                 TspEnum = "nextraq"
+	TSPENUM_OMNITRACS               TspEnum = "omnitracs"
 	TSPENUM_ONESTEP                 TspEnum = "onestep"
 	TSPENUM_ONTIME_ELD              TspEnum = "ontime_eld"
 	TSPENUM_OPTIMA                  TspEnum = "optima"
 	TSPENUM_ORBCOMM                 TspEnum = "orbcomm"
 	TSPENUM_ORIENT_ELD              TspEnum = "orient_eld"
+	TSPENUM_PANDA_ELD               TspEnum = "panda_eld"
 	TSPENUM_PAYD                    TspEnum = "payd"
+	TSPENUM_PEAK_ELD                TspEnum = "peak_eld"
 	TSPENUM_PEOPLENET               TspEnum = "peoplenet"
+	TSPENUM_PHILLIPS_CONNECT        TspEnum = "phillips_connect"
 	TSPENUM_PHOENIX                 TspEnum = "phoenix"
 	TSPENUM_POP_ELD                 TspEnum = "pop_eld"
+	TSPENUM_PROLOGS                 TspEnum = "prologs"
+	TSPENUM_PRORIDE_ELD             TspEnum = "proride_eld"
+	TSPENUM_QUALITYLOGS_ELD         TspEnum = "qualitylogs_eld"
 	TSPENUM_RANDMCNALLY             TspEnum = "randmcnally"
 	TSPENUM_RASTRAC                 TspEnum = "rastrac"
+	TSPENUM_REDFOX                  TspEnum = "redfox"
+	TSPENUM_REGULOG_ELD             TspEnum = "regulog_eld"
+	TSPENUM_RIDEHUB                 TspEnum = "ridehub"
+	TSPENUM_ROCK_ELD                TspEnum = "rock_eld"
 	TSPENUM_ROUTEMATE               TspEnum = "routemate"
+	TSPENUM_ROYAL_ELD               TspEnum = "royal_eld"
 	TSPENUM_SAMSARA                 TspEnum = "samsara"
 	TSPENUM_SELECTIVEDRIVE          TspEnum = "selectivedrive"
+	TSPENUM_SIMBA_ELD               TspEnum = "simba_eld"
+	TSPENUM_SKYBITZ                 TspEnum = "skybitz"
 	TSPENUM_SMART_ELDS              TspEnum = "smart_elds"
 	TSPENUM_SPARKLE_ELD             TspEnum = "sparkle_eld"
-	TSPENUM_OMNITRACS               TspEnum = "omnitracs"
 	TSPENUM_SPIREON                 TspEnum = "spireon"
 	TSPENUM_SURFSIGHT               TspEnum = "surfsight"
 	TSPENUM_SWIFT                   TspEnum = "swift"
 	TSPENUM_SWITCHBOARD             TspEnum = "switchboard"
+	TSPENUM_SYNERGY_ELD             TspEnum = "synergy_eld"
 	TSPENUM_TELETRACNAVMAN          TspEnum = "teletracnavman"
 	TSPENUM_TELETRACNAVMAN_DIRECTOR TspEnum = "teletracnavman_director"
 	TSPENUM_TELOGIS                 TspEnum = "telogis"
 	TSPENUM_TENNA                   TspEnum = "tenna"
+	TSPENUM_THERMO_KING             TspEnum = "thermo_king"
 	TSPENUM_THINK                   TspEnum = "think"
 	TSPENUM_TIVE                    TspEnum = "tive"
+	TSPENUM_TOPCOMPLIANCE_ELD       TspEnum = "topcompliance_eld"
 	TSPENUM_TRACCAR                 TspEnum = "traccar"
+	TSPENUM_TRACKEASE_ELD           TspEnum = "trackease_eld"
+	TSPENUM_TRACKPRO                TspEnum = "trackpro"
+	TSPENUM_TRACLOG                 TspEnum = "traclog"
 	TSPENUM_TRANSFLO                TspEnum = "transflo"
 	TSPENUM_TRIMBLE                 TspEnum = "trimble"
+	TSPENUM_TRUCKFORD               TspEnum = "truckford"
+	TSPENUM_TRUCKSPY                TspEnum = "truckspy"
 	TSPENUM_TRUCKX                  TspEnum = "truckx"
+	TSPENUM_TRUEROAD_ELD            TspEnum = "trueroad_eld"
 	TSPENUM_TT                      TspEnum = "tt"
 	TSPENUM_US_FAST_ELD             TspEnum = "us_fast_eld"
 	TSPENUM_VERIZON                 TspEnum = "verizon"
-	TSPENUM_VERIZON_REVEAL          TspEnum = "verizon_reveal"
 	TSPENUM_VISTA_ELD               TspEnum = "vista_eld"
 	TSPENUM_VISTRACKS               TspEnum = "vistracks"
+	TSPENUM_VLOG_ELD                TspEnum = "vlog_eld"
+	TSPENUM_VULCANSOLS_ELD          TspEnum = "vulcansols_eld"
+	TSPENUM_WIALON                  TspEnum = "wialon"
 	TSPENUM_WEBFLEET                TspEnum = "webfleet"
 	TSPENUM_XPLORE_ELD              TspEnum = "xplore_eld"
+	TSPENUM_ZMS_ELD                 TspEnum = "zms_eld"
 	TSPENUM_ZONAR                   TspEnum = "zonar"
 	TSPENUM_ZUBIE                   TspEnum = "zubie"
 )
@@ -119,22 +178,46 @@ const (
 var AllowedTspEnumEnumValues = []TspEnum{
 	"ada",
 	"ai_eld",
+	"air_eld",
+	"alfa_eld",
+	"alpha_eld",
+	"als",
+	"anytrek",
+	"apex_eld",
 	"apollo",
+	"apollocloud",
 	"ascend",
+	"att",
+	"awaregps",
 	"azuga",
 	"bigroad",
+	"bluehorse_eld",
 	"blueinktech",
 	"bouncie",
 	"budgetgps",
+	"captain_eld",
+	"carrier_lynx",
+	"club_eld",
 	"cyntrx",
+	"digital_eld",
+	"dragon_eld",
+	"drive_hos",
 	"driver_tech",
 	"dsg_elogs",
 	"dynamic_eld",
+	"eighteighteight_eld",
+	"eld_88",
+	"eld_books",
 	"eld_mandate",
+	"eld_mandate_prime",
 	"eroad",
+	"eva_eld",
 	"evo_eld",
+	"expressway_eld",
+	"extreme_eld",
 	"ezlogz",
 	"factor_eld",
+	"firstgate",
 	"fleetcomplete",
 	"fleetcompletehub",
 	"fleethunt",
@@ -142,72 +225,107 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"fleetup",
 	"fm",
 	"forwardthinking",
+	"forza_eld",
 	"geotab",
 	"gpsinsight",
 	"gpstab",
 	"gpstrackit",
+	"grand_eld",
 	"greenlight",
+	"groundhog",
 	"hcss",
-	"hosconnect",
 	"hos247",
 	"hutch",
 	"intellishift",
+	"ironman_eld",
 	"isaac",
 	"jjkeller",
+	"kinexaiot",
 	"knight_eld",
 	"konexial",
+	"lioneight",
 	"linxup",
 	"lucid_eld",
+	"luna_eld",
 	"lytx",
+	"lytxv3",
 	"mapon",
 	"matrack",
 	"maven",
 	"mobilefleet",
+	"moonlight_eld",
+	"motion_eld",
 	"motive",
 	"my_logs_eld",
 	"nero",
 	"netradyne",
 	"new_eld_world",
+	"nextgen_eld",
 	"nextraq",
+	"omnitracs",
 	"onestep",
 	"ontime_eld",
 	"optima",
 	"orbcomm",
 	"orient_eld",
+	"panda_eld",
 	"payd",
+	"peak_eld",
 	"peoplenet",
+	"phillips_connect",
 	"phoenix",
 	"pop_eld",
+	"prologs",
+	"proride_eld",
+	"qualitylogs_eld",
 	"randmcnally",
 	"rastrac",
+	"redfox",
+	"regulog_eld",
+	"ridehub",
+	"rock_eld",
 	"routemate",
+	"royal_eld",
 	"samsara",
 	"selectivedrive",
+	"simba_eld",
+	"skybitz",
 	"smart_elds",
 	"sparkle_eld",
-	"omnitracs",
 	"spireon",
 	"surfsight",
 	"swift",
 	"switchboard",
+	"synergy_eld",
 	"teletracnavman",
 	"teletracnavman_director",
 	"telogis",
 	"tenna",
+	"thermo_king",
 	"think",
 	"tive",
+	"topcompliance_eld",
 	"traccar",
+	"trackease_eld",
+	"trackpro",
+	"traclog",
 	"transflo",
 	"trimble",
+	"truckford",
+	"truckspy",
 	"truckx",
+	"trueroad_eld",
 	"tt",
 	"us_fast_eld",
 	"verizon",
-	"verizon_reveal",
 	"vista_eld",
 	"vistracks",
+	"vlog_eld",
+	"vulcansols_eld",
+	"wialon",
 	"webfleet",
 	"xplore_eld",
+	"zms_eld",
 	"zonar",
 	"zubie",
 }

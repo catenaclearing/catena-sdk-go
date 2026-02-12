@@ -28,6 +28,19 @@ paths:
       description: Get a paginated list of Fleets accessible to your organization.
       operationId: list_fleets
       parameters:
+      - description: Limit results to specific fleets using your organization's fleet
+          reference identifiers
+        explode: true
+        in: query
+        name: fleet_refs
+        required: false
+        schema:
+          items:
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
       - description: Cursor for the next page
         explode: true
         in: query
@@ -81,6 +94,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -112,7 +131,8 @@ paths:
       tags:
       - Fleets
       x-mint:
-        content: <Info>Partners can only list fleets they invited</Info>
+        content: <Info>Partners can only list fleets they have active share agreements
+          with</Info>
     post:
       description: Create a new fleet.
       operationId: create_fleet
@@ -153,6 +173,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -225,6 +251,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -302,6 +334,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -333,7 +371,8 @@ paths:
       tags:
       - Fleets
       x-mint:
-        content: <Info>Partners can only get fleets they invited</Info>
+        content: <Info>Partners can only get fleets they have active share agreements
+          with</Info>
     patch:
       description: Update an existing fleet information.
       operationId: update_fleet
@@ -384,6 +423,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -464,6 +509,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -552,6 +603,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -634,6 +691,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -723,6 +786,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -793,6 +862,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -865,6 +940,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -940,6 +1021,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1020,6 +1107,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1097,6 +1190,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1181,6 +1280,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1264,6 +1369,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1347,6 +1458,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1414,6 +1531,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1486,6 +1609,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1561,6 +1690,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1638,6 +1773,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1736,6 +1877,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1811,6 +1958,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1882,6 +2035,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -1960,6 +2119,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -2043,6 +2208,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -2128,6 +2299,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -2247,6 +2424,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -2317,6 +2500,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -2391,6 +2580,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -2468,6 +2663,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -2550,6 +2751,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -2607,7 +2814,7 @@ components:
       title: BadRequest
     Conflict:
       example:
-        code: 5
+        code: 2
         detail: detail
         message: Conflict
       properties:
@@ -2627,6 +2834,7 @@ components:
       description: Connection Types
       enum:
       - access_token
+      - api_auth
       - api_basic
       - api_key
       - azuga_slc
@@ -2650,6 +2858,7 @@ components:
       - private_key
       - s3
       - samsara
+      - switchboard
       - spireon_slc
       - sftp
       - token
@@ -3282,6 +3491,24 @@ components:
       - magic_link
       - status
       title: InvitationRead
+    MethodNotAllowed:
+      example:
+        code: 5
+        detail: detail
+        message: Method Not Allowed
+      properties:
+        code:
+          default: 405
+          title: Code
+          type: integer
+        message:
+          default: Method Not Allowed
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: MethodNotAllowed
     NotFound:
       example:
         code: 5
@@ -3531,22 +3758,23 @@ components:
       - hos_availability
       - hos_daily_snapshot
       - hos_event
-      - hos_log
-      - hos_log_annotation
-      - hos_log_attachment
+      - hos_event_annotation
+      - hos_event_attachment
       - hos_violation
       - ifta_summary
       - location_segment
+      - reefer_status
       - user
       - vehicle
       - vehicle_location
       - vehicle_sensor
       - trailer
+      - trailer_location
       title: ResourceEnum
       type: string
     RetryAfterDetail:
       example:
-        retry_after_seconds: 9
+        retry_after_seconds: 3
         message: message
       properties:
         retry_after_seconds:
@@ -3689,7 +3917,7 @@ components:
       example:
         effective_date: ""
         expiration_date: ""
-        fleet_ref: ""
+        fleet_ref: FLEET-12345
         status: cancelled
       properties:
         status:
@@ -3733,9 +3961,9 @@ components:
       type: string
     TooManyRequests:
       example:
-        code: 7
+        code: 9
         detail:
-          retry_after_seconds: 9
+          retry_after_seconds: 3
           message: message
         message: Too Many Requests
       properties:
@@ -3804,22 +4032,46 @@ components:
       enum:
       - ada
       - ai_eld
+      - air_eld
+      - alfa_eld
+      - alpha_eld
+      - als
+      - anytrek
+      - apex_eld
       - apollo
+      - apollocloud
       - ascend
+      - att
+      - awaregps
       - azuga
       - bigroad
+      - bluehorse_eld
       - blueinktech
       - bouncie
       - budgetgps
+      - captain_eld
+      - carrier_lynx
+      - club_eld
       - cyntrx
+      - digital_eld
+      - dragon_eld
+      - drive_hos
       - driver_tech
       - dsg_elogs
       - dynamic_eld
+      - eighteighteight_eld
+      - eld_88
+      - eld_books
       - eld_mandate
+      - eld_mandate_prime
       - eroad
+      - eva_eld
       - evo_eld
+      - expressway_eld
+      - extreme_eld
       - ezlogz
       - factor_eld
+      - firstgate
       - fleetcomplete
       - fleetcompletehub
       - fleethunt
@@ -3827,72 +4079,107 @@ components:
       - fleetup
       - fm
       - forwardthinking
+      - forza_eld
       - geotab
       - gpsinsight
       - gpstab
       - gpstrackit
+      - grand_eld
       - greenlight
+      - groundhog
       - hcss
-      - hosconnect
       - hos247
       - hutch
       - intellishift
+      - ironman_eld
       - isaac
       - jjkeller
+      - kinexaiot
       - knight_eld
       - konexial
+      - lioneight
       - linxup
       - lucid_eld
+      - luna_eld
       - lytx
+      - lytxv3
       - mapon
       - matrack
       - maven
       - mobilefleet
+      - moonlight_eld
+      - motion_eld
       - motive
       - my_logs_eld
       - nero
       - netradyne
       - new_eld_world
+      - nextgen_eld
       - nextraq
+      - omnitracs
       - onestep
       - ontime_eld
       - optima
       - orbcomm
       - orient_eld
+      - panda_eld
       - payd
+      - peak_eld
       - peoplenet
+      - phillips_connect
       - phoenix
       - pop_eld
+      - prologs
+      - proride_eld
+      - qualitylogs_eld
       - randmcnally
       - rastrac
+      - redfox
+      - regulog_eld
+      - ridehub
+      - rock_eld
       - routemate
+      - royal_eld
       - samsara
       - selectivedrive
+      - simba_eld
+      - skybitz
       - smart_elds
       - sparkle_eld
-      - omnitracs
       - spireon
       - surfsight
       - swift
       - switchboard
+      - synergy_eld
       - teletracnavman
       - teletracnavman_director
       - telogis
       - tenna
+      - thermo_king
       - think
       - tive
+      - topcompliance_eld
       - traccar
+      - trackease_eld
+      - trackpro
+      - traclog
       - transflo
       - trimble
+      - truckford
+      - truckspy
       - truckx
+      - trueroad_eld
       - tt
       - us_fast_eld
       - verizon
-      - verizon_reveal
       - vista_eld
       - vistracks
+      - vlog_eld
+      - vulcansols_eld
+      - wialon
       - webfleet
       - xplore_eld
+      - zms_eld
       - zonar
       - zubie
       title: TspEnum
@@ -4015,7 +4302,7 @@ components:
       title: Unauthorized
     UnprocessableEntity:
       example:
-        code: 2
+        code: 7
         detail:
         - path: path
           input: input

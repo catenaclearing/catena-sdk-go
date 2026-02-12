@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **SuccessRedirectUrl** | Pointer to **NullableString** |  | [optional] 
 **FailureRedirectUrl** | Pointer to **NullableString** |  | [optional] 
 **CallbackUrl** | Pointer to **NullableString** |  | [optional] 
-**LimitTsps** | Pointer to [**[]TspEnum**](TspEnum.md) |  | [optional] 
+**LimitTsps** | Pointer to **[]string** |  | [optional] 
 **FleetId** | Pointer to **NullableString** |  | [optional] 
 **PartnerSlug** | Pointer to **NullableString** |  | [optional] 
 **PartnerId** | Pointer to **NullableString** |  | [optional] 
@@ -411,20 +411,20 @@ HasCallbackUrl returns a boolean if a field has been set.
 UnsetCallbackUrl ensures that no value is present for CallbackUrl, not even an explicit nil
 ### GetLimitTsps
 
-`func (o *BaseInvitationEvent) GetLimitTsps() []TspEnum`
+`func (o *BaseInvitationEvent) GetLimitTsps() []string`
 
 GetLimitTsps returns the LimitTsps field if non-nil, zero value otherwise.
 
 ### GetLimitTspsOk
 
-`func (o *BaseInvitationEvent) GetLimitTspsOk() (*[]TspEnum, bool)`
+`func (o *BaseInvitationEvent) GetLimitTspsOk() (*[]string, bool)`
 
 GetLimitTspsOk returns a tuple with the LimitTsps field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimitTsps
 
-`func (o *BaseInvitationEvent) SetLimitTsps(v []TspEnum)`
+`func (o *BaseInvitationEvent) SetLimitTsps(v []string)`
 
 SetLimitTsps sets LimitTsps field to given value.
 

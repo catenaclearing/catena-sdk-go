@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ConsecutiveErrorCount** | Pointer to **NullableInt32** |  | [optional] 
 **MaxConcurrentExecutions** | Pointer to **NullableInt32** |  | [optional] 
 **NextExecutionAt** | Pointer to **NullableTime** |  | [optional] 
+**Cursor** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -240,6 +241,41 @@ HasNextExecutionAt returns a boolean if a field has been set.
 `func (o *ScheduleUpdate) UnsetNextExecutionAt()`
 
 UnsetNextExecutionAt ensures that no value is present for NextExecutionAt, not even an explicit nil
+### GetCursor
+
+`func (o *ScheduleUpdate) GetCursor() string`
+
+GetCursor returns the Cursor field if non-nil, zero value otherwise.
+
+### GetCursorOk
+
+`func (o *ScheduleUpdate) GetCursorOk() (*string, bool)`
+
+GetCursorOk returns a tuple with the Cursor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursor
+
+`func (o *ScheduleUpdate) SetCursor(v string)`
+
+SetCursor sets Cursor field to given value.
+
+### HasCursor
+
+`func (o *ScheduleUpdate) HasCursor() bool`
+
+HasCursor returns a boolean if a field has been set.
+
+### SetCursorNil
+
+`func (o *ScheduleUpdate) SetCursorNil(b bool)`
+
+ SetCursorNil sets the value for Cursor to be an explicit nil
+
+### UnsetCursor
+`func (o *ScheduleUpdate) UnsetCursor()`
+
+UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

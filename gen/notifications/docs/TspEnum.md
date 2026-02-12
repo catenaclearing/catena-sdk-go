@@ -7,13 +7,33 @@
 
 * `AI_ELD` (value: `"ai_eld"`)
 
+* `AIR_ELD` (value: `"air_eld"`)
+
+* `ALFA_ELD` (value: `"alfa_eld"`)
+
+* `ALPHA_ELD` (value: `"alpha_eld"`)
+
+* `ALS` (value: `"als"`)
+
+* `ANYTREK` (value: `"anytrek"`)
+
+* `APEX_ELD` (value: `"apex_eld"`)
+
 * `APOLLO` (value: `"apollo"`)
 
+* `APOLLOCLOUD` (value: `"apollocloud"`)
+
 * `ASCEND` (value: `"ascend"`)
+
+* `ATT` (value: `"att"`)
+
+* `AWAREGPS` (value: `"awaregps"`)
 
 * `AZUGA` (value: `"azuga"`)
 
 * `BIGROAD` (value: `"bigroad"`)
+
+* `BLUEHORSE_ELD` (value: `"bluehorse_eld"`)
 
 * `BLUEINKTECH` (value: `"blueinktech"`)
 
@@ -21,7 +41,19 @@
 
 * `BUDGETGPS` (value: `"budgetgps"`)
 
+* `CAPTAIN_ELD` (value: `"captain_eld"`)
+
+* `CARRIER_LYNX` (value: `"carrier_lynx"`)
+
+* `CLUB_ELD` (value: `"club_eld"`)
+
 * `CYNTRX` (value: `"cyntrx"`)
+
+* `DIGITAL_ELD` (value: `"digital_eld"`)
+
+* `DRAGON_ELD` (value: `"dragon_eld"`)
+
+* `DRIVE_HOS` (value: `"drive_hos"`)
 
 * `DRIVER_TECH` (value: `"driver_tech"`)
 
@@ -29,15 +61,31 @@
 
 * `DYNAMIC_ELD` (value: `"dynamic_eld"`)
 
+* `EIGHTEIGHTEIGHT_ELD` (value: `"eighteighteight_eld"`)
+
+* `ELD_88` (value: `"eld_88"`)
+
+* `ELD_BOOKS` (value: `"eld_books"`)
+
 * `ELD_MANDATE` (value: `"eld_mandate"`)
+
+* `ELD_MANDATE_PRIME` (value: `"eld_mandate_prime"`)
 
 * `EROAD` (value: `"eroad"`)
 
+* `EVA_ELD` (value: `"eva_eld"`)
+
 * `EVO_ELD` (value: `"evo_eld"`)
+
+* `EXPRESSWAY_ELD` (value: `"expressway_eld"`)
+
+* `EXTREME_ELD` (value: `"extreme_eld"`)
 
 * `EZLOGZ` (value: `"ezlogz"`)
 
 * `FACTOR_ELD` (value: `"factor_eld"`)
+
+* `FIRSTGATE` (value: `"firstgate"`)
 
 * `FLEETCOMPLETE` (value: `"fleetcomplete"`)
 
@@ -53,6 +101,8 @@
 
 * `FORWARDTHINKING` (value: `"forwardthinking"`)
 
+* `FORZA_ELD` (value: `"forza_eld"`)
+
 * `GEOTAB` (value: `"geotab"`)
 
 * `GPSINSIGHT` (value: `"gpsinsight"`)
@@ -61,11 +111,13 @@
 
 * `GPSTRACKIT` (value: `"gpstrackit"`)
 
+* `GRAND_ELD` (value: `"grand_eld"`)
+
 * `GREENLIGHT` (value: `"greenlight"`)
 
-* `HCSS` (value: `"hcss"`)
+* `GROUNDHOG` (value: `"groundhog"`)
 
-* `HOSCONNECT` (value: `"hosconnect"`)
+* `HCSS` (value: `"hcss"`)
 
 * `HOS247` (value: `"hos247"`)
 
@@ -73,19 +125,29 @@
 
 * `INTELLISHIFT` (value: `"intellishift"`)
 
+* `IRONMAN_ELD` (value: `"ironman_eld"`)
+
 * `ISAAC` (value: `"isaac"`)
 
 * `JJKELLER` (value: `"jjkeller"`)
+
+* `KINEXAIOT` (value: `"kinexaiot"`)
 
 * `KNIGHT_ELD` (value: `"knight_eld"`)
 
 * `KONEXIAL` (value: `"konexial"`)
 
+* `LIONEIGHT` (value: `"lioneight"`)
+
 * `LINXUP` (value: `"linxup"`)
 
 * `LUCID_ELD` (value: `"lucid_eld"`)
 
+* `LUNA_ELD` (value: `"luna_eld"`)
+
 * `LYTX` (value: `"lytx"`)
+
+* `LYTXV3` (value: `"lytxv3"`)
 
 * `MAPON` (value: `"mapon"`)
 
@@ -94,6 +156,10 @@
 * `MAVEN` (value: `"maven"`)
 
 * `MOBILEFLEET` (value: `"mobilefleet"`)
+
+* `MOONLIGHT_ELD` (value: `"moonlight_eld"`)
+
+* `MOTION_ELD` (value: `"motion_eld"`)
 
 * `MOTIVE` (value: `"motive"`)
 
@@ -105,7 +171,11 @@
 
 * `NEW_ELD_WORLD` (value: `"new_eld_world"`)
 
+* `NEXTGEN_ELD` (value: `"nextgen_eld"`)
+
 * `NEXTRAQ` (value: `"nextraq"`)
+
+* `OMNITRACS` (value: `"omnitracs"`)
 
 * `ONESTEP` (value: `"onestep"`)
 
@@ -117,29 +187,53 @@
 
 * `ORIENT_ELD` (value: `"orient_eld"`)
 
+* `PANDA_ELD` (value: `"panda_eld"`)
+
 * `PAYD` (value: `"payd"`)
 
+* `PEAK_ELD` (value: `"peak_eld"`)
+
 * `PEOPLENET` (value: `"peoplenet"`)
+
+* `PHILLIPS_CONNECT` (value: `"phillips_connect"`)
 
 * `PHOENIX` (value: `"phoenix"`)
 
 * `POP_ELD` (value: `"pop_eld"`)
 
+* `PROLOGS` (value: `"prologs"`)
+
+* `PRORIDE_ELD` (value: `"proride_eld"`)
+
+* `QUALITYLOGS_ELD` (value: `"qualitylogs_eld"`)
+
 * `RANDMCNALLY` (value: `"randmcnally"`)
 
 * `RASTRAC` (value: `"rastrac"`)
 
+* `REDFOX` (value: `"redfox"`)
+
+* `REGULOG_ELD` (value: `"regulog_eld"`)
+
+* `RIDEHUB` (value: `"ridehub"`)
+
+* `ROCK_ELD` (value: `"rock_eld"`)
+
 * `ROUTEMATE` (value: `"routemate"`)
+
+* `ROYAL_ELD` (value: `"royal_eld"`)
 
 * `SAMSARA` (value: `"samsara"`)
 
 * `SELECTIVEDRIVE` (value: `"selectivedrive"`)
 
+* `SIMBA_ELD` (value: `"simba_eld"`)
+
+* `SKYBITZ` (value: `"skybitz"`)
+
 * `SMART_ELDS` (value: `"smart_elds"`)
 
 * `SPARKLE_ELD` (value: `"sparkle_eld"`)
-
-* `OMNITRACS` (value: `"omnitracs"`)
 
 * `SPIREON` (value: `"spireon"`)
 
@@ -149,6 +243,8 @@
 
 * `SWITCHBOARD` (value: `"switchboard"`)
 
+* `SYNERGY_ELD` (value: `"synergy_eld"`)
+
 * `TELETRACNAVMAN` (value: `"teletracnavman"`)
 
 * `TELETRACNAVMAN_DIRECTOR` (value: `"teletracnavman_director"`)
@@ -157,17 +253,33 @@
 
 * `TENNA` (value: `"tenna"`)
 
+* `THERMO_KING` (value: `"thermo_king"`)
+
 * `THINK` (value: `"think"`)
 
 * `TIVE` (value: `"tive"`)
 
+* `TOPCOMPLIANCE_ELD` (value: `"topcompliance_eld"`)
+
 * `TRACCAR` (value: `"traccar"`)
+
+* `TRACKEASE_ELD` (value: `"trackease_eld"`)
+
+* `TRACKPRO` (value: `"trackpro"`)
+
+* `TRACLOG` (value: `"traclog"`)
 
 * `TRANSFLO` (value: `"transflo"`)
 
 * `TRIMBLE` (value: `"trimble"`)
 
+* `TRUCKFORD` (value: `"truckford"`)
+
+* `TRUCKSPY` (value: `"truckspy"`)
+
 * `TRUCKX` (value: `"truckx"`)
+
+* `TRUEROAD_ELD` (value: `"trueroad_eld"`)
 
 * `TT` (value: `"tt"`)
 
@@ -175,15 +287,21 @@
 
 * `VERIZON` (value: `"verizon"`)
 
-* `VERIZON_REVEAL` (value: `"verizon_reveal"`)
-
 * `VISTA_ELD` (value: `"vista_eld"`)
 
 * `VISTRACKS` (value: `"vistracks"`)
 
+* `VLOG_ELD` (value: `"vlog_eld"`)
+
+* `VULCANSOLS_ELD` (value: `"vulcansols_eld"`)
+
+* `WIALON` (value: `"wialon"`)
+
 * `WEBFLEET` (value: `"webfleet"`)
 
 * `XPLORE_ELD` (value: `"xplore_eld"`)
+
+* `ZMS_ELD` (value: `"zms_eld"`)
 
 * `ZONAR` (value: `"zonar"`)
 

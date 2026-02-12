@@ -44,7 +44,7 @@ func main() {
 		c,
 		context.Background(),
 		pagination.ListVehiclesPaginationOptions{},
-		func(vehicle telematicsapi.Vehicle) error {
+		func(vehicle telematicsapi.VehicleRead) error {
 			vehicleID = vehicle.GetId()
 			fmt.Printf("Found Vehicle: %s (Name: %s)\n", vehicleID, vehicle.GetVehicleName())
 			return ErrStop // Stop after finding the first one

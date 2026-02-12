@@ -31,8 +31,8 @@ type ReferenceDataSupportingTablesAPI interface {
 	ListHosEventCodesReference(ctx context.Context) ApiListHosEventCodesReferenceRequest
 
 	// ListHosEventCodesReferenceExecute executes the request
-	//  @return CursorPageTypeVarCustomizedRefHosEventCode
-	ListHosEventCodesReferenceExecute(r ApiListHosEventCodesReferenceRequest) (*CursorPageTypeVarCustomizedRefHosEventCode, *http.Response, error)
+	//  @return CursorPageRefHosEventCode
+	ListHosEventCodesReferenceExecute(r ApiListHosEventCodesReferenceRequest) (*CursorPageRefHosEventCode, *http.Response, error)
 
 	/*
 		ListHosMalfunctionCodesReference List HOS Malfunction Codes
@@ -45,8 +45,8 @@ type ReferenceDataSupportingTablesAPI interface {
 	ListHosMalfunctionCodesReference(ctx context.Context) ApiListHosMalfunctionCodesReferenceRequest
 
 	// ListHosMalfunctionCodesReferenceExecute executes the request
-	//  @return CursorPageTypeVarCustomizedRefHosMalfunctionCode
-	ListHosMalfunctionCodesReferenceExecute(r ApiListHosMalfunctionCodesReferenceRequest) (*CursorPageTypeVarCustomizedRefHosMalfunctionCode, *http.Response, error)
+	//  @return CursorPageRefHosMalfunctionCode
+	ListHosMalfunctionCodesReferenceExecute(r ApiListHosMalfunctionCodesReferenceRequest) (*CursorPageRefHosMalfunctionCode, *http.Response, error)
 
 	/*
 		ListHosRecordOriginsReference List HOS Record Origins
@@ -59,8 +59,8 @@ type ReferenceDataSupportingTablesAPI interface {
 	ListHosRecordOriginsReference(ctx context.Context) ApiListHosRecordOriginsReferenceRequest
 
 	// ListHosRecordOriginsReferenceExecute executes the request
-	//  @return CursorPageTypeVarCustomizedRefHosRecordOrigin
-	ListHosRecordOriginsReferenceExecute(r ApiListHosRecordOriginsReferenceRequest) (*CursorPageTypeVarCustomizedRefHosRecordOrigin, *http.Response, error)
+	//  @return CursorPageRefHosRecordOrigin
+	ListHosRecordOriginsReferenceExecute(r ApiListHosRecordOriginsReferenceRequest) (*CursorPageRefHosRecordOrigin, *http.Response, error)
 
 	/*
 		ListHosRecordStatusesReference List HOS Record Statuses
@@ -73,8 +73,8 @@ type ReferenceDataSupportingTablesAPI interface {
 	ListHosRecordStatusesReference(ctx context.Context) ApiListHosRecordStatusesReferenceRequest
 
 	// ListHosRecordStatusesReferenceExecute executes the request
-	//  @return CursorPageTypeVarCustomizedRefHosRecordStatus
-	ListHosRecordStatusesReferenceExecute(r ApiListHosRecordStatusesReferenceRequest) (*CursorPageTypeVarCustomizedRefHosRecordStatus, *http.Response, error)
+	//  @return CursorPageRefHosRecordStatus
+	ListHosRecordStatusesReferenceExecute(r ApiListHosRecordStatusesReferenceRequest) (*CursorPageRefHosRecordStatus, *http.Response, error)
 
 	/*
 		ListHosRegionsReference List HOS Regions
@@ -87,8 +87,8 @@ type ReferenceDataSupportingTablesAPI interface {
 	ListHosRegionsReference(ctx context.Context) ApiListHosRegionsReferenceRequest
 
 	// ListHosRegionsReferenceExecute executes the request
-	//  @return CursorPageTypeVarCustomizedRefHosRegion
-	ListHosRegionsReferenceExecute(r ApiListHosRegionsReferenceRequest) (*CursorPageTypeVarCustomizedRefHosRegion, *http.Response, error)
+	//  @return CursorPageRefHosRegion
+	ListHosRegionsReferenceExecute(r ApiListHosRegionsReferenceRequest) (*CursorPageRefHosRegion, *http.Response, error)
 
 	/*
 		ListHosViolationCodesReference List HOS Violation Codes
@@ -101,8 +101,8 @@ type ReferenceDataSupportingTablesAPI interface {
 	ListHosViolationCodesReference(ctx context.Context) ApiListHosViolationCodesReferenceRequest
 
 	// ListHosViolationCodesReferenceExecute executes the request
-	//  @return CursorPageTypeVarCustomizedRefHosViolationCode
-	ListHosViolationCodesReferenceExecute(r ApiListHosViolationCodesReferenceRequest) (*CursorPageTypeVarCustomizedRefHosViolationCode, *http.Response, error)
+	//  @return CursorPageRefHosViolationCode
+	ListHosViolationCodesReferenceExecute(r ApiListHosViolationCodesReferenceRequest) (*CursorPageRefHosViolationCode, *http.Response, error)
 
 	/*
 		ListRulesetsReference List HOS Rulesets
@@ -115,8 +115,8 @@ type ReferenceDataSupportingTablesAPI interface {
 	ListRulesetsReference(ctx context.Context) ApiListRulesetsReferenceRequest
 
 	// ListRulesetsReferenceExecute executes the request
-	//  @return CursorPageTypeVarCustomizedRefHosRuleset
-	ListRulesetsReferenceExecute(r ApiListRulesetsReferenceRequest) (*CursorPageTypeVarCustomizedRefHosRuleset, *http.Response, error)
+	//  @return CursorPageRefHosRuleset
+	ListRulesetsReferenceExecute(r ApiListRulesetsReferenceRequest) (*CursorPageRefHosRuleset, *http.Response, error)
 
 	/*
 		ListTimezonesReference List Timezones
@@ -129,8 +129,8 @@ type ReferenceDataSupportingTablesAPI interface {
 	ListTimezonesReference(ctx context.Context) ApiListTimezonesReferenceRequest
 
 	// ListTimezonesReferenceExecute executes the request
-	//  @return CursorPageTypeVarCustomizedRefTimezoneCode
-	ListTimezonesReferenceExecute(r ApiListTimezonesReferenceRequest) (*CursorPageTypeVarCustomizedRefTimezoneCode, *http.Response, error)
+	//  @return CursorPageRefTimezoneCode
+	ListTimezonesReferenceExecute(r ApiListTimezonesReferenceRequest) (*CursorPageRefTimezoneCode, *http.Response, error)
 }
 
 // ReferenceDataSupportingTablesAPIService ReferenceDataSupportingTablesAPI service
@@ -155,7 +155,7 @@ func (r ApiListHosEventCodesReferenceRequest) Size(size int32) ApiListHosEventCo
 	return r
 }
 
-func (r ApiListHosEventCodesReferenceRequest) Execute() (*CursorPageTypeVarCustomizedRefHosEventCode, *http.Response, error) {
+func (r ApiListHosEventCodesReferenceRequest) Execute() (*CursorPageRefHosEventCode, *http.Response, error) {
 	return r.ApiService.ListHosEventCodesReferenceExecute(r)
 }
 
@@ -176,13 +176,13 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosEventCodesReference(ctx
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedRefHosEventCode
-func (a *ReferenceDataSupportingTablesAPIService) ListHosEventCodesReferenceExecute(r ApiListHosEventCodesReferenceRequest) (*CursorPageTypeVarCustomizedRefHosEventCode, *http.Response, error) {
+//	@return CursorPageRefHosEventCode
+func (a *ReferenceDataSupportingTablesAPIService) ListHosEventCodesReferenceExecute(r ApiListHosEventCodesReferenceRequest) (*CursorPageRefHosEventCode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedRefHosEventCode
+		localVarReturnValue *CursorPageRefHosEventCode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferenceDataSupportingTablesAPIService.ListHosEventCodesReference")
@@ -288,6 +288,28 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosEventCodesReferenceExec
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -365,7 +387,7 @@ func (r ApiListHosMalfunctionCodesReferenceRequest) Size(size int32) ApiListHosM
 	return r
 }
 
-func (r ApiListHosMalfunctionCodesReferenceRequest) Execute() (*CursorPageTypeVarCustomizedRefHosMalfunctionCode, *http.Response, error) {
+func (r ApiListHosMalfunctionCodesReferenceRequest) Execute() (*CursorPageRefHosMalfunctionCode, *http.Response, error) {
 	return r.ApiService.ListHosMalfunctionCodesReferenceExecute(r)
 }
 
@@ -386,13 +408,13 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosMalfunctionCodesReferen
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedRefHosMalfunctionCode
-func (a *ReferenceDataSupportingTablesAPIService) ListHosMalfunctionCodesReferenceExecute(r ApiListHosMalfunctionCodesReferenceRequest) (*CursorPageTypeVarCustomizedRefHosMalfunctionCode, *http.Response, error) {
+//	@return CursorPageRefHosMalfunctionCode
+func (a *ReferenceDataSupportingTablesAPIService) ListHosMalfunctionCodesReferenceExecute(r ApiListHosMalfunctionCodesReferenceRequest) (*CursorPageRefHosMalfunctionCode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedRefHosMalfunctionCode
+		localVarReturnValue *CursorPageRefHosMalfunctionCode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferenceDataSupportingTablesAPIService.ListHosMalfunctionCodesReference")
@@ -498,6 +520,28 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosMalfunctionCodesReferen
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -575,7 +619,7 @@ func (r ApiListHosRecordOriginsReferenceRequest) Size(size int32) ApiListHosReco
 	return r
 }
 
-func (r ApiListHosRecordOriginsReferenceRequest) Execute() (*CursorPageTypeVarCustomizedRefHosRecordOrigin, *http.Response, error) {
+func (r ApiListHosRecordOriginsReferenceRequest) Execute() (*CursorPageRefHosRecordOrigin, *http.Response, error) {
 	return r.ApiService.ListHosRecordOriginsReferenceExecute(r)
 }
 
@@ -596,13 +640,13 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosRecordOriginsReference(
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedRefHosRecordOrigin
-func (a *ReferenceDataSupportingTablesAPIService) ListHosRecordOriginsReferenceExecute(r ApiListHosRecordOriginsReferenceRequest) (*CursorPageTypeVarCustomizedRefHosRecordOrigin, *http.Response, error) {
+//	@return CursorPageRefHosRecordOrigin
+func (a *ReferenceDataSupportingTablesAPIService) ListHosRecordOriginsReferenceExecute(r ApiListHosRecordOriginsReferenceRequest) (*CursorPageRefHosRecordOrigin, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedRefHosRecordOrigin
+		localVarReturnValue *CursorPageRefHosRecordOrigin
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferenceDataSupportingTablesAPIService.ListHosRecordOriginsReference")
@@ -708,6 +752,28 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosRecordOriginsReferenceE
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -785,7 +851,7 @@ func (r ApiListHosRecordStatusesReferenceRequest) Size(size int32) ApiListHosRec
 	return r
 }
 
-func (r ApiListHosRecordStatusesReferenceRequest) Execute() (*CursorPageTypeVarCustomizedRefHosRecordStatus, *http.Response, error) {
+func (r ApiListHosRecordStatusesReferenceRequest) Execute() (*CursorPageRefHosRecordStatus, *http.Response, error) {
 	return r.ApiService.ListHosRecordStatusesReferenceExecute(r)
 }
 
@@ -806,13 +872,13 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosRecordStatusesReference
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedRefHosRecordStatus
-func (a *ReferenceDataSupportingTablesAPIService) ListHosRecordStatusesReferenceExecute(r ApiListHosRecordStatusesReferenceRequest) (*CursorPageTypeVarCustomizedRefHosRecordStatus, *http.Response, error) {
+//	@return CursorPageRefHosRecordStatus
+func (a *ReferenceDataSupportingTablesAPIService) ListHosRecordStatusesReferenceExecute(r ApiListHosRecordStatusesReferenceRequest) (*CursorPageRefHosRecordStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedRefHosRecordStatus
+		localVarReturnValue *CursorPageRefHosRecordStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferenceDataSupportingTablesAPIService.ListHosRecordStatusesReference")
@@ -918,6 +984,28 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosRecordStatusesReference
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -995,7 +1083,7 @@ func (r ApiListHosRegionsReferenceRequest) Size(size int32) ApiListHosRegionsRef
 	return r
 }
 
-func (r ApiListHosRegionsReferenceRequest) Execute() (*CursorPageTypeVarCustomizedRefHosRegion, *http.Response, error) {
+func (r ApiListHosRegionsReferenceRequest) Execute() (*CursorPageRefHosRegion, *http.Response, error) {
 	return r.ApiService.ListHosRegionsReferenceExecute(r)
 }
 
@@ -1016,13 +1104,13 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosRegionsReference(ctx co
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedRefHosRegion
-func (a *ReferenceDataSupportingTablesAPIService) ListHosRegionsReferenceExecute(r ApiListHosRegionsReferenceRequest) (*CursorPageTypeVarCustomizedRefHosRegion, *http.Response, error) {
+//	@return CursorPageRefHosRegion
+func (a *ReferenceDataSupportingTablesAPIService) ListHosRegionsReferenceExecute(r ApiListHosRegionsReferenceRequest) (*CursorPageRefHosRegion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedRefHosRegion
+		localVarReturnValue *CursorPageRefHosRegion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferenceDataSupportingTablesAPIService.ListHosRegionsReference")
@@ -1128,6 +1216,28 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosRegionsReferenceExecute
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1205,7 +1315,7 @@ func (r ApiListHosViolationCodesReferenceRequest) Size(size int32) ApiListHosVio
 	return r
 }
 
-func (r ApiListHosViolationCodesReferenceRequest) Execute() (*CursorPageTypeVarCustomizedRefHosViolationCode, *http.Response, error) {
+func (r ApiListHosViolationCodesReferenceRequest) Execute() (*CursorPageRefHosViolationCode, *http.Response, error) {
 	return r.ApiService.ListHosViolationCodesReferenceExecute(r)
 }
 
@@ -1226,13 +1336,13 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosViolationCodesReference
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedRefHosViolationCode
-func (a *ReferenceDataSupportingTablesAPIService) ListHosViolationCodesReferenceExecute(r ApiListHosViolationCodesReferenceRequest) (*CursorPageTypeVarCustomizedRefHosViolationCode, *http.Response, error) {
+//	@return CursorPageRefHosViolationCode
+func (a *ReferenceDataSupportingTablesAPIService) ListHosViolationCodesReferenceExecute(r ApiListHosViolationCodesReferenceRequest) (*CursorPageRefHosViolationCode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedRefHosViolationCode
+		localVarReturnValue *CursorPageRefHosViolationCode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferenceDataSupportingTablesAPIService.ListHosViolationCodesReference")
@@ -1338,6 +1448,28 @@ func (a *ReferenceDataSupportingTablesAPIService) ListHosViolationCodesReference
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1415,7 +1547,7 @@ func (r ApiListRulesetsReferenceRequest) Size(size int32) ApiListRulesetsReferen
 	return r
 }
 
-func (r ApiListRulesetsReferenceRequest) Execute() (*CursorPageTypeVarCustomizedRefHosRuleset, *http.Response, error) {
+func (r ApiListRulesetsReferenceRequest) Execute() (*CursorPageRefHosRuleset, *http.Response, error) {
 	return r.ApiService.ListRulesetsReferenceExecute(r)
 }
 
@@ -1436,13 +1568,13 @@ func (a *ReferenceDataSupportingTablesAPIService) ListRulesetsReference(ctx cont
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedRefHosRuleset
-func (a *ReferenceDataSupportingTablesAPIService) ListRulesetsReferenceExecute(r ApiListRulesetsReferenceRequest) (*CursorPageTypeVarCustomizedRefHosRuleset, *http.Response, error) {
+//	@return CursorPageRefHosRuleset
+func (a *ReferenceDataSupportingTablesAPIService) ListRulesetsReferenceExecute(r ApiListRulesetsReferenceRequest) (*CursorPageRefHosRuleset, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedRefHosRuleset
+		localVarReturnValue *CursorPageRefHosRuleset
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferenceDataSupportingTablesAPIService.ListRulesetsReference")
@@ -1548,6 +1680,28 @@ func (a *ReferenceDataSupportingTablesAPIService) ListRulesetsReferenceExecute(r
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1625,7 +1779,7 @@ func (r ApiListTimezonesReferenceRequest) Size(size int32) ApiListTimezonesRefer
 	return r
 }
 
-func (r ApiListTimezonesReferenceRequest) Execute() (*CursorPageTypeVarCustomizedRefTimezoneCode, *http.Response, error) {
+func (r ApiListTimezonesReferenceRequest) Execute() (*CursorPageRefTimezoneCode, *http.Response, error) {
 	return r.ApiService.ListTimezonesReferenceExecute(r)
 }
 
@@ -1646,13 +1800,13 @@ func (a *ReferenceDataSupportingTablesAPIService) ListTimezonesReference(ctx con
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedRefTimezoneCode
-func (a *ReferenceDataSupportingTablesAPIService) ListTimezonesReferenceExecute(r ApiListTimezonesReferenceRequest) (*CursorPageTypeVarCustomizedRefTimezoneCode, *http.Response, error) {
+//	@return CursorPageRefTimezoneCode
+func (a *ReferenceDataSupportingTablesAPIService) ListTimezonesReferenceExecute(r ApiListTimezonesReferenceRequest) (*CursorPageRefTimezoneCode, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedRefTimezoneCode
+		localVarReturnValue *CursorPageRefTimezoneCode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReferenceDataSupportingTablesAPIService.ListTimezonesReference")
@@ -1749,6 +1903,28 @@ func (a *ReferenceDataSupportingTablesAPIService) ListTimezonesReferenceExecute(
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -26,6 +26,7 @@ type ScheduleUpdate struct {
 	ConsecutiveErrorCount     NullableInt32      `json:"consecutive_error_count,omitempty"`
 	MaxConcurrentExecutions   NullableInt32      `json:"max_concurrent_executions,omitempty"`
 	NextExecutionAt           NullableTime       `json:"next_execution_at,omitempty"`
+	Cursor                    NullableString     `json:"cursor,omitempty"`
 }
 
 // NewScheduleUpdate instantiates a new ScheduleUpdate object
@@ -303,6 +304,49 @@ func (o *ScheduleUpdate) UnsetNextExecutionAt() {
 	o.NextExecutionAt.Unset()
 }
 
+// GetCursor returns the Cursor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ScheduleUpdate) GetCursor() string {
+	if o == nil || IsNil(o.Cursor.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Cursor.Get()
+}
+
+// GetCursorOk returns a tuple with the Cursor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ScheduleUpdate) GetCursorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cursor.Get(), o.Cursor.IsSet()
+}
+
+// HasCursor returns a boolean if a field has been set.
+func (o *ScheduleUpdate) HasCursor() bool {
+	if o != nil && o.Cursor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCursor gets a reference to the given NullableString and assigns it to the Cursor field.
+func (o *ScheduleUpdate) SetCursor(v string) {
+	o.Cursor.Set(&v)
+}
+
+// SetCursorNil sets the value for Cursor to be an explicit nil
+func (o *ScheduleUpdate) SetCursorNil() {
+	o.Cursor.Set(nil)
+}
+
+// UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
+func (o *ScheduleUpdate) UnsetCursor() {
+	o.Cursor.Unset()
+}
+
 func (o ScheduleUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -330,6 +374,9 @@ func (o ScheduleUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if o.NextExecutionAt.IsSet() {
 		toSerialize["next_execution_at"] = o.NextExecutionAt.Get()
+	}
+	if o.Cursor.IsSet() {
+		toSerialize["cursor"] = o.Cursor.Get()
 	}
 	return toSerialize, nil
 }

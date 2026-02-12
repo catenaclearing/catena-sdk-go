@@ -27,9 +27,9 @@ type ConnectionRead struct {
 	// Timestamp when the connection was created.
 	CreatedAt time.Time `json:"created_at"`
 	// Timestamp when the connection was last updated.
-	UpdatedAt time.Time `json:"updated_at"`
-	// The Catena ID of the fleet that owns this connection.
-	FleetId string `json:"fleet_id"`
+	UpdatedAt time.Time      `json:"updated_at"`
+	FleetId   NullableString `json:"fleet_id"`
+	FleetRef  NullableString `json:"fleet_ref,omitempty"`
 	// The ID of the Telematics Service Provider (TSP).
 	TspId string `json:"tsp_id"`
 	// The name of the TSP integration used for this connection.
@@ -46,7 +46,7 @@ type _ConnectionRead ConnectionRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectionRead(id string, createdAt time.Time, updatedAt time.Time, fleetId string, tspId string, sourceName TspEnum, credentials Credentials1, status StatusEnum, description NullableString) *ConnectionRead {
+func NewConnectionRead(id string, createdAt time.Time, updatedAt time.Time, fleetId NullableString, tspId string, sourceName TspEnum, credentials Credentials1, status StatusEnum, description NullableString) *ConnectionRead {
 	this := ConnectionRead{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -141,27 +141,72 @@ func (o *ConnectionRead) SetUpdatedAt(v time.Time) {
 }
 
 // GetFleetId returns the FleetId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ConnectionRead) GetFleetId() string {
-	if o == nil {
+	if o == nil || o.FleetId.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.FleetId
+	return *o.FleetId.Get()
 }
 
 // GetFleetIdOk returns a tuple with the FleetId field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConnectionRead) GetFleetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.FleetId, true
+	return o.FleetId.Get(), o.FleetId.IsSet()
 }
 
 // SetFleetId sets field value
 func (o *ConnectionRead) SetFleetId(v string) {
-	o.FleetId = v
+	o.FleetId.Set(&v)
+}
+
+// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionRead) GetFleetRef() string {
+	if o == nil || IsNil(o.FleetRef.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetRef.Get()
+}
+
+// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionRead) GetFleetRefOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRef.Get(), o.FleetRef.IsSet()
+}
+
+// HasFleetRef returns a boolean if a field has been set.
+func (o *ConnectionRead) HasFleetRef() bool {
+	if o != nil && o.FleetRef.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
+func (o *ConnectionRead) SetFleetRef(v string) {
+	o.FleetRef.Set(&v)
+}
+
+// SetFleetRefNil sets the value for FleetRef to be an explicit nil
+func (o *ConnectionRead) SetFleetRefNil() {
+	o.FleetRef.Set(nil)
+}
+
+// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
+func (o *ConnectionRead) UnsetFleetRef() {
+	o.FleetRef.Unset()
 }
 
 // GetTspId returns the TspId field value
@@ -299,7 +344,10 @@ func (o ConnectionRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
-	toSerialize["fleet_id"] = o.FleetId
+	toSerialize["fleet_id"] = o.FleetId.Get()
+	if o.FleetRef.IsSet() {
+		toSerialize["fleet_ref"] = o.FleetRef.Get()
+	}
 	toSerialize["tsp_id"] = o.TspId
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["credentials"] = o.Credentials

@@ -4,6 +4,7 @@ All URIs are relative to *https://api.catenatelematics.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**BackfillSchedules**](ConnectionsAPI.md#BackfillSchedules) | **Post** /v2/integrations/connections/schedules/backfill | Backfill Schedules
 [**CreateConnection**](ConnectionsAPI.md#CreateConnection) | **Post** /v2/integrations/connections | Create Connection
 [**CreateSchedule**](ConnectionsAPI.md#CreateSchedule) | **Post** /v2/integrations/connections/{connection_id}/schedules | Create Schedule
 [**DeleteConnection**](ConnectionsAPI.md#DeleteConnection) | **Delete** /v2/integrations/connections/{connection_id} | Delete Connection
@@ -16,6 +17,72 @@ Method | HTTP request | Description
 [**UpdateConnection**](ConnectionsAPI.md#UpdateConnection) | **Patch** /v2/integrations/connections/{connection_id} | Update Connection
 [**UpdateSchedule**](ConnectionsAPI.md#UpdateSchedule) | **Patch** /v2/integrations/connections/{connection_id}/schedules/{schedule_id} | Update Schedule
 
+
+
+## BackfillSchedules
+
+> ScheduleBackfillResponse BackfillSchedules(ctx).ScheduleBackfillRequest(scheduleBackfillRequest).Execute()
+
+Backfill Schedules
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/integrations"
+)
+
+func main() {
+	scheduleBackfillRequest := *openapiclient.NewScheduleBackfillRequest(openapiclient.ResourceEnum("asset")) // ScheduleBackfillRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConnectionsAPI.BackfillSchedules(context.Background()).ScheduleBackfillRequest(scheduleBackfillRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsAPI.BackfillSchedules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `BackfillSchedules`: ScheduleBackfillResponse
+	fmt.Fprintf(os.Stdout, "Response from `ConnectionsAPI.BackfillSchedules`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiBackfillSchedulesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scheduleBackfillRequest** | [**ScheduleBackfillRequest**](ScheduleBackfillRequest.md) |  | 
+
+### Return type
+
+[**ScheduleBackfillResponse**](ScheduleBackfillResponse.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateConnection
@@ -39,7 +106,7 @@ import (
 )
 
 func main() {
-	connectionCreate := *openapiclient.NewConnectionCreate("TspId_example", *openapiclient.NewCredentials(openapiclient.DatabaseDriverEnum("postgresql+psycopg2"), "Host_example", int32(123), "Username_example", "Password_example", "Database_example", "ApiKey_example", "Url_example", "AuthCode_example", "Token_example", "RedirectUri_example", "ClientId_example", "ClientSecret_example", "CompanyId_example", "ResourceOwnerId_example", "ResourceOwnerSecret_example", "SignatureMethod_example", "Realm_example", "TokenUrl_example", "PrivateKey_example", "ConsumerKey_example", "AccessKey_example", "SecretKey_example", "BucketName_example", "Region_example", "AccessToken_example", "TokenType_example", "Code_example", "AppId_example", "AppKey_example", "ClientKey_example", "AccountId_example", "ProviderToken_example", "DotNumber_example", "CarrierId_example")) // ConnectionCreate | 
+	connectionCreate := *openapiclient.NewConnectionCreate("TspId_example", *openapiclient.NewCredentials(openapiclient.DatabaseDriverEnum("postgresql+psycopg2"), "Host_example", int32(123), "Username_example", "Password_example", "Database_example", "ApiKey_example", "Url_example", "AuthCode_example", "Token_example", "RedirectUri_example", "ClientId_example", "ClientSecret_example", "CompanyId_example", "ResourceOwnerId_example", "ResourceOwnerSecret_example", "SignatureMethod_example", "Realm_example", "TokenUrl_example", "PrivateKey_example", "ConsumerKey_example", "AccessKey_example", "SecretKey_example", "BucketName_example", "Region_example", "AccessToken_example", "TokenType_example", "Code_example", "AppId_example", "AppKey_example", "ClientKey_example", "AccountId_example", "ProviderToken_example", "DotNumber_example", "ApiId_example", "CarrierId_example")) // ConnectionCreate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -440,7 +507,7 @@ Name | Type | Description  | Notes
 
 ## ListConnections
 
-> CursorPageTypeVarCustomizedConnectionRead ListConnections(ctx).TspId(tspId).Cursor(cursor).Size(size).Execute()
+> CursorPageTypeVarCustomizedConnectionRead ListConnections(ctx).TspId(tspId).FleetIds(fleetIds).FleetRefs(fleetRefs).Cursor(cursor).Size(size).Execute()
 
 List Connections
 
@@ -460,12 +527,14 @@ import (
 
 func main() {
 	tspId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
+	fleetIds := []string{"Inner_example"} // []string | Limit results to specific fleets. **Maximum:** 100 IDs (optional)
+	fleetRefs := []string{"Inner_example"} // []string | Limit results to specific fleet references. **Maximum:** 100 references (optional)
 	cursor := "cursor_example" // string | Cursor for the next page (optional)
 	size := int32(56) // int32 | Page size (optional) (default to 300)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ConnectionsAPI.ListConnections(context.Background()).TspId(tspId).Cursor(cursor).Size(size).Execute()
+	resp, r, err := apiClient.ConnectionsAPI.ListConnections(context.Background()).TspId(tspId).FleetIds(fleetIds).FleetRefs(fleetRefs).Cursor(cursor).Size(size).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsAPI.ListConnections``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -487,6 +556,8 @@ Other parameters are passed through a pointer to a apiListConnectionsRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tspId** | **string** |  | 
+ **fleetIds** | **[]string** | Limit results to specific fleets. **Maximum:** 100 IDs | 
+ **fleetRefs** | **[]string** | Limit results to specific fleet references. **Maximum:** 100 references | 
  **cursor** | **string** | Cursor for the next page | 
  **size** | **int32** | Page size | [default to 300]
 

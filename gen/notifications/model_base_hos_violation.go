@@ -25,7 +25,8 @@ type BaseHosViolation struct {
 	// Internal unique identifier for the telematics event record (Catena PK).
 	Id string `json:"id"`
 	// The Catena fleet this record belongs to (multi-tenant scope).
-	FleetId string `json:"fleet_id"`
+	FleetId  string         `json:"fleet_id"`
+	FleetRef NullableString `json:"fleet_ref"`
 	// The name of the source
 	SourceName TspEnum `json:"source_name"`
 	// The specific fleet↔TSP connection through which this record was sourced.
@@ -41,10 +42,10 @@ type BaseHosViolation struct {
 	OccurredAt           time.Time                        `json:"occurred_at"`
 	ExecutionId          NullableString                   `json:"execution_id,omitempty"`
 	ScheduleId           NullableString                   `json:"schedule_id,omitempty"`
-	HosLogId             NullableString                   `json:"hos_log_id,omitempty"`
+	HosEventId           NullableString                   `json:"hos_event_id,omitempty"`
 	DriverId             NullableString                   `json:"driver_id,omitempty"`
 	SourceDriverId       NullableString                   `json:"source_driver_id,omitempty"`
-	SourceHosLogId       NullableString                   `json:"source_hos_log_id,omitempty"`
+	SourceHosEventId     NullableString                   `json:"source_hos_event_id,omitempty"`
 	ViolationCode        NullableHosViolationCodeEnum     `json:"violation_code,omitempty"`
 	ViolationCategory    NullableHosViolationCategoryEnum `json:"violation_category,omitempty"`
 	ViolationDescription NullableString                   `json:"violation_description,omitempty"`
@@ -60,10 +61,11 @@ type _BaseHosViolation BaseHosViolation
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseHosViolation(id string, fleetId string, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time) *BaseHosViolation {
+func NewBaseHosViolation(id string, fleetId string, fleetRef NullableString, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time) *BaseHosViolation {
 	this := BaseHosViolation{}
 	this.Id = id
 	this.FleetId = fleetId
+	this.FleetRef = fleetRef
 	this.SourceName = sourceName
 	this.ConnectionId = connectionId
 	this.SourceId = sourceId
@@ -127,6 +129,32 @@ func (o *BaseHosViolation) GetFleetIdOk() (*string, bool) {
 // SetFleetId sets field value
 func (o *BaseHosViolation) SetFleetId(v string) {
 	o.FleetId = v
+}
+
+// GetFleetRef returns the FleetRef field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *BaseHosViolation) GetFleetRef() string {
+	if o == nil || o.FleetRef.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetRef.Get()
+}
+
+// GetFleetRefOk returns a tuple with the FleetRef field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseHosViolation) GetFleetRefOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRef.Get(), o.FleetRef.IsSet()
+}
+
+// SetFleetRef sets field value
+func (o *BaseHosViolation) SetFleetRef(v string) {
+	o.FleetRef.Set(&v)
 }
 
 // GetSourceName returns the SourceName field value
@@ -402,47 +430,47 @@ func (o *BaseHosViolation) UnsetScheduleId() {
 	o.ScheduleId.Unset()
 }
 
-// GetHosLogId returns the HosLogId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseHosViolation) GetHosLogId() string {
-	if o == nil || IsNil(o.HosLogId.Get()) {
+// GetHosEventId returns the HosEventId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseHosViolation) GetHosEventId() string {
+	if o == nil || IsNil(o.HosEventId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.HosLogId.Get()
+	return *o.HosEventId.Get()
 }
 
-// GetHosLogIdOk returns a tuple with the HosLogId field value if set, nil otherwise
+// GetHosEventIdOk returns a tuple with the HosEventId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseHosViolation) GetHosLogIdOk() (*string, bool) {
+func (o *BaseHosViolation) GetHosEventIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.HosLogId.Get(), o.HosLogId.IsSet()
+	return o.HosEventId.Get(), o.HosEventId.IsSet()
 }
 
-// HasHosLogId returns a boolean if a field has been set.
-func (o *BaseHosViolation) HasHosLogId() bool {
-	if o != nil && o.HosLogId.IsSet() {
+// HasHosEventId returns a boolean if a field has been set.
+func (o *BaseHosViolation) HasHosEventId() bool {
+	if o != nil && o.HosEventId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHosLogId gets a reference to the given NullableString and assigns it to the HosLogId field.
-func (o *BaseHosViolation) SetHosLogId(v string) {
-	o.HosLogId.Set(&v)
+// SetHosEventId gets a reference to the given NullableString and assigns it to the HosEventId field.
+func (o *BaseHosViolation) SetHosEventId(v string) {
+	o.HosEventId.Set(&v)
 }
 
-// SetHosLogIdNil sets the value for HosLogId to be an explicit nil
-func (o *BaseHosViolation) SetHosLogIdNil() {
-	o.HosLogId.Set(nil)
+// SetHosEventIdNil sets the value for HosEventId to be an explicit nil
+func (o *BaseHosViolation) SetHosEventIdNil() {
+	o.HosEventId.Set(nil)
 }
 
-// UnsetHosLogId ensures that no value is present for HosLogId, not even an explicit nil
-func (o *BaseHosViolation) UnsetHosLogId() {
-	o.HosLogId.Unset()
+// UnsetHosEventId ensures that no value is present for HosEventId, not even an explicit nil
+func (o *BaseHosViolation) UnsetHosEventId() {
+	o.HosEventId.Unset()
 }
 
 // GetDriverId returns the DriverId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -531,47 +559,47 @@ func (o *BaseHosViolation) UnsetSourceDriverId() {
 	o.SourceDriverId.Unset()
 }
 
-// GetSourceHosLogId returns the SourceHosLogId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseHosViolation) GetSourceHosLogId() string {
-	if o == nil || IsNil(o.SourceHosLogId.Get()) {
+// GetSourceHosEventId returns the SourceHosEventId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseHosViolation) GetSourceHosEventId() string {
+	if o == nil || IsNil(o.SourceHosEventId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.SourceHosLogId.Get()
+	return *o.SourceHosEventId.Get()
 }
 
-// GetSourceHosLogIdOk returns a tuple with the SourceHosLogId field value if set, nil otherwise
+// GetSourceHosEventIdOk returns a tuple with the SourceHosEventId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseHosViolation) GetSourceHosLogIdOk() (*string, bool) {
+func (o *BaseHosViolation) GetSourceHosEventIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SourceHosLogId.Get(), o.SourceHosLogId.IsSet()
+	return o.SourceHosEventId.Get(), o.SourceHosEventId.IsSet()
 }
 
-// HasSourceHosLogId returns a boolean if a field has been set.
-func (o *BaseHosViolation) HasSourceHosLogId() bool {
-	if o != nil && o.SourceHosLogId.IsSet() {
+// HasSourceHosEventId returns a boolean if a field has been set.
+func (o *BaseHosViolation) HasSourceHosEventId() bool {
+	if o != nil && o.SourceHosEventId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceHosLogId gets a reference to the given NullableString and assigns it to the SourceHosLogId field.
-func (o *BaseHosViolation) SetSourceHosLogId(v string) {
-	o.SourceHosLogId.Set(&v)
+// SetSourceHosEventId gets a reference to the given NullableString and assigns it to the SourceHosEventId field.
+func (o *BaseHosViolation) SetSourceHosEventId(v string) {
+	o.SourceHosEventId.Set(&v)
 }
 
-// SetSourceHosLogIdNil sets the value for SourceHosLogId to be an explicit nil
-func (o *BaseHosViolation) SetSourceHosLogIdNil() {
-	o.SourceHosLogId.Set(nil)
+// SetSourceHosEventIdNil sets the value for SourceHosEventId to be an explicit nil
+func (o *BaseHosViolation) SetSourceHosEventIdNil() {
+	o.SourceHosEventId.Set(nil)
 }
 
-// UnsetSourceHosLogId ensures that no value is present for SourceHosLogId, not even an explicit nil
-func (o *BaseHosViolation) UnsetSourceHosLogId() {
-	o.SourceHosLogId.Unset()
+// UnsetSourceHosEventId ensures that no value is present for SourceHosEventId, not even an explicit nil
+func (o *BaseHosViolation) UnsetSourceHosEventId() {
+	o.SourceHosEventId.Unset()
 }
 
 // GetViolationCode returns the ViolationCode field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -887,6 +915,7 @@ func (o BaseHosViolation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["fleet_id"] = o.FleetId
+	toSerialize["fleet_ref"] = o.FleetRef.Get()
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["source_id"] = o.SourceId
@@ -902,8 +931,8 @@ func (o BaseHosViolation) ToMap() (map[string]interface{}, error) {
 	if o.ScheduleId.IsSet() {
 		toSerialize["schedule_id"] = o.ScheduleId.Get()
 	}
-	if o.HosLogId.IsSet() {
-		toSerialize["hos_log_id"] = o.HosLogId.Get()
+	if o.HosEventId.IsSet() {
+		toSerialize["hos_event_id"] = o.HosEventId.Get()
 	}
 	if o.DriverId.IsSet() {
 		toSerialize["driver_id"] = o.DriverId.Get()
@@ -911,8 +940,8 @@ func (o BaseHosViolation) ToMap() (map[string]interface{}, error) {
 	if o.SourceDriverId.IsSet() {
 		toSerialize["source_driver_id"] = o.SourceDriverId.Get()
 	}
-	if o.SourceHosLogId.IsSet() {
-		toSerialize["source_hos_log_id"] = o.SourceHosLogId.Get()
+	if o.SourceHosEventId.IsSet() {
+		toSerialize["source_hos_event_id"] = o.SourceHosEventId.Get()
 	}
 	if o.ViolationCode.IsSet() {
 		toSerialize["violation_code"] = o.ViolationCode.Get()
@@ -945,6 +974,7 @@ func (o *BaseHosViolation) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"fleet_id",
+		"fleet_ref",
 		"source_name",
 		"connection_id",
 		"source_id",

@@ -30,7 +30,8 @@ type ScheduleCreate struct {
 	// The maximum number of concurrent executions allowed for this schedule. Defaults to 1.
 	MaxConcurrentExecutions *int32 `json:"max_concurrent_executions,omitempty"`
 	// The initial status of the schedule. Defaults to ACTIVE.
-	Status *StatusEnum `json:"status,omitempty"`
+	Status *StatusEnum    `json:"status,omitempty"`
+	Cursor NullableString `json:"cursor,omitempty"`
 }
 
 type _ScheduleCreate ScheduleCreate
@@ -217,6 +218,49 @@ func (o *ScheduleCreate) SetStatus(v StatusEnum) {
 	o.Status = &v
 }
 
+// GetCursor returns the Cursor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ScheduleCreate) GetCursor() string {
+	if o == nil || IsNil(o.Cursor.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Cursor.Get()
+}
+
+// GetCursorOk returns a tuple with the Cursor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ScheduleCreate) GetCursorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cursor.Get(), o.Cursor.IsSet()
+}
+
+// HasCursor returns a boolean if a field has been set.
+func (o *ScheduleCreate) HasCursor() bool {
+	if o != nil && o.Cursor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCursor gets a reference to the given NullableString and assigns it to the Cursor field.
+func (o *ScheduleCreate) SetCursor(v string) {
+	o.Cursor.Set(&v)
+}
+
+// SetCursorNil sets the value for Cursor to be an explicit nil
+func (o *ScheduleCreate) SetCursorNil() {
+	o.Cursor.Set(nil)
+}
+
+// UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
+func (o *ScheduleCreate) UnsetCursor() {
+	o.Cursor.Unset()
+}
+
 func (o ScheduleCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -239,6 +283,9 @@ func (o ScheduleCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if o.Cursor.IsSet() {
+		toSerialize["cursor"] = o.Cursor.Get()
 	}
 	return toSerialize, nil
 }

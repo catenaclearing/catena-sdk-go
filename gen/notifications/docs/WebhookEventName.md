@@ -27,6 +27,10 @@
 
 * `CONNECTION` (value: `"connection.*"`)
 
+* `FLEET_CONNECTION_CREATED` (value: `"fleet_connection.created"`)
+
+* `FLEET_CONNECTION` (value: `"fleet_connection.*"`)
+
 * `SHARE_AGREEMENT_CREATED` (value: `"share_agreement.created"`)
 
 * `SHARE_AGREEMENT_UPDATED` (value: `"share_agreement.updated"`)
@@ -54,6 +58,20 @@
 * `VEHICLE_REMOVED` (value: `"vehicle.removed"`)
 
 * `VEHICLE` (value: `"vehicle.*"`)
+
+* `TRAILER_ADDED` (value: `"trailer.added"`)
+
+* `TRAILER_MODIFIED` (value: `"trailer.modified"`)
+
+* `TRAILER_REMOVED` (value: `"trailer.removed"`)
+
+* `TRAILER` (value: `"trailer.*"`)
+
+* `TRAILER_LOCATION_ADDED` (value: `"trailer_location.added"`)
+
+* `TRAILER_LOCATION_MODIFIED` (value: `"trailer_location.modified"`)
+
+* `TRAILER_LOCATION` (value: `"trailer_location.*"`)
 
 * `EXECUTION_CREATED` (value: `"execution.created"`)
 
@@ -92,6 +110,14 @@
 * `HOS_AVAILABILITY_REMOVED` (value: `"hos_availability.removed"`)
 
 * `HOS_AVAILABILITY` (value: `"hos_availability.*"`)
+
+* `HOS_DAILY_SNAPSHOT_ADDED` (value: `"hos_daily_snapshot.added"`)
+
+* `HOS_DAILY_SNAPSHOT_MODIFIED` (value: `"hos_daily_snapshot.modified"`)
+
+* `HOS_DAILY_SNAPSHOT_REMOVED` (value: `"hos_daily_snapshot.removed"`)
+
+* `HOS_DAILY_SNAPSHOT` (value: `"hos_daily_snapshot.*"`)
 
 * `HOS_EVENT_ADDED` (value: `"hos_event.added"`)
 

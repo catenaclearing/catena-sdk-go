@@ -8,9 +8,13 @@ Method | HTTP request | Description
 [**ConnectionStaledconnectionStaledPost**](WebhookEventsAPI.md#ConnectionStaledconnectionStaledPost) | **Post** /connection.staled | Connection Staled
 [**ExecutionFailedexecutionFailedPost**](WebhookEventsAPI.md#ExecutionFailedexecutionFailedPost) | **Post** /execution.failed | Execution Failed
 [**ExecutionStaledexecutionStaledPost**](WebhookEventsAPI.md#ExecutionStaledexecutionStaledPost) | **Post** /execution.staled | Execution Staled
+[**FleetConnectionCreatedfleetConnectionCreatedPost**](WebhookEventsAPI.md#FleetConnectionCreatedfleetConnectionCreatedPost) | **Post** /fleet_connection.created | Fleet Connection Created
 [**HosAvailabilityAddedhosAvailabilityAddedPost**](WebhookEventsAPI.md#HosAvailabilityAddedhosAvailabilityAddedPost) | **Post** /hos_availability.added | Hos Availability Added
 [**HosAvailabilityModifiedhosAvailabilityModifiedPost**](WebhookEventsAPI.md#HosAvailabilityModifiedhosAvailabilityModifiedPost) | **Post** /hos_availability.modified | Hos Availability Modified
 [**HosAvailabilityRemovedhosAvailabilityRemovedPost**](WebhookEventsAPI.md#HosAvailabilityRemovedhosAvailabilityRemovedPost) | **Post** /hos_availability.removed | Hos Availability Removed
+[**HosDailySnapshotAddedhosDailySnapshotAddedPost**](WebhookEventsAPI.md#HosDailySnapshotAddedhosDailySnapshotAddedPost) | **Post** /hos_daily_snapshot.added | Hos Daily Snapshot Added
+[**HosDailySnapshotModifiedhosDailySnapshotModifiedPost**](WebhookEventsAPI.md#HosDailySnapshotModifiedhosDailySnapshotModifiedPost) | **Post** /hos_daily_snapshot.modified | Hos Daily Snapshot Modified
+[**HosDailySnapshotRemovedhosDailySnapshotRemovedPost**](WebhookEventsAPI.md#HosDailySnapshotRemovedhosDailySnapshotRemovedPost) | **Post** /hos_daily_snapshot.removed | Hos Daily Snapshot Removed
 [**HosEventAddedhosEventAddedPost**](WebhookEventsAPI.md#HosEventAddedhosEventAddedPost) | **Post** /hos_event.added | Hos Event Added
 [**HosEventModifiedhosEventModifiedPost**](WebhookEventsAPI.md#HosEventModifiedhosEventModifiedPost) | **Post** /hos_event.modified | Hos Event Modified
 [**HosEventRemovedhosEventRemovedPost**](WebhookEventsAPI.md#HosEventRemovedhosEventRemovedPost) | **Post** /hos_event.removed | Hos Event Removed
@@ -32,6 +36,11 @@ Method | HTTP request | Description
 [**ShareAgreementCreatedshareAgreementCreatedPost**](WebhookEventsAPI.md#ShareAgreementCreatedshareAgreementCreatedPost) | **Post** /share_agreement.created | Share Agreement Created
 [**ShareAgreementDeletedshareAgreementDeletedPost**](WebhookEventsAPI.md#ShareAgreementDeletedshareAgreementDeletedPost) | **Post** /share_agreement.deleted | Share Agreement Deleted
 [**ShareAgreementUpdatedshareAgreementUpdatedPost**](WebhookEventsAPI.md#ShareAgreementUpdatedshareAgreementUpdatedPost) | **Post** /share_agreement.updated | Share Agreement Updated
+[**TrailerAddedtrailerAddedPost**](WebhookEventsAPI.md#TrailerAddedtrailerAddedPost) | **Post** /trailer.added | Trailer Added
+[**TrailerLocationAddedtrailerLocationAddedPost**](WebhookEventsAPI.md#TrailerLocationAddedtrailerLocationAddedPost) | **Post** /trailer_location.added | Trailer Location Added
+[**TrailerLocationModifiedtrailerLocationModifiedPost**](WebhookEventsAPI.md#TrailerLocationModifiedtrailerLocationModifiedPost) | **Post** /trailer_location.modified | Trailer Location Modified
+[**TrailerModifiedtrailerModifiedPost**](WebhookEventsAPI.md#TrailerModifiedtrailerModifiedPost) | **Post** /trailer.modified | Trailer Modified
+[**TrailerRemovedtrailerRemovedPost**](WebhookEventsAPI.md#TrailerRemovedtrailerRemovedPost) | **Post** /trailer.removed | Trailer Removed
 [**TspCreatedtspCreatedPost**](WebhookEventsAPI.md#TspCreatedtspCreatedPost) | **Post** /tsp.created | Tsp Created
 [**UserAddeduserAddedPost**](WebhookEventsAPI.md#UserAddeduserAddedPost) | **Post** /user.added | User Added
 [**UserModifieduserModifiedPost**](WebhookEventsAPI.md#UserModifieduserModifiedPost) | **Post** /user.modified | User Modified
@@ -311,6 +320,72 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## FleetConnectionCreatedfleetConnectionCreatedPost
+
+> interface{} FleetConnectionCreatedfleetConnectionCreatedPost(ctx).FleetConnectionCreated(fleetConnectionCreated).Execute()
+
+Fleet Connection Created
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	fleetConnectionCreated :=  // FleetConnectionCreated | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.FleetConnectionCreatedfleetConnectionCreatedPost(context.Background()).FleetConnectionCreated(fleetConnectionCreated).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.FleetConnectionCreatedfleetConnectionCreatedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `FleetConnectionCreatedfleetConnectionCreatedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.FleetConnectionCreatedfleetConnectionCreatedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFleetConnectionCreatedfleetConnectionCreatedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fleetConnectionCreated** | [**FleetConnectionCreated**](FleetConnectionCreated.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## HosAvailabilityAddedhosAvailabilityAddedPost
 
 > interface{} HosAvailabilityAddedhosAvailabilityAddedPost(ctx).HosAvailabilityAdded(hosAvailabilityAdded).Execute()
@@ -490,6 +565,204 @@ Other parameters are passed through a pointer to a apiHosAvailabilityRemovedhosA
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hosAvailabilityRemoved** | [**HosAvailabilityRemoved**](HosAvailabilityRemoved.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## HosDailySnapshotAddedhosDailySnapshotAddedPost
+
+> interface{} HosDailySnapshotAddedhosDailySnapshotAddedPost(ctx).HosDailySnapshotAdded(hosDailySnapshotAdded).Execute()
+
+Hos Daily Snapshot Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	hosDailySnapshotAdded :=  // HosDailySnapshotAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.HosDailySnapshotAddedhosDailySnapshotAddedPost(context.Background()).HosDailySnapshotAdded(hosDailySnapshotAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.HosDailySnapshotAddedhosDailySnapshotAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `HosDailySnapshotAddedhosDailySnapshotAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.HosDailySnapshotAddedhosDailySnapshotAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hosDailySnapshotAdded** | [**HosDailySnapshotAdded**](HosDailySnapshotAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## HosDailySnapshotModifiedhosDailySnapshotModifiedPost
+
+> interface{} HosDailySnapshotModifiedhosDailySnapshotModifiedPost(ctx).HosDailySnapshotModified(hosDailySnapshotModified).Execute()
+
+Hos Daily Snapshot Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	hosDailySnapshotModified :=  // HosDailySnapshotModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.HosDailySnapshotModifiedhosDailySnapshotModifiedPost(context.Background()).HosDailySnapshotModified(hosDailySnapshotModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.HosDailySnapshotModifiedhosDailySnapshotModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `HosDailySnapshotModifiedhosDailySnapshotModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.HosDailySnapshotModifiedhosDailySnapshotModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hosDailySnapshotModified** | [**HosDailySnapshotModified**](HosDailySnapshotModified.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## HosDailySnapshotRemovedhosDailySnapshotRemovedPost
+
+> interface{} HosDailySnapshotRemovedhosDailySnapshotRemovedPost(ctx).HosDailySnapshotRemoved(hosDailySnapshotRemoved).Execute()
+
+Hos Daily Snapshot Removed
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	hosDailySnapshotRemoved :=  // HosDailySnapshotRemoved | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.HosDailySnapshotRemovedhosDailySnapshotRemovedPost(context.Background()).HosDailySnapshotRemoved(hosDailySnapshotRemoved).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.HosDailySnapshotRemovedhosDailySnapshotRemovedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `HosDailySnapshotRemovedhosDailySnapshotRemovedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.HosDailySnapshotRemovedhosDailySnapshotRemovedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hosDailySnapshotRemoved** | [**HosDailySnapshotRemoved**](HosDailySnapshotRemoved.md) |  | 
 
 ### Return type
 
@@ -1876,6 +2149,336 @@ Other parameters are passed through a pointer to a apiShareAgreementUpdatedshare
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shareAgreementUpdated** | [**ShareAgreementUpdated**](ShareAgreementUpdated.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerAddedtrailerAddedPost
+
+> interface{} TrailerAddedtrailerAddedPost(ctx).TrailerAdded(trailerAdded).Execute()
+
+Trailer Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerAdded :=  // TrailerAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerAddedtrailerAddedPost(context.Background()).TrailerAdded(trailerAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerAddedtrailerAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerAddedtrailerAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerAddedtrailerAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerAddedtrailerAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerAdded** | [**TrailerAdded**](TrailerAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerLocationAddedtrailerLocationAddedPost
+
+> interface{} TrailerLocationAddedtrailerLocationAddedPost(ctx).TrailerLocationAdded(trailerLocationAdded).Execute()
+
+Trailer Location Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerLocationAdded :=  // TrailerLocationAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerLocationAddedtrailerLocationAddedPost(context.Background()).TrailerLocationAdded(trailerLocationAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerLocationAddedtrailerLocationAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerLocationAddedtrailerLocationAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerLocationAddedtrailerLocationAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerLocationAddedtrailerLocationAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerLocationAdded** | [**TrailerLocationAdded**](TrailerLocationAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerLocationModifiedtrailerLocationModifiedPost
+
+> interface{} TrailerLocationModifiedtrailerLocationModifiedPost(ctx).TrailerLocationModified(trailerLocationModified).Execute()
+
+Trailer Location Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerLocationModified :=  // TrailerLocationModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerLocationModifiedtrailerLocationModifiedPost(context.Background()).TrailerLocationModified(trailerLocationModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerLocationModifiedtrailerLocationModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerLocationModifiedtrailerLocationModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerLocationModifiedtrailerLocationModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerLocationModifiedtrailerLocationModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerLocationModified** | [**TrailerLocationModified**](TrailerLocationModified.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerModifiedtrailerModifiedPost
+
+> interface{} TrailerModifiedtrailerModifiedPost(ctx).TrailerModified(trailerModified).Execute()
+
+Trailer Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerModified :=  // TrailerModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerModifiedtrailerModifiedPost(context.Background()).TrailerModified(trailerModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerModifiedtrailerModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerModifiedtrailerModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerModifiedtrailerModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerModifiedtrailerModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerModified** | [**TrailerModified**](TrailerModified.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerRemovedtrailerRemovedPost
+
+> interface{} TrailerRemovedtrailerRemovedPost(ctx).TrailerRemoved(trailerRemoved).Execute()
+
+Trailer Removed
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerRemoved :=  // TrailerRemoved | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerRemovedtrailerRemovedPost(context.Background()).TrailerRemoved(trailerRemoved).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerRemovedtrailerRemovedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerRemovedtrailerRemovedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerRemovedtrailerRemovedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerRemovedtrailerRemovedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerRemoved** | [**TrailerRemoved**](TrailerRemoved.md) |  | 
 
 ### Return type
 

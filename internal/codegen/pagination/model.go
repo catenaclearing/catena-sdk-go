@@ -24,11 +24,12 @@ type PaginatedOperation struct {
 }
 
 type Param struct {
-	Name      string // OpenAPI name
-	GoName    string // Go struct field name / arg name
-	Type      string // Go type
-	IsPointer bool
-	In        string // "path", "query"
-	IsEnum    bool
-	EnumType  string
+	Name        string // OpenAPI name
+	GoName      string // Go struct field name / arg name
+	Type        string // Go type
+	IsPointer   bool
+	In          string // "path", "query"
+	IsEnum      bool
+	IsEnumSlice bool
+	EnumType    string
 }

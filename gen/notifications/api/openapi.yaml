@@ -56,6 +56,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -130,6 +136,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -210,6 +222,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -312,6 +330,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -382,6 +406,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -461,6 +491,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -535,6 +571,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -661,6 +703,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -737,6 +785,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -819,6 +873,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFound'
           description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
         "409":
           content:
             application/json:
@@ -963,22 +1023,67 @@ components:
       - status
       - updated_at
       title: BaseExecutionEvent
+    BaseFleetConnectionEvent:
+      description: Base fleet_connection event.
+      example:
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The ID of the fleet connection
+          format: uuid
+          title: Fleet Connection ID
+          type: string
+        fleet_id:
+          description: The ID of the fleet
+          format: uuid
+          title: Fleet ID
+          type: string
+        connection_id:
+          description: The ID of the connection
+          format: uuid
+          title: Connection ID
+          type: string
+      required:
+      - connection_id
+      - fleet_id
+      - id
+      title: BaseFleetConnectionEvent
     BaseHosAvailability:
       description: Base Hos availability event.
       example:
         rest_remaining_seconds: 3
+        sleeper_required_remaining_seconds: 1
         sleeper_split_window_ends_at: 2000-01-23T04:56:07.000+00:00
         driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         is_adverse_driving_applied: true
         notes: notes
+        duty_status_code: "OFF"
+        is_cycle_applicable: true
+        created_at: 2000-01-23T04:56:07.000+00:00
         is_personal_conveyance_applied: true
         cycle_started_at: 2000-01-23T04:56:07.000+00:00
+        is_adverse_driving_exemption_available: true
+        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        shift_driving_violation_duration_seconds: 4
         available_tomorrow_seconds: 5
+        cycle_violation_duration_seconds: 2
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        available_cycle_seconds: 1
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        meal_break_due_at: 2000-01-23T04:56:07.000+00:00
+        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         is_yard_move_applied: true
+        source_name: ada
         available_drive_seconds: 0
         meal_break_min_duration_seconds: 7
+        cycle_ends_at: 2000-01-23T04:56:07.000+00:00
         hos_ruleset_code: US_INT_PROP_60_7
+        available_day2_seconds: 5
+        fleet_ref: fleet_ref
+        next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
         time_until_break_seconds: 9
         meal_break_time_until_due_seconds: 1
         is_sleeper_eligible: true
@@ -986,36 +1091,17 @@ components:
         occurred_at: 2000-01-23T04:56:07.000+00:00
         forecast_horizon_days: 7
         next_10hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
+        is_meal_break_required: true
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         exception_codes:
         - exception_codes
         - exception_codes
-        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        available_day3_seconds: 2
-        available_shift_seconds: 6
-        sleeper_required_remaining_seconds: 1
-        duty_status_code: "OFF"
-        is_cycle_applicable: true
-        created_at: 2000-01-23T04:56:07.000+00:00
-        is_adverse_driving_exemption_available: true
-        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        shift_driving_violation_duration_seconds: 4
-        cycle_violation_duration_seconds: 2
-        updated_at: 2000-01-23T04:56:07.000+00:00
-        available_cycle_seconds: 1
-        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        meal_break_due_at: 2000-01-23T04:56:07.000+00:00
-        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_name: ada
-        cycle_ends_at: 2000-01-23T04:56:07.000+00:00
-        available_day2_seconds: 5
-        next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
-        is_meal_break_required: true
-        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        timezone_code: UTC
         is_split_sleep_applied: true
         shift_ends_at: 2000-01-23T04:56:07.000+00:00
         source_id: source_id
-        region_code: US-AL
+        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        available_day3_seconds: 2
+        available_shift_seconds: 6
         next_break_due_at: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
@@ -1028,6 +1114,9 @@ components:
           description: The Catena fleet this record belongs to (multi-tenant scope).
           format: uuid
           title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
@@ -1080,10 +1169,6 @@ components:
           type: string
         hos_ruleset_code:
           $ref: '#/components/schemas/HosRulesetCodeEnum'
-        region_code:
-          $ref: '#/components/schemas/HosRegionCodeEnum'
-        timezone_code:
-          $ref: '#/components/schemas/TimezoneCodeEnum'
         duty_status_code:
           $ref: '#/components/schemas/DutyStatusCodeEnum'
         cycle_started_at:
@@ -1196,12 +1281,141 @@ components:
       - connection_id
       - created_at
       - fleet_id
+      - fleet_ref
       - id
       - occurred_at
       - source_id
       - source_name
       - updated_at
       title: BaseHosAvailability
+    BaseHosDailySnapshot:
+      description: Base class for HOS daily snapshots.
+      example:
+        duration_unknown_seconds: 9
+        driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fleet_ref: fleet_ref
+        duration_driving_seconds: 5
+        duration_waiting_seconds: 7
+        snapshot_date: 2000-01-23
+        duration_sleeper_berth_seconds: 6
+        created_at: 2000-01-23T04:56:07.000+00:00
+        duration_personal_conveyance_seconds: 5
+        duration_cycle_on_duty_seconds: 3
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        occurred_at: 2000-01-23T04:56:07.000+00:00
+        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        duration_yard_move_seconds: 2
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_id: source_id
+        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        duration_on_duty_seconds: 1
+        source_name: ada
+        duration_off_duty_seconds: 0
+      properties:
+        id:
+          description: Internal unique identifier for the telematics event record
+            (Catena PK).
+          format: uuid
+          title: ID
+          type: string
+        fleet_id:
+          description: The Catena fleet this record belongs to (multi-tenant scope).
+          format: uuid
+          title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
+        connection_id:
+          description: The specific fleet↔TSP connection through which this record
+            was sourced.
+          format: uuid
+          title: Connection ID
+          type: string
+        source_id:
+          description: The ID of the record in the TSP or a deterministic ID/Hash
+            generated from a composite unique key
+          title: Source ID
+          type: string
+        created_at:
+          description: "Immutable: first time this record was ingested into our system."
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: Last time we modified this record in our system.
+          format: date-time
+          title: Updated At
+          type: string
+        deleted_at:
+          format: date-time
+          nullable: true
+          type: string
+        occurred_at:
+          description: "When the underlying event/observation occurred, as reported\
+            \ by the TSP, or the moment it was ingested by us if not available."
+          format: date-time
+          title: Occurred At
+          type: string
+        execution_id:
+          format: uuid
+          nullable: true
+          type: string
+        schedule_id:
+          format: uuid
+          nullable: true
+          type: string
+        driver_id:
+          format: uuid
+          nullable: true
+          type: string
+        snapshot_date:
+          format: date
+          nullable: true
+          type: string
+        duration_off_duty_seconds:
+          nullable: true
+          type: integer
+        duration_sleeper_berth_seconds:
+          nullable: true
+          type: integer
+        duration_on_duty_seconds:
+          nullable: true
+          type: integer
+        duration_driving_seconds:
+          nullable: true
+          type: integer
+        duration_personal_conveyance_seconds:
+          nullable: true
+          type: integer
+        duration_yard_move_seconds:
+          nullable: true
+          type: integer
+        duration_waiting_seconds:
+          nullable: true
+          type: integer
+        duration_unknown_seconds:
+          nullable: true
+          type: integer
+        duration_cycle_on_duty_seconds:
+          nullable: true
+          type: integer
+      required:
+      - connection_id
+      - created_at
+      - fleet_id
+      - fleet_ref
+      - id
+      - occurred_at
+      - source_id
+      - source_name
+      - updated_at
+      title: BaseHosDailySnapshot
     BaseHosEvent:
       description: Base class for HOS events.
       example:
@@ -1231,6 +1445,7 @@ components:
         source_name: ada
         log_origin_code: AUTO
         hos_ruleset_code: US_INT_PROP_60_7
+        fleet_ref: fleet_ref
         odometer: 1.4658129805029452
         time_zone_code: UTC
         deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -1267,6 +1482,9 @@ components:
           description: The Catena fleet this record belongs to (multi-tenant scope).
           format: uuid
           title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
@@ -1400,6 +1618,7 @@ components:
       - connection_id
       - created_at
       - fleet_id
+      - fleet_ref
       - id
       - occurred_at
       - source_id
@@ -1410,20 +1629,21 @@ components:
       description: Base Hos violation event.
       example:
         driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_hos_log_id: source_hos_log_id
+        fleet_ref: fleet_ref
         violation_category: Cycle
         end_time: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
         deleted_at: 2000-01-23T04:56:07.000+00:00
         occurred_at: 2000-01-23T04:56:07.000+00:00
         source_driver_id: source_driver_id
+        source_hos_event_id: source_hos_event_id
         duration: 0
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         start_time: 2000-01-23T04:56:07.000+00:00
         hours_limit: 6.027456183070403
         updated_at: 2000-01-23T04:56:07.000+00:00
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        hos_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         violation_code: DH_DAILY_OVER
         violation_description: violation_description
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -1442,6 +1662,9 @@ components:
           description: The Catena fleet this record belongs to (multi-tenant scope).
           format: uuid
           title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
@@ -1484,7 +1707,7 @@ components:
           format: uuid
           nullable: true
           type: string
-        hos_log_id:
+        hos_event_id:
           format: uuid
           nullable: true
           type: string
@@ -1495,7 +1718,7 @@ components:
         source_driver_id:
           nullable: true
           type: string
-        source_hos_log_id:
+        source_hos_event_id:
           nullable: true
           type: string
         violation_code:
@@ -1523,6 +1746,7 @@ components:
       - connection_id
       - created_at
       - fleet_id
+      - fleet_ref
       - id
       - occurred_at
       - source_id
@@ -1532,6 +1756,7 @@ components:
     BaseIftaSummary:
       description: Base IFTA summary event.
       example:
+        fleet_ref: fleet_ref
         year: 6
         created_at: 2000-01-23T04:56:07.000+00:00
         deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -1558,6 +1783,9 @@ components:
           description: The Catena fleet this record belongs to (multi-tenant scope).
           format: uuid
           title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
@@ -1617,6 +1845,7 @@ components:
       - connection_id
       - created_at
       - fleet_id
+      - fleet_ref
       - id
       - occurred_at
       - source_id
@@ -1639,8 +1868,8 @@ components:
         pre_registration_refresh_token: pre_registration_refresh_token
         expires_in_hours: 0
         limit_tsps:
-        - ada
-        - ada
+        - limit_tsps
+        - limit_tsps
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         magic_link: magic_link
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -1698,7 +1927,7 @@ components:
           type: string
         limit_tsps:
           items:
-            $ref: '#/components/schemas/TspEnum'
+            type: string
           nullable: true
           type: array
         fleet_id:
@@ -1843,6 +2072,7 @@ components:
       example:
         occurred_at: 2000-01-23T04:56:07.000+00:00
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fleet_ref: fleet_ref
         updated_at: 2000-01-23T04:56:07.000+00:00
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -1863,6 +2093,9 @@ components:
           description: The Catena fleet this record belongs to (multi-tenant scope).
           format: uuid
           title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
@@ -1909,12 +2142,289 @@ components:
       - connection_id
       - created_at
       - fleet_id
+      - fleet_ref
       - id
       - occurred_at
       - source_id
       - source_name
       - updated_at
       title: BaseTelematicsEvent
+    BaseTrailer:
+      description: Base trailer event.
+      example:
+        notes: notes
+        trailer_groups:
+          key: ""
+        trailer_length: 1.4658129805029452
+        eld_id: eld_id
+        created_at: 2000-01-23T04:56:07.000+00:00
+        eld_product_id: eld_product_id
+        external_id: external_id
+        trailer_type: trailer_type
+        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        total_axles: 6
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        oem: oem
+        vin: vin
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_name: ada
+        eld_serial_number: eld_serial_number
+        fleet_ref: fleet_ref
+        is_active: true
+        eld_device_type: eld_device_type
+        model_type: model_type
+        model_year: 0
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        occurred_at: 2000-01-23T04:56:07.000+00:00
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        license_plate_region: license_plate_region
+        license_plate_country: license_plate_country
+        started_at: 2000-01-23T04:56:07.000+00:00
+        source_id: source_id
+        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ended_at: 2000-01-23T04:56:07.000+00:00
+        vehicle_name: vehicle_name
+        status: status
+      properties:
+        id:
+          description: Internal unique identifier for the telematics event record
+            (Catena PK).
+          format: uuid
+          title: ID
+          type: string
+        fleet_id:
+          description: The Catena fleet this record belongs to (multi-tenant scope).
+          format: uuid
+          title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
+        connection_id:
+          description: The specific fleet↔TSP connection through which this record
+            was sourced.
+          format: uuid
+          title: Connection ID
+          type: string
+        source_id:
+          description: The ID of the record in the TSP or a deterministic ID/Hash
+            generated from a composite unique key
+          title: Source ID
+          type: string
+        created_at:
+          description: "Immutable: first time this record was ingested into our system."
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: Last time we modified this record in our system.
+          format: date-time
+          title: Updated At
+          type: string
+        deleted_at:
+          format: date-time
+          nullable: true
+          type: string
+        occurred_at:
+          description: "When the underlying event/observation occurred, as reported\
+            \ by the TSP, or the moment it was ingested by us if not available."
+          format: date-time
+          title: Occurred At
+          type: string
+        execution_id:
+          format: uuid
+          nullable: true
+          type: string
+        schedule_id:
+          format: uuid
+          nullable: true
+          type: string
+        vehicle_name:
+          nullable: true
+          type: string
+        oem:
+          nullable: true
+          type: string
+        model_type:
+          nullable: true
+          type: string
+        model_year:
+          nullable: true
+          type: integer
+        vin:
+          nullable: true
+          type: string
+        license_plate_region:
+          nullable: true
+          type: string
+        license_plate_country:
+          nullable: true
+          type: string
+        started_at:
+          format: date-time
+          nullable: true
+          type: string
+        ended_at:
+          format: date-time
+          nullable: true
+          type: string
+        is_active:
+          nullable: true
+          type: boolean
+        status:
+          nullable: true
+          type: string
+        notes:
+          nullable: true
+          type: string
+        eld_id:
+          nullable: true
+          type: string
+        eld_serial_number:
+          nullable: true
+          type: string
+        eld_device_type:
+          nullable: true
+          type: string
+        eld_product_id:
+          nullable: true
+          type: string
+        total_axles:
+          nullable: true
+          type: integer
+        trailer_groups:
+          additionalProperties: {}
+          nullable: true
+        external_id:
+          nullable: true
+          type: string
+        trailer_length:
+          nullable: true
+          type: number
+        trailer_type:
+          nullable: true
+          type: string
+      required:
+      - connection_id
+      - created_at
+      - fleet_id
+      - fleet_ref
+      - id
+      - occurred_at
+      - source_id
+      - source_name
+      - updated_at
+      title: BaseTrailer
+    BaseTrailerLocation:
+      description: Base Trailer location event.
+      example:
+        source_trailer_id: source_trailer_id
+        fleet_ref: fleet_ref
+        h3_index_11: 0
+        created_at: 2000-01-23T04:56:07.000+00:00
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        occurred_at: 2000-01-23T04:56:07.000+00:00
+        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        location:
+          bbox:
+          - ""
+          - ""
+          - ""
+          - ""
+          coordinates:
+          - ""
+          - ""
+          type: Point
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_id: source_id
+        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_name: ada
+      properties:
+        id:
+          description: Internal unique identifier for the telematics event record
+            (Catena PK).
+          format: uuid
+          title: ID
+          type: string
+        fleet_id:
+          description: The Catena fleet this record belongs to (multi-tenant scope).
+          format: uuid
+          title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
+        connection_id:
+          description: The specific fleet↔TSP connection through which this record
+            was sourced.
+          format: uuid
+          title: Connection ID
+          type: string
+        source_id:
+          description: The ID of the record in the TSP or a deterministic ID/Hash
+            generated from a composite unique key
+          title: Source ID
+          type: string
+        created_at:
+          description: "Immutable: first time this record was ingested into our system."
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: Last time we modified this record in our system.
+          format: date-time
+          title: Updated At
+          type: string
+        deleted_at:
+          format: date-time
+          nullable: true
+          type: string
+        occurred_at:
+          description: "When the underlying event/observation occurred, as reported\
+            \ by the TSP, or the moment it was ingested by us if not available."
+          format: date-time
+          title: Occurred At
+          type: string
+        execution_id:
+          format: uuid
+          nullable: true
+          type: string
+        schedule_id:
+          format: uuid
+          nullable: true
+          type: string
+        trailer_id:
+          format: uuid
+          nullable: true
+          type: string
+        source_trailer_id:
+          nullable: true
+          type: string
+        location:
+          $ref: '#/components/schemas/Point'
+        h3_index_11:
+          nullable: true
+          type: integer
+      required:
+      - connection_id
+      - created_at
+      - fleet_id
+      - fleet_ref
+      - id
+      - occurred_at
+      - source_id
+      - source_name
+      - updated_at
+      title: BaseTrailerLocation
     BaseTspEvent:
       description: Base TSP event.
       example:
@@ -1956,6 +2466,7 @@ components:
         source_name: ada
         user_email: user_email
         hos_ruleset_code: US_INT_PROP_60_7
+        fleet_ref: fleet_ref
         is_active: true
         default_time_zone: UTC
         license_region: license_region
@@ -1996,6 +2507,9 @@ components:
           description: The Catena fleet this record belongs to (multi-tenant scope).
           format: uuid
           title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
@@ -2143,6 +2657,7 @@ components:
       - connection_id
       - created_at
       - fleet_id
+      - fleet_ref
       - id
       - occurred_at
       - source_id
@@ -2170,6 +2685,7 @@ components:
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_name: ada
         eld_serial_number: eld_serial_number
+        fleet_ref: fleet_ref
         is_active: true
         eld_device_type: eld_device_type
         model_type: model_type
@@ -2200,6 +2716,9 @@ components:
           description: The Catena fleet this record belongs to (multi-tenant scope).
           format: uuid
           title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
@@ -2323,6 +2842,7 @@ components:
       - connection_id
       - created_at
       - fleet_id
+      - fleet_ref
       - id
       - occurred_at
       - source_id
@@ -2346,6 +2866,7 @@ components:
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_name: ada
+        fleet_ref: fleet_ref
         odometer: 1.4658129805029452
         source_co_driver_id: source_co_driver_id
         deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -2377,6 +2898,9 @@ components:
           description: The Catena fleet this record belongs to (multi-tenant scope).
           format: uuid
           title: Fleet ID
+          type: string
+        fleet_ref:
+          nullable: true
           type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
@@ -2467,6 +2991,7 @@ components:
       - connection_id
       - created_at
       - fleet_id
+      - fleet_ref
       - id
       - occurred_at
       - source_id
@@ -2511,7 +3036,7 @@ components:
       title: BaseWebhookEvent
     Conflict:
       example:
-        code: 5
+        code: 2
         detail: detail
         message: Conflict
       properties:
@@ -2528,7 +3053,8 @@ components:
           type: string
       title: Conflict
     ConnectionCreated:
-      description: Connection created event.
+      description: Connection created event. A connection is how we ingest data from
+        a TSP.
       example:
         data:
         - tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -2835,6 +3361,63 @@ components:
       - version
       - webhook_id
       title: ExecutionStaled
+    FleetConnectionCreated:
+      description: Fleet Connection created event. This object associates a connection
+        to a fleet.
+      example:
+        data:
+        - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 0
+        event_name: fleet_connection.created
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: fleet_connection.created
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseFleetConnectionEvent'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: FleetConnectionCreated
     Forbidden:
       example:
         code: 1
@@ -2877,18 +3460,36 @@ components:
       example:
         data:
         - rest_remaining_seconds: 3
+          sleeper_required_remaining_seconds: 1
           sleeper_split_window_ends_at: 2000-01-23T04:56:07.000+00:00
           driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_adverse_driving_applied: true
           notes: notes
+          duty_status_code: "OFF"
+          is_cycle_applicable: true
+          created_at: 2000-01-23T04:56:07.000+00:00
           is_personal_conveyance_applied: true
           cycle_started_at: 2000-01-23T04:56:07.000+00:00
+          is_adverse_driving_exemption_available: true
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          shift_driving_violation_duration_seconds: 4
           available_tomorrow_seconds: 5
+          cycle_violation_duration_seconds: 2
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          available_cycle_seconds: 1
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          meal_break_due_at: 2000-01-23T04:56:07.000+00:00
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_yard_move_applied: true
+          source_name: ada
           available_drive_seconds: 0
           meal_break_min_duration_seconds: 7
+          cycle_ends_at: 2000-01-23T04:56:07.000+00:00
           hos_ruleset_code: US_INT_PROP_60_7
+          available_day2_seconds: 5
+          fleet_ref: fleet_ref
+          next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
           time_until_break_seconds: 9
           meal_break_time_until_due_seconds: 1
           is_sleeper_eligible: true
@@ -2896,50 +3497,49 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           forecast_horizon_days: 7
           next_10hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
+          is_meal_break_required: true
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           exception_codes:
           - exception_codes
           - exception_codes
-          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          available_day3_seconds: 2
-          available_shift_seconds: 6
-          sleeper_required_remaining_seconds: 1
-          duty_status_code: "OFF"
-          is_cycle_applicable: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          is_adverse_driving_exemption_available: true
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          shift_driving_violation_duration_seconds: 4
-          cycle_violation_duration_seconds: 2
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          available_cycle_seconds: 1
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          meal_break_due_at: 2000-01-23T04:56:07.000+00:00
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
-          cycle_ends_at: 2000-01-23T04:56:07.000+00:00
-          available_day2_seconds: 5
-          next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
-          is_meal_break_required: true
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          timezone_code: UTC
           is_split_sleep_applied: true
           shift_ends_at: 2000-01-23T04:56:07.000+00:00
           source_id: source_id
-          region_code: US-AL
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          available_day3_seconds: 2
+          available_shift_seconds: 6
           next_break_due_at: 2000-01-23T04:56:07.000+00:00
         - rest_remaining_seconds: 3
+          sleeper_required_remaining_seconds: 1
           sleeper_split_window_ends_at: 2000-01-23T04:56:07.000+00:00
           driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_adverse_driving_applied: true
           notes: notes
+          duty_status_code: "OFF"
+          is_cycle_applicable: true
+          created_at: 2000-01-23T04:56:07.000+00:00
           is_personal_conveyance_applied: true
           cycle_started_at: 2000-01-23T04:56:07.000+00:00
+          is_adverse_driving_exemption_available: true
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          shift_driving_violation_duration_seconds: 4
           available_tomorrow_seconds: 5
+          cycle_violation_duration_seconds: 2
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          available_cycle_seconds: 1
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          meal_break_due_at: 2000-01-23T04:56:07.000+00:00
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_yard_move_applied: true
+          source_name: ada
           available_drive_seconds: 0
           meal_break_min_duration_seconds: 7
+          cycle_ends_at: 2000-01-23T04:56:07.000+00:00
           hos_ruleset_code: US_INT_PROP_60_7
+          available_day2_seconds: 5
+          fleet_ref: fleet_ref
+          next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
           time_until_break_seconds: 9
           meal_break_time_until_due_seconds: 1
           is_sleeper_eligible: true
@@ -2947,36 +3547,17 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           forecast_horizon_days: 7
           next_10hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
+          is_meal_break_required: true
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           exception_codes:
           - exception_codes
           - exception_codes
-          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          available_day3_seconds: 2
-          available_shift_seconds: 6
-          sleeper_required_remaining_seconds: 1
-          duty_status_code: "OFF"
-          is_cycle_applicable: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          is_adverse_driving_exemption_available: true
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          shift_driving_violation_duration_seconds: 4
-          cycle_violation_duration_seconds: 2
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          available_cycle_seconds: 1
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          meal_break_due_at: 2000-01-23T04:56:07.000+00:00
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
-          cycle_ends_at: 2000-01-23T04:56:07.000+00:00
-          available_day2_seconds: 5
-          next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
-          is_meal_break_required: true
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          timezone_code: UTC
           is_split_sleep_applied: true
           shift_ends_at: 2000-01-23T04:56:07.000+00:00
           source_id: source_id
-          region_code: US-AL
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          available_day3_seconds: 2
+          available_shift_seconds: 6
           next_break_due_at: 2000-01-23T04:56:07.000+00:00
         webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         delivery_attempt: 1
@@ -3029,18 +3610,36 @@ components:
       example:
         data:
         - rest_remaining_seconds: 3
+          sleeper_required_remaining_seconds: 1
           sleeper_split_window_ends_at: 2000-01-23T04:56:07.000+00:00
           driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_adverse_driving_applied: true
           notes: notes
+          duty_status_code: "OFF"
+          is_cycle_applicable: true
+          created_at: 2000-01-23T04:56:07.000+00:00
           is_personal_conveyance_applied: true
           cycle_started_at: 2000-01-23T04:56:07.000+00:00
+          is_adverse_driving_exemption_available: true
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          shift_driving_violation_duration_seconds: 4
           available_tomorrow_seconds: 5
+          cycle_violation_duration_seconds: 2
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          available_cycle_seconds: 1
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          meal_break_due_at: 2000-01-23T04:56:07.000+00:00
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_yard_move_applied: true
+          source_name: ada
           available_drive_seconds: 0
           meal_break_min_duration_seconds: 7
+          cycle_ends_at: 2000-01-23T04:56:07.000+00:00
           hos_ruleset_code: US_INT_PROP_60_7
+          available_day2_seconds: 5
+          fleet_ref: fleet_ref
+          next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
           time_until_break_seconds: 9
           meal_break_time_until_due_seconds: 1
           is_sleeper_eligible: true
@@ -3048,50 +3647,49 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           forecast_horizon_days: 7
           next_10hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
+          is_meal_break_required: true
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           exception_codes:
           - exception_codes
           - exception_codes
-          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          available_day3_seconds: 2
-          available_shift_seconds: 6
-          sleeper_required_remaining_seconds: 1
-          duty_status_code: "OFF"
-          is_cycle_applicable: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          is_adverse_driving_exemption_available: true
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          shift_driving_violation_duration_seconds: 4
-          cycle_violation_duration_seconds: 2
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          available_cycle_seconds: 1
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          meal_break_due_at: 2000-01-23T04:56:07.000+00:00
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
-          cycle_ends_at: 2000-01-23T04:56:07.000+00:00
-          available_day2_seconds: 5
-          next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
-          is_meal_break_required: true
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          timezone_code: UTC
           is_split_sleep_applied: true
           shift_ends_at: 2000-01-23T04:56:07.000+00:00
           source_id: source_id
-          region_code: US-AL
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          available_day3_seconds: 2
+          available_shift_seconds: 6
           next_break_due_at: 2000-01-23T04:56:07.000+00:00
         - rest_remaining_seconds: 3
+          sleeper_required_remaining_seconds: 1
           sleeper_split_window_ends_at: 2000-01-23T04:56:07.000+00:00
           driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_adverse_driving_applied: true
           notes: notes
+          duty_status_code: "OFF"
+          is_cycle_applicable: true
+          created_at: 2000-01-23T04:56:07.000+00:00
           is_personal_conveyance_applied: true
           cycle_started_at: 2000-01-23T04:56:07.000+00:00
+          is_adverse_driving_exemption_available: true
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          shift_driving_violation_duration_seconds: 4
           available_tomorrow_seconds: 5
+          cycle_violation_duration_seconds: 2
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          available_cycle_seconds: 1
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          meal_break_due_at: 2000-01-23T04:56:07.000+00:00
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_yard_move_applied: true
+          source_name: ada
           available_drive_seconds: 0
           meal_break_min_duration_seconds: 7
+          cycle_ends_at: 2000-01-23T04:56:07.000+00:00
           hos_ruleset_code: US_INT_PROP_60_7
+          available_day2_seconds: 5
+          fleet_ref: fleet_ref
+          next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
           time_until_break_seconds: 9
           meal_break_time_until_due_seconds: 1
           is_sleeper_eligible: true
@@ -3099,36 +3697,17 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           forecast_horizon_days: 7
           next_10hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
+          is_meal_break_required: true
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           exception_codes:
           - exception_codes
           - exception_codes
-          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          available_day3_seconds: 2
-          available_shift_seconds: 6
-          sleeper_required_remaining_seconds: 1
-          duty_status_code: "OFF"
-          is_cycle_applicable: true
-          created_at: 2000-01-23T04:56:07.000+00:00
-          is_adverse_driving_exemption_available: true
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          shift_driving_violation_duration_seconds: 4
-          cycle_violation_duration_seconds: 2
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          available_cycle_seconds: 1
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          meal_break_due_at: 2000-01-23T04:56:07.000+00:00
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
-          cycle_ends_at: 2000-01-23T04:56:07.000+00:00
-          available_day2_seconds: 5
-          next_34hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
-          is_meal_break_required: true
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          timezone_code: UTC
           is_split_sleep_applied: true
           shift_ends_at: 2000-01-23T04:56:07.000+00:00
           source_id: source_id
-          region_code: US-AL
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          available_day3_seconds: 2
+          available_shift_seconds: 6
           next_break_due_at: 2000-01-23T04:56:07.000+00:00
         webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         delivery_attempt: 0
@@ -3182,6 +3761,7 @@ components:
         data:
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -3193,6 +3773,7 @@ components:
           source_name: ada
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -3248,6 +3829,272 @@ components:
       - version
       - webhook_id
       title: HosAvailabilityRemoved
+    HosDailySnapshotAdded:
+      description: HOS daily snapshot added event.
+      example:
+        data:
+        - duration_unknown_seconds: 9
+          driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
+          duration_driving_seconds: 5
+          duration_waiting_seconds: 7
+          snapshot_date: 2000-01-23
+          duration_sleeper_berth_seconds: 6
+          created_at: 2000-01-23T04:56:07.000+00:00
+          duration_personal_conveyance_seconds: 5
+          duration_cycle_on_duty_seconds: 3
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          duration_yard_move_seconds: 2
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          duration_on_duty_seconds: 1
+          source_name: ada
+          duration_off_duty_seconds: 0
+        - duration_unknown_seconds: 9
+          driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
+          duration_driving_seconds: 5
+          duration_waiting_seconds: 7
+          snapshot_date: 2000-01-23
+          duration_sleeper_berth_seconds: 6
+          created_at: 2000-01-23T04:56:07.000+00:00
+          duration_personal_conveyance_seconds: 5
+          duration_cycle_on_duty_seconds: 3
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          duration_yard_move_seconds: 2
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          duration_on_duty_seconds: 1
+          source_name: ada
+          duration_off_duty_seconds: 0
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 2
+        event_name: hos_daily_snapshot.added
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: hos_daily_snapshot.added
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseHosDailySnapshot'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: HosDailySnapshotAdded
+    HosDailySnapshotModified:
+      description: HOS daily snapshot modified event.
+      example:
+        data:
+        - duration_unknown_seconds: 9
+          driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
+          duration_driving_seconds: 5
+          duration_waiting_seconds: 7
+          snapshot_date: 2000-01-23
+          duration_sleeper_berth_seconds: 6
+          created_at: 2000-01-23T04:56:07.000+00:00
+          duration_personal_conveyance_seconds: 5
+          duration_cycle_on_duty_seconds: 3
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          duration_yard_move_seconds: 2
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          duration_on_duty_seconds: 1
+          source_name: ada
+          duration_off_duty_seconds: 0
+        - duration_unknown_seconds: 9
+          driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
+          duration_driving_seconds: 5
+          duration_waiting_seconds: 7
+          snapshot_date: 2000-01-23
+          duration_sleeper_berth_seconds: 6
+          created_at: 2000-01-23T04:56:07.000+00:00
+          duration_personal_conveyance_seconds: 5
+          duration_cycle_on_duty_seconds: 3
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          duration_yard_move_seconds: 2
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          duration_on_duty_seconds: 1
+          source_name: ada
+          duration_off_duty_seconds: 0
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 0
+        event_name: hos_daily_snapshot.modified
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: hos_daily_snapshot.modified
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseHosDailySnapshot'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: HosDailySnapshotModified
+    HosDailySnapshotRemoved:
+      description: HOS daily snapshot removed event.
+      example:
+        data:
+        - occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        - occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 0
+        event_name: hos_daily_snapshot.removed
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: hos_daily_snapshot.removed
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseTelematicsEvent'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: HosDailySnapshotRemoved
     HosEventAdded:
       description: Hos event added event.
       example:
@@ -3278,6 +4125,7 @@ components:
           source_name: ada
           log_origin_code: AUTO
           hos_ruleset_code: US_INT_PROP_60_7
+          fleet_ref: fleet_ref
           odometer: 1.4658129805029452
           time_zone_code: UTC
           deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -3329,6 +4177,7 @@ components:
           source_name: ada
           log_origin_code: AUTO
           hos_ruleset_code: US_INT_PROP_60_7
+          fleet_ref: fleet_ref
           odometer: 1.4658129805029452
           time_zone_code: UTC
           deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -3463,6 +4312,7 @@ components:
           source_name: ada
           log_origin_code: AUTO
           hos_ruleset_code: US_INT_PROP_60_7
+          fleet_ref: fleet_ref
           odometer: 1.4658129805029452
           time_zone_code: UTC
           deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -3514,6 +4364,7 @@ components:
           source_name: ada
           log_origin_code: AUTO
           hos_ruleset_code: US_INT_PROP_60_7
+          fleet_ref: fleet_ref
           odometer: 1.4658129805029452
           time_zone_code: UTC
           deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -3591,6 +4442,7 @@ components:
         data:
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -3602,6 +4454,7 @@ components:
           source_name: ada
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -3949,20 +4802,21 @@ components:
       example:
         data:
         - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_hos_log_id: source_hos_log_id
+          fleet_ref: fleet_ref
           violation_category: Cycle
           end_time: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
+          source_hos_event_id: source_hos_event_id
           duration: 0
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           start_time: 2000-01-23T04:56:07.000+00:00
           hours_limit: 6.027456183070403
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          hos_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           violation_code: DH_DAILY_OVER
           violation_description: violation_description
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -3971,20 +4825,21 @@ components:
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
         - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_hos_log_id: source_hos_log_id
+          fleet_ref: fleet_ref
           violation_category: Cycle
           end_time: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
+          source_hos_event_id: source_hos_event_id
           duration: 0
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           start_time: 2000-01-23T04:56:07.000+00:00
           hours_limit: 6.027456183070403
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          hos_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           violation_code: DH_DAILY_OVER
           violation_description: violation_description
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4101,20 +4956,21 @@ components:
       example:
         data:
         - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_hos_log_id: source_hos_log_id
+          fleet_ref: fleet_ref
           violation_category: Cycle
           end_time: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
+          source_hos_event_id: source_hos_event_id
           duration: 0
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           start_time: 2000-01-23T04:56:07.000+00:00
           hours_limit: 6.027456183070403
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          hos_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           violation_code: DH_DAILY_OVER
           violation_description: violation_description
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4123,20 +4979,21 @@ components:
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
         - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_hos_log_id: source_hos_log_id
+          fleet_ref: fleet_ref
           violation_category: Cycle
           end_time: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
+          source_hos_event_id: source_hos_event_id
           duration: 0
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           start_time: 2000-01-23T04:56:07.000+00:00
           hours_limit: 6.027456183070403
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          hos_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           violation_code: DH_DAILY_OVER
           violation_description: violation_description
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4196,6 +5053,7 @@ components:
         data:
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -4207,6 +5065,7 @@ components:
           source_name: ada
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -4266,7 +5125,8 @@ components:
       description: Ifta summary added event.
       example:
         data:
-        - year: 6
+        - fleet_ref: fleet_ref
+          year: 6
           created_at: 2000-01-23T04:56:07.000+00:00
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
@@ -4281,7 +5141,8 @@ components:
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           source_vehicle_id: source_vehicle_id
-        - year: 6
+        - fleet_ref: fleet_ref
+          year: 6
           created_at: 2000-01-23T04:56:07.000+00:00
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
@@ -4346,7 +5207,8 @@ components:
       description: Ifta summary modified event.
       example:
         data:
-        - year: 6
+        - fleet_ref: fleet_ref
+          year: 6
           created_at: 2000-01-23T04:56:07.000+00:00
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
@@ -4361,7 +5223,8 @@ components:
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           source_vehicle_id: source_vehicle_id
-        - year: 6
+        - fleet_ref: fleet_ref
+          year: 6
           created_at: 2000-01-23T04:56:07.000+00:00
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
@@ -4428,6 +5291,7 @@ components:
         data:
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -4439,6 +5303,7 @@ components:
           source_name: ada
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -4520,8 +5385,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4542,8 +5407,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4614,8 +5479,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4636,8 +5501,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4708,8 +5573,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4730,8 +5595,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4802,8 +5667,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4824,8 +5689,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4896,8 +5761,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4918,8 +5783,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -4995,8 +5860,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5017,8 +5882,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5089,8 +5954,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5111,8 +5976,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5183,8 +6048,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5205,8 +6070,8 @@ components:
           pre_registration_refresh_token: pre_registration_refresh_token
           expires_in_hours: 0
           limit_tsps:
-          - ada
-          - ada
+          - limit_tsps
+          - limit_tsps
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           magic_link: magic_link
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -5260,6 +6125,24 @@ components:
       - version
       - webhook_id
       title: InvitationViewed
+    MethodNotAllowed:
+      example:
+        code: 5
+        detail: detail
+        message: Method Not Allowed
+      properties:
+        code:
+          default: 405
+          title: Code
+          type: integer
+        message:
+          default: Method Not Allowed
+          title: Message
+          type: string
+        detail:
+          nullable: true
+          type: string
+      title: MethodNotAllowed
     NotFound:
       example:
         code: 5
@@ -5325,22 +6208,23 @@ components:
       - hos_availability
       - hos_daily_snapshot
       - hos_event
-      - hos_log
-      - hos_log_annotation
-      - hos_log_attachment
+      - hos_event_annotation
+      - hos_event_attachment
       - hos_violation
       - ifta_summary
       - location_segment
+      - reefer_status
       - user
       - vehicle
       - vehicle_location
       - vehicle_sensor
       - trailer
+      - trailer_location
       title: ResourceEnum
       type: string
     RetryAfterDetail:
       example:
-        retry_after_seconds: 9
+        retry_after_seconds: 3
         message: message
       properties:
         retry_after_seconds:
@@ -5648,10 +6532,10 @@ components:
     TimePeriodMetric:
       description: Webhook Metrics Success Rate model
       example:
-        "14d": 5
-        "6h": 0
-        "24h": 6
-        "7d": 1
+        "14d": 5600
+        "24h": 400
+        "6h": 100
+        "7d": 2800
       properties:
         "6h":
           nullable: true
@@ -5732,13 +6616,124 @@ components:
       - America/Halifax
       - America/Moncton
       - America/St_Johns
+      - America/Mexico_City
+      - America/Cancun
+      - America/Merida
+      - America/Monterrey
+      - America/Mazatlan
+      - America/Chihuahua
+      - America/Hermosillo
+      - America/Tijuana
+      - America/Matamoros
+      - America/Ojinaga
+      - America/Ciudad_Juarez
+      - America/Guatemala
+      - America/Belize
+      - America/Tegucigalpa
+      - America/Managua
+      - America/Costa_Rica
+      - America/Panama
+      - America/Bogota
+      - America/Lima
+      - America/Santiago
+      - America/Argentina/Buenos_Aires
+      - America/Sao_Paulo
+      - America/Montevideo
+      - America/Puerto_Rico
+      - Europe/London
+      - Europe/Dublin
+      - Europe/Lisbon
+      - Europe/Madrid
+      - Europe/Paris
+      - Europe/Brussels
+      - Europe/Amsterdam
+      - Europe/Luxembourg
+      - Europe/Berlin
+      - Europe/Zurich
+      - Europe/Vienna
+      - Europe/Rome
+      - Europe/Copenhagen
+      - Europe/Stockholm
+      - Europe/Oslo
+      - Europe/Prague
+      - Europe/Budapest
+      - Europe/Warsaw
+      - Europe/Helsinki
+      - Europe/Tallinn
+      - Europe/Riga
+      - Europe/Vilnius
+      - Europe/Belgrade
+      - Europe/Tirane
+      - Europe/Sofia
+      - Europe/Athens
+      - Europe/Bucharest
+      - Europe/Kyiv
+      - Europe/Chisinau
+      - Europe/Istanbul
+      - Europe/Kaliningrad
+      - Europe/Moscow
+      - Europe/Samara
+      - Africa/Casablanca
+      - Africa/Algiers
+      - Africa/Tunis
+      - Africa/Cairo
+      - Africa/Tripoli
+      - Africa/Lagos
+      - Africa/Accra
+      - Africa/Dakar
+      - Africa/Abidjan
+      - Africa/Nairobi
+      - Africa/Dar_es_Salaam
+      - Africa/Kampala
+      - Africa/Johannesburg
+      - Africa/Maputo
+      - Africa/Windhoek
+      - Asia/Dubai
+      - Asia/Riyadh
+      - Asia/Qatar
+      - Asia/Kuwait
+      - Asia/Bahrain
+      - Asia/Muscat
+      - Asia/Baghdad
+      - Asia/Amman
+      - Asia/Beirut
+      - Asia/Jerusalem
+      - Asia/Baku
+      - Asia/Tbilisi
+      - Asia/Yerevan
+      - Asia/Almaty
+      - Asia/Tashkent
+      - Asia/Karachi
+      - Asia/Kolkata
+      - Asia/Dhaka
+      - Asia/Colombo
+      - Asia/Kathmandu
+      - Asia/Bangkok
+      - Asia/Ho_Chi_Minh
+      - Asia/Singapore
+      - Asia/Kuala_Lumpur
+      - Asia/Jakarta
+      - Asia/Manila
+      - Asia/Shanghai
+      - Asia/Hong_Kong
+      - Asia/Taipei
+      - Asia/Seoul
+      - Asia/Tokyo
+      - Australia/Sydney
+      - Australia/Melbourne
+      - Australia/Brisbane
+      - Australia/Adelaide
+      - Australia/Perth
+      - Australia/Darwin
+      - Australia/Hobart
+      - Pacific/Auckland
       title: TimezoneCodeEnum
       type: string
     TooManyRequests:
       example:
-        code: 7
+        code: 9
         detail:
-          retry_after_seconds: 9
+          retry_after_seconds: 3
           message: message
         message: Too Many Requests
       properties:
@@ -5753,6 +6748,516 @@ components:
         detail:
           $ref: '#/components/schemas/RetryAfterDetail'
       title: TooManyRequests
+    TrailerAdded:
+      description: Trailer added event.
+      example:
+        data:
+        - notes: notes
+          trailer_groups:
+            key: ""
+          trailer_length: 1.4658129805029452
+          eld_id: eld_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          eld_product_id: eld_product_id
+          external_id: external_id
+          trailer_type: trailer_type
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          total_axles: 6
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          oem: oem
+          vin: vin
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+          eld_serial_number: eld_serial_number
+          fleet_ref: fleet_ref
+          is_active: true
+          eld_device_type: eld_device_type
+          model_type: model_type
+          model_year: 0
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          license_plate_region: license_plate_region
+          license_plate_country: license_plate_country
+          started_at: 2000-01-23T04:56:07.000+00:00
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ended_at: 2000-01-23T04:56:07.000+00:00
+          vehicle_name: vehicle_name
+          status: status
+        - notes: notes
+          trailer_groups:
+            key: ""
+          trailer_length: 1.4658129805029452
+          eld_id: eld_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          eld_product_id: eld_product_id
+          external_id: external_id
+          trailer_type: trailer_type
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          total_axles: 6
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          oem: oem
+          vin: vin
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+          eld_serial_number: eld_serial_number
+          fleet_ref: fleet_ref
+          is_active: true
+          eld_device_type: eld_device_type
+          model_type: model_type
+          model_year: 0
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          license_plate_region: license_plate_region
+          license_plate_country: license_plate_country
+          started_at: 2000-01-23T04:56:07.000+00:00
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ended_at: 2000-01-23T04:56:07.000+00:00
+          vehicle_name: vehicle_name
+          status: status
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 5
+        event_name: trailer.added
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: trailer.added
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseTrailer'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: TrailerAdded
+    TrailerLocationAdded:
+      description: Trailer location added event.
+      example:
+        data:
+        - source_trailer_id: source_trailer_id
+          fleet_ref: fleet_ref
+          h3_index_11: 0
+          created_at: 2000-01-23T04:56:07.000+00:00
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          location:
+            bbox:
+            - ""
+            - ""
+            - ""
+            - ""
+            coordinates:
+            - ""
+            - ""
+            type: Point
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        - source_trailer_id: source_trailer_id
+          fleet_ref: fleet_ref
+          h3_index_11: 0
+          created_at: 2000-01-23T04:56:07.000+00:00
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          location:
+            bbox:
+            - ""
+            - ""
+            - ""
+            - ""
+            coordinates:
+            - ""
+            - ""
+            type: Point
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 6
+        event_name: trailer_location.added
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: trailer_location.added
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseTrailerLocation'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: TrailerLocationAdded
+    TrailerLocationModified:
+      description: Trailer location modified event.
+      example:
+        data:
+        - source_trailer_id: source_trailer_id
+          fleet_ref: fleet_ref
+          h3_index_11: 0
+          created_at: 2000-01-23T04:56:07.000+00:00
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          location:
+            bbox:
+            - ""
+            - ""
+            - ""
+            - ""
+            coordinates:
+            - ""
+            - ""
+            type: Point
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        - source_trailer_id: source_trailer_id
+          fleet_ref: fleet_ref
+          h3_index_11: 0
+          created_at: 2000-01-23T04:56:07.000+00:00
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          location:
+            bbox:
+            - ""
+            - ""
+            - ""
+            - ""
+            coordinates:
+            - ""
+            - ""
+            type: Point
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 0
+        event_name: trailer_location.modified
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: trailer_location.modified
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseTrailerLocation'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: TrailerLocationModified
+    TrailerModified:
+      description: Trailer modified event.
+      example:
+        data:
+        - notes: notes
+          trailer_groups:
+            key: ""
+          trailer_length: 1.4658129805029452
+          eld_id: eld_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          eld_product_id: eld_product_id
+          external_id: external_id
+          trailer_type: trailer_type
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          total_axles: 6
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          oem: oem
+          vin: vin
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+          eld_serial_number: eld_serial_number
+          fleet_ref: fleet_ref
+          is_active: true
+          eld_device_type: eld_device_type
+          model_type: model_type
+          model_year: 0
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          license_plate_region: license_plate_region
+          license_plate_country: license_plate_country
+          started_at: 2000-01-23T04:56:07.000+00:00
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ended_at: 2000-01-23T04:56:07.000+00:00
+          vehicle_name: vehicle_name
+          status: status
+        - notes: notes
+          trailer_groups:
+            key: ""
+          trailer_length: 1.4658129805029452
+          eld_id: eld_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          eld_product_id: eld_product_id
+          external_id: external_id
+          trailer_type: trailer_type
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          total_axles: 6
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          oem: oem
+          vin: vin
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+          eld_serial_number: eld_serial_number
+          fleet_ref: fleet_ref
+          is_active: true
+          eld_device_type: eld_device_type
+          model_type: model_type
+          model_year: 0
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          license_plate_region: license_plate_region
+          license_plate_country: license_plate_country
+          started_at: 2000-01-23T04:56:07.000+00:00
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ended_at: 2000-01-23T04:56:07.000+00:00
+          vehicle_name: vehicle_name
+          status: status
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 0
+        event_name: trailer.modified
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: trailer.modified
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseTrailer'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: TrailerModified
+    TrailerRemoved:
+      description: Trailer removed event.
+      example:
+        data:
+        - occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        - occurred_at: 2000-01-23T04:56:07.000+00:00
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        delivery_attempt: 0
+        event_name: trailer.removed
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        version:
+          description: Version of the schema used for this event
+          pattern: ^\d+\.\d+$
+          title: Schema Version
+          type: string
+        event_name:
+          default: trailer.removed
+          title: Event Name
+          type: string
+        data:
+          description: "The event payload, with one or more records of the specified\
+            \ type"
+          items:
+            $ref: '#/components/schemas/BaseTelematicsEvent'
+          type: array
+        webhook_id:
+          description: Unique identifier for the webhook subscription that triggered
+            this delivery
+          format: uuid
+          title: Webhook ID
+          type: string
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        id:
+          format: uuid
+          nullable: true
+          type: string
+        delivery_attempt:
+          default: 0
+          description: The number of times the event has been attempted to be delivered
+          title: Delivery Attempt
+          type: integer
+      required:
+      - data
+      - version
+      - webhook_id
+      title: TrailerRemoved
     TspCreated:
       description: TSP created event.
       example:
@@ -5812,22 +7317,46 @@ components:
       enum:
       - ada
       - ai_eld
+      - air_eld
+      - alfa_eld
+      - alpha_eld
+      - als
+      - anytrek
+      - apex_eld
       - apollo
+      - apollocloud
       - ascend
+      - att
+      - awaregps
       - azuga
       - bigroad
+      - bluehorse_eld
       - blueinktech
       - bouncie
       - budgetgps
+      - captain_eld
+      - carrier_lynx
+      - club_eld
       - cyntrx
+      - digital_eld
+      - dragon_eld
+      - drive_hos
       - driver_tech
       - dsg_elogs
       - dynamic_eld
+      - eighteighteight_eld
+      - eld_88
+      - eld_books
       - eld_mandate
+      - eld_mandate_prime
       - eroad
+      - eva_eld
       - evo_eld
+      - expressway_eld
+      - extreme_eld
       - ezlogz
       - factor_eld
+      - firstgate
       - fleetcomplete
       - fleetcompletehub
       - fleethunt
@@ -5835,72 +7364,107 @@ components:
       - fleetup
       - fm
       - forwardthinking
+      - forza_eld
       - geotab
       - gpsinsight
       - gpstab
       - gpstrackit
+      - grand_eld
       - greenlight
+      - groundhog
       - hcss
-      - hosconnect
       - hos247
       - hutch
       - intellishift
+      - ironman_eld
       - isaac
       - jjkeller
+      - kinexaiot
       - knight_eld
       - konexial
+      - lioneight
       - linxup
       - lucid_eld
+      - luna_eld
       - lytx
+      - lytxv3
       - mapon
       - matrack
       - maven
       - mobilefleet
+      - moonlight_eld
+      - motion_eld
       - motive
       - my_logs_eld
       - nero
       - netradyne
       - new_eld_world
+      - nextgen_eld
       - nextraq
+      - omnitracs
       - onestep
       - ontime_eld
       - optima
       - orbcomm
       - orient_eld
+      - panda_eld
       - payd
+      - peak_eld
       - peoplenet
+      - phillips_connect
       - phoenix
       - pop_eld
+      - prologs
+      - proride_eld
+      - qualitylogs_eld
       - randmcnally
       - rastrac
+      - redfox
+      - regulog_eld
+      - ridehub
+      - rock_eld
       - routemate
+      - royal_eld
       - samsara
       - selectivedrive
+      - simba_eld
+      - skybitz
       - smart_elds
       - sparkle_eld
-      - omnitracs
       - spireon
       - surfsight
       - swift
       - switchboard
+      - synergy_eld
       - teletracnavman
       - teletracnavman_director
       - telogis
       - tenna
+      - thermo_king
       - think
       - tive
+      - topcompliance_eld
       - traccar
+      - trackease_eld
+      - trackpro
+      - traclog
       - transflo
       - trimble
+      - truckford
+      - truckspy
       - truckx
+      - trueroad_eld
       - tt
       - us_fast_eld
       - verizon
-      - verizon_reveal
       - vista_eld
       - vistracks
+      - vlog_eld
+      - vulcansols_eld
+      - wialon
       - webfleet
       - xplore_eld
+      - zms_eld
       - zonar
       - zubie
       title: TspEnum
@@ -5925,7 +7489,7 @@ components:
       title: Unauthorized
     UnprocessableEntity:
       example:
-        code: 2
+        code: 7
         detail:
         - path: path
           input: input
@@ -5974,6 +7538,7 @@ components:
           source_name: ada
           user_email: user_email
           hos_ruleset_code: US_INT_PROP_60_7
+          fleet_ref: fleet_ref
           is_active: true
           default_time_zone: UTC
           license_region: license_region
@@ -6022,6 +7587,7 @@ components:
           source_name: ada
           user_email: user_email
           hos_ruleset_code: US_INT_PROP_60_7
+          fleet_ref: fleet_ref
           is_active: true
           default_time_zone: UTC
           license_region: license_region
@@ -6120,6 +7686,7 @@ components:
           source_name: ada
           user_email: user_email
           hos_ruleset_code: US_INT_PROP_60_7
+          fleet_ref: fleet_ref
           is_active: true
           default_time_zone: UTC
           license_region: license_region
@@ -6168,6 +7735,7 @@ components:
           source_name: ada
           user_email: user_email
           hos_ruleset_code: US_INT_PROP_60_7
+          fleet_ref: fleet_ref
           is_active: true
           default_time_zone: UTC
           license_region: license_region
@@ -6249,6 +7817,7 @@ components:
         data:
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -6260,6 +7829,7 @@ components:
           source_name: ada
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -6385,6 +7955,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           eld_serial_number: eld_serial_number
+          fleet_ref: fleet_ref
           is_active: true
           eld_device_type: eld_device_type
           model_type: model_type
@@ -6422,6 +7993,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           eld_serial_number: eld_serial_number
+          fleet_ref: fleet_ref
           is_active: true
           eld_device_type: eld_device_type
           model_type: model_type
@@ -6505,6 +8077,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
+          fleet_ref: fleet_ref
           odometer: 1.4658129805029452
           source_co_driver_id: source_co_driver_id
           deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -6539,6 +8112,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
+          fleet_ref: fleet_ref
           odometer: 1.4658129805029452
           source_co_driver_id: source_co_driver_id
           deleted_at: 2000-01-23T04:56:07.000+00:00
@@ -6627,6 +8201,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           eld_serial_number: eld_serial_number
+          fleet_ref: fleet_ref
           is_active: true
           eld_device_type: eld_device_type
           model_type: model_type
@@ -6664,6 +8239,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           eld_serial_number: eld_serial_number
+          fleet_ref: fleet_ref
           is_active: true
           eld_device_type: eld_device_type
           model_type: model_type
@@ -6735,6 +8311,7 @@ components:
         data:
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -6746,6 +8323,7 @@ components:
           source_name: ada
         - occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fleet_ref: fleet_ref
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -6869,13 +8447,17 @@ components:
       enum:
       - invitation.*
       - connection.*
+      - fleet_connection.*
       - share_agreement.*
       - webhook.*
       - vehicle.*
+      - trailer.*
+      - trailer_location.*
       - user.*
       - vehicle_location.*
       - ifta_summary.*
       - hos_availability.*
+      - hos_daily_snapshot.*
       - hos_event.*
       - hos_violation.*
       title: WebhookCatchAllEvents
@@ -6883,12 +8465,9 @@ components:
     WebhookCreate:
       description: Webhook create model
       example:
-        event_name: ""
         filters:
           fleet_ids: []
           fleet_refs: []
-        secret: ""
-        url: ""
       properties:
         url:
           description: The target URL of the webhook
@@ -7071,6 +8650,8 @@ components:
       - connection.created
       - connection.staled
       - connection.*
+      - fleet_connection.created
+      - fleet_connection.*
       - share_agreement.created
       - share_agreement.updated
       - share_agreement.deleted
@@ -7085,6 +8666,13 @@ components:
       - vehicle.modified
       - vehicle.removed
       - vehicle.*
+      - trailer.added
+      - trailer.modified
+      - trailer.removed
+      - trailer.*
+      - trailer_location.added
+      - trailer_location.modified
+      - trailer_location.*
       - execution.created
       - execution.staled
       - execution.failed
@@ -7104,6 +8692,10 @@ components:
       - hos_availability.modified
       - hos_availability.removed
       - hos_availability.*
+      - hos_daily_snapshot.added
+      - hos_daily_snapshot.modified
+      - hos_daily_snapshot.removed
+      - hos_daily_snapshot.*
       - hos_event.added
       - hos_event.modified
       - hos_event.removed
@@ -7193,44 +8785,44 @@ components:
 
         Intended to be calculated from the WebhookLogs table and not stored in the database.
       example:
-        webhook_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        http_attempts:
-          "14d": 5
-          "6h": 0
-          "24h": 6
-          "7d": 1
-        dlq_count: 2
-        http_failure_attempts:
-          "14d": 5
-          "6h": 0
-          "24h": 6
-          "7d": 1
-        ewma_success_rate: 5.637376656633329
-        message_count:
-          "14d": 5
-          "6h": 0
-          "24h": 6
-          "7d": 1
-        success_rate:
-          "14d": 5
-          "6h": 0
-          "24h": 6
-          "7d": 1
-        http_success_attempts:
-          "14d": 5
-          "6h": 0
-          "24h": 6
-          "7d": 1
-        message_success_count:
-          "14d": 5
-          "6h": 0
-          "24h": 6
-          "7d": 1
         avg_response_time_ms:
-          "14d": 5
-          "6h": 0
-          "24h": 6
-          "7d": 1
+          "14d": 158
+          "24h": 160
+          "6h": 150
+          "7d": 155
+        dlq_count: 5
+        ewma_success_rate: 0.98
+        http_attempts:
+          "14d": 6500
+          "24h": 420
+          "6h": 105
+          "7d": 3000
+        http_failure_attempts:
+          "14d": 500
+          "24h": 20
+          "6h": 5
+          "7d": 200
+        http_success_attempts:
+          "14d": 6000
+          "24h": 400
+          "6h": 100
+          "7d": 2800
+        message_count:
+          "14d": 6000
+          "24h": 400
+          "6h": 100
+          "7d": 2800
+        message_success_count:
+          "14d": 5800
+          "24h": 390
+          "6h": 98
+          "7d": 2700
+        success_rate:
+          "14d": 96
+          "24h": 97
+          "6h": 98
+          "7d": 96
+        webhook_id: 123e4567-e89b-12d3-a456-426614174000
       properties:
         webhook_id:
           description: The ID of the webhook that the metrics are for
@@ -7403,9 +8995,6 @@ components:
         filters:
           fleet_ids: []
           fleet_refs: []
-        secret: ""
-        status: ""
-        url: ""
       properties:
         url:
           format: uri

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Internal unique identifier for the telematics event record (Catena PK). | 
 **FleetId** | **string** | The Catena fleet this record belongs to (multi-tenant scope). | 
+**FleetRef** | **NullableString** |  | 
 **SourceName** | [**TspEnum**](TspEnum.md) | The name of the source | 
 **ConnectionId** | **string** | The specific fleet↔TSP connection through which this record was sourced. | 
 **SourceId** | **string** | The ID of the record in the TSP or a deterministic ID/Hash generated from a composite unique key | 
@@ -50,7 +51,7 @@ Name | Type | Description | Notes
 
 ### NewBaseHosEvent
 
-`func NewBaseHosEvent(id string, fleetId string, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time, ) *BaseHosEvent`
+`func NewBaseHosEvent(id string, fleetId string, fleetRef NullableString, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time, ) *BaseHosEvent`
 
 NewBaseHosEvent instantiates a new BaseHosEvent object
 This constructor will assign default values to properties that have it defined,
@@ -105,6 +106,36 @@ and a boolean to check if the value has been set.
 SetFleetId sets FleetId field to given value.
 
 
+### GetFleetRef
+
+`func (o *BaseHosEvent) GetFleetRef() string`
+
+GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
+
+### GetFleetRefOk
+
+`func (o *BaseHosEvent) GetFleetRefOk() (*string, bool)`
+
+GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetRef
+
+`func (o *BaseHosEvent) SetFleetRef(v string)`
+
+SetFleetRef sets FleetRef field to given value.
+
+
+### SetFleetRefNil
+
+`func (o *BaseHosEvent) SetFleetRefNil(b bool)`
+
+ SetFleetRefNil sets the value for FleetRef to be an explicit nil
+
+### UnsetFleetRef
+`func (o *BaseHosEvent) UnsetFleetRef()`
+
+UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 ### GetSourceName
 
 `func (o *BaseHosEvent) GetSourceName() TspEnum`

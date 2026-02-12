@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Status** | [**StatusEnum**](StatusEnum.md) | The current status of the execution. | 
 **SourceName** | [**TspEnum**](TspEnum.md) | The name of the TSP integration used for this execution. | 
 **Resource** | [**ResourceEnum**](ResourceEnum.md) | The type of resource being fetched (e.g., VEHICLE, DRIVER, HOS, IFTA). | 
+**Cursor** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -213,6 +214,41 @@ and a boolean to check if the value has been set.
 SetResource sets Resource field to given value.
 
 
+### GetCursor
+
+`func (o *ExecutionRead) GetCursor() string`
+
+GetCursor returns the Cursor field if non-nil, zero value otherwise.
+
+### GetCursorOk
+
+`func (o *ExecutionRead) GetCursorOk() (*string, bool)`
+
+GetCursorOk returns a tuple with the Cursor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursor
+
+`func (o *ExecutionRead) SetCursor(v string)`
+
+SetCursor sets Cursor field to given value.
+
+### HasCursor
+
+`func (o *ExecutionRead) HasCursor() bool`
+
+HasCursor returns a boolean if a field has been set.
+
+### SetCursorNil
+
+`func (o *ExecutionRead) SetCursorNil(b bool)`
+
+ SetCursorNil sets the value for Cursor to be an explicit nil
+
+### UnsetCursor
+`func (o *ExecutionRead) UnsetCursor()`
+
+UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

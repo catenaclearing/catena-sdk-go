@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Internal unique identifier for the telematics event record (Catena PK). | 
 **FleetId** | **string** | The Catena fleet this record belongs to (multi-tenant scope). | 
+**FleetRef** | **NullableString** |  | 
 **SourceName** | [**TspEnum**](TspEnum.md) | The name of the source | 
 **ConnectionId** | **string** | The specific fleet↔TSP connection through which this record was sourced. | 
 **SourceId** | **string** | The ID of the record in the TSP or a deterministic ID/Hash generated from a composite unique key | 
@@ -15,10 +16,10 @@ Name | Type | Description | Notes
 **OccurredAt** | **time.Time** | When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available. | 
 **ExecutionId** | Pointer to **NullableString** |  | [optional] 
 **ScheduleId** | Pointer to **NullableString** |  | [optional] 
-**HosLogId** | Pointer to **NullableString** |  | [optional] 
+**HosEventId** | Pointer to **NullableString** |  | [optional] 
 **DriverId** | Pointer to **NullableString** |  | [optional] 
 **SourceDriverId** | Pointer to **NullableString** |  | [optional] 
-**SourceHosLogId** | Pointer to **NullableString** |  | [optional] 
+**SourceHosEventId** | Pointer to **NullableString** |  | [optional] 
 **ViolationCode** | Pointer to [**NullableHosViolationCodeEnum**](HosViolationCodeEnum.md) |  | [optional] 
 **ViolationCategory** | Pointer to [**NullableHosViolationCategoryEnum**](HosViolationCategoryEnum.md) |  | [optional] 
 **ViolationDescription** | Pointer to **NullableString** |  | [optional] 
@@ -31,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewBaseHosViolation
 
-`func NewBaseHosViolation(id string, fleetId string, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time, ) *BaseHosViolation`
+`func NewBaseHosViolation(id string, fleetId string, fleetRef NullableString, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time, ) *BaseHosViolation`
 
 NewBaseHosViolation instantiates a new BaseHosViolation object
 This constructor will assign default values to properties that have it defined,
@@ -86,6 +87,36 @@ and a boolean to check if the value has been set.
 SetFleetId sets FleetId field to given value.
 
 
+### GetFleetRef
+
+`func (o *BaseHosViolation) GetFleetRef() string`
+
+GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
+
+### GetFleetRefOk
+
+`func (o *BaseHosViolation) GetFleetRefOk() (*string, bool)`
+
+GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetRef
+
+`func (o *BaseHosViolation) SetFleetRef(v string)`
+
+SetFleetRef sets FleetRef field to given value.
+
+
+### SetFleetRefNil
+
+`func (o *BaseHosViolation) SetFleetRefNil(b bool)`
+
+ SetFleetRefNil sets the value for FleetRef to be an explicit nil
+
+### UnsetFleetRef
+`func (o *BaseHosViolation) UnsetFleetRef()`
+
+UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 ### GetSourceName
 
 `func (o *BaseHosViolation) GetSourceName() TspEnum`
@@ -311,41 +342,41 @@ HasScheduleId returns a boolean if a field has been set.
 `func (o *BaseHosViolation) UnsetScheduleId()`
 
 UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
-### GetHosLogId
+### GetHosEventId
 
-`func (o *BaseHosViolation) GetHosLogId() string`
+`func (o *BaseHosViolation) GetHosEventId() string`
 
-GetHosLogId returns the HosLogId field if non-nil, zero value otherwise.
+GetHosEventId returns the HosEventId field if non-nil, zero value otherwise.
 
-### GetHosLogIdOk
+### GetHosEventIdOk
 
-`func (o *BaseHosViolation) GetHosLogIdOk() (*string, bool)`
+`func (o *BaseHosViolation) GetHosEventIdOk() (*string, bool)`
 
-GetHosLogIdOk returns a tuple with the HosLogId field if it's non-nil, zero value otherwise
+GetHosEventIdOk returns a tuple with the HosEventId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHosLogId
+### SetHosEventId
 
-`func (o *BaseHosViolation) SetHosLogId(v string)`
+`func (o *BaseHosViolation) SetHosEventId(v string)`
 
-SetHosLogId sets HosLogId field to given value.
+SetHosEventId sets HosEventId field to given value.
 
-### HasHosLogId
+### HasHosEventId
 
-`func (o *BaseHosViolation) HasHosLogId() bool`
+`func (o *BaseHosViolation) HasHosEventId() bool`
 
-HasHosLogId returns a boolean if a field has been set.
+HasHosEventId returns a boolean if a field has been set.
 
-### SetHosLogIdNil
+### SetHosEventIdNil
 
-`func (o *BaseHosViolation) SetHosLogIdNil(b bool)`
+`func (o *BaseHosViolation) SetHosEventIdNil(b bool)`
 
- SetHosLogIdNil sets the value for HosLogId to be an explicit nil
+ SetHosEventIdNil sets the value for HosEventId to be an explicit nil
 
-### UnsetHosLogId
-`func (o *BaseHosViolation) UnsetHosLogId()`
+### UnsetHosEventId
+`func (o *BaseHosViolation) UnsetHosEventId()`
 
-UnsetHosLogId ensures that no value is present for HosLogId, not even an explicit nil
+UnsetHosEventId ensures that no value is present for HosEventId, not even an explicit nil
 ### GetDriverId
 
 `func (o *BaseHosViolation) GetDriverId() string`
@@ -416,41 +447,41 @@ HasSourceDriverId returns a boolean if a field has been set.
 `func (o *BaseHosViolation) UnsetSourceDriverId()`
 
 UnsetSourceDriverId ensures that no value is present for SourceDriverId, not even an explicit nil
-### GetSourceHosLogId
+### GetSourceHosEventId
 
-`func (o *BaseHosViolation) GetSourceHosLogId() string`
+`func (o *BaseHosViolation) GetSourceHosEventId() string`
 
-GetSourceHosLogId returns the SourceHosLogId field if non-nil, zero value otherwise.
+GetSourceHosEventId returns the SourceHosEventId field if non-nil, zero value otherwise.
 
-### GetSourceHosLogIdOk
+### GetSourceHosEventIdOk
 
-`func (o *BaseHosViolation) GetSourceHosLogIdOk() (*string, bool)`
+`func (o *BaseHosViolation) GetSourceHosEventIdOk() (*string, bool)`
 
-GetSourceHosLogIdOk returns a tuple with the SourceHosLogId field if it's non-nil, zero value otherwise
+GetSourceHosEventIdOk returns a tuple with the SourceHosEventId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceHosLogId
+### SetSourceHosEventId
 
-`func (o *BaseHosViolation) SetSourceHosLogId(v string)`
+`func (o *BaseHosViolation) SetSourceHosEventId(v string)`
 
-SetSourceHosLogId sets SourceHosLogId field to given value.
+SetSourceHosEventId sets SourceHosEventId field to given value.
 
-### HasSourceHosLogId
+### HasSourceHosEventId
 
-`func (o *BaseHosViolation) HasSourceHosLogId() bool`
+`func (o *BaseHosViolation) HasSourceHosEventId() bool`
 
-HasSourceHosLogId returns a boolean if a field has been set.
+HasSourceHosEventId returns a boolean if a field has been set.
 
-### SetSourceHosLogIdNil
+### SetSourceHosEventIdNil
 
-`func (o *BaseHosViolation) SetSourceHosLogIdNil(b bool)`
+`func (o *BaseHosViolation) SetSourceHosEventIdNil(b bool)`
 
- SetSourceHosLogIdNil sets the value for SourceHosLogId to be an explicit nil
+ SetSourceHosEventIdNil sets the value for SourceHosEventId to be an explicit nil
 
-### UnsetSourceHosLogId
-`func (o *BaseHosViolation) UnsetSourceHosLogId()`
+### UnsetSourceHosEventId
+`func (o *BaseHosViolation) UnsetSourceHosEventId()`
 
-UnsetSourceHosLogId ensures that no value is present for SourceHosLogId, not even an explicit nil
+UnsetSourceHosEventId ensures that no value is present for SourceHosEventId, not even an explicit nil
 ### GetViolationCode
 
 `func (o *BaseHosViolation) GetViolationCode() HosViolationCodeEnum`

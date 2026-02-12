@@ -46,7 +46,7 @@ func main() {
 		c,
 		context.Background(),
 		opts,
-		func(loc telematicsapi.VehicleLocation) error {
+		func(loc telematicsapi.VehicleLocationRead) error {
 			count++
 
 			// Print details for every 100th location to avoid spamming the console

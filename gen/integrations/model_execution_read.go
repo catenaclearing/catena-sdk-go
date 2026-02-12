@@ -39,7 +39,8 @@ type ExecutionRead struct {
 	// The name of the TSP integration used for this execution.
 	SourceName TspEnum `json:"source_name"`
 	// The type of resource being fetched (e.g., VEHICLE, DRIVER, HOS, IFTA).
-	Resource ResourceEnum `json:"resource"`
+	Resource ResourceEnum   `json:"resource"`
+	Cursor   NullableString `json:"cursor,omitempty"`
 }
 
 type _ExecutionRead ExecutionRead
@@ -286,6 +287,49 @@ func (o *ExecutionRead) SetResource(v ResourceEnum) {
 	o.Resource = v
 }
 
+// GetCursor returns the Cursor field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ExecutionRead) GetCursor() string {
+	if o == nil || IsNil(o.Cursor.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Cursor.Get()
+}
+
+// GetCursorOk returns a tuple with the Cursor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ExecutionRead) GetCursorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cursor.Get(), o.Cursor.IsSet()
+}
+
+// HasCursor returns a boolean if a field has been set.
+func (o *ExecutionRead) HasCursor() bool {
+	if o != nil && o.Cursor.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCursor gets a reference to the given NullableString and assigns it to the Cursor field.
+func (o *ExecutionRead) SetCursor(v string) {
+	o.Cursor.Set(&v)
+}
+
+// SetCursorNil sets the value for Cursor to be an explicit nil
+func (o *ExecutionRead) SetCursorNil() {
+	o.Cursor.Set(nil)
+}
+
+// UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
+func (o *ExecutionRead) UnsetCursor() {
+	o.Cursor.Unset()
+}
+
 func (o ExecutionRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -305,6 +349,9 @@ func (o ExecutionRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["resource"] = o.Resource
+	if o.Cursor.IsSet() {
+		toSerialize["cursor"] = o.Cursor.Get()
+	}
 	return toSerialize, nil
 }
 

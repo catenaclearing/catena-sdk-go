@@ -20,6 +20,24 @@ Official Go SDK for the Catena Telematics API. This SDK provides type-safe Go cl
 go get github.com/catenaclearing/catena-sdk-go
 ```
 
+Install the latest tagged GitHub release:
+
+```bash
+go get github.com/catenaclearing/catena-sdk-go@latest
+```
+
+Verify the resolved version:
+
+```bash
+go list -m github.com/catenaclearing/catena-sdk-go
+```
+
+Install a specific release tag:
+
+```bash
+go get github.com/catenaclearing/catena-sdk-go@v1.2.3
+```
+
 Individual packages:
 
 ```bash

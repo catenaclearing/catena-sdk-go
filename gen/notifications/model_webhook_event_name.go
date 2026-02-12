@@ -20,59 +20,72 @@ type WebhookEventName string
 
 // List of WebhookEventName
 const (
-	WEBHOOKEVENTNAME_INVITATION_CREATED        WebhookEventName = "invitation.created"
-	WEBHOOKEVENTNAME_INVITATION_REJECTED       WebhookEventName = "invitation.rejected"
-	WEBHOOKEVENTNAME_INVITATION_DECLINED       WebhookEventName = "invitation.declined"
-	WEBHOOKEVENTNAME_INVITATION_VIEWED         WebhookEventName = "invitation.viewed"
-	WEBHOOKEVENTNAME_INVITATION_SENT           WebhookEventName = "invitation.sent"
-	WEBHOOKEVENTNAME_INVITATION_ACCEPTED       WebhookEventName = "invitation.accepted"
-	WEBHOOKEVENTNAME_INVITATION_EXPIRED        WebhookEventName = "invitation.expired"
-	WEBHOOKEVENTNAME_INVITATION_DELETED        WebhookEventName = "invitation.deleted"
-	WEBHOOKEVENTNAME_INVITATION                WebhookEventName = "invitation.*"
-	WEBHOOKEVENTNAME_CONNECTION_CREATED        WebhookEventName = "connection.created"
-	WEBHOOKEVENTNAME_CONNECTION_STALED         WebhookEventName = "connection.staled"
-	WEBHOOKEVENTNAME_CONNECTION                WebhookEventName = "connection.*"
-	WEBHOOKEVENTNAME_SHARE_AGREEMENT_CREATED   WebhookEventName = "share_agreement.created"
-	WEBHOOKEVENTNAME_SHARE_AGREEMENT_UPDATED   WebhookEventName = "share_agreement.updated"
-	WEBHOOKEVENTNAME_SHARE_AGREEMENT_DELETED   WebhookEventName = "share_agreement.deleted"
-	WEBHOOKEVENTNAME_SHARE_AGREEMENT           WebhookEventName = "share_agreement.*"
-	WEBHOOKEVENTNAME_WEBHOOK_CREATED           WebhookEventName = "webhook.created"
-	WEBHOOKEVENTNAME_WEBHOOK_UPDATED           WebhookEventName = "webhook.updated"
-	WEBHOOKEVENTNAME_WEBHOOK_DELETED           WebhookEventName = "webhook.deleted"
-	WEBHOOKEVENTNAME_WEBHOOK_STALED            WebhookEventName = "webhook.staled"
-	WEBHOOKEVENTNAME_WEBHOOK                   WebhookEventName = "webhook.*"
-	WEBHOOKEVENTNAME_TSP_CREATED               WebhookEventName = "tsp.created"
-	WEBHOOKEVENTNAME_VEHICLE_ADDED             WebhookEventName = "vehicle.added"
-	WEBHOOKEVENTNAME_VEHICLE_MODIFIED          WebhookEventName = "vehicle.modified"
-	WEBHOOKEVENTNAME_VEHICLE_REMOVED           WebhookEventName = "vehicle.removed"
-	WEBHOOKEVENTNAME_VEHICLE                   WebhookEventName = "vehicle.*"
-	WEBHOOKEVENTNAME_EXECUTION_CREATED         WebhookEventName = "execution.created"
-	WEBHOOKEVENTNAME_EXECUTION_STALED          WebhookEventName = "execution.staled"
-	WEBHOOKEVENTNAME_EXECUTION_FAILED          WebhookEventName = "execution.failed"
-	WEBHOOKEVENTNAME_EXECUTION                 WebhookEventName = "execution.*"
-	WEBHOOKEVENTNAME_SCHEDULE_DEACTIVATED      WebhookEventName = "schedule.deactivated"
-	WEBHOOKEVENTNAME_SCHEDULE                  WebhookEventName = "schedule.*"
-	WEBHOOKEVENTNAME_USER_ADDED                WebhookEventName = "user.added"
-	WEBHOOKEVENTNAME_USER_MODIFIED             WebhookEventName = "user.modified"
-	WEBHOOKEVENTNAME_USER_REMOVED              WebhookEventName = "user.removed"
-	WEBHOOKEVENTNAME_USER                      WebhookEventName = "user.*"
-	WEBHOOKEVENTNAME_VEHICLE_LOCATION_ADDED    WebhookEventName = "vehicle_location.added"
-	WEBHOOKEVENTNAME_IFTA_SUMMARY_ADDED        WebhookEventName = "ifta_summary.added"
-	WEBHOOKEVENTNAME_IFTA_SUMMARY_MODIFIED     WebhookEventName = "ifta_summary.modified"
-	WEBHOOKEVENTNAME_IFTA_SUMMARY_REMOVED      WebhookEventName = "ifta_summary.removed"
-	WEBHOOKEVENTNAME_IFTA_SUMMARY              WebhookEventName = "ifta_summary.*"
-	WEBHOOKEVENTNAME_HOS_AVAILABILITY_ADDED    WebhookEventName = "hos_availability.added"
-	WEBHOOKEVENTNAME_HOS_AVAILABILITY_MODIFIED WebhookEventName = "hos_availability.modified"
-	WEBHOOKEVENTNAME_HOS_AVAILABILITY_REMOVED  WebhookEventName = "hos_availability.removed"
-	WEBHOOKEVENTNAME_HOS_AVAILABILITY          WebhookEventName = "hos_availability.*"
-	WEBHOOKEVENTNAME_HOS_EVENT_ADDED           WebhookEventName = "hos_event.added"
-	WEBHOOKEVENTNAME_HOS_EVENT_MODIFIED        WebhookEventName = "hos_event.modified"
-	WEBHOOKEVENTNAME_HOS_EVENT_REMOVED         WebhookEventName = "hos_event.removed"
-	WEBHOOKEVENTNAME_HOS_EVENT                 WebhookEventName = "hos_event.*"
-	WEBHOOKEVENTNAME_HOS_VIOLATION_ADDED       WebhookEventName = "hos_violation.added"
-	WEBHOOKEVENTNAME_HOS_VIOLATION_MODIFIED    WebhookEventName = "hos_violation.modified"
-	WEBHOOKEVENTNAME_HOS_VIOLATION_REMOVED     WebhookEventName = "hos_violation.removed"
-	WEBHOOKEVENTNAME_HOS_VIOLATION             WebhookEventName = "hos_violation.*"
+	WEBHOOKEVENTNAME_INVITATION_CREATED          WebhookEventName = "invitation.created"
+	WEBHOOKEVENTNAME_INVITATION_REJECTED         WebhookEventName = "invitation.rejected"
+	WEBHOOKEVENTNAME_INVITATION_DECLINED         WebhookEventName = "invitation.declined"
+	WEBHOOKEVENTNAME_INVITATION_VIEWED           WebhookEventName = "invitation.viewed"
+	WEBHOOKEVENTNAME_INVITATION_SENT             WebhookEventName = "invitation.sent"
+	WEBHOOKEVENTNAME_INVITATION_ACCEPTED         WebhookEventName = "invitation.accepted"
+	WEBHOOKEVENTNAME_INVITATION_EXPIRED          WebhookEventName = "invitation.expired"
+	WEBHOOKEVENTNAME_INVITATION_DELETED          WebhookEventName = "invitation.deleted"
+	WEBHOOKEVENTNAME_INVITATION                  WebhookEventName = "invitation.*"
+	WEBHOOKEVENTNAME_CONNECTION_CREATED          WebhookEventName = "connection.created"
+	WEBHOOKEVENTNAME_CONNECTION_STALED           WebhookEventName = "connection.staled"
+	WEBHOOKEVENTNAME_CONNECTION                  WebhookEventName = "connection.*"
+	WEBHOOKEVENTNAME_FLEET_CONNECTION_CREATED    WebhookEventName = "fleet_connection.created"
+	WEBHOOKEVENTNAME_FLEET_CONNECTION            WebhookEventName = "fleet_connection.*"
+	WEBHOOKEVENTNAME_SHARE_AGREEMENT_CREATED     WebhookEventName = "share_agreement.created"
+	WEBHOOKEVENTNAME_SHARE_AGREEMENT_UPDATED     WebhookEventName = "share_agreement.updated"
+	WEBHOOKEVENTNAME_SHARE_AGREEMENT_DELETED     WebhookEventName = "share_agreement.deleted"
+	WEBHOOKEVENTNAME_SHARE_AGREEMENT             WebhookEventName = "share_agreement.*"
+	WEBHOOKEVENTNAME_WEBHOOK_CREATED             WebhookEventName = "webhook.created"
+	WEBHOOKEVENTNAME_WEBHOOK_UPDATED             WebhookEventName = "webhook.updated"
+	WEBHOOKEVENTNAME_WEBHOOK_DELETED             WebhookEventName = "webhook.deleted"
+	WEBHOOKEVENTNAME_WEBHOOK_STALED              WebhookEventName = "webhook.staled"
+	WEBHOOKEVENTNAME_WEBHOOK                     WebhookEventName = "webhook.*"
+	WEBHOOKEVENTNAME_TSP_CREATED                 WebhookEventName = "tsp.created"
+	WEBHOOKEVENTNAME_VEHICLE_ADDED               WebhookEventName = "vehicle.added"
+	WEBHOOKEVENTNAME_VEHICLE_MODIFIED            WebhookEventName = "vehicle.modified"
+	WEBHOOKEVENTNAME_VEHICLE_REMOVED             WebhookEventName = "vehicle.removed"
+	WEBHOOKEVENTNAME_VEHICLE                     WebhookEventName = "vehicle.*"
+	WEBHOOKEVENTNAME_TRAILER_ADDED               WebhookEventName = "trailer.added"
+	WEBHOOKEVENTNAME_TRAILER_MODIFIED            WebhookEventName = "trailer.modified"
+	WEBHOOKEVENTNAME_TRAILER_REMOVED             WebhookEventName = "trailer.removed"
+	WEBHOOKEVENTNAME_TRAILER                     WebhookEventName = "trailer.*"
+	WEBHOOKEVENTNAME_TRAILER_LOCATION_ADDED      WebhookEventName = "trailer_location.added"
+	WEBHOOKEVENTNAME_TRAILER_LOCATION_MODIFIED   WebhookEventName = "trailer_location.modified"
+	WEBHOOKEVENTNAME_TRAILER_LOCATION            WebhookEventName = "trailer_location.*"
+	WEBHOOKEVENTNAME_EXECUTION_CREATED           WebhookEventName = "execution.created"
+	WEBHOOKEVENTNAME_EXECUTION_STALED            WebhookEventName = "execution.staled"
+	WEBHOOKEVENTNAME_EXECUTION_FAILED            WebhookEventName = "execution.failed"
+	WEBHOOKEVENTNAME_EXECUTION                   WebhookEventName = "execution.*"
+	WEBHOOKEVENTNAME_SCHEDULE_DEACTIVATED        WebhookEventName = "schedule.deactivated"
+	WEBHOOKEVENTNAME_SCHEDULE                    WebhookEventName = "schedule.*"
+	WEBHOOKEVENTNAME_USER_ADDED                  WebhookEventName = "user.added"
+	WEBHOOKEVENTNAME_USER_MODIFIED               WebhookEventName = "user.modified"
+	WEBHOOKEVENTNAME_USER_REMOVED                WebhookEventName = "user.removed"
+	WEBHOOKEVENTNAME_USER                        WebhookEventName = "user.*"
+	WEBHOOKEVENTNAME_VEHICLE_LOCATION_ADDED      WebhookEventName = "vehicle_location.added"
+	WEBHOOKEVENTNAME_IFTA_SUMMARY_ADDED          WebhookEventName = "ifta_summary.added"
+	WEBHOOKEVENTNAME_IFTA_SUMMARY_MODIFIED       WebhookEventName = "ifta_summary.modified"
+	WEBHOOKEVENTNAME_IFTA_SUMMARY_REMOVED        WebhookEventName = "ifta_summary.removed"
+	WEBHOOKEVENTNAME_IFTA_SUMMARY                WebhookEventName = "ifta_summary.*"
+	WEBHOOKEVENTNAME_HOS_AVAILABILITY_ADDED      WebhookEventName = "hos_availability.added"
+	WEBHOOKEVENTNAME_HOS_AVAILABILITY_MODIFIED   WebhookEventName = "hos_availability.modified"
+	WEBHOOKEVENTNAME_HOS_AVAILABILITY_REMOVED    WebhookEventName = "hos_availability.removed"
+	WEBHOOKEVENTNAME_HOS_AVAILABILITY            WebhookEventName = "hos_availability.*"
+	WEBHOOKEVENTNAME_HOS_DAILY_SNAPSHOT_ADDED    WebhookEventName = "hos_daily_snapshot.added"
+	WEBHOOKEVENTNAME_HOS_DAILY_SNAPSHOT_MODIFIED WebhookEventName = "hos_daily_snapshot.modified"
+	WEBHOOKEVENTNAME_HOS_DAILY_SNAPSHOT_REMOVED  WebhookEventName = "hos_daily_snapshot.removed"
+	WEBHOOKEVENTNAME_HOS_DAILY_SNAPSHOT          WebhookEventName = "hos_daily_snapshot.*"
+	WEBHOOKEVENTNAME_HOS_EVENT_ADDED             WebhookEventName = "hos_event.added"
+	WEBHOOKEVENTNAME_HOS_EVENT_MODIFIED          WebhookEventName = "hos_event.modified"
+	WEBHOOKEVENTNAME_HOS_EVENT_REMOVED           WebhookEventName = "hos_event.removed"
+	WEBHOOKEVENTNAME_HOS_EVENT                   WebhookEventName = "hos_event.*"
+	WEBHOOKEVENTNAME_HOS_VIOLATION_ADDED         WebhookEventName = "hos_violation.added"
+	WEBHOOKEVENTNAME_HOS_VIOLATION_MODIFIED      WebhookEventName = "hos_violation.modified"
+	WEBHOOKEVENTNAME_HOS_VIOLATION_REMOVED       WebhookEventName = "hos_violation.removed"
+	WEBHOOKEVENTNAME_HOS_VIOLATION               WebhookEventName = "hos_violation.*"
 )
 
 // All allowed values of WebhookEventName enum
@@ -89,6 +102,8 @@ var AllowedWebhookEventNameEnumValues = []WebhookEventName{
 	"connection.created",
 	"connection.staled",
 	"connection.*",
+	"fleet_connection.created",
+	"fleet_connection.*",
 	"share_agreement.created",
 	"share_agreement.updated",
 	"share_agreement.deleted",
@@ -103,6 +118,13 @@ var AllowedWebhookEventNameEnumValues = []WebhookEventName{
 	"vehicle.modified",
 	"vehicle.removed",
 	"vehicle.*",
+	"trailer.added",
+	"trailer.modified",
+	"trailer.removed",
+	"trailer.*",
+	"trailer_location.added",
+	"trailer_location.modified",
+	"trailer_location.*",
 	"execution.created",
 	"execution.staled",
 	"execution.failed",
@@ -122,6 +144,10 @@ var AllowedWebhookEventNameEnumValues = []WebhookEventName{
 	"hos_availability.modified",
 	"hos_availability.removed",
 	"hos_availability.*",
+	"hos_daily_snapshot.added",
+	"hos_daily_snapshot.modified",
+	"hos_daily_snapshot.removed",
+	"hos_daily_snapshot.*",
 	"hos_event.added",
 	"hos_event.modified",
 	"hos_event.removed",
