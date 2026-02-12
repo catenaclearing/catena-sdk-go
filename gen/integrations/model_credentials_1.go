@@ -18,6 +18,7 @@ import (
 // Credentials1 The connection credentials used to authenticate with the TSP.
 type Credentials1 struct {
 	AccessTokenCredsOutput      *AccessTokenCredsOutput
+	ApiAuthCredsOutput          *ApiAuthCredsOutput
 	ApiBasicCredsOutput         *ApiBasicCredsOutput
 	ApiKeyCredsOutput           *ApiKeyCredsOutput
 	AzugaSLCOutput              *AzugaSLCOutput
@@ -43,6 +44,7 @@ type Credentials1 struct {
 	SamsaraCredsOutput          *SamsaraCredsOutput
 	SftpCredsOutput             *SftpCredsOutput
 	SpireonSLCOutput            *SpireonSLCOutput
+	SwitchBoardCredsOutput      *SwitchBoardCredsOutput
 	TTCredsOutput               *TTCredsOutput
 	TokenCredsOutput            *TokenCredsOutput
 	TruckXCredsOutput           *TruckXCredsOutput
@@ -64,6 +66,19 @@ func (dst *Credentials1) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.AccessTokenCredsOutput = nil
+	}
+
+	// try to unmarshal JSON data into ApiAuthCredsOutput
+	err = json.Unmarshal(data, &dst.ApiAuthCredsOutput)
+	if err == nil {
+		jsonApiAuthCredsOutput, _ := json.Marshal(dst.ApiAuthCredsOutput)
+		if string(jsonApiAuthCredsOutput) == "{}" { // empty struct
+			dst.ApiAuthCredsOutput = nil
+		} else {
+			return nil // data stored in dst.ApiAuthCredsOutput, return on the first match
+		}
+	} else {
+		dst.ApiAuthCredsOutput = nil
 	}
 
 	// try to unmarshal JSON data into ApiBasicCredsOutput
@@ -391,6 +406,19 @@ func (dst *Credentials1) UnmarshalJSON(data []byte) error {
 		dst.SpireonSLCOutput = nil
 	}
 
+	// try to unmarshal JSON data into SwitchBoardCredsOutput
+	err = json.Unmarshal(data, &dst.SwitchBoardCredsOutput)
+	if err == nil {
+		jsonSwitchBoardCredsOutput, _ := json.Marshal(dst.SwitchBoardCredsOutput)
+		if string(jsonSwitchBoardCredsOutput) == "{}" { // empty struct
+			dst.SwitchBoardCredsOutput = nil
+		} else {
+			return nil // data stored in dst.SwitchBoardCredsOutput, return on the first match
+		}
+	} else {
+		dst.SwitchBoardCredsOutput = nil
+	}
+
 	// try to unmarshal JSON data into TTCredsOutput
 	err = json.Unmarshal(data, &dst.TTCredsOutput)
 	if err == nil {
@@ -463,6 +491,10 @@ func (dst *Credentials1) UnmarshalJSON(data []byte) error {
 func (src Credentials1) MarshalJSON() ([]byte, error) {
 	if src.AccessTokenCredsOutput != nil {
 		return json.Marshal(&src.AccessTokenCredsOutput)
+	}
+
+	if src.ApiAuthCredsOutput != nil {
+		return json.Marshal(&src.ApiAuthCredsOutput)
 	}
 
 	if src.ApiBasicCredsOutput != nil {
@@ -563,6 +595,10 @@ func (src Credentials1) MarshalJSON() ([]byte, error) {
 
 	if src.SpireonSLCOutput != nil {
 		return json.Marshal(&src.SpireonSLCOutput)
+	}
+
+	if src.SwitchBoardCredsOutput != nil {
+		return json.Marshal(&src.SwitchBoardCredsOutput)
 	}
 
 	if src.TTCredsOutput != nil {

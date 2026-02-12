@@ -20,7 +20,7 @@ import (
 // checks if the ConnectionCreated type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConnectionCreated{}
 
-// ConnectionCreated Connection created event.
+// ConnectionCreated Connection created event. A connection is how we ingest data from a TSP.
 type ConnectionCreated struct {
 	// Version of the schema used for this event
 	Version   string  `json:"version" validate:"regexp=^\\\\d+\\\\.\\\\d+$"`

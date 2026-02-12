@@ -33,7 +33,17 @@ func {{.MethodName}}Each(c *catena.Client, ctx context.Context, opts {{.MethodNa
 		{{- range .OptionalParams}}
 		if opts.{{.GoName}} != nil {
 			{{- if .IsEnum}}
+			{{- if .IsEnumSlice}}
+			req = req.{{.GoName}}(func(in []string) []{{.EnumType}} {
+				out := make([]{{.EnumType}}, len(in))
+				for i, v := range in {
+					out[i] = {{.EnumType}}(v)
+				}
+				return out
+			}(*opts.{{.GoName}}))
+			{{- else}}
 			req = req.{{.GoName}}({{.EnumType}}(*opts.{{.GoName}}))
+			{{- end}}
 			{{- else}}
 			req = req.{{.GoName}}(*opts.{{.GoName}})
 			{{- end}}

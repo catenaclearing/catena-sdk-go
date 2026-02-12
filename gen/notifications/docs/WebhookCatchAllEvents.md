@@ -7,11 +7,17 @@
 
 * `CONNECTION` (value: `"connection.*"`)
 
+* `FLEET_CONNECTION` (value: `"fleet_connection.*"`)
+
 * `SHARE_AGREEMENT` (value: `"share_agreement.*"`)
 
 * `WEBHOOK` (value: `"webhook.*"`)
 
 * `VEHICLE` (value: `"vehicle.*"`)
+
+* `TRAILER` (value: `"trailer.*"`)
+
+* `TRAILER_LOCATION` (value: `"trailer_location.*"`)
 
 * `USER` (value: `"user.*"`)
 
@@ -20,6 +26,8 @@
 * `IFTA_SUMMARY` (value: `"ifta_summary.*"`)
 
 * `HOS_AVAILABILITY` (value: `"hos_availability.*"`)
+
+* `HOS_DAILY_SNAPSHOT` (value: `"hos_daily_snapshot.*"`)
 
 * `HOS_EVENT` (value: `"hos_event.*"`)
 

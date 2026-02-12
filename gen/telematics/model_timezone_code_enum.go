@@ -78,6 +78,117 @@ const (
 	TIMEZONECODEENUM_AMERICA_HALIFAX                TimezoneCodeEnum = "America/Halifax"
 	TIMEZONECODEENUM_AMERICA_MONCTON                TimezoneCodeEnum = "America/Moncton"
 	TIMEZONECODEENUM_AMERICA_ST_JOHNS               TimezoneCodeEnum = "America/St_Johns"
+	TIMEZONECODEENUM_AMERICA_MEXICO_CITY            TimezoneCodeEnum = "America/Mexico_City"
+	TIMEZONECODEENUM_AMERICA_CANCUN                 TimezoneCodeEnum = "America/Cancun"
+	TIMEZONECODEENUM_AMERICA_MERIDA                 TimezoneCodeEnum = "America/Merida"
+	TIMEZONECODEENUM_AMERICA_MONTERREY              TimezoneCodeEnum = "America/Monterrey"
+	TIMEZONECODEENUM_AMERICA_MAZATLAN               TimezoneCodeEnum = "America/Mazatlan"
+	TIMEZONECODEENUM_AMERICA_CHIHUAHUA              TimezoneCodeEnum = "America/Chihuahua"
+	TIMEZONECODEENUM_AMERICA_HERMOSILLO             TimezoneCodeEnum = "America/Hermosillo"
+	TIMEZONECODEENUM_AMERICA_TIJUANA                TimezoneCodeEnum = "America/Tijuana"
+	TIMEZONECODEENUM_AMERICA_MATAMOROS              TimezoneCodeEnum = "America/Matamoros"
+	TIMEZONECODEENUM_AMERICA_OJINAGA                TimezoneCodeEnum = "America/Ojinaga"
+	TIMEZONECODEENUM_AMERICA_CIUDAD_JUAREZ          TimezoneCodeEnum = "America/Ciudad_Juarez"
+	TIMEZONECODEENUM_AMERICA_GUATEMALA              TimezoneCodeEnum = "America/Guatemala"
+	TIMEZONECODEENUM_AMERICA_BELIZE                 TimezoneCodeEnum = "America/Belize"
+	TIMEZONECODEENUM_AMERICA_TEGUCIGALPA            TimezoneCodeEnum = "America/Tegucigalpa"
+	TIMEZONECODEENUM_AMERICA_MANAGUA                TimezoneCodeEnum = "America/Managua"
+	TIMEZONECODEENUM_AMERICA_COSTA_RICA             TimezoneCodeEnum = "America/Costa_Rica"
+	TIMEZONECODEENUM_AMERICA_PANAMA                 TimezoneCodeEnum = "America/Panama"
+	TIMEZONECODEENUM_AMERICA_BOGOTA                 TimezoneCodeEnum = "America/Bogota"
+	TIMEZONECODEENUM_AMERICA_LIMA                   TimezoneCodeEnum = "America/Lima"
+	TIMEZONECODEENUM_AMERICA_SANTIAGO               TimezoneCodeEnum = "America/Santiago"
+	TIMEZONECODEENUM_AMERICA_ARGENTINA_BUENOS_AIRES TimezoneCodeEnum = "America/Argentina/Buenos_Aires"
+	TIMEZONECODEENUM_AMERICA_SAO_PAULO              TimezoneCodeEnum = "America/Sao_Paulo"
+	TIMEZONECODEENUM_AMERICA_MONTEVIDEO             TimezoneCodeEnum = "America/Montevideo"
+	TIMEZONECODEENUM_AMERICA_PUERTO_RICO            TimezoneCodeEnum = "America/Puerto_Rico"
+	TIMEZONECODEENUM_EUROPE_LONDON                  TimezoneCodeEnum = "Europe/London"
+	TIMEZONECODEENUM_EUROPE_DUBLIN                  TimezoneCodeEnum = "Europe/Dublin"
+	TIMEZONECODEENUM_EUROPE_LISBON                  TimezoneCodeEnum = "Europe/Lisbon"
+	TIMEZONECODEENUM_EUROPE_MADRID                  TimezoneCodeEnum = "Europe/Madrid"
+	TIMEZONECODEENUM_EUROPE_PARIS                   TimezoneCodeEnum = "Europe/Paris"
+	TIMEZONECODEENUM_EUROPE_BRUSSELS                TimezoneCodeEnum = "Europe/Brussels"
+	TIMEZONECODEENUM_EUROPE_AMSTERDAM               TimezoneCodeEnum = "Europe/Amsterdam"
+	TIMEZONECODEENUM_EUROPE_LUXEMBOURG              TimezoneCodeEnum = "Europe/Luxembourg"
+	TIMEZONECODEENUM_EUROPE_BERLIN                  TimezoneCodeEnum = "Europe/Berlin"
+	TIMEZONECODEENUM_EUROPE_ZURICH                  TimezoneCodeEnum = "Europe/Zurich"
+	TIMEZONECODEENUM_EUROPE_VIENNA                  TimezoneCodeEnum = "Europe/Vienna"
+	TIMEZONECODEENUM_EUROPE_ROME                    TimezoneCodeEnum = "Europe/Rome"
+	TIMEZONECODEENUM_EUROPE_COPENHAGEN              TimezoneCodeEnum = "Europe/Copenhagen"
+	TIMEZONECODEENUM_EUROPE_STOCKHOLM               TimezoneCodeEnum = "Europe/Stockholm"
+	TIMEZONECODEENUM_EUROPE_OSLO                    TimezoneCodeEnum = "Europe/Oslo"
+	TIMEZONECODEENUM_EUROPE_PRAGUE                  TimezoneCodeEnum = "Europe/Prague"
+	TIMEZONECODEENUM_EUROPE_BUDAPEST                TimezoneCodeEnum = "Europe/Budapest"
+	TIMEZONECODEENUM_EUROPE_WARSAW                  TimezoneCodeEnum = "Europe/Warsaw"
+	TIMEZONECODEENUM_EUROPE_HELSINKI                TimezoneCodeEnum = "Europe/Helsinki"
+	TIMEZONECODEENUM_EUROPE_TALLINN                 TimezoneCodeEnum = "Europe/Tallinn"
+	TIMEZONECODEENUM_EUROPE_RIGA                    TimezoneCodeEnum = "Europe/Riga"
+	TIMEZONECODEENUM_EUROPE_VILNIUS                 TimezoneCodeEnum = "Europe/Vilnius"
+	TIMEZONECODEENUM_EUROPE_BELGRADE                TimezoneCodeEnum = "Europe/Belgrade"
+	TIMEZONECODEENUM_EUROPE_TIRANE                  TimezoneCodeEnum = "Europe/Tirane"
+	TIMEZONECODEENUM_EUROPE_SOFIA                   TimezoneCodeEnum = "Europe/Sofia"
+	TIMEZONECODEENUM_EUROPE_ATHENS                  TimezoneCodeEnum = "Europe/Athens"
+	TIMEZONECODEENUM_EUROPE_BUCHAREST               TimezoneCodeEnum = "Europe/Bucharest"
+	TIMEZONECODEENUM_EUROPE_KYIV                    TimezoneCodeEnum = "Europe/Kyiv"
+	TIMEZONECODEENUM_EUROPE_CHISINAU                TimezoneCodeEnum = "Europe/Chisinau"
+	TIMEZONECODEENUM_EUROPE_ISTANBUL                TimezoneCodeEnum = "Europe/Istanbul"
+	TIMEZONECODEENUM_EUROPE_KALININGRAD             TimezoneCodeEnum = "Europe/Kaliningrad"
+	TIMEZONECODEENUM_EUROPE_MOSCOW                  TimezoneCodeEnum = "Europe/Moscow"
+	TIMEZONECODEENUM_EUROPE_SAMARA                  TimezoneCodeEnum = "Europe/Samara"
+	TIMEZONECODEENUM_AFRICA_CASABLANCA              TimezoneCodeEnum = "Africa/Casablanca"
+	TIMEZONECODEENUM_AFRICA_ALGIERS                 TimezoneCodeEnum = "Africa/Algiers"
+	TIMEZONECODEENUM_AFRICA_TUNIS                   TimezoneCodeEnum = "Africa/Tunis"
+	TIMEZONECODEENUM_AFRICA_CAIRO                   TimezoneCodeEnum = "Africa/Cairo"
+	TIMEZONECODEENUM_AFRICA_TRIPOLI                 TimezoneCodeEnum = "Africa/Tripoli"
+	TIMEZONECODEENUM_AFRICA_LAGOS                   TimezoneCodeEnum = "Africa/Lagos"
+	TIMEZONECODEENUM_AFRICA_ACCRA                   TimezoneCodeEnum = "Africa/Accra"
+	TIMEZONECODEENUM_AFRICA_DAKAR                   TimezoneCodeEnum = "Africa/Dakar"
+	TIMEZONECODEENUM_AFRICA_ABIDJAN                 TimezoneCodeEnum = "Africa/Abidjan"
+	TIMEZONECODEENUM_AFRICA_NAIROBI                 TimezoneCodeEnum = "Africa/Nairobi"
+	TIMEZONECODEENUM_AFRICA_DAR_ES_SALAAM           TimezoneCodeEnum = "Africa/Dar_es_Salaam"
+	TIMEZONECODEENUM_AFRICA_KAMPALA                 TimezoneCodeEnum = "Africa/Kampala"
+	TIMEZONECODEENUM_AFRICA_JOHANNESBURG            TimezoneCodeEnum = "Africa/Johannesburg"
+	TIMEZONECODEENUM_AFRICA_MAPUTO                  TimezoneCodeEnum = "Africa/Maputo"
+	TIMEZONECODEENUM_AFRICA_WINDHOEK                TimezoneCodeEnum = "Africa/Windhoek"
+	TIMEZONECODEENUM_ASIA_DUBAI                     TimezoneCodeEnum = "Asia/Dubai"
+	TIMEZONECODEENUM_ASIA_RIYADH                    TimezoneCodeEnum = "Asia/Riyadh"
+	TIMEZONECODEENUM_ASIA_QATAR                     TimezoneCodeEnum = "Asia/Qatar"
+	TIMEZONECODEENUM_ASIA_KUWAIT                    TimezoneCodeEnum = "Asia/Kuwait"
+	TIMEZONECODEENUM_ASIA_BAHRAIN                   TimezoneCodeEnum = "Asia/Bahrain"
+	TIMEZONECODEENUM_ASIA_MUSCAT                    TimezoneCodeEnum = "Asia/Muscat"
+	TIMEZONECODEENUM_ASIA_BAGHDAD                   TimezoneCodeEnum = "Asia/Baghdad"
+	TIMEZONECODEENUM_ASIA_AMMAN                     TimezoneCodeEnum = "Asia/Amman"
+	TIMEZONECODEENUM_ASIA_BEIRUT                    TimezoneCodeEnum = "Asia/Beirut"
+	TIMEZONECODEENUM_ASIA_JERUSALEM                 TimezoneCodeEnum = "Asia/Jerusalem"
+	TIMEZONECODEENUM_ASIA_BAKU                      TimezoneCodeEnum = "Asia/Baku"
+	TIMEZONECODEENUM_ASIA_TBILISI                   TimezoneCodeEnum = "Asia/Tbilisi"
+	TIMEZONECODEENUM_ASIA_YEREVAN                   TimezoneCodeEnum = "Asia/Yerevan"
+	TIMEZONECODEENUM_ASIA_ALMATY                    TimezoneCodeEnum = "Asia/Almaty"
+	TIMEZONECODEENUM_ASIA_TASHKENT                  TimezoneCodeEnum = "Asia/Tashkent"
+	TIMEZONECODEENUM_ASIA_KARACHI                   TimezoneCodeEnum = "Asia/Karachi"
+	TIMEZONECODEENUM_ASIA_KOLKATA                   TimezoneCodeEnum = "Asia/Kolkata"
+	TIMEZONECODEENUM_ASIA_DHAKA                     TimezoneCodeEnum = "Asia/Dhaka"
+	TIMEZONECODEENUM_ASIA_COLOMBO                   TimezoneCodeEnum = "Asia/Colombo"
+	TIMEZONECODEENUM_ASIA_KATHMANDU                 TimezoneCodeEnum = "Asia/Kathmandu"
+	TIMEZONECODEENUM_ASIA_BANGKOK                   TimezoneCodeEnum = "Asia/Bangkok"
+	TIMEZONECODEENUM_ASIA_HO_CHI_MINH               TimezoneCodeEnum = "Asia/Ho_Chi_Minh"
+	TIMEZONECODEENUM_ASIA_SINGAPORE                 TimezoneCodeEnum = "Asia/Singapore"
+	TIMEZONECODEENUM_ASIA_KUALA_LUMPUR              TimezoneCodeEnum = "Asia/Kuala_Lumpur"
+	TIMEZONECODEENUM_ASIA_JAKARTA                   TimezoneCodeEnum = "Asia/Jakarta"
+	TIMEZONECODEENUM_ASIA_MANILA                    TimezoneCodeEnum = "Asia/Manila"
+	TIMEZONECODEENUM_ASIA_SHANGHAI                  TimezoneCodeEnum = "Asia/Shanghai"
+	TIMEZONECODEENUM_ASIA_HONG_KONG                 TimezoneCodeEnum = "Asia/Hong_Kong"
+	TIMEZONECODEENUM_ASIA_TAIPEI                    TimezoneCodeEnum = "Asia/Taipei"
+	TIMEZONECODEENUM_ASIA_SEOUL                     TimezoneCodeEnum = "Asia/Seoul"
+	TIMEZONECODEENUM_ASIA_TOKYO                     TimezoneCodeEnum = "Asia/Tokyo"
+	TIMEZONECODEENUM_AUSTRALIA_SYDNEY               TimezoneCodeEnum = "Australia/Sydney"
+	TIMEZONECODEENUM_AUSTRALIA_MELBOURNE            TimezoneCodeEnum = "Australia/Melbourne"
+	TIMEZONECODEENUM_AUSTRALIA_BRISBANE             TimezoneCodeEnum = "Australia/Brisbane"
+	TIMEZONECODEENUM_AUSTRALIA_ADELAIDE             TimezoneCodeEnum = "Australia/Adelaide"
+	TIMEZONECODEENUM_AUSTRALIA_PERTH                TimezoneCodeEnum = "Australia/Perth"
+	TIMEZONECODEENUM_AUSTRALIA_DARWIN               TimezoneCodeEnum = "Australia/Darwin"
+	TIMEZONECODEENUM_AUSTRALIA_HOBART               TimezoneCodeEnum = "Australia/Hobart"
+	TIMEZONECODEENUM_PACIFIC_AUCKLAND               TimezoneCodeEnum = "Pacific/Auckland"
 )
 
 // All allowed values of TimezoneCodeEnum enum
@@ -140,6 +251,117 @@ var AllowedTimezoneCodeEnumEnumValues = []TimezoneCodeEnum{
 	"America/Halifax",
 	"America/Moncton",
 	"America/St_Johns",
+	"America/Mexico_City",
+	"America/Cancun",
+	"America/Merida",
+	"America/Monterrey",
+	"America/Mazatlan",
+	"America/Chihuahua",
+	"America/Hermosillo",
+	"America/Tijuana",
+	"America/Matamoros",
+	"America/Ojinaga",
+	"America/Ciudad_Juarez",
+	"America/Guatemala",
+	"America/Belize",
+	"America/Tegucigalpa",
+	"America/Managua",
+	"America/Costa_Rica",
+	"America/Panama",
+	"America/Bogota",
+	"America/Lima",
+	"America/Santiago",
+	"America/Argentina/Buenos_Aires",
+	"America/Sao_Paulo",
+	"America/Montevideo",
+	"America/Puerto_Rico",
+	"Europe/London",
+	"Europe/Dublin",
+	"Europe/Lisbon",
+	"Europe/Madrid",
+	"Europe/Paris",
+	"Europe/Brussels",
+	"Europe/Amsterdam",
+	"Europe/Luxembourg",
+	"Europe/Berlin",
+	"Europe/Zurich",
+	"Europe/Vienna",
+	"Europe/Rome",
+	"Europe/Copenhagen",
+	"Europe/Stockholm",
+	"Europe/Oslo",
+	"Europe/Prague",
+	"Europe/Budapest",
+	"Europe/Warsaw",
+	"Europe/Helsinki",
+	"Europe/Tallinn",
+	"Europe/Riga",
+	"Europe/Vilnius",
+	"Europe/Belgrade",
+	"Europe/Tirane",
+	"Europe/Sofia",
+	"Europe/Athens",
+	"Europe/Bucharest",
+	"Europe/Kyiv",
+	"Europe/Chisinau",
+	"Europe/Istanbul",
+	"Europe/Kaliningrad",
+	"Europe/Moscow",
+	"Europe/Samara",
+	"Africa/Casablanca",
+	"Africa/Algiers",
+	"Africa/Tunis",
+	"Africa/Cairo",
+	"Africa/Tripoli",
+	"Africa/Lagos",
+	"Africa/Accra",
+	"Africa/Dakar",
+	"Africa/Abidjan",
+	"Africa/Nairobi",
+	"Africa/Dar_es_Salaam",
+	"Africa/Kampala",
+	"Africa/Johannesburg",
+	"Africa/Maputo",
+	"Africa/Windhoek",
+	"Asia/Dubai",
+	"Asia/Riyadh",
+	"Asia/Qatar",
+	"Asia/Kuwait",
+	"Asia/Bahrain",
+	"Asia/Muscat",
+	"Asia/Baghdad",
+	"Asia/Amman",
+	"Asia/Beirut",
+	"Asia/Jerusalem",
+	"Asia/Baku",
+	"Asia/Tbilisi",
+	"Asia/Yerevan",
+	"Asia/Almaty",
+	"Asia/Tashkent",
+	"Asia/Karachi",
+	"Asia/Kolkata",
+	"Asia/Dhaka",
+	"Asia/Colombo",
+	"Asia/Kathmandu",
+	"Asia/Bangkok",
+	"Asia/Ho_Chi_Minh",
+	"Asia/Singapore",
+	"Asia/Kuala_Lumpur",
+	"Asia/Jakarta",
+	"Asia/Manila",
+	"Asia/Shanghai",
+	"Asia/Hong_Kong",
+	"Asia/Taipei",
+	"Asia/Seoul",
+	"Asia/Tokyo",
+	"Australia/Sydney",
+	"Australia/Melbourne",
+	"Australia/Brisbane",
+	"Australia/Adelaide",
+	"Australia/Perth",
+	"Australia/Darwin",
+	"Australia/Hobart",
+	"Pacific/Auckland",
 }
 
 func (v *TimezoneCodeEnum) UnmarshalJSON(src []byte) error {

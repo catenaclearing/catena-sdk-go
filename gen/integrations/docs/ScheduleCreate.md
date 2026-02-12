@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ConsecutiveErrorThreshold** | Pointer to **int32** | The number of consecutive errors allowed before the schedule is automatically set to INACTIVE. Defaults to 15. | [optional] [default to 15]
 **MaxConcurrentExecutions** | Pointer to **int32** | The maximum number of concurrent executions allowed for this schedule. Defaults to 1. | [optional] [default to 1]
 **Status** | Pointer to [**StatusEnum**](StatusEnum.md) | The initial status of the schedule. Defaults to ACTIVE. | [optional] 
+**Cursor** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -149,6 +150,41 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
+### GetCursor
+
+`func (o *ScheduleCreate) GetCursor() string`
+
+GetCursor returns the Cursor field if non-nil, zero value otherwise.
+
+### GetCursorOk
+
+`func (o *ScheduleCreate) GetCursorOk() (*string, bool)`
+
+GetCursorOk returns a tuple with the Cursor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursor
+
+`func (o *ScheduleCreate) SetCursor(v string)`
+
+SetCursor sets Cursor field to given value.
+
+### HasCursor
+
+`func (o *ScheduleCreate) HasCursor() bool`
+
+HasCursor returns a boolean if a field has been set.
+
+### SetCursorNil
+
+`func (o *ScheduleCreate) SetCursorNil(b bool)`
+
+ SetCursorNil sets the value for Cursor to be an explicit nil
+
+### UnsetCursor
+`func (o *ScheduleCreate) UnsetCursor()`
+
+UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -25,7 +25,8 @@ type BaseHosAvailability struct {
 	// Internal unique identifier for the telematics event record (Catena PK).
 	Id string `json:"id"`
 	// The Catena fleet this record belongs to (multi-tenant scope).
-	FleetId string `json:"fleet_id"`
+	FleetId  string         `json:"fleet_id"`
+	FleetRef NullableString `json:"fleet_ref"`
 	// The name of the source
 	SourceName TspEnum `json:"source_name"`
 	// The specific fleet↔TSP connection through which this record was sourced.
@@ -44,8 +45,6 @@ type BaseHosAvailability struct {
 	DriverId                             NullableString             `json:"driver_id,omitempty"`
 	VehicleId                            NullableString             `json:"vehicle_id,omitempty"`
 	HosRulesetCode                       NullableHosRulesetCodeEnum `json:"hos_ruleset_code,omitempty"`
-	RegionCode                           NullableHosRegionCodeEnum  `json:"region_code,omitempty"`
-	TimezoneCode                         NullableTimezoneCodeEnum   `json:"timezone_code,omitempty"`
 	DutyStatusCode                       NullableDutyStatusCodeEnum `json:"duty_status_code,omitempty"`
 	CycleStartedAt                       NullableTime               `json:"cycle_started_at,omitempty"`
 	CycleEndsAt                          NullableTime               `json:"cycle_ends_at,omitempty"`
@@ -87,10 +86,11 @@ type _BaseHosAvailability BaseHosAvailability
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseHosAvailability(id string, fleetId string, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time) *BaseHosAvailability {
+func NewBaseHosAvailability(id string, fleetId string, fleetRef NullableString, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time) *BaseHosAvailability {
 	this := BaseHosAvailability{}
 	this.Id = id
 	this.FleetId = fleetId
+	this.FleetRef = fleetRef
 	this.SourceName = sourceName
 	this.ConnectionId = connectionId
 	this.SourceId = sourceId
@@ -154,6 +154,32 @@ func (o *BaseHosAvailability) GetFleetIdOk() (*string, bool) {
 // SetFleetId sets field value
 func (o *BaseHosAvailability) SetFleetId(v string) {
 	o.FleetId = v
+}
+
+// GetFleetRef returns the FleetRef field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *BaseHosAvailability) GetFleetRef() string {
+	if o == nil || o.FleetRef.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetRef.Get()
+}
+
+// GetFleetRefOk returns a tuple with the FleetRef field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseHosAvailability) GetFleetRefOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRef.Get(), o.FleetRef.IsSet()
+}
+
+// SetFleetRef sets field value
+func (o *BaseHosAvailability) SetFleetRef(v string) {
+	o.FleetRef.Set(&v)
 }
 
 // GetSourceName returns the SourceName field value
@@ -556,92 +582,6 @@ func (o *BaseHosAvailability) SetHosRulesetCodeNil() {
 // UnsetHosRulesetCode ensures that no value is present for HosRulesetCode, not even an explicit nil
 func (o *BaseHosAvailability) UnsetHosRulesetCode() {
 	o.HosRulesetCode.Unset()
-}
-
-// GetRegionCode returns the RegionCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseHosAvailability) GetRegionCode() HosRegionCodeEnum {
-	if o == nil || IsNil(o.RegionCode.Get()) {
-		var ret HosRegionCodeEnum
-		return ret
-	}
-	return *o.RegionCode.Get()
-}
-
-// GetRegionCodeOk returns a tuple with the RegionCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseHosAvailability) GetRegionCodeOk() (*HosRegionCodeEnum, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.RegionCode.Get(), o.RegionCode.IsSet()
-}
-
-// HasRegionCode returns a boolean if a field has been set.
-func (o *BaseHosAvailability) HasRegionCode() bool {
-	if o != nil && o.RegionCode.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetRegionCode gets a reference to the given NullableHosRegionCodeEnum and assigns it to the RegionCode field.
-func (o *BaseHosAvailability) SetRegionCode(v HosRegionCodeEnum) {
-	o.RegionCode.Set(&v)
-}
-
-// SetRegionCodeNil sets the value for RegionCode to be an explicit nil
-func (o *BaseHosAvailability) SetRegionCodeNil() {
-	o.RegionCode.Set(nil)
-}
-
-// UnsetRegionCode ensures that no value is present for RegionCode, not even an explicit nil
-func (o *BaseHosAvailability) UnsetRegionCode() {
-	o.RegionCode.Unset()
-}
-
-// GetTimezoneCode returns the TimezoneCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseHosAvailability) GetTimezoneCode() TimezoneCodeEnum {
-	if o == nil || IsNil(o.TimezoneCode.Get()) {
-		var ret TimezoneCodeEnum
-		return ret
-	}
-	return *o.TimezoneCode.Get()
-}
-
-// GetTimezoneCodeOk returns a tuple with the TimezoneCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseHosAvailability) GetTimezoneCodeOk() (*TimezoneCodeEnum, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.TimezoneCode.Get(), o.TimezoneCode.IsSet()
-}
-
-// HasTimezoneCode returns a boolean if a field has been set.
-func (o *BaseHosAvailability) HasTimezoneCode() bool {
-	if o != nil && o.TimezoneCode.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTimezoneCode gets a reference to the given NullableTimezoneCodeEnum and assigns it to the TimezoneCode field.
-func (o *BaseHosAvailability) SetTimezoneCode(v TimezoneCodeEnum) {
-	o.TimezoneCode.Set(&v)
-}
-
-// SetTimezoneCodeNil sets the value for TimezoneCode to be an explicit nil
-func (o *BaseHosAvailability) SetTimezoneCodeNil() {
-	o.TimezoneCode.Set(nil)
-}
-
-// UnsetTimezoneCode ensures that no value is present for TimezoneCode, not even an explicit nil
-func (o *BaseHosAvailability) UnsetTimezoneCode() {
-	o.TimezoneCode.Unset()
 }
 
 // GetDutyStatusCode returns the DutyStatusCode field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2065,6 +2005,7 @@ func (o BaseHosAvailability) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["fleet_id"] = o.FleetId
+	toSerialize["fleet_ref"] = o.FleetRef.Get()
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["source_id"] = o.SourceId
@@ -2088,12 +2029,6 @@ func (o BaseHosAvailability) ToMap() (map[string]interface{}, error) {
 	}
 	if o.HosRulesetCode.IsSet() {
 		toSerialize["hos_ruleset_code"] = o.HosRulesetCode.Get()
-	}
-	if o.RegionCode.IsSet() {
-		toSerialize["region_code"] = o.RegionCode.Get()
-	}
-	if o.TimezoneCode.IsSet() {
-		toSerialize["timezone_code"] = o.TimezoneCode.Get()
 	}
 	if o.DutyStatusCode.IsSet() {
 		toSerialize["duty_status_code"] = o.DutyStatusCode.Get()
@@ -2204,6 +2139,7 @@ func (o *BaseHosAvailability) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"fleet_id",
+		"fleet_ref",
 		"source_name",
 		"connection_id",
 		"source_id",

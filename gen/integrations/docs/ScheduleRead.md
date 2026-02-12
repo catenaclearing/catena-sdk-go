@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ConsecutiveErrorCount** | **int32** | The number of consecutive errors that have occurred for this schedule. | 
 **ConsecutiveErrorThreshold** | **int32** | The number of consecutive errors allowed before the schedule is automatically set to INACTIVE. | 
 **MaxConcurrentExecutions** | **int32** | The maximum number of concurrent executions allowed for this schedule. | 
+**Cursor** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -192,6 +193,41 @@ and a boolean to check if the value has been set.
 SetMaxConcurrentExecutions sets MaxConcurrentExecutions field to given value.
 
 
+### GetCursor
+
+`func (o *ScheduleRead) GetCursor() string`
+
+GetCursor returns the Cursor field if non-nil, zero value otherwise.
+
+### GetCursorOk
+
+`func (o *ScheduleRead) GetCursorOk() (*string, bool)`
+
+GetCursorOk returns a tuple with the Cursor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCursor
+
+`func (o *ScheduleRead) SetCursor(v string)`
+
+SetCursor sets Cursor field to given value.
+
+### HasCursor
+
+`func (o *ScheduleRead) HasCursor() bool`
+
+HasCursor returns a boolean if a field has been set.
+
+### SetCursorNil
+
+`func (o *ScheduleRead) SetCursorNil(b bool)`
+
+ SetCursorNil sets the value for Cursor to be an explicit nil
+
+### UnsetCursor
+`func (o *ScheduleRead) UnsetCursor()`
+
+UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

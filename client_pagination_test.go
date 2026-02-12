@@ -6,11 +6,13 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"strings"
 	"testing"
 
 	"github.com/catenaclearing/catena-sdk-go"
 	integrationsapi "github.com/catenaclearing/catena-sdk-go/gen/integrations"
+	telematicsapi "github.com/catenaclearing/catena-sdk-go/gen/telematics"
 	"github.com/catenaclearing/catena-sdk-go/pagination"
 )
 
@@ -110,5 +112,65 @@ func TestListConnectionsPagination(t *testing.T) {
 	}
 	if len(items) > 2 && items[2].Id != "3" {
 		t.Errorf("expected item 3 id 3, got %s", items[2].Id)
+	}
+}
+
+func TestListHosEventsPaginationEventTypeCodes(t *testing.T) {
+	var gotEventTypeCodes []string
+	requested := false
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/v2/telematics/hos-events" {
+			http.Error(w, "Not found", http.StatusNotFound)
+			return
+		}
+		requested = true
+		gotEventTypeCodes = append([]string{}, r.URL.Query()["event_type_codes"]...)
+
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(map[string]interface{}{
+			"items":     []map[string]interface{}{},
+			"total":     0,
+			"next_page": "",
+		})
+	}))
+	defer server.Close()
+
+	httpClient := &http.Client{Transport: &MockTransport{}}
+	client := catena.NewClient(
+		catena.WithBaseURL(server.URL),
+		catena.WithClientID("test"),
+		catena.WithClientSecret("test"),
+		catena.WithHTTPClient(httpClient),
+	)
+
+	if err := client.Authenticate(context.Background(), "test", "test"); err != nil {
+		t.Fatalf("Authenticate failed: %v", err)
+	}
+
+	codes := []string{
+		string(telematicsapi.HOSEVENTTYPECODEENUM__1),
+		string(telematicsapi.HOSEVENTTYPECODEENUM__2),
+	}
+	opts := pagination.ListHosEventsPaginationOptions{
+		EventTypeCodes: &codes,
+	}
+
+	itemsCount := 0
+	err := pagination.ListHosEventsEach(client, context.Background(), opts, func(_ telematicsapi.HosEventRead) error {
+		itemsCount++
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("ListHosEventsEach failed: %v", err)
+	}
+	if !requested {
+		t.Fatal("expected /v2/telematics/hos-events to be requested")
+	}
+	if itemsCount != 0 {
+		t.Fatalf("expected 0 items, got %d", itemsCount)
+	}
+	if !reflect.DeepEqual(gotEventTypeCodes, []string{"1", "2"}) {
+		t.Fatalf("expected event_type_codes [1 2], got %#v", gotEventTypeCodes)
 	}
 }

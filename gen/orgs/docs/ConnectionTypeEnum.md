@@ -5,6 +5,8 @@
 
 * `ACCESS_TOKEN` (value: `"access_token"`)
 
+* `API_AUTH` (value: `"api_auth"`)
+
 * `API_BASIC` (value: `"api_basic"`)
 
 * `API_KEY` (value: `"api_key"`)
@@ -50,6 +52,8 @@
 * `S3` (value: `"s3"`)
 
 * `SAMSARA` (value: `"samsara"`)
+
+* `SWITCHBOARD` (value: `"switchboard"`)
 
 * `SPIREON_SLC` (value: `"spireon_slc"`)
 

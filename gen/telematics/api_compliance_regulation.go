@@ -35,8 +35,8 @@ type ComplianceRegulationAPI interface {
 	GetDvirLogDefects(ctx context.Context, dvirLogId string) ApiGetDvirLogDefectsRequest
 
 	// GetDvirLogDefectsExecute executes the request
-	//  @return CursorPageDvirLogDefect
-	GetDvirLogDefectsExecute(r ApiGetDvirLogDefectsRequest) (*CursorPageDvirLogDefect, *http.Response, error)
+	//  @return CursorPageDvirLogDefectRead
+	GetDvirLogDefectsExecute(r ApiGetDvirLogDefectsRequest) (*CursorPageDvirLogDefectRead, *http.Response, error)
 
 	/*
 		GetHosEventAttachments Get Hos Event Attachments
@@ -50,8 +50,8 @@ type ComplianceRegulationAPI interface {
 	GetHosEventAttachments(ctx context.Context, hosEventId string) ApiGetHosEventAttachmentsRequest
 
 	// GetHosEventAttachmentsExecute executes the request
-	//  @return CursorPageTypeVarCustomizedHosEventAttachment
-	GetHosEventAttachmentsExecute(r ApiGetHosEventAttachmentsRequest) (*CursorPageTypeVarCustomizedHosEventAttachment, *http.Response, error)
+	//  @return CursorPageHosEventAttachmentRead
+	GetHosEventAttachmentsExecute(r ApiGetHosEventAttachmentsRequest) (*CursorPageHosEventAttachmentRead, *http.Response, error)
 
 	/*
 		ListDvirLogDefects List Dvir Log Defects
@@ -64,8 +64,8 @@ type ComplianceRegulationAPI interface {
 	ListDvirLogDefects(ctx context.Context) ApiListDvirLogDefectsRequest
 
 	// ListDvirLogDefectsExecute executes the request
-	//  @return CursorPageDvirLogDefect
-	ListDvirLogDefectsExecute(r ApiListDvirLogDefectsRequest) (*CursorPageDvirLogDefect, *http.Response, error)
+	//  @return CursorPageDvirLogDefectRead
+	ListDvirLogDefectsExecute(r ApiListDvirLogDefectsRequest) (*CursorPageDvirLogDefectRead, *http.Response, error)
 
 	/*
 		ListDvirLogs List Dvir Logs
@@ -78,8 +78,8 @@ type ComplianceRegulationAPI interface {
 	ListDvirLogs(ctx context.Context) ApiListDvirLogsRequest
 
 	// ListDvirLogsExecute executes the request
-	//  @return CursorPageDvirLog
-	ListDvirLogsExecute(r ApiListDvirLogsRequest) (*CursorPageDvirLog, *http.Response, error)
+	//  @return CursorPageDvirLogRead
+	ListDvirLogsExecute(r ApiListDvirLogsRequest) (*CursorPageDvirLogRead, *http.Response, error)
 
 	/*
 		ListHosAvailabilities List HOS Availabilities
@@ -92,8 +92,8 @@ type ComplianceRegulationAPI interface {
 	ListHosAvailabilities(ctx context.Context) ApiListHosAvailabilitiesRequest
 
 	// ListHosAvailabilitiesExecute executes the request
-	//  @return CursorPageTypeVarCustomizedHosAvailability
-	ListHosAvailabilitiesExecute(r ApiListHosAvailabilitiesRequest) (*CursorPageTypeVarCustomizedHosAvailability, *http.Response, error)
+	//  @return CursorPageHosAvailabilityRead
+	ListHosAvailabilitiesExecute(r ApiListHosAvailabilitiesRequest) (*CursorPageHosAvailabilityRead, *http.Response, error)
 
 	/*
 		ListHosDailySnapshots List Hos Daily Snapshots
@@ -106,22 +106,24 @@ type ComplianceRegulationAPI interface {
 	ListHosDailySnapshots(ctx context.Context) ApiListHosDailySnapshotsRequest
 
 	// ListHosDailySnapshotsExecute executes the request
-	//  @return CursorPageTypeVarCustomizedHosDailySnapshot
-	ListHosDailySnapshotsExecute(r ApiListHosDailySnapshotsRequest) (*CursorPageTypeVarCustomizedHosDailySnapshot, *http.Response, error)
+	//  @return CursorPageHosDailySnapshotRead
+	ListHosDailySnapshotsExecute(r ApiListHosDailySnapshotsRequest) (*CursorPageHosDailySnapshotRead, *http.Response, error)
 
 	/*
-		ListHosEvents List HOS Events
+			ListHosEvents List HOS Events
 
-		Get a paginated list of Hours of Service (HOS) events information accessible to your organization.
+			Get a paginated list of Hours of Service (HOS) events information accessible to your organization.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiListHosEventsRequest
+		Note: This endpoint uses a smaller maximum page size (500) due to the size of HOS event objects.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiListHosEventsRequest
 	*/
 	ListHosEvents(ctx context.Context) ApiListHosEventsRequest
 
 	// ListHosEventsExecute executes the request
-	//  @return CursorPageTypeVarCustomizedHosEvent
-	ListHosEventsExecute(r ApiListHosEventsRequest) (*CursorPageTypeVarCustomizedHosEvent, *http.Response, error)
+	//  @return LargeObjectCursorPageHosEventRead
+	ListHosEventsExecute(r ApiListHosEventsRequest) (*LargeObjectCursorPageHosEventRead, *http.Response, error)
 
 	/*
 		ListHosViolations List HOS Violations
@@ -134,8 +136,8 @@ type ComplianceRegulationAPI interface {
 	ListHosViolations(ctx context.Context) ApiListHosViolationsRequest
 
 	// ListHosViolationsExecute executes the request
-	//  @return CursorPageTypeVarCustomizedHosViolation
-	ListHosViolationsExecute(r ApiListHosViolationsRequest) (*CursorPageTypeVarCustomizedHosViolation, *http.Response, error)
+	//  @return CursorPageHosViolationRead
+	ListHosViolationsExecute(r ApiListHosViolationsRequest) (*CursorPageHosViolationRead, *http.Response, error)
 
 	/*
 		ListIftaSummaries List Ifta Summaries
@@ -148,8 +150,8 @@ type ComplianceRegulationAPI interface {
 	ListIftaSummaries(ctx context.Context) ApiListIftaSummariesRequest
 
 	// ListIftaSummariesExecute executes the request
-	//  @return CursorPageTypeVarCustomizedIftaSummary
-	ListIftaSummariesExecute(r ApiListIftaSummariesRequest) (*CursorPageTypeVarCustomizedIftaSummary, *http.Response, error)
+	//  @return CursorPageIftaSummaryRead
+	ListIftaSummariesExecute(r ApiListIftaSummariesRequest) (*CursorPageIftaSummaryRead, *http.Response, error)
 }
 
 // ComplianceRegulationAPIService ComplianceRegulationAPI service
@@ -162,6 +164,8 @@ type ApiGetDvirLogDefectsRequest struct {
 	fleetIds          *[]string
 	fleetRefs         *[]string
 	includeSourceData *bool
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
 }
@@ -184,6 +188,18 @@ func (r ApiGetDvirLogDefectsRequest) IncludeSourceData(includeSourceData bool) A
 	return r
 }
 
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiGetDvirLogDefectsRequest) SortBy(sortBy string) ApiGetDvirLogDefectsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiGetDvirLogDefectsRequest) SortOrder(sortOrder string) ApiGetDvirLogDefectsRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // Cursor for the next page
 func (r ApiGetDvirLogDefectsRequest) Cursor(cursor string) ApiGetDvirLogDefectsRequest {
 	r.cursor = &cursor
@@ -196,7 +212,7 @@ func (r ApiGetDvirLogDefectsRequest) Size(size int32) ApiGetDvirLogDefectsReques
 	return r
 }
 
-func (r ApiGetDvirLogDefectsRequest) Execute() (*CursorPageDvirLogDefect, *http.Response, error) {
+func (r ApiGetDvirLogDefectsRequest) Execute() (*CursorPageDvirLogDefectRead, *http.Response, error) {
 	return r.ApiService.GetDvirLogDefectsExecute(r)
 }
 
@@ -219,13 +235,13 @@ func (a *ComplianceRegulationAPIService) GetDvirLogDefects(ctx context.Context, 
 
 // Execute executes the request
 //
-//	@return CursorPageDvirLogDefect
-func (a *ComplianceRegulationAPIService) GetDvirLogDefectsExecute(r ApiGetDvirLogDefectsRequest) (*CursorPageDvirLogDefect, *http.Response, error) {
+//	@return CursorPageDvirLogDefectRead
+func (a *ComplianceRegulationAPIService) GetDvirLogDefectsExecute(r ApiGetDvirLogDefectsRequest) (*CursorPageDvirLogDefectRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageDvirLogDefect
+		localVarReturnValue *CursorPageDvirLogDefectRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.GetDvirLogDefects")
@@ -267,6 +283,15 @@ func (a *ComplianceRegulationAPIService) GetDvirLogDefectsExecute(r ApiGetDvirLo
 	} else {
 		var defaultValue bool = false
 		r.includeSourceData = &defaultValue
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -351,6 +376,28 @@ func (a *ComplianceRegulationAPIService) GetDvirLogDefectsExecute(r ApiGetDvirLo
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -459,7 +506,7 @@ func (r ApiGetHosEventAttachmentsRequest) Size(size int32) ApiGetHosEventAttachm
 	return r
 }
 
-func (r ApiGetHosEventAttachmentsRequest) Execute() (*CursorPageTypeVarCustomizedHosEventAttachment, *http.Response, error) {
+func (r ApiGetHosEventAttachmentsRequest) Execute() (*CursorPageHosEventAttachmentRead, *http.Response, error) {
 	return r.ApiService.GetHosEventAttachmentsExecute(r)
 }
 
@@ -482,13 +529,13 @@ func (a *ComplianceRegulationAPIService) GetHosEventAttachments(ctx context.Cont
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedHosEventAttachment
-func (a *ComplianceRegulationAPIService) GetHosEventAttachmentsExecute(r ApiGetHosEventAttachmentsRequest) (*CursorPageTypeVarCustomizedHosEventAttachment, *http.Response, error) {
+//	@return CursorPageHosEventAttachmentRead
+func (a *ComplianceRegulationAPIService) GetHosEventAttachmentsExecute(r ApiGetHosEventAttachmentsRequest) (*CursorPageHosEventAttachmentRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedHosEventAttachment
+		localVarReturnValue *CursorPageHosEventAttachmentRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.GetHosEventAttachments")
@@ -623,6 +670,28 @@ func (a *ComplianceRegulationAPIService) GetHosEventAttachmentsExecute(r ApiGetH
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -690,6 +759,8 @@ type ApiListDvirLogDefectsRequest struct {
 	toDatetime        *time.Time
 	dvirLogIds        *[]string
 	includeSourceData *bool
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
 }
@@ -706,13 +777,13 @@ func (r ApiListDvirLogDefectsRequest) FleetRefs(fleetRefs []string) ApiListDvirL
 	return r
 }
 
-// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListDvirLogDefectsRequest) FromDatetime(fromDatetime time.Time) ApiListDvirLogDefectsRequest {
 	r.fromDatetime = &fromDatetime
 	return r
 }
 
-// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListDvirLogDefectsRequest) ToDatetime(toDatetime time.Time) ApiListDvirLogDefectsRequest {
 	r.toDatetime = &toDatetime
 	return r
@@ -730,6 +801,18 @@ func (r ApiListDvirLogDefectsRequest) IncludeSourceData(includeSourceData bool) 
 	return r
 }
 
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListDvirLogDefectsRequest) SortBy(sortBy string) ApiListDvirLogDefectsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListDvirLogDefectsRequest) SortOrder(sortOrder string) ApiListDvirLogDefectsRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // Cursor for the next page
 func (r ApiListDvirLogDefectsRequest) Cursor(cursor string) ApiListDvirLogDefectsRequest {
 	r.cursor = &cursor
@@ -742,7 +825,7 @@ func (r ApiListDvirLogDefectsRequest) Size(size int32) ApiListDvirLogDefectsRequ
 	return r
 }
 
-func (r ApiListDvirLogDefectsRequest) Execute() (*CursorPageDvirLogDefect, *http.Response, error) {
+func (r ApiListDvirLogDefectsRequest) Execute() (*CursorPageDvirLogDefectRead, *http.Response, error) {
 	return r.ApiService.ListDvirLogDefectsExecute(r)
 }
 
@@ -763,13 +846,13 @@ func (a *ComplianceRegulationAPIService) ListDvirLogDefects(ctx context.Context)
 
 // Execute executes the request
 //
-//	@return CursorPageDvirLogDefect
-func (a *ComplianceRegulationAPIService) ListDvirLogDefectsExecute(r ApiListDvirLogDefectsRequest) (*CursorPageDvirLogDefect, *http.Response, error) {
+//	@return CursorPageDvirLogDefectRead
+func (a *ComplianceRegulationAPIService) ListDvirLogDefectsExecute(r ApiListDvirLogDefectsRequest) (*CursorPageDvirLogDefectRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageDvirLogDefect
+		localVarReturnValue *CursorPageDvirLogDefectRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.ListDvirLogDefects")
@@ -827,6 +910,15 @@ func (a *ComplianceRegulationAPIService) ListDvirLogDefectsExecute(r ApiListDvir
 	} else {
 		var defaultValue bool = false
 		r.includeSourceData = &defaultValue
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -911,6 +1003,28 @@ func (a *ComplianceRegulationAPIService) ListDvirLogDefectsExecute(r ApiListDvir
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -988,6 +1102,8 @@ type ApiListDvirLogsRequest struct {
 	includeSourceData *bool
 	driverIds         *[]string
 	vehicleIds        *[]string
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
 }
@@ -1004,13 +1120,13 @@ func (r ApiListDvirLogsRequest) FleetRefs(fleetRefs []string) ApiListDvirLogsReq
 	return r
 }
 
-// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListDvirLogsRequest) FromDatetime(fromDatetime time.Time) ApiListDvirLogsRequest {
 	r.fromDatetime = &fromDatetime
 	return r
 }
 
-// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListDvirLogsRequest) ToDatetime(toDatetime time.Time) ApiListDvirLogsRequest {
 	r.toDatetime = &toDatetime
 	return r
@@ -1034,6 +1150,18 @@ func (r ApiListDvirLogsRequest) VehicleIds(vehicleIds []string) ApiListDvirLogsR
 	return r
 }
 
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListDvirLogsRequest) SortBy(sortBy string) ApiListDvirLogsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListDvirLogsRequest) SortOrder(sortOrder string) ApiListDvirLogsRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // Cursor for the next page
 func (r ApiListDvirLogsRequest) Cursor(cursor string) ApiListDvirLogsRequest {
 	r.cursor = &cursor
@@ -1046,7 +1174,7 @@ func (r ApiListDvirLogsRequest) Size(size int32) ApiListDvirLogsRequest {
 	return r
 }
 
-func (r ApiListDvirLogsRequest) Execute() (*CursorPageDvirLog, *http.Response, error) {
+func (r ApiListDvirLogsRequest) Execute() (*CursorPageDvirLogRead, *http.Response, error) {
 	return r.ApiService.ListDvirLogsExecute(r)
 }
 
@@ -1067,13 +1195,13 @@ func (a *ComplianceRegulationAPIService) ListDvirLogs(ctx context.Context) ApiLi
 
 // Execute executes the request
 //
-//	@return CursorPageDvirLog
-func (a *ComplianceRegulationAPIService) ListDvirLogsExecute(r ApiListDvirLogsRequest) (*CursorPageDvirLog, *http.Response, error) {
+//	@return CursorPageDvirLogRead
+func (a *ComplianceRegulationAPIService) ListDvirLogsExecute(r ApiListDvirLogsRequest) (*CursorPageDvirLogRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageDvirLog
+		localVarReturnValue *CursorPageDvirLogRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.ListDvirLogs")
@@ -1142,6 +1270,15 @@ func (a *ComplianceRegulationAPIService) ListDvirLogsExecute(r ApiListDvirLogsRe
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", t, "form", "multi")
 		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -1235,6 +1372,28 @@ func (a *ComplianceRegulationAPIService) ListDvirLogsExecute(r ApiListDvirLogsRe
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1301,6 +1460,8 @@ type ApiListHosAvailabilitiesRequest struct {
 	includeSourceData *bool
 	driverIds         *[]string
 	vehicleIds        *[]string
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
 }
@@ -1335,6 +1496,18 @@ func (r ApiListHosAvailabilitiesRequest) VehicleIds(vehicleIds []string) ApiList
 	return r
 }
 
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListHosAvailabilitiesRequest) SortBy(sortBy string) ApiListHosAvailabilitiesRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListHosAvailabilitiesRequest) SortOrder(sortOrder string) ApiListHosAvailabilitiesRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // Cursor for the next page
 func (r ApiListHosAvailabilitiesRequest) Cursor(cursor string) ApiListHosAvailabilitiesRequest {
 	r.cursor = &cursor
@@ -1347,7 +1520,7 @@ func (r ApiListHosAvailabilitiesRequest) Size(size int32) ApiListHosAvailabiliti
 	return r
 }
 
-func (r ApiListHosAvailabilitiesRequest) Execute() (*CursorPageTypeVarCustomizedHosAvailability, *http.Response, error) {
+func (r ApiListHosAvailabilitiesRequest) Execute() (*CursorPageHosAvailabilityRead, *http.Response, error) {
 	return r.ApiService.ListHosAvailabilitiesExecute(r)
 }
 
@@ -1368,13 +1541,13 @@ func (a *ComplianceRegulationAPIService) ListHosAvailabilities(ctx context.Conte
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedHosAvailability
-func (a *ComplianceRegulationAPIService) ListHosAvailabilitiesExecute(r ApiListHosAvailabilitiesRequest) (*CursorPageTypeVarCustomizedHosAvailability, *http.Response, error) {
+//	@return CursorPageHosAvailabilityRead
+func (a *ComplianceRegulationAPIService) ListHosAvailabilitiesExecute(r ApiListHosAvailabilitiesRequest) (*CursorPageHosAvailabilityRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedHosAvailability
+		localVarReturnValue *CursorPageHosAvailabilityRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.ListHosAvailabilities")
@@ -1437,6 +1610,15 @@ func (a *ComplianceRegulationAPIService) ListHosAvailabilitiesExecute(r ApiListH
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", t, "form", "multi")
 		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -1521,6 +1703,28 @@ func (a *ComplianceRegulationAPIService) ListHosAvailabilitiesExecute(r ApiListH
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1597,6 +1801,8 @@ type ApiListHosDailySnapshotsRequest struct {
 	toDatetime        *time.Time
 	includeSourceData *bool
 	driverIds         *[]string
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
 }
@@ -1613,13 +1819,13 @@ func (r ApiListHosDailySnapshotsRequest) FleetRefs(fleetRefs []string) ApiListHo
 	return r
 }
 
-// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListHosDailySnapshotsRequest) FromDatetime(fromDatetime time.Time) ApiListHosDailySnapshotsRequest {
 	r.fromDatetime = &fromDatetime
 	return r
 }
 
-// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListHosDailySnapshotsRequest) ToDatetime(toDatetime time.Time) ApiListHosDailySnapshotsRequest {
 	r.toDatetime = &toDatetime
 	return r
@@ -1637,6 +1843,18 @@ func (r ApiListHosDailySnapshotsRequest) DriverIds(driverIds []string) ApiListHo
 	return r
 }
 
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListHosDailySnapshotsRequest) SortBy(sortBy string) ApiListHosDailySnapshotsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListHosDailySnapshotsRequest) SortOrder(sortOrder string) ApiListHosDailySnapshotsRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // Cursor for the next page
 func (r ApiListHosDailySnapshotsRequest) Cursor(cursor string) ApiListHosDailySnapshotsRequest {
 	r.cursor = &cursor
@@ -1649,7 +1867,7 @@ func (r ApiListHosDailySnapshotsRequest) Size(size int32) ApiListHosDailySnapsho
 	return r
 }
 
-func (r ApiListHosDailySnapshotsRequest) Execute() (*CursorPageTypeVarCustomizedHosDailySnapshot, *http.Response, error) {
+func (r ApiListHosDailySnapshotsRequest) Execute() (*CursorPageHosDailySnapshotRead, *http.Response, error) {
 	return r.ApiService.ListHosDailySnapshotsExecute(r)
 }
 
@@ -1670,13 +1888,13 @@ func (a *ComplianceRegulationAPIService) ListHosDailySnapshots(ctx context.Conte
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedHosDailySnapshot
-func (a *ComplianceRegulationAPIService) ListHosDailySnapshotsExecute(r ApiListHosDailySnapshotsRequest) (*CursorPageTypeVarCustomizedHosDailySnapshot, *http.Response, error) {
+//	@return CursorPageHosDailySnapshotRead
+func (a *ComplianceRegulationAPIService) ListHosDailySnapshotsExecute(r ApiListHosDailySnapshotsRequest) (*CursorPageHosDailySnapshotRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedHosDailySnapshot
+		localVarReturnValue *CursorPageHosDailySnapshotRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.ListHosDailySnapshots")
@@ -1734,6 +1952,15 @@ func (a *ComplianceRegulationAPIService) ListHosDailySnapshotsExecute(r ApiListH
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "driver_ids", t, "form", "multi")
 		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -1818,6 +2045,28 @@ func (a *ComplianceRegulationAPIService) ListHosDailySnapshotsExecute(r ApiListH
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1886,17 +2135,20 @@ func (a *ComplianceRegulationAPIService) ListHosDailySnapshotsExecute(r ApiListH
 }
 
 type ApiListHosEventsRequest struct {
-	ctx               context.Context
-	ApiService        ComplianceRegulationAPI
-	fleetIds          *[]string
-	fleetRefs         *[]string
-	fromDatetime      *time.Time
-	toDatetime        *time.Time
-	includeSourceData *bool
-	driverIds         *[]string
-	vehicleIds        *[]string
-	cursor            *string
-	size              *int32
+	ctx                context.Context
+	ApiService         ComplianceRegulationAPI
+	fleetIds           *[]string
+	fleetRefs          *[]string
+	fromDatetime       *time.Time
+	toDatetime         *time.Time
+	activeFromDatetime *time.Time
+	activeToDatetime   *time.Time
+	includeSourceData  *bool
+	driverIds          *[]string
+	vehicleIds         *[]string
+	eventTypeCodes     *[]HosEventTypeCodeEnum
+	cursor             *string
+	size               *int32
 }
 
 // Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
@@ -1911,15 +2163,27 @@ func (r ApiListHosEventsRequest) FleetRefs(fleetRefs []string) ApiListHosEventsR
 	return r
 }
 
-// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListHosEventsRequest) FromDatetime(fromDatetime time.Time) ApiListHosEventsRequest {
 	r.fromDatetime = &fromDatetime
 	return r
 }
 
-// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListHosEventsRequest) ToDatetime(toDatetime time.Time) ApiListHosEventsRequest {
 	r.toDatetime = &toDatetime
+	return r
+}
+
+// Return only records that were still active at or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;ended_at &gt;&#x3D; active_from_datetime&#x60;
+func (r ApiListHosEventsRequest) ActiveFromDatetime(activeFromDatetime time.Time) ApiListHosEventsRequest {
+	r.activeFromDatetime = &activeFromDatetime
+	return r
+}
+
+// Return only records that started before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;started_at &lt; active_to_datetime&#x60;
+func (r ApiListHosEventsRequest) ActiveToDatetime(activeToDatetime time.Time) ApiListHosEventsRequest {
+	r.activeToDatetime = &activeToDatetime
 	return r
 }
 
@@ -1941,6 +2205,12 @@ func (r ApiListHosEventsRequest) VehicleIds(vehicleIds []string) ApiListHosEvent
 	return r
 }
 
+// Limit results to specific HOS event type codes. **Maximum:** 5 codes
+func (r ApiListHosEventsRequest) EventTypeCodes(eventTypeCodes []HosEventTypeCodeEnum) ApiListHosEventsRequest {
+	r.eventTypeCodes = &eventTypeCodes
+	return r
+}
+
 // Cursor for the next page
 func (r ApiListHosEventsRequest) Cursor(cursor string) ApiListHosEventsRequest {
 	r.cursor = &cursor
@@ -1953,7 +2223,7 @@ func (r ApiListHosEventsRequest) Size(size int32) ApiListHosEventsRequest {
 	return r
 }
 
-func (r ApiListHosEventsRequest) Execute() (*CursorPageTypeVarCustomizedHosEvent, *http.Response, error) {
+func (r ApiListHosEventsRequest) Execute() (*LargeObjectCursorPageHosEventRead, *http.Response, error) {
 	return r.ApiService.ListHosEventsExecute(r)
 }
 
@@ -1961,6 +2231,8 @@ func (r ApiListHosEventsRequest) Execute() (*CursorPageTypeVarCustomizedHosEvent
 ListHosEvents List HOS Events
 
 Get a paginated list of Hours of Service (HOS) events information accessible to your organization.
+
+Note: This endpoint uses a smaller maximum page size (500) due to the size of HOS event objects.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListHosEventsRequest
@@ -1974,13 +2246,13 @@ func (a *ComplianceRegulationAPIService) ListHosEvents(ctx context.Context) ApiL
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedHosEvent
-func (a *ComplianceRegulationAPIService) ListHosEventsExecute(r ApiListHosEventsRequest) (*CursorPageTypeVarCustomizedHosEvent, *http.Response, error) {
+//	@return LargeObjectCursorPageHosEventRead
+func (a *ComplianceRegulationAPIService) ListHosEventsExecute(r ApiListHosEventsRequest) (*LargeObjectCursorPageHosEventRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedHosEvent
+		localVarReturnValue *LargeObjectCursorPageHosEventRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.ListHosEvents")
@@ -2022,6 +2294,12 @@ func (a *ComplianceRegulationAPIService) ListHosEventsExecute(r ApiListHosEvents
 	if r.toDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "to_datetime", r.toDatetime, "form", "")
 	}
+	if r.activeFromDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "active_from_datetime", r.activeFromDatetime, "form", "")
+	}
+	if r.activeToDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "active_to_datetime", r.activeToDatetime, "form", "")
+	}
 	if r.includeSourceData != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_source_data", r.includeSourceData, "form", "")
 	} else {
@@ -2048,6 +2326,17 @@ func (a *ComplianceRegulationAPIService) ListHosEventsExecute(r ApiListHosEvents
 			}
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", t, "form", "multi")
+		}
+	}
+	if r.eventTypeCodes != nil {
+		t := *r.eventTypeCodes
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "event_type_codes", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "event_type_codes", t, "form", "multi")
 		}
 	}
 	if r.cursor != nil {
@@ -2133,6 +2422,28 @@ func (a *ComplianceRegulationAPIService) ListHosEventsExecute(r ApiListHosEvents
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2209,6 +2520,8 @@ type ApiListHosViolationsRequest struct {
 	toDatetime        *time.Time
 	includeSourceData *bool
 	driverIds         *[]string
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
 }
@@ -2225,13 +2538,13 @@ func (r ApiListHosViolationsRequest) FleetRefs(fleetRefs []string) ApiListHosVio
 	return r
 }
 
-// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListHosViolationsRequest) FromDatetime(fromDatetime time.Time) ApiListHosViolationsRequest {
 	r.fromDatetime = &fromDatetime
 	return r
 }
 
-// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListHosViolationsRequest) ToDatetime(toDatetime time.Time) ApiListHosViolationsRequest {
 	r.toDatetime = &toDatetime
 	return r
@@ -2249,6 +2562,18 @@ func (r ApiListHosViolationsRequest) DriverIds(driverIds []string) ApiListHosVio
 	return r
 }
 
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListHosViolationsRequest) SortBy(sortBy string) ApiListHosViolationsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListHosViolationsRequest) SortOrder(sortOrder string) ApiListHosViolationsRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // Cursor for the next page
 func (r ApiListHosViolationsRequest) Cursor(cursor string) ApiListHosViolationsRequest {
 	r.cursor = &cursor
@@ -2261,7 +2586,7 @@ func (r ApiListHosViolationsRequest) Size(size int32) ApiListHosViolationsReques
 	return r
 }
 
-func (r ApiListHosViolationsRequest) Execute() (*CursorPageTypeVarCustomizedHosViolation, *http.Response, error) {
+func (r ApiListHosViolationsRequest) Execute() (*CursorPageHosViolationRead, *http.Response, error) {
 	return r.ApiService.ListHosViolationsExecute(r)
 }
 
@@ -2282,13 +2607,13 @@ func (a *ComplianceRegulationAPIService) ListHosViolations(ctx context.Context) 
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedHosViolation
-func (a *ComplianceRegulationAPIService) ListHosViolationsExecute(r ApiListHosViolationsRequest) (*CursorPageTypeVarCustomizedHosViolation, *http.Response, error) {
+//	@return CursorPageHosViolationRead
+func (a *ComplianceRegulationAPIService) ListHosViolationsExecute(r ApiListHosViolationsRequest) (*CursorPageHosViolationRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedHosViolation
+		localVarReturnValue *CursorPageHosViolationRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.ListHosViolations")
@@ -2346,6 +2671,15 @@ func (a *ComplianceRegulationAPIService) ListHosViolationsExecute(r ApiListHosVi
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "driver_ids", t, "form", "multi")
 		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -2430,6 +2764,28 @@ func (a *ComplianceRegulationAPIService) ListHosViolationsExecute(r ApiListHosVi
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2502,8 +2858,12 @@ type ApiListIftaSummariesRequest struct {
 	ApiService        ComplianceRegulationAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	fromDatetime      *time.Time
+	toDatetime        *time.Time
 	includeSourceData *bool
 	vehicleIds        *[]string
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
 }
@@ -2520,6 +2880,18 @@ func (r ApiListIftaSummariesRequest) FleetRefs(fleetRefs []string) ApiListIftaSu
 	return r
 }
 
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
+func (r ApiListIftaSummariesRequest) FromDatetime(fromDatetime time.Time) ApiListIftaSummariesRequest {
+	r.fromDatetime = &fromDatetime
+	return r
+}
+
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
+func (r ApiListIftaSummariesRequest) ToDatetime(toDatetime time.Time) ApiListIftaSummariesRequest {
+	r.toDatetime = &toDatetime
+	return r
+}
+
 // Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena*
 func (r ApiListIftaSummariesRequest) IncludeSourceData(includeSourceData bool) ApiListIftaSummariesRequest {
 	r.includeSourceData = &includeSourceData
@@ -2529,6 +2901,18 @@ func (r ApiListIftaSummariesRequest) IncludeSourceData(includeSourceData bool) A
 // Limit results to specific vehicles. **Maximum:** 100 IDs
 func (r ApiListIftaSummariesRequest) VehicleIds(vehicleIds []string) ApiListIftaSummariesRequest {
 	r.vehicleIds = &vehicleIds
+	return r
+}
+
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListIftaSummariesRequest) SortBy(sortBy string) ApiListIftaSummariesRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListIftaSummariesRequest) SortOrder(sortOrder string) ApiListIftaSummariesRequest {
+	r.sortOrder = &sortOrder
 	return r
 }
 
@@ -2544,7 +2928,7 @@ func (r ApiListIftaSummariesRequest) Size(size int32) ApiListIftaSummariesReques
 	return r
 }
 
-func (r ApiListIftaSummariesRequest) Execute() (*CursorPageTypeVarCustomizedIftaSummary, *http.Response, error) {
+func (r ApiListIftaSummariesRequest) Execute() (*CursorPageIftaSummaryRead, *http.Response, error) {
 	return r.ApiService.ListIftaSummariesExecute(r)
 }
 
@@ -2565,13 +2949,13 @@ func (a *ComplianceRegulationAPIService) ListIftaSummaries(ctx context.Context) 
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedIftaSummary
-func (a *ComplianceRegulationAPIService) ListIftaSummariesExecute(r ApiListIftaSummariesRequest) (*CursorPageTypeVarCustomizedIftaSummary, *http.Response, error) {
+//	@return CursorPageIftaSummaryRead
+func (a *ComplianceRegulationAPIService) ListIftaSummariesExecute(r ApiListIftaSummariesRequest) (*CursorPageIftaSummaryRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedIftaSummary
+		localVarReturnValue *CursorPageIftaSummaryRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.ListIftaSummaries")
@@ -2607,6 +2991,12 @@ func (a *ComplianceRegulationAPIService) ListIftaSummariesExecute(r ApiListIftaS
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
 	}
+	if r.fromDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
+	}
+	if r.toDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to_datetime", r.toDatetime, "form", "")
+	}
 	if r.includeSourceData != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_source_data", r.includeSourceData, "form", "")
 	} else {
@@ -2623,6 +3013,15 @@ func (a *ComplianceRegulationAPIService) ListIftaSummariesExecute(r ApiListIftaS
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", t, "form", "multi")
 		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -2707,6 +3106,28 @@ func (a *ComplianceRegulationAPIService) ListIftaSummariesExecute(r ApiListIftaS
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

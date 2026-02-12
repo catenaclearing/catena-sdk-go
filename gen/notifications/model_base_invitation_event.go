@@ -41,7 +41,7 @@ type BaseInvitationEvent struct {
 	SuccessRedirectUrl          NullableString `json:"success_redirect_url,omitempty"`
 	FailureRedirectUrl          NullableString `json:"failure_redirect_url,omitempty"`
 	CallbackUrl                 NullableString `json:"callback_url,omitempty"`
-	LimitTsps                   []TspEnum      `json:"limit_tsps,omitempty"`
+	LimitTsps                   []string       `json:"limit_tsps,omitempty"`
 	FleetId                     NullableString `json:"fleet_id,omitempty"`
 	PartnerSlug                 NullableString `json:"partner_slug,omitempty"`
 	PartnerId                   NullableString `json:"partner_id,omitempty"`
@@ -521,9 +521,9 @@ func (o *BaseInvitationEvent) UnsetCallbackUrl() {
 }
 
 // GetLimitTsps returns the LimitTsps field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseInvitationEvent) GetLimitTsps() []TspEnum {
+func (o *BaseInvitationEvent) GetLimitTsps() []string {
 	if o == nil {
-		var ret []TspEnum
+		var ret []string
 		return ret
 	}
 	return o.LimitTsps
@@ -532,7 +532,7 @@ func (o *BaseInvitationEvent) GetLimitTsps() []TspEnum {
 // GetLimitTspsOk returns a tuple with the LimitTsps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseInvitationEvent) GetLimitTspsOk() ([]TspEnum, bool) {
+func (o *BaseInvitationEvent) GetLimitTspsOk() ([]string, bool) {
 	if o == nil || IsNil(o.LimitTsps) {
 		return nil, false
 	}
@@ -548,8 +548,8 @@ func (o *BaseInvitationEvent) HasLimitTsps() bool {
 	return false
 }
 
-// SetLimitTsps gets a reference to the given []TspEnum and assigns it to the LimitTsps field.
-func (o *BaseInvitationEvent) SetLimitTsps(v []TspEnum) {
+// SetLimitTsps gets a reference to the given []string and assigns it to the LimitTsps field.
+func (o *BaseInvitationEvent) SetLimitTsps(v []string) {
 	o.LimitTsps = v
 }
 

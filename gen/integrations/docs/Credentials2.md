@@ -44,13 +44,14 @@ Name | Type | Description | Notes
 **AccountId** | **string** |  | 
 **ProviderToken** | **string** |  | 
 **DotNumber** | **string** |  | 
+**ApiId** | **string** |  | 
 **CarrierId** | **string** |  | 
 
 ## Methods
 
 ### NewCredentials2
 
-`func NewCredentials2(drivername DatabaseDriverEnum, host string, port int32, username string, password string, database string, apiKey string, url string, authCode string, token string, redirectUri string, clientId string, clientSecret string, companyId string, resourceOwnerId string, resourceOwnerSecret string, signatureMethod string, realm string, tokenUrl string, privateKey string, consumerKey string, accessKey string, secretKey string, bucketName string, region string, accessToken string, tokenType string, code string, appId string, appKey string, clientKey string, accountId string, providerToken string, dotNumber string, carrierId string, ) *Credentials2`
+`func NewCredentials2(drivername DatabaseDriverEnum, host string, port int32, username string, password string, database string, apiKey string, url string, authCode string, token string, redirectUri string, clientId string, clientSecret string, companyId string, resourceOwnerId string, resourceOwnerSecret string, signatureMethod string, realm string, tokenUrl string, privateKey string, consumerKey string, accessKey string, secretKey string, bucketName string, region string, accessToken string, tokenType string, code string, appId string, appKey string, clientKey string, accountId string, providerToken string, dotNumber string, apiId string, carrierId string, ) *Credentials2`
 
 NewCredentials2 instantiates a new Credentials2 object
 This constructor will assign default values to properties that have it defined,
@@ -893,6 +894,26 @@ and a boolean to check if the value has been set.
 `func (o *Credentials2) SetDotNumber(v string)`
 
 SetDotNumber sets DotNumber field to given value.
+
+
+### GetApiId
+
+`func (o *Credentials2) GetApiId() string`
+
+GetApiId returns the ApiId field if non-nil, zero value otherwise.
+
+### GetApiIdOk
+
+`func (o *Credentials2) GetApiIdOk() (*string, bool)`
+
+GetApiIdOk returns a tuple with the ApiId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiId
+
+`func (o *Credentials2) SetApiId(v string)`
+
+SetApiId sets ApiId field to given value.
 
 
 ### GetCarrierId

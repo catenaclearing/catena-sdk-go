@@ -134,6 +134,7 @@ Class | Method | HTTP request | Description
  - [InvitationCreate](docs/InvitationCreate.md)
  - [InvitationDecline](docs/InvitationDecline.md)
  - [InvitationRead](docs/InvitationRead.md)
+ - [MethodNotAllowed](docs/MethodNotAllowed.md)
  - [NotFound](docs/NotFound.md)
  - [PartnerCategory](docs/PartnerCategory.md)
  - [PartnerCreate](docs/PartnerCreate.md)

@@ -25,7 +25,8 @@ type BaseVehicle struct {
 	// Internal unique identifier for the telematics event record (Catena PK).
 	Id string `json:"id"`
 	// The Catena fleet this record belongs to (multi-tenant scope).
-	FleetId string `json:"fleet_id"`
+	FleetId  string         `json:"fleet_id"`
+	FleetRef NullableString `json:"fleet_ref"`
 	// The name of the source
 	SourceName TspEnum `json:"source_name"`
 	// The specific fleet↔TSP connection through which this record was sourced.
@@ -74,10 +75,11 @@ type _BaseVehicle BaseVehicle
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseVehicle(id string, fleetId string, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time) *BaseVehicle {
+func NewBaseVehicle(id string, fleetId string, fleetRef NullableString, sourceName TspEnum, connectionId string, sourceId string, createdAt time.Time, updatedAt time.Time, occurredAt time.Time) *BaseVehicle {
 	this := BaseVehicle{}
 	this.Id = id
 	this.FleetId = fleetId
+	this.FleetRef = fleetRef
 	this.SourceName = sourceName
 	this.ConnectionId = connectionId
 	this.SourceId = sourceId
@@ -141,6 +143,32 @@ func (o *BaseVehicle) GetFleetIdOk() (*string, bool) {
 // SetFleetId sets field value
 func (o *BaseVehicle) SetFleetId(v string) {
 	o.FleetId = v
+}
+
+// GetFleetRef returns the FleetRef field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *BaseVehicle) GetFleetRef() string {
+	if o == nil || o.FleetRef.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetRef.Get()
+}
+
+// GetFleetRefOk returns a tuple with the FleetRef field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseVehicle) GetFleetRefOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRef.Get(), o.FleetRef.IsSet()
+}
+
+// SetFleetRef sets field value
+func (o *BaseVehicle) SetFleetRef(v string) {
+	o.FleetRef.Set(&v)
 }
 
 // GetSourceName returns the SourceName field value
@@ -1493,6 +1521,7 @@ func (o BaseVehicle) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["fleet_id"] = o.FleetId
+	toSerialize["fleet_ref"] = o.FleetRef.Get()
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["source_id"] = o.SourceId
@@ -1593,6 +1622,7 @@ func (o *BaseVehicle) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"fleet_id",
+		"fleet_ref",
 		"source_name",
 		"connection_id",
 		"source_id",

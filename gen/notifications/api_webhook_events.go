@@ -80,6 +80,20 @@ type WebhookEventsAPI interface {
 	ExecutionStaledexecutionStaledPostExecute(r ApiExecutionStaledexecutionStaledPostRequest) (interface{}, *http.Response, error)
 
 	/*
+		FleetConnectionCreatedfleetConnectionCreatedPost Fleet Connection Created
+
+		Emitted when a new fleet connection is created between a fleet and a connection.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest
+	*/
+	FleetConnectionCreatedfleetConnectionCreatedPost(ctx context.Context) ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest
+
+	// FleetConnectionCreatedfleetConnectionCreatedPostExecute executes the request
+	//  @return interface{}
+	FleetConnectionCreatedfleetConnectionCreatedPostExecute(r ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest) (interface{}, *http.Response, error)
+
+	/*
 			HosAvailabilityAddedhosAvailabilityAddedPost Hos Availability Added
 
 			Emitted when a new HOS availability is added to our database.
@@ -126,6 +140,54 @@ type WebhookEventsAPI interface {
 	// HosAvailabilityRemovedhosAvailabilityRemovedPostExecute executes the request
 	//  @return interface{}
 	HosAvailabilityRemovedhosAvailabilityRemovedPostExecute(r ApiHosAvailabilityRemovedhosAvailabilityRemovedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+			HosDailySnapshotAddedhosDailySnapshotAddedPost Hos Daily Snapshot Added
+
+			Emitted when a new HOS daily snapshot is added to our database.
+
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest
+	*/
+	HosDailySnapshotAddedhosDailySnapshotAddedPost(ctx context.Context) ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest
+
+	// HosDailySnapshotAddedhosDailySnapshotAddedPostExecute executes the request
+	//  @return interface{}
+	HosDailySnapshotAddedhosDailySnapshotAddedPostExecute(r ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+			HosDailySnapshotModifiedhosDailySnapshotModifiedPost Hos Daily Snapshot Modified
+
+			Emitted when an HOS daily snapshot is modified in our database.
+
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest
+	*/
+	HosDailySnapshotModifiedhosDailySnapshotModifiedPost(ctx context.Context) ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest
+
+	// HosDailySnapshotModifiedhosDailySnapshotModifiedPostExecute executes the request
+	//  @return interface{}
+	HosDailySnapshotModifiedhosDailySnapshotModifiedPostExecute(r ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+			HosDailySnapshotRemovedhosDailySnapshotRemovedPost Hos Daily Snapshot Removed
+
+			Emitted when an HOS daily snapshot is removed from our database.
+
+		e.g. The record was deleted from the TSP and we removed it from our database.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest
+	*/
+	HosDailySnapshotRemovedhosDailySnapshotRemovedPost(ctx context.Context) ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest
+
+	// HosDailySnapshotRemovedhosDailySnapshotRemovedPostExecute executes the request
+	//  @return interface{}
+	HosDailySnapshotRemovedhosDailySnapshotRemovedPostExecute(r ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest) (interface{}, *http.Response, error)
 
 	/*
 			HosEventAddedhosEventAddedPost Hos Event Added
@@ -444,6 +506,76 @@ type WebhookEventsAPI interface {
 	// ShareAgreementUpdatedshareAgreementUpdatedPostExecute executes the request
 	//  @return interface{}
 	ShareAgreementUpdatedshareAgreementUpdatedPostExecute(r ApiShareAgreementUpdatedshareAgreementUpdatedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		TrailerAddedtrailerAddedPost Trailer Added
+
+		Emitted when a new trailer is added to our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiTrailerAddedtrailerAddedPostRequest
+	*/
+	TrailerAddedtrailerAddedPost(ctx context.Context) ApiTrailerAddedtrailerAddedPostRequest
+
+	// TrailerAddedtrailerAddedPostExecute executes the request
+	//  @return interface{}
+	TrailerAddedtrailerAddedPostExecute(r ApiTrailerAddedtrailerAddedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		TrailerLocationAddedtrailerLocationAddedPost Trailer Location Added
+
+		Emitted when a new trailer location is added to our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiTrailerLocationAddedtrailerLocationAddedPostRequest
+	*/
+	TrailerLocationAddedtrailerLocationAddedPost(ctx context.Context) ApiTrailerLocationAddedtrailerLocationAddedPostRequest
+
+	// TrailerLocationAddedtrailerLocationAddedPostExecute executes the request
+	//  @return interface{}
+	TrailerLocationAddedtrailerLocationAddedPostExecute(r ApiTrailerLocationAddedtrailerLocationAddedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		TrailerLocationModifiedtrailerLocationModifiedPost Trailer Location Modified
+
+		Emitted when a trailer location is modified in our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest
+	*/
+	TrailerLocationModifiedtrailerLocationModifiedPost(ctx context.Context) ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest
+
+	// TrailerLocationModifiedtrailerLocationModifiedPostExecute executes the request
+	//  @return interface{}
+	TrailerLocationModifiedtrailerLocationModifiedPostExecute(r ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		TrailerModifiedtrailerModifiedPost Trailer Modified
+
+		Emitted when a trailer is modified in our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiTrailerModifiedtrailerModifiedPostRequest
+	*/
+	TrailerModifiedtrailerModifiedPost(ctx context.Context) ApiTrailerModifiedtrailerModifiedPostRequest
+
+	// TrailerModifiedtrailerModifiedPostExecute executes the request
+	//  @return interface{}
+	TrailerModifiedtrailerModifiedPostExecute(r ApiTrailerModifiedtrailerModifiedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		TrailerRemovedtrailerRemovedPost Trailer Removed
+
+		Emitted when a trailer is removed from our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiTrailerRemovedtrailerRemovedPostRequest
+	*/
+	TrailerRemovedtrailerRemovedPost(ctx context.Context) ApiTrailerRemovedtrailerRemovedPostRequest
+
+	// TrailerRemovedtrailerRemovedPostExecute executes the request
+	//  @return interface{}
+	TrailerRemovedtrailerRemovedPostExecute(r ApiTrailerRemovedtrailerRemovedPostRequest) (interface{}, *http.Response, error)
 
 	/*
 		TspCreatedtspCreatedPost Tsp Created
@@ -1124,6 +1256,127 @@ func (a *WebhookEventsAPIService) ExecutionStaledexecutionStaledPostExecute(r Ap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest struct {
+	ctx                    context.Context
+	ApiService             WebhookEventsAPI
+	fleetConnectionCreated *FleetConnectionCreated
+}
+
+func (r ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest) FleetConnectionCreated(fleetConnectionCreated FleetConnectionCreated) ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest {
+	r.fleetConnectionCreated = &fleetConnectionCreated
+	return r
+}
+
+func (r ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.FleetConnectionCreatedfleetConnectionCreatedPostExecute(r)
+}
+
+/*
+FleetConnectionCreatedfleetConnectionCreatedPost Fleet Connection Created
+
+Emitted when a new fleet connection is created between a fleet and a connection.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest
+*/
+func (a *WebhookEventsAPIService) FleetConnectionCreatedfleetConnectionCreatedPost(ctx context.Context) ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest {
+	return ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) FleetConnectionCreatedfleetConnectionCreatedPostExecute(r ApiFleetConnectionCreatedfleetConnectionCreatedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.FleetConnectionCreatedfleetConnectionCreatedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/fleet_connection.created"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.fleetConnectionCreated == nil {
+		return localVarReturnValue, nil, reportError("fleetConnectionCreated is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.fleetConnectionCreated
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiHosAvailabilityAddedhosAvailabilityAddedPostRequest struct {
 	ctx                  context.Context
 	ApiService           WebhookEventsAPI
@@ -1446,6 +1699,375 @@ func (a *WebhookEventsAPIService) HosAvailabilityRemovedhosAvailabilityRemovedPo
 	}
 	// body params
 	localVarPostBody = r.hosAvailabilityRemoved
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest struct {
+	ctx                   context.Context
+	ApiService            WebhookEventsAPI
+	hosDailySnapshotAdded *HosDailySnapshotAdded
+}
+
+func (r ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest) HosDailySnapshotAdded(hosDailySnapshotAdded HosDailySnapshotAdded) ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest {
+	r.hosDailySnapshotAdded = &hosDailySnapshotAdded
+	return r
+}
+
+func (r ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.HosDailySnapshotAddedhosDailySnapshotAddedPostExecute(r)
+}
+
+/*
+HosDailySnapshotAddedhosDailySnapshotAddedPost Hos Daily Snapshot Added
+
+Emitted when a new HOS daily snapshot is added to our database.
+
+e.g. The record fetched from the TSP is new and generated a new record in our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest
+*/
+func (a *WebhookEventsAPIService) HosDailySnapshotAddedhosDailySnapshotAddedPost(ctx context.Context) ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest {
+	return ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) HosDailySnapshotAddedhosDailySnapshotAddedPostExecute(r ApiHosDailySnapshotAddedhosDailySnapshotAddedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.HosDailySnapshotAddedhosDailySnapshotAddedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/hos_daily_snapshot.added"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.hosDailySnapshotAdded == nil {
+		return localVarReturnValue, nil, reportError("hosDailySnapshotAdded is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.hosDailySnapshotAdded
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest struct {
+	ctx                      context.Context
+	ApiService               WebhookEventsAPI
+	hosDailySnapshotModified *HosDailySnapshotModified
+}
+
+func (r ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest) HosDailySnapshotModified(hosDailySnapshotModified HosDailySnapshotModified) ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest {
+	r.hosDailySnapshotModified = &hosDailySnapshotModified
+	return r
+}
+
+func (r ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.HosDailySnapshotModifiedhosDailySnapshotModifiedPostExecute(r)
+}
+
+/*
+HosDailySnapshotModifiedhosDailySnapshotModifiedPost Hos Daily Snapshot Modified
+
+Emitted when an HOS daily snapshot is modified in our database.
+
+e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest
+*/
+func (a *WebhookEventsAPIService) HosDailySnapshotModifiedhosDailySnapshotModifiedPost(ctx context.Context) ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest {
+	return ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) HosDailySnapshotModifiedhosDailySnapshotModifiedPostExecute(r ApiHosDailySnapshotModifiedhosDailySnapshotModifiedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.HosDailySnapshotModifiedhosDailySnapshotModifiedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/hos_daily_snapshot.modified"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.hosDailySnapshotModified == nil {
+		return localVarReturnValue, nil, reportError("hosDailySnapshotModified is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.hosDailySnapshotModified
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest struct {
+	ctx                     context.Context
+	ApiService              WebhookEventsAPI
+	hosDailySnapshotRemoved *HosDailySnapshotRemoved
+}
+
+func (r ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest) HosDailySnapshotRemoved(hosDailySnapshotRemoved HosDailySnapshotRemoved) ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest {
+	r.hosDailySnapshotRemoved = &hosDailySnapshotRemoved
+	return r
+}
+
+func (r ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.HosDailySnapshotRemovedhosDailySnapshotRemovedPostExecute(r)
+}
+
+/*
+HosDailySnapshotRemovedhosDailySnapshotRemovedPost Hos Daily Snapshot Removed
+
+Emitted when an HOS daily snapshot is removed from our database.
+
+e.g. The record was deleted from the TSP and we removed it from our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest
+*/
+func (a *WebhookEventsAPIService) HosDailySnapshotRemovedhosDailySnapshotRemovedPost(ctx context.Context) ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest {
+	return ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) HosDailySnapshotRemovedhosDailySnapshotRemovedPostExecute(r ApiHosDailySnapshotRemovedhosDailySnapshotRemovedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.HosDailySnapshotRemovedhosDailySnapshotRemovedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/hos_daily_snapshot.removed"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.hosDailySnapshotRemoved == nil {
+		return localVarReturnValue, nil, reportError("hosDailySnapshotRemoved is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.hosDailySnapshotRemoved
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -4013,6 +4635,611 @@ func (a *WebhookEventsAPIService) ShareAgreementUpdatedshareAgreementUpdatedPost
 	}
 	// body params
 	localVarPostBody = r.shareAgreementUpdated
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTrailerAddedtrailerAddedPostRequest struct {
+	ctx          context.Context
+	ApiService   WebhookEventsAPI
+	trailerAdded *TrailerAdded
+}
+
+func (r ApiTrailerAddedtrailerAddedPostRequest) TrailerAdded(trailerAdded TrailerAdded) ApiTrailerAddedtrailerAddedPostRequest {
+	r.trailerAdded = &trailerAdded
+	return r
+}
+
+func (r ApiTrailerAddedtrailerAddedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.TrailerAddedtrailerAddedPostExecute(r)
+}
+
+/*
+TrailerAddedtrailerAddedPost Trailer Added
+
+Emitted when a new trailer is added to our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiTrailerAddedtrailerAddedPostRequest
+*/
+func (a *WebhookEventsAPIService) TrailerAddedtrailerAddedPost(ctx context.Context) ApiTrailerAddedtrailerAddedPostRequest {
+	return ApiTrailerAddedtrailerAddedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) TrailerAddedtrailerAddedPostExecute(r ApiTrailerAddedtrailerAddedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.TrailerAddedtrailerAddedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/trailer.added"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.trailerAdded == nil {
+		return localVarReturnValue, nil, reportError("trailerAdded is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.trailerAdded
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTrailerLocationAddedtrailerLocationAddedPostRequest struct {
+	ctx                  context.Context
+	ApiService           WebhookEventsAPI
+	trailerLocationAdded *TrailerLocationAdded
+}
+
+func (r ApiTrailerLocationAddedtrailerLocationAddedPostRequest) TrailerLocationAdded(trailerLocationAdded TrailerLocationAdded) ApiTrailerLocationAddedtrailerLocationAddedPostRequest {
+	r.trailerLocationAdded = &trailerLocationAdded
+	return r
+}
+
+func (r ApiTrailerLocationAddedtrailerLocationAddedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.TrailerLocationAddedtrailerLocationAddedPostExecute(r)
+}
+
+/*
+TrailerLocationAddedtrailerLocationAddedPost Trailer Location Added
+
+Emitted when a new trailer location is added to our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiTrailerLocationAddedtrailerLocationAddedPostRequest
+*/
+func (a *WebhookEventsAPIService) TrailerLocationAddedtrailerLocationAddedPost(ctx context.Context) ApiTrailerLocationAddedtrailerLocationAddedPostRequest {
+	return ApiTrailerLocationAddedtrailerLocationAddedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) TrailerLocationAddedtrailerLocationAddedPostExecute(r ApiTrailerLocationAddedtrailerLocationAddedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.TrailerLocationAddedtrailerLocationAddedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/trailer_location.added"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.trailerLocationAdded == nil {
+		return localVarReturnValue, nil, reportError("trailerLocationAdded is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.trailerLocationAdded
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest struct {
+	ctx                     context.Context
+	ApiService              WebhookEventsAPI
+	trailerLocationModified *TrailerLocationModified
+}
+
+func (r ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest) TrailerLocationModified(trailerLocationModified TrailerLocationModified) ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest {
+	r.trailerLocationModified = &trailerLocationModified
+	return r
+}
+
+func (r ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.TrailerLocationModifiedtrailerLocationModifiedPostExecute(r)
+}
+
+/*
+TrailerLocationModifiedtrailerLocationModifiedPost Trailer Location Modified
+
+Emitted when a trailer location is modified in our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest
+*/
+func (a *WebhookEventsAPIService) TrailerLocationModifiedtrailerLocationModifiedPost(ctx context.Context) ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest {
+	return ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) TrailerLocationModifiedtrailerLocationModifiedPostExecute(r ApiTrailerLocationModifiedtrailerLocationModifiedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.TrailerLocationModifiedtrailerLocationModifiedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/trailer_location.modified"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.trailerLocationModified == nil {
+		return localVarReturnValue, nil, reportError("trailerLocationModified is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.trailerLocationModified
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTrailerModifiedtrailerModifiedPostRequest struct {
+	ctx             context.Context
+	ApiService      WebhookEventsAPI
+	trailerModified *TrailerModified
+}
+
+func (r ApiTrailerModifiedtrailerModifiedPostRequest) TrailerModified(trailerModified TrailerModified) ApiTrailerModifiedtrailerModifiedPostRequest {
+	r.trailerModified = &trailerModified
+	return r
+}
+
+func (r ApiTrailerModifiedtrailerModifiedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.TrailerModifiedtrailerModifiedPostExecute(r)
+}
+
+/*
+TrailerModifiedtrailerModifiedPost Trailer Modified
+
+Emitted when a trailer is modified in our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiTrailerModifiedtrailerModifiedPostRequest
+*/
+func (a *WebhookEventsAPIService) TrailerModifiedtrailerModifiedPost(ctx context.Context) ApiTrailerModifiedtrailerModifiedPostRequest {
+	return ApiTrailerModifiedtrailerModifiedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) TrailerModifiedtrailerModifiedPostExecute(r ApiTrailerModifiedtrailerModifiedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.TrailerModifiedtrailerModifiedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/trailer.modified"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.trailerModified == nil {
+		return localVarReturnValue, nil, reportError("trailerModified is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.trailerModified
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiTrailerRemovedtrailerRemovedPostRequest struct {
+	ctx            context.Context
+	ApiService     WebhookEventsAPI
+	trailerRemoved *TrailerRemoved
+}
+
+func (r ApiTrailerRemovedtrailerRemovedPostRequest) TrailerRemoved(trailerRemoved TrailerRemoved) ApiTrailerRemovedtrailerRemovedPostRequest {
+	r.trailerRemoved = &trailerRemoved
+	return r
+}
+
+func (r ApiTrailerRemovedtrailerRemovedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.TrailerRemovedtrailerRemovedPostExecute(r)
+}
+
+/*
+TrailerRemovedtrailerRemovedPost Trailer Removed
+
+Emitted when a trailer is removed from our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiTrailerRemovedtrailerRemovedPostRequest
+*/
+func (a *WebhookEventsAPIService) TrailerRemovedtrailerRemovedPost(ctx context.Context) ApiTrailerRemovedtrailerRemovedPostRequest {
+	return ApiTrailerRemovedtrailerRemovedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) TrailerRemovedtrailerRemovedPostExecute(r ApiTrailerRemovedtrailerRemovedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.TrailerRemovedtrailerRemovedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/trailer.removed"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.trailerRemoved == nil {
+		return localVarReturnValue, nil, reportError("trailerRemoved is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.trailerRemoved
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

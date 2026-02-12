@@ -44,13 +44,14 @@ Name | Type | Description | Notes
 **AccountId** | **string** |  | 
 **ProviderToken** | **interface{}** |  | 
 **DotNumber** | **string** |  | 
+**ApiId** | **string** |  | 
 **CarrierId** | **string** |  | 
 
 ## Methods
 
 ### NewCredentials1
 
-`func NewCredentials1(drivername DatabaseDriverEnum, host interface{}, port int32, username interface{}, password interface{}, database string, apiKey interface{}, url string, authCode interface{}, token interface{}, redirectUri string, clientId string, clientSecret interface{}, companyId interface{}, resourceOwnerId string, resourceOwnerSecret interface{}, signatureMethod string, realm string, tokenUrl string, privateKey interface{}, consumerKey interface{}, accessKey string, secretKey interface{}, bucketName string, region string, accessToken interface{}, tokenType string, code interface{}, appId string, appKey string, clientKey string, accountId string, providerToken interface{}, dotNumber string, carrierId string, ) *Credentials1`
+`func NewCredentials1(drivername DatabaseDriverEnum, host interface{}, port int32, username interface{}, password interface{}, database string, apiKey interface{}, url string, authCode interface{}, token interface{}, redirectUri string, clientId string, clientSecret interface{}, companyId interface{}, resourceOwnerId string, resourceOwnerSecret interface{}, signatureMethod string, realm string, tokenUrl string, privateKey interface{}, consumerKey interface{}, accessKey string, secretKey interface{}, bucketName string, region string, accessToken interface{}, tokenType string, code interface{}, appId string, appKey string, clientKey string, accountId string, providerToken interface{}, dotNumber string, apiId string, carrierId string, ) *Credentials1`
 
 NewCredentials1 instantiates a new Credentials1 object
 This constructor will assign default values to properties that have it defined,
@@ -1053,6 +1054,26 @@ and a boolean to check if the value has been set.
 `func (o *Credentials1) SetDotNumber(v string)`
 
 SetDotNumber sets DotNumber field to given value.
+
+
+### GetApiId
+
+`func (o *Credentials1) GetApiId() string`
+
+GetApiId returns the ApiId field if non-nil, zero value otherwise.
+
+### GetApiIdOk
+
+`func (o *Credentials1) GetApiIdOk() (*string, bool)`
+
+GetApiIdOk returns a tuple with the ApiId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiId
+
+`func (o *Credentials1) SetApiId(v string)`
+
+SetApiId sets ApiId field to given value.
 
 
 ### GetCarrierId

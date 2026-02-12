@@ -79,6 +79,17 @@ All URIs are relative to *https://api.catenatelematics.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AnalyticsAPI* | [**GetAnalyticsOverview**](docs/AnalyticsAPI.md#getanalyticsoverview) | **Get** /v2/telematics/analytics/overview | Get analytics overview
+*AnalyticsAPI* | [**GetDriverGrowthMetrics**](docs/AnalyticsAPI.md#getdrivergrowthmetrics) | **Get** /v2/telematics/analytics/drivers/time-series | Get driver growth time series
+*AnalyticsAPI* | [**GetFleetGrowthMetrics**](docs/AnalyticsAPI.md#getfleetgrowthmetrics) | **Get** /v2/telematics/analytics/fleets/time-series | Get fleet growth time series
+*AnalyticsAPI* | [**GetTrailerGrowthMetrics**](docs/AnalyticsAPI.md#gettrailergrowthmetrics) | **Get** /v2/telematics/analytics/trailers/time-series | Get trailer growth time series
+*AnalyticsAPI* | [**GetVehicleGrowthMetrics**](docs/AnalyticsAPI.md#getvehiclegrowthmetrics) | **Get** /v2/telematics/analytics/vehicles/time-series | Get vehicle growth time series
+*AnalyticsAPI* | [**ListDriverSummaries**](docs/AnalyticsAPI.md#listdriversummaries) | **Get** /v2/telematics/analytics/drivers | List driver summaries
+*AnalyticsAPI* | [**ListFleetSummaries**](docs/AnalyticsAPI.md#listfleetsummaries) | **Get** /v2/telematics/analytics/fleets | List fleet summaries
+*AnalyticsAPI* | [**ListTrailerLiveLocations**](docs/AnalyticsAPI.md#listtrailerlivelocations) | **Get** /v2/telematics/analytics/trailers/live-locations | List trailer live locations
+*AnalyticsAPI* | [**ListTrailerSummaries**](docs/AnalyticsAPI.md#listtrailersummaries) | **Get** /v2/telematics/analytics/trailers | List trailer summaries
+*AnalyticsAPI* | [**ListVehicleLiveLocations**](docs/AnalyticsAPI.md#listvehiclelivelocations) | **Get** /v2/telematics/analytics/vehicles/live-locations | List vehicle live locations
+*AnalyticsAPI* | [**ListVehicleSummaries**](docs/AnalyticsAPI.md#listvehiclesummaries) | **Get** /v2/telematics/analytics/vehicles | List vehicle summaries
 *ComplianceRegulationAPI* | [**GetDvirLogDefects**](docs/ComplianceRegulationAPI.md#getdvirlogdefects) | **Get** /v2/telematics/dvir-logs/{dvir_log_id}/defects | Get Dvir Log Defects
 *ComplianceRegulationAPI* | [**GetHosEventAttachments**](docs/ComplianceRegulationAPI.md#gethoseventattachments) | **Get** /v2/telematics/hos-events/{hos_event_id}/attachments | Get Hos Event Attachments
 *ComplianceRegulationAPI* | [**ListDvirLogDefects**](docs/ComplianceRegulationAPI.md#listdvirlogdefects) | **Get** /v2/telematics/dvir-defects | List Dvir Log Defects
@@ -93,6 +104,7 @@ Class | Method | HTTP request | Description
 *FleetOperationsTrackingAPI* | [**GetTrailer**](docs/FleetOperationsTrackingAPI.md#gettrailer) | **Get** /v2/telematics/trailers/{trailer_id} | Get Trailer
 *FleetOperationsTrackingAPI* | [**GetVehicle**](docs/FleetOperationsTrackingAPI.md#getvehicle) | **Get** /v2/telematics/vehicles/{vehicle_id} | Get Vehicle
 *FleetOperationsTrackingAPI* | [**GetVehicleSensorEvents**](docs/FleetOperationsTrackingAPI.md#getvehiclesensorevents) | **Get** /v2/telematics/vehicles/{vehicle_id}/sensor-events | Get Vehicle Sensor Events
+*FleetOperationsTrackingAPI* | [**ListTrailerLocations**](docs/FleetOperationsTrackingAPI.md#listtrailerlocations) | **Get** /v2/telematics/trailer-locations | List Trailer Locations
 *FleetOperationsTrackingAPI* | [**ListTrailers**](docs/FleetOperationsTrackingAPI.md#listtrailers) | **Get** /v2/telematics/trailers | List Trailers
 *FleetOperationsTrackingAPI* | [**ListVehicleLocations**](docs/FleetOperationsTrackingAPI.md#listvehiclelocations) | **Get** /v2/telematics/vehicle-locations | List Vehicle Locations
 *FleetOperationsTrackingAPI* | [**ListVehicleSensorEvents**](docs/FleetOperationsTrackingAPI.md#listvehiclesensorevents) | **Get** /v2/telematics/vehicle-sensor-events | List Vehicle Sensor Events
@@ -112,57 +124,70 @@ Class | Method | HTTP request | Description
 
  - [BadRequest](docs/BadRequest.md)
  - [Bbox](docs/Bbox.md)
+ - [Conflict](docs/Conflict.md)
  - [Coordinates](docs/Coordinates.md)
- - [CursorPageDvirLog](docs/CursorPageDvirLog.md)
- - [CursorPageDvirLogDefect](docs/CursorPageDvirLogDefect.md)
- - [CursorPageTypeVarCustomizedDriverSafetyEvent](docs/CursorPageTypeVarCustomizedDriverSafetyEvent.md)
- - [CursorPageTypeVarCustomizedHosAvailability](docs/CursorPageTypeVarCustomizedHosAvailability.md)
- - [CursorPageTypeVarCustomizedHosDailySnapshot](docs/CursorPageTypeVarCustomizedHosDailySnapshot.md)
- - [CursorPageTypeVarCustomizedHosEvent](docs/CursorPageTypeVarCustomizedHosEvent.md)
- - [CursorPageTypeVarCustomizedHosEventAttachment](docs/CursorPageTypeVarCustomizedHosEventAttachment.md)
- - [CursorPageTypeVarCustomizedHosViolation](docs/CursorPageTypeVarCustomizedHosViolation.md)
- - [CursorPageTypeVarCustomizedIftaSummary](docs/CursorPageTypeVarCustomizedIftaSummary.md)
- - [CursorPageTypeVarCustomizedRefHosEventCode](docs/CursorPageTypeVarCustomizedRefHosEventCode.md)
- - [CursorPageTypeVarCustomizedRefHosMalfunctionCode](docs/CursorPageTypeVarCustomizedRefHosMalfunctionCode.md)
- - [CursorPageTypeVarCustomizedRefHosRecordOrigin](docs/CursorPageTypeVarCustomizedRefHosRecordOrigin.md)
- - [CursorPageTypeVarCustomizedRefHosRecordStatus](docs/CursorPageTypeVarCustomizedRefHosRecordStatus.md)
- - [CursorPageTypeVarCustomizedRefHosRegion](docs/CursorPageTypeVarCustomizedRefHosRegion.md)
- - [CursorPageTypeVarCustomizedRefHosRuleset](docs/CursorPageTypeVarCustomizedRefHosRuleset.md)
- - [CursorPageTypeVarCustomizedRefHosViolationCode](docs/CursorPageTypeVarCustomizedRefHosViolationCode.md)
- - [CursorPageTypeVarCustomizedRefTimezoneCode](docs/CursorPageTypeVarCustomizedRefTimezoneCode.md)
- - [CursorPageTypeVarCustomizedTrailer](docs/CursorPageTypeVarCustomizedTrailer.md)
- - [CursorPageTypeVarCustomizedUser](docs/CursorPageTypeVarCustomizedUser.md)
- - [CursorPageTypeVarCustomizedVehicle](docs/CursorPageTypeVarCustomizedVehicle.md)
- - [CursorPageTypeVarCustomizedVehicleLocation](docs/CursorPageTypeVarCustomizedVehicleLocation.md)
- - [CursorPageTypeVarCustomizedVehicleSensor](docs/CursorPageTypeVarCustomizedVehicleSensor.md)
- - [DriverSafetyEvent](docs/DriverSafetyEvent.md)
+ - [CursorPageDriverSafetyEventRead](docs/CursorPageDriverSafetyEventRead.md)
+ - [CursorPageDriverSummary](docs/CursorPageDriverSummary.md)
+ - [CursorPageDvirLogDefectRead](docs/CursorPageDvirLogDefectRead.md)
+ - [CursorPageDvirLogRead](docs/CursorPageDvirLogRead.md)
+ - [CursorPageFleetSummary](docs/CursorPageFleetSummary.md)
+ - [CursorPageHosAvailabilityRead](docs/CursorPageHosAvailabilityRead.md)
+ - [CursorPageHosDailySnapshotRead](docs/CursorPageHosDailySnapshotRead.md)
+ - [CursorPageHosEventAttachmentRead](docs/CursorPageHosEventAttachmentRead.md)
+ - [CursorPageHosViolationRead](docs/CursorPageHosViolationRead.md)
+ - [CursorPageIftaSummaryRead](docs/CursorPageIftaSummaryRead.md)
+ - [CursorPageRefHosEventCode](docs/CursorPageRefHosEventCode.md)
+ - [CursorPageRefHosMalfunctionCode](docs/CursorPageRefHosMalfunctionCode.md)
+ - [CursorPageRefHosRecordOrigin](docs/CursorPageRefHosRecordOrigin.md)
+ - [CursorPageRefHosRecordStatus](docs/CursorPageRefHosRecordStatus.md)
+ - [CursorPageRefHosRegion](docs/CursorPageRefHosRegion.md)
+ - [CursorPageRefHosRuleset](docs/CursorPageRefHosRuleset.md)
+ - [CursorPageRefHosViolationCode](docs/CursorPageRefHosViolationCode.md)
+ - [CursorPageRefTimezoneCode](docs/CursorPageRefTimezoneCode.md)
+ - [CursorPageTrailerLiveLocation](docs/CursorPageTrailerLiveLocation.md)
+ - [CursorPageTrailerLocationRead](docs/CursorPageTrailerLocationRead.md)
+ - [CursorPageTrailerRead](docs/CursorPageTrailerRead.md)
+ - [CursorPageTrailerSummary](docs/CursorPageTrailerSummary.md)
+ - [CursorPageUserRead](docs/CursorPageUserRead.md)
+ - [CursorPageVehicleLiveLocation](docs/CursorPageVehicleLiveLocation.md)
+ - [CursorPageVehicleLocationRead](docs/CursorPageVehicleLocationRead.md)
+ - [CursorPageVehicleRead](docs/CursorPageVehicleRead.md)
+ - [CursorPageVehicleSensorRead](docs/CursorPageVehicleSensorRead.md)
+ - [CursorPageVehicleSummary](docs/CursorPageVehicleSummary.md)
  - [DriverSafetyEventEnum](docs/DriverSafetyEventEnum.md)
+ - [DriverSafetyEventRead](docs/DriverSafetyEventRead.md)
+ - [DriverSummary](docs/DriverSummary.md)
  - [DutyStatusCodeEnum](docs/DutyStatusCodeEnum.md)
  - [DvirDefectEnum](docs/DvirDefectEnum.md)
- - [DvirLog](docs/DvirLog.md)
- - [DvirLogDefect](docs/DvirLogDefect.md)
+ - [DvirLogDefectRead](docs/DvirLogDefectRead.md)
+ - [DvirLogRead](docs/DvirLogRead.md)
+ - [FleetSummary](docs/FleetSummary.md)
  - [Forbidden](docs/Forbidden.md)
- - [HosAvailability](docs/HosAvailability.md)
- - [HosDailySnapshot](docs/HosDailySnapshot.md)
- - [HosEvent](docs/HosEvent.md)
+ - [HosAvailabilityRead](docs/HosAvailabilityRead.md)
+ - [HosDailySnapshotRead](docs/HosDailySnapshotRead.md)
  - [HosEventAnnotation](docs/HosEventAnnotation.md)
- - [HosEventAttachment](docs/HosEventAttachment.md)
+ - [HosEventAttachmentRead](docs/HosEventAttachmentRead.md)
  - [HosEventCodeEnum](docs/HosEventCodeEnum.md)
+ - [HosEventRead](docs/HosEventRead.md)
  - [HosEventTypeCodeEnum](docs/HosEventTypeCodeEnum.md)
  - [HosMalfunctionCodeEnum](docs/HosMalfunctionCodeEnum.md)
  - [HosRecordOriginCodeEnum](docs/HosRecordOriginCodeEnum.md)
  - [HosRecordStatusCodeEnum](docs/HosRecordStatusCodeEnum.md)
  - [HosRegionCodeEnum](docs/HosRegionCodeEnum.md)
  - [HosRulesetCodeEnum](docs/HosRulesetCodeEnum.md)
- - [HosViolation](docs/HosViolation.md)
  - [HosViolationCategoryEnum](docs/HosViolationCategoryEnum.md)
  - [HosViolationCodeEnum](docs/HosViolationCodeEnum.md)
- - [IftaSummary](docs/IftaSummary.md)
+ - [HosViolationRead](docs/HosViolationRead.md)
+ - [IftaSummaryRead](docs/IftaSummaryRead.md)
  - [InternalServerError](docs/InternalServerError.md)
+ - [LargeObjectCursorPageHosEventRead](docs/LargeObjectCursorPageHosEventRead.md)
+ - [LastLocation](docs/LastLocation.md)
  - [Location](docs/Location.md)
  - [Location1](docs/Location1.md)
  - [Location2](docs/Location2.md)
  - [Location3](docs/Location3.md)
+ - [Location4](docs/Location4.md)
+ - [MethodNotAllowed](docs/MethodNotAllowed.md)
  - [NotFound](docs/NotFound.md)
  - [NotImplementedResponse](docs/NotImplementedResponse.md)
  - [Point](docs/Point.md)
@@ -174,18 +199,27 @@ Class | Method | HTTP request | Description
  - [RefHosRuleset](docs/RefHosRuleset.md)
  - [RefHosViolationCode](docs/RefHosViolationCode.md)
  - [RefTimezoneCode](docs/RefTimezoneCode.md)
+ - [ResourceCount](docs/ResourceCount.md)
  - [RetryAfterDetail](docs/RetryAfterDetail.md)
+ - [TimeSeriesDataPoint](docs/TimeSeriesDataPoint.md)
  - [TimezoneCodeEnum](docs/TimezoneCodeEnum.md)
  - [TooManyRequests](docs/TooManyRequests.md)
- - [Trailer](docs/Trailer.md)
+ - [TrailerLiveLocation](docs/TrailerLiveLocation.md)
+ - [TrailerLocation](docs/TrailerLocation.md)
+ - [TrailerLocationRead](docs/TrailerLocationRead.md)
+ - [TrailerRead](docs/TrailerRead.md)
+ - [TrailerSummary](docs/TrailerSummary.md)
  - [TspEnum](docs/TspEnum.md)
  - [Unauthorized](docs/Unauthorized.md)
  - [UnprocessableEntity](docs/UnprocessableEntity.md)
- - [User](docs/User.md)
+ - [UserRead](docs/UserRead.md)
  - [ValidationErrorDetail](docs/ValidationErrorDetail.md)
- - [Vehicle](docs/Vehicle.md)
+ - [VehicleLiveLocation](docs/VehicleLiveLocation.md)
  - [VehicleLocation](docs/VehicleLocation.md)
- - [VehicleSensor](docs/VehicleSensor.md)
+ - [VehicleLocationRead](docs/VehicleLocationRead.md)
+ - [VehicleRead](docs/VehicleRead.md)
+ - [VehicleSensorRead](docs/VehicleSensorRead.md)
+ - [VehicleSummary](docs/VehicleSummary.md)
 
 
 ## Documentation For Authorization

@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## ListHosEventCodesReference
 
-> CursorPageTypeVarCustomizedRefHosEventCode ListHosEventCodesReference(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageRefHosEventCode ListHosEventCodesReference(ctx).Cursor(cursor).Size(size).Execute()
 
 List HOS Event Codes
 
@@ -46,7 +46,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataSupportingTablesAPI.ListHosEventCodesReference``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListHosEventCodesReference`: CursorPageTypeVarCustomizedRefHosEventCode
+	// response from `ListHosEventCodesReference`: CursorPageRefHosEventCode
 	fmt.Fprintf(os.Stdout, "Response from `ReferenceDataSupportingTablesAPI.ListHosEventCodesReference`: %v\n", resp)
 }
 ```
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedRefHosEventCode**](CursorPageTypeVarCustomizedRefHosEventCode.md)
+[**CursorPageRefHosEventCode**](CursorPageRefHosEventCode.md)
 
 ### Authorization
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## ListHosMalfunctionCodesReference
 
-> CursorPageTypeVarCustomizedRefHosMalfunctionCode ListHosMalfunctionCodesReference(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageRefHosMalfunctionCode ListHosMalfunctionCodesReference(ctx).Cursor(cursor).Size(size).Execute()
 
 List HOS Malfunction Codes
 
@@ -114,7 +114,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataSupportingTablesAPI.ListHosMalfunctionCodesReference``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListHosMalfunctionCodesReference`: CursorPageTypeVarCustomizedRefHosMalfunctionCode
+	// response from `ListHosMalfunctionCodesReference`: CursorPageRefHosMalfunctionCode
 	fmt.Fprintf(os.Stdout, "Response from `ReferenceDataSupportingTablesAPI.ListHosMalfunctionCodesReference`: %v\n", resp)
 }
 ```
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedRefHosMalfunctionCode**](CursorPageTypeVarCustomizedRefHosMalfunctionCode.md)
+[**CursorPageRefHosMalfunctionCode**](CursorPageRefHosMalfunctionCode.md)
 
 ### Authorization
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## ListHosRecordOriginsReference
 
-> CursorPageTypeVarCustomizedRefHosRecordOrigin ListHosRecordOriginsReference(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageRefHosRecordOrigin ListHosRecordOriginsReference(ctx).Cursor(cursor).Size(size).Execute()
 
 List HOS Record Origins
 
@@ -182,7 +182,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataSupportingTablesAPI.ListHosRecordOriginsReference``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListHosRecordOriginsReference`: CursorPageTypeVarCustomizedRefHosRecordOrigin
+	// response from `ListHosRecordOriginsReference`: CursorPageRefHosRecordOrigin
 	fmt.Fprintf(os.Stdout, "Response from `ReferenceDataSupportingTablesAPI.ListHosRecordOriginsReference`: %v\n", resp)
 }
 ```
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedRefHosRecordOrigin**](CursorPageTypeVarCustomizedRefHosRecordOrigin.md)
+[**CursorPageRefHosRecordOrigin**](CursorPageRefHosRecordOrigin.md)
 
 ### Authorization
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## ListHosRecordStatusesReference
 
-> CursorPageTypeVarCustomizedRefHosRecordStatus ListHosRecordStatusesReference(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageRefHosRecordStatus ListHosRecordStatusesReference(ctx).Cursor(cursor).Size(size).Execute()
 
 List HOS Record Statuses
 
@@ -250,7 +250,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataSupportingTablesAPI.ListHosRecordStatusesReference``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListHosRecordStatusesReference`: CursorPageTypeVarCustomizedRefHosRecordStatus
+	// response from `ListHosRecordStatusesReference`: CursorPageRefHosRecordStatus
 	fmt.Fprintf(os.Stdout, "Response from `ReferenceDataSupportingTablesAPI.ListHosRecordStatusesReference`: %v\n", resp)
 }
 ```
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedRefHosRecordStatus**](CursorPageTypeVarCustomizedRefHosRecordStatus.md)
+[**CursorPageRefHosRecordStatus**](CursorPageRefHosRecordStatus.md)
 
 ### Authorization
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ## ListHosRegionsReference
 
-> CursorPageTypeVarCustomizedRefHosRegion ListHosRegionsReference(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageRefHosRegion ListHosRegionsReference(ctx).Cursor(cursor).Size(size).Execute()
 
 List HOS Regions
 
@@ -318,7 +318,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataSupportingTablesAPI.ListHosRegionsReference``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListHosRegionsReference`: CursorPageTypeVarCustomizedRefHosRegion
+	// response from `ListHosRegionsReference`: CursorPageRefHosRegion
 	fmt.Fprintf(os.Stdout, "Response from `ReferenceDataSupportingTablesAPI.ListHosRegionsReference`: %v\n", resp)
 }
 ```
@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedRefHosRegion**](CursorPageTypeVarCustomizedRefHosRegion.md)
+[**CursorPageRefHosRegion**](CursorPageRefHosRegion.md)
 
 ### Authorization
 
@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 
 ## ListHosViolationCodesReference
 
-> CursorPageTypeVarCustomizedRefHosViolationCode ListHosViolationCodesReference(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageRefHosViolationCode ListHosViolationCodesReference(ctx).Cursor(cursor).Size(size).Execute()
 
 List HOS Violation Codes
 
@@ -386,7 +386,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataSupportingTablesAPI.ListHosViolationCodesReference``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListHosViolationCodesReference`: CursorPageTypeVarCustomizedRefHosViolationCode
+	// response from `ListHosViolationCodesReference`: CursorPageRefHosViolationCode
 	fmt.Fprintf(os.Stdout, "Response from `ReferenceDataSupportingTablesAPI.ListHosViolationCodesReference`: %v\n", resp)
 }
 ```
@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedRefHosViolationCode**](CursorPageTypeVarCustomizedRefHosViolationCode.md)
+[**CursorPageRefHosViolationCode**](CursorPageRefHosViolationCode.md)
 
 ### Authorization
 
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 
 ## ListRulesetsReference
 
-> CursorPageTypeVarCustomizedRefHosRuleset ListRulesetsReference(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageRefHosRuleset ListRulesetsReference(ctx).Cursor(cursor).Size(size).Execute()
 
 List HOS Rulesets
 
@@ -454,7 +454,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataSupportingTablesAPI.ListRulesetsReference``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListRulesetsReference`: CursorPageTypeVarCustomizedRefHosRuleset
+	// response from `ListRulesetsReference`: CursorPageRefHosRuleset
 	fmt.Fprintf(os.Stdout, "Response from `ReferenceDataSupportingTablesAPI.ListRulesetsReference`: %v\n", resp)
 }
 ```
@@ -475,7 +475,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedRefHosRuleset**](CursorPageTypeVarCustomizedRefHosRuleset.md)
+[**CursorPageRefHosRuleset**](CursorPageRefHosRuleset.md)
 
 ### Authorization
 
@@ -493,7 +493,7 @@ Name | Type | Description  | Notes
 
 ## ListTimezonesReference
 
-> CursorPageTypeVarCustomizedRefTimezoneCode ListTimezonesReference(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPageRefTimezoneCode ListTimezonesReference(ctx).Cursor(cursor).Size(size).Execute()
 
 List Timezones
 
@@ -522,7 +522,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataSupportingTablesAPI.ListTimezonesReference``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListTimezonesReference`: CursorPageTypeVarCustomizedRefTimezoneCode
+	// response from `ListTimezonesReference`: CursorPageRefTimezoneCode
 	fmt.Fprintf(os.Stdout, "Response from `ReferenceDataSupportingTablesAPI.ListTimezonesReference`: %v\n", resp)
 }
 ```
@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CursorPageTypeVarCustomizedRefTimezoneCode**](CursorPageTypeVarCustomizedRefTimezoneCode.md)
+[**CursorPageRefTimezoneCode**](CursorPageRefTimezoneCode.md)
 
 ### Authorization
 

@@ -28,6 +28,7 @@ docs/InvitationCreate.md
 docs/InvitationDecline.md
 docs/InvitationRead.md
 docs/InvitationsAPI.md
+docs/MethodNotAllowed.md
 docs/NotFound.md
 docs/PartnerCategory.md
 docs/PartnerCreate.md
@@ -73,6 +74,7 @@ model_invitation_accept.go
 model_invitation_create.go
 model_invitation_decline.go
 model_invitation_read.go
+model_method_not_allowed.go
 model_not_found.go
 model_partner_category.go
 model_partner_create.go

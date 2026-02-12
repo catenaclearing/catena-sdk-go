@@ -19,17 +19,17 @@
 
 * `HOS_EVENT` (value: `"hos_event"`)
 
-* `HOS_LOG` (value: `"hos_log"`)
+* `HOS_EVENT_ANNOTATION` (value: `"hos_event_annotation"`)
 
-* `HOS_LOG_ANNOTATION` (value: `"hos_log_annotation"`)
-
-* `HOS_LOG_ATTACHMENT` (value: `"hos_log_attachment"`)
+* `HOS_EVENT_ATTACHMENT` (value: `"hos_event_attachment"`)
 
 * `HOS_VIOLATION` (value: `"hos_violation"`)
 
 * `IFTA_SUMMARY` (value: `"ifta_summary"`)
 
 * `LOCATION_SEGMENT` (value: `"location_segment"`)
+
+* `REEFER_STATUS` (value: `"reefer_status"`)
 
 * `USER` (value: `"user"`)
 
@@ -40,6 +40,8 @@
 * `VEHICLE_SENSOR` (value: `"vehicle_sensor"`)
 
 * `TRAILER` (value: `"trailer"`)
+
+* `TRAILER_LOCATION` (value: `"trailer_location"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -33,8 +33,8 @@ type SafetyDriverBehaviorAPI interface {
 	ListDriverSafetyEvents(ctx context.Context) ApiListDriverSafetyEventsRequest
 
 	// ListDriverSafetyEventsExecute executes the request
-	//  @return CursorPageTypeVarCustomizedDriverSafetyEvent
-	ListDriverSafetyEventsExecute(r ApiListDriverSafetyEventsRequest) (*CursorPageTypeVarCustomizedDriverSafetyEvent, *http.Response, error)
+	//  @return CursorPageDriverSafetyEventRead
+	ListDriverSafetyEventsExecute(r ApiListDriverSafetyEventsRequest) (*CursorPageDriverSafetyEventRead, *http.Response, error)
 }
 
 // SafetyDriverBehaviorAPIService SafetyDriverBehaviorAPI service
@@ -50,6 +50,8 @@ type ApiListDriverSafetyEventsRequest struct {
 	includeSourceData *bool
 	driverIds         *[]string
 	vehicleIds        *[]string
+	sortBy            *string
+	sortOrder         *string
 	cursor            *string
 	size              *int32
 }
@@ -66,13 +68,13 @@ func (r ApiListDriverSafetyEventsRequest) FleetRefs(fleetRefs []string) ApiListD
 	return r
 }
 
-// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListDriverSafetyEventsRequest) FromDatetime(fromDatetime time.Time) ApiListDriverSafetyEventsRequest {
 	r.fromDatetime = &fromDatetime
 	return r
 }
 
-// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 15 days
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
 func (r ApiListDriverSafetyEventsRequest) ToDatetime(toDatetime time.Time) ApiListDriverSafetyEventsRequest {
 	r.toDatetime = &toDatetime
 	return r
@@ -96,6 +98,18 @@ func (r ApiListDriverSafetyEventsRequest) VehicleIds(vehicleIds []string) ApiLis
 	return r
 }
 
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListDriverSafetyEventsRequest) SortBy(sortBy string) ApiListDriverSafetyEventsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListDriverSafetyEventsRequest) SortOrder(sortOrder string) ApiListDriverSafetyEventsRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
 // Cursor for the next page
 func (r ApiListDriverSafetyEventsRequest) Cursor(cursor string) ApiListDriverSafetyEventsRequest {
 	r.cursor = &cursor
@@ -108,7 +122,7 @@ func (r ApiListDriverSafetyEventsRequest) Size(size int32) ApiListDriverSafetyEv
 	return r
 }
 
-func (r ApiListDriverSafetyEventsRequest) Execute() (*CursorPageTypeVarCustomizedDriverSafetyEvent, *http.Response, error) {
+func (r ApiListDriverSafetyEventsRequest) Execute() (*CursorPageDriverSafetyEventRead, *http.Response, error) {
 	return r.ApiService.ListDriverSafetyEventsExecute(r)
 }
 
@@ -129,13 +143,13 @@ func (a *SafetyDriverBehaviorAPIService) ListDriverSafetyEvents(ctx context.Cont
 
 // Execute executes the request
 //
-//	@return CursorPageTypeVarCustomizedDriverSafetyEvent
-func (a *SafetyDriverBehaviorAPIService) ListDriverSafetyEventsExecute(r ApiListDriverSafetyEventsRequest) (*CursorPageTypeVarCustomizedDriverSafetyEvent, *http.Response, error) {
+//	@return CursorPageDriverSafetyEventRead
+func (a *SafetyDriverBehaviorAPIService) ListDriverSafetyEventsExecute(r ApiListDriverSafetyEventsRequest) (*CursorPageDriverSafetyEventRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageTypeVarCustomizedDriverSafetyEvent
+		localVarReturnValue *CursorPageDriverSafetyEventRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SafetyDriverBehaviorAPIService.ListDriverSafetyEvents")
@@ -204,6 +218,15 @@ func (a *SafetyDriverBehaviorAPIService) ListDriverSafetyEventsExecute(r ApiList
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", t, "form", "multi")
 		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
 	}
 	if r.cursor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
@@ -288,6 +311,28 @@ func (a *SafetyDriverBehaviorAPIService) ListDriverSafetyEventsExecute(r ApiList
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
