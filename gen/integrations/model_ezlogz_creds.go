@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &EzlogzCreds{}
 
 // EzlogzCreds Ezlogz Connection model
 type EzlogzCreds struct {
-	AppId     string `json:"app_id"`
-	AppKey    string `json:"app_key"`
-	ClientKey string `json:"client_key"`
+	AppId                string `json:"app_id"`
+	AppKey               string `json:"app_key"`
+	ClientKey            string `json:"client_key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EzlogzCreds EzlogzCreds
@@ -133,6 +133,11 @@ func (o EzlogzCreds) ToMap() (map[string]interface{}, error) {
 	toSerialize["app_id"] = o.AppId
 	toSerialize["app_key"] = o.AppKey
 	toSerialize["client_key"] = o.ClientKey
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *EzlogzCreds) UnmarshalJSON(data []byte) (err error) {
 
 	varEzlogzCreds := _EzlogzCreds{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEzlogzCreds)
+	err = json.Unmarshal(data, &varEzlogzCreds)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EzlogzCreds(varEzlogzCreds)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "app_id")
+		delete(additionalProperties, "app_key")
+		delete(additionalProperties, "client_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

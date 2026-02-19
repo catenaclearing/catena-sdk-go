@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -39,7 +38,8 @@ type BaseExecutionEvent struct {
 	// The TSP that is the source for this execution
 	SourceName TspEnum `json:"source_name"`
 	// The resource type being processed in this execution
-	Resource ResourceEnum `json:"resource"`
+	Resource             ResourceEnum `json:"resource"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseExecutionEvent BaseExecutionEvent
@@ -305,6 +305,11 @@ func (o BaseExecutionEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["resource"] = o.Resource
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -340,15 +345,28 @@ func (o *BaseExecutionEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseExecutionEvent := _BaseExecutionEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseExecutionEvent)
+	err = json.Unmarshal(data, &varBaseExecutionEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseExecutionEvent(varBaseExecutionEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "schedule_id")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "resource")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

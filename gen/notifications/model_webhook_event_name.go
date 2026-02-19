@@ -86,6 +86,10 @@ const (
 	WEBHOOKEVENTNAME_HOS_VIOLATION_MODIFIED      WebhookEventName = "hos_violation.modified"
 	WEBHOOKEVENTNAME_HOS_VIOLATION_REMOVED       WebhookEventName = "hos_violation.removed"
 	WEBHOOKEVENTNAME_HOS_VIOLATION               WebhookEventName = "hos_violation.*"
+	WEBHOOKEVENTNAME_ENGINE_LOG_ADDED            WebhookEventName = "engine_log.added"
+	WEBHOOKEVENTNAME_ENGINE_LOG_MODIFIED         WebhookEventName = "engine_log.modified"
+	WEBHOOKEVENTNAME_ENGINE_LOG_REMOVED          WebhookEventName = "engine_log.removed"
+	WEBHOOKEVENTNAME_ENGINE_LOG                  WebhookEventName = "engine_log.*"
 )
 
 // All allowed values of WebhookEventName enum
@@ -156,6 +160,10 @@ var AllowedWebhookEventNameEnumValues = []WebhookEventName{
 	"hos_violation.modified",
 	"hos_violation.removed",
 	"hos_violation.*",
+	"engine_log.added",
+	"engine_log.modified",
+	"engine_log.removed",
+	"engine_log.*",
 }
 
 func (v *WebhookEventName) UnmarshalJSON(src []byte) error {

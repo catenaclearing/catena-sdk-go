@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -45,7 +44,8 @@ type FleetRead struct {
 	// When the fleet was created
 	CreatedAt time.Time `json:"created_at"`
 	// Last modification timestamp
-	UpdatedAt time.Time `json:"updated_at"`
+	UpdatedAt            time.Time `json:"updated_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FleetRead FleetRead
@@ -953,6 +953,11 @@ func (o FleetRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -983,15 +988,40 @@ func (o *FleetRead) UnmarshalJSON(data []byte) (err error) {
 
 	varFleetRead := _FleetRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFleetRead)
+	err = json.Unmarshal(data, &varFleetRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FleetRead(varFleetRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "display_name")
+		delete(additionalProperties, "legal_name")
+		delete(additionalProperties, "dba_name")
+		delete(additionalProperties, "websites")
+		delete(additionalProperties, "regulatory_id")
+		delete(additionalProperties, "regulatory_id_type")
+		delete(additionalProperties, "regulatory_id_date")
+		delete(additionalProperties, "regulatory_id_status")
+		delete(additionalProperties, "registered_email")
+		delete(additionalProperties, "registered_phone")
+		delete(additionalProperties, "registered_fax")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "province")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

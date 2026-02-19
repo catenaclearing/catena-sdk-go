@@ -35,6 +35,7 @@ const (
 	WEBHOOKCATCHALLEVENTS_HOS_DAILY_SNAPSHOT WebhookCatchAllEvents = "hos_daily_snapshot.*"
 	WEBHOOKCATCHALLEVENTS_HOS_EVENT          WebhookCatchAllEvents = "hos_event.*"
 	WEBHOOKCATCHALLEVENTS_HOS_VIOLATION      WebhookCatchAllEvents = "hos_violation.*"
+	WEBHOOKCATCHALLEVENTS_ENGINE_LOG         WebhookCatchAllEvents = "engine_log.*"
 )
 
 // All allowed values of WebhookCatchAllEvents enum
@@ -54,6 +55,7 @@ var AllowedWebhookCatchAllEventsEnumValues = []WebhookCatchAllEvents{
 	"hos_daily_snapshot.*",
 	"hos_event.*",
 	"hos_violation.*",
+	"engine_log.*",
 }
 
 func (v *WebhookCatchAllEvents) UnmarshalJSON(src []byte) error {

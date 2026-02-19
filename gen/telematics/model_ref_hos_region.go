@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -30,7 +29,8 @@ type RefHosRegion struct {
 	// Subdivision code component of ISO-3166-2 (the part after the hyphen), e.g., 'CA' for US-CA, 'ON' for CA-ON.
 	RegionCodeIso2 string `json:"region_code_iso2"`
 	// Region/subdivision name, e.g., 'California', 'Ontario'.
-	RegionName string `json:"region_name"`
+	RegionName           string `json:"region_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RefHosRegion RefHosRegion
@@ -192,6 +192,11 @@ func (o RefHosRegion) ToMap() (map[string]interface{}, error) {
 	toSerialize["country_name"] = o.CountryName
 	toSerialize["region_code_iso2"] = o.RegionCodeIso2
 	toSerialize["region_name"] = o.RegionName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -223,15 +228,24 @@ func (o *RefHosRegion) UnmarshalJSON(data []byte) (err error) {
 
 	varRefHosRegion := _RefHosRegion{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRefHosRegion)
+	err = json.Unmarshal(data, &varRefHosRegion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RefHosRegion(varRefHosRegion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "country_name")
+		delete(additionalProperties, "region_code_iso2")
+		delete(additionalProperties, "region_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

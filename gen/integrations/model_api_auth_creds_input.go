@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &ApiAuthCredsInput{}
 
 // ApiAuthCredsInput API Auth Connection model
 type ApiAuthCredsInput struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	ApiKey   string `json:"api_key"`
+	Username             string `json:"username"`
+	Password             string `json:"password"`
+	ApiKey               string `json:"api_key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ApiAuthCredsInput ApiAuthCredsInput
@@ -133,6 +133,11 @@ func (o ApiAuthCredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["username"] = o.Username
 	toSerialize["password"] = o.Password
 	toSerialize["api_key"] = o.ApiKey
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *ApiAuthCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varApiAuthCredsInput := _ApiAuthCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApiAuthCredsInput)
+	err = json.Unmarshal(data, &varApiAuthCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ApiAuthCredsInput(varApiAuthCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "api_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

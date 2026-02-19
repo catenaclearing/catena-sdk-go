@@ -19,24 +19,27 @@ var _ MappedNullable = &FleetUpdate{}
 
 // FleetUpdate API model for updating a fleet  Fleets can update their own information. All fields are optional - only provide fields you want to change.
 type FleetUpdate struct {
-	Name               NullableString `json:"name,omitempty"`
-	Description        NullableString `json:"description,omitempty"`
-	DisplayName        NullableString `json:"display_name,omitempty"`
-	LegalName          NullableString `json:"legal_name,omitempty"`
-	DbaName            NullableString `json:"dba_name,omitempty"`
-	RegulatoryId       NullableString `json:"regulatory_id,omitempty"`
-	RegulatoryIdType   NullableString `json:"regulatory_id_type,omitempty"`
-	RegulatoryIdDate   NullableString `json:"regulatory_id_date,omitempty"`
-	RegulatoryIdStatus NullableString `json:"regulatory_id_status,omitempty"`
-	RegisteredEmail    NullableString `json:"registered_email,omitempty"`
-	RegisteredPhone    NullableString `json:"registered_phone,omitempty"`
-	RegisteredFax      NullableString `json:"registered_fax,omitempty"`
-	Address            NullableString `json:"address,omitempty"`
-	City               NullableString `json:"city,omitempty"`
-	Province           NullableString `json:"province,omitempty"`
-	PostalCode         NullableString `json:"postal_code,omitempty"`
-	CountryCode        NullableString `json:"country_code,omitempty" validate:"regexp=^\\\\w{3}$"`
+	Name                 NullableString `json:"name,omitempty"`
+	Description          NullableString `json:"description,omitempty"`
+	DisplayName          NullableString `json:"display_name,omitempty"`
+	LegalName            NullableString `json:"legal_name,omitempty"`
+	DbaName              NullableString `json:"dba_name,omitempty"`
+	RegulatoryId         NullableString `json:"regulatory_id,omitempty"`
+	RegulatoryIdType     NullableString `json:"regulatory_id_type,omitempty"`
+	RegulatoryIdDate     NullableString `json:"regulatory_id_date,omitempty"`
+	RegulatoryIdStatus   NullableString `json:"regulatory_id_status,omitempty"`
+	RegisteredEmail      NullableString `json:"registered_email,omitempty"`
+	RegisteredPhone      NullableString `json:"registered_phone,omitempty"`
+	RegisteredFax        NullableString `json:"registered_fax,omitempty"`
+	Address              NullableString `json:"address,omitempty"`
+	City                 NullableString `json:"city,omitempty"`
+	Province             NullableString `json:"province,omitempty"`
+	PostalCode           NullableString `json:"postal_code,omitempty"`
+	CountryCode          NullableString `json:"country_code,omitempty" validate:"regexp=^\\\\w{3}$"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FleetUpdate FleetUpdate
 
 // NewFleetUpdate instantiates a new FleetUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -847,7 +850,49 @@ func (o FleetUpdate) ToMap() (map[string]interface{}, error) {
 	if o.CountryCode.IsSet() {
 		toSerialize["country_code"] = o.CountryCode.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FleetUpdate) UnmarshalJSON(data []byte) (err error) {
+	varFleetUpdate := _FleetUpdate{}
+
+	err = json.Unmarshal(data, &varFleetUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FleetUpdate(varFleetUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "display_name")
+		delete(additionalProperties, "legal_name")
+		delete(additionalProperties, "dba_name")
+		delete(additionalProperties, "regulatory_id")
+		delete(additionalProperties, "regulatory_id_type")
+		delete(additionalProperties, "regulatory_id_date")
+		delete(additionalProperties, "regulatory_id_status")
+		delete(additionalProperties, "registered_email")
+		delete(additionalProperties, "registered_phone")
+		delete(additionalProperties, "registered_fax")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "province")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "country_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFleetUpdate struct {

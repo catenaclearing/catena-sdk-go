@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +20,9 @@ var _ MappedNullable = &SpireonSLCInput{}
 
 // SpireonSLCInput Spireon Short-lived Credentials model
 type SpireonSLCInput struct {
-	AccessToken string `json:"access_token"`
-	AuthCode    string `json:"auth_code"`
+	AccessToken          string `json:"access_token"`
+	AuthCode             string `json:"auth_code"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SpireonSLCInput SpireonSLCInput
@@ -106,6 +106,11 @@ func (o SpireonSLCInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["access_token"] = o.AccessToken
 	toSerialize["auth_code"] = o.AuthCode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *SpireonSLCInput) UnmarshalJSON(data []byte) (err error) {
 
 	varSpireonSLCInput := _SpireonSLCInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSpireonSLCInput)
+	err = json.Unmarshal(data, &varSpireonSLCInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SpireonSLCInput(varSpireonSLCInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_token")
+		delete(additionalProperties, "auth_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

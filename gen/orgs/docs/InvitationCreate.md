@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
+**FleetRef** | **string** | Your internal fleet identifier. Use this to map Catena fleets back to your system. This value will be returned in webhooks and redirect URLs. Only letters, numbers, spaces, dashes, and underscores are allowed. | 
 **PartnerProvidedFleetName** | Pointer to **NullableString** |  | [optional] 
 **PartnerProvidedFleetEmail** | Pointer to **NullableString** |  | [optional] 
 **PartnerProvidedFleetRegulatoryId** | Pointer to **NullableString** |  | [optional] 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewInvitationCreate
 
-`func NewInvitationCreate() *InvitationCreate`
+`func NewInvitationCreate(fleetRef string, ) *InvitationCreate`
 
 NewInvitationCreate instantiates a new InvitationCreate object
 This constructor will assign default values to properties that have it defined,
@@ -56,22 +56,7 @@ and a boolean to check if the value has been set.
 
 SetFleetRef sets FleetRef field to given value.
 
-### HasFleetRef
 
-`func (o *InvitationCreate) HasFleetRef() bool`
-
-HasFleetRef returns a boolean if a field has been set.
-
-### SetFleetRefNil
-
-`func (o *InvitationCreate) SetFleetRefNil(b bool)`
-
- SetFleetRefNil sets the value for FleetRef to be an explicit nil
-
-### UnsetFleetRef
-`func (o *InvitationCreate) UnsetFleetRef()`
-
-UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 ### GetPartnerProvidedFleetName
 
 `func (o *InvitationCreate) GetPartnerProvidedFleetName() string`

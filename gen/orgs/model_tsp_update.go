@@ -19,11 +19,14 @@ var _ MappedNullable = &TspUpdate{}
 
 // TspUpdate API model for updating a TSP  Update TSP profile information. All fields are optional - only provide fields you want to change.
 type TspUpdate struct {
-	Name        NullableString             `json:"name,omitempty"`
-	SourceName  NullableTspEnum            `json:"source_name,omitempty"`
-	ConnType    NullableConnectionTypeEnum `json:"conn_type,omitempty"`
-	Description NullableString             `json:"description,omitempty"`
+	Name                 NullableString             `json:"name,omitempty"`
+	SourceName           NullableTspEnum            `json:"source_name,omitempty"`
+	ConnType             NullableConnectionTypeEnum `json:"conn_type,omitempty"`
+	Description          NullableString             `json:"description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TspUpdate TspUpdate
 
 // NewTspUpdate instantiates a new TspUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -236,7 +239,36 @@ func (o TspUpdate) ToMap() (map[string]interface{}, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TspUpdate) UnmarshalJSON(data []byte) (err error) {
+	varTspUpdate := _TspUpdate{}
+
+	err = json.Unmarshal(data, &varTspUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TspUpdate(varTspUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "conn_type")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTspUpdate struct {

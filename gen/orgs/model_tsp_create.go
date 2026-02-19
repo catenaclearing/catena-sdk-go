@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,7 +31,10 @@ type TspCreate struct {
 	// Authentication method (OAuth, API Key, etc.)
 	ConnType ConnectionTypeEnum `json:"conn_type"`
 	// Indicates whether the TSP is a sandbox integrations for testing purposes.
-	IsSandbox *bool `json:"is_sandbox,omitempty"`
+	IsSandbox            *bool          `json:"is_sandbox,omitempty"`
+	LogoUrl              NullableString `json:"logo_url,omitempty"`
+	LogoDarkUrl          NullableString `json:"logo_dark_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TspCreate TspCreate
@@ -273,6 +275,92 @@ func (o *TspCreate) SetIsSandbox(v bool) {
 	o.IsSandbox = &v
 }
 
+// GetLogoUrl returns the LogoUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TspCreate) GetLogoUrl() string {
+	if o == nil || IsNil(o.LogoUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LogoUrl.Get()
+}
+
+// GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TspCreate) GetLogoUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LogoUrl.Get(), o.LogoUrl.IsSet()
+}
+
+// HasLogoUrl returns a boolean if a field has been set.
+func (o *TspCreate) HasLogoUrl() bool {
+	if o != nil && o.LogoUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoUrl gets a reference to the given NullableString and assigns it to the LogoUrl field.
+func (o *TspCreate) SetLogoUrl(v string) {
+	o.LogoUrl.Set(&v)
+}
+
+// SetLogoUrlNil sets the value for LogoUrl to be an explicit nil
+func (o *TspCreate) SetLogoUrlNil() {
+	o.LogoUrl.Set(nil)
+}
+
+// UnsetLogoUrl ensures that no value is present for LogoUrl, not even an explicit nil
+func (o *TspCreate) UnsetLogoUrl() {
+	o.LogoUrl.Unset()
+}
+
+// GetLogoDarkUrl returns the LogoDarkUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TspCreate) GetLogoDarkUrl() string {
+	if o == nil || IsNil(o.LogoDarkUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LogoDarkUrl.Get()
+}
+
+// GetLogoDarkUrlOk returns a tuple with the LogoDarkUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TspCreate) GetLogoDarkUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LogoDarkUrl.Get(), o.LogoDarkUrl.IsSet()
+}
+
+// HasLogoDarkUrl returns a boolean if a field has been set.
+func (o *TspCreate) HasLogoDarkUrl() bool {
+	if o != nil && o.LogoDarkUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoDarkUrl gets a reference to the given NullableString and assigns it to the LogoDarkUrl field.
+func (o *TspCreate) SetLogoDarkUrl(v string) {
+	o.LogoDarkUrl.Set(&v)
+}
+
+// SetLogoDarkUrlNil sets the value for LogoDarkUrl to be an explicit nil
+func (o *TspCreate) SetLogoDarkUrlNil() {
+	o.LogoDarkUrl.Set(nil)
+}
+
+// UnsetLogoDarkUrl ensures that no value is present for LogoDarkUrl, not even an explicit nil
+func (o *TspCreate) UnsetLogoDarkUrl() {
+	o.LogoDarkUrl.Unset()
+}
+
 func (o TspCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -298,6 +386,17 @@ func (o TspCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsSandbox) {
 		toSerialize["is_sandbox"] = o.IsSandbox
 	}
+	if o.LogoUrl.IsSet() {
+		toSerialize["logo_url"] = o.LogoUrl.Get()
+	}
+	if o.LogoDarkUrl.IsSet() {
+		toSerialize["logo_dark_url"] = o.LogoDarkUrl.Get()
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -327,15 +426,28 @@ func (o *TspCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varTspCreate := _TspCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTspCreate)
+	err = json.Unmarshal(data, &varTspCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TspCreate(varTspCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "websites")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "conn_type")
+		delete(additionalProperties, "is_sandbox")
+		delete(additionalProperties, "logo_url")
+		delete(additionalProperties, "logo_dark_url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

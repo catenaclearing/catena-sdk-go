@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,10 +27,11 @@ type RefTimezoneCode struct {
 	// Standard (non-DST) UTC offset in minutes (e.g., -360 for UTC-06:00).
 	StandardUtcOffsetMinutes int32 `json:"standard_utc_offset_minutes"`
 	// Indicates whether this timezone observes daylight saving time (DST).
-	ObservesDst         bool           `json:"observes_dst"`
-	DstUtcOffsetMinutes NullableInt32  `json:"dst_utc_offset_minutes,omitempty"`
-	DstStartRule        NullableString `json:"dst_start_rule,omitempty"`
-	DstEndRule          NullableString `json:"dst_end_rule,omitempty"`
+	ObservesDst          bool           `json:"observes_dst"`
+	DstUtcOffsetMinutes  NullableInt32  `json:"dst_utc_offset_minutes,omitempty"`
+	DstStartRule         NullableString `json:"dst_start_rule,omitempty"`
+	DstEndRule           NullableString `json:"dst_end_rule,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RefTimezoneCode RefTimezoneCode
@@ -305,6 +305,11 @@ func (o RefTimezoneCode) ToMap() (map[string]interface{}, error) {
 	if o.DstEndRule.IsSet() {
 		toSerialize["dst_end_rule"] = o.DstEndRule.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -335,15 +340,26 @@ func (o *RefTimezoneCode) UnmarshalJSON(data []byte) (err error) {
 
 	varRefTimezoneCode := _RefTimezoneCode{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRefTimezoneCode)
+	err = json.Unmarshal(data, &varRefTimezoneCode)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RefTimezoneCode(varRefTimezoneCode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "timezone_code")
+		delete(additionalProperties, "timezone")
+		delete(additionalProperties, "standard_utc_offset_minutes")
+		delete(additionalProperties, "observes_dst")
+		delete(additionalProperties, "dst_utc_offset_minutes")
+		delete(additionalProperties, "dst_start_rule")
+		delete(additionalProperties, "dst_end_rule")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

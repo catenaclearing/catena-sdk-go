@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,28 +31,32 @@ type HosEventAttachmentRead struct {
 	UpdatedAt time.Time    `json:"updated_at"`
 	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	// Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing.
-	ConnectionId string `json:"connection_id"`
-	// An enumeration identifying the TSP from which this record was sourced.
+	ConnectionId string         `json:"connection_id"`
+	TspId        NullableString `json:"tsp_id,omitempty"`
+	TspSlug      NullableString `json:"tsp_slug,omitempty"`
+	// The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name — use `tsp_id` or `tsp_slug` to identify the specific ELD provider.
 	SourceName TspEnum `json:"source_name"`
 	// Raw source payload as ingested from the TSP. **Note: use it for audit/debugging.**
 	SourceData map[string]interface{} `json:"source_data,omitempty"`
 	// Unique identifier of the record in the TSP. **Note: we generate a unique composite key based on available fields if the TSP does not provide an unique ID.**
 	SourceId string `json:"source_id"`
 	// SHA-256 hash of the source data payload. **Note: we use it internally for idempotence and deduplication.**
-	SourceDataHash string         `json:"source_data_hash"`
-	OccurredAt     NullableTime   `json:"occurred_at,omitempty"`
-	ExecutionId    NullableString `json:"execution_id,omitempty"`
-	ScheduleId     NullableString `json:"schedule_id,omitempty"`
-	HosEventId     NullableString `json:"hos_event_id,omitempty"`
-	LastEditAt     NullableTime   `json:"last_edit_at,omitempty"`
-	UploadedBy     NullableString `json:"uploaded_by,omitempty"`
-	FileName       NullableString `json:"file_name,omitempty"`
-	FileType       NullableString `json:"file_type,omitempty"`
-	FileSize       NullableInt32  `json:"file_size,omitempty"`
-	SourceUrl      NullableString `json:"source_url,omitempty"`
-	Url            NullableString `json:"url,omitempty"`
-	Checksum       NullableString `json:"checksum,omitempty"`
-	Description    NullableString `json:"description,omitempty"`
+	SourceDataHash       string                 `json:"source_data_hash"`
+	OccurredAt           NullableTime           `json:"occurred_at,omitempty"`
+	ExecutionId          NullableString         `json:"execution_id,omitempty"`
+	ScheduleId           NullableString         `json:"schedule_id,omitempty"`
+	Extras               map[string]interface{} `json:"extras,omitempty"`
+	HosEventId           NullableString         `json:"hos_event_id,omitempty"`
+	LastEditAt           NullableTime           `json:"last_edit_at,omitempty"`
+	UploadedBy           NullableString         `json:"uploaded_by,omitempty"`
+	FileName             NullableString         `json:"file_name,omitempty"`
+	FileType             NullableString         `json:"file_type,omitempty"`
+	FileSize             NullableInt32          `json:"file_size,omitempty"`
+	SourceUrl            NullableString         `json:"source_url,omitempty"`
+	Url                  NullableString         `json:"url,omitempty"`
+	Checksum             NullableString         `json:"checksum,omitempty"`
+	Description          NullableString         `json:"description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HosEventAttachmentRead HosEventAttachmentRead
@@ -291,6 +294,92 @@ func (o *HosEventAttachmentRead) SetConnectionId(v string) {
 	o.ConnectionId = v
 }
 
+// GetTspId returns the TspId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HosEventAttachmentRead) GetTspId() string {
+	if o == nil || IsNil(o.TspId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HosEventAttachmentRead) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// HasTspId returns a boolean if a field has been set.
+func (o *HosEventAttachmentRead) HasTspId() bool {
+	if o != nil && o.TspId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspId gets a reference to the given NullableString and assigns it to the TspId field.
+func (o *HosEventAttachmentRead) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// SetTspIdNil sets the value for TspId to be an explicit nil
+func (o *HosEventAttachmentRead) SetTspIdNil() {
+	o.TspId.Set(nil)
+}
+
+// UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+func (o *HosEventAttachmentRead) UnsetTspId() {
+	o.TspId.Unset()
+}
+
+// GetTspSlug returns the TspSlug field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HosEventAttachmentRead) GetTspSlug() string {
+	if o == nil || IsNil(o.TspSlug.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HosEventAttachmentRead) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// HasTspSlug returns a boolean if a field has been set.
+func (o *HosEventAttachmentRead) HasTspSlug() bool {
+	if o != nil && o.TspSlug.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspSlug gets a reference to the given NullableString and assigns it to the TspSlug field.
+func (o *HosEventAttachmentRead) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// SetTspSlugNil sets the value for TspSlug to be an explicit nil
+func (o *HosEventAttachmentRead) SetTspSlugNil() {
+	o.TspSlug.Set(nil)
+}
+
+// UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
+func (o *HosEventAttachmentRead) UnsetTspSlug() {
+	o.TspSlug.Unset()
+}
+
 // GetSourceName returns the SourceName field value
 func (o *HosEventAttachmentRead) GetSourceName() TspEnum {
 	if o == nil {
@@ -522,6 +611,39 @@ func (o *HosEventAttachmentRead) SetScheduleIdNil() {
 // UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
 func (o *HosEventAttachmentRead) UnsetScheduleId() {
 	o.ScheduleId.Unset()
+}
+
+// GetExtras returns the Extras field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HosEventAttachmentRead) GetExtras() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Extras
+}
+
+// GetExtrasOk returns a tuple with the Extras field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HosEventAttachmentRead) GetExtrasOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Extras) {
+		return map[string]interface{}{}, false
+	}
+	return o.Extras, true
+}
+
+// HasExtras returns a boolean if a field has been set.
+func (o *HosEventAttachmentRead) HasExtras() bool {
+	if o != nil && !IsNil(o.Extras) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtras gets a reference to the given map[string]interface{} and assigns it to the Extras field.
+func (o *HosEventAttachmentRead) SetExtras(v map[string]interface{}) {
+	o.Extras = v
 }
 
 // GetHosEventId returns the HosEventId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -975,6 +1097,12 @@ func (o HosEventAttachmentRead) ToMap() (map[string]interface{}, error) {
 		toSerialize["deleted_at"] = o.DeletedAt.Get()
 	}
 	toSerialize["connection_id"] = o.ConnectionId
+	if o.TspId.IsSet() {
+		toSerialize["tsp_id"] = o.TspId.Get()
+	}
+	if o.TspSlug.IsSet() {
+		toSerialize["tsp_slug"] = o.TspSlug.Get()
+	}
 	toSerialize["source_name"] = o.SourceName
 	if !IsNil(o.SourceData) {
 		toSerialize["source_data"] = o.SourceData
@@ -989,6 +1117,9 @@ func (o HosEventAttachmentRead) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ScheduleId.IsSet() {
 		toSerialize["schedule_id"] = o.ScheduleId.Get()
+	}
+	if o.Extras != nil {
+		toSerialize["extras"] = o.Extras
 	}
 	if o.HosEventId.IsSet() {
 		toSerialize["hos_event_id"] = o.HosEventId.Get()
@@ -1020,6 +1151,11 @@ func (o HosEventAttachmentRead) ToMap() (map[string]interface{}, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1054,15 +1190,46 @@ func (o *HosEventAttachmentRead) UnmarshalJSON(data []byte) (err error) {
 
 	varHosEventAttachmentRead := _HosEventAttachmentRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHosEventAttachmentRead)
+	err = json.Unmarshal(data, &varHosEventAttachmentRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HosEventAttachmentRead(varHosEventAttachmentRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "source_data")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "source_data_hash")
+		delete(additionalProperties, "occurred_at")
+		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "schedule_id")
+		delete(additionalProperties, "extras")
+		delete(additionalProperties, "hos_event_id")
+		delete(additionalProperties, "last_edit_at")
+		delete(additionalProperties, "uploaded_by")
+		delete(additionalProperties, "file_name")
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "file_size")
+		delete(additionalProperties, "source_url")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "checksum")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

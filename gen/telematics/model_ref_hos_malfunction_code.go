@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type RefHosMalfunctionCode struct {
 	// Normalized category (e.g., 'MALFUNCTION', 'DIAGNOSTIC').
 	Category string `json:"category"`
 	// Human-readable description of the malfunction/diagnostic (display).
-	Description string `json:"description"`
+	Description          string `json:"description"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RefHosMalfunctionCode RefHosMalfunctionCode
@@ -164,6 +164,11 @@ func (o RefHosMalfunctionCode) ToMap() (map[string]interface{}, error) {
 	toSerialize["eld_code"] = o.EldCode
 	toSerialize["category"] = o.Category
 	toSerialize["description"] = o.Description
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *RefHosMalfunctionCode) UnmarshalJSON(data []byte) (err error) {
 
 	varRefHosMalfunctionCode := _RefHosMalfunctionCode{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRefHosMalfunctionCode)
+	err = json.Unmarshal(data, &varRefHosMalfunctionCode)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RefHosMalfunctionCode(varRefHosMalfunctionCode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "malfunction_code")
+		delete(additionalProperties, "eld_code")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -1,6 +1,7 @@
 README.md
 api/openapi.yaml
 api_connections.go
+api_tsp_integrations.go
 client.go
 configuration.go
 docs/AccessTokenCredsInput.md
@@ -33,6 +34,7 @@ docs/Credentials2.md
 docs/CursorPageTypeVarCustomizedConnectionRead.md
 docs/CursorPageTypeVarCustomizedExecutionRead.md
 docs/CursorPageTypeVarCustomizedScheduleRead.md
+docs/CursorPageTypeVarCustomizedTspIntegrationsRead.md
 docs/DatabaseCredsInput.md
 docs/DatabaseCredsOutput.md
 docs/DatabaseDriverEnum.md
@@ -48,6 +50,7 @@ docs/Forbidden.md
 docs/GatewayTimeout.md
 docs/GeotabCredsInput.md
 docs/GeotabCredsOutput.md
+docs/IntegrationStatusEnum.md
 docs/InternalServerError.md
 docs/IsaacCredsInput.md
 docs/IsaacCredsOutput.md
@@ -85,6 +88,7 @@ docs/SpireonSLCOutput.md
 docs/StatusEnum.md
 docs/SwitchBoardCredsInput.md
 docs/SwitchBoardCredsOutput.md
+docs/TSPIntegrationsAPI.md
 docs/TTCredsInput.md
 docs/TTCredsOutput.md
 docs/TokenCredsInput.md
@@ -95,6 +99,7 @@ docs/TruckXCredsOutput.md
 docs/TruckXSLCInput.md
 docs/TruckXSLCOutput.md
 docs/TspEnum.md
+docs/TspIntegrationsRead.md
 docs/Unauthorized.md
 docs/UnprocessableEntity.md
 docs/ValidationErrorDetail.md
@@ -103,6 +108,7 @@ docs/ZubieCredsOutput.md
 model__cursor_page_type_var_customized_connection_read_.go
 model__cursor_page_type_var_customized_execution_read_.go
 model__cursor_page_type_var_customized_schedule_read_.go
+model__cursor_page_type_var_customized_tsp_integrations_read_.go
 model_access_token_creds_input.go
 model_access_token_creds_output.go
 model_api_auth_creds_input.go
@@ -144,6 +150,7 @@ model_forbidden.go
 model_gateway_timeout.go
 model_geotab_creds_input.go
 model_geotab_creds_output.go
+model_integration_status_enum.go
 model_internal_server_error.go
 model_isaac_creds_input.go
 model_isaac_creds_output.go
@@ -189,6 +196,7 @@ model_truck_x_creds_output.go
 model_truck_xslc_input.go
 model_truck_xslc_output.go
 model_tsp_enum.go
+model_tsp_integrations_read.go
 model_tt_creds_input.go
 model_tt_creds_output.go
 model_unauthorized.go
@@ -198,4 +206,5 @@ model_zubie_creds_input.go
 model_zubie_creds_output.go
 response.go
 test/api_connections_test.go
+test/api_tsp_integrations_test.go
 utils.go

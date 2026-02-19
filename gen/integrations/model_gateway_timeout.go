@@ -19,10 +19,13 @@ var _ MappedNullable = &GatewayTimeout{}
 
 // GatewayTimeout struct for GatewayTimeout
 type GatewayTimeout struct {
-	Code    *int32         `json:"code,omitempty"`
-	Message *string        `json:"message,omitempty"`
-	Detail  NullableString `json:"detail,omitempty"`
+	Code                 *int32         `json:"code,omitempty"`
+	Message              *string        `json:"message,omitempty"`
+	Detail               NullableString `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GatewayTimeout GatewayTimeout
 
 // NewGatewayTimeout instantiates a new GatewayTimeout object
 // This constructor will assign default values to properties that have it defined,
@@ -175,7 +178,35 @@ func (o GatewayTimeout) ToMap() (map[string]interface{}, error) {
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GatewayTimeout) UnmarshalJSON(data []byte) (err error) {
+	varGatewayTimeout := _GatewayTimeout{}
+
+	err = json.Unmarshal(data, &varGatewayTimeout)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GatewayTimeout(varGatewayTimeout)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGatewayTimeout struct {

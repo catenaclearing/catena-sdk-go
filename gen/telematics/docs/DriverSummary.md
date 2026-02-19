@@ -5,22 +5,24 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FleetId** | **string** | Catena fleet identifier. | 
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
+**FleetRef** | **NullableString** |  | 
 **ConnectionId** | **string** | Catena connection identifier through which this driver was ingested. | 
 **UserId** | **string** | Unique Catena identifier for the driver. | 
-**SourceName** | Pointer to **NullableString** |  | [optional] 
-**SourceId** | Pointer to **NullableString** |  | [optional] 
-**EmployeeNumber** | Pointer to **NullableString** |  | [optional] 
-**FirstName** | Pointer to **NullableString** |  | [optional] 
-**LastName** | Pointer to **NullableString** |  | [optional] 
-**Username** | Pointer to **NullableString** |  | [optional] 
-**Status** | Pointer to **NullableString** |  | [optional] 
-**PhoneNumber** | Pointer to **NullableString** |  | [optional] 
-**LicenseCountry** | Pointer to **NullableString** |  | [optional] 
-**LicenseRegion** | Pointer to **NullableString** |  | [optional] 
-**LicenseNumber** | Pointer to **NullableString** |  | [optional] 
-**LicenseExpiration** | Pointer to **NullableString** |  | [optional] 
-**HosRulesetCode** | Pointer to **NullableString** |  | [optional] 
+**TspId** | **NullableString** |  | 
+**TspSlug** | **NullableString** |  | 
+**SourceName** | [**NullableTspEnum**](TspEnum.md) |  | 
+**SourceId** | **NullableString** |  | 
+**EmployeeNumber** | **NullableString** |  | 
+**FirstName** | **NullableString** |  | 
+**LastName** | **NullableString** |  | 
+**Username** | **NullableString** |  | 
+**Status** | **NullableString** |  | 
+**PhoneNumber** | **NullableString** |  | 
+**LicenseCountry** | **NullableString** |  | 
+**LicenseRegion** | **NullableString** |  | 
+**LicenseNumber** | **NullableString** |  | 
+**LicenseExpiration** | **NullableString** |  | 
+**HosRulesetCode** | **NullableString** |  | 
 **SafetyEvents30d** | Pointer to **int32** | Count of safety events recorded in the last 30 days. | [optional] [default to 0]
 **HosViolations30d** | Pointer to **int32** | Count of HOS violations recorded in the last 30 days. | [optional] [default to 0]
 
@@ -28,7 +30,7 @@ Name | Type | Description | Notes
 
 ### NewDriverSummary
 
-`func NewDriverSummary(fleetId string, connectionId string, userId string, ) *DriverSummary`
+`func NewDriverSummary(fleetId string, fleetRef NullableString, connectionId string, userId string, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, sourceId NullableString, employeeNumber NullableString, firstName NullableString, lastName NullableString, username NullableString, status NullableString, phoneNumber NullableString, licenseCountry NullableString, licenseRegion NullableString, licenseNumber NullableString, licenseExpiration NullableString, hosRulesetCode NullableString, ) *DriverSummary`
 
 NewDriverSummary instantiates a new DriverSummary object
 This constructor will assign default values to properties that have it defined,
@@ -82,11 +84,6 @@ and a boolean to check if the value has been set.
 
 SetFleetRef sets FleetRef field to given value.
 
-### HasFleetRef
-
-`func (o *DriverSummary) HasFleetRef() bool`
-
-HasFleetRef returns a boolean if a field has been set.
 
 ### SetFleetRefNil
 
@@ -138,30 +135,85 @@ and a boolean to check if the value has been set.
 SetUserId sets UserId field to given value.
 
 
+### GetTspId
+
+`func (o *DriverSummary) GetTspId() string`
+
+GetTspId returns the TspId field if non-nil, zero value otherwise.
+
+### GetTspIdOk
+
+`func (o *DriverSummary) GetTspIdOk() (*string, bool)`
+
+GetTspIdOk returns a tuple with the TspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspId
+
+`func (o *DriverSummary) SetTspId(v string)`
+
+SetTspId sets TspId field to given value.
+
+
+### SetTspIdNil
+
+`func (o *DriverSummary) SetTspIdNil(b bool)`
+
+ SetTspIdNil sets the value for TspId to be an explicit nil
+
+### UnsetTspId
+`func (o *DriverSummary) UnsetTspId()`
+
+UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+### GetTspSlug
+
+`func (o *DriverSummary) GetTspSlug() string`
+
+GetTspSlug returns the TspSlug field if non-nil, zero value otherwise.
+
+### GetTspSlugOk
+
+`func (o *DriverSummary) GetTspSlugOk() (*string, bool)`
+
+GetTspSlugOk returns a tuple with the TspSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspSlug
+
+`func (o *DriverSummary) SetTspSlug(v string)`
+
+SetTspSlug sets TspSlug field to given value.
+
+
+### SetTspSlugNil
+
+`func (o *DriverSummary) SetTspSlugNil(b bool)`
+
+ SetTspSlugNil sets the value for TspSlug to be an explicit nil
+
+### UnsetTspSlug
+`func (o *DriverSummary) UnsetTspSlug()`
+
+UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
 ### GetSourceName
 
-`func (o *DriverSummary) GetSourceName() string`
+`func (o *DriverSummary) GetSourceName() TspEnum`
 
 GetSourceName returns the SourceName field if non-nil, zero value otherwise.
 
 ### GetSourceNameOk
 
-`func (o *DriverSummary) GetSourceNameOk() (*string, bool)`
+`func (o *DriverSummary) GetSourceNameOk() (*TspEnum, bool)`
 
 GetSourceNameOk returns a tuple with the SourceName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceName
 
-`func (o *DriverSummary) SetSourceName(v string)`
+`func (o *DriverSummary) SetSourceName(v TspEnum)`
 
 SetSourceName sets SourceName field to given value.
 
-### HasSourceName
-
-`func (o *DriverSummary) HasSourceName() bool`
-
-HasSourceName returns a boolean if a field has been set.
 
 ### SetSourceNameNil
 
@@ -192,11 +244,6 @@ and a boolean to check if the value has been set.
 
 SetSourceId sets SourceId field to given value.
 
-### HasSourceId
-
-`func (o *DriverSummary) HasSourceId() bool`
-
-HasSourceId returns a boolean if a field has been set.
 
 ### SetSourceIdNil
 
@@ -227,11 +274,6 @@ and a boolean to check if the value has been set.
 
 SetEmployeeNumber sets EmployeeNumber field to given value.
 
-### HasEmployeeNumber
-
-`func (o *DriverSummary) HasEmployeeNumber() bool`
-
-HasEmployeeNumber returns a boolean if a field has been set.
 
 ### SetEmployeeNumberNil
 
@@ -262,11 +304,6 @@ and a boolean to check if the value has been set.
 
 SetFirstName sets FirstName field to given value.
 
-### HasFirstName
-
-`func (o *DriverSummary) HasFirstName() bool`
-
-HasFirstName returns a boolean if a field has been set.
 
 ### SetFirstNameNil
 
@@ -297,11 +334,6 @@ and a boolean to check if the value has been set.
 
 SetLastName sets LastName field to given value.
 
-### HasLastName
-
-`func (o *DriverSummary) HasLastName() bool`
-
-HasLastName returns a boolean if a field has been set.
 
 ### SetLastNameNil
 
@@ -332,11 +364,6 @@ and a boolean to check if the value has been set.
 
 SetUsername sets Username field to given value.
 
-### HasUsername
-
-`func (o *DriverSummary) HasUsername() bool`
-
-HasUsername returns a boolean if a field has been set.
 
 ### SetUsernameNil
 
@@ -367,11 +394,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *DriverSummary) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### SetStatusNil
 
@@ -402,11 +424,6 @@ and a boolean to check if the value has been set.
 
 SetPhoneNumber sets PhoneNumber field to given value.
 
-### HasPhoneNumber
-
-`func (o *DriverSummary) HasPhoneNumber() bool`
-
-HasPhoneNumber returns a boolean if a field has been set.
 
 ### SetPhoneNumberNil
 
@@ -437,11 +454,6 @@ and a boolean to check if the value has been set.
 
 SetLicenseCountry sets LicenseCountry field to given value.
 
-### HasLicenseCountry
-
-`func (o *DriverSummary) HasLicenseCountry() bool`
-
-HasLicenseCountry returns a boolean if a field has been set.
 
 ### SetLicenseCountryNil
 
@@ -472,11 +484,6 @@ and a boolean to check if the value has been set.
 
 SetLicenseRegion sets LicenseRegion field to given value.
 
-### HasLicenseRegion
-
-`func (o *DriverSummary) HasLicenseRegion() bool`
-
-HasLicenseRegion returns a boolean if a field has been set.
 
 ### SetLicenseRegionNil
 
@@ -507,11 +514,6 @@ and a boolean to check if the value has been set.
 
 SetLicenseNumber sets LicenseNumber field to given value.
 
-### HasLicenseNumber
-
-`func (o *DriverSummary) HasLicenseNumber() bool`
-
-HasLicenseNumber returns a boolean if a field has been set.
 
 ### SetLicenseNumberNil
 
@@ -542,11 +544,6 @@ and a boolean to check if the value has been set.
 
 SetLicenseExpiration sets LicenseExpiration field to given value.
 
-### HasLicenseExpiration
-
-`func (o *DriverSummary) HasLicenseExpiration() bool`
-
-HasLicenseExpiration returns a boolean if a field has been set.
 
 ### SetLicenseExpirationNil
 
@@ -577,11 +574,6 @@ and a boolean to check if the value has been set.
 
 SetHosRulesetCode sets HosRulesetCode field to given value.
 
-### HasHosRulesetCode
-
-`func (o *DriverSummary) HasHosRulesetCode() bool`
-
-HasHosRulesetCode returns a boolean if a field has been set.
 
 ### SetHosRulesetCodeNil
 

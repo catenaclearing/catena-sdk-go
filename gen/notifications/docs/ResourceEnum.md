@@ -13,6 +13,8 @@
 
 * `DVIR_LOG_DEFECT` (value: `"dvir_log_defect"`)
 
+* `ENGINE_LOG` (value: `"engine_log"`)
+
 * `HOS_AVAILABILITY` (value: `"hos_availability"`)
 
 * `HOS_DAILY_SNAPSHOT` (value: `"hos_daily_snapshot"`)

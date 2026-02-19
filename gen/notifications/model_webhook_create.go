@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,10 +21,11 @@ var _ MappedNullable = &WebhookCreate{}
 // WebhookCreate Webhook create model
 type WebhookCreate struct {
 	// The target URL of the webhook
-	Url       string                 `json:"url"`
-	Filters   NullableWebhookFilters `json:"filters,omitempty"`
-	Secret    NullableString         `json:"secret,omitempty"`
-	EventName WebhookEventNameUnion  `json:"event_name"`
+	Url                  string                 `json:"url"`
+	Filters              NullableWebhookFilters `json:"filters,omitempty"`
+	Secret               NullableString         `json:"secret,omitempty"`
+	EventName            WebhookEventNameUnion  `json:"event_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WebhookCreate WebhookCreate
@@ -201,6 +201,11 @@ func (o WebhookCreate) ToMap() (map[string]interface{}, error) {
 		toSerialize["secret"] = o.Secret.Get()
 	}
 	toSerialize["event_name"] = o.EventName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -229,15 +234,23 @@ func (o *WebhookCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhookCreate := _WebhookCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWebhookCreate)
+	err = json.Unmarshal(data, &varWebhookCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WebhookCreate(varWebhookCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "secret")
+		delete(additionalProperties, "event_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

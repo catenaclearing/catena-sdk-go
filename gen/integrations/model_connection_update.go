@@ -19,10 +19,13 @@ var _ MappedNullable = &ConnectionUpdate{}
 
 // ConnectionUpdate API Model for updating a connection
 type ConnectionUpdate struct {
-	Credentials NullableCredentials2 `json:"credentials,omitempty"`
-	Description NullableString       `json:"description,omitempty"`
-	Status      NullableStatusEnum   `json:"status,omitempty"`
+	Credentials          NullableCredentials2 `json:"credentials,omitempty"`
+	Description          NullableString       `json:"description,omitempty"`
+	Status               NullableStatusEnum   `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConnectionUpdate ConnectionUpdate
 
 // NewConnectionUpdate instantiates a new ConnectionUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -189,7 +192,35 @@ func (o ConnectionUpdate) ToMap() (map[string]interface{}, error) {
 	if o.Status.IsSet() {
 		toSerialize["status"] = o.Status.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConnectionUpdate) UnmarshalJSON(data []byte) (err error) {
+	varConnectionUpdate := _ConnectionUpdate{}
+
+	err = json.Unmarshal(data, &varConnectionUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConnectionUpdate(varConnectionUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "credentials")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConnectionUpdate struct {

@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &SamsaraCredsOutput{}
 
 // SamsaraCredsOutput Samsara Connection model
 type SamsaraCredsOutput struct {
-	ClientId     string      `json:"client_id"`
-	ClientSecret interface{} `json:"client_secret"`
-	AuthCode     interface{} `json:"auth_code"`
+	ClientId             string      `json:"client_id"`
+	ClientSecret         interface{} `json:"client_secret"`
+	AuthCode             interface{} `json:"auth_code"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SamsaraCredsOutput SamsaraCredsOutput
@@ -141,6 +141,11 @@ func (o SamsaraCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.AuthCode != nil {
 		toSerialize["auth_code"] = o.AuthCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,15 +175,22 @@ func (o *SamsaraCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varSamsaraCredsOutput := _SamsaraCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSamsaraCredsOutput)
+	err = json.Unmarshal(data, &varSamsaraCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SamsaraCredsOutput(varSamsaraCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "auth_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

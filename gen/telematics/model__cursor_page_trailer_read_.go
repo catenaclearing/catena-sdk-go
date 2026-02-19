@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,6 +26,7 @@ type CursorPageTrailerRead struct {
 	CurrentPageBackwards NullableString `json:"current_page_backwards,omitempty"`
 	PreviousPage         NullableString `json:"previous_page,omitempty"`
 	NextPage             NullableString `json:"next_page,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CursorPageTrailerRead CursorPageTrailerRead
@@ -294,6 +294,11 @@ func (o CursorPageTrailerRead) ToMap() (map[string]interface{}, error) {
 	if o.NextPage.IsSet() {
 		toSerialize["next_page"] = o.NextPage.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -322,15 +327,25 @@ func (o *CursorPageTrailerRead) UnmarshalJSON(data []byte) (err error) {
 
 	varCursorPageTrailerRead := _CursorPageTrailerRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCursorPageTrailerRead)
+	err = json.Unmarshal(data, &varCursorPageTrailerRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CursorPageTrailerRead(varCursorPageTrailerRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "current_page")
+		delete(additionalProperties, "current_page_backwards")
+		delete(additionalProperties, "previous_page")
+		delete(additionalProperties, "next_page")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

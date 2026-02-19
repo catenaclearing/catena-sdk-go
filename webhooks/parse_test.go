@@ -99,6 +99,31 @@ func TestParseBytesUserAddedWithFleetRef(t *testing.T) {
 	}
 }
 
+func TestParseBytesIgnoresUnknownFields(t *testing.T) {
+	withUnknownFields := `{
+		"version": "1.0",
+		"event_name": "connection.created",
+		"webhook_id": "wh_123",
+		"data": [{
+			"id": "conn_123",
+			"source_name": "azuga",
+			"fleet_id": "fleet_123",
+			"tsp_id": "tsp_123",
+			"status": "active",
+			"future_field": "new-value"
+		}]
+	}`
+
+	_, payload, err := ParseBytes([]byte(withUnknownFields))
+	if err != nil {
+		t.Fatalf("ParseBytes failed with unknown fields: %v", err)
+	}
+
+	if _, ok := payload.([]notificationsapi.BaseConnectionEvent); !ok {
+		t.Fatalf("expected payload type []notificationsapi.BaseConnectionEvent, got %T", payload)
+	}
+}
+
 func TestParseRequest(t *testing.T) {
 	body := `{
 		"version": "1.0",

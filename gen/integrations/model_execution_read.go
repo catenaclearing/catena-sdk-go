@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -39,8 +38,9 @@ type ExecutionRead struct {
 	// The name of the TSP integration used for this execution.
 	SourceName TspEnum `json:"source_name"`
 	// The type of resource being fetched (e.g., VEHICLE, DRIVER, HOS, IFTA).
-	Resource ResourceEnum   `json:"resource"`
-	Cursor   NullableString `json:"cursor,omitempty"`
+	Resource             ResourceEnum   `json:"resource"`
+	Cursor               NullableString `json:"cursor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExecutionRead ExecutionRead
@@ -352,6 +352,11 @@ func (o ExecutionRead) ToMap() (map[string]interface{}, error) {
 	if o.Cursor.IsSet() {
 		toSerialize["cursor"] = o.Cursor.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -387,15 +392,29 @@ func (o *ExecutionRead) UnmarshalJSON(data []byte) (err error) {
 
 	varExecutionRead := _ExecutionRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExecutionRead)
+	err = json.Unmarshal(data, &varExecutionRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExecutionRead(varExecutionRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "schedule_id")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "resource")
+		delete(additionalProperties, "cursor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

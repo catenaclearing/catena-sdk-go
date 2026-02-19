@@ -19,10 +19,13 @@ var _ MappedNullable = &NotImplementedResponse{}
 
 // NotImplementedResponse struct for NotImplementedResponse
 type NotImplementedResponse struct {
-	Code    *int32         `json:"code,omitempty"`
-	Message *string        `json:"message,omitempty"`
-	Detail  NullableString `json:"detail,omitempty"`
+	Code                 *int32         `json:"code,omitempty"`
+	Message              *string        `json:"message,omitempty"`
+	Detail               NullableString `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotImplementedResponse NotImplementedResponse
 
 // NewNotImplementedResponse instantiates a new NotImplementedResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -175,7 +178,35 @@ func (o NotImplementedResponse) ToMap() (map[string]interface{}, error) {
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotImplementedResponse) UnmarshalJSON(data []byte) (err error) {
+	varNotImplementedResponse := _NotImplementedResponse{}
+
+	err = json.Unmarshal(data, &varNotImplementedResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotImplementedResponse(varNotImplementedResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotImplementedResponse struct {

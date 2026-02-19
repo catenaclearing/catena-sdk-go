@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,7 +25,8 @@ type RefHosRecordOrigin struct {
 	// ELD specification code for the record origin (vendor/ELD spec value).
 	EldCode string `json:"eld_code"`
 	// Human-readable description of the record origin (e.g., 'AUTOMATIC', 'MANUAL').
-	Description string `json:"description"`
+	Description          string `json:"description"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RefHosRecordOrigin RefHosRecordOrigin
@@ -136,6 +136,11 @@ func (o RefHosRecordOrigin) ToMap() (map[string]interface{}, error) {
 	toSerialize["record_origin_code"] = o.RecordOriginCode
 	toSerialize["eld_code"] = o.EldCode
 	toSerialize["description"] = o.Description
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *RefHosRecordOrigin) UnmarshalJSON(data []byte) (err error) {
 
 	varRefHosRecordOrigin := _RefHosRecordOrigin{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRefHosRecordOrigin)
+	err = json.Unmarshal(data, &varRefHosRecordOrigin)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RefHosRecordOrigin(varRefHosRecordOrigin)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "record_origin_code")
+		delete(additionalProperties, "eld_code")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

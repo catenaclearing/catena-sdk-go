@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -30,8 +29,9 @@ type ScheduleCreate struct {
 	// The maximum number of concurrent executions allowed for this schedule. Defaults to 1.
 	MaxConcurrentExecutions *int32 `json:"max_concurrent_executions,omitempty"`
 	// The initial status of the schedule. Defaults to ACTIVE.
-	Status *StatusEnum    `json:"status,omitempty"`
-	Cursor NullableString `json:"cursor,omitempty"`
+	Status               *StatusEnum    `json:"status,omitempty"`
+	Cursor               NullableString `json:"cursor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleCreate ScheduleCreate
@@ -287,6 +287,11 @@ func (o ScheduleCreate) ToMap() (map[string]interface{}, error) {
 	if o.Cursor.IsSet() {
 		toSerialize["cursor"] = o.Cursor.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -314,15 +319,25 @@ func (o *ScheduleCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleCreate := _ScheduleCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleCreate)
+	err = json.Unmarshal(data, &varScheduleCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleCreate(varScheduleCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource")
+		delete(additionalProperties, "execution_interval_seconds")
+		delete(additionalProperties, "consecutive_error_threshold")
+		delete(additionalProperties, "max_concurrent_executions")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "cursor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

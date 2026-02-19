@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &SftpCredsInput{}
 
 // SftpCredsInput SFTP Connection model
 type SftpCredsInput struct {
-	Host     string        `json:"host"`
-	Port     NullableInt32 `json:"port,omitempty"`
-	Username string        `json:"username"`
-	Password string        `json:"password"`
+	Host                 string        `json:"host"`
+	Port                 NullableInt32 `json:"port,omitempty"`
+	Username             string        `json:"username"`
+	Password             string        `json:"password"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SftpCredsInput SftpCredsInput
@@ -180,6 +180,11 @@ func (o SftpCredsInput) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["username"] = o.Username
 	toSerialize["password"] = o.Password
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -209,15 +214,23 @@ func (o *SftpCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varSftpCredsInput := _SftpCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSftpCredsInput)
+	err = json.Unmarshal(data, &varSftpCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SftpCredsInput(varSftpCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "port")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

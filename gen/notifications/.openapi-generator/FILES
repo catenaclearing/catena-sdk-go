@@ -7,6 +7,7 @@ client.go
 configuration.go
 docs/BadRequest.md
 docs/BaseConnectionEvent.md
+docs/BaseEngineLog.md
 docs/BaseExecutionEvent.md
 docs/BaseFleetConnectionEvent.md
 docs/BaseHosAvailability.md
@@ -26,6 +27,7 @@ docs/BaseVehicle.md
 docs/BaseVehicleLocation.md
 docs/BaseWebhookEvent.md
 docs/Bbox.md
+docs/CanonicalFaultCodeEnum.md
 docs/Conflict.md
 docs/ConnectionCreated.md
 docs/ConnectionStaled.md
@@ -33,9 +35,12 @@ docs/Coordinates.md
 docs/CursorPageTypeVarCustomizedWebhookLogRead.md
 docs/CursorPageTypeVarCustomizedWebhookRead.md
 docs/DutyStatusCodeEnum.md
+docs/EngineLogAdded.md
+docs/EngineLogModified.md
 docs/EventSchema.md
 docs/ExecutionFailed.md
 docs/ExecutionStaled.md
+docs/FaultCodeSourceEnum.md
 docs/FleetConnectionCreated.md
 docs/Forbidden.md
 docs/HTTPValidationError.md
@@ -126,6 +131,7 @@ model__cursor_page_type_var_customized_webhook_log_read_.go
 model__cursor_page_type_var_customized_webhook_read_.go
 model_bad_request.go
 model_base_connection_event.go
+model_base_engine_log.go
 model_base_execution_event.go
 model_base_fleet_connection_event.go
 model_base_hos_availability.go
@@ -145,14 +151,18 @@ model_base_vehicle.go
 model_base_vehicle_location.go
 model_base_webhook_event.go
 model_bbox.go
+model_canonical_fault_code_enum.go
 model_conflict.go
 model_connection_created.go
 model_connection_staled.go
 model_coordinates.go
 model_duty_status_code_enum.go
+model_engine_log_added.go
+model_engine_log_modified.go
 model_event_schema.go
 model_execution_failed.go
 model_execution_staled.go
+model_fault_code_source_enum.go
 model_fleet_connection_created.go
 model_forbidden.go
 model_hos_availability_added.go

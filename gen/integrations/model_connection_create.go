@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,9 +21,10 @@ var _ MappedNullable = &ConnectionCreate{}
 // ConnectionCreate API Model for creating a connection
 type ConnectionCreate struct {
 	// The ID of the Telematics Service Provider (TSP) that the fleet uses.
-	TspId       string         `json:"tsp_id"`
-	Credentials Credentials    `json:"credentials"`
-	Description NullableString `json:"description,omitempty"`
+	TspId                string         `json:"tsp_id"`
+	Credentials          Credentials    `json:"credentials"`
+	Description          NullableString `json:"description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConnectionCreate ConnectionCreate
@@ -154,6 +154,11 @@ func (o ConnectionCreate) ToMap() (map[string]interface{}, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -182,15 +187,22 @@ func (o *ConnectionCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varConnectionCreate := _ConnectionCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConnectionCreate)
+	err = json.Unmarshal(data, &varConnectionCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConnectionCreate(varConnectionCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "credentials")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

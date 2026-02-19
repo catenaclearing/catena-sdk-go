@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,11 +20,12 @@ var _ MappedNullable = &PrivateKeyCredsInput{}
 
 // PrivateKeyCredsInput Private Key Connection model
 type PrivateKeyCredsInput struct {
-	PrivateKey  string         `json:"private_key"`
-	ConsumerKey string         `json:"consumer_key"`
-	Username    string         `json:"username"`
-	Url         NullableString `json:"url,omitempty"`
-	TokenUrl    NullableString `json:"token_url,omitempty"`
+	PrivateKey           string         `json:"private_key"`
+	ConsumerKey          string         `json:"consumer_key"`
+	Username             string         `json:"username"`
+	Url                  NullableString `json:"url,omitempty"`
+	TokenUrl             NullableString `json:"token_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PrivateKeyCredsInput PrivateKeyCredsInput
@@ -227,6 +227,11 @@ func (o PrivateKeyCredsInput) ToMap() (map[string]interface{}, error) {
 	if o.TokenUrl.IsSet() {
 		toSerialize["token_url"] = o.TokenUrl.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -256,15 +261,24 @@ func (o *PrivateKeyCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varPrivateKeyCredsInput := _PrivateKeyCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPrivateKeyCredsInput)
+	err = json.Unmarshal(data, &varPrivateKeyCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PrivateKeyCredsInput(varPrivateKeyCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "private_key")
+		delete(additionalProperties, "consumer_key")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "token_url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

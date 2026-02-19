@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -31,7 +30,8 @@ type EventSchema struct {
 	// The complete OpenAPI 3.0 document containing the event schema as a JSON string
 	OpenapiSchema string `json:"openapi_schema"`
 	// The changes made to this version of the schema, when compared to the previous version
-	Changelog *string `json:"changelog,omitempty"`
+	Changelog            *string `json:"changelog,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EventSchema EventSchema
@@ -215,6 +215,11 @@ func (o EventSchema) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Changelog) {
 		toSerialize["changelog"] = o.Changelog
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -244,15 +249,24 @@ func (o *EventSchema) UnmarshalJSON(data []byte) (err error) {
 
 	varEventSchema := _EventSchema{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEventSchema)
+	err = json.Unmarshal(data, &varEventSchema)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EventSchema(varEventSchema)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_name")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "openapi_schema")
+		delete(additionalProperties, "changelog")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

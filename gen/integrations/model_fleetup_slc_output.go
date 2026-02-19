@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &FleetupSLCOutput{}
 
 // FleetupSLCOutput Fleetup SLC Connection model
 type FleetupSLCOutput struct {
-	AccountId string      `json:"account_id"`
-	ApiKey    interface{} `json:"api_key"`
-	Token     interface{} `json:"token"`
+	AccountId            string      `json:"account_id"`
+	ApiKey               interface{} `json:"api_key"`
+	Token                interface{} `json:"token"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FleetupSLCOutput FleetupSLCOutput
@@ -141,6 +141,11 @@ func (o FleetupSLCOutput) ToMap() (map[string]interface{}, error) {
 	if o.Token != nil {
 		toSerialize["token"] = o.Token
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,15 +175,22 @@ func (o *FleetupSLCOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varFleetupSLCOutput := _FleetupSLCOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFleetupSLCOutput)
+	err = json.Unmarshal(data, &varFleetupSLCOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FleetupSLCOutput(varFleetupSLCOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "token")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

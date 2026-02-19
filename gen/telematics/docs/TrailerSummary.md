@@ -5,20 +5,22 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FleetId** | **string** | Catena fleet identifier. | 
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
+**FleetRef** | **NullableString** |  | 
 **ConnectionId** | **string** | Catena connection identifier through which this trailer was ingested. | 
 **TrailerId** | **string** | Unique Catena identifier for the trailer. | 
-**SourceId** | Pointer to **NullableString** |  | [optional] 
-**TrailerName** | Pointer to **NullableString** |  | [optional] 
-**SourceName** | Pointer to **NullableString** |  | [optional] 
-**Location** | Pointer to [**NullableLocation4**](Location4.md) |  | [optional] 
-**H3Index11** | Pointer to **NullableInt32** |  | [optional] 
+**SourceId** | **NullableString** |  | 
+**TrailerName** | **NullableString** |  | 
+**TspId** | **NullableString** |  | 
+**TspSlug** | **NullableString** |  | 
+**SourceName** | [**NullableTspEnum**](TspEnum.md) |  | 
+**Location** | [**NullableLocation4**](Location4.md) |  | 
+**H3Index11** | **NullableInt32** |  | 
 
 ## Methods
 
 ### NewTrailerSummary
 
-`func NewTrailerSummary(fleetId string, connectionId string, trailerId string, ) *TrailerSummary`
+`func NewTrailerSummary(fleetId string, fleetRef NullableString, connectionId string, trailerId string, sourceId NullableString, trailerName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, location NullableLocation4, h3Index11 NullableInt32, ) *TrailerSummary`
 
 NewTrailerSummary instantiates a new TrailerSummary object
 This constructor will assign default values to properties that have it defined,
@@ -72,11 +74,6 @@ and a boolean to check if the value has been set.
 
 SetFleetRef sets FleetRef field to given value.
 
-### HasFleetRef
-
-`func (o *TrailerSummary) HasFleetRef() bool`
-
-HasFleetRef returns a boolean if a field has been set.
 
 ### SetFleetRefNil
 
@@ -147,11 +144,6 @@ and a boolean to check if the value has been set.
 
 SetSourceId sets SourceId field to given value.
 
-### HasSourceId
-
-`func (o *TrailerSummary) HasSourceId() bool`
-
-HasSourceId returns a boolean if a field has been set.
 
 ### SetSourceIdNil
 
@@ -182,11 +174,6 @@ and a boolean to check if the value has been set.
 
 SetTrailerName sets TrailerName field to given value.
 
-### HasTrailerName
-
-`func (o *TrailerSummary) HasTrailerName() bool`
-
-HasTrailerName returns a boolean if a field has been set.
 
 ### SetTrailerNameNil
 
@@ -198,30 +185,85 @@ HasTrailerName returns a boolean if a field has been set.
 `func (o *TrailerSummary) UnsetTrailerName()`
 
 UnsetTrailerName ensures that no value is present for TrailerName, not even an explicit nil
+### GetTspId
+
+`func (o *TrailerSummary) GetTspId() string`
+
+GetTspId returns the TspId field if non-nil, zero value otherwise.
+
+### GetTspIdOk
+
+`func (o *TrailerSummary) GetTspIdOk() (*string, bool)`
+
+GetTspIdOk returns a tuple with the TspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspId
+
+`func (o *TrailerSummary) SetTspId(v string)`
+
+SetTspId sets TspId field to given value.
+
+
+### SetTspIdNil
+
+`func (o *TrailerSummary) SetTspIdNil(b bool)`
+
+ SetTspIdNil sets the value for TspId to be an explicit nil
+
+### UnsetTspId
+`func (o *TrailerSummary) UnsetTspId()`
+
+UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+### GetTspSlug
+
+`func (o *TrailerSummary) GetTspSlug() string`
+
+GetTspSlug returns the TspSlug field if non-nil, zero value otherwise.
+
+### GetTspSlugOk
+
+`func (o *TrailerSummary) GetTspSlugOk() (*string, bool)`
+
+GetTspSlugOk returns a tuple with the TspSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspSlug
+
+`func (o *TrailerSummary) SetTspSlug(v string)`
+
+SetTspSlug sets TspSlug field to given value.
+
+
+### SetTspSlugNil
+
+`func (o *TrailerSummary) SetTspSlugNil(b bool)`
+
+ SetTspSlugNil sets the value for TspSlug to be an explicit nil
+
+### UnsetTspSlug
+`func (o *TrailerSummary) UnsetTspSlug()`
+
+UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
 ### GetSourceName
 
-`func (o *TrailerSummary) GetSourceName() string`
+`func (o *TrailerSummary) GetSourceName() TspEnum`
 
 GetSourceName returns the SourceName field if non-nil, zero value otherwise.
 
 ### GetSourceNameOk
 
-`func (o *TrailerSummary) GetSourceNameOk() (*string, bool)`
+`func (o *TrailerSummary) GetSourceNameOk() (*TspEnum, bool)`
 
 GetSourceNameOk returns a tuple with the SourceName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceName
 
-`func (o *TrailerSummary) SetSourceName(v string)`
+`func (o *TrailerSummary) SetSourceName(v TspEnum)`
 
 SetSourceName sets SourceName field to given value.
 
-### HasSourceName
-
-`func (o *TrailerSummary) HasSourceName() bool`
-
-HasSourceName returns a boolean if a field has been set.
 
 ### SetSourceNameNil
 
@@ -252,11 +294,6 @@ and a boolean to check if the value has been set.
 
 SetLocation sets Location field to given value.
 
-### HasLocation
-
-`func (o *TrailerSummary) HasLocation() bool`
-
-HasLocation returns a boolean if a field has been set.
 
 ### SetLocationNil
 
@@ -287,11 +324,6 @@ and a boolean to check if the value has been set.
 
 SetH3Index11 sets H3Index11 field to given value.
 
-### HasH3Index11
-
-`func (o *TrailerSummary) HasH3Index11() bool`
-
-HasH3Index11 returns a boolean if a field has been set.
 
 ### SetH3Index11Nil
 

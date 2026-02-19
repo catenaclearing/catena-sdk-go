@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,11 +20,12 @@ var _ MappedNullable = &ApiBasicCredsInput{}
 
 // ApiBasicCredsInput API Basic Connection model
 type ApiBasicCredsInput struct {
-	Username string         `json:"username"`
-	Password string         `json:"password"`
-	Url      NullableString `json:"url,omitempty"`
-	AuthCode NullableString `json:"auth_code,omitempty"`
-	Host     NullableString `json:"host,omitempty"`
+	Username             string         `json:"username"`
+	Password             string         `json:"password"`
+	Url                  NullableString `json:"url,omitempty"`
+	AuthCode             NullableString `json:"auth_code,omitempty"`
+	Host                 NullableString `json:"host,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ApiBasicCredsInput ApiBasicCredsInput
@@ -247,6 +247,11 @@ func (o ApiBasicCredsInput) ToMap() (map[string]interface{}, error) {
 	if o.Host.IsSet() {
 		toSerialize["host"] = o.Host.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -275,15 +280,24 @@ func (o *ApiBasicCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varApiBasicCredsInput := _ApiBasicCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApiBasicCredsInput)
+	err = json.Unmarshal(data, &varApiBasicCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ApiBasicCredsInput(varApiBasicCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "auth_code")
+		delete(additionalProperties, "host")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

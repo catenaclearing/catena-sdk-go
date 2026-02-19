@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,13 +20,14 @@ var _ MappedNullable = &OAuth1CredsInput{}
 
 // OAuth1CredsInput OAuth1 Connection model
 type OAuth1CredsInput struct {
-	ClientId            string `json:"client_id"`
-	ClientSecret        string `json:"client_secret"`
-	ResourceOwnerId     string `json:"resource_owner_id"`
-	ResourceOwnerSecret string `json:"resource_owner_secret"`
-	SignatureMethod     string `json:"signature_method"`
-	Realm               string `json:"realm"`
-	Url                 string `json:"url"`
+	ClientId             string `json:"client_id"`
+	ClientSecret         string `json:"client_secret"`
+	ResourceOwnerId      string `json:"resource_owner_id"`
+	ResourceOwnerSecret  string `json:"resource_owner_secret"`
+	SignatureMethod      string `json:"signature_method"`
+	Realm                string `json:"realm"`
+	Url                  string `json:"url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OAuth1CredsInput OAuth1CredsInput
@@ -241,6 +241,11 @@ func (o OAuth1CredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["signature_method"] = o.SignatureMethod
 	toSerialize["realm"] = o.Realm
 	toSerialize["url"] = o.Url
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -274,15 +279,26 @@ func (o *OAuth1CredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varOAuth1CredsInput := _OAuth1CredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOAuth1CredsInput)
+	err = json.Unmarshal(data, &varOAuth1CredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OAuth1CredsInput(varOAuth1CredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "resource_owner_id")
+		delete(additionalProperties, "resource_owner_secret")
+		delete(additionalProperties, "signature_method")
+		delete(additionalProperties, "realm")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

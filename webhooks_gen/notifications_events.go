@@ -11,6 +11,8 @@ import (
 var NotificationsDecoders = map[string]func(json.RawMessage) (any, error){
 	"connection.created":          decodeBaseConnectionEvent,
 	"connection.staled":           decodeBaseConnectionEvent,
+	"engine_log.added":            decodeBaseEngineLog,
+	"engine_log.modified":         decodeBaseEngineLog,
 	"execution.failed":            decodeBaseExecutionEvent,
 	"execution.staled":            decodeBaseExecutionEvent,
 	"fleet_connection.created":    decodeBaseFleetConnectionEvent,
@@ -62,6 +64,14 @@ var NotificationsDecoders = map[string]func(json.RawMessage) (any, error){
 
 func decodeBaseConnectionEvent(data json.RawMessage) (any, error) {
 	var out []notificationsapi.BaseConnectionEvent
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseEngineLog(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseEngineLog
 	if err := json.Unmarshal(data, &out); err != nil {
 		return nil, err
 	}

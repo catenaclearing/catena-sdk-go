@@ -15,7 +15,9 @@
 
 * `ALS` (value: `"als"`)
 
-* `ANYTREK` (value: `"anytrek"`)
+* `ANYTREK_PRO` (value: `"anytrek_pro"`)
+
+* `ANYTREK_CLASSIC` (value: `"anytrek_classic"`)
 
 * `APEX_ELD` (value: `"apex_eld"`)
 

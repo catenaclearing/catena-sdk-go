@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &OntimeEldCredsInput{}
 
 // OntimeEldCredsInput Ontime ELD Connection model
 type OntimeEldCredsInput struct {
-	ApiKey        string `json:"api_key"`
-	ProviderToken string `json:"provider_token"`
-	DotNumber     string `json:"dot_number"`
+	ApiKey               string `json:"api_key"`
+	ProviderToken        string `json:"provider_token"`
+	DotNumber            string `json:"dot_number"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OntimeEldCredsInput OntimeEldCredsInput
@@ -133,6 +133,11 @@ func (o OntimeEldCredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["api_key"] = o.ApiKey
 	toSerialize["provider_token"] = o.ProviderToken
 	toSerialize["dot_number"] = o.DotNumber
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *OntimeEldCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varOntimeEldCredsInput := _OntimeEldCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOntimeEldCredsInput)
+	err = json.Unmarshal(data, &varOntimeEldCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OntimeEldCredsInput(varOntimeEldCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "provider_token")
+		delete(additionalProperties, "dot_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

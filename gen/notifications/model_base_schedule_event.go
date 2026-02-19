@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -35,6 +34,7 @@ type BaseScheduleEvent struct {
 	ConsecutiveErrorThreshold int32 `json:"consecutive_error_threshold"`
 	// The maximum number of concurrent executions allowed
 	MaxConcurrentExecutions int32 `json:"max_concurrent_executions"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _BaseScheduleEvent BaseScheduleEvent
@@ -248,6 +248,11 @@ func (o BaseScheduleEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["status"] = o.Status
 	toSerialize["consecutive_error_threshold"] = o.ConsecutiveErrorThreshold
 	toSerialize["max_concurrent_executions"] = o.MaxConcurrentExecutions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -281,15 +286,26 @@ func (o *BaseScheduleEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseScheduleEvent := _BaseScheduleEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseScheduleEvent)
+	err = json.Unmarshal(data, &varBaseScheduleEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseScheduleEvent(varBaseScheduleEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "resource")
+		delete(additionalProperties, "execution_interval_seconds")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "consecutive_error_threshold")
+		delete(additionalProperties, "max_concurrent_executions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

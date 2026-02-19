@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -48,6 +47,7 @@ type BaseInvitationEvent struct {
 	DeclineReason               NullableString `json:"decline_reason,omitempty"`
 	DeclinedAt                  NullableTime   `json:"declined_at,omitempty"`
 	FleetRef                    NullableString `json:"fleet_ref,omitempty"`
+	AdditionalProperties        map[string]interface{}
 }
 
 type _BaseInvitationEvent BaseInvitationEvent
@@ -869,6 +869,11 @@ func (o BaseInvitationEvent) ToMap() (map[string]interface{}, error) {
 	if o.FleetRef.IsSet() {
 		toSerialize["fleet_ref"] = o.FleetRef.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -901,15 +906,39 @@ func (o *BaseInvitationEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseInvitationEvent := _BaseInvitationEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseInvitationEvent)
+	err = json.Unmarshal(data, &varBaseInvitationEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseInvitationEvent(varBaseInvitationEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "magic_link")
+		delete(additionalProperties, "expires_at")
+		delete(additionalProperties, "expires_in_hours")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "partner_provided_fleet_name")
+		delete(additionalProperties, "accepted_at")
+		delete(additionalProperties, "pre_registration_access_token")
+		delete(additionalProperties, "pre_registration_refresh_token")
+		delete(additionalProperties, "success_redirect_url")
+		delete(additionalProperties, "failure_redirect_url")
+		delete(additionalProperties, "callback_url")
+		delete(additionalProperties, "limit_tsps")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "partner_slug")
+		delete(additionalProperties, "partner_id")
+		delete(additionalProperties, "decline_reason")
+		delete(additionalProperties, "declined_at")
+		delete(additionalProperties, "fleet_ref")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

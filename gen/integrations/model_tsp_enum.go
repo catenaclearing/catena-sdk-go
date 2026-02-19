@@ -26,7 +26,8 @@ const (
 	TSPENUM_ALFA_ELD                TspEnum = "alfa_eld"
 	TSPENUM_ALPHA_ELD               TspEnum = "alpha_eld"
 	TSPENUM_ALS                     TspEnum = "als"
-	TSPENUM_ANYTREK                 TspEnum = "anytrek"
+	TSPENUM_ANYTREK_PRO             TspEnum = "anytrek_pro"
+	TSPENUM_ANYTREK_CLASSIC         TspEnum = "anytrek_classic"
 	TSPENUM_APEX_ELD                TspEnum = "apex_eld"
 	TSPENUM_APOLLO                  TspEnum = "apollo"
 	TSPENUM_APOLLOCLOUD             TspEnum = "apollocloud"
@@ -182,7 +183,8 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"alfa_eld",
 	"alpha_eld",
 	"als",
-	"anytrek",
+	"anytrek_pro",
+	"anytrek_classic",
 	"apex_eld",
 	"apollo",
 	"apollocloud",

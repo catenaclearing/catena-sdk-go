@@ -19,10 +19,13 @@ var _ MappedNullable = &UnprocessableEntity{}
 
 // UnprocessableEntity struct for UnprocessableEntity
 type UnprocessableEntity struct {
-	Code    *int32                  `json:"code,omitempty"`
-	Message *string                 `json:"message,omitempty"`
-	Detail  []ValidationErrorDetail `json:"detail,omitempty"`
+	Code                 *int32                  `json:"code,omitempty"`
+	Message              *string                 `json:"message,omitempty"`
+	Detail               []ValidationErrorDetail `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UnprocessableEntity UnprocessableEntity
 
 // NewUnprocessableEntity instantiates a new UnprocessableEntity object
 // This constructor will assign default values to properties that have it defined,
@@ -165,7 +168,35 @@ func (o UnprocessableEntity) ToMap() (map[string]interface{}, error) {
 	if o.Detail != nil {
 		toSerialize["detail"] = o.Detail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UnprocessableEntity) UnmarshalJSON(data []byte) (err error) {
+	varUnprocessableEntity := _UnprocessableEntity{}
+
+	err = json.Unmarshal(data, &varUnprocessableEntity)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnprocessableEntity(varUnprocessableEntity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnprocessableEntity struct {

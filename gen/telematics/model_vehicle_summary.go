@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -24,30 +23,33 @@ var _ MappedNullable = &VehicleSummary{}
 type VehicleSummary struct {
 	// Catena fleet identifier.
 	FleetId  string         `json:"fleet_id"`
-	FleetRef NullableString `json:"fleet_ref,omitempty"`
+	FleetRef NullableString `json:"fleet_ref"`
 	// Catena connection identifier through which this vehicle was ingested.
 	ConnectionId string `json:"connection_id"`
 	// Unique Catena identifier for the vehicle.
 	VehicleId             string               `json:"vehicle_id"`
-	SourceName            NullableString       `json:"source_name,omitempty"`
-	SourceId              NullableString       `json:"source_id,omitempty"`
-	Status                NullableString       `json:"status,omitempty"`
-	VehicleName           NullableString       `json:"vehicle_name,omitempty"`
-	Oem                   NullableString       `json:"oem,omitempty"`
-	ModelType             NullableString       `json:"model_type,omitempty"`
-	ModelYear             NullableInt32        `json:"model_year,omitempty"`
-	Vin                   NullableString       `json:"vin,omitempty"`
-	EngineVin             NullableString       `json:"engine_vin,omitempty"`
-	LicensePlateCountry   NullableString       `json:"license_plate_country,omitempty"`
-	LicensePlateRegion    NullableString       `json:"license_plate_region,omitempty"`
-	LicensePlateNumber    NullableString       `json:"license_plate_number,omitempty"`
-	LastLocationPing      NullableTime         `json:"last_location_ping,omitempty"`
-	LastLocationH3Index11 NullableInt32        `json:"last_location_h3_index_11,omitempty"`
-	LastLocation          NullableLastLocation `json:"last_location,omitempty"`
-	LastFuelLevel         NullableFloat32      `json:"last_fuel_level,omitempty"`
-	LastOdometerReading   NullableFloat32      `json:"last_odometer_reading,omitempty"`
-	LastEngineHours       NullableFloat32      `json:"last_engine_hours,omitempty"`
-	LastSpeedReading      NullableFloat32      `json:"last_speed_reading,omitempty"`
+	TspId                 NullableString       `json:"tsp_id"`
+	TspSlug               NullableString       `json:"tsp_slug"`
+	SourceName            NullableTspEnum      `json:"source_name"`
+	SourceId              NullableString       `json:"source_id"`
+	Status                NullableString       `json:"status"`
+	VehicleName           NullableString       `json:"vehicle_name"`
+	Oem                   NullableString       `json:"oem"`
+	ModelType             NullableString       `json:"model_type"`
+	ModelYear             NullableInt32        `json:"model_year"`
+	Vin                   NullableString       `json:"vin"`
+	EngineVin             NullableString       `json:"engine_vin"`
+	LicensePlateCountry   NullableString       `json:"license_plate_country"`
+	LicensePlateRegion    NullableString       `json:"license_plate_region"`
+	LicensePlateNumber    NullableString       `json:"license_plate_number"`
+	LastLocationPing      NullableTime         `json:"last_location_ping"`
+	LastLocationH3Index11 NullableInt32        `json:"last_location_h3_index_11"`
+	LastLocation          NullableLastLocation `json:"last_location"`
+	LastFuelLevel         NullableFloat32      `json:"last_fuel_level"`
+	LastOdometerReading   NullableFloat32      `json:"last_odometer_reading"`
+	LastEngineHours       NullableFloat32      `json:"last_engine_hours"`
+	LastSpeedReading      NullableFloat32      `json:"last_speed_reading"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _VehicleSummary VehicleSummary
@@ -56,11 +58,33 @@ type _VehicleSummary VehicleSummary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVehicleSummary(fleetId string, connectionId string, vehicleId string) *VehicleSummary {
+func NewVehicleSummary(fleetId string, fleetRef NullableString, connectionId string, vehicleId string, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, sourceId NullableString, status NullableString, vehicleName NullableString, oem NullableString, modelType NullableString, modelYear NullableInt32, vin NullableString, engineVin NullableString, licensePlateCountry NullableString, licensePlateRegion NullableString, licensePlateNumber NullableString, lastLocationPing NullableTime, lastLocationH3Index11 NullableInt32, lastLocation NullableLastLocation, lastFuelLevel NullableFloat32, lastOdometerReading NullableFloat32, lastEngineHours NullableFloat32, lastSpeedReading NullableFloat32) *VehicleSummary {
 	this := VehicleSummary{}
 	this.FleetId = fleetId
+	this.FleetRef = fleetRef
 	this.ConnectionId = connectionId
 	this.VehicleId = vehicleId
+	this.TspId = tspId
+	this.TspSlug = tspSlug
+	this.SourceName = sourceName
+	this.SourceId = sourceId
+	this.Status = status
+	this.VehicleName = vehicleName
+	this.Oem = oem
+	this.ModelType = modelType
+	this.ModelYear = modelYear
+	this.Vin = vin
+	this.EngineVin = engineVin
+	this.LicensePlateCountry = licensePlateCountry
+	this.LicensePlateRegion = licensePlateRegion
+	this.LicensePlateNumber = licensePlateNumber
+	this.LastLocationPing = lastLocationPing
+	this.LastLocationH3Index11 = lastLocationH3Index11
+	this.LastLocation = lastLocation
+	this.LastFuelLevel = lastFuelLevel
+	this.LastOdometerReading = lastOdometerReading
+	this.LastEngineHours = lastEngineHours
+	this.LastSpeedReading = lastSpeedReading
 	return &this
 }
 
@@ -96,16 +120,18 @@ func (o *VehicleSummary) SetFleetId(v string) {
 	o.FleetId = v
 }
 
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFleetRef returns the FleetRef field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+	if o == nil || o.FleetRef.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.FleetRef.Get()
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetFleetRefOk returns a tuple with the FleetRef field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetFleetRefOk() (*string, bool) {
@@ -115,28 +141,9 @@ func (o *VehicleSummary) GetFleetRefOk() (*string, bool) {
 	return o.FleetRef.Get(), o.FleetRef.IsSet()
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *VehicleSummary) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
+// SetFleetRef sets field value
 func (o *VehicleSummary) SetFleetRef(v string) {
 	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *VehicleSummary) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *VehicleSummary) UnsetFleetRef() {
-	o.FleetRef.Unset()
 }
 
 // GetConnectionId returns the ConnectionId field value
@@ -187,59 +194,96 @@ func (o *VehicleSummary) SetVehicleId(v string) {
 	o.VehicleId = v
 }
 
-// GetSourceName returns the SourceName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *VehicleSummary) GetSourceName() string {
-	if o == nil || IsNil(o.SourceName.Get()) {
+// GetTspId returns the TspId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *VehicleSummary) GetTspId() string {
+	if o == nil || o.TspId.Get() == nil {
 		var ret string
 		return ret
 	}
+
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VehicleSummary) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// SetTspId sets field value
+func (o *VehicleSummary) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// GetTspSlug returns the TspSlug field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *VehicleSummary) GetTspSlug() string {
+	if o == nil || o.TspSlug.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VehicleSummary) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// SetTspSlug sets field value
+func (o *VehicleSummary) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// GetSourceName returns the SourceName field value
+// If the value is explicit nil, the zero value for TspEnum will be returned
+func (o *VehicleSummary) GetSourceName() TspEnum {
+	if o == nil || o.SourceName.Get() == nil {
+		var ret TspEnum
+		return ret
+	}
+
 	return *o.SourceName.Get()
 }
 
-// GetSourceNameOk returns a tuple with the SourceName field value if set, nil otherwise
+// GetSourceNameOk returns a tuple with the SourceName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VehicleSummary) GetSourceNameOk() (*string, bool) {
+func (o *VehicleSummary) GetSourceNameOk() (*TspEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
 	return o.SourceName.Get(), o.SourceName.IsSet()
 }
 
-// HasSourceName returns a boolean if a field has been set.
-func (o *VehicleSummary) HasSourceName() bool {
-	if o != nil && o.SourceName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceName gets a reference to the given NullableString and assigns it to the SourceName field.
-func (o *VehicleSummary) SetSourceName(v string) {
+// SetSourceName sets field value
+func (o *VehicleSummary) SetSourceName(v TspEnum) {
 	o.SourceName.Set(&v)
 }
 
-// SetSourceNameNil sets the value for SourceName to be an explicit nil
-func (o *VehicleSummary) SetSourceNameNil() {
-	o.SourceName.Set(nil)
-}
-
-// UnsetSourceName ensures that no value is present for SourceName, not even an explicit nil
-func (o *VehicleSummary) UnsetSourceName() {
-	o.SourceName.Unset()
-}
-
-// GetSourceId returns the SourceId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSourceId returns the SourceId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetSourceId() string {
-	if o == nil || IsNil(o.SourceId.Get()) {
+	if o == nil || o.SourceId.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.SourceId.Get()
 }
 
-// GetSourceIdOk returns a tuple with the SourceId field value if set, nil otherwise
+// GetSourceIdOk returns a tuple with the SourceId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetSourceIdOk() (*string, bool) {
@@ -249,40 +293,23 @@ func (o *VehicleSummary) GetSourceIdOk() (*string, bool) {
 	return o.SourceId.Get(), o.SourceId.IsSet()
 }
 
-// HasSourceId returns a boolean if a field has been set.
-func (o *VehicleSummary) HasSourceId() bool {
-	if o != nil && o.SourceId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceId gets a reference to the given NullableString and assigns it to the SourceId field.
+// SetSourceId sets field value
 func (o *VehicleSummary) SetSourceId(v string) {
 	o.SourceId.Set(&v)
 }
 
-// SetSourceIdNil sets the value for SourceId to be an explicit nil
-func (o *VehicleSummary) SetSourceIdNil() {
-	o.SourceId.Set(nil)
-}
-
-// UnsetSourceId ensures that no value is present for SourceId, not even an explicit nil
-func (o *VehicleSummary) UnsetSourceId() {
-	o.SourceId.Unset()
-}
-
-// GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStatus returns the Status field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetStatus() string {
-	if o == nil || IsNil(o.Status.Get()) {
+	if o == nil || o.Status.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Status.Get()
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetStatusOk() (*string, bool) {
@@ -292,40 +319,23 @@ func (o *VehicleSummary) GetStatusOk() (*string, bool) {
 	return o.Status.Get(), o.Status.IsSet()
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *VehicleSummary) HasStatus() bool {
-	if o != nil && o.Status.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given NullableString and assigns it to the Status field.
+// SetStatus sets field value
 func (o *VehicleSummary) SetStatus(v string) {
 	o.Status.Set(&v)
 }
 
-// SetStatusNil sets the value for Status to be an explicit nil
-func (o *VehicleSummary) SetStatusNil() {
-	o.Status.Set(nil)
-}
-
-// UnsetStatus ensures that no value is present for Status, not even an explicit nil
-func (o *VehicleSummary) UnsetStatus() {
-	o.Status.Unset()
-}
-
-// GetVehicleName returns the VehicleName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetVehicleName returns the VehicleName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetVehicleName() string {
-	if o == nil || IsNil(o.VehicleName.Get()) {
+	if o == nil || o.VehicleName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.VehicleName.Get()
 }
 
-// GetVehicleNameOk returns a tuple with the VehicleName field value if set, nil otherwise
+// GetVehicleNameOk returns a tuple with the VehicleName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetVehicleNameOk() (*string, bool) {
@@ -335,40 +345,23 @@ func (o *VehicleSummary) GetVehicleNameOk() (*string, bool) {
 	return o.VehicleName.Get(), o.VehicleName.IsSet()
 }
 
-// HasVehicleName returns a boolean if a field has been set.
-func (o *VehicleSummary) HasVehicleName() bool {
-	if o != nil && o.VehicleName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetVehicleName gets a reference to the given NullableString and assigns it to the VehicleName field.
+// SetVehicleName sets field value
 func (o *VehicleSummary) SetVehicleName(v string) {
 	o.VehicleName.Set(&v)
 }
 
-// SetVehicleNameNil sets the value for VehicleName to be an explicit nil
-func (o *VehicleSummary) SetVehicleNameNil() {
-	o.VehicleName.Set(nil)
-}
-
-// UnsetVehicleName ensures that no value is present for VehicleName, not even an explicit nil
-func (o *VehicleSummary) UnsetVehicleName() {
-	o.VehicleName.Unset()
-}
-
-// GetOem returns the Oem field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetOem returns the Oem field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetOem() string {
-	if o == nil || IsNil(o.Oem.Get()) {
+	if o == nil || o.Oem.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Oem.Get()
 }
 
-// GetOemOk returns a tuple with the Oem field value if set, nil otherwise
+// GetOemOk returns a tuple with the Oem field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetOemOk() (*string, bool) {
@@ -378,40 +371,23 @@ func (o *VehicleSummary) GetOemOk() (*string, bool) {
 	return o.Oem.Get(), o.Oem.IsSet()
 }
 
-// HasOem returns a boolean if a field has been set.
-func (o *VehicleSummary) HasOem() bool {
-	if o != nil && o.Oem.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetOem gets a reference to the given NullableString and assigns it to the Oem field.
+// SetOem sets field value
 func (o *VehicleSummary) SetOem(v string) {
 	o.Oem.Set(&v)
 }
 
-// SetOemNil sets the value for Oem to be an explicit nil
-func (o *VehicleSummary) SetOemNil() {
-	o.Oem.Set(nil)
-}
-
-// UnsetOem ensures that no value is present for Oem, not even an explicit nil
-func (o *VehicleSummary) UnsetOem() {
-	o.Oem.Unset()
-}
-
-// GetModelType returns the ModelType field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetModelType returns the ModelType field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetModelType() string {
-	if o == nil || IsNil(o.ModelType.Get()) {
+	if o == nil || o.ModelType.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.ModelType.Get()
 }
 
-// GetModelTypeOk returns a tuple with the ModelType field value if set, nil otherwise
+// GetModelTypeOk returns a tuple with the ModelType field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetModelTypeOk() (*string, bool) {
@@ -421,40 +397,23 @@ func (o *VehicleSummary) GetModelTypeOk() (*string, bool) {
 	return o.ModelType.Get(), o.ModelType.IsSet()
 }
 
-// HasModelType returns a boolean if a field has been set.
-func (o *VehicleSummary) HasModelType() bool {
-	if o != nil && o.ModelType.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetModelType gets a reference to the given NullableString and assigns it to the ModelType field.
+// SetModelType sets field value
 func (o *VehicleSummary) SetModelType(v string) {
 	o.ModelType.Set(&v)
 }
 
-// SetModelTypeNil sets the value for ModelType to be an explicit nil
-func (o *VehicleSummary) SetModelTypeNil() {
-	o.ModelType.Set(nil)
-}
-
-// UnsetModelType ensures that no value is present for ModelType, not even an explicit nil
-func (o *VehicleSummary) UnsetModelType() {
-	o.ModelType.Unset()
-}
-
-// GetModelYear returns the ModelYear field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetModelYear returns the ModelYear field value
+// If the value is explicit nil, the zero value for int32 will be returned
 func (o *VehicleSummary) GetModelYear() int32 {
-	if o == nil || IsNil(o.ModelYear.Get()) {
+	if o == nil || o.ModelYear.Get() == nil {
 		var ret int32
 		return ret
 	}
+
 	return *o.ModelYear.Get()
 }
 
-// GetModelYearOk returns a tuple with the ModelYear field value if set, nil otherwise
+// GetModelYearOk returns a tuple with the ModelYear field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetModelYearOk() (*int32, bool) {
@@ -464,40 +423,23 @@ func (o *VehicleSummary) GetModelYearOk() (*int32, bool) {
 	return o.ModelYear.Get(), o.ModelYear.IsSet()
 }
 
-// HasModelYear returns a boolean if a field has been set.
-func (o *VehicleSummary) HasModelYear() bool {
-	if o != nil && o.ModelYear.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetModelYear gets a reference to the given NullableInt32 and assigns it to the ModelYear field.
+// SetModelYear sets field value
 func (o *VehicleSummary) SetModelYear(v int32) {
 	o.ModelYear.Set(&v)
 }
 
-// SetModelYearNil sets the value for ModelYear to be an explicit nil
-func (o *VehicleSummary) SetModelYearNil() {
-	o.ModelYear.Set(nil)
-}
-
-// UnsetModelYear ensures that no value is present for ModelYear, not even an explicit nil
-func (o *VehicleSummary) UnsetModelYear() {
-	o.ModelYear.Unset()
-}
-
-// GetVin returns the Vin field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetVin returns the Vin field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetVin() string {
-	if o == nil || IsNil(o.Vin.Get()) {
+	if o == nil || o.Vin.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Vin.Get()
 }
 
-// GetVinOk returns a tuple with the Vin field value if set, nil otherwise
+// GetVinOk returns a tuple with the Vin field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetVinOk() (*string, bool) {
@@ -507,40 +449,23 @@ func (o *VehicleSummary) GetVinOk() (*string, bool) {
 	return o.Vin.Get(), o.Vin.IsSet()
 }
 
-// HasVin returns a boolean if a field has been set.
-func (o *VehicleSummary) HasVin() bool {
-	if o != nil && o.Vin.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetVin gets a reference to the given NullableString and assigns it to the Vin field.
+// SetVin sets field value
 func (o *VehicleSummary) SetVin(v string) {
 	o.Vin.Set(&v)
 }
 
-// SetVinNil sets the value for Vin to be an explicit nil
-func (o *VehicleSummary) SetVinNil() {
-	o.Vin.Set(nil)
-}
-
-// UnsetVin ensures that no value is present for Vin, not even an explicit nil
-func (o *VehicleSummary) UnsetVin() {
-	o.Vin.Unset()
-}
-
-// GetEngineVin returns the EngineVin field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEngineVin returns the EngineVin field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetEngineVin() string {
-	if o == nil || IsNil(o.EngineVin.Get()) {
+	if o == nil || o.EngineVin.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.EngineVin.Get()
 }
 
-// GetEngineVinOk returns a tuple with the EngineVin field value if set, nil otherwise
+// GetEngineVinOk returns a tuple with the EngineVin field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetEngineVinOk() (*string, bool) {
@@ -550,40 +475,23 @@ func (o *VehicleSummary) GetEngineVinOk() (*string, bool) {
 	return o.EngineVin.Get(), o.EngineVin.IsSet()
 }
 
-// HasEngineVin returns a boolean if a field has been set.
-func (o *VehicleSummary) HasEngineVin() bool {
-	if o != nil && o.EngineVin.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEngineVin gets a reference to the given NullableString and assigns it to the EngineVin field.
+// SetEngineVin sets field value
 func (o *VehicleSummary) SetEngineVin(v string) {
 	o.EngineVin.Set(&v)
 }
 
-// SetEngineVinNil sets the value for EngineVin to be an explicit nil
-func (o *VehicleSummary) SetEngineVinNil() {
-	o.EngineVin.Set(nil)
-}
-
-// UnsetEngineVin ensures that no value is present for EngineVin, not even an explicit nil
-func (o *VehicleSummary) UnsetEngineVin() {
-	o.EngineVin.Unset()
-}
-
-// GetLicensePlateCountry returns the LicensePlateCountry field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLicensePlateCountry returns the LicensePlateCountry field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetLicensePlateCountry() string {
-	if o == nil || IsNil(o.LicensePlateCountry.Get()) {
+	if o == nil || o.LicensePlateCountry.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LicensePlateCountry.Get()
 }
 
-// GetLicensePlateCountryOk returns a tuple with the LicensePlateCountry field value if set, nil otherwise
+// GetLicensePlateCountryOk returns a tuple with the LicensePlateCountry field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLicensePlateCountryOk() (*string, bool) {
@@ -593,40 +501,23 @@ func (o *VehicleSummary) GetLicensePlateCountryOk() (*string, bool) {
 	return o.LicensePlateCountry.Get(), o.LicensePlateCountry.IsSet()
 }
 
-// HasLicensePlateCountry returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLicensePlateCountry() bool {
-	if o != nil && o.LicensePlateCountry.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLicensePlateCountry gets a reference to the given NullableString and assigns it to the LicensePlateCountry field.
+// SetLicensePlateCountry sets field value
 func (o *VehicleSummary) SetLicensePlateCountry(v string) {
 	o.LicensePlateCountry.Set(&v)
 }
 
-// SetLicensePlateCountryNil sets the value for LicensePlateCountry to be an explicit nil
-func (o *VehicleSummary) SetLicensePlateCountryNil() {
-	o.LicensePlateCountry.Set(nil)
-}
-
-// UnsetLicensePlateCountry ensures that no value is present for LicensePlateCountry, not even an explicit nil
-func (o *VehicleSummary) UnsetLicensePlateCountry() {
-	o.LicensePlateCountry.Unset()
-}
-
-// GetLicensePlateRegion returns the LicensePlateRegion field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLicensePlateRegion returns the LicensePlateRegion field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetLicensePlateRegion() string {
-	if o == nil || IsNil(o.LicensePlateRegion.Get()) {
+	if o == nil || o.LicensePlateRegion.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LicensePlateRegion.Get()
 }
 
-// GetLicensePlateRegionOk returns a tuple with the LicensePlateRegion field value if set, nil otherwise
+// GetLicensePlateRegionOk returns a tuple with the LicensePlateRegion field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLicensePlateRegionOk() (*string, bool) {
@@ -636,40 +527,23 @@ func (o *VehicleSummary) GetLicensePlateRegionOk() (*string, bool) {
 	return o.LicensePlateRegion.Get(), o.LicensePlateRegion.IsSet()
 }
 
-// HasLicensePlateRegion returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLicensePlateRegion() bool {
-	if o != nil && o.LicensePlateRegion.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLicensePlateRegion gets a reference to the given NullableString and assigns it to the LicensePlateRegion field.
+// SetLicensePlateRegion sets field value
 func (o *VehicleSummary) SetLicensePlateRegion(v string) {
 	o.LicensePlateRegion.Set(&v)
 }
 
-// SetLicensePlateRegionNil sets the value for LicensePlateRegion to be an explicit nil
-func (o *VehicleSummary) SetLicensePlateRegionNil() {
-	o.LicensePlateRegion.Set(nil)
-}
-
-// UnsetLicensePlateRegion ensures that no value is present for LicensePlateRegion, not even an explicit nil
-func (o *VehicleSummary) UnsetLicensePlateRegion() {
-	o.LicensePlateRegion.Unset()
-}
-
-// GetLicensePlateNumber returns the LicensePlateNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLicensePlateNumber returns the LicensePlateNumber field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *VehicleSummary) GetLicensePlateNumber() string {
-	if o == nil || IsNil(o.LicensePlateNumber.Get()) {
+	if o == nil || o.LicensePlateNumber.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LicensePlateNumber.Get()
 }
 
-// GetLicensePlateNumberOk returns a tuple with the LicensePlateNumber field value if set, nil otherwise
+// GetLicensePlateNumberOk returns a tuple with the LicensePlateNumber field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLicensePlateNumberOk() (*string, bool) {
@@ -679,40 +553,23 @@ func (o *VehicleSummary) GetLicensePlateNumberOk() (*string, bool) {
 	return o.LicensePlateNumber.Get(), o.LicensePlateNumber.IsSet()
 }
 
-// HasLicensePlateNumber returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLicensePlateNumber() bool {
-	if o != nil && o.LicensePlateNumber.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLicensePlateNumber gets a reference to the given NullableString and assigns it to the LicensePlateNumber field.
+// SetLicensePlateNumber sets field value
 func (o *VehicleSummary) SetLicensePlateNumber(v string) {
 	o.LicensePlateNumber.Set(&v)
 }
 
-// SetLicensePlateNumberNil sets the value for LicensePlateNumber to be an explicit nil
-func (o *VehicleSummary) SetLicensePlateNumberNil() {
-	o.LicensePlateNumber.Set(nil)
-}
-
-// UnsetLicensePlateNumber ensures that no value is present for LicensePlateNumber, not even an explicit nil
-func (o *VehicleSummary) UnsetLicensePlateNumber() {
-	o.LicensePlateNumber.Unset()
-}
-
-// GetLastLocationPing returns the LastLocationPing field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastLocationPing returns the LastLocationPing field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *VehicleSummary) GetLastLocationPing() time.Time {
-	if o == nil || IsNil(o.LastLocationPing.Get()) {
+	if o == nil || o.LastLocationPing.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.LastLocationPing.Get()
 }
 
-// GetLastLocationPingOk returns a tuple with the LastLocationPing field value if set, nil otherwise
+// GetLastLocationPingOk returns a tuple with the LastLocationPing field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLastLocationPingOk() (*time.Time, bool) {
@@ -722,40 +579,23 @@ func (o *VehicleSummary) GetLastLocationPingOk() (*time.Time, bool) {
 	return o.LastLocationPing.Get(), o.LastLocationPing.IsSet()
 }
 
-// HasLastLocationPing returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLastLocationPing() bool {
-	if o != nil && o.LastLocationPing.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastLocationPing gets a reference to the given NullableTime and assigns it to the LastLocationPing field.
+// SetLastLocationPing sets field value
 func (o *VehicleSummary) SetLastLocationPing(v time.Time) {
 	o.LastLocationPing.Set(&v)
 }
 
-// SetLastLocationPingNil sets the value for LastLocationPing to be an explicit nil
-func (o *VehicleSummary) SetLastLocationPingNil() {
-	o.LastLocationPing.Set(nil)
-}
-
-// UnsetLastLocationPing ensures that no value is present for LastLocationPing, not even an explicit nil
-func (o *VehicleSummary) UnsetLastLocationPing() {
-	o.LastLocationPing.Unset()
-}
-
-// GetLastLocationH3Index11 returns the LastLocationH3Index11 field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastLocationH3Index11 returns the LastLocationH3Index11 field value
+// If the value is explicit nil, the zero value for int32 will be returned
 func (o *VehicleSummary) GetLastLocationH3Index11() int32 {
-	if o == nil || IsNil(o.LastLocationH3Index11.Get()) {
+	if o == nil || o.LastLocationH3Index11.Get() == nil {
 		var ret int32
 		return ret
 	}
+
 	return *o.LastLocationH3Index11.Get()
 }
 
-// GetLastLocationH3Index11Ok returns a tuple with the LastLocationH3Index11 field value if set, nil otherwise
+// GetLastLocationH3Index11Ok returns a tuple with the LastLocationH3Index11 field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLastLocationH3Index11Ok() (*int32, bool) {
@@ -765,40 +605,23 @@ func (o *VehicleSummary) GetLastLocationH3Index11Ok() (*int32, bool) {
 	return o.LastLocationH3Index11.Get(), o.LastLocationH3Index11.IsSet()
 }
 
-// HasLastLocationH3Index11 returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLastLocationH3Index11() bool {
-	if o != nil && o.LastLocationH3Index11.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastLocationH3Index11 gets a reference to the given NullableInt32 and assigns it to the LastLocationH3Index11 field.
+// SetLastLocationH3Index11 sets field value
 func (o *VehicleSummary) SetLastLocationH3Index11(v int32) {
 	o.LastLocationH3Index11.Set(&v)
 }
 
-// SetLastLocationH3Index11Nil sets the value for LastLocationH3Index11 to be an explicit nil
-func (o *VehicleSummary) SetLastLocationH3Index11Nil() {
-	o.LastLocationH3Index11.Set(nil)
-}
-
-// UnsetLastLocationH3Index11 ensures that no value is present for LastLocationH3Index11, not even an explicit nil
-func (o *VehicleSummary) UnsetLastLocationH3Index11() {
-	o.LastLocationH3Index11.Unset()
-}
-
-// GetLastLocation returns the LastLocation field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastLocation returns the LastLocation field value
+// If the value is explicit nil, the zero value for LastLocation will be returned
 func (o *VehicleSummary) GetLastLocation() LastLocation {
-	if o == nil || IsNil(o.LastLocation.Get()) {
+	if o == nil || o.LastLocation.Get() == nil {
 		var ret LastLocation
 		return ret
 	}
+
 	return *o.LastLocation.Get()
 }
 
-// GetLastLocationOk returns a tuple with the LastLocation field value if set, nil otherwise
+// GetLastLocationOk returns a tuple with the LastLocation field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLastLocationOk() (*LastLocation, bool) {
@@ -808,40 +631,23 @@ func (o *VehicleSummary) GetLastLocationOk() (*LastLocation, bool) {
 	return o.LastLocation.Get(), o.LastLocation.IsSet()
 }
 
-// HasLastLocation returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLastLocation() bool {
-	if o != nil && o.LastLocation.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastLocation gets a reference to the given NullableLastLocation and assigns it to the LastLocation field.
+// SetLastLocation sets field value
 func (o *VehicleSummary) SetLastLocation(v LastLocation) {
 	o.LastLocation.Set(&v)
 }
 
-// SetLastLocationNil sets the value for LastLocation to be an explicit nil
-func (o *VehicleSummary) SetLastLocationNil() {
-	o.LastLocation.Set(nil)
-}
-
-// UnsetLastLocation ensures that no value is present for LastLocation, not even an explicit nil
-func (o *VehicleSummary) UnsetLastLocation() {
-	o.LastLocation.Unset()
-}
-
-// GetLastFuelLevel returns the LastFuelLevel field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastFuelLevel returns the LastFuelLevel field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *VehicleSummary) GetLastFuelLevel() float32 {
-	if o == nil || IsNil(o.LastFuelLevel.Get()) {
+	if o == nil || o.LastFuelLevel.Get() == nil {
 		var ret float32
 		return ret
 	}
+
 	return *o.LastFuelLevel.Get()
 }
 
-// GetLastFuelLevelOk returns a tuple with the LastFuelLevel field value if set, nil otherwise
+// GetLastFuelLevelOk returns a tuple with the LastFuelLevel field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLastFuelLevelOk() (*float32, bool) {
@@ -851,40 +657,23 @@ func (o *VehicleSummary) GetLastFuelLevelOk() (*float32, bool) {
 	return o.LastFuelLevel.Get(), o.LastFuelLevel.IsSet()
 }
 
-// HasLastFuelLevel returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLastFuelLevel() bool {
-	if o != nil && o.LastFuelLevel.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastFuelLevel gets a reference to the given NullableFloat32 and assigns it to the LastFuelLevel field.
+// SetLastFuelLevel sets field value
 func (o *VehicleSummary) SetLastFuelLevel(v float32) {
 	o.LastFuelLevel.Set(&v)
 }
 
-// SetLastFuelLevelNil sets the value for LastFuelLevel to be an explicit nil
-func (o *VehicleSummary) SetLastFuelLevelNil() {
-	o.LastFuelLevel.Set(nil)
-}
-
-// UnsetLastFuelLevel ensures that no value is present for LastFuelLevel, not even an explicit nil
-func (o *VehicleSummary) UnsetLastFuelLevel() {
-	o.LastFuelLevel.Unset()
-}
-
-// GetLastOdometerReading returns the LastOdometerReading field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastOdometerReading returns the LastOdometerReading field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *VehicleSummary) GetLastOdometerReading() float32 {
-	if o == nil || IsNil(o.LastOdometerReading.Get()) {
+	if o == nil || o.LastOdometerReading.Get() == nil {
 		var ret float32
 		return ret
 	}
+
 	return *o.LastOdometerReading.Get()
 }
 
-// GetLastOdometerReadingOk returns a tuple with the LastOdometerReading field value if set, nil otherwise
+// GetLastOdometerReadingOk returns a tuple with the LastOdometerReading field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLastOdometerReadingOk() (*float32, bool) {
@@ -894,40 +683,23 @@ func (o *VehicleSummary) GetLastOdometerReadingOk() (*float32, bool) {
 	return o.LastOdometerReading.Get(), o.LastOdometerReading.IsSet()
 }
 
-// HasLastOdometerReading returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLastOdometerReading() bool {
-	if o != nil && o.LastOdometerReading.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastOdometerReading gets a reference to the given NullableFloat32 and assigns it to the LastOdometerReading field.
+// SetLastOdometerReading sets field value
 func (o *VehicleSummary) SetLastOdometerReading(v float32) {
 	o.LastOdometerReading.Set(&v)
 }
 
-// SetLastOdometerReadingNil sets the value for LastOdometerReading to be an explicit nil
-func (o *VehicleSummary) SetLastOdometerReadingNil() {
-	o.LastOdometerReading.Set(nil)
-}
-
-// UnsetLastOdometerReading ensures that no value is present for LastOdometerReading, not even an explicit nil
-func (o *VehicleSummary) UnsetLastOdometerReading() {
-	o.LastOdometerReading.Unset()
-}
-
-// GetLastEngineHours returns the LastEngineHours field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastEngineHours returns the LastEngineHours field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *VehicleSummary) GetLastEngineHours() float32 {
-	if o == nil || IsNil(o.LastEngineHours.Get()) {
+	if o == nil || o.LastEngineHours.Get() == nil {
 		var ret float32
 		return ret
 	}
+
 	return *o.LastEngineHours.Get()
 }
 
-// GetLastEngineHoursOk returns a tuple with the LastEngineHours field value if set, nil otherwise
+// GetLastEngineHoursOk returns a tuple with the LastEngineHours field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLastEngineHoursOk() (*float32, bool) {
@@ -937,40 +709,23 @@ func (o *VehicleSummary) GetLastEngineHoursOk() (*float32, bool) {
 	return o.LastEngineHours.Get(), o.LastEngineHours.IsSet()
 }
 
-// HasLastEngineHours returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLastEngineHours() bool {
-	if o != nil && o.LastEngineHours.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastEngineHours gets a reference to the given NullableFloat32 and assigns it to the LastEngineHours field.
+// SetLastEngineHours sets field value
 func (o *VehicleSummary) SetLastEngineHours(v float32) {
 	o.LastEngineHours.Set(&v)
 }
 
-// SetLastEngineHoursNil sets the value for LastEngineHours to be an explicit nil
-func (o *VehicleSummary) SetLastEngineHoursNil() {
-	o.LastEngineHours.Set(nil)
-}
-
-// UnsetLastEngineHours ensures that no value is present for LastEngineHours, not even an explicit nil
-func (o *VehicleSummary) UnsetLastEngineHours() {
-	o.LastEngineHours.Unset()
-}
-
-// GetLastSpeedReading returns the LastSpeedReading field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastSpeedReading returns the LastSpeedReading field value
+// If the value is explicit nil, the zero value for float32 will be returned
 func (o *VehicleSummary) GetLastSpeedReading() float32 {
-	if o == nil || IsNil(o.LastSpeedReading.Get()) {
+	if o == nil || o.LastSpeedReading.Get() == nil {
 		var ret float32
 		return ret
 	}
+
 	return *o.LastSpeedReading.Get()
 }
 
-// GetLastSpeedReadingOk returns a tuple with the LastSpeedReading field value if set, nil otherwise
+// GetLastSpeedReadingOk returns a tuple with the LastSpeedReading field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VehicleSummary) GetLastSpeedReadingOk() (*float32, bool) {
@@ -980,28 +735,9 @@ func (o *VehicleSummary) GetLastSpeedReadingOk() (*float32, bool) {
 	return o.LastSpeedReading.Get(), o.LastSpeedReading.IsSet()
 }
 
-// HasLastSpeedReading returns a boolean if a field has been set.
-func (o *VehicleSummary) HasLastSpeedReading() bool {
-	if o != nil && o.LastSpeedReading.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastSpeedReading gets a reference to the given NullableFloat32 and assigns it to the LastSpeedReading field.
+// SetLastSpeedReading sets field value
 func (o *VehicleSummary) SetLastSpeedReading(v float32) {
 	o.LastSpeedReading.Set(&v)
-}
-
-// SetLastSpeedReadingNil sets the value for LastSpeedReading to be an explicit nil
-func (o *VehicleSummary) SetLastSpeedReadingNil() {
-	o.LastSpeedReading.Set(nil)
-}
-
-// UnsetLastSpeedReading ensures that no value is present for LastSpeedReading, not even an explicit nil
-func (o *VehicleSummary) UnsetLastSpeedReading() {
-	o.LastSpeedReading.Unset()
 }
 
 func (o VehicleSummary) MarshalJSON() ([]byte, error) {
@@ -1015,68 +751,35 @@ func (o VehicleSummary) MarshalJSON() ([]byte, error) {
 func (o VehicleSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["fleet_id"] = o.FleetId
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
+	toSerialize["fleet_ref"] = o.FleetRef.Get()
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["vehicle_id"] = o.VehicleId
-	if o.SourceName.IsSet() {
-		toSerialize["source_name"] = o.SourceName.Get()
+	toSerialize["tsp_id"] = o.TspId.Get()
+	toSerialize["tsp_slug"] = o.TspSlug.Get()
+	toSerialize["source_name"] = o.SourceName.Get()
+	toSerialize["source_id"] = o.SourceId.Get()
+	toSerialize["status"] = o.Status.Get()
+	toSerialize["vehicle_name"] = o.VehicleName.Get()
+	toSerialize["oem"] = o.Oem.Get()
+	toSerialize["model_type"] = o.ModelType.Get()
+	toSerialize["model_year"] = o.ModelYear.Get()
+	toSerialize["vin"] = o.Vin.Get()
+	toSerialize["engine_vin"] = o.EngineVin.Get()
+	toSerialize["license_plate_country"] = o.LicensePlateCountry.Get()
+	toSerialize["license_plate_region"] = o.LicensePlateRegion.Get()
+	toSerialize["license_plate_number"] = o.LicensePlateNumber.Get()
+	toSerialize["last_location_ping"] = o.LastLocationPing.Get()
+	toSerialize["last_location_h3_index_11"] = o.LastLocationH3Index11.Get()
+	toSerialize["last_location"] = o.LastLocation.Get()
+	toSerialize["last_fuel_level"] = o.LastFuelLevel.Get()
+	toSerialize["last_odometer_reading"] = o.LastOdometerReading.Get()
+	toSerialize["last_engine_hours"] = o.LastEngineHours.Get()
+	toSerialize["last_speed_reading"] = o.LastSpeedReading.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
-	if o.SourceId.IsSet() {
-		toSerialize["source_id"] = o.SourceId.Get()
-	}
-	if o.Status.IsSet() {
-		toSerialize["status"] = o.Status.Get()
-	}
-	if o.VehicleName.IsSet() {
-		toSerialize["vehicle_name"] = o.VehicleName.Get()
-	}
-	if o.Oem.IsSet() {
-		toSerialize["oem"] = o.Oem.Get()
-	}
-	if o.ModelType.IsSet() {
-		toSerialize["model_type"] = o.ModelType.Get()
-	}
-	if o.ModelYear.IsSet() {
-		toSerialize["model_year"] = o.ModelYear.Get()
-	}
-	if o.Vin.IsSet() {
-		toSerialize["vin"] = o.Vin.Get()
-	}
-	if o.EngineVin.IsSet() {
-		toSerialize["engine_vin"] = o.EngineVin.Get()
-	}
-	if o.LicensePlateCountry.IsSet() {
-		toSerialize["license_plate_country"] = o.LicensePlateCountry.Get()
-	}
-	if o.LicensePlateRegion.IsSet() {
-		toSerialize["license_plate_region"] = o.LicensePlateRegion.Get()
-	}
-	if o.LicensePlateNumber.IsSet() {
-		toSerialize["license_plate_number"] = o.LicensePlateNumber.Get()
-	}
-	if o.LastLocationPing.IsSet() {
-		toSerialize["last_location_ping"] = o.LastLocationPing.Get()
-	}
-	if o.LastLocationH3Index11.IsSet() {
-		toSerialize["last_location_h3_index_11"] = o.LastLocationH3Index11.Get()
-	}
-	if o.LastLocation.IsSet() {
-		toSerialize["last_location"] = o.LastLocation.Get()
-	}
-	if o.LastFuelLevel.IsSet() {
-		toSerialize["last_fuel_level"] = o.LastFuelLevel.Get()
-	}
-	if o.LastOdometerReading.IsSet() {
-		toSerialize["last_odometer_reading"] = o.LastOdometerReading.Get()
-	}
-	if o.LastEngineHours.IsSet() {
-		toSerialize["last_engine_hours"] = o.LastEngineHours.Get()
-	}
-	if o.LastSpeedReading.IsSet() {
-		toSerialize["last_speed_reading"] = o.LastSpeedReading.Get()
-	}
+
 	return toSerialize, nil
 }
 
@@ -1086,8 +789,30 @@ func (o *VehicleSummary) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"fleet_id",
+		"fleet_ref",
 		"connection_id",
 		"vehicle_id",
+		"tsp_id",
+		"tsp_slug",
+		"source_name",
+		"source_id",
+		"status",
+		"vehicle_name",
+		"oem",
+		"model_type",
+		"model_year",
+		"vin",
+		"engine_vin",
+		"license_plate_country",
+		"license_plate_region",
+		"license_plate_number",
+		"last_location_ping",
+		"last_location_h3_index_11",
+		"last_location",
+		"last_fuel_level",
+		"last_odometer_reading",
+		"last_engine_hours",
+		"last_speed_reading",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -1106,15 +831,44 @@ func (o *VehicleSummary) UnmarshalJSON(data []byte) (err error) {
 
 	varVehicleSummary := _VehicleSummary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVehicleSummary)
+	err = json.Unmarshal(data, &varVehicleSummary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VehicleSummary(varVehicleSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "vehicle_id")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "vehicle_name")
+		delete(additionalProperties, "oem")
+		delete(additionalProperties, "model_type")
+		delete(additionalProperties, "model_year")
+		delete(additionalProperties, "vin")
+		delete(additionalProperties, "engine_vin")
+		delete(additionalProperties, "license_plate_country")
+		delete(additionalProperties, "license_plate_region")
+		delete(additionalProperties, "license_plate_number")
+		delete(additionalProperties, "last_location_ping")
+		delete(additionalProperties, "last_location_h3_index_11")
+		delete(additionalProperties, "last_location")
+		delete(additionalProperties, "last_fuel_level")
+		delete(additionalProperties, "last_odometer_reading")
+		delete(additionalProperties, "last_engine_hours")
+		delete(additionalProperties, "last_speed_reading")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

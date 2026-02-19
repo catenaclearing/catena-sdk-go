@@ -75,6 +75,7 @@ EOF
         --additional-properties=generateGoMod=false \
         --additional-properties=enumClassPrefix=true \
         --additional-properties=generateInterfaces=true \
+        --additional-properties=disallowAdditionalPropertiesIfNotPresent=false \
         --git-user-id=catenaclearing \
         --git-repo-id=catena-sdk-go \
         --package-name="${package_name}"

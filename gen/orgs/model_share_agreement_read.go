@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -36,7 +35,8 @@ type ShareAgreementRead struct {
 	EffectiveDate  time.Time    `json:"effective_date"`
 	ExpirationDate NullableTime `json:"expiration_date"`
 	// Defines which resources (vehicle, locations, users, etc.) you can access and the permission level (read, write) for each.
-	Scopes map[string]ShareLevelEnum `json:"scopes"`
+	Scopes               map[string]ShareLevelEnum `json:"scopes"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ShareAgreementRead ShareAgreementRead
@@ -308,6 +308,11 @@ func (o ShareAgreementRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["effective_date"] = o.EffectiveDate
 	toSerialize["expiration_date"] = o.ExpirationDate.Get()
 	toSerialize["scopes"] = o.Scopes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -343,15 +348,28 @@ func (o *ShareAgreementRead) UnmarshalJSON(data []byte) (err error) {
 
 	varShareAgreementRead := _ShareAgreementRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varShareAgreementRead)
+	err = json.Unmarshal(data, &varShareAgreementRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ShareAgreementRead(varShareAgreementRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "partner_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "invitation_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "effective_date")
+		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "scopes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

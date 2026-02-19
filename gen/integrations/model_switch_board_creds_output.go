@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +20,9 @@ var _ MappedNullable = &SwitchBoardCredsOutput{}
 
 // SwitchBoardCredsOutput SwitchBoard Connection model
 type SwitchBoardCredsOutput struct {
-	ApiId  string      `json:"api_id"`
-	ApiKey interface{} `json:"api_key"`
+	ApiId                string      `json:"api_id"`
+	ApiKey               interface{} `json:"api_key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SwitchBoardCredsOutput SwitchBoardCredsOutput
@@ -110,6 +110,11 @@ func (o SwitchBoardCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.ApiKey != nil {
 		toSerialize["api_key"] = o.ApiKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -138,15 +143,21 @@ func (o *SwitchBoardCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varSwitchBoardCredsOutput := _SwitchBoardCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSwitchBoardCredsOutput)
+	err = json.Unmarshal(data, &varSwitchBoardCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SwitchBoardCredsOutput(varSwitchBoardCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "api_id")
+		delete(additionalProperties, "api_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

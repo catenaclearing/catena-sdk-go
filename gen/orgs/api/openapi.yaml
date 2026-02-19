@@ -3298,7 +3298,10 @@ components:
       example: {}
       properties:
         fleet_ref:
-          nullable: true
+          description: "Your internal fleet identifier. Use this to map Catena fleets\
+            \ back to your system. This value will be returned in webhooks and redirect\
+            \ URLs. Only letters, numbers, spaces, dashes, and underscores are allowed."
+          title: Fleet Reference
           type: string
         partner_provided_fleet_name:
           nullable: true
@@ -3358,6 +3361,8 @@ components:
           minimum: 1.0
           title: Expires In Hours
           type: integer
+      required:
+      - fleet_ref
       title: InvitationCreate
     InvitationDecline:
       description: |-
@@ -3622,6 +3627,7 @@ components:
       - default_failure_redirect_url
       - default_success_redirect_url
       - default_callback_url
+      - default_invitation_expires_in_hours
       title: PartnerPropertyKeyEnum
       type: string
     PartnerPropertyRead:
@@ -3755,6 +3761,7 @@ components:
       - driver_safety_event
       - dvir_log
       - dvir_log_defect
+      - engine_log
       - hos_availability
       - hos_daily_snapshot
       - hos_event
@@ -3986,6 +3993,8 @@ components:
         TSPs cannot create themselves - contact Catena to integrate your TSP.
       example:
         conn_type: access_token
+        logo_dark_url: https://openapi-generator.tech
+        logo_url: https://openapi-generator.tech
         name: name
         description: description
         websites:
@@ -4022,6 +4031,18 @@ components:
             purposes.
           title: Is Sandbox
           type: boolean
+        logo_url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          nullable: true
+          type: string
+        logo_dark_url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          nullable: true
+          type: string
       required:
       - conn_type
       - name
@@ -4197,6 +4218,8 @@ components:
           operations
         id: 11223344-5566-7788-99aa-bbccddeeff00
         is_sandbox: false
+        logo_dark_url: https://cdn.sanity.io/images/abc123/samsara-logo-dark.png
+        logo_url: https://cdn.sanity.io/images/abc123/samsara-logo.png
         name: Samsara
         slug: samsara
         source_name: samsara
@@ -4231,6 +4254,18 @@ components:
             purposes.
           title: Is Sandbox
           type: boolean
+        logo_url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          nullable: true
+          type: string
+        logo_dark_url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          nullable: true
+          type: string
         id:
           description: Unique Catena TSP identifier
           format: uuid

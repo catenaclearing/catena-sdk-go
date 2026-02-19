@@ -11,7 +11,6 @@ API version: 1.0.0
 package authenticationapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,14 +20,15 @@ var _ MappedNullable = &TokenResponse{}
 
 // TokenResponse OAuth2 token response from Keycloak.
 type TokenResponse struct {
-	AccessToken      string  `json:"access_token"`
-	ExpiresIn        int32   `json:"expires_in"`
-	RefreshExpiresIn *int32  `json:"refresh_expires_in,omitempty"`
-	RefreshToken     *string `json:"refresh_token,omitempty"`
-	TokenType        string  `json:"token_type"`
-	SessionState     *string `json:"session_state,omitempty"`
-	NotBeforePolicy  *int32  `json:"not-before-policy,omitempty"`
-	Scope            *string `json:"scope,omitempty"`
+	AccessToken          string  `json:"access_token"`
+	ExpiresIn            int32   `json:"expires_in"`
+	RefreshExpiresIn     *int32  `json:"refresh_expires_in,omitempty"`
+	RefreshToken         *string `json:"refresh_token,omitempty"`
+	TokenType            string  `json:"token_type"`
+	SessionState         *string `json:"session_state,omitempty"`
+	NotBeforePolicy      *int32  `json:"not-before-policy,omitempty"`
+	Scope                *string `json:"scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TokenResponse TokenResponse
@@ -313,6 +313,11 @@ func (o TokenResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -342,15 +347,27 @@ func (o *TokenResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varTokenResponse := _TokenResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTokenResponse)
+	err = json.Unmarshal(data, &varTokenResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TokenResponse(varTokenResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_token")
+		delete(additionalProperties, "expires_in")
+		delete(additionalProperties, "refresh_expires_in")
+		delete(additionalProperties, "refresh_token")
+		delete(additionalProperties, "token_type")
+		delete(additionalProperties, "session_state")
+		delete(additionalProperties, "not-before-policy")
+		delete(additionalProperties, "scope")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

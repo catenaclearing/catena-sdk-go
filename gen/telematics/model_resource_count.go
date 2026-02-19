@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type ResourceCount struct {
 	// Current count of active drivers.
 	Drivers int32 `json:"drivers"`
 	// Current count of active trailers.
-	Trailers int32 `json:"trailers"`
+	Trailers             int32 `json:"trailers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResourceCount ResourceCount
@@ -164,6 +164,11 @@ func (o ResourceCount) ToMap() (map[string]interface{}, error) {
 	toSerialize["vehicles"] = o.Vehicles
 	toSerialize["drivers"] = o.Drivers
 	toSerialize["trailers"] = o.Trailers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *ResourceCount) UnmarshalJSON(data []byte) (err error) {
 
 	varResourceCount := _ResourceCount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResourceCount)
+	err = json.Unmarshal(data, &varResourceCount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResourceCount(varResourceCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleets")
+		delete(additionalProperties, "vehicles")
+		delete(additionalProperties, "drivers")
+		delete(additionalProperties, "trailers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

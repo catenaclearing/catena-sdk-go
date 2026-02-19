@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -25,10 +24,11 @@ type FleetPropertyRead struct {
 	// The key of the property
 	Key FleetPropertyKeyEnum `json:"key"`
 	// The value of the property
-	Value     string    `json:"value"`
-	Id        string    `json:"id"`
-	CreatedAt time.Time `json:"created_at"`
-	FleetId   string    `json:"fleet_id"`
+	Value                string    `json:"value"`
+	Id                   string    `json:"id"`
+	CreatedAt            time.Time `json:"created_at"`
+	FleetId              string    `json:"fleet_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FleetPropertyRead FleetPropertyRead
@@ -190,6 +190,11 @@ func (o FleetPropertyRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["fleet_id"] = o.FleetId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -221,15 +226,24 @@ func (o *FleetPropertyRead) UnmarshalJSON(data []byte) (err error) {
 
 	varFleetPropertyRead := _FleetPropertyRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFleetPropertyRead)
+	err = json.Unmarshal(data, &varFleetPropertyRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FleetPropertyRead(varFleetPropertyRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "fleet_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -20,11 +20,14 @@ var _ MappedNullable = &ShareAgreementUpdate{}
 
 // ShareAgreementUpdate API model for updating a sharing agreement  Update agreement status or dates. Note: Fleets own their share agreements, so partners typically cannot modify these directly.
 type ShareAgreementUpdate struct {
-	Status         NullableStatusEnum `json:"status,omitempty"`
-	FleetRef       NullableString     `json:"fleet_ref,omitempty"`
-	EffectiveDate  NullableTime       `json:"effective_date,omitempty"`
-	ExpirationDate NullableTime       `json:"expiration_date,omitempty"`
+	Status               NullableStatusEnum `json:"status,omitempty"`
+	FleetRef             NullableString     `json:"fleet_ref,omitempty"`
+	EffectiveDate        NullableTime       `json:"effective_date,omitempty"`
+	ExpirationDate       NullableTime       `json:"expiration_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ShareAgreementUpdate ShareAgreementUpdate
 
 // NewShareAgreementUpdate instantiates a new ShareAgreementUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -237,7 +240,36 @@ func (o ShareAgreementUpdate) ToMap() (map[string]interface{}, error) {
 	if o.ExpirationDate.IsSet() {
 		toSerialize["expiration_date"] = o.ExpirationDate.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ShareAgreementUpdate) UnmarshalJSON(data []byte) (err error) {
+	varShareAgreementUpdate := _ShareAgreementUpdate{}
+
+	err = json.Unmarshal(data, &varShareAgreementUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ShareAgreementUpdate(varShareAgreementUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "effective_date")
+		delete(additionalProperties, "expiration_date")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShareAgreementUpdate struct {

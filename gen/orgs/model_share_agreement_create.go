@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -25,12 +24,13 @@ type ShareAgreementCreate struct {
 	// Your organization ID receiving access to fleet data
 	PartnerId string `json:"partner_id"`
 	// Defines which resources (vehicle, locations, users, etc.) you can access and the permission level (read, write) for each.
-	Scopes         map[string]ShareLevelEnum `json:"scopes"`
-	FleetId        NullableString            `json:"fleet_id,omitempty"`
-	FleetRef       NullableString            `json:"fleet_ref,omitempty"`
-	InvitationId   NullableString            `json:"invitation_id,omitempty"`
-	EffectiveDate  NullableTime              `json:"effective_date,omitempty"`
-	ExpirationDate NullableTime              `json:"expiration_date,omitempty"`
+	Scopes               map[string]ShareLevelEnum `json:"scopes"`
+	FleetId              NullableString            `json:"fleet_id,omitempty"`
+	FleetRef             NullableString            `json:"fleet_ref,omitempty"`
+	InvitationId         NullableString            `json:"invitation_id,omitempty"`
+	EffectiveDate        NullableTime              `json:"effective_date,omitempty"`
+	ExpirationDate       NullableTime              `json:"expiration_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ShareAgreementCreate ShareAgreementCreate
@@ -344,6 +344,11 @@ func (o ShareAgreementCreate) ToMap() (map[string]interface{}, error) {
 	if o.ExpirationDate.IsSet() {
 		toSerialize["expiration_date"] = o.ExpirationDate.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -372,15 +377,26 @@ func (o *ShareAgreementCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varShareAgreementCreate := _ShareAgreementCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varShareAgreementCreate)
+	err = json.Unmarshal(data, &varShareAgreementCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ShareAgreementCreate(varShareAgreementCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "partner_id")
+		delete(additionalProperties, "scopes")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "invitation_id")
+		delete(additionalProperties, "effective_date")
+		delete(additionalProperties, "expiration_date")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

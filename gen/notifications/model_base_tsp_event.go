@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type BaseTspEvent struct {
 	// The ID of the TSP
 	Id string `json:"id"`
 	// The name of the TSP
-	Name string `json:"name"`
+	Name                 string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseTspEvent BaseTspEvent
@@ -108,6 +108,11 @@ func (o BaseTspEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *BaseTspEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseTspEvent := _BaseTspEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseTspEvent)
+	err = json.Unmarshal(data, &varBaseTspEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseTspEvent(varBaseTspEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

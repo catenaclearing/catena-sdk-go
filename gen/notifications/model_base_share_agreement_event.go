@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -36,7 +35,8 @@ type BaseShareAgreementEvent struct {
 	EffectiveDate  NullableTime `json:"effective_date,omitempty"`
 	ExpirationDate NullableTime `json:"expiration_date,omitempty"`
 	// The scopes/resources that are shared between the fleet and the partner
-	Scopes map[string]string `json:"scopes"`
+	Scopes               map[string]string `json:"scopes"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseShareAgreementEvent BaseShareAgreementEvent
@@ -362,6 +362,11 @@ func (o BaseShareAgreementEvent) ToMap() (map[string]interface{}, error) {
 		toSerialize["expiration_date"] = o.ExpirationDate.Get()
 	}
 	toSerialize["scopes"] = o.Scopes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -394,15 +399,28 @@ func (o *BaseShareAgreementEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseShareAgreementEvent := _BaseShareAgreementEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseShareAgreementEvent)
+	err = json.Unmarshal(data, &varBaseShareAgreementEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseShareAgreementEvent(varBaseShareAgreementEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "partner_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "invitation_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "effective_date")
+		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "scopes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

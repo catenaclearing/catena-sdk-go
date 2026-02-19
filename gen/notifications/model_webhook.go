@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -35,7 +34,8 @@ type Webhook struct {
 	// The current status of the webhook
 	Status *StatusEnum `json:"status,omitempty"`
 	// The event name that triggers the webhook
-	EventName WebhookEventName `json:"event_name"`
+	EventName            WebhookEventName `json:"event_name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Webhook Webhook
@@ -445,6 +445,11 @@ func (o Webhook) ToMap() (map[string]interface{}, error) {
 		toSerialize["status"] = o.Status
 	}
 	toSerialize["event_name"] = o.EventName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -474,15 +479,29 @@ func (o *Webhook) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhook := _Webhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWebhook)
+	err = json.Unmarshal(data, &varWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Webhook(varWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "secret")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "partner_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "event_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

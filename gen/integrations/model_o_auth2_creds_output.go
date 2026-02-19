@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,12 +20,13 @@ var _ MappedNullable = &OAuth2CredsOutput{}
 
 // OAuth2CredsOutput OAuth2 Connection model
 type OAuth2CredsOutput struct {
-	ClientId     string         `json:"client_id"`
-	ClientSecret interface{}    `json:"client_secret"`
-	Scope        NullableString `json:"scope,omitempty"`
-	RefreshToken interface{}    `json:"refresh_token,omitempty"`
-	TokenUrl     string         `json:"token_url"`
-	Url          string         `json:"url"`
+	ClientId             string         `json:"client_id"`
+	ClientSecret         interface{}    `json:"client_secret"`
+	Scope                NullableString `json:"scope,omitempty"`
+	RefreshToken         interface{}    `json:"refresh_token,omitempty"`
+	TokenUrl             string         `json:"token_url"`
+	Url                  string         `json:"url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OAuth2CredsOutput OAuth2CredsOutput
@@ -248,6 +248,11 @@ func (o OAuth2CredsOutput) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["token_url"] = o.TokenUrl
 	toSerialize["url"] = o.Url
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -278,15 +283,25 @@ func (o *OAuth2CredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varOAuth2CredsOutput := _OAuth2CredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOAuth2CredsOutput)
+	err = json.Unmarshal(data, &varOAuth2CredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OAuth2CredsOutput(varOAuth2CredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "refresh_token")
+		delete(additionalProperties, "token_url")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

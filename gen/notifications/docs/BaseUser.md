@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **Id** | **string** | Internal unique identifier for the telematics event record (Catena PK). | 
 **FleetId** | **string** | The Catena fleet this record belongs to (multi-tenant scope). | 
 **FleetRef** | **NullableString** |  | 
-**SourceName** | [**TspEnum**](TspEnum.md) | The name of the source | 
+**TspId** | Pointer to **NullableString** |  | [optional] 
+**TspSlug** | Pointer to **NullableString** |  | [optional] 
+**SourceName** | [**TspEnum**](TspEnum.md) | The underlying telematics platform that provided this data (e.g., &#x60;samsara&#x60;, &#x60;motive&#x60;, &#x60;hos247&#x60;). Note: Some platforms like &#x60;hos247&#x60; offer white-labeling, so multiple TSPs may share the same source_name — use &#x60;tsp_id&#x60; or &#x60;tsp_slug&#x60; to identify the specific ELD provider. | 
 **ConnectionId** | **string** | The specific fleet↔TSP connection through which this record was sourced. | 
 **SourceId** | **string** | The ID of the record in the TSP or a deterministic ID/Hash generated from a composite unique key | 
 **CreatedAt** | **time.Time** | Immutable: first time this record was ingested into our system. | 
@@ -16,6 +18,7 @@ Name | Type | Description | Notes
 **OccurredAt** | **time.Time** | When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available. | 
 **ExecutionId** | Pointer to **NullableString** |  | [optional] 
 **ScheduleId** | Pointer to **NullableString** |  | [optional] 
+**Extras** | Pointer to **map[string]interface{}** |  | [optional] 
 **Username** | Pointer to **NullableString** |  | [optional] 
 **StartedAt** | Pointer to **NullableTime** |  | [optional] 
 **EndedAt** | Pointer to **NullableTime** |  | [optional] 
@@ -139,6 +142,76 @@ SetFleetRef sets FleetRef field to given value.
 `func (o *BaseUser) UnsetFleetRef()`
 
 UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
+### GetTspId
+
+`func (o *BaseUser) GetTspId() string`
+
+GetTspId returns the TspId field if non-nil, zero value otherwise.
+
+### GetTspIdOk
+
+`func (o *BaseUser) GetTspIdOk() (*string, bool)`
+
+GetTspIdOk returns a tuple with the TspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspId
+
+`func (o *BaseUser) SetTspId(v string)`
+
+SetTspId sets TspId field to given value.
+
+### HasTspId
+
+`func (o *BaseUser) HasTspId() bool`
+
+HasTspId returns a boolean if a field has been set.
+
+### SetTspIdNil
+
+`func (o *BaseUser) SetTspIdNil(b bool)`
+
+ SetTspIdNil sets the value for TspId to be an explicit nil
+
+### UnsetTspId
+`func (o *BaseUser) UnsetTspId()`
+
+UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+### GetTspSlug
+
+`func (o *BaseUser) GetTspSlug() string`
+
+GetTspSlug returns the TspSlug field if non-nil, zero value otherwise.
+
+### GetTspSlugOk
+
+`func (o *BaseUser) GetTspSlugOk() (*string, bool)`
+
+GetTspSlugOk returns a tuple with the TspSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspSlug
+
+`func (o *BaseUser) SetTspSlug(v string)`
+
+SetTspSlug sets TspSlug field to given value.
+
+### HasTspSlug
+
+`func (o *BaseUser) HasTspSlug() bool`
+
+HasTspSlug returns a boolean if a field has been set.
+
+### SetTspSlugNil
+
+`func (o *BaseUser) SetTspSlugNil(b bool)`
+
+ SetTspSlugNil sets the value for TspSlug to be an explicit nil
+
+### UnsetTspSlug
+`func (o *BaseUser) UnsetTspSlug()`
+
+UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
 ### GetSourceName
 
 `func (o *BaseUser) GetSourceName() TspEnum`
@@ -364,6 +437,41 @@ HasScheduleId returns a boolean if a field has been set.
 `func (o *BaseUser) UnsetScheduleId()`
 
 UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
+### GetExtras
+
+`func (o *BaseUser) GetExtras() map[string]interface{}`
+
+GetExtras returns the Extras field if non-nil, zero value otherwise.
+
+### GetExtrasOk
+
+`func (o *BaseUser) GetExtrasOk() (*map[string]interface{}, bool)`
+
+GetExtrasOk returns a tuple with the Extras field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtras
+
+`func (o *BaseUser) SetExtras(v map[string]interface{})`
+
+SetExtras sets Extras field to given value.
+
+### HasExtras
+
+`func (o *BaseUser) HasExtras() bool`
+
+HasExtras returns a boolean if a field has been set.
+
+### SetExtrasNil
+
+`func (o *BaseUser) SetExtrasNil(b bool)`
+
+ SetExtrasNil sets the value for Extras to be an explicit nil
+
+### UnsetExtras
+`func (o *BaseUser) UnsetExtras()`
+
+UnsetExtras ensures that no value is present for Extras, not even an explicit nil
 ### GetUsername
 
 `func (o *BaseUser) GetUsername() string`

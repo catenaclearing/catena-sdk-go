@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &CompanyAccessCredsInput{}
 
 // CompanyAccessCredsInput Company Access Credentials model
 type CompanyAccessCredsInput struct {
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	CompanyId string `json:"company_id"`
+	Username             string `json:"username"`
+	Password             string `json:"password"`
+	CompanyId            string `json:"company_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyAccessCredsInput CompanyAccessCredsInput
@@ -133,6 +133,11 @@ func (o CompanyAccessCredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["username"] = o.Username
 	toSerialize["password"] = o.Password
 	toSerialize["company_id"] = o.CompanyId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *CompanyAccessCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanyAccessCredsInput := _CompanyAccessCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyAccessCredsInput)
+	err = json.Unmarshal(data, &varCompanyAccessCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyAccessCredsInput(varCompanyAccessCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "company_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

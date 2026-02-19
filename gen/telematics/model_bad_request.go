@@ -19,10 +19,13 @@ var _ MappedNullable = &BadRequest{}
 
 // BadRequest struct for BadRequest
 type BadRequest struct {
-	Code    *int32         `json:"code,omitempty"`
-	Message *string        `json:"message,omitempty"`
-	Detail  NullableString `json:"detail,omitempty"`
+	Code                 *int32         `json:"code,omitempty"`
+	Message              *string        `json:"message,omitempty"`
+	Detail               NullableString `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BadRequest BadRequest
 
 // NewBadRequest instantiates a new BadRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -175,7 +178,35 @@ func (o BadRequest) ToMap() (map[string]interface{}, error) {
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BadRequest) UnmarshalJSON(data []byte) (err error) {
+	varBadRequest := _BadRequest{}
+
+	err = json.Unmarshal(data, &varBadRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BadRequest(varBadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBadRequest struct {

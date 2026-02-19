@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,11 +20,12 @@ var _ MappedNullable = &PrivateKeyCredsOutput{}
 
 // PrivateKeyCredsOutput Private Key Connection model
 type PrivateKeyCredsOutput struct {
-	PrivateKey  interface{}    `json:"private_key"`
-	ConsumerKey interface{}    `json:"consumer_key"`
-	Username    interface{}    `json:"username"`
-	Url         NullableString `json:"url,omitempty"`
-	TokenUrl    NullableString `json:"token_url,omitempty"`
+	PrivateKey           interface{}    `json:"private_key"`
+	ConsumerKey          interface{}    `json:"consumer_key"`
+	Username             interface{}    `json:"username"`
+	Url                  NullableString `json:"url,omitempty"`
+	TokenUrl             NullableString `json:"token_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PrivateKeyCredsOutput PrivateKeyCredsOutput
@@ -239,6 +239,11 @@ func (o PrivateKeyCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.TokenUrl.IsSet() {
 		toSerialize["token_url"] = o.TokenUrl.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -268,15 +273,24 @@ func (o *PrivateKeyCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varPrivateKeyCredsOutput := _PrivateKeyCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPrivateKeyCredsOutput)
+	err = json.Unmarshal(data, &varPrivateKeyCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PrivateKeyCredsOutput(varPrivateKeyCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "private_key")
+		delete(additionalProperties, "consumer_key")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "token_url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &TimePeriodMetric{}
 
 // TimePeriodMetric Webhook Metrics Success Rate model
 type TimePeriodMetric struct {
-	Var6h  NullableInt32 `json:"6h"`
-	Var24h NullableInt32 `json:"24h"`
-	Var7d  NullableInt32 `json:"7d"`
-	Var14d NullableInt32 `json:"14d"`
+	Var6h                NullableInt32 `json:"6h"`
+	Var24h               NullableInt32 `json:"24h"`
+	Var7d                NullableInt32 `json:"7d"`
+	Var14d               NullableInt32 `json:"14d"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TimePeriodMetric TimePeriodMetric
@@ -168,6 +168,11 @@ func (o TimePeriodMetric) ToMap() (map[string]interface{}, error) {
 	toSerialize["24h"] = o.Var24h.Get()
 	toSerialize["7d"] = o.Var7d.Get()
 	toSerialize["14d"] = o.Var14d.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -198,15 +203,23 @@ func (o *TimePeriodMetric) UnmarshalJSON(data []byte) (err error) {
 
 	varTimePeriodMetric := _TimePeriodMetric{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTimePeriodMetric)
+	err = json.Unmarshal(data, &varTimePeriodMetric)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TimePeriodMetric(varTimePeriodMetric)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "6h")
+		delete(additionalProperties, "24h")
+		delete(additionalProperties, "7d")
+		delete(additionalProperties, "14d")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

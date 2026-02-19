@@ -19,8 +19,11 @@ var _ MappedNullable = &InvitationDecline{}
 
 // InvitationDecline API model for declining a fleet invitation  Optional data that fleets can provide when declining an invitation. Helps partners understand why invitations were rejected.
 type InvitationDecline struct {
-	DeclineReason NullableString `json:"decline_reason,omitempty"`
+	DeclineReason        NullableString `json:"decline_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvitationDecline InvitationDecline
 
 // NewInvitationDecline instantiates a new InvitationDecline object
 // This constructor will assign default values to properties that have it defined,
@@ -95,7 +98,33 @@ func (o InvitationDecline) ToMap() (map[string]interface{}, error) {
 	if o.DeclineReason.IsSet() {
 		toSerialize["decline_reason"] = o.DeclineReason.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvitationDecline) UnmarshalJSON(data []byte) (err error) {
+	varInvitationDecline := _InvitationDecline{}
+
+	err = json.Unmarshal(data, &varInvitationDecline)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvitationDecline(varInvitationDecline)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "decline_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvitationDecline struct {

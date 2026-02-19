@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Status** | Pointer to [**StatusEnum**](StatusEnum.md) | The status of the TSP | [optional] 
 **ConnType** | [**ConnectionTypeEnum**](ConnectionTypeEnum.md) | The type of connection usedt to authenticate with the TSP | 
 **IsSandbox** | Pointer to **bool** | Indicates whether the TSP is a sandbox integrations for testing purposes. | [optional] [default to false]
+**LogoUrl** | Pointer to **NullableString** |  | [optional] 
+**LogoDarkUrl** | Pointer to **NullableString** |  | [optional] 
 **Id** | **string** | Unique Catena TSP identifier | 
 **Slug** | **string** | URL-friendly TSP identifier | 
 **CreatedAt** | **time.Time** | When the TSP was added to Catena | 
@@ -215,6 +217,76 @@ SetIsSandbox sets IsSandbox field to given value.
 
 HasIsSandbox returns a boolean if a field has been set.
 
+### GetLogoUrl
+
+`func (o *TspRead) GetLogoUrl() string`
+
+GetLogoUrl returns the LogoUrl field if non-nil, zero value otherwise.
+
+### GetLogoUrlOk
+
+`func (o *TspRead) GetLogoUrlOk() (*string, bool)`
+
+GetLogoUrlOk returns a tuple with the LogoUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogoUrl
+
+`func (o *TspRead) SetLogoUrl(v string)`
+
+SetLogoUrl sets LogoUrl field to given value.
+
+### HasLogoUrl
+
+`func (o *TspRead) HasLogoUrl() bool`
+
+HasLogoUrl returns a boolean if a field has been set.
+
+### SetLogoUrlNil
+
+`func (o *TspRead) SetLogoUrlNil(b bool)`
+
+ SetLogoUrlNil sets the value for LogoUrl to be an explicit nil
+
+### UnsetLogoUrl
+`func (o *TspRead) UnsetLogoUrl()`
+
+UnsetLogoUrl ensures that no value is present for LogoUrl, not even an explicit nil
+### GetLogoDarkUrl
+
+`func (o *TspRead) GetLogoDarkUrl() string`
+
+GetLogoDarkUrl returns the LogoDarkUrl field if non-nil, zero value otherwise.
+
+### GetLogoDarkUrlOk
+
+`func (o *TspRead) GetLogoDarkUrlOk() (*string, bool)`
+
+GetLogoDarkUrlOk returns a tuple with the LogoDarkUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogoDarkUrl
+
+`func (o *TspRead) SetLogoDarkUrl(v string)`
+
+SetLogoDarkUrl sets LogoDarkUrl field to given value.
+
+### HasLogoDarkUrl
+
+`func (o *TspRead) HasLogoDarkUrl() bool`
+
+HasLogoDarkUrl returns a boolean if a field has been set.
+
+### SetLogoDarkUrlNil
+
+`func (o *TspRead) SetLogoDarkUrlNil(b bool)`
+
+ SetLogoDarkUrlNil sets the value for LogoDarkUrl to be an explicit nil
+
+### UnsetLogoDarkUrl
+`func (o *TspRead) UnsetLogoDarkUrl()`
+
+UnsetLogoDarkUrl ensures that no value is present for LogoDarkUrl, not even an explicit nil
 ### GetId
 
 `func (o *TspRead) GetId() string`

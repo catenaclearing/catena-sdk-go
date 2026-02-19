@@ -106,7 +106,7 @@ import (
 )
 
 func main() {
-	invitationCreate := *openapiclient.NewInvitationCreate() // InvitationCreate | 
+	invitationCreate := *openapiclient.NewInvitationCreate("FleetRef_example") // InvitationCreate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

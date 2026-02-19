@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,12 +20,13 @@ var _ MappedNullable = &DatabaseCredsInput{}
 
 // DatabaseCredsInput Database Connection model
 type DatabaseCredsInput struct {
-	Drivername DatabaseDriverEnum `json:"drivername"`
-	Host       string             `json:"host"`
-	Port       int32              `json:"port"`
-	Username   string             `json:"username"`
-	Password   string             `json:"password"`
-	Database   string             `json:"database"`
+	Drivername           DatabaseDriverEnum `json:"drivername"`
+	Host                 string             `json:"host"`
+	Port                 int32              `json:"port"`
+	Username             string             `json:"username"`
+	Password             string             `json:"password"`
+	Database             string             `json:"database"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DatabaseCredsInput DatabaseCredsInput
@@ -214,6 +214,11 @@ func (o DatabaseCredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["username"] = o.Username
 	toSerialize["password"] = o.Password
 	toSerialize["database"] = o.Database
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -246,15 +251,25 @@ func (o *DatabaseCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varDatabaseCredsInput := _DatabaseCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDatabaseCredsInput)
+	err = json.Unmarshal(data, &varDatabaseCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DatabaseCredsInput(varDatabaseCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "drivername")
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "port")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "database")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

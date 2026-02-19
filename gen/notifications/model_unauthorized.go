@@ -19,10 +19,13 @@ var _ MappedNullable = &Unauthorized{}
 
 // Unauthorized struct for Unauthorized
 type Unauthorized struct {
-	Code    *int32         `json:"code,omitempty"`
-	Message *string        `json:"message,omitempty"`
-	Detail  NullableString `json:"detail,omitempty"`
+	Code                 *int32         `json:"code,omitempty"`
+	Message              *string        `json:"message,omitempty"`
+	Detail               NullableString `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Unauthorized Unauthorized
 
 // NewUnauthorized instantiates a new Unauthorized object
 // This constructor will assign default values to properties that have it defined,
@@ -175,7 +178,35 @@ func (o Unauthorized) ToMap() (map[string]interface{}, error) {
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Unauthorized) UnmarshalJSON(data []byte) (err error) {
+	varUnauthorized := _Unauthorized{}
+
+	err = json.Unmarshal(data, &varUnauthorized)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Unauthorized(varUnauthorized)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnauthorized struct {

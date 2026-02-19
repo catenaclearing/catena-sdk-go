@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &BouncieCredsOutput{}
 
 // BouncieCredsOutput Bouncie Credentials model
 type BouncieCredsOutput struct {
-	AuthCode     interface{}    `json:"auth_code"`
-	RedirectUri  string         `json:"redirect_uri"`
-	ClientId     NullableString `json:"client_id,omitempty"`
-	ClientSecret interface{}    `json:"client_secret,omitempty"`
+	AuthCode             interface{}    `json:"auth_code"`
+	RedirectUri          string         `json:"redirect_uri"`
+	ClientId             NullableString `json:"client_id,omitempty"`
+	ClientSecret         interface{}    `json:"client_secret,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BouncieCredsOutput BouncieCredsOutput
@@ -194,6 +194,11 @@ func (o BouncieCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.ClientSecret != nil {
 		toSerialize["client_secret"] = o.ClientSecret
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -222,15 +227,23 @@ func (o *BouncieCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varBouncieCredsOutput := _BouncieCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBouncieCredsOutput)
+	err = json.Unmarshal(data, &varBouncieCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BouncieCredsOutput(varBouncieCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auth_code")
+		delete(additionalProperties, "redirect_uri")
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

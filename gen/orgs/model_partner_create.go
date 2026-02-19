@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -30,7 +29,8 @@ type PartnerCreate struct {
 	// Indicates whether the account is a sandbox account for testing purposes.
 	IsSandbox *bool `json:"is_sandbox,omitempty"`
 	// Optional custom properties for the partner organization
-	Properties []PartnerPropertyCreate `json:"properties,omitempty"`
+	Properties           []PartnerPropertyCreate `json:"properties,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartnerCreate PartnerCreate
@@ -279,6 +279,11 @@ func (o PartnerCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Properties) {
 		toSerialize["properties"] = o.Properties
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -306,15 +311,25 @@ func (o *PartnerCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varPartnerCreate := _PartnerCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartnerCreate)
+	err = json.Unmarshal(data, &varPartnerCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartnerCreate(varPartnerCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "websites")
+		delete(additionalProperties, "categories")
+		delete(additionalProperties, "is_sandbox")
+		delete(additionalProperties, "properties")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

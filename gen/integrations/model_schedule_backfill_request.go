@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,9 +21,10 @@ var _ MappedNullable = &ScheduleBackfillRequest{}
 // ScheduleBackfillRequest API Model for backfilling schedules across connections
 type ScheduleBackfillRequest struct {
 	// The type of resource to backfill schedules for (e.g., VEHICLE, DRIVER, HOS, IFTA).
-	Resource ResourceEnum   `json:"resource"`
-	TspId    NullableString `json:"tsp_id,omitempty"`
-	FleetIds []string       `json:"fleet_ids,omitempty"`
+	Resource             ResourceEnum   `json:"resource"`
+	TspId                NullableString `json:"tsp_id,omitempty"`
+	FleetIds             []string       `json:"fleet_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleBackfillRequest ScheduleBackfillRequest
@@ -164,6 +164,11 @@ func (o ScheduleBackfillRequest) ToMap() (map[string]interface{}, error) {
 	if o.FleetIds != nil {
 		toSerialize["fleet_ids"] = o.FleetIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,15 +196,22 @@ func (o *ScheduleBackfillRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleBackfillRequest := _ScheduleBackfillRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleBackfillRequest)
+	err = json.Unmarshal(data, &varScheduleBackfillRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleBackfillRequest(varScheduleBackfillRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resource")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "fleet_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +20,9 @@ var _ MappedNullable = &TokenCredsInput{}
 
 // TokenCredsInput Token Connection model
 type TokenCredsInput struct {
-	Token string         `json:"token"`
-	Url   NullableString `json:"url,omitempty"`
+	Token                string         `json:"token"`
+	Url                  NullableString `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TokenCredsInput TokenCredsInput
@@ -126,6 +126,11 @@ func (o TokenCredsInput) ToMap() (map[string]interface{}, error) {
 	if o.Url.IsSet() {
 		toSerialize["url"] = o.Url.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -153,15 +158,21 @@ func (o *TokenCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varTokenCredsInput := _TokenCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTokenCredsInput)
+	err = json.Unmarshal(data, &varTokenCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TokenCredsInput(varTokenCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "token")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

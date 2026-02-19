@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,11 +20,12 @@ var _ MappedNullable = &OAuth2PrivateKeyCredsOutput{}
 
 // OAuth2PrivateKeyCredsOutput OAuth2 Private Key Connection model
 type OAuth2PrivateKeyCredsOutput struct {
-	ClientId   string         `json:"client_id"`
-	PrivateKey interface{}    `json:"private_key"`
-	Scope      NullableString `json:"scope,omitempty"`
-	TokenUrl   string         `json:"token_url"`
-	Url        string         `json:"url"`
+	ClientId             string         `json:"client_id"`
+	PrivateKey           interface{}    `json:"private_key"`
+	Scope                NullableString `json:"scope,omitempty"`
+	TokenUrl             string         `json:"token_url"`
+	Url                  string         `json:"url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OAuth2PrivateKeyCredsOutput OAuth2PrivateKeyCredsOutput
@@ -211,6 +211,11 @@ func (o OAuth2PrivateKeyCredsOutput) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["token_url"] = o.TokenUrl
 	toSerialize["url"] = o.Url
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -241,15 +246,24 @@ func (o *OAuth2PrivateKeyCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varOAuth2PrivateKeyCredsOutput := _OAuth2PrivateKeyCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOAuth2PrivateKeyCredsOutput)
+	err = json.Unmarshal(data, &varOAuth2PrivateKeyCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OAuth2PrivateKeyCredsOutput(varOAuth2PrivateKeyCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "private_key")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "token_url")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

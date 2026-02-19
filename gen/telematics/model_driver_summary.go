@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,28 +22,31 @@ var _ MappedNullable = &DriverSummary{}
 type DriverSummary struct {
 	// Catena fleet identifier.
 	FleetId  string         `json:"fleet_id"`
-	FleetRef NullableString `json:"fleet_ref,omitempty"`
+	FleetRef NullableString `json:"fleet_ref"`
 	// Catena connection identifier through which this driver was ingested.
 	ConnectionId string `json:"connection_id"`
 	// Unique Catena identifier for the driver.
-	UserId            string         `json:"user_id"`
-	SourceName        NullableString `json:"source_name,omitempty"`
-	SourceId          NullableString `json:"source_id,omitempty"`
-	EmployeeNumber    NullableString `json:"employee_number,omitempty"`
-	FirstName         NullableString `json:"first_name,omitempty"`
-	LastName          NullableString `json:"last_name,omitempty"`
-	Username          NullableString `json:"username,omitempty"`
-	Status            NullableString `json:"status,omitempty"`
-	PhoneNumber       NullableString `json:"phone_number,omitempty"`
-	LicenseCountry    NullableString `json:"license_country,omitempty"`
-	LicenseRegion     NullableString `json:"license_region,omitempty"`
-	LicenseNumber     NullableString `json:"license_number,omitempty"`
-	LicenseExpiration NullableString `json:"license_expiration,omitempty"`
-	HosRulesetCode    NullableString `json:"hos_ruleset_code,omitempty"`
+	UserId            string          `json:"user_id"`
+	TspId             NullableString  `json:"tsp_id"`
+	TspSlug           NullableString  `json:"tsp_slug"`
+	SourceName        NullableTspEnum `json:"source_name"`
+	SourceId          NullableString  `json:"source_id"`
+	EmployeeNumber    NullableString  `json:"employee_number"`
+	FirstName         NullableString  `json:"first_name"`
+	LastName          NullableString  `json:"last_name"`
+	Username          NullableString  `json:"username"`
+	Status            NullableString  `json:"status"`
+	PhoneNumber       NullableString  `json:"phone_number"`
+	LicenseCountry    NullableString  `json:"license_country"`
+	LicenseRegion     NullableString  `json:"license_region"`
+	LicenseNumber     NullableString  `json:"license_number"`
+	LicenseExpiration NullableString  `json:"license_expiration"`
+	HosRulesetCode    NullableString  `json:"hos_ruleset_code"`
 	// Count of safety events recorded in the last 30 days.
 	SafetyEvents30d *int32 `json:"safety_events_30d,omitempty"`
 	// Count of HOS violations recorded in the last 30 days.
-	HosViolations30d *int32 `json:"hos_violations_30d,omitempty"`
+	HosViolations30d     *int32 `json:"hos_violations_30d,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DriverSummary DriverSummary
@@ -53,11 +55,27 @@ type _DriverSummary DriverSummary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDriverSummary(fleetId string, connectionId string, userId string) *DriverSummary {
+func NewDriverSummary(fleetId string, fleetRef NullableString, connectionId string, userId string, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, sourceId NullableString, employeeNumber NullableString, firstName NullableString, lastName NullableString, username NullableString, status NullableString, phoneNumber NullableString, licenseCountry NullableString, licenseRegion NullableString, licenseNumber NullableString, licenseExpiration NullableString, hosRulesetCode NullableString) *DriverSummary {
 	this := DriverSummary{}
 	this.FleetId = fleetId
+	this.FleetRef = fleetRef
 	this.ConnectionId = connectionId
 	this.UserId = userId
+	this.TspId = tspId
+	this.TspSlug = tspSlug
+	this.SourceName = sourceName
+	this.SourceId = sourceId
+	this.EmployeeNumber = employeeNumber
+	this.FirstName = firstName
+	this.LastName = lastName
+	this.Username = username
+	this.Status = status
+	this.PhoneNumber = phoneNumber
+	this.LicenseCountry = licenseCountry
+	this.LicenseRegion = licenseRegion
+	this.LicenseNumber = licenseNumber
+	this.LicenseExpiration = licenseExpiration
+	this.HosRulesetCode = hosRulesetCode
 	var safetyEvents30d int32 = 0
 	this.SafetyEvents30d = &safetyEvents30d
 	var hosViolations30d int32 = 0
@@ -101,16 +119,18 @@ func (o *DriverSummary) SetFleetId(v string) {
 	o.FleetId = v
 }
 
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFleetRef returns the FleetRef field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+	if o == nil || o.FleetRef.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.FleetRef.Get()
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetFleetRefOk returns a tuple with the FleetRef field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetFleetRefOk() (*string, bool) {
@@ -120,28 +140,9 @@ func (o *DriverSummary) GetFleetRefOk() (*string, bool) {
 	return o.FleetRef.Get(), o.FleetRef.IsSet()
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *DriverSummary) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
+// SetFleetRef sets field value
 func (o *DriverSummary) SetFleetRef(v string) {
 	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *DriverSummary) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *DriverSummary) UnsetFleetRef() {
-	o.FleetRef.Unset()
 }
 
 // GetConnectionId returns the ConnectionId field value
@@ -192,59 +193,96 @@ func (o *DriverSummary) SetUserId(v string) {
 	o.UserId = v
 }
 
-// GetSourceName returns the SourceName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DriverSummary) GetSourceName() string {
-	if o == nil || IsNil(o.SourceName.Get()) {
+// GetTspId returns the TspId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DriverSummary) GetTspId() string {
+	if o == nil || o.TspId.Get() == nil {
 		var ret string
 		return ret
 	}
+
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DriverSummary) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// SetTspId sets field value
+func (o *DriverSummary) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// GetTspSlug returns the TspSlug field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *DriverSummary) GetTspSlug() string {
+	if o == nil || o.TspSlug.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DriverSummary) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// SetTspSlug sets field value
+func (o *DriverSummary) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// GetSourceName returns the SourceName field value
+// If the value is explicit nil, the zero value for TspEnum will be returned
+func (o *DriverSummary) GetSourceName() TspEnum {
+	if o == nil || o.SourceName.Get() == nil {
+		var ret TspEnum
+		return ret
+	}
+
 	return *o.SourceName.Get()
 }
 
-// GetSourceNameOk returns a tuple with the SourceName field value if set, nil otherwise
+// GetSourceNameOk returns a tuple with the SourceName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DriverSummary) GetSourceNameOk() (*string, bool) {
+func (o *DriverSummary) GetSourceNameOk() (*TspEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
 	return o.SourceName.Get(), o.SourceName.IsSet()
 }
 
-// HasSourceName returns a boolean if a field has been set.
-func (o *DriverSummary) HasSourceName() bool {
-	if o != nil && o.SourceName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceName gets a reference to the given NullableString and assigns it to the SourceName field.
-func (o *DriverSummary) SetSourceName(v string) {
+// SetSourceName sets field value
+func (o *DriverSummary) SetSourceName(v TspEnum) {
 	o.SourceName.Set(&v)
 }
 
-// SetSourceNameNil sets the value for SourceName to be an explicit nil
-func (o *DriverSummary) SetSourceNameNil() {
-	o.SourceName.Set(nil)
-}
-
-// UnsetSourceName ensures that no value is present for SourceName, not even an explicit nil
-func (o *DriverSummary) UnsetSourceName() {
-	o.SourceName.Unset()
-}
-
-// GetSourceId returns the SourceId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSourceId returns the SourceId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetSourceId() string {
-	if o == nil || IsNil(o.SourceId.Get()) {
+	if o == nil || o.SourceId.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.SourceId.Get()
 }
 
-// GetSourceIdOk returns a tuple with the SourceId field value if set, nil otherwise
+// GetSourceIdOk returns a tuple with the SourceId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetSourceIdOk() (*string, bool) {
@@ -254,40 +292,23 @@ func (o *DriverSummary) GetSourceIdOk() (*string, bool) {
 	return o.SourceId.Get(), o.SourceId.IsSet()
 }
 
-// HasSourceId returns a boolean if a field has been set.
-func (o *DriverSummary) HasSourceId() bool {
-	if o != nil && o.SourceId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceId gets a reference to the given NullableString and assigns it to the SourceId field.
+// SetSourceId sets field value
 func (o *DriverSummary) SetSourceId(v string) {
 	o.SourceId.Set(&v)
 }
 
-// SetSourceIdNil sets the value for SourceId to be an explicit nil
-func (o *DriverSummary) SetSourceIdNil() {
-	o.SourceId.Set(nil)
-}
-
-// UnsetSourceId ensures that no value is present for SourceId, not even an explicit nil
-func (o *DriverSummary) UnsetSourceId() {
-	o.SourceId.Unset()
-}
-
-// GetEmployeeNumber returns the EmployeeNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEmployeeNumber returns the EmployeeNumber field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetEmployeeNumber() string {
-	if o == nil || IsNil(o.EmployeeNumber.Get()) {
+	if o == nil || o.EmployeeNumber.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.EmployeeNumber.Get()
 }
 
-// GetEmployeeNumberOk returns a tuple with the EmployeeNumber field value if set, nil otherwise
+// GetEmployeeNumberOk returns a tuple with the EmployeeNumber field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetEmployeeNumberOk() (*string, bool) {
@@ -297,40 +318,23 @@ func (o *DriverSummary) GetEmployeeNumberOk() (*string, bool) {
 	return o.EmployeeNumber.Get(), o.EmployeeNumber.IsSet()
 }
 
-// HasEmployeeNumber returns a boolean if a field has been set.
-func (o *DriverSummary) HasEmployeeNumber() bool {
-	if o != nil && o.EmployeeNumber.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEmployeeNumber gets a reference to the given NullableString and assigns it to the EmployeeNumber field.
+// SetEmployeeNumber sets field value
 func (o *DriverSummary) SetEmployeeNumber(v string) {
 	o.EmployeeNumber.Set(&v)
 }
 
-// SetEmployeeNumberNil sets the value for EmployeeNumber to be an explicit nil
-func (o *DriverSummary) SetEmployeeNumberNil() {
-	o.EmployeeNumber.Set(nil)
-}
-
-// UnsetEmployeeNumber ensures that no value is present for EmployeeNumber, not even an explicit nil
-func (o *DriverSummary) UnsetEmployeeNumber() {
-	o.EmployeeNumber.Unset()
-}
-
-// GetFirstName returns the FirstName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFirstName returns the FirstName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetFirstName() string {
-	if o == nil || IsNil(o.FirstName.Get()) {
+	if o == nil || o.FirstName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.FirstName.Get()
 }
 
-// GetFirstNameOk returns a tuple with the FirstName field value if set, nil otherwise
+// GetFirstNameOk returns a tuple with the FirstName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetFirstNameOk() (*string, bool) {
@@ -340,40 +344,23 @@ func (o *DriverSummary) GetFirstNameOk() (*string, bool) {
 	return o.FirstName.Get(), o.FirstName.IsSet()
 }
 
-// HasFirstName returns a boolean if a field has been set.
-func (o *DriverSummary) HasFirstName() bool {
-	if o != nil && o.FirstName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstName gets a reference to the given NullableString and assigns it to the FirstName field.
+// SetFirstName sets field value
 func (o *DriverSummary) SetFirstName(v string) {
 	o.FirstName.Set(&v)
 }
 
-// SetFirstNameNil sets the value for FirstName to be an explicit nil
-func (o *DriverSummary) SetFirstNameNil() {
-	o.FirstName.Set(nil)
-}
-
-// UnsetFirstName ensures that no value is present for FirstName, not even an explicit nil
-func (o *DriverSummary) UnsetFirstName() {
-	o.FirstName.Unset()
-}
-
-// GetLastName returns the LastName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastName returns the LastName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetLastName() string {
-	if o == nil || IsNil(o.LastName.Get()) {
+	if o == nil || o.LastName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LastName.Get()
 }
 
-// GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
+// GetLastNameOk returns a tuple with the LastName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetLastNameOk() (*string, bool) {
@@ -383,40 +370,23 @@ func (o *DriverSummary) GetLastNameOk() (*string, bool) {
 	return o.LastName.Get(), o.LastName.IsSet()
 }
 
-// HasLastName returns a boolean if a field has been set.
-func (o *DriverSummary) HasLastName() bool {
-	if o != nil && o.LastName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastName gets a reference to the given NullableString and assigns it to the LastName field.
+// SetLastName sets field value
 func (o *DriverSummary) SetLastName(v string) {
 	o.LastName.Set(&v)
 }
 
-// SetLastNameNil sets the value for LastName to be an explicit nil
-func (o *DriverSummary) SetLastNameNil() {
-	o.LastName.Set(nil)
-}
-
-// UnsetLastName ensures that no value is present for LastName, not even an explicit nil
-func (o *DriverSummary) UnsetLastName() {
-	o.LastName.Unset()
-}
-
-// GetUsername returns the Username field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUsername returns the Username field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetUsername() string {
-	if o == nil || IsNil(o.Username.Get()) {
+	if o == nil || o.Username.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Username.Get()
 }
 
-// GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
+// GetUsernameOk returns a tuple with the Username field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetUsernameOk() (*string, bool) {
@@ -426,40 +396,23 @@ func (o *DriverSummary) GetUsernameOk() (*string, bool) {
 	return o.Username.Get(), o.Username.IsSet()
 }
 
-// HasUsername returns a boolean if a field has been set.
-func (o *DriverSummary) HasUsername() bool {
-	if o != nil && o.Username.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUsername gets a reference to the given NullableString and assigns it to the Username field.
+// SetUsername sets field value
 func (o *DriverSummary) SetUsername(v string) {
 	o.Username.Set(&v)
 }
 
-// SetUsernameNil sets the value for Username to be an explicit nil
-func (o *DriverSummary) SetUsernameNil() {
-	o.Username.Set(nil)
-}
-
-// UnsetUsername ensures that no value is present for Username, not even an explicit nil
-func (o *DriverSummary) UnsetUsername() {
-	o.Username.Unset()
-}
-
-// GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStatus returns the Status field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetStatus() string {
-	if o == nil || IsNil(o.Status.Get()) {
+	if o == nil || o.Status.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Status.Get()
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetStatusOk() (*string, bool) {
@@ -469,40 +422,23 @@ func (o *DriverSummary) GetStatusOk() (*string, bool) {
 	return o.Status.Get(), o.Status.IsSet()
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *DriverSummary) HasStatus() bool {
-	if o != nil && o.Status.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given NullableString and assigns it to the Status field.
+// SetStatus sets field value
 func (o *DriverSummary) SetStatus(v string) {
 	o.Status.Set(&v)
 }
 
-// SetStatusNil sets the value for Status to be an explicit nil
-func (o *DriverSummary) SetStatusNil() {
-	o.Status.Set(nil)
-}
-
-// UnsetStatus ensures that no value is present for Status, not even an explicit nil
-func (o *DriverSummary) UnsetStatus() {
-	o.Status.Unset()
-}
-
-// GetPhoneNumber returns the PhoneNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPhoneNumber returns the PhoneNumber field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetPhoneNumber() string {
-	if o == nil || IsNil(o.PhoneNumber.Get()) {
+	if o == nil || o.PhoneNumber.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.PhoneNumber.Get()
 }
 
-// GetPhoneNumberOk returns a tuple with the PhoneNumber field value if set, nil otherwise
+// GetPhoneNumberOk returns a tuple with the PhoneNumber field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetPhoneNumberOk() (*string, bool) {
@@ -512,40 +448,23 @@ func (o *DriverSummary) GetPhoneNumberOk() (*string, bool) {
 	return o.PhoneNumber.Get(), o.PhoneNumber.IsSet()
 }
 
-// HasPhoneNumber returns a boolean if a field has been set.
-func (o *DriverSummary) HasPhoneNumber() bool {
-	if o != nil && o.PhoneNumber.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPhoneNumber gets a reference to the given NullableString and assigns it to the PhoneNumber field.
+// SetPhoneNumber sets field value
 func (o *DriverSummary) SetPhoneNumber(v string) {
 	o.PhoneNumber.Set(&v)
 }
 
-// SetPhoneNumberNil sets the value for PhoneNumber to be an explicit nil
-func (o *DriverSummary) SetPhoneNumberNil() {
-	o.PhoneNumber.Set(nil)
-}
-
-// UnsetPhoneNumber ensures that no value is present for PhoneNumber, not even an explicit nil
-func (o *DriverSummary) UnsetPhoneNumber() {
-	o.PhoneNumber.Unset()
-}
-
-// GetLicenseCountry returns the LicenseCountry field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLicenseCountry returns the LicenseCountry field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetLicenseCountry() string {
-	if o == nil || IsNil(o.LicenseCountry.Get()) {
+	if o == nil || o.LicenseCountry.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LicenseCountry.Get()
 }
 
-// GetLicenseCountryOk returns a tuple with the LicenseCountry field value if set, nil otherwise
+// GetLicenseCountryOk returns a tuple with the LicenseCountry field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetLicenseCountryOk() (*string, bool) {
@@ -555,40 +474,23 @@ func (o *DriverSummary) GetLicenseCountryOk() (*string, bool) {
 	return o.LicenseCountry.Get(), o.LicenseCountry.IsSet()
 }
 
-// HasLicenseCountry returns a boolean if a field has been set.
-func (o *DriverSummary) HasLicenseCountry() bool {
-	if o != nil && o.LicenseCountry.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLicenseCountry gets a reference to the given NullableString and assigns it to the LicenseCountry field.
+// SetLicenseCountry sets field value
 func (o *DriverSummary) SetLicenseCountry(v string) {
 	o.LicenseCountry.Set(&v)
 }
 
-// SetLicenseCountryNil sets the value for LicenseCountry to be an explicit nil
-func (o *DriverSummary) SetLicenseCountryNil() {
-	o.LicenseCountry.Set(nil)
-}
-
-// UnsetLicenseCountry ensures that no value is present for LicenseCountry, not even an explicit nil
-func (o *DriverSummary) UnsetLicenseCountry() {
-	o.LicenseCountry.Unset()
-}
-
-// GetLicenseRegion returns the LicenseRegion field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLicenseRegion returns the LicenseRegion field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetLicenseRegion() string {
-	if o == nil || IsNil(o.LicenseRegion.Get()) {
+	if o == nil || o.LicenseRegion.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LicenseRegion.Get()
 }
 
-// GetLicenseRegionOk returns a tuple with the LicenseRegion field value if set, nil otherwise
+// GetLicenseRegionOk returns a tuple with the LicenseRegion field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetLicenseRegionOk() (*string, bool) {
@@ -598,40 +500,23 @@ func (o *DriverSummary) GetLicenseRegionOk() (*string, bool) {
 	return o.LicenseRegion.Get(), o.LicenseRegion.IsSet()
 }
 
-// HasLicenseRegion returns a boolean if a field has been set.
-func (o *DriverSummary) HasLicenseRegion() bool {
-	if o != nil && o.LicenseRegion.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLicenseRegion gets a reference to the given NullableString and assigns it to the LicenseRegion field.
+// SetLicenseRegion sets field value
 func (o *DriverSummary) SetLicenseRegion(v string) {
 	o.LicenseRegion.Set(&v)
 }
 
-// SetLicenseRegionNil sets the value for LicenseRegion to be an explicit nil
-func (o *DriverSummary) SetLicenseRegionNil() {
-	o.LicenseRegion.Set(nil)
-}
-
-// UnsetLicenseRegion ensures that no value is present for LicenseRegion, not even an explicit nil
-func (o *DriverSummary) UnsetLicenseRegion() {
-	o.LicenseRegion.Unset()
-}
-
-// GetLicenseNumber returns the LicenseNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLicenseNumber returns the LicenseNumber field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetLicenseNumber() string {
-	if o == nil || IsNil(o.LicenseNumber.Get()) {
+	if o == nil || o.LicenseNumber.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LicenseNumber.Get()
 }
 
-// GetLicenseNumberOk returns a tuple with the LicenseNumber field value if set, nil otherwise
+// GetLicenseNumberOk returns a tuple with the LicenseNumber field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetLicenseNumberOk() (*string, bool) {
@@ -641,40 +526,23 @@ func (o *DriverSummary) GetLicenseNumberOk() (*string, bool) {
 	return o.LicenseNumber.Get(), o.LicenseNumber.IsSet()
 }
 
-// HasLicenseNumber returns a boolean if a field has been set.
-func (o *DriverSummary) HasLicenseNumber() bool {
-	if o != nil && o.LicenseNumber.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLicenseNumber gets a reference to the given NullableString and assigns it to the LicenseNumber field.
+// SetLicenseNumber sets field value
 func (o *DriverSummary) SetLicenseNumber(v string) {
 	o.LicenseNumber.Set(&v)
 }
 
-// SetLicenseNumberNil sets the value for LicenseNumber to be an explicit nil
-func (o *DriverSummary) SetLicenseNumberNil() {
-	o.LicenseNumber.Set(nil)
-}
-
-// UnsetLicenseNumber ensures that no value is present for LicenseNumber, not even an explicit nil
-func (o *DriverSummary) UnsetLicenseNumber() {
-	o.LicenseNumber.Unset()
-}
-
-// GetLicenseExpiration returns the LicenseExpiration field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLicenseExpiration returns the LicenseExpiration field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetLicenseExpiration() string {
-	if o == nil || IsNil(o.LicenseExpiration.Get()) {
+	if o == nil || o.LicenseExpiration.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LicenseExpiration.Get()
 }
 
-// GetLicenseExpirationOk returns a tuple with the LicenseExpiration field value if set, nil otherwise
+// GetLicenseExpirationOk returns a tuple with the LicenseExpiration field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetLicenseExpirationOk() (*string, bool) {
@@ -684,40 +552,23 @@ func (o *DriverSummary) GetLicenseExpirationOk() (*string, bool) {
 	return o.LicenseExpiration.Get(), o.LicenseExpiration.IsSet()
 }
 
-// HasLicenseExpiration returns a boolean if a field has been set.
-func (o *DriverSummary) HasLicenseExpiration() bool {
-	if o != nil && o.LicenseExpiration.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLicenseExpiration gets a reference to the given NullableString and assigns it to the LicenseExpiration field.
+// SetLicenseExpiration sets field value
 func (o *DriverSummary) SetLicenseExpiration(v string) {
 	o.LicenseExpiration.Set(&v)
 }
 
-// SetLicenseExpirationNil sets the value for LicenseExpiration to be an explicit nil
-func (o *DriverSummary) SetLicenseExpirationNil() {
-	o.LicenseExpiration.Set(nil)
-}
-
-// UnsetLicenseExpiration ensures that no value is present for LicenseExpiration, not even an explicit nil
-func (o *DriverSummary) UnsetLicenseExpiration() {
-	o.LicenseExpiration.Unset()
-}
-
-// GetHosRulesetCode returns the HosRulesetCode field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetHosRulesetCode returns the HosRulesetCode field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DriverSummary) GetHosRulesetCode() string {
-	if o == nil || IsNil(o.HosRulesetCode.Get()) {
+	if o == nil || o.HosRulesetCode.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.HosRulesetCode.Get()
 }
 
-// GetHosRulesetCodeOk returns a tuple with the HosRulesetCode field value if set, nil otherwise
+// GetHosRulesetCodeOk returns a tuple with the HosRulesetCode field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DriverSummary) GetHosRulesetCodeOk() (*string, bool) {
@@ -727,28 +578,9 @@ func (o *DriverSummary) GetHosRulesetCodeOk() (*string, bool) {
 	return o.HosRulesetCode.Get(), o.HosRulesetCode.IsSet()
 }
 
-// HasHosRulesetCode returns a boolean if a field has been set.
-func (o *DriverSummary) HasHosRulesetCode() bool {
-	if o != nil && o.HosRulesetCode.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetHosRulesetCode gets a reference to the given NullableString and assigns it to the HosRulesetCode field.
+// SetHosRulesetCode sets field value
 func (o *DriverSummary) SetHosRulesetCode(v string) {
 	o.HosRulesetCode.Set(&v)
-}
-
-// SetHosRulesetCodeNil sets the value for HosRulesetCode to be an explicit nil
-func (o *DriverSummary) SetHosRulesetCodeNil() {
-	o.HosRulesetCode.Set(nil)
-}
-
-// UnsetHosRulesetCode ensures that no value is present for HosRulesetCode, not even an explicit nil
-func (o *DriverSummary) UnsetHosRulesetCode() {
-	o.HosRulesetCode.Unset()
 }
 
 // GetSafetyEvents30d returns the SafetyEvents30d field value if set, zero value otherwise.
@@ -826,56 +658,35 @@ func (o DriverSummary) MarshalJSON() ([]byte, error) {
 func (o DriverSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["fleet_id"] = o.FleetId
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
+	toSerialize["fleet_ref"] = o.FleetRef.Get()
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["user_id"] = o.UserId
-	if o.SourceName.IsSet() {
-		toSerialize["source_name"] = o.SourceName.Get()
-	}
-	if o.SourceId.IsSet() {
-		toSerialize["source_id"] = o.SourceId.Get()
-	}
-	if o.EmployeeNumber.IsSet() {
-		toSerialize["employee_number"] = o.EmployeeNumber.Get()
-	}
-	if o.FirstName.IsSet() {
-		toSerialize["first_name"] = o.FirstName.Get()
-	}
-	if o.LastName.IsSet() {
-		toSerialize["last_name"] = o.LastName.Get()
-	}
-	if o.Username.IsSet() {
-		toSerialize["username"] = o.Username.Get()
-	}
-	if o.Status.IsSet() {
-		toSerialize["status"] = o.Status.Get()
-	}
-	if o.PhoneNumber.IsSet() {
-		toSerialize["phone_number"] = o.PhoneNumber.Get()
-	}
-	if o.LicenseCountry.IsSet() {
-		toSerialize["license_country"] = o.LicenseCountry.Get()
-	}
-	if o.LicenseRegion.IsSet() {
-		toSerialize["license_region"] = o.LicenseRegion.Get()
-	}
-	if o.LicenseNumber.IsSet() {
-		toSerialize["license_number"] = o.LicenseNumber.Get()
-	}
-	if o.LicenseExpiration.IsSet() {
-		toSerialize["license_expiration"] = o.LicenseExpiration.Get()
-	}
-	if o.HosRulesetCode.IsSet() {
-		toSerialize["hos_ruleset_code"] = o.HosRulesetCode.Get()
-	}
+	toSerialize["tsp_id"] = o.TspId.Get()
+	toSerialize["tsp_slug"] = o.TspSlug.Get()
+	toSerialize["source_name"] = o.SourceName.Get()
+	toSerialize["source_id"] = o.SourceId.Get()
+	toSerialize["employee_number"] = o.EmployeeNumber.Get()
+	toSerialize["first_name"] = o.FirstName.Get()
+	toSerialize["last_name"] = o.LastName.Get()
+	toSerialize["username"] = o.Username.Get()
+	toSerialize["status"] = o.Status.Get()
+	toSerialize["phone_number"] = o.PhoneNumber.Get()
+	toSerialize["license_country"] = o.LicenseCountry.Get()
+	toSerialize["license_region"] = o.LicenseRegion.Get()
+	toSerialize["license_number"] = o.LicenseNumber.Get()
+	toSerialize["license_expiration"] = o.LicenseExpiration.Get()
+	toSerialize["hos_ruleset_code"] = o.HosRulesetCode.Get()
 	if !IsNil(o.SafetyEvents30d) {
 		toSerialize["safety_events_30d"] = o.SafetyEvents30d
 	}
 	if !IsNil(o.HosViolations30d) {
 		toSerialize["hos_violations_30d"] = o.HosViolations30d
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -885,8 +696,24 @@ func (o *DriverSummary) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"fleet_id",
+		"fleet_ref",
 		"connection_id",
 		"user_id",
+		"tsp_id",
+		"tsp_slug",
+		"source_name",
+		"source_id",
+		"employee_number",
+		"first_name",
+		"last_name",
+		"username",
+		"status",
+		"phone_number",
+		"license_country",
+		"license_region",
+		"license_number",
+		"license_expiration",
+		"hos_ruleset_code",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -905,15 +732,40 @@ func (o *DriverSummary) UnmarshalJSON(data []byte) (err error) {
 
 	varDriverSummary := _DriverSummary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDriverSummary)
+	err = json.Unmarshal(data, &varDriverSummary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DriverSummary(varDriverSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "employee_number")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "license_country")
+		delete(additionalProperties, "license_region")
+		delete(additionalProperties, "license_number")
+		delete(additionalProperties, "license_expiration")
+		delete(additionalProperties, "hos_ruleset_code")
+		delete(additionalProperties, "safety_events_30d")
+		delete(additionalProperties, "hos_violations_30d")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

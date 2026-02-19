@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **Id** | **string** | Internal unique identifier for the telematics event record (Catena PK). | 
 **FleetId** | **string** | The Catena fleet this record belongs to (multi-tenant scope). | 
 **FleetRef** | **NullableString** |  | 
-**SourceName** | [**TspEnum**](TspEnum.md) | The name of the source | 
+**TspId** | Pointer to **NullableString** |  | [optional] 
+**TspSlug** | Pointer to **NullableString** |  | [optional] 
+**SourceName** | [**TspEnum**](TspEnum.md) | The underlying telematics platform that provided this data (e.g., &#x60;samsara&#x60;, &#x60;motive&#x60;, &#x60;hos247&#x60;). Note: Some platforms like &#x60;hos247&#x60; offer white-labeling, so multiple TSPs may share the same source_name — use &#x60;tsp_id&#x60; or &#x60;tsp_slug&#x60; to identify the specific ELD provider. | 
 **ConnectionId** | **string** | The specific fleet↔TSP connection through which this record was sourced. | 
 **SourceId** | **string** | The ID of the record in the TSP or a deterministic ID/Hash generated from a composite unique key | 
 **CreatedAt** | **time.Time** | Immutable: first time this record was ingested into our system. | 
@@ -16,6 +18,7 @@ Name | Type | Description | Notes
 **OccurredAt** | **time.Time** | When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available. | 
 **ExecutionId** | Pointer to **NullableString** |  | [optional] 
 **ScheduleId** | Pointer to **NullableString** |  | [optional] 
+**Extras** | Pointer to **map[string]interface{}** |  | [optional] 
 **VehicleName** | Pointer to **NullableString** |  | [optional] 
 **Oem** | Pointer to **NullableString** |  | [optional] 
 **ModelType** | Pointer to **NullableString** |  | [optional] 
@@ -23,6 +26,7 @@ Name | Type | Description | Notes
 **Vin** | Pointer to **NullableString** |  | [optional] 
 **LicensePlateRegion** | Pointer to **NullableString** |  | [optional] 
 **LicensePlateCountry** | Pointer to **NullableString** |  | [optional] 
+**LicensePlateNumber** | Pointer to **NullableString** |  | [optional] 
 **StartedAt** | Pointer to **NullableTime** |  | [optional] 
 **EndedAt** | Pointer to **NullableTime** |  | [optional] 
 **IsActive** | Pointer to **NullableBool** |  | [optional] 
@@ -127,6 +131,76 @@ SetFleetRef sets FleetRef field to given value.
 `func (o *BaseTrailer) UnsetFleetRef()`
 
 UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
+### GetTspId
+
+`func (o *BaseTrailer) GetTspId() string`
+
+GetTspId returns the TspId field if non-nil, zero value otherwise.
+
+### GetTspIdOk
+
+`func (o *BaseTrailer) GetTspIdOk() (*string, bool)`
+
+GetTspIdOk returns a tuple with the TspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspId
+
+`func (o *BaseTrailer) SetTspId(v string)`
+
+SetTspId sets TspId field to given value.
+
+### HasTspId
+
+`func (o *BaseTrailer) HasTspId() bool`
+
+HasTspId returns a boolean if a field has been set.
+
+### SetTspIdNil
+
+`func (o *BaseTrailer) SetTspIdNil(b bool)`
+
+ SetTspIdNil sets the value for TspId to be an explicit nil
+
+### UnsetTspId
+`func (o *BaseTrailer) UnsetTspId()`
+
+UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+### GetTspSlug
+
+`func (o *BaseTrailer) GetTspSlug() string`
+
+GetTspSlug returns the TspSlug field if non-nil, zero value otherwise.
+
+### GetTspSlugOk
+
+`func (o *BaseTrailer) GetTspSlugOk() (*string, bool)`
+
+GetTspSlugOk returns a tuple with the TspSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspSlug
+
+`func (o *BaseTrailer) SetTspSlug(v string)`
+
+SetTspSlug sets TspSlug field to given value.
+
+### HasTspSlug
+
+`func (o *BaseTrailer) HasTspSlug() bool`
+
+HasTspSlug returns a boolean if a field has been set.
+
+### SetTspSlugNil
+
+`func (o *BaseTrailer) SetTspSlugNil(b bool)`
+
+ SetTspSlugNil sets the value for TspSlug to be an explicit nil
+
+### UnsetTspSlug
+`func (o *BaseTrailer) UnsetTspSlug()`
+
+UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
 ### GetSourceName
 
 `func (o *BaseTrailer) GetSourceName() TspEnum`
@@ -352,6 +426,41 @@ HasScheduleId returns a boolean if a field has been set.
 `func (o *BaseTrailer) UnsetScheduleId()`
 
 UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
+### GetExtras
+
+`func (o *BaseTrailer) GetExtras() map[string]interface{}`
+
+GetExtras returns the Extras field if non-nil, zero value otherwise.
+
+### GetExtrasOk
+
+`func (o *BaseTrailer) GetExtrasOk() (*map[string]interface{}, bool)`
+
+GetExtrasOk returns a tuple with the Extras field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtras
+
+`func (o *BaseTrailer) SetExtras(v map[string]interface{})`
+
+SetExtras sets Extras field to given value.
+
+### HasExtras
+
+`func (o *BaseTrailer) HasExtras() bool`
+
+HasExtras returns a boolean if a field has been set.
+
+### SetExtrasNil
+
+`func (o *BaseTrailer) SetExtrasNil(b bool)`
+
+ SetExtrasNil sets the value for Extras to be an explicit nil
+
+### UnsetExtras
+`func (o *BaseTrailer) UnsetExtras()`
+
+UnsetExtras ensures that no value is present for Extras, not even an explicit nil
 ### GetVehicleName
 
 `func (o *BaseTrailer) GetVehicleName() string`
@@ -597,6 +706,41 @@ HasLicensePlateCountry returns a boolean if a field has been set.
 `func (o *BaseTrailer) UnsetLicensePlateCountry()`
 
 UnsetLicensePlateCountry ensures that no value is present for LicensePlateCountry, not even an explicit nil
+### GetLicensePlateNumber
+
+`func (o *BaseTrailer) GetLicensePlateNumber() string`
+
+GetLicensePlateNumber returns the LicensePlateNumber field if non-nil, zero value otherwise.
+
+### GetLicensePlateNumberOk
+
+`func (o *BaseTrailer) GetLicensePlateNumberOk() (*string, bool)`
+
+GetLicensePlateNumberOk returns a tuple with the LicensePlateNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicensePlateNumber
+
+`func (o *BaseTrailer) SetLicensePlateNumber(v string)`
+
+SetLicensePlateNumber sets LicensePlateNumber field to given value.
+
+### HasLicensePlateNumber
+
+`func (o *BaseTrailer) HasLicensePlateNumber() bool`
+
+HasLicensePlateNumber returns a boolean if a field has been set.
+
+### SetLicensePlateNumberNil
+
+`func (o *BaseTrailer) SetLicensePlateNumberNil(b bool)`
+
+ SetLicensePlateNumberNil sets the value for LicensePlateNumber to be an explicit nil
+
+### UnsetLicensePlateNumber
+`func (o *BaseTrailer) UnsetLicensePlateNumber()`
+
+UnsetLicensePlateNumber ensures that no value is present for LicensePlateNumber, not even an explicit nil
 ### GetStartedAt
 
 `func (o *BaseTrailer) GetStartedAt() time.Time`

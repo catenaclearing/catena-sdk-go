@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,7 +31,8 @@ type TrailerRemoved struct {
 	Timestamp NullableTime   `json:"timestamp,omitempty"`
 	Id        NullableString `json:"id,omitempty"`
 	// The number of times the event has been attempted to be delivered
-	DeliveryAttempt *int32 `json:"delivery_attempt,omitempty"`
+	DeliveryAttempt      *int32 `json:"delivery_attempt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TrailerRemoved TrailerRemoved
@@ -312,6 +312,11 @@ func (o TrailerRemoved) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeliveryAttempt) {
 		toSerialize["delivery_attempt"] = o.DeliveryAttempt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -341,15 +346,26 @@ func (o *TrailerRemoved) UnmarshalJSON(data []byte) (err error) {
 
 	varTrailerRemoved := _TrailerRemoved{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTrailerRemoved)
+	err = json.Unmarshal(data, &varTrailerRemoved)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TrailerRemoved(varTrailerRemoved)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "event_name")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "webhook_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "delivery_attempt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

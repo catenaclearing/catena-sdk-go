@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -40,7 +39,8 @@ type FleetCreate struct {
 	PostalCode         NullableString `json:"postal_code,omitempty"`
 	CountryCode        NullableString `json:"country_code,omitempty" validate:"regexp=^\\\\w{3}$"`
 	// Optional custom properties for the fleet
-	Properties []FleetPropertyCreate `json:"properties,omitempty"`
+	Properties           []FleetPropertyCreate `json:"properties,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FleetCreate FleetCreate
@@ -905,6 +905,11 @@ func (o FleetCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Properties) {
 		toSerialize["properties"] = o.Properties
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -932,15 +937,38 @@ func (o *FleetCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varFleetCreate := _FleetCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFleetCreate)
+	err = json.Unmarshal(data, &varFleetCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FleetCreate(varFleetCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "display_name")
+		delete(additionalProperties, "legal_name")
+		delete(additionalProperties, "dba_name")
+		delete(additionalProperties, "websites")
+		delete(additionalProperties, "regulatory_id")
+		delete(additionalProperties, "regulatory_id_type")
+		delete(additionalProperties, "regulatory_id_date")
+		delete(additionalProperties, "regulatory_id_status")
+		delete(additionalProperties, "registered_email")
+		delete(additionalProperties, "registered_phone")
+		delete(additionalProperties, "registered_fax")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "province")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "properties")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

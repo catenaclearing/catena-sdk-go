@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
+**FleetRef** | **NullableString** |  | 
 **FleetIds** | Pointer to **[]string** | List of Catena fleet IDs associated with this reference (multiple if the same fleet reconnected). | [optional] 
 **Connections** | Pointer to **int32** | Number of active data connections for this fleet. | [optional] [default to 0]
 **Drivers** | Pointer to **int32** | Total number of drivers associated with this fleet. | [optional] [default to 0]
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewFleetSummary
 
-`func NewFleetSummary() *FleetSummary`
+`func NewFleetSummary(fleetRef NullableString, ) *FleetSummary`
 
 NewFleetSummary instantiates a new FleetSummary object
 This constructor will assign default values to properties that have it defined,
@@ -49,11 +49,6 @@ and a boolean to check if the value has been set.
 
 SetFleetRef sets FleetRef field to given value.
 
-### HasFleetRef
-
-`func (o *FleetSummary) HasFleetRef() bool`
-
-HasFleetRef returns a boolean if a field has been set.
 
 ### SetFleetRefNil
 

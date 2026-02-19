@@ -26,7 +26,10 @@ type InvitationAccept struct {
 	FleetPhone            NullableString `json:"fleet_phone,omitempty"`
 	FleetWebsite          NullableString `json:"fleet_website,omitempty"`
 	FleetCountryCode      NullableString `json:"fleet_country_code,omitempty" validate:"regexp=^\\\\w{3}$"`
+	AdditionalProperties  map[string]interface{}
 }
+
+type _InvitationAccept InvitationAccept
 
 // NewInvitationAccept instantiates a new InvitationAccept object
 // This constructor will assign default values to properties that have it defined,
@@ -377,7 +380,39 @@ func (o InvitationAccept) ToMap() (map[string]interface{}, error) {
 	if o.FleetCountryCode.IsSet() {
 		toSerialize["fleet_country_code"] = o.FleetCountryCode.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvitationAccept) UnmarshalJSON(data []byte) (err error) {
+	varInvitationAccept := _InvitationAccept{}
+
+	err = json.Unmarshal(data, &varInvitationAccept)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvitationAccept(varInvitationAccept)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_name")
+		delete(additionalProperties, "fleet_email")
+		delete(additionalProperties, "fleet_regulatory_id")
+		delete(additionalProperties, "fleet_regulatory_id_type")
+		delete(additionalProperties, "fleet_phone")
+		delete(additionalProperties, "fleet_website")
+		delete(additionalProperties, "fleet_country_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvitationAccept struct {

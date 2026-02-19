@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,6 +25,7 @@ type CursorPageTypeVarCustomizedScheduleRead struct {
 	CurrentPageBackwards NullableString `json:"current_page_backwards,omitempty"`
 	PreviousPage         NullableString `json:"previous_page,omitempty"`
 	NextPage             NullableString `json:"next_page,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CursorPageTypeVarCustomizedScheduleRead CursorPageTypeVarCustomizedScheduleRead
@@ -267,6 +267,11 @@ func (o CursorPageTypeVarCustomizedScheduleRead) ToMap() (map[string]interface{}
 	if o.NextPage.IsSet() {
 		toSerialize["next_page"] = o.NextPage.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -294,15 +299,24 @@ func (o *CursorPageTypeVarCustomizedScheduleRead) UnmarshalJSON(data []byte) (er
 
 	varCursorPageTypeVarCustomizedScheduleRead := _CursorPageTypeVarCustomizedScheduleRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCursorPageTypeVarCustomizedScheduleRead)
+	err = json.Unmarshal(data, &varCursorPageTypeVarCustomizedScheduleRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CursorPageTypeVarCustomizedScheduleRead(varCursorPageTypeVarCustomizedScheduleRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "current_page")
+		delete(additionalProperties, "current_page_backwards")
+		delete(additionalProperties, "previous_page")
+		delete(additionalProperties, "next_page")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

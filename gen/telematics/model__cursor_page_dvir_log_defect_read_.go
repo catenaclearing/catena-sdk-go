@@ -11,49 +11,49 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
 
-// checks if the CursorPageDvirLogRead type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CursorPageDvirLogRead{}
+// checks if the CursorPageDvirLogDefectRead type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CursorPageDvirLogDefectRead{}
 
-// CursorPageDvirLogRead struct for CursorPageDvirLogRead
-type CursorPageDvirLogRead struct {
-	Items                []DvirLogRead  `json:"items"`
-	Total                int32          `json:"total"`
-	CurrentPage          NullableString `json:"current_page,omitempty"`
-	CurrentPageBackwards NullableString `json:"current_page_backwards,omitempty"`
-	PreviousPage         NullableString `json:"previous_page,omitempty"`
-	NextPage             NullableString `json:"next_page,omitempty"`
+// CursorPageDvirLogDefectRead struct for CursorPageDvirLogDefectRead
+type CursorPageDvirLogDefectRead struct {
+	Items                []DvirLogDefectRead `json:"items"`
+	Total                int32               `json:"total"`
+	CurrentPage          NullableString      `json:"current_page,omitempty"`
+	CurrentPageBackwards NullableString      `json:"current_page_backwards,omitempty"`
+	PreviousPage         NullableString      `json:"previous_page,omitempty"`
+	NextPage             NullableString      `json:"next_page,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-type _CursorPageDvirLogRead CursorPageDvirLogRead
+type _CursorPageDvirLogDefectRead CursorPageDvirLogDefectRead
 
-// NewCursorPageDvirLogRead instantiates a new CursorPageDvirLogRead object
+// NewCursorPageDvirLogDefectRead instantiates a new CursorPageDvirLogDefectRead object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCursorPageDvirLogRead(items []DvirLogRead, total int32) *CursorPageDvirLogRead {
-	this := CursorPageDvirLogRead{}
+func NewCursorPageDvirLogDefectRead(items []DvirLogDefectRead, total int32) *CursorPageDvirLogDefectRead {
+	this := CursorPageDvirLogDefectRead{}
 	this.Items = items
 	this.Total = total
 	return &this
 }
 
-// NewCursorPageDvirLogReadWithDefaults instantiates a new CursorPageDvirLogRead object
+// NewCursorPageDvirLogDefectReadWithDefaults instantiates a new CursorPageDvirLogDefectRead object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCursorPageDvirLogReadWithDefaults() *CursorPageDvirLogRead {
-	this := CursorPageDvirLogRead{}
+func NewCursorPageDvirLogDefectReadWithDefaults() *CursorPageDvirLogDefectRead {
+	this := CursorPageDvirLogDefectRead{}
 	return &this
 }
 
 // GetItems returns the Items field value
-func (o *CursorPageDvirLogRead) GetItems() []DvirLogRead {
+func (o *CursorPageDvirLogDefectRead) GetItems() []DvirLogDefectRead {
 	if o == nil {
-		var ret []DvirLogRead
+		var ret []DvirLogDefectRead
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *CursorPageDvirLogRead) GetItems() []DvirLogRead {
 
 // GetItemsOk returns a tuple with the Items field value
 // and a boolean to check if the value has been set.
-func (o *CursorPageDvirLogRead) GetItemsOk() ([]DvirLogRead, bool) {
+func (o *CursorPageDvirLogDefectRead) GetItemsOk() ([]DvirLogDefectRead, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,12 +70,12 @@ func (o *CursorPageDvirLogRead) GetItemsOk() ([]DvirLogRead, bool) {
 }
 
 // SetItems sets field value
-func (o *CursorPageDvirLogRead) SetItems(v []DvirLogRead) {
+func (o *CursorPageDvirLogDefectRead) SetItems(v []DvirLogDefectRead) {
 	o.Items = v
 }
 
 // GetTotal returns the Total field value
-func (o *CursorPageDvirLogRead) GetTotal() int32 {
+func (o *CursorPageDvirLogDefectRead) GetTotal() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -86,7 +86,7 @@ func (o *CursorPageDvirLogRead) GetTotal() int32 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *CursorPageDvirLogRead) GetTotalOk() (*int32, bool) {
+func (o *CursorPageDvirLogDefectRead) GetTotalOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,12 +94,12 @@ func (o *CursorPageDvirLogRead) GetTotalOk() (*int32, bool) {
 }
 
 // SetTotal sets field value
-func (o *CursorPageDvirLogRead) SetTotal(v int32) {
+func (o *CursorPageDvirLogDefectRead) SetTotal(v int32) {
 	o.Total = v
 }
 
 // GetCurrentPage returns the CurrentPage field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CursorPageDvirLogRead) GetCurrentPage() string {
+func (o *CursorPageDvirLogDefectRead) GetCurrentPage() string {
 	if o == nil || IsNil(o.CurrentPage.Get()) {
 		var ret string
 		return ret
@@ -110,7 +110,7 @@ func (o *CursorPageDvirLogRead) GetCurrentPage() string {
 // GetCurrentPageOk returns a tuple with the CurrentPage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CursorPageDvirLogRead) GetCurrentPageOk() (*string, bool) {
+func (o *CursorPageDvirLogDefectRead) GetCurrentPageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,7 +118,7 @@ func (o *CursorPageDvirLogRead) GetCurrentPageOk() (*string, bool) {
 }
 
 // HasCurrentPage returns a boolean if a field has been set.
-func (o *CursorPageDvirLogRead) HasCurrentPage() bool {
+func (o *CursorPageDvirLogDefectRead) HasCurrentPage() bool {
 	if o != nil && o.CurrentPage.IsSet() {
 		return true
 	}
@@ -127,22 +127,22 @@ func (o *CursorPageDvirLogRead) HasCurrentPage() bool {
 }
 
 // SetCurrentPage gets a reference to the given NullableString and assigns it to the CurrentPage field.
-func (o *CursorPageDvirLogRead) SetCurrentPage(v string) {
+func (o *CursorPageDvirLogDefectRead) SetCurrentPage(v string) {
 	o.CurrentPage.Set(&v)
 }
 
 // SetCurrentPageNil sets the value for CurrentPage to be an explicit nil
-func (o *CursorPageDvirLogRead) SetCurrentPageNil() {
+func (o *CursorPageDvirLogDefectRead) SetCurrentPageNil() {
 	o.CurrentPage.Set(nil)
 }
 
 // UnsetCurrentPage ensures that no value is present for CurrentPage, not even an explicit nil
-func (o *CursorPageDvirLogRead) UnsetCurrentPage() {
+func (o *CursorPageDvirLogDefectRead) UnsetCurrentPage() {
 	o.CurrentPage.Unset()
 }
 
 // GetCurrentPageBackwards returns the CurrentPageBackwards field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CursorPageDvirLogRead) GetCurrentPageBackwards() string {
+func (o *CursorPageDvirLogDefectRead) GetCurrentPageBackwards() string {
 	if o == nil || IsNil(o.CurrentPageBackwards.Get()) {
 		var ret string
 		return ret
@@ -153,7 +153,7 @@ func (o *CursorPageDvirLogRead) GetCurrentPageBackwards() string {
 // GetCurrentPageBackwardsOk returns a tuple with the CurrentPageBackwards field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CursorPageDvirLogRead) GetCurrentPageBackwardsOk() (*string, bool) {
+func (o *CursorPageDvirLogDefectRead) GetCurrentPageBackwardsOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -161,7 +161,7 @@ func (o *CursorPageDvirLogRead) GetCurrentPageBackwardsOk() (*string, bool) {
 }
 
 // HasCurrentPageBackwards returns a boolean if a field has been set.
-func (o *CursorPageDvirLogRead) HasCurrentPageBackwards() bool {
+func (o *CursorPageDvirLogDefectRead) HasCurrentPageBackwards() bool {
 	if o != nil && o.CurrentPageBackwards.IsSet() {
 		return true
 	}
@@ -170,22 +170,22 @@ func (o *CursorPageDvirLogRead) HasCurrentPageBackwards() bool {
 }
 
 // SetCurrentPageBackwards gets a reference to the given NullableString and assigns it to the CurrentPageBackwards field.
-func (o *CursorPageDvirLogRead) SetCurrentPageBackwards(v string) {
+func (o *CursorPageDvirLogDefectRead) SetCurrentPageBackwards(v string) {
 	o.CurrentPageBackwards.Set(&v)
 }
 
 // SetCurrentPageBackwardsNil sets the value for CurrentPageBackwards to be an explicit nil
-func (o *CursorPageDvirLogRead) SetCurrentPageBackwardsNil() {
+func (o *CursorPageDvirLogDefectRead) SetCurrentPageBackwardsNil() {
 	o.CurrentPageBackwards.Set(nil)
 }
 
 // UnsetCurrentPageBackwards ensures that no value is present for CurrentPageBackwards, not even an explicit nil
-func (o *CursorPageDvirLogRead) UnsetCurrentPageBackwards() {
+func (o *CursorPageDvirLogDefectRead) UnsetCurrentPageBackwards() {
 	o.CurrentPageBackwards.Unset()
 }
 
 // GetPreviousPage returns the PreviousPage field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CursorPageDvirLogRead) GetPreviousPage() string {
+func (o *CursorPageDvirLogDefectRead) GetPreviousPage() string {
 	if o == nil || IsNil(o.PreviousPage.Get()) {
 		var ret string
 		return ret
@@ -196,7 +196,7 @@ func (o *CursorPageDvirLogRead) GetPreviousPage() string {
 // GetPreviousPageOk returns a tuple with the PreviousPage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CursorPageDvirLogRead) GetPreviousPageOk() (*string, bool) {
+func (o *CursorPageDvirLogDefectRead) GetPreviousPageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -204,7 +204,7 @@ func (o *CursorPageDvirLogRead) GetPreviousPageOk() (*string, bool) {
 }
 
 // HasPreviousPage returns a boolean if a field has been set.
-func (o *CursorPageDvirLogRead) HasPreviousPage() bool {
+func (o *CursorPageDvirLogDefectRead) HasPreviousPage() bool {
 	if o != nil && o.PreviousPage.IsSet() {
 		return true
 	}
@@ -213,22 +213,22 @@ func (o *CursorPageDvirLogRead) HasPreviousPage() bool {
 }
 
 // SetPreviousPage gets a reference to the given NullableString and assigns it to the PreviousPage field.
-func (o *CursorPageDvirLogRead) SetPreviousPage(v string) {
+func (o *CursorPageDvirLogDefectRead) SetPreviousPage(v string) {
 	o.PreviousPage.Set(&v)
 }
 
 // SetPreviousPageNil sets the value for PreviousPage to be an explicit nil
-func (o *CursorPageDvirLogRead) SetPreviousPageNil() {
+func (o *CursorPageDvirLogDefectRead) SetPreviousPageNil() {
 	o.PreviousPage.Set(nil)
 }
 
 // UnsetPreviousPage ensures that no value is present for PreviousPage, not even an explicit nil
-func (o *CursorPageDvirLogRead) UnsetPreviousPage() {
+func (o *CursorPageDvirLogDefectRead) UnsetPreviousPage() {
 	o.PreviousPage.Unset()
 }
 
 // GetNextPage returns the NextPage field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CursorPageDvirLogRead) GetNextPage() string {
+func (o *CursorPageDvirLogDefectRead) GetNextPage() string {
 	if o == nil || IsNil(o.NextPage.Get()) {
 		var ret string
 		return ret
@@ -239,7 +239,7 @@ func (o *CursorPageDvirLogRead) GetNextPage() string {
 // GetNextPageOk returns a tuple with the NextPage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CursorPageDvirLogRead) GetNextPageOk() (*string, bool) {
+func (o *CursorPageDvirLogDefectRead) GetNextPageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -247,7 +247,7 @@ func (o *CursorPageDvirLogRead) GetNextPageOk() (*string, bool) {
 }
 
 // HasNextPage returns a boolean if a field has been set.
-func (o *CursorPageDvirLogRead) HasNextPage() bool {
+func (o *CursorPageDvirLogDefectRead) HasNextPage() bool {
 	if o != nil && o.NextPage.IsSet() {
 		return true
 	}
@@ -256,21 +256,21 @@ func (o *CursorPageDvirLogRead) HasNextPage() bool {
 }
 
 // SetNextPage gets a reference to the given NullableString and assigns it to the NextPage field.
-func (o *CursorPageDvirLogRead) SetNextPage(v string) {
+func (o *CursorPageDvirLogDefectRead) SetNextPage(v string) {
 	o.NextPage.Set(&v)
 }
 
 // SetNextPageNil sets the value for NextPage to be an explicit nil
-func (o *CursorPageDvirLogRead) SetNextPageNil() {
+func (o *CursorPageDvirLogDefectRead) SetNextPageNil() {
 	o.NextPage.Set(nil)
 }
 
 // UnsetNextPage ensures that no value is present for NextPage, not even an explicit nil
-func (o *CursorPageDvirLogRead) UnsetNextPage() {
+func (o *CursorPageDvirLogDefectRead) UnsetNextPage() {
 	o.NextPage.Unset()
 }
 
-func (o CursorPageDvirLogRead) MarshalJSON() ([]byte, error) {
+func (o CursorPageDvirLogDefectRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -278,7 +278,7 @@ func (o CursorPageDvirLogRead) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CursorPageDvirLogRead) ToMap() (map[string]interface{}, error) {
+func (o CursorPageDvirLogDefectRead) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["items"] = o.Items
 	toSerialize["total"] = o.Total
@@ -294,10 +294,15 @@ func (o CursorPageDvirLogRead) ToMap() (map[string]interface{}, error) {
 	if o.NextPage.IsSet() {
 		toSerialize["next_page"] = o.NextPage.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
-func (o *CursorPageDvirLogRead) UnmarshalJSON(data []byte) (err error) {
+func (o *CursorPageDvirLogDefectRead) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -320,53 +325,63 @@ func (o *CursorPageDvirLogRead) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCursorPageDvirLogRead := _CursorPageDvirLogRead{}
+	varCursorPageDvirLogDefectRead := _CursorPageDvirLogDefectRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCursorPageDvirLogRead)
+	err = json.Unmarshal(data, &varCursorPageDvirLogDefectRead)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CursorPageDvirLogRead(varCursorPageDvirLogRead)
+	*o = CursorPageDvirLogDefectRead(varCursorPageDvirLogDefectRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "current_page")
+		delete(additionalProperties, "current_page_backwards")
+		delete(additionalProperties, "previous_page")
+		delete(additionalProperties, "next_page")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
 
-type NullableCursorPageDvirLogRead struct {
-	value *CursorPageDvirLogRead
+type NullableCursorPageDvirLogDefectRead struct {
+	value *CursorPageDvirLogDefectRead
 	isSet bool
 }
 
-func (v NullableCursorPageDvirLogRead) Get() *CursorPageDvirLogRead {
+func (v NullableCursorPageDvirLogDefectRead) Get() *CursorPageDvirLogDefectRead {
 	return v.value
 }
 
-func (v *NullableCursorPageDvirLogRead) Set(val *CursorPageDvirLogRead) {
+func (v *NullableCursorPageDvirLogDefectRead) Set(val *CursorPageDvirLogDefectRead) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCursorPageDvirLogRead) IsSet() bool {
+func (v NullableCursorPageDvirLogDefectRead) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCursorPageDvirLogRead) Unset() {
+func (v *NullableCursorPageDvirLogDefectRead) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCursorPageDvirLogRead(val *CursorPageDvirLogRead) *NullableCursorPageDvirLogRead {
-	return &NullableCursorPageDvirLogRead{value: val, isSet: true}
+func NewNullableCursorPageDvirLogDefectRead(val *CursorPageDvirLogDefectRead) *NullableCursorPageDvirLogDefectRead {
+	return &NullableCursorPageDvirLogDefectRead{value: val, isSet: true}
 }
 
-func (v NullableCursorPageDvirLogRead) MarshalJSON() ([]byte, error) {
+func (v NullableCursorPageDvirLogDefectRead) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCursorPageDvirLogRead) UnmarshalJSON(src []byte) error {
+func (v *NullableCursorPageDvirLogDefectRead) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

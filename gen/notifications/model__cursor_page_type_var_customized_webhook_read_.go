@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,6 +25,7 @@ type CursorPageTypeVarCustomizedWebhookRead struct {
 	CurrentPageBackwards NullableString `json:"current_page_backwards,omitempty"`
 	PreviousPage         NullableString `json:"previous_page,omitempty"`
 	NextPage             NullableString `json:"next_page,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CursorPageTypeVarCustomizedWebhookRead CursorPageTypeVarCustomizedWebhookRead
@@ -267,6 +267,11 @@ func (o CursorPageTypeVarCustomizedWebhookRead) ToMap() (map[string]interface{},
 	if o.NextPage.IsSet() {
 		toSerialize["next_page"] = o.NextPage.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -294,15 +299,24 @@ func (o *CursorPageTypeVarCustomizedWebhookRead) UnmarshalJSON(data []byte) (err
 
 	varCursorPageTypeVarCustomizedWebhookRead := _CursorPageTypeVarCustomizedWebhookRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCursorPageTypeVarCustomizedWebhookRead)
+	err = json.Unmarshal(data, &varCursorPageTypeVarCustomizedWebhookRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CursorPageTypeVarCustomizedWebhookRead(varCursorPageTypeVarCustomizedWebhookRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "current_page")
+		delete(additionalProperties, "current_page_backwards")
+		delete(additionalProperties, "previous_page")
+		delete(additionalProperties, "next_page")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
