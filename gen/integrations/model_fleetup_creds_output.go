@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &FleetupCredsOutput{}
 
 // FleetupCredsOutput Fleetup Connection model
 type FleetupCredsOutput struct {
-	AccountId string      `json:"account_id"`
-	SecretKey interface{} `json:"secret_key"`
-	ApiKey    interface{} `json:"api_key"`
+	AccountId            string      `json:"account_id"`
+	SecretKey            interface{} `json:"secret_key"`
+	ApiKey               interface{} `json:"api_key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FleetupCredsOutput FleetupCredsOutput
@@ -141,6 +141,11 @@ func (o FleetupCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.ApiKey != nil {
 		toSerialize["api_key"] = o.ApiKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,15 +175,22 @@ func (o *FleetupCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varFleetupCredsOutput := _FleetupCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFleetupCredsOutput)
+	err = json.Unmarshal(data, &varFleetupCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FleetupCredsOutput(varFleetupCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "account_id")
+		delete(additionalProperties, "secret_key")
+		delete(additionalProperties, "api_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

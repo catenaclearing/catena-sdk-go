@@ -5,34 +5,36 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FleetId** | **string** | Catena fleet identifier. | 
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
+**FleetRef** | **NullableString** |  | 
 **ConnectionId** | **string** | Catena connection identifier through which this vehicle was ingested. | 
 **VehicleId** | **string** | Unique Catena identifier for the vehicle. | 
-**SourceName** | Pointer to **NullableString** |  | [optional] 
-**SourceId** | Pointer to **NullableString** |  | [optional] 
-**Status** | Pointer to **NullableString** |  | [optional] 
-**VehicleName** | Pointer to **NullableString** |  | [optional] 
-**Oem** | Pointer to **NullableString** |  | [optional] 
-**ModelType** | Pointer to **NullableString** |  | [optional] 
-**ModelYear** | Pointer to **NullableInt32** |  | [optional] 
-**Vin** | Pointer to **NullableString** |  | [optional] 
-**EngineVin** | Pointer to **NullableString** |  | [optional] 
-**LicensePlateCountry** | Pointer to **NullableString** |  | [optional] 
-**LicensePlateRegion** | Pointer to **NullableString** |  | [optional] 
-**LicensePlateNumber** | Pointer to **NullableString** |  | [optional] 
-**LastLocationPing** | Pointer to **NullableTime** |  | [optional] 
-**LastLocationH3Index11** | Pointer to **NullableInt32** |  | [optional] 
-**LastLocation** | Pointer to [**NullableLastLocation**](LastLocation.md) |  | [optional] 
-**LastFuelLevel** | Pointer to **NullableFloat32** |  | [optional] 
-**LastOdometerReading** | Pointer to **NullableFloat32** |  | [optional] 
-**LastEngineHours** | Pointer to **NullableFloat32** |  | [optional] 
-**LastSpeedReading** | Pointer to **NullableFloat32** |  | [optional] 
+**TspId** | **NullableString** |  | 
+**TspSlug** | **NullableString** |  | 
+**SourceName** | [**NullableTspEnum**](TspEnum.md) |  | 
+**SourceId** | **NullableString** |  | 
+**Status** | **NullableString** |  | 
+**VehicleName** | **NullableString** |  | 
+**Oem** | **NullableString** |  | 
+**ModelType** | **NullableString** |  | 
+**ModelYear** | **NullableInt32** |  | 
+**Vin** | **NullableString** |  | 
+**EngineVin** | **NullableString** |  | 
+**LicensePlateCountry** | **NullableString** |  | 
+**LicensePlateRegion** | **NullableString** |  | 
+**LicensePlateNumber** | **NullableString** |  | 
+**LastLocationPing** | **NullableTime** |  | 
+**LastLocationH3Index11** | **NullableInt32** |  | 
+**LastLocation** | [**NullableLastLocation**](LastLocation.md) |  | 
+**LastFuelLevel** | **NullableFloat32** |  | 
+**LastOdometerReading** | **NullableFloat32** |  | 
+**LastEngineHours** | **NullableFloat32** |  | 
+**LastSpeedReading** | **NullableFloat32** |  | 
 
 ## Methods
 
 ### NewVehicleSummary
 
-`func NewVehicleSummary(fleetId string, connectionId string, vehicleId string, ) *VehicleSummary`
+`func NewVehicleSummary(fleetId string, fleetRef NullableString, connectionId string, vehicleId string, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, sourceId NullableString, status NullableString, vehicleName NullableString, oem NullableString, modelType NullableString, modelYear NullableInt32, vin NullableString, engineVin NullableString, licensePlateCountry NullableString, licensePlateRegion NullableString, licensePlateNumber NullableString, lastLocationPing NullableTime, lastLocationH3Index11 NullableInt32, lastLocation NullableLastLocation, lastFuelLevel NullableFloat32, lastOdometerReading NullableFloat32, lastEngineHours NullableFloat32, lastSpeedReading NullableFloat32, ) *VehicleSummary`
 
 NewVehicleSummary instantiates a new VehicleSummary object
 This constructor will assign default values to properties that have it defined,
@@ -86,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetFleetRef sets FleetRef field to given value.
 
-### HasFleetRef
-
-`func (o *VehicleSummary) HasFleetRef() bool`
-
-HasFleetRef returns a boolean if a field has been set.
 
 ### SetFleetRefNil
 
@@ -142,30 +139,85 @@ and a boolean to check if the value has been set.
 SetVehicleId sets VehicleId field to given value.
 
 
+### GetTspId
+
+`func (o *VehicleSummary) GetTspId() string`
+
+GetTspId returns the TspId field if non-nil, zero value otherwise.
+
+### GetTspIdOk
+
+`func (o *VehicleSummary) GetTspIdOk() (*string, bool)`
+
+GetTspIdOk returns a tuple with the TspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspId
+
+`func (o *VehicleSummary) SetTspId(v string)`
+
+SetTspId sets TspId field to given value.
+
+
+### SetTspIdNil
+
+`func (o *VehicleSummary) SetTspIdNil(b bool)`
+
+ SetTspIdNil sets the value for TspId to be an explicit nil
+
+### UnsetTspId
+`func (o *VehicleSummary) UnsetTspId()`
+
+UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+### GetTspSlug
+
+`func (o *VehicleSummary) GetTspSlug() string`
+
+GetTspSlug returns the TspSlug field if non-nil, zero value otherwise.
+
+### GetTspSlugOk
+
+`func (o *VehicleSummary) GetTspSlugOk() (*string, bool)`
+
+GetTspSlugOk returns a tuple with the TspSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspSlug
+
+`func (o *VehicleSummary) SetTspSlug(v string)`
+
+SetTspSlug sets TspSlug field to given value.
+
+
+### SetTspSlugNil
+
+`func (o *VehicleSummary) SetTspSlugNil(b bool)`
+
+ SetTspSlugNil sets the value for TspSlug to be an explicit nil
+
+### UnsetTspSlug
+`func (o *VehicleSummary) UnsetTspSlug()`
+
+UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
 ### GetSourceName
 
-`func (o *VehicleSummary) GetSourceName() string`
+`func (o *VehicleSummary) GetSourceName() TspEnum`
 
 GetSourceName returns the SourceName field if non-nil, zero value otherwise.
 
 ### GetSourceNameOk
 
-`func (o *VehicleSummary) GetSourceNameOk() (*string, bool)`
+`func (o *VehicleSummary) GetSourceNameOk() (*TspEnum, bool)`
 
 GetSourceNameOk returns a tuple with the SourceName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceName
 
-`func (o *VehicleSummary) SetSourceName(v string)`
+`func (o *VehicleSummary) SetSourceName(v TspEnum)`
 
 SetSourceName sets SourceName field to given value.
 
-### HasSourceName
-
-`func (o *VehicleSummary) HasSourceName() bool`
-
-HasSourceName returns a boolean if a field has been set.
 
 ### SetSourceNameNil
 
@@ -196,11 +248,6 @@ and a boolean to check if the value has been set.
 
 SetSourceId sets SourceId field to given value.
 
-### HasSourceId
-
-`func (o *VehicleSummary) HasSourceId() bool`
-
-HasSourceId returns a boolean if a field has been set.
 
 ### SetSourceIdNil
 
@@ -231,11 +278,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *VehicleSummary) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### SetStatusNil
 
@@ -266,11 +308,6 @@ and a boolean to check if the value has been set.
 
 SetVehicleName sets VehicleName field to given value.
 
-### HasVehicleName
-
-`func (o *VehicleSummary) HasVehicleName() bool`
-
-HasVehicleName returns a boolean if a field has been set.
 
 ### SetVehicleNameNil
 
@@ -301,11 +338,6 @@ and a boolean to check if the value has been set.
 
 SetOem sets Oem field to given value.
 
-### HasOem
-
-`func (o *VehicleSummary) HasOem() bool`
-
-HasOem returns a boolean if a field has been set.
 
 ### SetOemNil
 
@@ -336,11 +368,6 @@ and a boolean to check if the value has been set.
 
 SetModelType sets ModelType field to given value.
 
-### HasModelType
-
-`func (o *VehicleSummary) HasModelType() bool`
-
-HasModelType returns a boolean if a field has been set.
 
 ### SetModelTypeNil
 
@@ -371,11 +398,6 @@ and a boolean to check if the value has been set.
 
 SetModelYear sets ModelYear field to given value.
 
-### HasModelYear
-
-`func (o *VehicleSummary) HasModelYear() bool`
-
-HasModelYear returns a boolean if a field has been set.
 
 ### SetModelYearNil
 
@@ -406,11 +428,6 @@ and a boolean to check if the value has been set.
 
 SetVin sets Vin field to given value.
 
-### HasVin
-
-`func (o *VehicleSummary) HasVin() bool`
-
-HasVin returns a boolean if a field has been set.
 
 ### SetVinNil
 
@@ -441,11 +458,6 @@ and a boolean to check if the value has been set.
 
 SetEngineVin sets EngineVin field to given value.
 
-### HasEngineVin
-
-`func (o *VehicleSummary) HasEngineVin() bool`
-
-HasEngineVin returns a boolean if a field has been set.
 
 ### SetEngineVinNil
 
@@ -476,11 +488,6 @@ and a boolean to check if the value has been set.
 
 SetLicensePlateCountry sets LicensePlateCountry field to given value.
 
-### HasLicensePlateCountry
-
-`func (o *VehicleSummary) HasLicensePlateCountry() bool`
-
-HasLicensePlateCountry returns a boolean if a field has been set.
 
 ### SetLicensePlateCountryNil
 
@@ -511,11 +518,6 @@ and a boolean to check if the value has been set.
 
 SetLicensePlateRegion sets LicensePlateRegion field to given value.
 
-### HasLicensePlateRegion
-
-`func (o *VehicleSummary) HasLicensePlateRegion() bool`
-
-HasLicensePlateRegion returns a boolean if a field has been set.
 
 ### SetLicensePlateRegionNil
 
@@ -546,11 +548,6 @@ and a boolean to check if the value has been set.
 
 SetLicensePlateNumber sets LicensePlateNumber field to given value.
 
-### HasLicensePlateNumber
-
-`func (o *VehicleSummary) HasLicensePlateNumber() bool`
-
-HasLicensePlateNumber returns a boolean if a field has been set.
 
 ### SetLicensePlateNumberNil
 
@@ -581,11 +578,6 @@ and a boolean to check if the value has been set.
 
 SetLastLocationPing sets LastLocationPing field to given value.
 
-### HasLastLocationPing
-
-`func (o *VehicleSummary) HasLastLocationPing() bool`
-
-HasLastLocationPing returns a boolean if a field has been set.
 
 ### SetLastLocationPingNil
 
@@ -616,11 +608,6 @@ and a boolean to check if the value has been set.
 
 SetLastLocationH3Index11 sets LastLocationH3Index11 field to given value.
 
-### HasLastLocationH3Index11
-
-`func (o *VehicleSummary) HasLastLocationH3Index11() bool`
-
-HasLastLocationH3Index11 returns a boolean if a field has been set.
 
 ### SetLastLocationH3Index11Nil
 
@@ -651,11 +638,6 @@ and a boolean to check if the value has been set.
 
 SetLastLocation sets LastLocation field to given value.
 
-### HasLastLocation
-
-`func (o *VehicleSummary) HasLastLocation() bool`
-
-HasLastLocation returns a boolean if a field has been set.
 
 ### SetLastLocationNil
 
@@ -686,11 +668,6 @@ and a boolean to check if the value has been set.
 
 SetLastFuelLevel sets LastFuelLevel field to given value.
 
-### HasLastFuelLevel
-
-`func (o *VehicleSummary) HasLastFuelLevel() bool`
-
-HasLastFuelLevel returns a boolean if a field has been set.
 
 ### SetLastFuelLevelNil
 
@@ -721,11 +698,6 @@ and a boolean to check if the value has been set.
 
 SetLastOdometerReading sets LastOdometerReading field to given value.
 
-### HasLastOdometerReading
-
-`func (o *VehicleSummary) HasLastOdometerReading() bool`
-
-HasLastOdometerReading returns a boolean if a field has been set.
 
 ### SetLastOdometerReadingNil
 
@@ -756,11 +728,6 @@ and a boolean to check if the value has been set.
 
 SetLastEngineHours sets LastEngineHours field to given value.
 
-### HasLastEngineHours
-
-`func (o *VehicleSummary) HasLastEngineHours() bool`
-
-HasLastEngineHours returns a boolean if a field has been set.
 
 ### SetLastEngineHoursNil
 
@@ -791,11 +758,6 @@ and a boolean to check if the value has been set.
 
 SetLastSpeedReading sets LastSpeedReading field to given value.
 
-### HasLastSpeedReading
-
-`func (o *VehicleSummary) HasLastSpeedReading() bool`
-
-HasLastSpeedReading returns a boolean if a field has been set.
 
 ### SetLastSpeedReadingNil
 

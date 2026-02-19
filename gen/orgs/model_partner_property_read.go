@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -25,10 +24,11 @@ type PartnerPropertyRead struct {
 	// The key of the property
 	Key PartnerPropertyKeyEnum `json:"key"`
 	// The value of the property
-	Value     string    `json:"value"`
-	Id        string    `json:"id"`
-	CreatedAt time.Time `json:"created_at"`
-	PartnerId string    `json:"partner_id"`
+	Value                string    `json:"value"`
+	Id                   string    `json:"id"`
+	CreatedAt            time.Time `json:"created_at"`
+	PartnerId            string    `json:"partner_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartnerPropertyRead PartnerPropertyRead
@@ -190,6 +190,11 @@ func (o PartnerPropertyRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["partner_id"] = o.PartnerId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -221,15 +226,24 @@ func (o *PartnerPropertyRead) UnmarshalJSON(data []byte) (err error) {
 
 	varPartnerPropertyRead := _PartnerPropertyRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartnerPropertyRead)
+	err = json.Unmarshal(data, &varPartnerPropertyRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartnerPropertyRead(varPartnerPropertyRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "partner_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -10,59 +10,6 @@ import (
 	"github.com/catenaclearing/catena-sdk-go/internal/pagination"
 )
 
-// ListShareAgreementsPaginationOptions holds the options for the ListShareAgreements paginated operation.
-type ListShareAgreementsPaginationOptions struct {
-	FleetId              *string
-	InvitationId         *string
-	ShareAgreementStatus *string
-	// Cursor is the cursor for the next page.
-	Cursor string
-	// Size is the maximum number of items to return per page.
-	Size *int
-}
-
-// ListShareAgreementsEach iterates over all items in the ListShareAgreements operation.
-func ListShareAgreementsEach(c *catena.Client, ctx context.Context, opts ListShareAgreementsPaginationOptions, yield func(orgsapi.ShareAgreementRead) error) error {
-	fetch := func(ctx context.Context, cursor string) ([]orgsapi.ShareAgreementRead, string, error) {
-		req := c.Orgs().ShareAgreementsAPI.ListShareAgreements(ctx)
-		if opts.FleetId != nil {
-			req = req.FleetId(*opts.FleetId)
-		}
-		if opts.InvitationId != nil {
-			req = req.InvitationId(*opts.InvitationId)
-		}
-		if opts.ShareAgreementStatus != nil {
-			req = req.ShareAgreementStatus(orgsapi.StatusEnum(*opts.ShareAgreementStatus))
-		}
-		if cursor != "" {
-			req = req.Cursor(cursor)
-		} else if opts.Cursor != "" {
-			req = req.Cursor(opts.Cursor)
-		}
-		if opts.Size != nil {
-			req = req.Size(int32(*opts.Size))
-		}
-
-		resp, _, err := req.Execute()
-		if err != nil {
-			return nil, "", err
-		}
-
-		if resp == nil {
-			return nil, "", nil
-		}
-
-		var next string
-		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
-			next = *resp.NextPage.Get()
-		}
-
-		return resp.Items, next, nil
-	}
-
-	return pagination.Each(ctx, opts.Cursor, fetch, yield)
-}
-
 // ListInvitationsPaginationOptions holds the options for the ListInvitations paginated operation.
 type ListInvitationsPaginationOptions struct {
 	FleetRef *string
@@ -165,6 +112,59 @@ type ListPartnersPaginationOptions struct {
 func ListPartnersEach(c *catena.Client, ctx context.Context, opts ListPartnersPaginationOptions, yield func(orgsapi.PartnerRead) error) error {
 	fetch := func(ctx context.Context, cursor string) ([]orgsapi.PartnerRead, string, error) {
 		req := c.Orgs().PartnersAPI.ListPartners(ctx)
+		if cursor != "" {
+			req = req.Cursor(cursor)
+		} else if opts.Cursor != "" {
+			req = req.Cursor(opts.Cursor)
+		}
+		if opts.Size != nil {
+			req = req.Size(int32(*opts.Size))
+		}
+
+		resp, _, err := req.Execute()
+		if err != nil {
+			return nil, "", err
+		}
+
+		if resp == nil {
+			return nil, "", nil
+		}
+
+		var next string
+		if resp.NextPage.IsSet() && resp.NextPage.Get() != nil {
+			next = *resp.NextPage.Get()
+		}
+
+		return resp.Items, next, nil
+	}
+
+	return pagination.Each(ctx, opts.Cursor, fetch, yield)
+}
+
+// ListShareAgreementsPaginationOptions holds the options for the ListShareAgreements paginated operation.
+type ListShareAgreementsPaginationOptions struct {
+	FleetId              *string
+	InvitationId         *string
+	ShareAgreementStatus *string
+	// Cursor is the cursor for the next page.
+	Cursor string
+	// Size is the maximum number of items to return per page.
+	Size *int
+}
+
+// ListShareAgreementsEach iterates over all items in the ListShareAgreements operation.
+func ListShareAgreementsEach(c *catena.Client, ctx context.Context, opts ListShareAgreementsPaginationOptions, yield func(orgsapi.ShareAgreementRead) error) error {
+	fetch := func(ctx context.Context, cursor string) ([]orgsapi.ShareAgreementRead, string, error) {
+		req := c.Orgs().ShareAgreementsAPI.ListShareAgreements(ctx)
+		if opts.FleetId != nil {
+			req = req.FleetId(*opts.FleetId)
+		}
+		if opts.InvitationId != nil {
+			req = req.InvitationId(*opts.InvitationId)
+		}
+		if opts.ShareAgreementStatus != nil {
+			req = req.ShareAgreementStatus(orgsapi.StatusEnum(*opts.ShareAgreementStatus))
+		}
 		if cursor != "" {
 			req = req.Cursor(cursor)
 		} else if opts.Cursor != "" {

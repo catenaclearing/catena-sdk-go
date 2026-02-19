@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -30,7 +29,8 @@ type BaseConnectionEvent struct {
 	// The ID of the Telematics Service Provider (TSP) at Catena
 	TspId string `json:"tsp_id"`
 	// The status of the connection, used to determine if the connection is active or stale.
-	Status StatusEnum `json:"status"`
+	Status               StatusEnum `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseConnectionEvent BaseConnectionEvent
@@ -192,6 +192,11 @@ func (o BaseConnectionEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["fleet_id"] = o.FleetId
 	toSerialize["tsp_id"] = o.TspId
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -223,15 +228,24 @@ func (o *BaseConnectionEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseConnectionEvent := _BaseConnectionEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseConnectionEvent)
+	err = json.Unmarshal(data, &varBaseConnectionEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseConnectionEvent(varBaseConnectionEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

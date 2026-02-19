@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,28 +31,32 @@ type DriverSafetyEventRead struct {
 	UpdatedAt time.Time    `json:"updated_at"`
 	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	// Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing.
-	ConnectionId string `json:"connection_id"`
-	// An enumeration identifying the TSP from which this record was sourced.
+	ConnectionId string         `json:"connection_id"`
+	TspId        NullableString `json:"tsp_id,omitempty"`
+	TspSlug      NullableString `json:"tsp_slug,omitempty"`
+	// The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name — use `tsp_id` or `tsp_slug` to identify the specific ELD provider.
 	SourceName TspEnum `json:"source_name"`
 	// Raw source payload as ingested from the TSP. **Note: use it for audit/debugging.**
 	SourceData map[string]interface{} `json:"source_data,omitempty"`
 	// Unique identifier of the record in the TSP. **Note: we generate a unique composite key based on available fields if the TSP does not provide an unique ID.**
 	SourceId string `json:"source_id"`
 	// SHA-256 hash of the source data payload. **Note: we use it internally for idempotence and deduplication.**
-	SourceDataHash  string         `json:"source_data_hash"`
-	OccurredAt      NullableTime   `json:"occurred_at,omitempty"`
-	ExecutionId     NullableString `json:"execution_id,omitempty"`
-	ScheduleId      NullableString `json:"schedule_id,omitempty"`
-	DriverId        NullableString `json:"driver_id,omitempty"`
-	VehicleId       NullableString `json:"vehicle_id,omitempty"`
-	SourceDriverId  NullableString `json:"source_driver_id,omitempty"`
-	SourceVehicleId NullableString `json:"source_vehicle_id,omitempty"`
+	SourceDataHash  string                 `json:"source_data_hash"`
+	OccurredAt      NullableTime           `json:"occurred_at,omitempty"`
+	ExecutionId     NullableString         `json:"execution_id,omitempty"`
+	ScheduleId      NullableString         `json:"schedule_id,omitempty"`
+	Extras          map[string]interface{} `json:"extras,omitempty"`
+	DriverId        NullableString         `json:"driver_id,omitempty"`
+	VehicleId       NullableString         `json:"vehicle_id,omitempty"`
+	SourceDriverId  NullableString         `json:"source_driver_id,omitempty"`
+	SourceVehicleId NullableString         `json:"source_vehicle_id,omitempty"`
 	// Normalized safety event type.
-	Event           DriverSafetyEventEnum  `json:"event"`
-	Location        NullableLocation       `json:"location,omitempty"`
-	H3Index11       NullableInt32          `json:"h3_index_11,omitempty"`
-	DurationSeconds NullableInt32          `json:"duration_seconds,omitempty"`
-	EventMetadata   map[string]interface{} `json:"event_metadata,omitempty"`
+	Event                DriverSafetyEventEnum  `json:"event"`
+	Location             NullableLocation       `json:"location,omitempty"`
+	H3Index11            NullableInt32          `json:"h3_index_11,omitempty"`
+	DurationSeconds      NullableInt32          `json:"duration_seconds,omitempty"`
+	EventMetadata        map[string]interface{} `json:"event_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DriverSafetyEventRead DriverSafetyEventRead
@@ -292,6 +295,92 @@ func (o *DriverSafetyEventRead) SetConnectionId(v string) {
 	o.ConnectionId = v
 }
 
+// GetTspId returns the TspId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DriverSafetyEventRead) GetTspId() string {
+	if o == nil || IsNil(o.TspId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DriverSafetyEventRead) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// HasTspId returns a boolean if a field has been set.
+func (o *DriverSafetyEventRead) HasTspId() bool {
+	if o != nil && o.TspId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspId gets a reference to the given NullableString and assigns it to the TspId field.
+func (o *DriverSafetyEventRead) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// SetTspIdNil sets the value for TspId to be an explicit nil
+func (o *DriverSafetyEventRead) SetTspIdNil() {
+	o.TspId.Set(nil)
+}
+
+// UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+func (o *DriverSafetyEventRead) UnsetTspId() {
+	o.TspId.Unset()
+}
+
+// GetTspSlug returns the TspSlug field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DriverSafetyEventRead) GetTspSlug() string {
+	if o == nil || IsNil(o.TspSlug.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DriverSafetyEventRead) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// HasTspSlug returns a boolean if a field has been set.
+func (o *DriverSafetyEventRead) HasTspSlug() bool {
+	if o != nil && o.TspSlug.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspSlug gets a reference to the given NullableString and assigns it to the TspSlug field.
+func (o *DriverSafetyEventRead) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// SetTspSlugNil sets the value for TspSlug to be an explicit nil
+func (o *DriverSafetyEventRead) SetTspSlugNil() {
+	o.TspSlug.Set(nil)
+}
+
+// UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
+func (o *DriverSafetyEventRead) UnsetTspSlug() {
+	o.TspSlug.Unset()
+}
+
 // GetSourceName returns the SourceName field value
 func (o *DriverSafetyEventRead) GetSourceName() TspEnum {
 	if o == nil {
@@ -523,6 +612,39 @@ func (o *DriverSafetyEventRead) SetScheduleIdNil() {
 // UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
 func (o *DriverSafetyEventRead) UnsetScheduleId() {
 	o.ScheduleId.Unset()
+}
+
+// GetExtras returns the Extras field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DriverSafetyEventRead) GetExtras() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Extras
+}
+
+// GetExtrasOk returns a tuple with the Extras field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DriverSafetyEventRead) GetExtrasOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Extras) {
+		return map[string]interface{}{}, false
+	}
+	return o.Extras, true
+}
+
+// HasExtras returns a boolean if a field has been set.
+func (o *DriverSafetyEventRead) HasExtras() bool {
+	if o != nil && !IsNil(o.Extras) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtras gets a reference to the given map[string]interface{} and assigns it to the Extras field.
+func (o *DriverSafetyEventRead) SetExtras(v map[string]interface{}) {
+	o.Extras = v
 }
 
 // GetDriverId returns the DriverId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -904,6 +1026,12 @@ func (o DriverSafetyEventRead) ToMap() (map[string]interface{}, error) {
 		toSerialize["deleted_at"] = o.DeletedAt.Get()
 	}
 	toSerialize["connection_id"] = o.ConnectionId
+	if o.TspId.IsSet() {
+		toSerialize["tsp_id"] = o.TspId.Get()
+	}
+	if o.TspSlug.IsSet() {
+		toSerialize["tsp_slug"] = o.TspSlug.Get()
+	}
 	toSerialize["source_name"] = o.SourceName
 	if !IsNil(o.SourceData) {
 		toSerialize["source_data"] = o.SourceData
@@ -918,6 +1046,9 @@ func (o DriverSafetyEventRead) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ScheduleId.IsSet() {
 		toSerialize["schedule_id"] = o.ScheduleId.Get()
+	}
+	if o.Extras != nil {
+		toSerialize["extras"] = o.Extras
 	}
 	if o.DriverId.IsSet() {
 		toSerialize["driver_id"] = o.DriverId.Get()
@@ -944,6 +1075,11 @@ func (o DriverSafetyEventRead) ToMap() (map[string]interface{}, error) {
 	if o.EventMetadata != nil {
 		toSerialize["event_metadata"] = o.EventMetadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -979,15 +1115,45 @@ func (o *DriverSafetyEventRead) UnmarshalJSON(data []byte) (err error) {
 
 	varDriverSafetyEventRead := _DriverSafetyEventRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDriverSafetyEventRead)
+	err = json.Unmarshal(data, &varDriverSafetyEventRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DriverSafetyEventRead(varDriverSafetyEventRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "source_data")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "source_data_hash")
+		delete(additionalProperties, "occurred_at")
+		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "schedule_id")
+		delete(additionalProperties, "extras")
+		delete(additionalProperties, "driver_id")
+		delete(additionalProperties, "vehicle_id")
+		delete(additionalProperties, "source_driver_id")
+		delete(additionalProperties, "source_vehicle_id")
+		delete(additionalProperties, "event")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "h3_index_11")
+		delete(additionalProperties, "duration_seconds")
+		delete(additionalProperties, "event_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

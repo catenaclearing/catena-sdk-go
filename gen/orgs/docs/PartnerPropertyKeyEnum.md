@@ -9,6 +9,8 @@
 
 * `DEFAULT_CALLBACK_URL` (value: `"default_callback_url"`)
 
+* `DEFAULT_INVITATION_EXPIRES_IN_HOURS` (value: `"default_invitation_expires_in_hours"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

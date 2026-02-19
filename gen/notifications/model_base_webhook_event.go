@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +28,8 @@ type BaseWebhookEvent struct {
 	EventName WebhookEventName       `json:"event_name"`
 	Filters   NullableWebhookFilters `json:"filters,omitempty"`
 	// The status of the webhook
-	Status StatusEnum `json:"status"`
+	Status               StatusEnum `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseWebhookEvent BaseWebhookEvent
@@ -211,6 +211,11 @@ func (o BaseWebhookEvent) ToMap() (map[string]interface{}, error) {
 		toSerialize["filters"] = o.Filters.Get()
 	}
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -241,15 +246,24 @@ func (o *BaseWebhookEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseWebhookEvent := _BaseWebhookEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseWebhookEvent)
+	err = json.Unmarshal(data, &varBaseWebhookEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseWebhookEvent(varBaseWebhookEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "event_name")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -19,11 +19,14 @@ var _ MappedNullable = &WebhookUpdate{}
 
 // WebhookUpdate Webhook update model
 type WebhookUpdate struct {
-	Url     NullableString         `json:"url,omitempty"`
-	Filters NullableWebhookFilters `json:"filters,omitempty"`
-	Secret  NullableString         `json:"secret,omitempty"`
-	Status  NullableStatusEnum     `json:"status,omitempty"`
+	Url                  NullableString         `json:"url,omitempty"`
+	Filters              NullableWebhookFilters `json:"filters,omitempty"`
+	Secret               NullableString         `json:"secret,omitempty"`
+	Status               NullableStatusEnum     `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WebhookUpdate WebhookUpdate
 
 // NewWebhookUpdate instantiates a new WebhookUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -236,7 +239,36 @@ func (o WebhookUpdate) ToMap() (map[string]interface{}, error) {
 	if o.Status.IsSet() {
 		toSerialize["status"] = o.Status.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WebhookUpdate) UnmarshalJSON(data []byte) (err error) {
+	varWebhookUpdate := _WebhookUpdate{}
+
+	err = json.Unmarshal(data, &varWebhookUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WebhookUpdate(varWebhookUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "secret")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWebhookUpdate struct {

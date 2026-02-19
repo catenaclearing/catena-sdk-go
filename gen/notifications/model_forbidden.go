@@ -19,10 +19,13 @@ var _ MappedNullable = &Forbidden{}
 
 // Forbidden struct for Forbidden
 type Forbidden struct {
-	Code    *int32         `json:"code,omitempty"`
-	Message *string        `json:"message,omitempty"`
-	Detail  NullableString `json:"detail,omitempty"`
+	Code                 *int32         `json:"code,omitempty"`
+	Message              *string        `json:"message,omitempty"`
+	Detail               NullableString `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Forbidden Forbidden
 
 // NewForbidden instantiates a new Forbidden object
 // This constructor will assign default values to properties that have it defined,
@@ -175,7 +178,35 @@ func (o Forbidden) ToMap() (map[string]interface{}, error) {
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Forbidden) UnmarshalJSON(data []byte) (err error) {
+	varForbidden := _Forbidden{}
+
+	err = json.Unmarshal(data, &varForbidden)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Forbidden(varForbidden)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableForbidden struct {

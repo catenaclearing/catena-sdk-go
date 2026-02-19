@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +20,9 @@ var _ MappedNullable = &TruckXSLCInput{}
 
 // TruckXSLCInput TruckX Short-lived Credentials model
 type TruckXSLCInput struct {
-	Token     string `json:"token"`
-	CarrierId string `json:"carrier_id"`
+	Token                string `json:"token"`
+	CarrierId            string `json:"carrier_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TruckXSLCInput TruckXSLCInput
@@ -106,6 +106,11 @@ func (o TruckXSLCInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["token"] = o.Token
 	toSerialize["carrier_id"] = o.CarrierId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *TruckXSLCInput) UnmarshalJSON(data []byte) (err error) {
 
 	varTruckXSLCInput := _TruckXSLCInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTruckXSLCInput)
+	err = json.Unmarshal(data, &varTruckXSLCInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TruckXSLCInput(varTruckXSLCInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "token")
+		delete(additionalProperties, "carrier_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

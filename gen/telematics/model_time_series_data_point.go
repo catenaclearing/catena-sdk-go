@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,7 +25,8 @@ type TimeSeriesDataPoint struct {
 	// Number of new resources created on this specific date.
 	DailyCount int32 `json:"daily_count"`
 	// Running total of resources up to and including this date.
-	CumulativeCount int32 `json:"cumulative_count"`
+	CumulativeCount      int32 `json:"cumulative_count"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TimeSeriesDataPoint TimeSeriesDataPoint
@@ -136,6 +136,11 @@ func (o TimeSeriesDataPoint) ToMap() (map[string]interface{}, error) {
 	toSerialize["date"] = o.Date
 	toSerialize["daily_count"] = o.DailyCount
 	toSerialize["cumulative_count"] = o.CumulativeCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *TimeSeriesDataPoint) UnmarshalJSON(data []byte) (err error) {
 
 	varTimeSeriesDataPoint := _TimeSeriesDataPoint{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTimeSeriesDataPoint)
+	err = json.Unmarshal(data, &varTimeSeriesDataPoint)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TimeSeriesDataPoint(varTimeSeriesDataPoint)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "daily_count")
+		delete(additionalProperties, "cumulative_count")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

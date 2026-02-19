@@ -19,9 +19,12 @@ var _ MappedNullable = &WebhookFilters{}
 
 // WebhookFilters Webhook filters
 type WebhookFilters struct {
-	FleetIds  []string `json:"fleet_ids,omitempty"`
-	FleetRefs []string `json:"fleet_refs,omitempty"`
+	FleetIds             []string `json:"fleet_ids,omitempty"`
+	FleetRefs            []string `json:"fleet_refs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WebhookFilters WebhookFilters
 
 // NewWebhookFilters instantiates a new WebhookFilters object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o WebhookFilters) ToMap() (map[string]interface{}, error) {
 	if o.FleetRefs != nil {
 		toSerialize["fleet_refs"] = o.FleetRefs
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WebhookFilters) UnmarshalJSON(data []byte) (err error) {
+	varWebhookFilters := _WebhookFilters{}
+
+	err = json.Unmarshal(data, &varWebhookFilters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WebhookFilters(varWebhookFilters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_ids")
+		delete(additionalProperties, "fleet_refs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWebhookFilters struct {

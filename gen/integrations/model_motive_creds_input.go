@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &MotiveCredsInput{}
 
 // MotiveCredsInput Motive Connection model
 type MotiveCredsInput struct {
-	ClientId     string `json:"client_id"`
-	ClientSecret string `json:"client_secret"`
-	AuthCode     string `json:"auth_code"`
-	RedirectUri  string `json:"redirect_uri"`
+	ClientId             string `json:"client_id"`
+	ClientSecret         string `json:"client_secret"`
+	AuthCode             string `json:"auth_code"`
+	RedirectUri          string `json:"redirect_uri"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MotiveCredsInput MotiveCredsInput
@@ -160,6 +160,11 @@ func (o MotiveCredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["client_secret"] = o.ClientSecret
 	toSerialize["auth_code"] = o.AuthCode
 	toSerialize["redirect_uri"] = o.RedirectUri
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -190,15 +195,23 @@ func (o *MotiveCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varMotiveCredsInput := _MotiveCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMotiveCredsInput)
+	err = json.Unmarshal(data, &varMotiveCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MotiveCredsInput(varMotiveCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "auth_code")
+		delete(additionalProperties, "redirect_uri")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

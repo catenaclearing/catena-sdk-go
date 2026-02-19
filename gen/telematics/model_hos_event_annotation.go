@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -25,7 +24,8 @@ type HosEventAnnotation struct {
 	// Timestamp when the annotation was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// Free-text remarks or notes for the HOS event.
-	Remarks string `json:"remarks"`
+	Remarks              string `json:"remarks"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HosEventAnnotation HosEventAnnotation
@@ -118,6 +118,11 @@ func (o HosEventAnnotation) ToMap() (map[string]interface{}, error) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
 	toSerialize["remarks"] = o.Remarks
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,15 +150,21 @@ func (o *HosEventAnnotation) UnmarshalJSON(data []byte) (err error) {
 
 	varHosEventAnnotation := _HosEventAnnotation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHosEventAnnotation)
+	err = json.Unmarshal(data, &varHosEventAnnotation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HosEventAnnotation(varHosEventAnnotation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "remarks")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

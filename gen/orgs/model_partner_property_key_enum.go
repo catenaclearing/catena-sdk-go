@@ -20,9 +20,10 @@ type PartnerPropertyKeyEnum string
 
 // List of PartnerPropertyKeyEnum
 const (
-	PARTNERPROPERTYKEYENUM_DEFAULT_FAILURE_REDIRECT_URL PartnerPropertyKeyEnum = "default_failure_redirect_url"
-	PARTNERPROPERTYKEYENUM_DEFAULT_SUCCESS_REDIRECT_URL PartnerPropertyKeyEnum = "default_success_redirect_url"
-	PARTNERPROPERTYKEYENUM_DEFAULT_CALLBACK_URL         PartnerPropertyKeyEnum = "default_callback_url"
+	PARTNERPROPERTYKEYENUM_DEFAULT_FAILURE_REDIRECT_URL        PartnerPropertyKeyEnum = "default_failure_redirect_url"
+	PARTNERPROPERTYKEYENUM_DEFAULT_SUCCESS_REDIRECT_URL        PartnerPropertyKeyEnum = "default_success_redirect_url"
+	PARTNERPROPERTYKEYENUM_DEFAULT_CALLBACK_URL                PartnerPropertyKeyEnum = "default_callback_url"
+	PARTNERPROPERTYKEYENUM_DEFAULT_INVITATION_EXPIRES_IN_HOURS PartnerPropertyKeyEnum = "default_invitation_expires_in_hours"
 )
 
 // All allowed values of PartnerPropertyKeyEnum enum
@@ -30,6 +31,7 @@ var AllowedPartnerPropertyKeyEnumEnumValues = []PartnerPropertyKeyEnum{
 	"default_failure_redirect_url",
 	"default_success_redirect_url",
 	"default_callback_url",
+	"default_invitation_expires_in_hours",
 }
 
 func (v *PartnerPropertyKeyEnum) UnmarshalJSON(src []byte) error {

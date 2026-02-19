@@ -299,7 +299,7 @@ func (a *ComplianceRegulationAPIService) GetDvirLogDefectsExecute(r ApiGetDvirLo
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-		var defaultValue int32 = 50
+		var defaultValue int32 = 300
 		r.size = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -926,7 +926,7 @@ func (a *ComplianceRegulationAPIService) ListDvirLogDefectsExecute(r ApiListDvir
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-		var defaultValue int32 = 50
+		var defaultValue int32 = 300
 		r.size = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1286,7 +1286,7 @@ func (a *ComplianceRegulationAPIService) ListDvirLogsExecute(r ApiListDvirLogsRe
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-		var defaultValue int32 = 50
+		var defaultValue int32 = 300
 		r.size = &defaultValue
 	}
 	// to determine the Content-Type header

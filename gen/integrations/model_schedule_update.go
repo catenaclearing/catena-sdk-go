@@ -27,7 +27,10 @@ type ScheduleUpdate struct {
 	MaxConcurrentExecutions   NullableInt32      `json:"max_concurrent_executions,omitempty"`
 	NextExecutionAt           NullableTime       `json:"next_execution_at,omitempty"`
 	Cursor                    NullableString     `json:"cursor,omitempty"`
+	AdditionalProperties      map[string]interface{}
 }
+
+type _ScheduleUpdate ScheduleUpdate
 
 // NewScheduleUpdate instantiates a new ScheduleUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -378,7 +381,39 @@ func (o ScheduleUpdate) ToMap() (map[string]interface{}, error) {
 	if o.Cursor.IsSet() {
 		toSerialize["cursor"] = o.Cursor.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduleUpdate) UnmarshalJSON(data []byte) (err error) {
+	varScheduleUpdate := _ScheduleUpdate{}
+
+	err = json.Unmarshal(data, &varScheduleUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduleUpdate(varScheduleUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "execution_interval_seconds")
+		delete(additionalProperties, "consecutive_error_threshold")
+		delete(additionalProperties, "consecutive_error_count")
+		delete(additionalProperties, "max_concurrent_executions")
+		delete(additionalProperties, "next_execution_at")
+		delete(additionalProperties, "cursor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduleUpdate struct {

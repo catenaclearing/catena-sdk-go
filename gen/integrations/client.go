@@ -51,6 +51,8 @@ type APIClient struct {
 	// API Services
 
 	ConnectionsAPI ConnectionsAPI
+
+	TSPIntegrationsAPI TSPIntegrationsAPI
 }
 
 type service struct {
@@ -70,6 +72,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.ConnectionsAPI = (*ConnectionsAPIService)(&c.common)
+	c.TSPIntegrationsAPI = (*TSPIntegrationsAPIService)(&c.common)
 
 	return c
 }

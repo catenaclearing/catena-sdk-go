@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -39,7 +38,8 @@ type WebhookMetrics struct {
 	AvgResponseTimeMs TimePeriodMetric `json:"avg_response_time_ms"`
 	EwmaSuccessRate   NullableFloat32  `json:"ewma_success_rate"`
 	// The number of messages that failed to be delivered, and were put in the DLQ. Messages are stored for 14 days and must be replayed manually.
-	DlqCount int32 `json:"dlq_count"`
+	DlqCount             int32 `json:"dlq_count"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WebhookMetrics WebhookMetrics
@@ -333,6 +333,11 @@ func (o WebhookMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize["avg_response_time_ms"] = o.AvgResponseTimeMs
 	toSerialize["ewma_success_rate"] = o.EwmaSuccessRate.Get()
 	toSerialize["dlq_count"] = o.DlqCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -369,15 +374,29 @@ func (o *WebhookMetrics) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhookMetrics := _WebhookMetrics{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWebhookMetrics)
+	err = json.Unmarshal(data, &varWebhookMetrics)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WebhookMetrics(varWebhookMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "webhook_id")
+		delete(additionalProperties, "http_attempts")
+		delete(additionalProperties, "http_success_attempts")
+		delete(additionalProperties, "http_failure_attempts")
+		delete(additionalProperties, "message_count")
+		delete(additionalProperties, "message_success_count")
+		delete(additionalProperties, "success_rate")
+		delete(additionalProperties, "avg_response_time_ms")
+		delete(additionalProperties, "ewma_success_rate")
+		delete(additionalProperties, "dlq_count")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -4,6 +4,7 @@ api_analytics.go
 api_compliance_regulation.go
 api_drivers_users.go
 api_fleet_operations_tracking.go
+api_maintenance_vehicle_health.go
 api_reference_data_supporting_tables.go
 api_safety_driver_behavior.go
 client.go
@@ -11,6 +12,7 @@ configuration.go
 docs/AnalyticsAPI.md
 docs/BadRequest.md
 docs/Bbox.md
+docs/CanonicalFaultCodeEnum.md
 docs/ComplianceRegulationAPI.md
 docs/Conflict.md
 docs/Coordinates.md
@@ -18,6 +20,7 @@ docs/CursorPageDriverSafetyEventRead.md
 docs/CursorPageDriverSummary.md
 docs/CursorPageDvirLogDefectRead.md
 docs/CursorPageDvirLogRead.md
+docs/CursorPageEngineLogRead.md
 docs/CursorPageFleetSummary.md
 docs/CursorPageHosAvailabilityRead.md
 docs/CursorPageHosDailySnapshotRead.md
@@ -50,6 +53,8 @@ docs/DutyStatusCodeEnum.md
 docs/DvirDefectEnum.md
 docs/DvirLogDefectRead.md
 docs/DvirLogRead.md
+docs/EngineLogRead.md
+docs/FaultCodeSourceEnum.md
 docs/FleetOperationsTrackingAPI.md
 docs/FleetSummary.md
 docs/Forbidden.md
@@ -77,6 +82,7 @@ docs/Location1.md
 docs/Location2.md
 docs/Location3.md
 docs/Location4.md
+docs/MaintenanceVehicleHealthAPI.md
 docs/MethodNotAllowed.md
 docs/NotFound.md
 docs/NotImplementedResponse.md
@@ -93,6 +99,7 @@ docs/ReferenceDataSupportingTablesAPI.md
 docs/ResourceCount.md
 docs/RetryAfterDetail.md
 docs/SafetyDriverBehaviorAPI.md
+docs/StatusEnum.md
 docs/TimeSeriesDataPoint.md
 docs/TimezoneCodeEnum.md
 docs/TooManyRequests.md
@@ -114,6 +121,9 @@ docs/VehicleSensorRead.md
 docs/VehicleSummary.md
 model__cursor_page_driver_safety_event_read_.go
 model__cursor_page_driver_summary_.go
+model__cursor_page_dvir_log_defect_read_.go
+model__cursor_page_dvir_log_read_.go
+model__cursor_page_engine_log_read_.go
 model__cursor_page_fleet_summary_.go
 model__cursor_page_hos_availability_read_.go
 model__cursor_page_hos_daily_snapshot_read_.go
@@ -141,10 +151,9 @@ model__cursor_page_vehicle_summary_.go
 model__large_object_cursor_page_hos_event_read_.go
 model_bad_request.go
 model_bbox.go
+model_canonical_fault_code_enum.go
 model_conflict.go
 model_coordinates.go
-model_cursor_page_dvir_log_defect_read_.go
-model_cursor_page_dvir_log_read_.go
 model_driver_safety_event_enum.go
 model_driver_safety_event_read.go
 model_driver_summary.go
@@ -152,6 +161,8 @@ model_duty_status_code_enum.go
 model_dvir_defect_enum.go
 model_dvir_log_defect_read.go
 model_dvir_log_read.go
+model_engine_log_read.go
+model_fault_code_source_enum.go
 model_fleet_summary.go
 model_forbidden.go
 model_hos_availability_read.go
@@ -191,6 +202,7 @@ model_ref_hos_violation_code.go
 model_ref_timezone_code.go
 model_resource_count.go
 model_retry_after_detail.go
+model_status_enum.go
 model_time_series_data_point.go
 model_timezone_code_enum.go
 model_too_many_requests.go
@@ -215,6 +227,7 @@ test/api_analytics_test.go
 test/api_compliance_regulation_test.go
 test/api_drivers_users_test.go
 test/api_fleet_operations_tracking_test.go
+test/api_maintenance_vehicle_health_test.go
 test/api_reference_data_supporting_tables_test.go
 test/api_safety_driver_behavior_test.go
 utils.go

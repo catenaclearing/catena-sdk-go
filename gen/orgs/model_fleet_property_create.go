@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type FleetPropertyCreate struct {
 	// The key of the property
 	Key FleetPropertyKeyEnum `json:"key"`
 	// The value of the property
-	Value string `json:"value"`
+	Value                string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FleetPropertyCreate FleetPropertyCreate
@@ -108,6 +108,11 @@ func (o FleetPropertyCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *FleetPropertyCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varFleetPropertyCreate := _FleetPropertyCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFleetPropertyCreate)
+	err = json.Unmarshal(data, &varFleetPropertyCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FleetPropertyCreate(varFleetPropertyCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

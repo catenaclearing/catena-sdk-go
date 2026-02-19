@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &ApiAuthCredsOutput{}
 
 // ApiAuthCredsOutput API Auth Connection model
 type ApiAuthCredsOutput struct {
-	Username interface{} `json:"username"`
-	Password interface{} `json:"password"`
-	ApiKey   interface{} `json:"api_key"`
+	Username             interface{} `json:"username"`
+	Password             interface{} `json:"password"`
+	ApiKey               interface{} `json:"api_key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ApiAuthCredsOutput ApiAuthCredsOutput
@@ -145,6 +145,11 @@ func (o ApiAuthCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.ApiKey != nil {
 		toSerialize["api_key"] = o.ApiKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -174,15 +179,22 @@ func (o *ApiAuthCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varApiAuthCredsOutput := _ApiAuthCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApiAuthCredsOutput)
+	err = json.Unmarshal(data, &varApiAuthCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ApiAuthCredsOutput(varApiAuthCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "api_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

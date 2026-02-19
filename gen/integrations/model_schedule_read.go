@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -38,6 +37,7 @@ type ScheduleRead struct {
 	// The maximum number of concurrent executions allowed for this schedule.
 	MaxConcurrentExecutions int32          `json:"max_concurrent_executions"`
 	Cursor                  NullableString `json:"cursor,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _ScheduleRead ScheduleRead
@@ -323,6 +323,11 @@ func (o ScheduleRead) ToMap() (map[string]interface{}, error) {
 	if o.Cursor.IsSet() {
 		toSerialize["cursor"] = o.Cursor.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -357,15 +362,28 @@ func (o *ScheduleRead) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleRead := _ScheduleRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleRead)
+	err = json.Unmarshal(data, &varScheduleRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleRead(varScheduleRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "resource")
+		delete(additionalProperties, "execution_interval_seconds")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "consecutive_error_count")
+		delete(additionalProperties, "consecutive_error_threshold")
+		delete(additionalProperties, "max_concurrent_executions")
+		delete(additionalProperties, "cursor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &ApiKeyCredsInput{}
 
 // ApiKeyCredsInput API Key Connection model
 type ApiKeyCredsInput struct {
-	ApiKey string         `json:"api_key"`
-	Url    NullableString `json:"url,omitempty"`
-	UserId NullableString `json:"user_id,omitempty"`
+	ApiKey               string         `json:"api_key"`
+	Url                  NullableString `json:"url,omitempty"`
+	UserId               NullableString `json:"user_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ApiKeyCredsInput ApiKeyCredsInput
@@ -173,6 +173,11 @@ func (o ApiKeyCredsInput) ToMap() (map[string]interface{}, error) {
 	if o.UserId.IsSet() {
 		toSerialize["user_id"] = o.UserId.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -200,15 +205,22 @@ func (o *ApiKeyCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varApiKeyCredsInput := _ApiKeyCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApiKeyCredsInput)
+	err = json.Unmarshal(data, &varApiKeyCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ApiKeyCredsInput(varApiKeyCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "user_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

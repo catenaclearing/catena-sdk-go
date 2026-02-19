@@ -13,6 +13,8 @@
 
 * `DVIR_LOG_DEFECT` (value: `"dvir_log_defect"`)
 
+* `ENGINE_LOG` (value: `"engine_log"`)
+
 * `HOS_AVAILABILITY` (value: `"hos_availability"`)
 
 * `HOS_DAILY_SNAPSHOT` (value: `"hos_daily_snapshot"`)
@@ -29,8 +31,6 @@
 
 * `LOCATION_SEGMENT` (value: `"location_segment"`)
 
-* `REEFER_STATUS` (value: `"reefer_status"`)
-
 * `USER` (value: `"user"`)
 
 * `VEHICLE` (value: `"vehicle"`)
@@ -42,6 +42,8 @@
 * `TRAILER` (value: `"trailer"`)
 
 * `TRAILER_LOCATION` (value: `"trailer_location"`)
+
+* `TRAILER_STATUS` (value: `"trailer_status"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

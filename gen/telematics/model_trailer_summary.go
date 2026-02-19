@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,16 +22,19 @@ var _ MappedNullable = &TrailerSummary{}
 type TrailerSummary struct {
 	// Catena fleet identifier.
 	FleetId  string         `json:"fleet_id"`
-	FleetRef NullableString `json:"fleet_ref,omitempty"`
+	FleetRef NullableString `json:"fleet_ref"`
 	// Catena connection identifier through which this trailer was ingested.
 	ConnectionId string `json:"connection_id"`
 	// Unique Catena identifier for the trailer.
-	TrailerId   string            `json:"trailer_id"`
-	SourceId    NullableString    `json:"source_id,omitempty"`
-	TrailerName NullableString    `json:"trailer_name,omitempty"`
-	SourceName  NullableString    `json:"source_name,omitempty"`
-	Location    NullableLocation4 `json:"location,omitempty"`
-	H3Index11   NullableInt32     `json:"h3_index_11,omitempty"`
+	TrailerId            string            `json:"trailer_id"`
+	SourceId             NullableString    `json:"source_id"`
+	TrailerName          NullableString    `json:"trailer_name"`
+	TspId                NullableString    `json:"tsp_id"`
+	TspSlug              NullableString    `json:"tsp_slug"`
+	SourceName           NullableTspEnum   `json:"source_name"`
+	Location             NullableLocation4 `json:"location"`
+	H3Index11            NullableInt32     `json:"h3_index_11"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TrailerSummary TrailerSummary
@@ -41,11 +43,19 @@ type _TrailerSummary TrailerSummary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTrailerSummary(fleetId string, connectionId string, trailerId string) *TrailerSummary {
+func NewTrailerSummary(fleetId string, fleetRef NullableString, connectionId string, trailerId string, sourceId NullableString, trailerName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, location NullableLocation4, h3Index11 NullableInt32) *TrailerSummary {
 	this := TrailerSummary{}
 	this.FleetId = fleetId
+	this.FleetRef = fleetRef
 	this.ConnectionId = connectionId
 	this.TrailerId = trailerId
+	this.SourceId = sourceId
+	this.TrailerName = trailerName
+	this.TspId = tspId
+	this.TspSlug = tspSlug
+	this.SourceName = sourceName
+	this.Location = location
+	this.H3Index11 = h3Index11
 	return &this
 }
 
@@ -81,16 +91,18 @@ func (o *TrailerSummary) SetFleetId(v string) {
 	o.FleetId = v
 }
 
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFleetRef returns the FleetRef field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *TrailerSummary) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+	if o == nil || o.FleetRef.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.FleetRef.Get()
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetFleetRefOk returns a tuple with the FleetRef field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TrailerSummary) GetFleetRefOk() (*string, bool) {
@@ -100,28 +112,9 @@ func (o *TrailerSummary) GetFleetRefOk() (*string, bool) {
 	return o.FleetRef.Get(), o.FleetRef.IsSet()
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *TrailerSummary) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
+// SetFleetRef sets field value
 func (o *TrailerSummary) SetFleetRef(v string) {
 	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *TrailerSummary) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *TrailerSummary) UnsetFleetRef() {
-	o.FleetRef.Unset()
 }
 
 // GetConnectionId returns the ConnectionId field value
@@ -172,16 +165,18 @@ func (o *TrailerSummary) SetTrailerId(v string) {
 	o.TrailerId = v
 }
 
-// GetSourceId returns the SourceId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSourceId returns the SourceId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *TrailerSummary) GetSourceId() string {
-	if o == nil || IsNil(o.SourceId.Get()) {
+	if o == nil || o.SourceId.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.SourceId.Get()
 }
 
-// GetSourceIdOk returns a tuple with the SourceId field value if set, nil otherwise
+// GetSourceIdOk returns a tuple with the SourceId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TrailerSummary) GetSourceIdOk() (*string, bool) {
@@ -191,40 +186,23 @@ func (o *TrailerSummary) GetSourceIdOk() (*string, bool) {
 	return o.SourceId.Get(), o.SourceId.IsSet()
 }
 
-// HasSourceId returns a boolean if a field has been set.
-func (o *TrailerSummary) HasSourceId() bool {
-	if o != nil && o.SourceId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceId gets a reference to the given NullableString and assigns it to the SourceId field.
+// SetSourceId sets field value
 func (o *TrailerSummary) SetSourceId(v string) {
 	o.SourceId.Set(&v)
 }
 
-// SetSourceIdNil sets the value for SourceId to be an explicit nil
-func (o *TrailerSummary) SetSourceIdNil() {
-	o.SourceId.Set(nil)
-}
-
-// UnsetSourceId ensures that no value is present for SourceId, not even an explicit nil
-func (o *TrailerSummary) UnsetSourceId() {
-	o.SourceId.Unset()
-}
-
-// GetTrailerName returns the TrailerName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetTrailerName returns the TrailerName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *TrailerSummary) GetTrailerName() string {
-	if o == nil || IsNil(o.TrailerName.Get()) {
+	if o == nil || o.TrailerName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.TrailerName.Get()
 }
 
-// GetTrailerNameOk returns a tuple with the TrailerName field value if set, nil otherwise
+// GetTrailerNameOk returns a tuple with the TrailerName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TrailerSummary) GetTrailerNameOk() (*string, bool) {
@@ -234,83 +212,101 @@ func (o *TrailerSummary) GetTrailerNameOk() (*string, bool) {
 	return o.TrailerName.Get(), o.TrailerName.IsSet()
 }
 
-// HasTrailerName returns a boolean if a field has been set.
-func (o *TrailerSummary) HasTrailerName() bool {
-	if o != nil && o.TrailerName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTrailerName gets a reference to the given NullableString and assigns it to the TrailerName field.
+// SetTrailerName sets field value
 func (o *TrailerSummary) SetTrailerName(v string) {
 	o.TrailerName.Set(&v)
 }
 
-// SetTrailerNameNil sets the value for TrailerName to be an explicit nil
-func (o *TrailerSummary) SetTrailerNameNil() {
-	o.TrailerName.Set(nil)
-}
-
-// UnsetTrailerName ensures that no value is present for TrailerName, not even an explicit nil
-func (o *TrailerSummary) UnsetTrailerName() {
-	o.TrailerName.Unset()
-}
-
-// GetSourceName returns the SourceName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TrailerSummary) GetSourceName() string {
-	if o == nil || IsNil(o.SourceName.Get()) {
+// GetTspId returns the TspId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *TrailerSummary) GetTspId() string {
+	if o == nil || o.TspId.Get() == nil {
 		var ret string
 		return ret
 	}
+
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TrailerSummary) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// SetTspId sets field value
+func (o *TrailerSummary) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// GetTspSlug returns the TspSlug field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *TrailerSummary) GetTspSlug() string {
+	if o == nil || o.TspSlug.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TrailerSummary) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// SetTspSlug sets field value
+func (o *TrailerSummary) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// GetSourceName returns the SourceName field value
+// If the value is explicit nil, the zero value for TspEnum will be returned
+func (o *TrailerSummary) GetSourceName() TspEnum {
+	if o == nil || o.SourceName.Get() == nil {
+		var ret TspEnum
+		return ret
+	}
+
 	return *o.SourceName.Get()
 }
 
-// GetSourceNameOk returns a tuple with the SourceName field value if set, nil otherwise
+// GetSourceNameOk returns a tuple with the SourceName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TrailerSummary) GetSourceNameOk() (*string, bool) {
+func (o *TrailerSummary) GetSourceNameOk() (*TspEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
 	return o.SourceName.Get(), o.SourceName.IsSet()
 }
 
-// HasSourceName returns a boolean if a field has been set.
-func (o *TrailerSummary) HasSourceName() bool {
-	if o != nil && o.SourceName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceName gets a reference to the given NullableString and assigns it to the SourceName field.
-func (o *TrailerSummary) SetSourceName(v string) {
+// SetSourceName sets field value
+func (o *TrailerSummary) SetSourceName(v TspEnum) {
 	o.SourceName.Set(&v)
 }
 
-// SetSourceNameNil sets the value for SourceName to be an explicit nil
-func (o *TrailerSummary) SetSourceNameNil() {
-	o.SourceName.Set(nil)
-}
-
-// UnsetSourceName ensures that no value is present for SourceName, not even an explicit nil
-func (o *TrailerSummary) UnsetSourceName() {
-	o.SourceName.Unset()
-}
-
-// GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLocation returns the Location field value
+// If the value is explicit nil, the zero value for Location4 will be returned
 func (o *TrailerSummary) GetLocation() Location4 {
-	if o == nil || IsNil(o.Location.Get()) {
+	if o == nil || o.Location.Get() == nil {
 		var ret Location4
 		return ret
 	}
+
 	return *o.Location.Get()
 }
 
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TrailerSummary) GetLocationOk() (*Location4, bool) {
@@ -320,40 +316,23 @@ func (o *TrailerSummary) GetLocationOk() (*Location4, bool) {
 	return o.Location.Get(), o.Location.IsSet()
 }
 
-// HasLocation returns a boolean if a field has been set.
-func (o *TrailerSummary) HasLocation() bool {
-	if o != nil && o.Location.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLocation gets a reference to the given NullableLocation4 and assigns it to the Location field.
+// SetLocation sets field value
 func (o *TrailerSummary) SetLocation(v Location4) {
 	o.Location.Set(&v)
 }
 
-// SetLocationNil sets the value for Location to be an explicit nil
-func (o *TrailerSummary) SetLocationNil() {
-	o.Location.Set(nil)
-}
-
-// UnsetLocation ensures that no value is present for Location, not even an explicit nil
-func (o *TrailerSummary) UnsetLocation() {
-	o.Location.Unset()
-}
-
-// GetH3Index11 returns the H3Index11 field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetH3Index11 returns the H3Index11 field value
+// If the value is explicit nil, the zero value for int32 will be returned
 func (o *TrailerSummary) GetH3Index11() int32 {
-	if o == nil || IsNil(o.H3Index11.Get()) {
+	if o == nil || o.H3Index11.Get() == nil {
 		var ret int32
 		return ret
 	}
+
 	return *o.H3Index11.Get()
 }
 
-// GetH3Index11Ok returns a tuple with the H3Index11 field value if set, nil otherwise
+// GetH3Index11Ok returns a tuple with the H3Index11 field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TrailerSummary) GetH3Index11Ok() (*int32, bool) {
@@ -363,28 +342,9 @@ func (o *TrailerSummary) GetH3Index11Ok() (*int32, bool) {
 	return o.H3Index11.Get(), o.H3Index11.IsSet()
 }
 
-// HasH3Index11 returns a boolean if a field has been set.
-func (o *TrailerSummary) HasH3Index11() bool {
-	if o != nil && o.H3Index11.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetH3Index11 gets a reference to the given NullableInt32 and assigns it to the H3Index11 field.
+// SetH3Index11 sets field value
 func (o *TrailerSummary) SetH3Index11(v int32) {
 	o.H3Index11.Set(&v)
-}
-
-// SetH3Index11Nil sets the value for H3Index11 to be an explicit nil
-func (o *TrailerSummary) SetH3Index11Nil() {
-	o.H3Index11.Set(nil)
-}
-
-// UnsetH3Index11 ensures that no value is present for H3Index11, not even an explicit nil
-func (o *TrailerSummary) UnsetH3Index11() {
-	o.H3Index11.Unset()
 }
 
 func (o TrailerSummary) MarshalJSON() ([]byte, error) {
@@ -398,26 +358,21 @@ func (o TrailerSummary) MarshalJSON() ([]byte, error) {
 func (o TrailerSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["fleet_id"] = o.FleetId
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
+	toSerialize["fleet_ref"] = o.FleetRef.Get()
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["trailer_id"] = o.TrailerId
-	if o.SourceId.IsSet() {
-		toSerialize["source_id"] = o.SourceId.Get()
+	toSerialize["source_id"] = o.SourceId.Get()
+	toSerialize["trailer_name"] = o.TrailerName.Get()
+	toSerialize["tsp_id"] = o.TspId.Get()
+	toSerialize["tsp_slug"] = o.TspSlug.Get()
+	toSerialize["source_name"] = o.SourceName.Get()
+	toSerialize["location"] = o.Location.Get()
+	toSerialize["h3_index_11"] = o.H3Index11.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
-	if o.TrailerName.IsSet() {
-		toSerialize["trailer_name"] = o.TrailerName.Get()
-	}
-	if o.SourceName.IsSet() {
-		toSerialize["source_name"] = o.SourceName.Get()
-	}
-	if o.Location.IsSet() {
-		toSerialize["location"] = o.Location.Get()
-	}
-	if o.H3Index11.IsSet() {
-		toSerialize["h3_index_11"] = o.H3Index11.Get()
-	}
+
 	return toSerialize, nil
 }
 
@@ -427,8 +382,16 @@ func (o *TrailerSummary) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"fleet_id",
+		"fleet_ref",
 		"connection_id",
 		"trailer_id",
+		"source_id",
+		"trailer_name",
+		"tsp_id",
+		"tsp_slug",
+		"source_name",
+		"location",
+		"h3_index_11",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -447,15 +410,30 @@ func (o *TrailerSummary) UnmarshalJSON(data []byte) (err error) {
 
 	varTrailerSummary := _TrailerSummary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTrailerSummary)
+	err = json.Unmarshal(data, &varTrailerSummary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TrailerSummary(varTrailerSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "trailer_id")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "trailer_name")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "h3_index_11")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

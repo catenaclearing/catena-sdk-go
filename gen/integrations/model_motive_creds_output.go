@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &MotiveCredsOutput{}
 
 // MotiveCredsOutput Motive Connection model
 type MotiveCredsOutput struct {
-	ClientId     string      `json:"client_id"`
-	ClientSecret interface{} `json:"client_secret"`
-	AuthCode     interface{} `json:"auth_code"`
-	RedirectUri  string      `json:"redirect_uri"`
+	ClientId             string      `json:"client_id"`
+	ClientSecret         interface{} `json:"client_secret"`
+	AuthCode             interface{} `json:"auth_code"`
+	RedirectUri          string      `json:"redirect_uri"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MotiveCredsOutput MotiveCredsOutput
@@ -168,6 +168,11 @@ func (o MotiveCredsOutput) ToMap() (map[string]interface{}, error) {
 		toSerialize["auth_code"] = o.AuthCode
 	}
 	toSerialize["redirect_uri"] = o.RedirectUri
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -198,15 +203,23 @@ func (o *MotiveCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varMotiveCredsOutput := _MotiveCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMotiveCredsOutput)
+	err = json.Unmarshal(data, &varMotiveCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MotiveCredsOutput(varMotiveCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "auth_code")
+		delete(additionalProperties, "redirect_uri")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

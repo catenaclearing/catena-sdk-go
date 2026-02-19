@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &S3CredsInput{}
 
 // S3CredsInput S3 Connection model
 type S3CredsInput struct {
-	AccessKey  string `json:"access_key"`
-	SecretKey  string `json:"secret_key"`
-	BucketName string `json:"bucket_name"`
-	Region     string `json:"region"`
+	AccessKey            string `json:"access_key"`
+	SecretKey            string `json:"secret_key"`
+	BucketName           string `json:"bucket_name"`
+	Region               string `json:"region"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _S3CredsInput S3CredsInput
@@ -160,6 +160,11 @@ func (o S3CredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["secret_key"] = o.SecretKey
 	toSerialize["bucket_name"] = o.BucketName
 	toSerialize["region"] = o.Region
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -190,15 +195,23 @@ func (o *S3CredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varS3CredsInput := _S3CredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varS3CredsInput)
+	err = json.Unmarshal(data, &varS3CredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = S3CredsInput(varS3CredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_key")
+		delete(additionalProperties, "secret_key")
+		delete(additionalProperties, "bucket_name")
+		delete(additionalProperties, "region")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &GeotabCredsOutput{}
 
 // GeotabCredsOutput Geotab Connection model
 type GeotabCredsOutput struct {
-	Username  interface{}    `json:"username"`
-	Password  interface{}    `json:"password"`
-	Database  string         `json:"database"`
-	SessionId NullableString `json:"session_id,omitempty"`
+	Username             interface{}    `json:"username"`
+	Password             interface{}    `json:"password"`
+	Database             string         `json:"database"`
+	SessionId            NullableString `json:"session_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GeotabCredsOutput GeotabCredsOutput
@@ -188,6 +188,11 @@ func (o GeotabCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.SessionId.IsSet() {
 		toSerialize["session_id"] = o.SessionId.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -217,15 +222,23 @@ func (o *GeotabCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varGeotabCredsOutput := _GeotabCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGeotabCredsOutput)
+	err = json.Unmarshal(data, &varGeotabCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GeotabCredsOutput(varGeotabCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "database")
+		delete(additionalProperties, "session_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

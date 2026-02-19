@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &S3CredsOutput{}
 
 // S3CredsOutput S3 Connection model
 type S3CredsOutput struct {
-	AccessKey  string      `json:"access_key"`
-	SecretKey  interface{} `json:"secret_key"`
-	BucketName string      `json:"bucket_name"`
-	Region     string      `json:"region"`
+	AccessKey            string      `json:"access_key"`
+	SecretKey            interface{} `json:"secret_key"`
+	BucketName           string      `json:"bucket_name"`
+	Region               string      `json:"region"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _S3CredsOutput S3CredsOutput
@@ -164,6 +164,11 @@ func (o S3CredsOutput) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["bucket_name"] = o.BucketName
 	toSerialize["region"] = o.Region
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *S3CredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varS3CredsOutput := _S3CredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varS3CredsOutput)
+	err = json.Unmarshal(data, &varS3CredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = S3CredsOutput(varS3CredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_key")
+		delete(additionalProperties, "secret_key")
+		delete(additionalProperties, "bucket_name")
+		delete(additionalProperties, "region")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

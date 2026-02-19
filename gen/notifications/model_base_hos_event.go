@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -27,7 +26,9 @@ type BaseHosEvent struct {
 	// The Catena fleet this record belongs to (multi-tenant scope).
 	FleetId  string         `json:"fleet_id"`
 	FleetRef NullableString `json:"fleet_ref"`
-	// The name of the source
+	TspId    NullableString `json:"tsp_id,omitempty"`
+	TspSlug  NullableString `json:"tsp_slug,omitempty"`
+	// The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name — use `tsp_id` or `tsp_slug` to identify the specific ELD provider.
 	SourceName TspEnum `json:"source_name"`
 	// The specific fleet↔TSP connection through which this record was sourced.
 	ConnectionId string `json:"connection_id"`
@@ -39,39 +40,41 @@ type BaseHosEvent struct {
 	UpdatedAt time.Time    `json:"updated_at"`
 	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	// When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available.
-	OccurredAt          time.Time                       `json:"occurred_at"`
-	ExecutionId         NullableString                  `json:"execution_id,omitempty"`
-	ScheduleId          NullableString                  `json:"schedule_id,omitempty"`
-	DriverId            NullableString                  `json:"driver_id,omitempty"`
-	VehicleId           NullableString                  `json:"vehicle_id,omitempty"`
-	CoDriverId          NullableString                  `json:"co_driver_id,omitempty"`
-	AdditionalDriverIds map[string]interface{}          `json:"additional_driver_ids,omitempty"`
-	StartedAt           NullableTime                    `json:"started_at,omitempty"`
-	EndedAt             NullableTime                    `json:"ended_at,omitempty"`
-	DriverLastEditAt    NullableTime                    `json:"driver_last_edit_at,omitempty"`
-	DriverCertifiedAt   NullableTime                    `json:"driver_certified_at,omitempty"`
-	HosRulesetCode      NullableHosRulesetCodeEnum      `json:"hos_ruleset_code,omitempty"`
-	TimeZoneCode        NullableTimezoneCodeEnum        `json:"time_zone_code,omitempty"`
-	Notes               NullableString                  `json:"notes,omitempty"`
-	DutyStatusCode      NullableDutyStatusCodeEnum      `json:"duty_status_code,omitempty"`
-	EventTypeCode       NullableHosEventTypeCodeEnum    `json:"event_type_code,omitempty"`
-	EventCode           NullableHosEventCodeEnum        `json:"event_code,omitempty"`
-	LogStateCode        NullableHosRecordStatusCodeEnum `json:"log_state_code,omitempty"`
-	LogOriginCode       NullableHosRecordOriginCodeEnum `json:"log_origin_code,omitempty"`
-	DeferralStatus      NullableString                  `json:"deferral_status,omitempty"`
-	DeferralMinutes     NullableInt32                   `json:"deferral_minutes,omitempty"`
-	EldMalfunctionCode  NullableHosMalfunctionCodeEnum  `json:"eld_malfunction_code,omitempty"`
-	IsExcluded          NullableBool                    `json:"is_excluded,omitempty"`
-	IsTransitioning     NullableBool                    `json:"is_transitioning,omitempty"`
-	RecordStatus        NullableString                  `json:"record_status,omitempty"`
-	RegionCode          NullableHosRegionCodeEnum       `json:"region_code,omitempty"`
-	LocationName        NullableString                  `json:"location_name,omitempty"`
-	Location            NullablePoint                   `json:"location,omitempty"`
-	H3Index11           NullableInt32                   `json:"h3_index_11,omitempty"`
-	Odometer            NullableFloat32                 `json:"odometer,omitempty"`
-	EngineHours         NullableFloat32                 `json:"engine_hours,omitempty"`
-	Sequence            NullableString                  `json:"sequence,omitempty"`
-	Version             NullableString                  `json:"version,omitempty"`
+	OccurredAt           time.Time                       `json:"occurred_at"`
+	ExecutionId          NullableString                  `json:"execution_id,omitempty"`
+	ScheduleId           NullableString                  `json:"schedule_id,omitempty"`
+	Extras               map[string]interface{}          `json:"extras,omitempty"`
+	DriverId             NullableString                  `json:"driver_id,omitempty"`
+	VehicleId            NullableString                  `json:"vehicle_id,omitempty"`
+	CoDriverId           NullableString                  `json:"co_driver_id,omitempty"`
+	AdditionalDriverIds  map[string]interface{}          `json:"additional_driver_ids,omitempty"`
+	StartedAt            NullableTime                    `json:"started_at,omitempty"`
+	EndedAt              NullableTime                    `json:"ended_at,omitempty"`
+	DriverLastEditAt     NullableTime                    `json:"driver_last_edit_at,omitempty"`
+	DriverCertifiedAt    NullableTime                    `json:"driver_certified_at,omitempty"`
+	HosRulesetCode       NullableHosRulesetCodeEnum      `json:"hos_ruleset_code,omitempty"`
+	TimeZoneCode         NullableTimezoneCodeEnum        `json:"time_zone_code,omitempty"`
+	Notes                NullableString                  `json:"notes,omitempty"`
+	DutyStatusCode       NullableDutyStatusCodeEnum      `json:"duty_status_code,omitempty"`
+	EventTypeCode        NullableHosEventTypeCodeEnum    `json:"event_type_code,omitempty"`
+	EventCode            NullableHosEventCodeEnum        `json:"event_code,omitempty"`
+	LogStateCode         NullableHosRecordStatusCodeEnum `json:"log_state_code,omitempty"`
+	LogOriginCode        NullableHosRecordOriginCodeEnum `json:"log_origin_code,omitempty"`
+	DeferralStatus       NullableString                  `json:"deferral_status,omitempty"`
+	DeferralMinutes      NullableInt32                   `json:"deferral_minutes,omitempty"`
+	EldMalfunctionCode   NullableHosMalfunctionCodeEnum  `json:"eld_malfunction_code,omitempty"`
+	IsExcluded           NullableBool                    `json:"is_excluded,omitempty"`
+	IsTransitioning      NullableBool                    `json:"is_transitioning,omitempty"`
+	RecordStatus         NullableString                  `json:"record_status,omitempty"`
+	RegionCode           NullableHosRegionCodeEnum       `json:"region_code,omitempty"`
+	LocationName         NullableString                  `json:"location_name,omitempty"`
+	Location             NullablePoint                   `json:"location,omitempty"`
+	H3Index11            NullableInt32                   `json:"h3_index_11,omitempty"`
+	Odometer             NullableFloat32                 `json:"odometer,omitempty"`
+	EngineHours          NullableFloat32                 `json:"engine_hours,omitempty"`
+	Sequence             NullableString                  `json:"sequence,omitempty"`
+	Version              NullableString                  `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseHosEvent BaseHosEvent
@@ -174,6 +177,92 @@ func (o *BaseHosEvent) GetFleetRefOk() (*string, bool) {
 // SetFleetRef sets field value
 func (o *BaseHosEvent) SetFleetRef(v string) {
 	o.FleetRef.Set(&v)
+}
+
+// GetTspId returns the TspId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseHosEvent) GetTspId() string {
+	if o == nil || IsNil(o.TspId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseHosEvent) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// HasTspId returns a boolean if a field has been set.
+func (o *BaseHosEvent) HasTspId() bool {
+	if o != nil && o.TspId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspId gets a reference to the given NullableString and assigns it to the TspId field.
+func (o *BaseHosEvent) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// SetTspIdNil sets the value for TspId to be an explicit nil
+func (o *BaseHosEvent) SetTspIdNil() {
+	o.TspId.Set(nil)
+}
+
+// UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+func (o *BaseHosEvent) UnsetTspId() {
+	o.TspId.Unset()
+}
+
+// GetTspSlug returns the TspSlug field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseHosEvent) GetTspSlug() string {
+	if o == nil || IsNil(o.TspSlug.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseHosEvent) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// HasTspSlug returns a boolean if a field has been set.
+func (o *BaseHosEvent) HasTspSlug() bool {
+	if o != nil && o.TspSlug.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspSlug gets a reference to the given NullableString and assigns it to the TspSlug field.
+func (o *BaseHosEvent) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// SetTspSlugNil sets the value for TspSlug to be an explicit nil
+func (o *BaseHosEvent) SetTspSlugNil() {
+	o.TspSlug.Set(nil)
+}
+
+// UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
+func (o *BaseHosEvent) UnsetTspSlug() {
+	o.TspSlug.Unset()
 }
 
 // GetSourceName returns the SourceName field value
@@ -447,6 +536,39 @@ func (o *BaseHosEvent) SetScheduleIdNil() {
 // UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
 func (o *BaseHosEvent) UnsetScheduleId() {
 	o.ScheduleId.Unset()
+}
+
+// GetExtras returns the Extras field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseHosEvent) GetExtras() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Extras
+}
+
+// GetExtrasOk returns a tuple with the Extras field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseHosEvent) GetExtrasOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Extras) {
+		return map[string]interface{}{}, false
+	}
+	return o.Extras, true
+}
+
+// HasExtras returns a boolean if a field has been set.
+func (o *BaseHosEvent) HasExtras() bool {
+	if o != nil && !IsNil(o.Extras) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtras gets a reference to the given map[string]interface{} and assigns it to the Extras field.
+func (o *BaseHosEvent) SetExtras(v map[string]interface{}) {
+	o.Extras = v
 }
 
 // GetDriverId returns the DriverId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1742,6 +1864,12 @@ func (o BaseHosEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["fleet_id"] = o.FleetId
 	toSerialize["fleet_ref"] = o.FleetRef.Get()
+	if o.TspId.IsSet() {
+		toSerialize["tsp_id"] = o.TspId.Get()
+	}
+	if o.TspSlug.IsSet() {
+		toSerialize["tsp_slug"] = o.TspSlug.Get()
+	}
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["source_id"] = o.SourceId
@@ -1756,6 +1884,9 @@ func (o BaseHosEvent) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ScheduleId.IsSet() {
 		toSerialize["schedule_id"] = o.ScheduleId.Get()
+	}
+	if o.Extras != nil {
+		toSerialize["extras"] = o.Extras
 	}
 	if o.DriverId.IsSet() {
 		toSerialize["driver_id"] = o.DriverId.Get()
@@ -1847,6 +1978,11 @@ func (o BaseHosEvent) ToMap() (map[string]interface{}, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1882,15 +2018,64 @@ func (o *BaseHosEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseHosEvent := _BaseHosEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseHosEvent)
+	err = json.Unmarshal(data, &varBaseHosEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseHosEvent(varBaseHosEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "occurred_at")
+		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "schedule_id")
+		delete(additionalProperties, "extras")
+		delete(additionalProperties, "driver_id")
+		delete(additionalProperties, "vehicle_id")
+		delete(additionalProperties, "co_driver_id")
+		delete(additionalProperties, "additional_driver_ids")
+		delete(additionalProperties, "started_at")
+		delete(additionalProperties, "ended_at")
+		delete(additionalProperties, "driver_last_edit_at")
+		delete(additionalProperties, "driver_certified_at")
+		delete(additionalProperties, "hos_ruleset_code")
+		delete(additionalProperties, "time_zone_code")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "duty_status_code")
+		delete(additionalProperties, "event_type_code")
+		delete(additionalProperties, "event_code")
+		delete(additionalProperties, "log_state_code")
+		delete(additionalProperties, "log_origin_code")
+		delete(additionalProperties, "deferral_status")
+		delete(additionalProperties, "deferral_minutes")
+		delete(additionalProperties, "eld_malfunction_code")
+		delete(additionalProperties, "is_excluded")
+		delete(additionalProperties, "is_transitioning")
+		delete(additionalProperties, "record_status")
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "location_name")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "h3_index_11")
+		delete(additionalProperties, "odometer")
+		delete(additionalProperties, "engine_hours")
+		delete(additionalProperties, "sequence")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

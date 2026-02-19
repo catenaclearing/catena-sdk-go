@@ -71,7 +71,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -89,7 +89,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -270,7 +270,6 @@ paths:
           endpoint</strong><br/>This endpoint may change or be removed in future releases.
           Backward compatibility is not guaranteed.<br/><br/><em>See <a href="/overview/api-stability-and-versioning">API
           Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>
-      x-hidden: true
   /v2/telematics/users/{user_id}:
     get:
       description: Get detailed information about a specific user.
@@ -1215,7 +1214,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -1233,7 +1232,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -1440,7 +1439,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -1458,7 +1457,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -1474,7 +1473,7 @@ paths:
         style: form
       - description: Return only records that were still active at or after this date
           and time. **Format:** ISO 8601 (UTC) **Applies filter:** `ended_at >= active_from_datetime`
-        example: 2026-02-11T16:42:26.333660+00:00
+        example: 2026-02-18T16:56:19.577462+00:00
         explode: true
         in: query
         name: active_from_datetime
@@ -1486,7 +1485,7 @@ paths:
         style: form
       - description: Return only records that started before this date and time. **Format:**
           ISO 8601 (UTC) **Applies filter:** `started_at < active_to_datetime`
-        example: 2026-02-12T16:42:26.333762+00:00
+        example: 2026-02-19T16:56:19.577537+00:00
         explode: true
         in: query
         name: active_to_datetime
@@ -1839,7 +1838,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -1857,7 +1856,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -1951,10 +1950,10 @@ paths:
         name: size
         required: false
         schema:
-          default: 50
+          default: 300
           description: Page size
-          maximum: 100
-          minimum: 0
+          maximum: 1000
+          minimum: 1
           title: Size
           type: integer
         style: form
@@ -1963,7 +1962,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CursorPage_DvirLogRead_'
+                $ref: '#/components/schemas/_CursorPage_DvirLogRead_'
           description: Successful Response
         "400":
           content:
@@ -2136,10 +2135,10 @@ paths:
         name: size
         required: false
         schema:
-          default: 50
+          default: 300
           description: Page size
-          maximum: 100
-          minimum: 0
+          maximum: 1000
+          minimum: 1
           title: Size
           type: integer
         style: form
@@ -2148,7 +2147,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CursorPage_DvirLogDefectRead_'
+                $ref: '#/components/schemas/_CursorPage_DvirLogDefectRead_'
           description: Successful Response
         "400":
           content:
@@ -2260,7 +2259,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -2278,7 +2277,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -2359,10 +2358,10 @@ paths:
         name: size
         required: false
         schema:
-          default: 50
+          default: 300
           description: Page size
-          maximum: 100
-          minimum: 0
+          maximum: 1000
+          minimum: 1
           title: Size
           type: integer
         style: form
@@ -2371,7 +2370,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CursorPage_DvirLogDefectRead_'
+                $ref: '#/components/schemas/_CursorPage_DvirLogDefectRead_'
           description: Successful Response
         "400":
           content:
@@ -2446,6 +2445,241 @@ paths:
           endpoint</strong><br/>This endpoint may change or be removed in future releases.
           Backward compatibility is not guaranteed.<br/><br/><em>See <a href="/overview/api-stability-and-versioning">API
           Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>
+  /v2/telematics/engine-logs:
+    get:
+      description: List all engine logs.
+      operationId: list_engine_logs
+      parameters:
+      - description: "Limit results to specific fleets using Catena's fleet IDs. *For\
+          \ your own fleet identifiers, use `fleet_refs` instead*"
+        explode: true
+        in: query
+        name: fleet_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: Limit results to specific fleets using your organization's fleet
+          reference identifiers
+        explode: true
+        in: query
+        name: fleet_refs
+        required: false
+        schema:
+          items:
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: Return only records that occurred on or after this date and time.
+          **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
+          **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
+          cannot exceed 45 days
+        example: 2026-02-18T16:56:19.577194+00:00
+        explode: true
+        in: query
+        name: from_datetime
+        required: false
+        schema:
+          description: Return only records that occurred on or after this date and
+            time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
+            **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
+            cannot exceed 45 days
+          format: date-time
+          title: From Datetime
+          type: string
+        style: form
+      - description: Return only records that occurred before this date and time.
+          **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
+          **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
+          cannot exceed 45 days
+        example: 2026-02-19T16:56:19.577365+00:00
+        explode: true
+        in: query
+        name: to_datetime
+        required: false
+        schema:
+          description: Return only records that occurred before this date and time.
+            **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
+            **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
+            cannot exceed 45 days
+          format: date-time
+          title: To Datetime
+          type: string
+        style: form
+      - description: Include the raw data from the telematics provider. *Useful for
+          auditing or accessing fields not normalized by Catena*
+        explode: true
+        in: query
+        name: include_source_data
+        required: false
+        schema:
+          default: false
+          description: Include the raw data from the telematics provider. *Useful
+            for auditing or accessing fields not normalized by Catena*
+          title: Include Source Data
+          type: boolean
+        style: form
+      - description: Limit results to specific drivers. **Maximum:** 100 IDs
+        explode: true
+        in: query
+        name: driver_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: Limit results to specific vehicles. **Maximum:** 100 IDs
+        explode: true
+        in: query
+        name: vehicle_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: "The name of the field to sort results by. If not provided, results\
+          \ will be ordered by `occurred_at`. "
+        explode: true
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "The order of sorting, either `asc` for ascending or `desc` for\
+          \ descending. Defaults to `asc` if `sort_by` is provided without `sort_order`."
+        explode: true
+        in: query
+        name: sort_order
+        required: false
+        schema:
+          default: asc
+          description: "The order of sorting, either `asc` for ascending or `desc`\
+            \ for descending. Defaults to `asc` if `sort_by` is provided without `sort_order`."
+          enum:
+          - asc
+          - desc
+          title: Sort Order
+          type: string
+        style: form
+      - description: Cursor for the next page
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 300
+          description: Page size
+          maximum: 1000
+          minimum: 1
+          title: Size
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_CursorPage_EngineLogRead_'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotImplementedResponse'
+          description: Not Implemented
+      security:
+      - Bearer:
+        - telematics:read
+      summary: List Engine Logs
+      tags:
+      - Maintenance & Vehicle Health
+      x-mint:
+        metadata:
+          title: 🧪 List Engine Logs
+        content: <Callout icon="vial" color="#FFC107" iconType="solid"><strong>Provisional
+          endpoint</strong><br/>This endpoint may change or be removed in future releases.
+          Backward compatibility is not guaranteed.<br/><br/><em>See <a href="/overview/api-stability-and-versioning">API
+          Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>
   /v2/telematics/vehicle-locations:
     get:
       description: Get a paginated list of vehicle locations accessible to your organization.
@@ -2493,7 +2727,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -2511,7 +2745,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -2661,7 +2895,7 @@ paths:
       - Fleet Operations & Tracking
       x-mint:
         content: |-
-          <Note>All numeric values are returned in SI units (e.g., km/h, km, °C, kPa).</Note>
+          <Note>All units of measure are returned in SI units (e.g., meters, m/s, Kelvin, Pa).</Note>
           <Warning>When <code>only_latest=true</code>, the <code>from_datetime</code> and <code>to_datetime</code> query parameters are not applied. Only the most recent location per vehicle is returned regardless of the date range specified.</Warning>
           <Warning>When <code>only_latest=false</code>, exactly one <code>vehicle_ids</code> value or one <code>driver_ids</code> value must be specified. To retrieve location history for multiple vehicles or drivers, make separate requests for each.</Warning>
   /v2/telematics/trailer-locations:
@@ -2711,7 +2945,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -2729,7 +2963,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -3112,7 +3346,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -3130,7 +3364,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -4135,7 +4369,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -4153,7 +4387,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -4545,7 +4779,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
           **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-11T16:42:26.333445+00:00
+        example: 2026-02-18T16:56:19.577194+00:00
         explode: true
         in: query
         name: from_datetime
@@ -4563,7 +4797,7 @@ paths:
           **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
           **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
           cannot exceed 45 days
-        example: 2026-02-12T16:42:26.333571+00:00
+        example: 2026-02-19T16:56:19.577365+00:00
         explode: true
         in: query
         name: to_datetime
@@ -6409,6 +6643,52 @@ components:
           nullable: true
           type: string
       title: BadRequest
+    CanonicalFaultCodeEnum:
+      description: Canonical fault codes for various engine subsystems.
+      enum:
+      - BRAKE_SWITCH_CIRCUIT
+      - ENG_COOLANT_TEMP_HIGH
+      - ENG_COOLANT_TEMP_LOW
+      - ENG_FUEL_PRESSURE_HIGH
+      - ENG_FUEL_PRESSURE_LOW
+      - ENG_FUEL_PRESSURE_SIGNAL_ERRATIC
+      - ENG_MAP_HIGH
+      - ENG_MAP_LOW
+      - ENG_MAP_SIGNAL_ERRATIC
+      - ENG_OIL_PRESSURE_HIGH
+      - ENG_OIL_PRESSURE_LOW
+      - ENG_OIL_TEMP_HIGH
+      - ENG_OIL_TEMP_LOW
+      - ENG_OVERSPEED
+      - ENG_SPEED_CIRCUIT_FAULT
+      - ENG_SPEED_NO_SIGNAL
+      - ENG_SPEED_SIGNAL_ERRATIC
+      - ENG_THROTTLE_HIGH
+      - ENG_THROTTLE_LOW
+      - ENG_THROTTLE_SIGNAL_ERRATIC
+      - GEAR_MODULE_SIGNAL_ERRATIC
+      - GEAR_MODULE_NO_SIGNAL
+      - GEAR_MODULE_CALIBRATION_INVALID
+      - TRANS_FLUID_DETERIORATED
+      - TRANS_FLUID_LEVEL_HIGH
+      - TRANS_FLUID_LEVEL_LOW
+      - TRANS_FLUID_OVER_TEMP
+      - TRANS_FLUID_TEMP_HIGH
+      - TRANS_FLUID_TEMP_LOW
+      - TRANS_FLUID_TEMP_SIGNAL_ERRATIC
+      - TRANS_CONTROL_SYSTEM_PERFORMANCE
+      - TRANS_FILTER_MAINTENANCE_ALERT
+      - TRANS_FILTER_MAINTENANCE_REQUIRED
+      - RETARDER_OIL_TEMP_HIGH
+      - RETARDER_OIL_TEMP_LOW
+      - RETARDER_OIL_TEMP_OVER_TEMP
+      - RETARDER_PRESSURE_HIGH
+      - RETARDER_PRESSURE_LOW
+      - VEH_SPEED_SIGNAL_ERRATIC
+      - CRANK_ENABLE_CIRCUIT_HIGH
+      - CRANK_ENABLE_CIRCUIT_LOW
+      title: CanonicalFaultCodeEnum
+      type: string
     Conflict:
       example:
         code: 3
@@ -6427,212 +6707,6 @@ components:
           nullable: true
           type: string
       title: Conflict
-    CursorPage_DvirLogDefectRead_:
-      example:
-        next_page: next_page
-        total: 0
-        current_page_backwards: current_page_backwards
-        previous_page: previous_page
-        items:
-        - fleet_ref: fleet_ref
-          source_data: "{}"
-          notes: notes
-          created_at: 2000-01-23T04:56:07.000+00:00
-          description: description
-          defect_name: defect_name
-          deleted_at: 2000-01-23T04:56:07.000+00:00
-          occurred_at: 2000-01-23T04:56:07.000+00:00
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          dvir_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          defect_code: defect_code
-          is_safety_critical: true
-          resolved_at: 2000-01-23T04:56:07.000+00:00
-          source_dvir_log_id: source_dvir_log_id
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_id: source_id
-          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
-          defect_type: defect_type
-          source_data_hash: source_data_hash
-          status: status
-        - fleet_ref: fleet_ref
-          source_data: "{}"
-          notes: notes
-          created_at: 2000-01-23T04:56:07.000+00:00
-          description: description
-          defect_name: defect_name
-          deleted_at: 2000-01-23T04:56:07.000+00:00
-          occurred_at: 2000-01-23T04:56:07.000+00:00
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          dvir_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          defect_code: defect_code
-          is_safety_critical: true
-          resolved_at: 2000-01-23T04:56:07.000+00:00
-          source_dvir_log_id: source_dvir_log_id
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_id: source_id
-          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
-          defect_type: defect_type
-          source_data_hash: source_data_hash
-          status: status
-        current_page: current_page
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/DvirLogDefectRead'
-          type: array
-        total:
-          minimum: 0.0
-          title: Total
-          type: integer
-        current_page:
-          nullable: true
-          type: string
-        current_page_backwards:
-          nullable: true
-          type: string
-        previous_page:
-          nullable: true
-          type: string
-        next_page:
-          nullable: true
-          type: string
-      required:
-      - items
-      - total
-      title: "CursorPage[DvirLogDefectRead]"
-    CursorPage_DvirLogRead_:
-      example:
-        next_page: next_page
-        total: 0
-        current_page_backwards: current_page_backwards
-        previous_page: previous_page
-        items:
-        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          h3_index_11: 5
-          created_at: 2000-01-23T04:56:07.000+00:00
-          engine_hours: 1.4658129805029452
-          defect_count: 5
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          log_type: log_type
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          is_safety_critical: true
-          tsp_trailer_id: tsp_trailer_id
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_tsp_trailer_id: source_tsp_trailer_id
-          source_name: ada
-          duration_seconds: 0.8008281904610115
-          odometer_km: 6.027456183070403
-          fleet_ref: fleet_ref
-          source_data: "{}"
-          driver_comment: driver_comment
-          certify_comment: certify_comment
-          deleted_at: 2000-01-23T04:56:07.000+00:00
-          version: version
-          occurred_at: 2000-01-23T04:56:07.000+00:00
-          source_driver_id: source_driver_id
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          authority_address: authority_address
-          defects:
-          - fluid_levels
-          - fluid_levels
-          location:
-            bbox:
-            - ""
-            - ""
-            - ""
-            - ""
-            coordinates:
-            - ""
-            - ""
-            type: Point
-          source_id: source_id
-          authority_name: authority_name
-          inspected_by: inspected_by
-          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_vehicle_id: source_vehicle_id
-          source_data_hash: source_data_hash
-        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          h3_index_11: 5
-          created_at: 2000-01-23T04:56:07.000+00:00
-          engine_hours: 1.4658129805029452
-          defect_count: 5
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          log_type: log_type
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          is_safety_critical: true
-          tsp_trailer_id: tsp_trailer_id
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_tsp_trailer_id: source_tsp_trailer_id
-          source_name: ada
-          duration_seconds: 0.8008281904610115
-          odometer_km: 6.027456183070403
-          fleet_ref: fleet_ref
-          source_data: "{}"
-          driver_comment: driver_comment
-          certify_comment: certify_comment
-          deleted_at: 2000-01-23T04:56:07.000+00:00
-          version: version
-          occurred_at: 2000-01-23T04:56:07.000+00:00
-          source_driver_id: source_driver_id
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          authority_address: authority_address
-          defects:
-          - fluid_levels
-          - fluid_levels
-          location:
-            bbox:
-            - ""
-            - ""
-            - ""
-            - ""
-            coordinates:
-            - ""
-            - ""
-            type: Point
-          source_id: source_id
-          authority_name: authority_name
-          inspected_by: inspected_by
-          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_vehicle_id: source_vehicle_id
-          source_data_hash: source_data_hash
-        current_page: current_page
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/DvirLogRead'
-          type: array
-        total:
-          minimum: 0.0
-          title: Total
-          type: integer
-        current_page:
-          nullable: true
-          type: string
-        current_page_backwards:
-          nullable: true
-          type: string
-        previous_page:
-          nullable: true
-          type: string
-        next_page:
-          nullable: true
-          type: string
-      required:
-      - items
-      - total
-      title: "CursorPage[DvirLogRead]"
     DriverSafetyEventEnum:
       description: Enum for driver safety events
       enum:
@@ -6667,18 +6741,26 @@ components:
     DriverSafetyEventRead:
       description: DriverSafetyEvent model for API responses
       example:
-        duration_seconds: 6
         driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        fleet_ref: fleet_ref
-        source_data: "{}"
         h3_index_11: 0
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
+        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        event: collision
+        tsp_slug: tsp_slug
+        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_name: ada
+        duration_seconds: 6
+        fleet_ref: fleet_ref
+        source_data: "{}"
         deleted_at: 2000-01-23T04:56:07.000+00:00
         event_metadata: "{}"
         occurred_at: 2000-01-23T04:56:07.000+00:00
         source_driver_id: source_driver_id
-        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        updated_at: 2000-01-23T04:56:07.000+00:00
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         location:
           bbox:
@@ -6690,13 +6772,8 @@ components:
           - ""
           - ""
           type: Point
-        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
-        event: collision
         schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_name: ada
         source_vehicle_id: source_vehicle_id
         source_data_hash: source_data_hash
       properties:
@@ -6733,6 +6810,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -6764,6 +6848,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         driver_id:
           format: uuid
           nullable: true
@@ -6816,6 +6903,7 @@ components:
         license_country: license_country
         license_expiration: 2000-01-23
         license_number: license_number
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         employee_number: employee_number
@@ -6823,8 +6911,9 @@ components:
         hos_violations_30d: 6
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
+        tsp_slug: tsp_slug
         first_name: first_name
-        source_name: source_name
+        source_name: ada
         safety_events_30d: 0
         username: username
         status: status
@@ -6848,9 +6937,15 @@ components:
           format: uuid
           title: User Id
           type: string
-        source_name:
+        tsp_id:
+          format: uuid
           nullable: true
           type: string
+        tsp_slug:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
         source_id:
           nullable: true
           type: string
@@ -6900,8 +6995,24 @@ components:
           type: integer
       required:
       - connection_id
+      - employee_number
+      - first_name
       - fleet_id
+      - fleet_ref
+      - hos_ruleset_code
+      - last_name
+      - license_country
+      - license_expiration
+      - license_number
+      - license_region
+      - phone_number
+      - source_id
+      - source_name
+      - status
+      - tsp_id
+      - tsp_slug
       - user_id
+      - username
       title: DriverSummary
     DutyStatusCodeEnum:
       description: Enum for duty status codes
@@ -6982,28 +7093,31 @@ components:
     DvirLogDefectRead:
       description: DvirLogDefect model for API responses
       example:
-        fleet_ref: fleet_ref
-        source_data: "{}"
         notes: notes
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         description: description
         defect_name: defect_name
-        deleted_at: 2000-01-23T04:56:07.000+00:00
-        occurred_at: 2000-01-23T04:56:07.000+00:00
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
-        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        dvir_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        defect_code: defect_code
         is_safety_critical: true
-        resolved_at: 2000-01-23T04:56:07.000+00:00
         source_dvir_log_id: source_dvir_log_id
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_id: source_id
-        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
         source_name: ada
         defect_type: defect_type
+        fleet_ref: fleet_ref
+        source_data: "{}"
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        occurred_at: 2000-01-23T04:56:07.000+00:00
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        dvir_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        defect_code: defect_code
+        resolved_at: 2000-01-23T04:56:07.000+00:00
+        source_id: source_id
+        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_data_hash: source_data_hash
         status: status
       properties:
@@ -7040,6 +7154,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -7071,6 +7192,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         dvir_log_id:
           format: uuid
           nullable: true
@@ -7119,6 +7243,7 @@ components:
         driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         h3_index_11: 5
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         engine_hours: 1.4658129805029452
         defect_count: 5
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7128,6 +7253,7 @@ components:
         tsp_trailer_id: tsp_trailer_id
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_tsp_trailer_id: source_tsp_trailer_id
         source_name: ada
@@ -7141,6 +7267,7 @@ components:
         version: version
         occurred_at: 2000-01-23T04:56:07.000+00:00
         source_driver_id: source_driver_id
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         authority_address: authority_address
         defects:
@@ -7196,6 +7323,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -7227,6 +7361,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         vehicle_id:
           format: uuid
           nullable: true
@@ -7303,6 +7440,171 @@ components:
       - source_name
       - updated_at
       title: DvirLogRead
+    EngineLogRead:
+      description: Engine log model for API responses
+      example:
+        driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
+        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        mil_status: true
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        canonical_code: BRAKE_SWITCH_CIRCUIT
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fault_code_description: fault_code_description
+        tsp_slug: tsp_slug
+        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_name: ada
+        fleet_ref: fleet_ref
+        source_data: "{}"
+        fault_code_source: J1708
+        engine_status: true
+        source_co_driver_id: source_co_driver_id
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        occurred_at: 2000-01-23T04:56:07.000+00:00
+        source_driver_id: source_driver_id
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_id: source_id
+        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fault_code: "{}"
+        source_vehicle_id: source_vehicle_id
+        source_data_hash: source_data_hash
+        status: active
+      properties:
+        fleet_id:
+          format: uuid
+          nullable: true
+          type: string
+        fleet_ref:
+          nullable: true
+          type: string
+        id:
+          description: Unique identifier of the record at Catena Telematics.
+          format: uuid
+          title: Id
+          type: string
+        created_at:
+          description: "Immutable: The datetime the record was ingested into Catena\
+            \ Telematics."
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: The dateime the record was last modified in Catena Telematics.
+          format: date-time
+          title: Updated At
+          type: string
+        deleted_at:
+          format: date-time
+          nullable: true
+          type: string
+        connection_id:
+          description: Unique identifier of the connection at Catena Telematics through
+            which this record was ingested. A connection represents a Fleet/TSP pairing.
+          format: uuid
+          title: Connection Id
+          type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
+        source_data:
+          description: "Raw source payload as ingested from the TSP. **Note: use it\
+            \ for audit/debugging.**"
+          title: Source Data
+          type: object
+        source_id:
+          description: "Unique identifier of the record in the TSP. **Note: we generate\
+            \ a unique composite key based on available fields if the TSP does not\
+            \ provide an unique ID.**"
+          title: Source Id
+          type: string
+        source_data_hash:
+          description: "SHA-256 hash of the source data payload. **Note: we use it\
+            \ internally for idempotence and deduplication.**"
+          maxLength: 64
+          title: Source Data Hash
+          type: string
+        occurred_at:
+          format: date-time
+          nullable: true
+          type: string
+        execution_id:
+          format: uuid
+          nullable: true
+          type: string
+        schedule_id:
+          format: uuid
+          nullable: true
+          type: string
+        extras:
+          nullable: true
+          type: object
+        vehicle_id:
+          format: uuid
+          nullable: true
+          type: string
+        driver_id:
+          format: uuid
+          nullable: true
+          type: string
+        co_driver_id:
+          format: uuid
+          nullable: true
+          type: string
+        source_driver_id:
+          nullable: true
+          type: string
+        source_vehicle_id:
+          nullable: true
+          type: string
+        source_co_driver_id:
+          nullable: true
+          type: string
+        fault_code_source:
+          $ref: '#/components/schemas/FaultCodeSourceEnum'
+        fault_code:
+          nullable: true
+          type: object
+        fault_code_description:
+          nullable: true
+          type: string
+        canonical_code:
+          $ref: '#/components/schemas/CanonicalFaultCodeEnum'
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        engine_status:
+          nullable: true
+          type: boolean
+        mil_status:
+          nullable: true
+          type: boolean
+      required:
+      - connection_id
+      - created_at
+      - fleet_id
+      - id
+      - source_data_hash
+      - source_id
+      - source_name
+      - updated_at
+      title: EngineLogRead
+    FaultCodeSourceEnum:
+      description: Sources of fault codes in engine logs.
+      enum:
+      - J1708
+      - J1939
+      - OBD2
+      title: FaultCodeSourceEnum
+      type: string
     FleetSummary:
       description: |-
         Aggregated metrics for a fleet, grouped by your fleet reference.
@@ -7350,6 +7652,8 @@ components:
             update (indicates active telematics).
           title: Vehicles With Locations
           type: integer
+      required:
+      - fleet_ref
       title: FleetSummary
     Forbidden:
       example:
@@ -7392,6 +7696,7 @@ components:
         is_sleeper_eligible: true
         deleted_at: 2000-01-23T04:56:07.000+00:00
         occurred_at: 2000-01-23T04:56:07.000+00:00
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         forecast_horizon_days: 7
         next_10hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
         exception_codes:
@@ -7405,6 +7710,7 @@ components:
         duty_status_code: "OFF"
         is_cycle_applicable: true
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         is_adverse_driving_exemption_available: true
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         shift_driving_violation_duration_seconds: 4
@@ -7413,6 +7719,7 @@ components:
         available_cycle_seconds: 1
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         meal_break_due_at: 2000-01-23T04:56:07.000+00:00
+        tsp_slug: tsp_slug
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_name: ada
         cycle_ends_at: 2000-01-23T04:56:07.000+00:00
@@ -7458,6 +7765,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -7489,6 +7803,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         driver_id:
           format: uuid
           nullable: true
@@ -7623,12 +7940,14 @@ components:
         driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         duration_driving_seconds: 5
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         duration_personal_conveyance_seconds: 5
         duration_cycle_on_duty_seconds: 3
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
         source_name: ada
         duration_unknown_seconds: 9
         fleet_ref: fleet_ref
@@ -7639,6 +7958,7 @@ components:
         deleted_at: 2000-01-23T04:56:07.000+00:00
         occurred_at: 2000-01-23T04:56:07.000+00:00
         source_driver_id: source_driver_id
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         duration_yard_move_seconds: 2
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
@@ -7680,6 +8000,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -7711,6 +8038,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         driver_id:
           format: uuid
           nullable: true
@@ -7781,28 +8111,31 @@ components:
     HosEventAttachmentRead:
       description: HosEventAttachment model for API responses
       example:
-        fleet_ref: fleet_ref
-        source_data: "{}"
-        file_name: file_name
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         description: description
-        deleted_at: 2000-01-23T04:56:07.000+00:00
-        file_size: 0
         source_url: source_url
-        url: url
-        occurred_at: 2000-01-23T04:56:07.000+00:00
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         uploaded_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
-        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         file_type: file_type
-        hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         checksum: checksum
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
+        source_name: ada
+        fleet_ref: fleet_ref
+        source_data: "{}"
+        file_name: file_name
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        file_size: 0
+        url: url
+        occurred_at: 2000-01-23T04:56:07.000+00:00
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
         schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_name: ada
         last_edit_at: 2000-01-23T04:56:07.000+00:00
         source_data_hash: source_data_hash
       properties:
@@ -7839,6 +8172,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -7870,6 +8210,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         hos_event_id:
           format: uuid
           nullable: true
@@ -7956,6 +8299,7 @@ components:
         record_status: record_status
         h3_index_11: 6
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         annotations:
           created_at: 2000-01-23T04:56:07.000+00:00
           remarks: remarks
@@ -7972,6 +8316,7 @@ components:
         log_state_code: ACTIVE
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_name: ada
         log_origin_code: AUTO
@@ -7985,6 +8330,7 @@ components:
         occurred_at: 2000-01-23T04:56:07.000+00:00
         deferral_status: deferral_status
         sequence: sequence
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         location_name: location_name
         is_excluded: true
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8038,6 +8384,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -8069,6 +8422,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         driver_id:
           format: uuid
           nullable: true
@@ -8517,12 +8873,14 @@ components:
         violation_category: Cycle
         source_hos_log_id: source_hos_log_id
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         duration: 0
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
         violation_code: DH_DAILY_OVER
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
         source_name: ada
         fleet_ref: fleet_ref
         source_data: "{}"
@@ -8532,6 +8890,7 @@ components:
         source_driver_id: source_driver_id
         source_hos_event_id: source_hos_event_id
         start_time: 2000-01-23T04:56:07.000+00:00
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hours_limit: 6.027456183070403
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8574,6 +8933,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -8605,6 +8971,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         hos_event_id:
           format: uuid
           nullable: true
@@ -8664,15 +9033,18 @@ components:
         source_data: "{}"
         year: 6
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         deleted_at: 2000-01-23T04:56:07.000+00:00
         occurred_at: 2000-01-23T04:56:07.000+00:00
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
         month: 0
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
+        tsp_slug: tsp_slug
         schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_name: ada
@@ -8712,6 +9084,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -8743,6 +9122,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         vehicle_id:
           format: uuid
           nullable: true
@@ -9303,6 +9685,24 @@ components:
       - message
       - retry_after_seconds
       title: RetryAfterDetail
+    StatusEnum:
+      description: Enum for statuses
+      enum:
+      - active
+      - inactive
+      - paused
+      - expired
+      - cancelled
+      - pending
+      - deleted
+      - stale
+      - success
+      - failed
+      - scheduled
+      - accepted
+      - declined
+      title: StatusEnum
+      type: string
     TimeSeriesDataPoint:
       description: A single data point for time-series growth charts.
       example:
@@ -9528,14 +9928,9 @@ components:
         Use this to build live fleet maps, dispatch boards, or trailer status dashboards.
         Includes the most recent location and other relevant metrics.
       example:
-        driver_name: driver_name
-        trailer_name: trailer_name
         driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         trailer_h3_index_11: 0
-        vehicle_h3_index_11: 6
         trailer_location_occurred_at: 2000-01-23T04:56:07.000+00:00
-        trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        vehicle_location_occurred_at: 2000-01-23T04:56:07.000+00:00
         vehicle_location:
           bbox:
           - ""
@@ -9556,17 +9951,30 @@ components:
           - ""
           - ""
           type: Point
+        driver_name: driver_name
+        trailer_name: trailer_name
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        vehicle_h3_index_11: 6
+        trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        vehicle_location_occurred_at: 2000-01-23T04:56:07.000+00:00
+        tsp_slug: tsp_slug
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_name: source_name
+        source_name: ada
       properties:
         trailer_id:
           description: Unique Catena identifier for the trailer.
           format: uuid
           title: Trailer Id
           type: string
-        source_name:
+        tsp_id:
+          format: uuid
           nullable: true
           type: string
+        tsp_slug:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
         trailer_name:
           nullable: true
           type: string
@@ -9602,8 +10010,20 @@ components:
         vehicle_location:
           $ref: '#/components/schemas/Vehicle_Location'
       required:
+      - driver_id
+      - driver_name
+      - source_name
+      - trailer_h3_index_11
       - trailer_id
+      - trailer_location
       - trailer_location_occurred_at
+      - trailer_name
+      - tsp_id
+      - tsp_slug
+      - vehicle_h3_index_11
+      - vehicle_id
+      - vehicle_location
+      - vehicle_location_occurred_at
       title: TrailerLiveLocation
     TrailerLocationRead:
       description: Trailer location API model with fleet fields.
@@ -9613,9 +10033,11 @@ components:
         source_data: "{}"
         h3_index_11: 0
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         deleted_at: 2000-01-23T04:56:07.000+00:00
         occurred_at: 2000-01-23T04:56:07.000+00:00
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9632,6 +10054,7 @@ components:
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
+        tsp_slug: tsp_slug
         schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_name: ada
@@ -9671,6 +10094,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -9702,6 +10132,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         trailer_id:
           description: Internal trailer identifier (Catena FK).
           format: uuid
@@ -9740,10 +10173,12 @@ components:
         trailer_length: 1.4658129805029452
         eld_id: eld_id
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         eld_product_id: eld_product_id
         external_id: external_id
         speed_unit: speed_unit
         odometer_unit: odometer_unit
+        license_plate_number: license_plate_number
         trailer_type: trailer_type
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         trailer_name: trailer_name
@@ -9754,6 +10189,7 @@ components:
         vin: vin
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
         source_name: ada
         eld_serial_number: eld_serial_number
         fleet_ref: fleet_ref
@@ -9765,6 +10201,7 @@ components:
         deleted_at: 2000-01-23T04:56:07.000+00:00
         fuel_unit: fuel_unit
         occurred_at: 2000-01-23T04:56:07.000+00:00
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         engine_type: engine_type
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         license_plate_region: license_plate_region
@@ -9809,6 +10246,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -9840,6 +10284,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         trailer_name:
           nullable: true
           type: string
@@ -9859,6 +10306,9 @@ components:
           nullable: true
           type: string
         license_plate_country:
+          nullable: true
+          type: string
+        license_plate_number:
           nullable: true
           type: string
         started_at:
@@ -9937,6 +10387,7 @@ components:
         Use this to build trailer inventories or track trailer locations across your fleet.
       example:
         trailer_name: trailer_name
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         fleet_ref: fleet_ref
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         h3_index_11: 0
@@ -9953,7 +10404,8 @@ components:
           type: Point
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
-        source_name: source_name
+        tsp_slug: tsp_slug
+        source_name: ada
       properties:
         fleet_id:
           description: Catena fleet identifier.
@@ -9980,9 +10432,15 @@ components:
         trailer_name:
           nullable: true
           type: string
-        source_name:
+        tsp_id:
+          format: uuid
           nullable: true
           type: string
+        tsp_slug:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
         location:
           $ref: '#/components/schemas/Location_4'
         h3_index_11:
@@ -9991,7 +10449,15 @@ components:
       required:
       - connection_id
       - fleet_id
+      - fleet_ref
+      - h3_index_11
+      - location
+      - source_id
+      - source_name
       - trailer_id
+      - trailer_name
+      - tsp_id
+      - tsp_slug
       title: TrailerSummary
     TspEnum:
       description: Enum for TSPs
@@ -10200,29 +10666,19 @@ components:
       description: User model for API responses
       example:
         notes: notes
-        company_groups: "{}"
-        created_at: 2000-01-23T04:56:07.000+00:00
-        user_designation: user_designation
         license_expiration: 2000-01-23
         company_address: company_address
-        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        updated_at: 2000-01-23T04:56:07.000+00:00
         allow_yard_move: true
         allow_adverse_driving: true
         is_driver: true
         last_tsp_login: 2000-01-23T04:56:07.000+00:00
-        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        first_name: first_name
-        source_name: ada
         user_email: user_email
         hos_ruleset_code: US_INT_PROP_60_7
         fleet_ref: fleet_ref
         source_data: "{}"
-        is_active: true
         default_time_zone: UTC
         license_region: license_region
-        last_name: last_name
         license_country: license_country
         deleted_at: 2000-01-23T04:56:07.000+00:00
         private_user_groups: "{}"
@@ -10230,22 +10686,35 @@ components:
         occurred_at: 2000-01-23T04:56:07.000+00:00
         country_code: country_code
         security_groups: "{}"
-        allow_personal_conveyance: true
-        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        authority_address: authority_address
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         company_name: company_name
         started_at: 2000-01-23T04:56:07.000+00:00
         employee_number: employee_number
         phone_number: phone_number
-        source_id: source_id
         report_groups: "{}"
-        carrier_number: carrier_number
         authority_name: authority_name
         schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ended_at: 2000-01-23T04:56:07.000+00:00
         source_data_hash: source_data_hash
-        username: username
         status: status
+        company_groups: "{}"
+        created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
+        user_designation: user_designation
+        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
+        first_name: first_name
+        source_name: ada
+        is_active: true
+        last_name: last_name
+        allow_personal_conveyance: true
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        authority_address: authority_address
+        source_id: source_id
+        carrier_number: carrier_number
+        ended_at: 2000-01-23T04:56:07.000+00:00
+        username: username
       properties:
         fleet_id:
           format: uuid
@@ -10280,6 +10749,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -10311,6 +10787,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         username:
           nullable: true
           type: string
@@ -10459,11 +10938,12 @@ components:
         fuel_level: 5.962133916683182
         h3_index_11: 0
         engine_hours: 5.637376656633329
-        speed: 6
+        speed: 6.027456183070403
         coolant_temperature: 7.061401241503109
         driver_name: driver_name
         occurred_at: 2000-01-23T04:56:07.000+00:00
         oil_pressure: 2.3021358869347655
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         vin: vin
         location:
           bbox:
@@ -10476,7 +10956,8 @@ components:
           - ""
           type: Point
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_name: source_name
+        tsp_slug: tsp_slug
+        source_name: ada
         vehicle_name: vehicle_name
       properties:
         vehicle_id:
@@ -10490,9 +10971,15 @@ components:
         vehicle_name:
           nullable: true
           type: string
-        source_name:
+        tsp_id:
+          format: uuid
           nullable: true
           type: string
+        tsp_slug:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
         driver_id:
           format: uuid
           nullable: true
@@ -10505,7 +10992,7 @@ components:
           type: integer
         speed:
           nullable: true
-          type: integer
+          type: number
         odometer:
           nullable: true
           type: number
@@ -10530,8 +11017,23 @@ components:
         location:
           $ref: '#/components/schemas/Location_4'
       required:
+      - coolant_temperature
+      - driver_id
+      - driver_name
+      - engine_hours
+      - fuel_level
+      - h3_index_11
+      - location
       - occurred_at
+      - odometer
+      - oil_pressure
+      - source_name
+      - speed
+      - tsp_id
+      - tsp_slug
       - vehicle_id
+      - vehicle_name
+      - vin
       title: VehicleLiveLocation
     VehicleLocationRead:
       description: Vehicle location API model with fleet fields.
@@ -10540,6 +11042,7 @@ components:
         fuel_level: 5.962133916683182
         h3_index_11: 0
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         engine_hours: 2.3021358869347655
         speed: 6
         coolant_temperature: 9.301444243932576
@@ -10548,6 +11051,7 @@ components:
         updated_at: 2000-01-23T04:56:07.000+00:00
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_name: ada
         fuel_value: 5.637376656633329
@@ -10559,6 +11063,7 @@ components:
         occurred_at: 2000-01-23T04:56:07.000+00:00
         source_driver_id: source_driver_id
         oil_pressure: 7.061401241503109
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         location:
           bbox:
@@ -10608,6 +11113,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -10639,6 +11151,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         vehicle_id:
           format: uuid
           nullable: true
@@ -10703,6 +11218,7 @@ components:
         engine_vin: engine_vin
         eld_id: eld_id
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         eld_product_id: eld_product_id
         external_id: external_id
         speed_unit: speed_unit
@@ -10716,6 +11232,7 @@ components:
         vin: vin
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
         source_name: ada
         eld_serial_number: eld_serial_number
         fleet_ref: fleet_ref
@@ -10728,6 +11245,7 @@ components:
         deleted_at: 2000-01-23T04:56:07.000+00:00
         fuel_unit: fuel_unit
         occurred_at: 2000-01-23T04:56:07.000+00:00
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         engine_type: engine_type
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         license_plate_region: license_plate_region
@@ -10773,6 +11291,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -10804,6 +11329,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         vehicle_name:
           nullable: true
           type: string
@@ -10900,18 +11428,21 @@ components:
         fleet_ref: fleet_ref
         source_data: "{}"
         created_at: 2000-01-23T04:56:07.000+00:00
+        extras: "{}"
         sensor_event: sensor_event
         sensor_value: 0.8008281904610115
         deleted_at: 2000-01-23T04:56:07.000+00:00
         occurred_at: 2000-01-23T04:56:07.000+00:00
         raw_event: raw_event
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
         sensor_unit: sensor_unit
+        tsp_slug: tsp_slug
         schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_name: ada
@@ -10951,6 +11482,13 @@ components:
           format: uuid
           title: Connection Id
           type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
         source_name:
           $ref: '#/components/schemas/TspEnum'
         source_data:
@@ -10982,6 +11520,9 @@ components:
           format: uuid
           nullable: true
           type: string
+        extras:
+          nullable: true
+          type: object
         vehicle_id:
           format: uuid
           nullable: true
@@ -11019,14 +11560,21 @@ components:
         Combines registration details with the most recent location and engine data.
       example:
         last_location_ping: 2000-01-23T04:56:07.000+00:00
-        fleet_ref: fleet_ref
-        last_engine_hours: 5.637376656633329
         engine_vin: engine_vin
-        model_type: model_type
         last_location_h3_index_11: 6
-        model_year: 0
         last_speed_reading: 2.3021358869347655
         license_plate_number: license_plate_number
+        oem: oem
+        last_fuel_level: 1.4658129805029452
+        vin: vin
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
+        source_name: ada
+        fleet_ref: fleet_ref
+        last_engine_hours: 5.637376656633329
+        model_type: model_type
+        model_year: 0
         last_location:
           bbox:
           - ""
@@ -11037,17 +11585,12 @@ components:
           - ""
           - ""
           type: Point
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         license_plate_region: license_plate_region
         last_odometer_reading: 5.962133916683182
-        oem: oem
-        last_fuel_level: 1.4658129805029452
         license_plate_country: license_plate_country
-        vin: vin
-        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
-        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_name: source_name
         status: status
         vehicle_name: vehicle_name
       properties:
@@ -11070,9 +11613,15 @@ components:
           format: uuid
           title: Vehicle Id
           type: string
-        source_name:
+        tsp_id:
+          format: uuid
           nullable: true
           type: string
+        tsp_slug:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
         source_id:
           nullable: true
           type: string
@@ -11129,8 +11678,30 @@ components:
           type: number
       required:
       - connection_id
+      - engine_vin
       - fleet_id
+      - fleet_ref
+      - last_engine_hours
+      - last_fuel_level
+      - last_location
+      - last_location_h3_index_11
+      - last_location_ping
+      - last_odometer_reading
+      - last_speed_reading
+      - license_plate_country
+      - license_plate_number
+      - license_plate_region
+      - model_type
+      - model_year
+      - oem
+      - source_id
+      - source_name
+      - status
+      - tsp_id
+      - tsp_slug
       - vehicle_id
+      - vehicle_name
+      - vin
       title: VehicleSummary
     _CursorPage_DriverSafetyEventRead_:
       example:
@@ -11139,18 +11710,26 @@ components:
         current_page_backwards: current_page_backwards
         previous_page: previous_page
         items:
-        - duration_seconds: 6
-          driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          fleet_ref: fleet_ref
-          source_data: "{}"
+        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           h3_index_11: 0
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          event: collision
+          tsp_slug: tsp_slug
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+          duration_seconds: 6
+          fleet_ref: fleet_ref
+          source_data: "{}"
           deleted_at: 2000-01-23T04:56:07.000+00:00
           event_metadata: "{}"
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updated_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           location:
             bbox:
@@ -11162,27 +11741,30 @@ components:
             - ""
             - ""
             type: Point
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
-          event: collision
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
           source_vehicle_id: source_vehicle_id
           source_data_hash: source_data_hash
-        - duration_seconds: 6
-          driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          fleet_ref: fleet_ref
-          source_data: "{}"
+        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           h3_index_11: 0
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          event: collision
+          tsp_slug: tsp_slug
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+          duration_seconds: 6
+          fleet_ref: fleet_ref
+          source_data: "{}"
           deleted_at: 2000-01-23T04:56:07.000+00:00
           event_metadata: "{}"
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updated_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           location:
             bbox:
@@ -11194,13 +11776,8 @@ components:
             - ""
             - ""
             type: Point
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
-          event: collision
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
           source_vehicle_id: source_vehicle_id
           source_data_hash: source_data_hash
         current_page: current_page
@@ -11243,6 +11820,7 @@ components:
           license_country: license_country
           license_expiration: 2000-01-23
           license_number: license_number
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           employee_number: employee_number
@@ -11250,8 +11828,9 @@ components:
           hos_violations_30d: 6
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
+          tsp_slug: tsp_slug
           first_name: first_name
-          source_name: source_name
+          source_name: ada
           safety_events_30d: 0
           username: username
           status: status
@@ -11262,6 +11841,7 @@ components:
           license_country: license_country
           license_expiration: 2000-01-23
           license_number: license_number
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           user_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           employee_number: employee_number
@@ -11269,8 +11849,9 @@ components:
           hos_violations_30d: 6
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
+          tsp_slug: tsp_slug
           first_name: first_name
-          source_name: source_name
+          source_name: ada
           safety_events_30d: 0
           username: username
           status: status
@@ -11300,6 +11881,317 @@ components:
       - items
       - total
       title: "_CursorPage[DriverSummary]"
+    _CursorPage_DvirLogDefectRead_:
+      example:
+        next_page: next_page
+        total: 0
+        current_page_backwards: current_page_backwards
+        previous_page: previous_page
+        items:
+        - notes: notes
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          description: description
+          defect_name: defect_name
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          is_safety_critical: true
+          source_dvir_log_id: source_dvir_log_id
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          source_name: ada
+          defect_type: defect_type
+          fleet_ref: fleet_ref
+          source_data: "{}"
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          dvir_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          defect_code: defect_code
+          resolved_at: 2000-01-23T04:56:07.000+00:00
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_data_hash: source_data_hash
+          status: status
+        - notes: notes
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          description: description
+          defect_name: defect_name
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          is_safety_critical: true
+          source_dvir_log_id: source_dvir_log_id
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          source_name: ada
+          defect_type: defect_type
+          fleet_ref: fleet_ref
+          source_data: "{}"
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          dvir_log_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          defect_code: defect_code
+          resolved_at: 2000-01-23T04:56:07.000+00:00
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_data_hash: source_data_hash
+          status: status
+        current_page: current_page
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DvirLogDefectRead'
+          type: array
+        total:
+          minimum: 0.0
+          title: Total
+          type: integer
+        current_page:
+          nullable: true
+          type: string
+        current_page_backwards:
+          nullable: true
+          type: string
+        previous_page:
+          nullable: true
+          type: string
+        next_page:
+          nullable: true
+          type: string
+      required:
+      - items
+      - total
+      title: "_CursorPage[DvirLogDefectRead]"
+    _CursorPage_DvirLogRead_:
+      example:
+        next_page: next_page
+        total: 0
+        current_page_backwards: current_page_backwards
+        previous_page: previous_page
+        items:
+        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          h3_index_11: 5
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          engine_hours: 1.4658129805029452
+          defect_count: 5
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          log_type: log_type
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          is_safety_critical: true
+          tsp_trailer_id: tsp_trailer_id
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_tsp_trailer_id: source_tsp_trailer_id
+          source_name: ada
+          duration_seconds: 0.8008281904610115
+          odometer_km: 6.027456183070403
+          fleet_ref: fleet_ref
+          source_data: "{}"
+          driver_comment: driver_comment
+          certify_comment: certify_comment
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          version: version
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          source_driver_id: source_driver_id
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          authority_address: authority_address
+          defects:
+          - fluid_levels
+          - fluid_levels
+          location:
+            bbox:
+            - ""
+            - ""
+            - ""
+            - ""
+            coordinates:
+            - ""
+            - ""
+            type: Point
+          source_id: source_id
+          authority_name: authority_name
+          inspected_by: inspected_by
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_vehicle_id: source_vehicle_id
+          source_data_hash: source_data_hash
+        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          h3_index_11: 5
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          engine_hours: 1.4658129805029452
+          defect_count: 5
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          log_type: log_type
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          is_safety_critical: true
+          tsp_trailer_id: tsp_trailer_id
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_tsp_trailer_id: source_tsp_trailer_id
+          source_name: ada
+          duration_seconds: 0.8008281904610115
+          odometer_km: 6.027456183070403
+          fleet_ref: fleet_ref
+          source_data: "{}"
+          driver_comment: driver_comment
+          certify_comment: certify_comment
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          version: version
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          source_driver_id: source_driver_id
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          authority_address: authority_address
+          defects:
+          - fluid_levels
+          - fluid_levels
+          location:
+            bbox:
+            - ""
+            - ""
+            - ""
+            - ""
+            coordinates:
+            - ""
+            - ""
+            type: Point
+          source_id: source_id
+          authority_name: authority_name
+          inspected_by: inspected_by
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_vehicle_id: source_vehicle_id
+          source_data_hash: source_data_hash
+        current_page: current_page
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DvirLogRead'
+          type: array
+        total:
+          minimum: 0.0
+          title: Total
+          type: integer
+        current_page:
+          nullable: true
+          type: string
+        current_page_backwards:
+          nullable: true
+          type: string
+        previous_page:
+          nullable: true
+          type: string
+        next_page:
+          nullable: true
+          type: string
+      required:
+      - items
+      - total
+      title: "_CursorPage[DvirLogRead]"
+    _CursorPage_EngineLogRead_:
+      example:
+        next_page: next_page
+        total: 0
+        current_page_backwards: current_page_backwards
+        previous_page: previous_page
+        items:
+        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          mil_status: true
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          canonical_code: BRAKE_SWITCH_CIRCUIT
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fault_code_description: fault_code_description
+          tsp_slug: tsp_slug
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+          fleet_ref: fleet_ref
+          source_data: "{}"
+          fault_code_source: J1708
+          engine_status: true
+          source_co_driver_id: source_co_driver_id
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          source_driver_id: source_driver_id
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fault_code: "{}"
+          source_vehicle_id: source_vehicle_id
+          source_data_hash: source_data_hash
+          status: active
+        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          mil_status: true
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          canonical_code: BRAKE_SWITCH_CIRCUIT
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fault_code_description: fault_code_description
+          tsp_slug: tsp_slug
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+          fleet_ref: fleet_ref
+          source_data: "{}"
+          fault_code_source: J1708
+          engine_status: true
+          source_co_driver_id: source_co_driver_id
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          source_driver_id: source_driver_id
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_id: source_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          fault_code: "{}"
+          source_vehicle_id: source_vehicle_id
+          source_data_hash: source_data_hash
+          status: active
+        current_page: current_page
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/EngineLogRead'
+          type: array
+        total:
+          minimum: 0.0
+          title: Total
+          type: integer
+        current_page:
+          nullable: true
+          type: string
+        current_page_backwards:
+          nullable: true
+          type: string
+        previous_page:
+          nullable: true
+          type: string
+        next_page:
+          nullable: true
+          type: string
+      required:
+      - items
+      - total
+      title: "_CursorPage[EngineLogRead]"
     _CursorPage_FleetSummary_:
       example:
         next_page: next_page
@@ -11376,6 +12268,7 @@ components:
           is_sleeper_eligible: true
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           forecast_horizon_days: 7
           next_10hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
           exception_codes:
@@ -11389,6 +12282,7 @@ components:
           duty_status_code: "OFF"
           is_cycle_applicable: true
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           is_adverse_driving_exemption_available: true
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           shift_driving_violation_duration_seconds: 4
@@ -11397,6 +12291,7 @@ components:
           available_cycle_seconds: 1
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           meal_break_due_at: 2000-01-23T04:56:07.000+00:00
+          tsp_slug: tsp_slug
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           cycle_ends_at: 2000-01-23T04:56:07.000+00:00
@@ -11428,6 +12323,7 @@ components:
           is_sleeper_eligible: true
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           forecast_horizon_days: 7
           next_10hr_reset_eligible_at: 2000-01-23T04:56:07.000+00:00
           exception_codes:
@@ -11441,6 +12337,7 @@ components:
           duty_status_code: "OFF"
           is_cycle_applicable: true
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           is_adverse_driving_exemption_available: true
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           shift_driving_violation_duration_seconds: 4
@@ -11449,6 +12346,7 @@ components:
           available_cycle_seconds: 1
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           meal_break_due_at: 2000-01-23T04:56:07.000+00:00
+          tsp_slug: tsp_slug
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           cycle_ends_at: 2000-01-23T04:56:07.000+00:00
@@ -11496,12 +12394,14 @@ components:
         - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           duration_driving_seconds: 5
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           duration_personal_conveyance_seconds: 5
           duration_cycle_on_duty_seconds: 3
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           source_name: ada
           duration_unknown_seconds: 9
           fleet_ref: fleet_ref
@@ -11512,6 +12412,7 @@ components:
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           duration_yard_move_seconds: 2
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
@@ -11522,12 +12423,14 @@ components:
         - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           duration_driving_seconds: 5
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           duration_personal_conveyance_seconds: 5
           duration_cycle_on_duty_seconds: 3
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           source_name: ada
           duration_unknown_seconds: 9
           fleet_ref: fleet_ref
@@ -11538,6 +12441,7 @@ components:
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           duration_yard_move_seconds: 2
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
@@ -11578,52 +12482,58 @@ components:
         current_page_backwards: current_page_backwards
         previous_page: previous_page
         items:
-        - fleet_ref: fleet_ref
-          source_data: "{}"
-          file_name: file_name
-          created_at: 2000-01-23T04:56:07.000+00:00
+        - created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           description: description
-          deleted_at: 2000-01-23T04:56:07.000+00:00
-          file_size: 0
           source_url: source_url
-          url: url
-          occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           uploaded_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           file_type: file_type
-          hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           checksum: checksum
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          source_name: ada
+          fleet_ref: fleet_ref
+          source_data: "{}"
+          file_name: file_name
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          file_size: 0
+          url: url
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
           last_edit_at: 2000-01-23T04:56:07.000+00:00
           source_data_hash: source_data_hash
-        - fleet_ref: fleet_ref
-          source_data: "{}"
-          file_name: file_name
-          created_at: 2000-01-23T04:56:07.000+00:00
+        - created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           description: description
-          deleted_at: 2000-01-23T04:56:07.000+00:00
-          file_size: 0
           source_url: source_url
-          url: url
-          occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           uploaded_by: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           file_type: file_type
-          hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           checksum: checksum
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          source_name: ada
+          fleet_ref: fleet_ref
+          source_data: "{}"
+          file_name: file_name
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          file_size: 0
+          url: url
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: ada
           last_edit_at: 2000-01-23T04:56:07.000+00:00
           source_data_hash: source_data_hash
         current_page: current_page
@@ -11663,12 +12573,14 @@ components:
           violation_category: Cycle
           source_hos_log_id: source_hos_log_id
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           duration: 0
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           violation_code: DH_DAILY_OVER
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           source_name: ada
           fleet_ref: fleet_ref
           source_data: "{}"
@@ -11678,6 +12590,7 @@ components:
           source_driver_id: source_driver_id
           source_hos_event_id: source_hos_event_id
           start_time: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           hours_limit: 6.027456183070403
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -11690,12 +12603,14 @@ components:
           violation_category: Cycle
           source_hos_log_id: source_hos_log_id
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           duration: 0
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           violation_code: DH_DAILY_OVER
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           source_name: ada
           fleet_ref: fleet_ref
           source_data: "{}"
@@ -11705,6 +12620,7 @@ components:
           source_driver_id: source_driver_id
           source_hos_event_id: source_hos_event_id
           start_time: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           hours_limit: 6.027456183070403
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           hos_event_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -11750,15 +12666,18 @@ components:
           source_data: "{}"
           year: 6
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           month: 0
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
+          tsp_slug: tsp_slug
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
@@ -11768,15 +12687,18 @@ components:
           source_data: "{}"
           year: 6
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           month: 0
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
+          tsp_slug: tsp_slug
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
@@ -12205,14 +13127,9 @@ components:
         current_page_backwards: current_page_backwards
         previous_page: previous_page
         items:
-        - driver_name: driver_name
-          trailer_name: trailer_name
-          driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           trailer_h3_index_11: 0
-          vehicle_h3_index_11: 6
           trailer_location_occurred_at: 2000-01-23T04:56:07.000+00:00
-          trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          vehicle_location_occurred_at: 2000-01-23T04:56:07.000+00:00
           vehicle_location:
             bbox:
             - ""
@@ -12233,16 +13150,18 @@ components:
             - ""
             - ""
             type: Point
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: source_name
-        - driver_name: driver_name
+          driver_name: driver_name
           trailer_name: trailer_name
-          driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          trailer_h3_index_11: 0
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_h3_index_11: 6
-          trailer_location_occurred_at: 2000-01-23T04:56:07.000+00:00
           trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_location_occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_slug: tsp_slug
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_name: ada
+        - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          trailer_h3_index_11: 0
+          trailer_location_occurred_at: 2000-01-23T04:56:07.000+00:00
           vehicle_location:
             bbox:
             - ""
@@ -12263,8 +13182,15 @@ components:
             - ""
             - ""
             type: Point
+          driver_name: driver_name
+          trailer_name: trailer_name
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          vehicle_h3_index_11: 6
+          trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          vehicle_location_occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_slug: tsp_slug
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: source_name
+          source_name: ada
         current_page: current_page
       properties:
         items:
@@ -12303,9 +13229,11 @@ components:
           source_data: "{}"
           h3_index_11: 0
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -12322,6 +13250,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
+          tsp_slug: tsp_slug
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
@@ -12332,9 +13261,11 @@ components:
           source_data: "{}"
           h3_index_11: 0
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -12351,6 +13282,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
+          tsp_slug: tsp_slug
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
@@ -12394,10 +13326,12 @@ components:
           trailer_length: 1.4658129805029452
           eld_id: eld_id
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           eld_product_id: eld_product_id
           external_id: external_id
           speed_unit: speed_unit
           odometer_unit: odometer_unit
+          license_plate_number: license_plate_number
           trailer_type: trailer_type
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           trailer_name: trailer_name
@@ -12408,6 +13342,7 @@ components:
           vin: vin
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           source_name: ada
           eld_serial_number: eld_serial_number
           fleet_ref: fleet_ref
@@ -12419,6 +13354,7 @@ components:
           deleted_at: 2000-01-23T04:56:07.000+00:00
           fuel_unit: fuel_unit
           occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           engine_type: engine_type
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           license_plate_region: license_plate_region
@@ -12434,10 +13370,12 @@ components:
           trailer_length: 1.4658129805029452
           eld_id: eld_id
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           eld_product_id: eld_product_id
           external_id: external_id
           speed_unit: speed_unit
           odometer_unit: odometer_unit
+          license_plate_number: license_plate_number
           trailer_type: trailer_type
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           trailer_name: trailer_name
@@ -12448,6 +13386,7 @@ components:
           vin: vin
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           source_name: ada
           eld_serial_number: eld_serial_number
           fleet_ref: fleet_ref
@@ -12459,6 +13398,7 @@ components:
           deleted_at: 2000-01-23T04:56:07.000+00:00
           fuel_unit: fuel_unit
           occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           engine_type: engine_type
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           license_plate_region: license_plate_region
@@ -12503,6 +13443,7 @@ components:
         previous_page: previous_page
         items:
         - trailer_name: trailer_name
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           fleet_ref: fleet_ref
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           h3_index_11: 0
@@ -12519,8 +13460,10 @@ components:
             type: Point
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
-          source_name: source_name
+          tsp_slug: tsp_slug
+          source_name: ada
         - trailer_name: trailer_name
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           fleet_ref: fleet_ref
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           h3_index_11: 0
@@ -12537,7 +13480,8 @@ components:
             type: Point
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
-          source_name: source_name
+          tsp_slug: tsp_slug
+          source_name: ada
         current_page: current_page
       properties:
         items:
@@ -12572,29 +13516,19 @@ components:
         previous_page: previous_page
         items:
         - notes: notes
-          company_groups: "{}"
-          created_at: 2000-01-23T04:56:07.000+00:00
-          user_designation: user_designation
           license_expiration: 2000-01-23
           company_address: company_address
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updated_at: 2000-01-23T04:56:07.000+00:00
           allow_yard_move: true
           allow_adverse_driving: true
           is_driver: true
           last_tsp_login: 2000-01-23T04:56:07.000+00:00
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          first_name: first_name
-          source_name: ada
           user_email: user_email
           hos_ruleset_code: US_INT_PROP_60_7
           fleet_ref: fleet_ref
           source_data: "{}"
-          is_active: true
           default_time_zone: UTC
           license_region: license_region
-          last_name: last_name
           license_country: license_country
           deleted_at: 2000-01-23T04:56:07.000+00:00
           private_user_groups: "{}"
@@ -12602,46 +13536,49 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           country_code: country_code
           security_groups: "{}"
-          allow_personal_conveyance: true
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          authority_address: authority_address
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           company_name: company_name
           started_at: 2000-01-23T04:56:07.000+00:00
           employee_number: employee_number
           phone_number: phone_number
-          source_id: source_id
           report_groups: "{}"
-          carrier_number: carrier_number
           authority_name: authority_name
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ended_at: 2000-01-23T04:56:07.000+00:00
           source_data_hash: source_data_hash
-          username: username
           status: status
+          company_groups: "{}"
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          user_designation: user_designation
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          first_name: first_name
+          source_name: ada
+          is_active: true
+          last_name: last_name
+          allow_personal_conveyance: true
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          authority_address: authority_address
+          source_id: source_id
+          carrier_number: carrier_number
+          ended_at: 2000-01-23T04:56:07.000+00:00
+          username: username
         - notes: notes
-          company_groups: "{}"
-          created_at: 2000-01-23T04:56:07.000+00:00
-          user_designation: user_designation
           license_expiration: 2000-01-23
           company_address: company_address
-          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          updated_at: 2000-01-23T04:56:07.000+00:00
           allow_yard_move: true
           allow_adverse_driving: true
           is_driver: true
           last_tsp_login: 2000-01-23T04:56:07.000+00:00
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          first_name: first_name
-          source_name: ada
           user_email: user_email
           hos_ruleset_code: US_INT_PROP_60_7
           fleet_ref: fleet_ref
           source_data: "{}"
-          is_active: true
           default_time_zone: UTC
           license_region: license_region
-          last_name: last_name
           license_country: license_country
           deleted_at: 2000-01-23T04:56:07.000+00:00
           private_user_groups: "{}"
@@ -12649,22 +13586,35 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           country_code: country_code
           security_groups: "{}"
-          allow_personal_conveyance: true
-          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          authority_address: authority_address
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           company_name: company_name
           started_at: 2000-01-23T04:56:07.000+00:00
           employee_number: employee_number
           phone_number: phone_number
-          source_id: source_id
           report_groups: "{}"
-          carrier_number: carrier_number
           authority_name: authority_name
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ended_at: 2000-01-23T04:56:07.000+00:00
           source_data_hash: source_data_hash
-          username: username
           status: status
+          company_groups: "{}"
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
+          user_designation: user_designation
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          first_name: first_name
+          source_name: ada
+          is_active: true
+          last_name: last_name
+          allow_personal_conveyance: true
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          authority_address: authority_address
+          source_id: source_id
+          carrier_number: carrier_number
+          ended_at: 2000-01-23T04:56:07.000+00:00
+          username: username
         current_page: current_page
       properties:
         items:
@@ -12703,11 +13653,12 @@ components:
           fuel_level: 5.962133916683182
           h3_index_11: 0
           engine_hours: 5.637376656633329
-          speed: 6
+          speed: 6.027456183070403
           coolant_temperature: 7.061401241503109
           driver_name: driver_name
           occurred_at: 2000-01-23T04:56:07.000+00:00
           oil_pressure: 2.3021358869347655
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vin: vin
           location:
             bbox:
@@ -12720,18 +13671,20 @@ components:
             - ""
             type: Point
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: source_name
+          tsp_slug: tsp_slug
+          source_name: ada
           vehicle_name: vehicle_name
         - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           odometer: 1.4658129805029452
           fuel_level: 5.962133916683182
           h3_index_11: 0
           engine_hours: 5.637376656633329
-          speed: 6
+          speed: 6.027456183070403
           coolant_temperature: 7.061401241503109
           driver_name: driver_name
           occurred_at: 2000-01-23T04:56:07.000+00:00
           oil_pressure: 2.3021358869347655
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vin: vin
           location:
             bbox:
@@ -12744,7 +13697,8 @@ components:
             - ""
             type: Point
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: source_name
+          tsp_slug: tsp_slug
+          source_name: ada
           vehicle_name: vehicle_name
         current_page: current_page
       properties:
@@ -12783,6 +13737,7 @@ components:
           fuel_level: 5.962133916683182
           h3_index_11: 0
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           engine_hours: 2.3021358869347655
           speed: 6
           coolant_temperature: 9.301444243932576
@@ -12791,6 +13746,7 @@ components:
           updated_at: 2000-01-23T04:56:07.000+00:00
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           fuel_value: 5.637376656633329
@@ -12802,6 +13758,7 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
           oil_pressure: 7.061401241503109
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           location:
             bbox:
@@ -12821,6 +13778,7 @@ components:
           fuel_level: 5.962133916683182
           h3_index_11: 0
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           engine_hours: 2.3021358869347655
           speed: 6
           coolant_temperature: 9.301444243932576
@@ -12829,6 +13787,7 @@ components:
           updated_at: 2000-01-23T04:56:07.000+00:00
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           fuel_value: 5.637376656633329
@@ -12840,6 +13799,7 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
           oil_pressure: 7.061401241503109
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           location:
             bbox:
@@ -12892,6 +13852,7 @@ components:
           engine_vin: engine_vin
           eld_id: eld_id
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           eld_product_id: eld_product_id
           external_id: external_id
           speed_unit: speed_unit
@@ -12905,6 +13866,7 @@ components:
           vin: vin
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           source_name: ada
           eld_serial_number: eld_serial_number
           fleet_ref: fleet_ref
@@ -12917,6 +13879,7 @@ components:
           deleted_at: 2000-01-23T04:56:07.000+00:00
           fuel_unit: fuel_unit
           occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           engine_type: engine_type
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           license_plate_region: license_plate_region
@@ -12932,6 +13895,7 @@ components:
           engine_vin: engine_vin
           eld_id: eld_id
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           eld_product_id: eld_product_id
           external_id: external_id
           speed_unit: speed_unit
@@ -12945,6 +13909,7 @@ components:
           vin: vin
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           source_name: ada
           eld_serial_number: eld_serial_number
           fleet_ref: fleet_ref
@@ -12957,6 +13922,7 @@ components:
           deleted_at: 2000-01-23T04:56:07.000+00:00
           fuel_unit: fuel_unit
           occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           engine_type: engine_type
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           license_plate_region: license_plate_region
@@ -13004,18 +13970,21 @@ components:
         - fleet_ref: fleet_ref
           source_data: "{}"
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           sensor_event: sensor_event
           sensor_value: 0.8008281904610115
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           raw_event: raw_event
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
           sensor_unit: sensor_unit
+          tsp_slug: tsp_slug
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
@@ -13024,18 +13993,21 @@ components:
         - fleet_ref: fleet_ref
           source_data: "{}"
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           sensor_event: sensor_event
           sensor_value: 0.8008281904610115
           deleted_at: 2000-01-23T04:56:07.000+00:00
           occurred_at: 2000-01-23T04:56:07.000+00:00
           raw_event: raw_event
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
           sensor_unit: sensor_unit
+          tsp_slug: tsp_slug
           schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
@@ -13075,14 +14047,21 @@ components:
         previous_page: previous_page
         items:
         - last_location_ping: 2000-01-23T04:56:07.000+00:00
-          fleet_ref: fleet_ref
-          last_engine_hours: 5.637376656633329
           engine_vin: engine_vin
-          model_type: model_type
           last_location_h3_index_11: 6
-          model_year: 0
           last_speed_reading: 2.3021358869347655
           license_plate_number: license_plate_number
+          oem: oem
+          last_fuel_level: 1.4658129805029452
+          vin: vin
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          source_name: ada
+          fleet_ref: fleet_ref
+          last_engine_hours: 5.637376656633329
+          model_type: model_type
+          model_year: 0
           last_location:
             bbox:
             - ""
@@ -13093,28 +14072,30 @@ components:
             - ""
             - ""
             type: Point
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           license_plate_region: license_plate_region
           last_odometer_reading: 5.962133916683182
-          oem: oem
-          last_fuel_level: 1.4658129805029452
           license_plate_country: license_plate_country
-          vin: vin
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: source_name
           status: status
           vehicle_name: vehicle_name
         - last_location_ping: 2000-01-23T04:56:07.000+00:00
-          fleet_ref: fleet_ref
-          last_engine_hours: 5.637376656633329
           engine_vin: engine_vin
-          model_type: model_type
           last_location_h3_index_11: 6
-          model_year: 0
           last_speed_reading: 2.3021358869347655
           license_plate_number: license_plate_number
+          oem: oem
+          last_fuel_level: 1.4658129805029452
+          vin: vin
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          source_name: ada
+          fleet_ref: fleet_ref
+          last_engine_hours: 5.637376656633329
+          model_type: model_type
+          model_year: 0
           last_location:
             bbox:
             - ""
@@ -13125,17 +14106,12 @@ components:
             - ""
             - ""
             type: Point
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           license_plate_region: license_plate_region
           last_odometer_reading: 5.962133916683182
-          oem: oem
-          last_fuel_level: 1.4658129805029452
           license_plate_country: license_plate_country
-          vin: vin
-          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
-          vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          source_name: source_name
           status: status
           vehicle_name: vehicle_name
         current_page: current_page
@@ -13178,6 +14154,7 @@ components:
           record_status: record_status
           h3_index_11: 6
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           annotations:
             created_at: 2000-01-23T04:56:07.000+00:00
             remarks: remarks
@@ -13194,6 +14171,7 @@ components:
           log_state_code: ACTIVE
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           log_origin_code: AUTO
@@ -13207,6 +14185,7 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           deferral_status: deferral_status
           sequence: sequence
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           location_name: location_name
           is_excluded: true
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13233,6 +14212,7 @@ components:
           record_status: record_status
           h3_index_11: 6
           created_at: 2000-01-23T04:56:07.000+00:00
+          extras: "{}"
           annotations:
             created_at: 2000-01-23T04:56:07.000+00:00
             remarks: remarks
@@ -13249,6 +14229,7 @@ components:
           log_state_code: ACTIVE
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_name: ada
           log_origin_code: AUTO
@@ -13262,6 +14243,7 @@ components:
           occurred_at: 2000-01-23T04:56:07.000+00:00
           deferral_status: deferral_status
           sequence: sequence
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           location_name: location_name
           is_excluded: true
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91

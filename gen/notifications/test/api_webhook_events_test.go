@@ -48,6 +48,30 @@ func Test_notificationsapi_WebhookEventsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test WebhookEventsAPIService EngineLogAddedengineLogAddedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.EngineLogAddedengineLogAddedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService EngineLogModifiedengineLogModifiedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.EngineLogModifiedengineLogModifiedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WebhookEventsAPIService ExecutionFailedexecutionFailedPost", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

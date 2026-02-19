@@ -25,16 +25,16 @@ mkdir -p "${SPECS_DIR}/notifications"
 
 # Download each spec
 echo "Downloading integrations spec..."
-curl -fsSL "${INTEGRATIONS_URL}" -o "${SPECS_DIR}/integrations/openapi.json"
+curl -fsSL --compressed "${INTEGRATIONS_URL}" -o "${SPECS_DIR}/integrations/openapi.json"
 
 echo "Downloading orgs spec..."
-curl -fsSL "${ORGS_URL}" -o "${SPECS_DIR}/orgs/openapi.json"
+curl -fsSL --compressed "${ORGS_URL}" -o "${SPECS_DIR}/orgs/openapi.json"
 
 echo "Downloading telematics spec..."
-curl -fsSL "${TELEMATICS_URL}" -o "${SPECS_DIR}/telematics/openapi.json"
+curl -fsSL --compressed "${TELEMATICS_URL}" -o "${SPECS_DIR}/telematics/openapi.json"
 
 echo "Downloading notifications spec..."
-curl -fsSL "${NOTIFICATIONS_URL}" -o "${SPECS_DIR}/notifications/openapi.json"
+curl -fsSL --compressed "${NOTIFICATIONS_URL}" -o "${SPECS_DIR}/notifications/openapi.json"
 
 echo "==> Normalizing specs (fixing duplicate tags)..."
 "${SCRIPT_DIR}/fix-tags.py" "${SPECS_DIR}/integrations/openapi.json"

@@ -11,7 +11,6 @@ API version: 1.0.0
 package authenticationapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type ErrorResponse struct {
 	// Error code.
 	Error string `json:"error"`
 	// Human-readable error description.
-	ErrorDescription *string `json:"error_description,omitempty"`
+	ErrorDescription     *string `json:"error_description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ErrorResponse ErrorResponse
@@ -117,6 +117,11 @@ func (o ErrorResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ErrorDescription) {
 		toSerialize["error_description"] = o.ErrorDescription
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ErrorResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varErrorResponse := _ErrorResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varErrorResponse)
+	err = json.Unmarshal(data, &varErrorResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ErrorResponse(varErrorResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "error")
+		delete(additionalProperties, "error_description")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

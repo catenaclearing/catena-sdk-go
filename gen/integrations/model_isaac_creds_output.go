@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &IsaacCredsOutput{}
 
 // IsaacCredsOutput Isaac Connection model
 type IsaacCredsOutput struct {
-	Username interface{} `json:"username"`
-	Password interface{} `json:"password"`
-	AuthCode interface{} `json:"auth_code"`
-	Host     interface{} `json:"host"`
+	Username             interface{} `json:"username"`
+	Password             interface{} `json:"password"`
+	AuthCode             interface{} `json:"auth_code"`
+	Host                 interface{} `json:"host"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IsaacCredsOutput IsaacCredsOutput
@@ -176,6 +176,11 @@ func (o IsaacCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.Host != nil {
 		toSerialize["host"] = o.Host
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -206,15 +211,23 @@ func (o *IsaacCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varIsaacCredsOutput := _IsaacCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIsaacCredsOutput)
+	err = json.Unmarshal(data, &varIsaacCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IsaacCredsOutput(varIsaacCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "auth_code")
+		delete(additionalProperties, "host")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

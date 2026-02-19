@@ -58,6 +58,8 @@ type APIClient struct {
 
 	FleetOperationsTrackingAPI FleetOperationsTrackingAPI
 
+	MaintenanceVehicleHealthAPI MaintenanceVehicleHealthAPI
+
 	ReferenceDataSupportingTablesAPI ReferenceDataSupportingTablesAPI
 
 	SafetyDriverBehaviorAPI SafetyDriverBehaviorAPI
@@ -83,6 +85,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ComplianceRegulationAPI = (*ComplianceRegulationAPIService)(&c.common)
 	c.DriversUsersAPI = (*DriversUsersAPIService)(&c.common)
 	c.FleetOperationsTrackingAPI = (*FleetOperationsTrackingAPIService)(&c.common)
+	c.MaintenanceVehicleHealthAPI = (*MaintenanceVehicleHealthAPIService)(&c.common)
 	c.ReferenceDataSupportingTablesAPI = (*ReferenceDataSupportingTablesAPIService)(&c.common)
 	c.SafetyDriverBehaviorAPI = (*SafetyDriverBehaviorAPIService)(&c.common)
 

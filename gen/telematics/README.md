@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *FleetOperationsTrackingAPI* | [**ListVehicleLocations**](docs/FleetOperationsTrackingAPI.md#listvehiclelocations) | **Get** /v2/telematics/vehicle-locations | List Vehicle Locations
 *FleetOperationsTrackingAPI* | [**ListVehicleSensorEvents**](docs/FleetOperationsTrackingAPI.md#listvehiclesensorevents) | **Get** /v2/telematics/vehicle-sensor-events | List Vehicle Sensor Events
 *FleetOperationsTrackingAPI* | [**ListVehicles**](docs/FleetOperationsTrackingAPI.md#listvehicles) | **Get** /v2/telematics/vehicles | List Vehicles
+*MaintenanceVehicleHealthAPI* | [**ListEngineLogs**](docs/MaintenanceVehicleHealthAPI.md#listenginelogs) | **Get** /v2/telematics/engine-logs | List Engine Logs
 *ReferenceDataSupportingTablesAPI* | [**ListHosEventCodesReference**](docs/ReferenceDataSupportingTablesAPI.md#listhoseventcodesreference) | **Get** /v2/telematics/ref-hos-event-codes | List HOS Event Codes
 *ReferenceDataSupportingTablesAPI* | [**ListHosMalfunctionCodesReference**](docs/ReferenceDataSupportingTablesAPI.md#listhosmalfunctioncodesreference) | **Get** /v2/telematics/ref-hos-malfunction-codes | List HOS Malfunction Codes
 *ReferenceDataSupportingTablesAPI* | [**ListHosRecordOriginsReference**](docs/ReferenceDataSupportingTablesAPI.md#listhosrecordoriginsreference) | **Get** /v2/telematics/ref-hos-record-origins | List HOS Record Origins
@@ -124,12 +125,14 @@ Class | Method | HTTP request | Description
 
  - [BadRequest](docs/BadRequest.md)
  - [Bbox](docs/Bbox.md)
+ - [CanonicalFaultCodeEnum](docs/CanonicalFaultCodeEnum.md)
  - [Conflict](docs/Conflict.md)
  - [Coordinates](docs/Coordinates.md)
  - [CursorPageDriverSafetyEventRead](docs/CursorPageDriverSafetyEventRead.md)
  - [CursorPageDriverSummary](docs/CursorPageDriverSummary.md)
  - [CursorPageDvirLogDefectRead](docs/CursorPageDvirLogDefectRead.md)
  - [CursorPageDvirLogRead](docs/CursorPageDvirLogRead.md)
+ - [CursorPageEngineLogRead](docs/CursorPageEngineLogRead.md)
  - [CursorPageFleetSummary](docs/CursorPageFleetSummary.md)
  - [CursorPageHosAvailabilityRead](docs/CursorPageHosAvailabilityRead.md)
  - [CursorPageHosDailySnapshotRead](docs/CursorPageHosDailySnapshotRead.md)
@@ -161,6 +164,8 @@ Class | Method | HTTP request | Description
  - [DvirDefectEnum](docs/DvirDefectEnum.md)
  - [DvirLogDefectRead](docs/DvirLogDefectRead.md)
  - [DvirLogRead](docs/DvirLogRead.md)
+ - [EngineLogRead](docs/EngineLogRead.md)
+ - [FaultCodeSourceEnum](docs/FaultCodeSourceEnum.md)
  - [FleetSummary](docs/FleetSummary.md)
  - [Forbidden](docs/Forbidden.md)
  - [HosAvailabilityRead](docs/HosAvailabilityRead.md)
@@ -201,6 +206,7 @@ Class | Method | HTTP request | Description
  - [RefTimezoneCode](docs/RefTimezoneCode.md)
  - [ResourceCount](docs/ResourceCount.md)
  - [RetryAfterDetail](docs/RetryAfterDetail.md)
+ - [StatusEnum](docs/StatusEnum.md)
  - [TimeSeriesDataPoint](docs/TimeSeriesDataPoint.md)
  - [TimezoneCodeEnum](docs/TimezoneCodeEnum.md)
  - [TooManyRequests](docs/TooManyRequests.md)

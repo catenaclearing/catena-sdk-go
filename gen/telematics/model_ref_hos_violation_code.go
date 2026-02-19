@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,7 +27,8 @@ type RefHosViolationCode struct {
 	// Short display name for the violation (human-readable).
 	Name string `json:"name"`
 	// Detailed description of the violation rule/condition (display).
-	Description string `json:"description"`
+	Description          string `json:"description"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RefHosViolationCode RefHosViolationCode
@@ -164,6 +164,11 @@ func (o RefHosViolationCode) ToMap() (map[string]interface{}, error) {
 	toSerialize["category"] = o.Category
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *RefHosViolationCode) UnmarshalJSON(data []byte) (err error) {
 
 	varRefHosViolationCode := _RefHosViolationCode{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRefHosViolationCode)
+	err = json.Unmarshal(data, &varRefHosViolationCode)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RefHosViolationCode(varRefHosViolationCode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "violation_code")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

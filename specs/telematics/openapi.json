@@ -84,7 +84,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -97,7 +97,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "include_source_data",
@@ -341,8 +341,7 @@
             "title": "\ud83e\uddea List Driver Safety Events"
           },
           "content": "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional endpoint</strong><br/>This endpoint may change or be removed in future releases. Backward compatibility is not guaranteed.<br/><br/><em>See <a href=\"/overview/api-stability-and-versioning\">API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
-        },
-        "x-hidden": true
+        }
       }
     },
     "/v2/telematics/users/{user_id}": {
@@ -1809,7 +1808,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -1822,7 +1821,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "include_source_data",
@@ -2118,7 +2117,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -2131,7 +2130,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "active_from_datetime",
@@ -2151,7 +2150,7 @@
               "title": "Active From Datetime"
             },
             "description": "Return only records that were still active at or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `ended_at >= active_from_datetime`",
-            "example": "2026-02-11T16:42:26.333660+00:00"
+            "example": "2026-02-18T16:56:19.577462+00:00"
           },
           {
             "name": "active_to_datetime",
@@ -2171,7 +2170,7 @@
               "title": "Active To Datetime"
             },
             "description": "Return only records that started before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `started_at < active_to_datetime`",
-            "example": "2026-02-12T16:42:26.333762+00:00"
+            "example": "2026-02-19T16:56:19.577537+00:00"
           },
           {
             "name": "include_source_data",
@@ -2711,7 +2710,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -2724,7 +2723,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "include_source_data",
@@ -2842,10 +2841,10 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "maximum": 100,
-              "minimum": 0,
+              "maximum": 1000,
+              "minimum": 1,
               "description": "Page size",
-              "default": 50,
+              "default": 300,
               "title": "Size"
             },
             "description": "Page size"
@@ -2857,7 +2856,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CursorPage_DvirLogRead_"
+                  "$ref": "#/components/schemas/_CursorPage_DvirLogRead_"
                 }
               }
             }
@@ -3114,10 +3113,10 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "maximum": 100,
-              "minimum": 0,
+              "maximum": 1000,
+              "minimum": 1,
               "description": "Page size",
-              "default": 50,
+              "default": 300,
               "title": "Size"
             },
             "description": "Page size"
@@ -3129,7 +3128,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CursorPage_DvirLogDefectRead_"
+                  "$ref": "#/components/schemas/_CursorPage_DvirLogDefectRead_"
                 }
               }
             }
@@ -3315,7 +3314,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -3328,7 +3327,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "dvir_log_ids",
@@ -3423,10 +3422,10 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "maximum": 100,
-              "minimum": 0,
+              "maximum": 1000,
+              "minimum": 1,
               "description": "Page size",
-              "default": 50,
+              "default": 300,
               "title": "Size"
             },
             "description": "Page size"
@@ -3438,7 +3437,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CursorPage_DvirLogDefectRead_"
+                  "$ref": "#/components/schemas/_CursorPage_DvirLogDefectRead_"
                 }
               }
             }
@@ -3552,6 +3551,338 @@
         }
       }
     },
+    "/v2/telematics/engine-logs": {
+      "get": {
+        "tags": [
+          "Maintenance & Vehicle Health"
+        ],
+        "summary": "List Engine Logs",
+        "description": "List all engine logs.",
+        "operationId": "list_engine_logs",
+        "security": [
+          {
+            "Bearer": [
+              "telematics:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "fleet_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific fleets using Catena's fleet IDs. *For your own fleet identifiers, use `fleet_refs` instead*",
+              "title": "Fleet Ids"
+            },
+            "description": "Limit results to specific fleets using Catena's fleet IDs. *For your own fleet identifiers, use `fleet_refs` instead*"
+          },
+          {
+            "name": "fleet_refs",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific fleets using your organization's fleet reference identifiers",
+              "title": "Fleet Refs"
+            },
+            "description": "Limit results to specific fleets using your organization's fleet reference identifiers"
+          },
+          {
+            "name": "from_datetime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
+              "title": "From Datetime"
+            },
+            "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
+            "example": "2026-02-18T16:56:19.577194+00:00"
+          },
+          {
+            "name": "to_datetime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
+              "title": "To Datetime"
+            },
+            "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
+            "example": "2026-02-19T16:56:19.577365+00:00"
+          },
+          {
+            "name": "include_source_data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena*",
+              "default": false,
+              "title": "Include Source Data"
+            },
+            "description": "Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena*"
+          },
+          {
+            "name": "driver_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific drivers. **Maximum:** 100 IDs",
+              "title": "Driver Ids"
+            },
+            "description": "Limit results to specific drivers. **Maximum:** 100 IDs"
+          },
+          {
+            "name": "vehicle_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific vehicles. **Maximum:** 100 IDs",
+              "title": "Vehicle Ids"
+            },
+            "description": "Limit results to specific vehicles. **Maximum:** 100 IDs"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The name of the field to sort results by. If not provided, results will be ordered by `occurred_at`. ",
+              "title": "Sort By"
+            },
+            "description": "The name of the field to sort results by. If not provided, results will be ordered by `occurred_at`. "
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "The order of sorting, either `asc` for ascending or `desc` for descending. Defaults to `asc` if `sort_by` is provided without `sort_order`.",
+              "default": "asc",
+              "title": "Sort Order"
+            },
+            "description": "The order of sorting, either `asc` for ascending or `desc` for descending. Defaults to `asc` if `sort_by` is provided without `sort_order`."
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Cursor for the next page",
+              "title": "Cursor"
+            },
+            "description": "Cursor for the next page"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "description": "Page size",
+              "default": 300,
+              "title": "Size"
+            },
+            "description": "Page size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_CursorPage_EngineLogRead_"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MethodNotAllowed"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntity"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotImplementedResponse"
+                }
+              }
+            },
+            "description": "Not Implemented"
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "title": "\ud83e\uddea List Engine Logs"
+          },
+          "content": "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional endpoint</strong><br/>This endpoint may change or be removed in future releases. Backward compatibility is not guaranteed.<br/><br/><em>See <a href=\"/overview/api-stability-and-versioning\">API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
+        }
+      }
+    },
     "/v2/telematics/vehicle-locations": {
       "get": {
         "tags": [
@@ -3636,7 +3967,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -3649,7 +3980,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "driver_ids",
@@ -3855,7 +4186,7 @@
           }
         },
         "x-mint": {
-          "content": "<Note>All numeric values are returned in SI units (e.g., km/h, km, \u00b0C, kPa).</Note>\n<Warning>When <code>only_latest=true</code>, the <code>from_datetime</code> and <code>to_datetime</code> query parameters are not applied. Only the most recent location per vehicle is returned regardless of the date range specified.</Warning>\n<Warning>When <code>only_latest=false</code>, exactly one <code>vehicle_ids</code> value or one <code>driver_ids</code> value must be specified. To retrieve location history for multiple vehicles or drivers, make separate requests for each.</Warning>"
+          "content": "<Note>All units of measure are returned in SI units (e.g., meters, m/s, Kelvin, Pa).</Note>\n<Warning>When <code>only_latest=true</code>, the <code>from_datetime</code> and <code>to_datetime</code> query parameters are not applied. Only the most recent location per vehicle is returned regardless of the date range specified.</Warning>\n<Warning>When <code>only_latest=false</code>, exactly one <code>vehicle_ids</code> value or one <code>driver_ids</code> value must be specified. To retrieve location history for multiple vehicles or drivers, make separate requests for each.</Warning>"
         }
       }
     },
@@ -3943,7 +4274,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -3956,7 +4287,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "trailer_ids",
@@ -4538,7 +4869,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -4551,7 +4882,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "include_source_data",
@@ -6145,7 +6476,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -6158,7 +6489,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "include_source_data",
@@ -6728,7 +7059,7 @@
               "title": "From Datetime"
             },
             "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-11T16:42:26.333445+00:00"
+            "example": "2026-02-18T16:56:19.577194+00:00"
           },
           {
             "name": "to_datetime",
@@ -6741,7 +7072,7 @@
               "title": "To Datetime"
             },
             "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
-            "example": "2026-02-12T16:42:26.333571+00:00"
+            "example": "2026-02-19T16:56:19.577365+00:00"
           },
           {
             "name": "include_source_data",
@@ -9648,6 +9979,54 @@
         "type": "object",
         "title": "BadRequest"
       },
+      "CanonicalFaultCodeEnum": {
+        "type": "string",
+        "enum": [
+          "BRAKE_SWITCH_CIRCUIT",
+          "ENG_COOLANT_TEMP_HIGH",
+          "ENG_COOLANT_TEMP_LOW",
+          "ENG_FUEL_PRESSURE_HIGH",
+          "ENG_FUEL_PRESSURE_LOW",
+          "ENG_FUEL_PRESSURE_SIGNAL_ERRATIC",
+          "ENG_MAP_HIGH",
+          "ENG_MAP_LOW",
+          "ENG_MAP_SIGNAL_ERRATIC",
+          "ENG_OIL_PRESSURE_HIGH",
+          "ENG_OIL_PRESSURE_LOW",
+          "ENG_OIL_TEMP_HIGH",
+          "ENG_OIL_TEMP_LOW",
+          "ENG_OVERSPEED",
+          "ENG_SPEED_CIRCUIT_FAULT",
+          "ENG_SPEED_NO_SIGNAL",
+          "ENG_SPEED_SIGNAL_ERRATIC",
+          "ENG_THROTTLE_HIGH",
+          "ENG_THROTTLE_LOW",
+          "ENG_THROTTLE_SIGNAL_ERRATIC",
+          "GEAR_MODULE_SIGNAL_ERRATIC",
+          "GEAR_MODULE_NO_SIGNAL",
+          "GEAR_MODULE_CALIBRATION_INVALID",
+          "TRANS_FLUID_DETERIORATED",
+          "TRANS_FLUID_LEVEL_HIGH",
+          "TRANS_FLUID_LEVEL_LOW",
+          "TRANS_FLUID_OVER_TEMP",
+          "TRANS_FLUID_TEMP_HIGH",
+          "TRANS_FLUID_TEMP_LOW",
+          "TRANS_FLUID_TEMP_SIGNAL_ERRATIC",
+          "TRANS_CONTROL_SYSTEM_PERFORMANCE",
+          "TRANS_FILTER_MAINTENANCE_ALERT",
+          "TRANS_FILTER_MAINTENANCE_REQUIRED",
+          "RETARDER_OIL_TEMP_HIGH",
+          "RETARDER_OIL_TEMP_LOW",
+          "RETARDER_OIL_TEMP_OVER_TEMP",
+          "RETARDER_PRESSURE_HIGH",
+          "RETARDER_PRESSURE_LOW",
+          "VEH_SPEED_SIGNAL_ERRATIC",
+          "CRANK_ENABLE_CIRCUIT_HIGH",
+          "CRANK_ENABLE_CIRCUIT_LOW"
+        ],
+        "title": "CanonicalFaultCodeEnum",
+        "description": "Canonical fault codes for various engine subsystems."
+      },
       "Conflict": {
         "properties": {
           "code": {
@@ -9674,146 +10053,6 @@
         },
         "type": "object",
         "title": "Conflict"
-      },
-      "CursorPage_DvirLogDefectRead_": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/DvirLogDefectRead"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "total": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Total"
-          },
-          "current_page": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Current Page",
-            "description": "Cursor to refetch the current page"
-          },
-          "current_page_backwards": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Current Page Backwards",
-            "description": "Cursor to refetch the current page starting from the last item"
-          },
-          "previous_page": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Previous Page",
-            "description": "Cursor for the previous page"
-          },
-          "next_page": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Next Page",
-            "description": "Cursor for the next page"
-          }
-        },
-        "type": "object",
-        "required": [
-          "items",
-          "total"
-        ],
-        "title": "CursorPage[DvirLogDefectRead]"
-      },
-      "CursorPage_DvirLogRead_": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/DvirLogRead"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "total": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Total"
-          },
-          "current_page": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Current Page",
-            "description": "Cursor to refetch the current page"
-          },
-          "current_page_backwards": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Current Page Backwards",
-            "description": "Cursor to refetch the current page starting from the last item"
-          },
-          "previous_page": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Previous Page",
-            "description": "Cursor for the previous page"
-          },
-          "next_page": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Next Page",
-            "description": "Cursor for the next page"
-          }
-        },
-        "type": "object",
-        "required": [
-          "items",
-          "total"
-        ],
-        "title": "CursorPage[DvirLogRead]"
       },
       "DriverSafetyEventEnum": {
         "type": "string",
@@ -9912,9 +10151,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -9970,6 +10234,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "driver_id": {
             "anyOf": [
@@ -10125,7 +10401,20 @@
             "title": "User Id",
             "description": "Unique Catena identifier for the driver."
           },
-          "source_name": {
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
             "anyOf": [
               {
                 "type": "string"
@@ -10134,8 +10423,19 @@
                 "type": "null"
               }
             ],
-            "title": "Source Name",
-            "description": "Name of the telematics provider (TSP) that provided this driver data."
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TspEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_id": {
             "anyOf": [
@@ -10298,8 +10598,24 @@
         "type": "object",
         "required": [
           "fleet_id",
+          "fleet_ref",
           "connection_id",
-          "user_id"
+          "user_id",
+          "tsp_id",
+          "tsp_slug",
+          "source_name",
+          "source_id",
+          "employee_number",
+          "first_name",
+          "last_name",
+          "username",
+          "status",
+          "phone_number",
+          "license_country",
+          "license_region",
+          "license_number",
+          "license_expiration",
+          "hos_ruleset_code"
         ],
         "title": "DriverSummary",
         "description": "Driver profile with compliance and safety metrics.\n\nUse this to build driver rosters, compliance dashboards, or safety scorecards.\nIncludes license information, HOS ruleset, and rolling-window event counts."
@@ -10448,9 +10764,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -10506,6 +10847,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "dvir_log_id": {
             "anyOf": [
@@ -10708,9 +11061,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -10766,6 +11144,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "vehicle_id": {
             "anyOf": [
@@ -11043,6 +11433,347 @@
         "title": "DvirLogRead",
         "description": "DvirLog model for API responses"
       },
+      "EngineLogRead": {
+        "properties": {
+          "fleet_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fleet Id",
+            "description": "Internal fleet identifier."
+          },
+          "fleet_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fleet Ref",
+            "description": "External fleet reference in the partner system."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "Unique identifier of the record at Catena Telematics."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Immutable: The datetime the record was ingested into Catena Telematics."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The dateime the record was last modified in Catena Telematics."
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "The datetime the record was logically deleted from Catena Telematics."
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection Id",
+            "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
+          },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "$ref": "#/components/schemas/TspEnum",
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
+          },
+          "source_data": {
+            "type": "object",
+            "title": "Source Data",
+            "description": "Raw source payload as ingested from the TSP. **Note: use it for audit/debugging.**"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id",
+            "description": "Unique identifier of the record in the TSP. **Note: we generate a unique composite key based on available fields if the TSP does not provide an unique ID.**"
+          },
+          "source_data_hash": {
+            "type": "string",
+            "maxLength": 64,
+            "title": "Source Data Hash",
+            "description": "SHA-256 hash of the source data payload. **Note: we use it internally for idempotence and deduplication.**"
+          },
+          "occurred_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Occurred At",
+            "description": "Datetime of when the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available in the source data."
+          },
+          "execution_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Execution Id",
+            "description": "Unique identifier for the execution that ingested this record into Catena Telematics. **Note: useful for tracing.**"
+          },
+          "schedule_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schedule Id",
+            "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
+          },
+          "vehicle_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle Id",
+            "description": "Internal vehicle identifier (Catena FK)."
+          },
+          "driver_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Driver Id",
+            "description": "Internal driver identifier (Catena FK)."
+          },
+          "co_driver_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Co Driver Id",
+            "description": "Internal co-driver identifier (Catena FK), if present."
+          },
+          "source_driver_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Driver Id",
+            "description": "External source system driver identifier (from the TSP)."
+          },
+          "source_vehicle_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Vehicle Id",
+            "description": "External source system vehicle identifier (from the TSP)."
+          },
+          "source_co_driver_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Co Driver Id",
+            "description": "External source system co-driver identifier (from the TSP)."
+          },
+          "fault_code_source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FaultCodeSourceEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source of the engine fault code (e.g., 'OBD2', 'J1939')."
+          },
+          "fault_code": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fault Code",
+            "description": "Engine fault code as provided by the TSP (e.g., DTC code like 'P0420' will be `{\"dtc\":\"P0420\"}`)."
+          },
+          "fault_code_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fault Code Description",
+            "description": "Description of the engine fault code as provided by the TSP, if available."
+          },
+          "canonical_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CanonicalFaultCodeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Canonicalized fault code for normalization across different sources, if available."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StatusEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status of the fault code (e.g., 'active', 'inactive'), if available."
+          },
+          "engine_status": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Engine Status",
+            "description": "Indicates whether the engine is currently on (true) or off (false), if available."
+          },
+          "mil_status": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mil Status",
+            "description": "Indicates whether the Malfunction Indicator Lamp (MIL) is on (true) or off (false), if available."
+          }
+        },
+        "type": "object",
+        "required": [
+          "fleet_id",
+          "id",
+          "created_at",
+          "updated_at",
+          "connection_id",
+          "source_name",
+          "source_id",
+          "source_data_hash"
+        ],
+        "title": "EngineLogRead",
+        "description": "Engine log model for API responses"
+      },
+      "FaultCodeSourceEnum": {
+        "type": "string",
+        "enum": [
+          "J1708",
+          "J1939",
+          "OBD2"
+        ],
+        "title": "FaultCodeSourceEnum",
+        "description": "Sources of fault codes in engine logs."
+      },
       "FleetSummary": {
         "properties": {
           "fleet_ref": {
@@ -11092,6 +11823,9 @@
           }
         },
         "type": "object",
+        "required": [
+          "fleet_ref"
+        ],
         "title": "FleetSummary",
         "description": "Aggregated metrics for a fleet, grouped by your fleet reference.\n\nUse this to populate fleet management tables or summary cards showing\nconnection health, driver count, vehicle count, and location coverage."
       },
@@ -11186,9 +11920,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -11244,6 +12003,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "driver_id": {
             "anyOf": [
@@ -11767,9 +12538,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -11825,6 +12621,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "driver_id": {
             "anyOf": [
@@ -12072,9 +12880,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -12130,6 +12963,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "hos_event_id": {
             "anyOf": [
@@ -12368,9 +13213,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -12426,6 +13296,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "driver_id": {
             "anyOf": [
@@ -13230,9 +14112,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -13288,6 +14195,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "hos_event_id": {
             "anyOf": [
@@ -13529,9 +14448,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -13587,6 +14531,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "vehicle_id": {
             "anyOf": [
@@ -14526,6 +15482,26 @@
         ],
         "title": "RetryAfterDetail"
       },
+      "StatusEnum": {
+        "type": "string",
+        "enum": [
+          "active",
+          "inactive",
+          "paused",
+          "expired",
+          "cancelled",
+          "pending",
+          "deleted",
+          "stale",
+          "success",
+          "failed",
+          "scheduled",
+          "accepted",
+          "declined"
+        ],
+        "title": "StatusEnum",
+        "description": "Enum for statuses"
+      },
       "TimeSeriesDataPoint": {
         "properties": {
           "date": {
@@ -14764,7 +15740,20 @@
             "title": "Trailer Id",
             "description": "Unique Catena identifier for the trailer."
           },
-          "source_name": {
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
             "anyOf": [
               {
                 "type": "string"
@@ -14773,8 +15762,19 @@
                 "type": "null"
               }
             ],
-            "title": "Source Name",
-            "description": "Name of the telematics provider (TSP) that reported this data."
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TspEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "trailer_name": {
             "anyOf": [
@@ -14905,7 +15905,19 @@
         "type": "object",
         "required": [
           "trailer_id",
-          "trailer_location_occurred_at"
+          "tsp_id",
+          "tsp_slug",
+          "source_name",
+          "trailer_name",
+          "vehicle_id",
+          "driver_id",
+          "driver_name",
+          "trailer_h3_index_11",
+          "trailer_location_occurred_at",
+          "trailer_location",
+          "vehicle_h3_index_11",
+          "vehicle_location_occurred_at",
+          "vehicle_location"
         ],
         "title": "TrailerLiveLocation",
         "description": "Real-time operational status for a trailer, including latest telemetry.\n\nUse this to build live fleet maps, dispatch boards, or trailer status dashboards.\nIncludes the most recent location and other relevant metrics."
@@ -14974,9 +15986,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -15032,6 +16069,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "trailer_id": {
             "type": "string",
@@ -15183,9 +16232,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -15241,6 +16315,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "trailer_name": {
             "anyOf": [
@@ -15325,6 +16411,18 @@
             ],
             "title": "License Plate Country",
             "description": "Plate country code (ISO-3166-1 alpha-2, e.g., 'US', 'CA')."
+          },
+          "license_plate_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Plate Number",
+            "description": "License plate number (e.g., 'HMT-3570')."
           },
           "started_at": {
             "anyOf": [
@@ -15627,7 +16725,20 @@
             "title": "Trailer Name",
             "description": "Display name or unit number for the trailer."
           },
-          "source_name": {
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
             "anyOf": [
               {
                 "type": "string"
@@ -15636,8 +16747,19 @@
                 "type": "null"
               }
             ],
-            "title": "Source Name",
-            "description": "Name of the telematics provider (TSP) that provided this trailer data."
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TspEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "location": {
             "anyOf": [
@@ -15671,8 +16793,16 @@
         "type": "object",
         "required": [
           "fleet_id",
+          "fleet_ref",
           "connection_id",
-          "trailer_id"
+          "trailer_id",
+          "source_id",
+          "trailer_name",
+          "tsp_id",
+          "tsp_slug",
+          "source_name",
+          "location",
+          "h3_index_11"
         ],
         "title": "TrailerSummary",
         "description": "Trailer profile with identification and latest location data.\n\nUse this to build trailer inventories or track trailer locations across your fleet."
@@ -15957,9 +17087,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -16015,6 +17170,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "username": {
             "anyOf": [
@@ -16489,7 +17656,20 @@
             "title": "Vehicle Name",
             "description": "Display name or unit number for the vehicle."
           },
-          "source_name": {
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
             "anyOf": [
               {
                 "type": "string"
@@ -16498,8 +17678,19 @@
                 "type": "null"
               }
             ],
-            "title": "Source Name",
-            "description": "Name of the telematics provider (TSP) that reported this data."
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TspEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "driver_id": {
             "anyOf": [
@@ -16541,14 +17732,14 @@
           "speed": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "number"
               },
               {
                 "type": "null"
               }
             ],
             "title": "Speed",
-            "description": "Instantaneous speed at the last telemetry sample (unit per source, typically km/h or mph)."
+            "description": "Instantaneous speed at the last telemetry sample (meters/second)."
           },
           "odometer": {
             "anyOf": [
@@ -16560,7 +17751,7 @@
               }
             ],
             "title": "Odometer",
-            "description": "Odometer reading at the last sample (kilometers)."
+            "description": "Odometer reading at the last sample (meters)."
           },
           "fuel_level": {
             "anyOf": [
@@ -16572,7 +17763,7 @@
               }
             ],
             "title": "Fuel Level",
-            "description": "Fuel level as reported by the TSP (unit per source; often percentage 0-100)."
+            "description": "Fuel level as reported by the TSP (remaining percentage)."
           },
           "engine_hours": {
             "anyOf": [
@@ -16584,7 +17775,7 @@
               }
             ],
             "title": "Engine Hours",
-            "description": "Accumulated engine hours at the last sample."
+            "description": "Engine hours at the last sample (as reported)."
           },
           "oil_pressure": {
             "anyOf": [
@@ -16596,7 +17787,7 @@
               }
             ],
             "title": "Oil Pressure",
-            "description": "Oil pressure as reported (unit per source, e.g., psi or kPa)."
+            "description": "Oil pressure as reported (pascal)."
           },
           "coolant_temperature": {
             "anyOf": [
@@ -16608,7 +17799,7 @@
               }
             ],
             "title": "Coolant Temperature",
-            "description": "Engine coolant temperature as reported (\u00b0C or \u00b0F depending on source)."
+            "description": "Coolant temperature as reported (kelvin)."
           },
           "occurred_at": {
             "type": "string",
@@ -16636,7 +17827,22 @@
         "type": "object",
         "required": [
           "vehicle_id",
-          "occurred_at"
+          "vin",
+          "vehicle_name",
+          "tsp_id",
+          "tsp_slug",
+          "source_name",
+          "driver_id",
+          "driver_name",
+          "h3_index_11",
+          "speed",
+          "odometer",
+          "fuel_level",
+          "engine_hours",
+          "oil_pressure",
+          "coolant_temperature",
+          "occurred_at",
+          "location"
         ],
         "title": "VehicleLiveLocation",
         "description": "Real-time operational status for a vehicle, including latest telemetry.\n\nUse this to build live fleet maps, dispatch boards, or vehicle status dashboards.\nIncludes the most recent location, speed, fuel level, and engine metrics."
@@ -16705,9 +17911,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -16763,6 +17994,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "vehicle_id": {
             "anyOf": [
@@ -17030,9 +18273,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -17088,6 +18356,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "vehicle_name": {
             "anyOf": [
@@ -17482,9 +18762,34 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
           },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
           "source_name": {
             "$ref": "#/components/schemas/TspEnum",
-            "description": "An enumeration identifying the TSP from which this record was sourced."
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_data": {
             "type": "object",
@@ -17540,6 +18845,18 @@
             ],
             "title": "Schedule Id",
             "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
           },
           "vehicle_id": {
             "anyOf": [
@@ -17661,7 +18978,20 @@
             "title": "Vehicle Id",
             "description": "Unique Catena identifier for the vehicle."
           },
-          "source_name": {
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
             "anyOf": [
               {
                 "type": "string"
@@ -17670,8 +19000,19 @@
                 "type": "null"
               }
             ],
-            "title": "Source Name",
-            "description": "Name of the telematics provider (TSP) that provided this vehicle data."
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TspEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
           },
           "source_id": {
             "anyOf": [
@@ -17856,7 +19197,7 @@
               }
             ],
             "title": "Last Fuel Level",
-            "description": "Most recent fuel level reading (unit per source; often percentage 0-100)."
+            "description": "Most recent fuel level reading (remaining percentage)."
           },
           "last_odometer_reading": {
             "anyOf": [
@@ -17868,7 +19209,7 @@
               }
             ],
             "title": "Last Odometer Reading",
-            "description": "Most recent odometer reading (kilometers)."
+            "description": "Most recent odometer reading (meters)."
           },
           "last_engine_hours": {
             "anyOf": [
@@ -17880,7 +19221,7 @@
               }
             ],
             "title": "Last Engine Hours",
-            "description": "Most recent accumulated engine hours reading."
+            "description": "Most recent engine hours reading (as reported)."
           },
           "last_speed_reading": {
             "anyOf": [
@@ -17892,14 +19233,36 @@
               }
             ],
             "title": "Last Speed Reading",
-            "description": "Most recent speed reading (unit per source, typically km/h or mph)."
+            "description": "Most recent speed reading (meters/second)."
           }
         },
         "type": "object",
         "required": [
           "fleet_id",
+          "fleet_ref",
           "connection_id",
-          "vehicle_id"
+          "vehicle_id",
+          "tsp_id",
+          "tsp_slug",
+          "source_name",
+          "source_id",
+          "status",
+          "vehicle_name",
+          "oem",
+          "model_type",
+          "model_year",
+          "vin",
+          "engine_vin",
+          "license_plate_country",
+          "license_plate_region",
+          "license_plate_number",
+          "last_location_ping",
+          "last_location_h3_index_11",
+          "last_location",
+          "last_fuel_level",
+          "last_odometer_reading",
+          "last_engine_hours",
+          "last_speed_reading"
         ],
         "title": "VehicleSummary",
         "description": "Vehicle profile with static attributes and latest telemetry snapshot.\n\nUse this to build asset inventories, maintenance dashboards, or fleet utilization reports.\nCombines registration details with the most recent location and engine data."
@@ -18043,6 +19406,216 @@
           "total"
         ],
         "title": "_CursorPage[DriverSummary]"
+      },
+      "_CursorPage_DvirLogDefectRead_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DvirLogDefectRead"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "current_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Page",
+            "description": "Cursor to refetch the current page"
+          },
+          "current_page_backwards": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Page Backwards",
+            "description": "Cursor to refetch the current page starting from the last item"
+          },
+          "previous_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Page",
+            "description": "Cursor for the previous page"
+          },
+          "next_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Page",
+            "description": "Cursor for the next page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "_CursorPage[DvirLogDefectRead]"
+      },
+      "_CursorPage_DvirLogRead_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DvirLogRead"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "current_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Page",
+            "description": "Cursor to refetch the current page"
+          },
+          "current_page_backwards": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Page Backwards",
+            "description": "Cursor to refetch the current page starting from the last item"
+          },
+          "previous_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Page",
+            "description": "Cursor for the previous page"
+          },
+          "next_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Page",
+            "description": "Cursor for the next page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "_CursorPage[DvirLogRead]"
+      },
+      "_CursorPage_EngineLogRead_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/EngineLogRead"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "current_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Page",
+            "description": "Cursor to refetch the current page"
+          },
+          "current_page_backwards": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Page Backwards",
+            "description": "Cursor to refetch the current page starting from the last item"
+          },
+          "previous_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Page",
+            "description": "Cursor for the previous page"
+          },
+          "next_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Page",
+            "description": "Cursor for the next page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "_CursorPage[EngineLogRead]"
       },
       "_CursorPage_FleetSummary_": {
         "properties": {

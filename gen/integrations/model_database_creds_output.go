@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,12 +20,13 @@ var _ MappedNullable = &DatabaseCredsOutput{}
 
 // DatabaseCredsOutput Database Connection model
 type DatabaseCredsOutput struct {
-	Drivername DatabaseDriverEnum `json:"drivername"`
-	Host       interface{}        `json:"host"`
-	Port       int32              `json:"port"`
-	Username   interface{}        `json:"username"`
-	Password   interface{}        `json:"password"`
-	Database   string             `json:"database"`
+	Drivername           DatabaseDriverEnum `json:"drivername"`
+	Host                 interface{}        `json:"host"`
+	Port                 int32              `json:"port"`
+	Username             interface{}        `json:"username"`
+	Password             interface{}        `json:"password"`
+	Database             string             `json:"database"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DatabaseCredsOutput DatabaseCredsOutput
@@ -226,6 +226,11 @@ func (o DatabaseCredsOutput) ToMap() (map[string]interface{}, error) {
 		toSerialize["password"] = o.Password
 	}
 	toSerialize["database"] = o.Database
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -258,15 +263,25 @@ func (o *DatabaseCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varDatabaseCredsOutput := _DatabaseCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDatabaseCredsOutput)
+	err = json.Unmarshal(data, &varDatabaseCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DatabaseCredsOutput(varDatabaseCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "drivername")
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "port")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "database")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

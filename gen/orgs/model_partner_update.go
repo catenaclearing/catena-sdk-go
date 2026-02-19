@@ -19,9 +19,12 @@ var _ MappedNullable = &PartnerUpdate{}
 
 // PartnerUpdate API model for updating a partner  Update your organization's profile information. All fields are optional - only provide fields you want to change.
 type PartnerUpdate struct {
-	Name        NullableString `json:"name,omitempty"`
-	Description NullableString `json:"description,omitempty"`
+	Name                 NullableString `json:"name,omitempty"`
+	Description          NullableString `json:"description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartnerUpdate PartnerUpdate
 
 // NewPartnerUpdate instantiates a new PartnerUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -142,7 +145,34 @@ func (o PartnerUpdate) ToMap() (map[string]interface{}, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartnerUpdate) UnmarshalJSON(data []byte) (err error) {
+	varPartnerUpdate := _PartnerUpdate{}
+
+	err = json.Unmarshal(data, &varPartnerUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartnerUpdate(varPartnerUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartnerUpdate struct {

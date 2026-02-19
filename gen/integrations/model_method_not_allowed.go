@@ -19,10 +19,13 @@ var _ MappedNullable = &MethodNotAllowed{}
 
 // MethodNotAllowed struct for MethodNotAllowed
 type MethodNotAllowed struct {
-	Code    *int32         `json:"code,omitempty"`
-	Message *string        `json:"message,omitempty"`
-	Detail  NullableString `json:"detail,omitempty"`
+	Code                 *int32         `json:"code,omitempty"`
+	Message              *string        `json:"message,omitempty"`
+	Detail               NullableString `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MethodNotAllowed MethodNotAllowed
 
 // NewMethodNotAllowed instantiates a new MethodNotAllowed object
 // This constructor will assign default values to properties that have it defined,
@@ -175,7 +178,35 @@ func (o MethodNotAllowed) ToMap() (map[string]interface{}, error) {
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MethodNotAllowed) UnmarshalJSON(data []byte) (err error) {
+	varMethodNotAllowed := _MethodNotAllowed{}
+
+	err = json.Unmarshal(data, &varMethodNotAllowed)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MethodNotAllowed(varMethodNotAllowed)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMethodNotAllowed struct {

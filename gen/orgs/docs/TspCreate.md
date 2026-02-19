@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Status** | Pointer to [**StatusEnum**](StatusEnum.md) | The status of the TSP | [optional] 
 **ConnType** | [**ConnectionTypeEnum**](ConnectionTypeEnum.md) | Authentication method (OAuth, API Key, etc.) | 
 **IsSandbox** | Pointer to **bool** | Indicates whether the TSP is a sandbox integrations for testing purposes. | [optional] [default to false]
+**LogoUrl** | Pointer to **NullableString** |  | [optional] 
+**LogoDarkUrl** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -211,6 +213,76 @@ SetIsSandbox sets IsSandbox field to given value.
 
 HasIsSandbox returns a boolean if a field has been set.
 
+### GetLogoUrl
+
+`func (o *TspCreate) GetLogoUrl() string`
+
+GetLogoUrl returns the LogoUrl field if non-nil, zero value otherwise.
+
+### GetLogoUrlOk
+
+`func (o *TspCreate) GetLogoUrlOk() (*string, bool)`
+
+GetLogoUrlOk returns a tuple with the LogoUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogoUrl
+
+`func (o *TspCreate) SetLogoUrl(v string)`
+
+SetLogoUrl sets LogoUrl field to given value.
+
+### HasLogoUrl
+
+`func (o *TspCreate) HasLogoUrl() bool`
+
+HasLogoUrl returns a boolean if a field has been set.
+
+### SetLogoUrlNil
+
+`func (o *TspCreate) SetLogoUrlNil(b bool)`
+
+ SetLogoUrlNil sets the value for LogoUrl to be an explicit nil
+
+### UnsetLogoUrl
+`func (o *TspCreate) UnsetLogoUrl()`
+
+UnsetLogoUrl ensures that no value is present for LogoUrl, not even an explicit nil
+### GetLogoDarkUrl
+
+`func (o *TspCreate) GetLogoDarkUrl() string`
+
+GetLogoDarkUrl returns the LogoDarkUrl field if non-nil, zero value otherwise.
+
+### GetLogoDarkUrlOk
+
+`func (o *TspCreate) GetLogoDarkUrlOk() (*string, bool)`
+
+GetLogoDarkUrlOk returns a tuple with the LogoDarkUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogoDarkUrl
+
+`func (o *TspCreate) SetLogoDarkUrl(v string)`
+
+SetLogoDarkUrl sets LogoDarkUrl field to given value.
+
+### HasLogoDarkUrl
+
+`func (o *TspCreate) HasLogoDarkUrl() bool`
+
+HasLogoDarkUrl returns a boolean if a field has been set.
+
+### SetLogoDarkUrlNil
+
+`func (o *TspCreate) SetLogoDarkUrlNil(b bool)`
+
+ SetLogoDarkUrlNil sets the value for LogoDarkUrl to be an explicit nil
+
+### UnsetLogoDarkUrl
+`func (o *TspCreate) UnsetLogoDarkUrl()`
+
+UnsetLogoDarkUrl ensures that no value is present for LogoDarkUrl, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

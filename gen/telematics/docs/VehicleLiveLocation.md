@@ -5,26 +5,28 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **VehicleId** | **string** | Unique Catena identifier for the vehicle. | 
-**Vin** | Pointer to **NullableString** |  | [optional] 
-**VehicleName** | Pointer to **NullableString** |  | [optional] 
-**SourceName** | Pointer to **NullableString** |  | [optional] 
-**DriverId** | Pointer to **NullableString** |  | [optional] 
-**DriverName** | Pointer to **NullableString** |  | [optional] 
-**H3Index11** | Pointer to **NullableInt32** |  | [optional] 
-**Speed** | Pointer to **NullableInt32** |  | [optional] 
-**Odometer** | Pointer to **NullableFloat32** |  | [optional] 
-**FuelLevel** | Pointer to **NullableFloat32** |  | [optional] 
-**EngineHours** | Pointer to **NullableFloat32** |  | [optional] 
-**OilPressure** | Pointer to **NullableFloat32** |  | [optional] 
-**CoolantTemperature** | Pointer to **NullableFloat32** |  | [optional] 
+**Vin** | **NullableString** |  | 
+**VehicleName** | **NullableString** |  | 
+**TspId** | **NullableString** |  | 
+**TspSlug** | **NullableString** |  | 
+**SourceName** | [**NullableTspEnum**](TspEnum.md) |  | 
+**DriverId** | **NullableString** |  | 
+**DriverName** | **NullableString** |  | 
+**H3Index11** | **NullableInt32** |  | 
+**Speed** | **NullableFloat32** |  | 
+**Odometer** | **NullableFloat32** |  | 
+**FuelLevel** | **NullableFloat32** |  | 
+**EngineHours** | **NullableFloat32** |  | 
+**OilPressure** | **NullableFloat32** |  | 
+**CoolantTemperature** | **NullableFloat32** |  | 
 **OccurredAt** | **time.Time** | Timestamp (UTC) when this telemetry data was recorded by the vehicle. | 
-**Location** | Pointer to [**NullableLocation4**](Location4.md) |  | [optional] 
+**Location** | [**NullableLocation4**](Location4.md) |  | 
 
 ## Methods
 
 ### NewVehicleLiveLocation
 
-`func NewVehicleLiveLocation(vehicleId string, occurredAt time.Time, ) *VehicleLiveLocation`
+`func NewVehicleLiveLocation(vehicleId string, vin NullableString, vehicleName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, driverId NullableString, driverName NullableString, h3Index11 NullableInt32, speed NullableFloat32, odometer NullableFloat32, fuelLevel NullableFloat32, engineHours NullableFloat32, oilPressure NullableFloat32, coolantTemperature NullableFloat32, occurredAt time.Time, location NullableLocation4, ) *VehicleLiveLocation`
 
 NewVehicleLiveLocation instantiates a new VehicleLiveLocation object
 This constructor will assign default values to properties that have it defined,
@@ -78,11 +80,6 @@ and a boolean to check if the value has been set.
 
 SetVin sets Vin field to given value.
 
-### HasVin
-
-`func (o *VehicleLiveLocation) HasVin() bool`
-
-HasVin returns a boolean if a field has been set.
 
 ### SetVinNil
 
@@ -113,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetVehicleName sets VehicleName field to given value.
 
-### HasVehicleName
-
-`func (o *VehicleLiveLocation) HasVehicleName() bool`
-
-HasVehicleName returns a boolean if a field has been set.
 
 ### SetVehicleNameNil
 
@@ -129,30 +121,85 @@ HasVehicleName returns a boolean if a field has been set.
 `func (o *VehicleLiveLocation) UnsetVehicleName()`
 
 UnsetVehicleName ensures that no value is present for VehicleName, not even an explicit nil
+### GetTspId
+
+`func (o *VehicleLiveLocation) GetTspId() string`
+
+GetTspId returns the TspId field if non-nil, zero value otherwise.
+
+### GetTspIdOk
+
+`func (o *VehicleLiveLocation) GetTspIdOk() (*string, bool)`
+
+GetTspIdOk returns a tuple with the TspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspId
+
+`func (o *VehicleLiveLocation) SetTspId(v string)`
+
+SetTspId sets TspId field to given value.
+
+
+### SetTspIdNil
+
+`func (o *VehicleLiveLocation) SetTspIdNil(b bool)`
+
+ SetTspIdNil sets the value for TspId to be an explicit nil
+
+### UnsetTspId
+`func (o *VehicleLiveLocation) UnsetTspId()`
+
+UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+### GetTspSlug
+
+`func (o *VehicleLiveLocation) GetTspSlug() string`
+
+GetTspSlug returns the TspSlug field if non-nil, zero value otherwise.
+
+### GetTspSlugOk
+
+`func (o *VehicleLiveLocation) GetTspSlugOk() (*string, bool)`
+
+GetTspSlugOk returns a tuple with the TspSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspSlug
+
+`func (o *VehicleLiveLocation) SetTspSlug(v string)`
+
+SetTspSlug sets TspSlug field to given value.
+
+
+### SetTspSlugNil
+
+`func (o *VehicleLiveLocation) SetTspSlugNil(b bool)`
+
+ SetTspSlugNil sets the value for TspSlug to be an explicit nil
+
+### UnsetTspSlug
+`func (o *VehicleLiveLocation) UnsetTspSlug()`
+
+UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
 ### GetSourceName
 
-`func (o *VehicleLiveLocation) GetSourceName() string`
+`func (o *VehicleLiveLocation) GetSourceName() TspEnum`
 
 GetSourceName returns the SourceName field if non-nil, zero value otherwise.
 
 ### GetSourceNameOk
 
-`func (o *VehicleLiveLocation) GetSourceNameOk() (*string, bool)`
+`func (o *VehicleLiveLocation) GetSourceNameOk() (*TspEnum, bool)`
 
 GetSourceNameOk returns a tuple with the SourceName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceName
 
-`func (o *VehicleLiveLocation) SetSourceName(v string)`
+`func (o *VehicleLiveLocation) SetSourceName(v TspEnum)`
 
 SetSourceName sets SourceName field to given value.
 
-### HasSourceName
-
-`func (o *VehicleLiveLocation) HasSourceName() bool`
-
-HasSourceName returns a boolean if a field has been set.
 
 ### SetSourceNameNil
 
@@ -183,11 +230,6 @@ and a boolean to check if the value has been set.
 
 SetDriverId sets DriverId field to given value.
 
-### HasDriverId
-
-`func (o *VehicleLiveLocation) HasDriverId() bool`
-
-HasDriverId returns a boolean if a field has been set.
 
 ### SetDriverIdNil
 
@@ -218,11 +260,6 @@ and a boolean to check if the value has been set.
 
 SetDriverName sets DriverName field to given value.
 
-### HasDriverName
-
-`func (o *VehicleLiveLocation) HasDriverName() bool`
-
-HasDriverName returns a boolean if a field has been set.
 
 ### SetDriverNameNil
 
@@ -253,11 +290,6 @@ and a boolean to check if the value has been set.
 
 SetH3Index11 sets H3Index11 field to given value.
 
-### HasH3Index11
-
-`func (o *VehicleLiveLocation) HasH3Index11() bool`
-
-HasH3Index11 returns a boolean if a field has been set.
 
 ### SetH3Index11Nil
 
@@ -271,28 +303,23 @@ HasH3Index11 returns a boolean if a field has been set.
 UnsetH3Index11 ensures that no value is present for H3Index11, not even an explicit nil
 ### GetSpeed
 
-`func (o *VehicleLiveLocation) GetSpeed() int32`
+`func (o *VehicleLiveLocation) GetSpeed() float32`
 
 GetSpeed returns the Speed field if non-nil, zero value otherwise.
 
 ### GetSpeedOk
 
-`func (o *VehicleLiveLocation) GetSpeedOk() (*int32, bool)`
+`func (o *VehicleLiveLocation) GetSpeedOk() (*float32, bool)`
 
 GetSpeedOk returns a tuple with the Speed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpeed
 
-`func (o *VehicleLiveLocation) SetSpeed(v int32)`
+`func (o *VehicleLiveLocation) SetSpeed(v float32)`
 
 SetSpeed sets Speed field to given value.
 
-### HasSpeed
-
-`func (o *VehicleLiveLocation) HasSpeed() bool`
-
-HasSpeed returns a boolean if a field has been set.
 
 ### SetSpeedNil
 
@@ -323,11 +350,6 @@ and a boolean to check if the value has been set.
 
 SetOdometer sets Odometer field to given value.
 
-### HasOdometer
-
-`func (o *VehicleLiveLocation) HasOdometer() bool`
-
-HasOdometer returns a boolean if a field has been set.
 
 ### SetOdometerNil
 
@@ -358,11 +380,6 @@ and a boolean to check if the value has been set.
 
 SetFuelLevel sets FuelLevel field to given value.
 
-### HasFuelLevel
-
-`func (o *VehicleLiveLocation) HasFuelLevel() bool`
-
-HasFuelLevel returns a boolean if a field has been set.
 
 ### SetFuelLevelNil
 
@@ -393,11 +410,6 @@ and a boolean to check if the value has been set.
 
 SetEngineHours sets EngineHours field to given value.
 
-### HasEngineHours
-
-`func (o *VehicleLiveLocation) HasEngineHours() bool`
-
-HasEngineHours returns a boolean if a field has been set.
 
 ### SetEngineHoursNil
 
@@ -428,11 +440,6 @@ and a boolean to check if the value has been set.
 
 SetOilPressure sets OilPressure field to given value.
 
-### HasOilPressure
-
-`func (o *VehicleLiveLocation) HasOilPressure() bool`
-
-HasOilPressure returns a boolean if a field has been set.
 
 ### SetOilPressureNil
 
@@ -463,11 +470,6 @@ and a boolean to check if the value has been set.
 
 SetCoolantTemperature sets CoolantTemperature field to given value.
 
-### HasCoolantTemperature
-
-`func (o *VehicleLiveLocation) HasCoolantTemperature() bool`
-
-HasCoolantTemperature returns a boolean if a field has been set.
 
 ### SetCoolantTemperatureNil
 
@@ -518,11 +520,6 @@ and a boolean to check if the value has been set.
 
 SetLocation sets Location field to given value.
 
-### HasLocation
-
-`func (o *VehicleLiveLocation) HasLocation() bool`
-
-HasLocation returns a boolean if a field has been set.
 
 ### SetLocationNil
 

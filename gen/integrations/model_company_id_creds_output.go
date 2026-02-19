@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,7 +20,8 @@ var _ MappedNullable = &CompanyIdCredsOutput{}
 
 // CompanyIdCredsOutput Company ID Credentials model
 type CompanyIdCredsOutput struct {
-	CompanyId interface{} `json:"company_id"`
+	CompanyId            interface{} `json:"company_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CompanyIdCredsOutput CompanyIdCredsOutput
@@ -83,6 +83,11 @@ func (o CompanyIdCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.CompanyId != nil {
 		toSerialize["company_id"] = o.CompanyId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -110,15 +115,20 @@ func (o *CompanyIdCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varCompanyIdCredsOutput := _CompanyIdCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCompanyIdCredsOutput)
+	err = json.Unmarshal(data, &varCompanyIdCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CompanyIdCredsOutput(varCompanyIdCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "company_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

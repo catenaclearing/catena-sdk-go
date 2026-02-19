@@ -135,6 +135,14 @@
 
 * `HOS_VIOLATION` (value: `"hos_violation.*"`)
 
+* `ENGINE_LOG_ADDED` (value: `"engine_log.added"`)
+
+* `ENGINE_LOG_MODIFIED` (value: `"engine_log.modified"`)
+
+* `ENGINE_LOG_REMOVED` (value: `"engine_log.removed"`)
+
+* `ENGINE_LOG` (value: `"engine_log.*"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -91,6 +91,8 @@ Class | Method | HTTP request | Description
 *ConnectionsAPI* | [**ListSchedules**](docs/ConnectionsAPI.md#listschedules) | **Get** /v2/integrations/connections/{connection_id}/schedules | List Schedules
 *ConnectionsAPI* | [**UpdateConnection**](docs/ConnectionsAPI.md#updateconnection) | **Patch** /v2/integrations/connections/{connection_id} | Update Connection
 *ConnectionsAPI* | [**UpdateSchedule**](docs/ConnectionsAPI.md#updateschedule) | **Patch** /v2/integrations/connections/{connection_id}/schedules/{schedule_id} | Update Schedule
+*TSPIntegrationsAPI* | [**GetIntegrationsPerTsp**](docs/TSPIntegrationsAPI.md#getintegrationspertsp) | **Get** /v2/integrations/tsps/{tsp_id} | Get Integrations Per Tsp
+*TSPIntegrationsAPI* | [**ListIntegrationsPerTsp**](docs/TSPIntegrationsAPI.md#listintegrationspertsp) | **Get** /v2/integrations/tsps | List Integrations Per Tsp
 
 
 ## Documentation For Models
@@ -124,6 +126,7 @@ Class | Method | HTTP request | Description
  - [CursorPageTypeVarCustomizedConnectionRead](docs/CursorPageTypeVarCustomizedConnectionRead.md)
  - [CursorPageTypeVarCustomizedExecutionRead](docs/CursorPageTypeVarCustomizedExecutionRead.md)
  - [CursorPageTypeVarCustomizedScheduleRead](docs/CursorPageTypeVarCustomizedScheduleRead.md)
+ - [CursorPageTypeVarCustomizedTspIntegrationsRead](docs/CursorPageTypeVarCustomizedTspIntegrationsRead.md)
  - [DatabaseCredsInput](docs/DatabaseCredsInput.md)
  - [DatabaseCredsOutput](docs/DatabaseCredsOutput.md)
  - [DatabaseDriverEnum](docs/DatabaseDriverEnum.md)
@@ -139,6 +142,7 @@ Class | Method | HTTP request | Description
  - [GatewayTimeout](docs/GatewayTimeout.md)
  - [GeotabCredsInput](docs/GeotabCredsInput.md)
  - [GeotabCredsOutput](docs/GeotabCredsOutput.md)
+ - [IntegrationStatusEnum](docs/IntegrationStatusEnum.md)
  - [InternalServerError](docs/InternalServerError.md)
  - [IsaacCredsInput](docs/IsaacCredsInput.md)
  - [IsaacCredsOutput](docs/IsaacCredsOutput.md)
@@ -186,6 +190,7 @@ Class | Method | HTTP request | Description
  - [TruckXSLCInput](docs/TruckXSLCInput.md)
  - [TruckXSLCOutput](docs/TruckXSLCOutput.md)
  - [TspEnum](docs/TspEnum.md)
+ - [TspIntegrationsRead](docs/TspIntegrationsRead.md)
  - [Unauthorized](docs/Unauthorized.md)
  - [UnprocessableEntity](docs/UnprocessableEntity.md)
  - [ValidationErrorDetail](docs/ValidationErrorDetail.md)

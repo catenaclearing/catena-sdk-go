@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &Point{}
 
 // Point Point Model
 type Point struct {
-	Bbox        NullableBbox `json:"bbox,omitempty"`
-	Type        string       `json:"type"`
-	Coordinates Coordinates  `json:"coordinates"`
+	Bbox                 NullableBbox `json:"bbox,omitempty"`
+	Type                 string       `json:"type"`
+	Coordinates          Coordinates  `json:"coordinates"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Point Point
@@ -153,6 +153,11 @@ func (o Point) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["type"] = o.Type
 	toSerialize["coordinates"] = o.Coordinates
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *Point) UnmarshalJSON(data []byte) (err error) {
 
 	varPoint := _Point{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPoint)
+	err = json.Unmarshal(data, &varPoint)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Point(varPoint)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bbox")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "coordinates")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &FactorEldCredsOutput{}
 
 // FactorEldCredsOutput Factor ELD Connection model
 type FactorEldCredsOutput struct {
-	Username interface{} `json:"username"`
-	Password interface{} `json:"password"`
-	ApiKey   interface{} `json:"api_key"`
+	Username             interface{} `json:"username"`
+	Password             interface{} `json:"password"`
+	ApiKey               interface{} `json:"api_key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FactorEldCredsOutput FactorEldCredsOutput
@@ -145,6 +145,11 @@ func (o FactorEldCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.ApiKey != nil {
 		toSerialize["api_key"] = o.ApiKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -174,15 +179,22 @@ func (o *FactorEldCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varFactorEldCredsOutput := _FactorEldCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFactorEldCredsOutput)
+	err = json.Unmarshal(data, &varFactorEldCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FactorEldCredsOutput(varFactorEldCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "api_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

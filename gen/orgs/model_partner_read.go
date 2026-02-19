@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -36,7 +35,8 @@ type PartnerRead struct {
 	// When the partner was onboarded to Catena
 	CreatedAt time.Time `json:"created_at"`
 	// Last modification timestamp
-	UpdatedAt time.Time `json:"updated_at"`
+	UpdatedAt            time.Time `json:"updated_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartnerRead PartnerRead
@@ -374,6 +374,11 @@ func (o PartnerRead) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -404,15 +409,28 @@ func (o *PartnerRead) UnmarshalJSON(data []byte) (err error) {
 
 	varPartnerRead := _PartnerRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartnerRead)
+	err = json.Unmarshal(data, &varPartnerRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartnerRead(varPartnerRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "websites")
+		delete(additionalProperties, "categories")
+		delete(additionalProperties, "is_sandbox")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

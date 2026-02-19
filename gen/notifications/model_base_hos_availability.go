@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -27,7 +26,9 @@ type BaseHosAvailability struct {
 	// The Catena fleet this record belongs to (multi-tenant scope).
 	FleetId  string         `json:"fleet_id"`
 	FleetRef NullableString `json:"fleet_ref"`
-	// The name of the source
+	TspId    NullableString `json:"tsp_id,omitempty"`
+	TspSlug  NullableString `json:"tsp_slug,omitempty"`
+	// The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name — use `tsp_id` or `tsp_slug` to identify the specific ELD provider.
 	SourceName TspEnum `json:"source_name"`
 	// The specific fleet↔TSP connection through which this record was sourced.
 	ConnectionId string `json:"connection_id"`
@@ -42,6 +43,7 @@ type BaseHosAvailability struct {
 	OccurredAt                           time.Time                  `json:"occurred_at"`
 	ExecutionId                          NullableString             `json:"execution_id,omitempty"`
 	ScheduleId                           NullableString             `json:"schedule_id,omitempty"`
+	Extras                               map[string]interface{}     `json:"extras,omitempty"`
 	DriverId                             NullableString             `json:"driver_id,omitempty"`
 	VehicleId                            NullableString             `json:"vehicle_id,omitempty"`
 	HosRulesetCode                       NullableHosRulesetCodeEnum `json:"hos_ruleset_code,omitempty"`
@@ -78,6 +80,7 @@ type BaseHosAvailability struct {
 	IsCycleApplicable                    NullableBool               `json:"is_cycle_applicable,omitempty"`
 	ExceptionCodes                       []string                   `json:"exception_codes,omitempty"`
 	Notes                                NullableString             `json:"notes,omitempty"`
+	AdditionalProperties                 map[string]interface{}
 }
 
 type _BaseHosAvailability BaseHosAvailability
@@ -180,6 +183,92 @@ func (o *BaseHosAvailability) GetFleetRefOk() (*string, bool) {
 // SetFleetRef sets field value
 func (o *BaseHosAvailability) SetFleetRef(v string) {
 	o.FleetRef.Set(&v)
+}
+
+// GetTspId returns the TspId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseHosAvailability) GetTspId() string {
+	if o == nil || IsNil(o.TspId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseHosAvailability) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// HasTspId returns a boolean if a field has been set.
+func (o *BaseHosAvailability) HasTspId() bool {
+	if o != nil && o.TspId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspId gets a reference to the given NullableString and assigns it to the TspId field.
+func (o *BaseHosAvailability) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// SetTspIdNil sets the value for TspId to be an explicit nil
+func (o *BaseHosAvailability) SetTspIdNil() {
+	o.TspId.Set(nil)
+}
+
+// UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+func (o *BaseHosAvailability) UnsetTspId() {
+	o.TspId.Unset()
+}
+
+// GetTspSlug returns the TspSlug field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseHosAvailability) GetTspSlug() string {
+	if o == nil || IsNil(o.TspSlug.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseHosAvailability) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// HasTspSlug returns a boolean if a field has been set.
+func (o *BaseHosAvailability) HasTspSlug() bool {
+	if o != nil && o.TspSlug.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspSlug gets a reference to the given NullableString and assigns it to the TspSlug field.
+func (o *BaseHosAvailability) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// SetTspSlugNil sets the value for TspSlug to be an explicit nil
+func (o *BaseHosAvailability) SetTspSlugNil() {
+	o.TspSlug.Set(nil)
+}
+
+// UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
+func (o *BaseHosAvailability) UnsetTspSlug() {
+	o.TspSlug.Unset()
 }
 
 // GetSourceName returns the SourceName field value
@@ -453,6 +542,39 @@ func (o *BaseHosAvailability) SetScheduleIdNil() {
 // UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
 func (o *BaseHosAvailability) UnsetScheduleId() {
 	o.ScheduleId.Unset()
+}
+
+// GetExtras returns the Extras field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseHosAvailability) GetExtras() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Extras
+}
+
+// GetExtrasOk returns a tuple with the Extras field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseHosAvailability) GetExtrasOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Extras) {
+		return map[string]interface{}{}, false
+	}
+	return o.Extras, true
+}
+
+// HasExtras returns a boolean if a field has been set.
+func (o *BaseHosAvailability) HasExtras() bool {
+	if o != nil && !IsNil(o.Extras) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtras gets a reference to the given map[string]interface{} and assigns it to the Extras field.
+func (o *BaseHosAvailability) SetExtras(v map[string]interface{}) {
+	o.Extras = v
 }
 
 // GetDriverId returns the DriverId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2006,6 +2128,12 @@ func (o BaseHosAvailability) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["fleet_id"] = o.FleetId
 	toSerialize["fleet_ref"] = o.FleetRef.Get()
+	if o.TspId.IsSet() {
+		toSerialize["tsp_id"] = o.TspId.Get()
+	}
+	if o.TspSlug.IsSet() {
+		toSerialize["tsp_slug"] = o.TspSlug.Get()
+	}
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["source_id"] = o.SourceId
@@ -2020,6 +2148,9 @@ func (o BaseHosAvailability) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ScheduleId.IsSet() {
 		toSerialize["schedule_id"] = o.ScheduleId.Get()
+	}
+	if o.Extras != nil {
+		toSerialize["extras"] = o.Extras
 	}
 	if o.DriverId.IsSet() {
 		toSerialize["driver_id"] = o.DriverId.Get()
@@ -2129,6 +2260,11 @@ func (o BaseHosAvailability) ToMap() (map[string]interface{}, error) {
 	if o.Notes.IsSet() {
 		toSerialize["notes"] = o.Notes.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2164,15 +2300,70 @@ func (o *BaseHosAvailability) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseHosAvailability := _BaseHosAvailability{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseHosAvailability)
+	err = json.Unmarshal(data, &varBaseHosAvailability)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseHosAvailability(varBaseHosAvailability)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "occurred_at")
+		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "schedule_id")
+		delete(additionalProperties, "extras")
+		delete(additionalProperties, "driver_id")
+		delete(additionalProperties, "vehicle_id")
+		delete(additionalProperties, "hos_ruleset_code")
+		delete(additionalProperties, "duty_status_code")
+		delete(additionalProperties, "cycle_started_at")
+		delete(additionalProperties, "cycle_ends_at")
+		delete(additionalProperties, "available_drive_seconds")
+		delete(additionalProperties, "available_shift_seconds")
+		delete(additionalProperties, "available_cycle_seconds")
+		delete(additionalProperties, "available_tomorrow_seconds")
+		delete(additionalProperties, "available_day2_seconds")
+		delete(additionalProperties, "available_day3_seconds")
+		delete(additionalProperties, "forecast_horizon_days")
+		delete(additionalProperties, "time_until_break_seconds")
+		delete(additionalProperties, "rest_remaining_seconds")
+		delete(additionalProperties, "cycle_violation_duration_seconds")
+		delete(additionalProperties, "shift_driving_violation_duration_seconds")
+		delete(additionalProperties, "shift_ends_at")
+		delete(additionalProperties, "next_break_due_at")
+		delete(additionalProperties, "next_10hr_reset_eligible_at")
+		delete(additionalProperties, "next_34hr_reset_eligible_at")
+		delete(additionalProperties, "is_personal_conveyance_applied")
+		delete(additionalProperties, "is_yard_move_applied")
+		delete(additionalProperties, "is_adverse_driving_exemption_available")
+		delete(additionalProperties, "is_adverse_driving_applied")
+		delete(additionalProperties, "is_meal_break_required")
+		delete(additionalProperties, "meal_break_due_at")
+		delete(additionalProperties, "meal_break_min_duration_seconds")
+		delete(additionalProperties, "meal_break_time_until_due_seconds")
+		delete(additionalProperties, "is_split_sleep_applied")
+		delete(additionalProperties, "is_sleeper_eligible")
+		delete(additionalProperties, "sleeper_required_remaining_seconds")
+		delete(additionalProperties, "sleeper_split_window_ends_at")
+		delete(additionalProperties, "is_cycle_applicable")
+		delete(additionalProperties, "exception_codes")
+		delete(additionalProperties, "notes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

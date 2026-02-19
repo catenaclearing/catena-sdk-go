@@ -25,6 +25,7 @@ const (
 	RESOURCEENUM_DRIVER_SAFETY_EVENT  ResourceEnum = "driver_safety_event"
 	RESOURCEENUM_DVIR_LOG             ResourceEnum = "dvir_log"
 	RESOURCEENUM_DVIR_LOG_DEFECT      ResourceEnum = "dvir_log_defect"
+	RESOURCEENUM_ENGINE_LOG           ResourceEnum = "engine_log"
 	RESOURCEENUM_HOS_AVAILABILITY     ResourceEnum = "hos_availability"
 	RESOURCEENUM_HOS_DAILY_SNAPSHOT   ResourceEnum = "hos_daily_snapshot"
 	RESOURCEENUM_HOS_EVENT            ResourceEnum = "hos_event"
@@ -49,6 +50,7 @@ var AllowedResourceEnumEnumValues = []ResourceEnum{
 	"driver_safety_event",
 	"dvir_log",
 	"dvir_log_defect",
+	"engine_log",
 	"hos_availability",
 	"hos_daily_snapshot",
 	"hos_event",

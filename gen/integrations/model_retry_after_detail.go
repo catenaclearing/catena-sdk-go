@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +20,9 @@ var _ MappedNullable = &RetryAfterDetail{}
 
 // RetryAfterDetail struct for RetryAfterDetail
 type RetryAfterDetail struct {
-	RetryAfterSeconds int32  `json:"retry_after_seconds"`
-	Message           string `json:"message"`
+	RetryAfterSeconds    int32  `json:"retry_after_seconds"`
+	Message              string `json:"message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RetryAfterDetail RetryAfterDetail
@@ -106,6 +106,11 @@ func (o RetryAfterDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["retry_after_seconds"] = o.RetryAfterSeconds
 	toSerialize["message"] = o.Message
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *RetryAfterDetail) UnmarshalJSON(data []byte) (err error) {
 
 	varRetryAfterDetail := _RetryAfterDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRetryAfterDetail)
+	err = json.Unmarshal(data, &varRetryAfterDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RetryAfterDetail(varRetryAfterDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "retry_after_seconds")
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

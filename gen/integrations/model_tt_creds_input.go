@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &TTCredsInput{}
 
 // TTCredsInput Trucking Technologies Credentials model
 type TTCredsInput struct {
-	ApiKey        string `json:"api_key"`
-	ProviderToken string `json:"provider_token"`
-	DotNumber     string `json:"dot_number"`
+	ApiKey               string `json:"api_key"`
+	ProviderToken        string `json:"provider_token"`
+	DotNumber            string `json:"dot_number"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TTCredsInput TTCredsInput
@@ -133,6 +133,11 @@ func (o TTCredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["api_key"] = o.ApiKey
 	toSerialize["provider_token"] = o.ProviderToken
 	toSerialize["dot_number"] = o.DotNumber
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *TTCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varTTCredsInput := _TTCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTTCredsInput)
+	err = json.Unmarshal(data, &varTTCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TTCredsInput(varTTCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "provider_token")
+		delete(additionalProperties, "dot_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

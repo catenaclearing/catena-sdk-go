@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -36,8 +35,9 @@ type ConnectionRead struct {
 	SourceName  TspEnum      `json:"source_name"`
 	Credentials Credentials1 `json:"credentials"`
 	// The current status of the connection.
-	Status      StatusEnum     `json:"status"`
-	Description NullableString `json:"description"`
+	Status               StatusEnum     `json:"status"`
+	Description          NullableString `json:"description"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConnectionRead ConnectionRead
@@ -353,6 +353,11 @@ func (o ConnectionRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["credentials"] = o.Credentials
 	toSerialize["status"] = o.Status
 	toSerialize["description"] = o.Description.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -388,15 +393,29 @@ func (o *ConnectionRead) UnmarshalJSON(data []byte) (err error) {
 
 	varConnectionRead := _ConnectionRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConnectionRead)
+	err = json.Unmarshal(data, &varConnectionRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConnectionRead(varConnectionRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "credentials")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

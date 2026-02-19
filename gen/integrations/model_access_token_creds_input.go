@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,13 +20,14 @@ var _ MappedNullable = &AccessTokenCredsInput{}
 
 // AccessTokenCredsInput Access Token Credentials
 type AccessTokenCredsInput struct {
-	AccessToken  string         `json:"access_token"`
-	TokenType    string         `json:"token_type"`
-	ExpiresIn    NullableInt32  `json:"expires_in,omitempty"`
-	RefreshToken NullableString `json:"refresh_token,omitempty"`
-	Scope        NullableString `json:"scope,omitempty"`
-	UserId       NullableString `json:"user_id,omitempty"`
-	Host         NullableString `json:"host,omitempty"`
+	AccessToken          string         `json:"access_token"`
+	TokenType            string         `json:"token_type"`
+	ExpiresIn            NullableInt32  `json:"expires_in,omitempty"`
+	RefreshToken         NullableString `json:"refresh_token,omitempty"`
+	Scope                NullableString `json:"scope,omitempty"`
+	UserId               NullableString `json:"user_id,omitempty"`
+	Host                 NullableString `json:"host,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AccessTokenCredsInput AccessTokenCredsInput
@@ -341,6 +341,11 @@ func (o AccessTokenCredsInput) ToMap() (map[string]interface{}, error) {
 	if o.Host.IsSet() {
 		toSerialize["host"] = o.Host.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -369,15 +374,26 @@ func (o *AccessTokenCredsInput) UnmarshalJSON(data []byte) (err error) {
 
 	varAccessTokenCredsInput := _AccessTokenCredsInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAccessTokenCredsInput)
+	err = json.Unmarshal(data, &varAccessTokenCredsInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AccessTokenCredsInput(varAccessTokenCredsInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_token")
+		delete(additionalProperties, "token_type")
+		delete(additionalProperties, "expires_in")
+		delete(additionalProperties, "refresh_token")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "host")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

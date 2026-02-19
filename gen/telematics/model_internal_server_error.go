@@ -19,8 +19,11 @@ var _ MappedNullable = &InternalServerError{}
 
 // InternalServerError struct for InternalServerError
 type InternalServerError struct {
-	Message *string `json:"message,omitempty"`
+	Message              *string `json:"message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InternalServerError InternalServerError
 
 // NewInternalServerError instantiates a new InternalServerError object
 // This constructor will assign default values to properties that have it defined,
@@ -88,7 +91,33 @@ func (o InternalServerError) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InternalServerError) UnmarshalJSON(data []byte) (err error) {
+	varInternalServerError := _InternalServerError{}
+
+	err = json.Unmarshal(data, &varInternalServerError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InternalServerError(varInternalServerError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInternalServerError struct {

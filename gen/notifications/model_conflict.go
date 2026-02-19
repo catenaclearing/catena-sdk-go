@@ -19,10 +19,13 @@ var _ MappedNullable = &Conflict{}
 
 // Conflict struct for Conflict
 type Conflict struct {
-	Code    *int32         `json:"code,omitempty"`
-	Message *string        `json:"message,omitempty"`
-	Detail  NullableString `json:"detail,omitempty"`
+	Code                 *int32         `json:"code,omitempty"`
+	Message              *string        `json:"message,omitempty"`
+	Detail               NullableString `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Conflict Conflict
 
 // NewConflict instantiates a new Conflict object
 // This constructor will assign default values to properties that have it defined,
@@ -175,7 +178,35 @@ func (o Conflict) ToMap() (map[string]interface{}, error) {
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Conflict) UnmarshalJSON(data []byte) (err error) {
+	varConflict := _Conflict{}
+
+	err = json.Unmarshal(data, &varConflict)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Conflict(varConflict)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConflict struct {

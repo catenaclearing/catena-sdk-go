@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,7 +25,8 @@ type BaseFleetConnectionEvent struct {
 	// The ID of the fleet
 	FleetId string `json:"fleet_id"`
 	// The ID of the connection
-	ConnectionId string `json:"connection_id"`
+	ConnectionId         string `json:"connection_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseFleetConnectionEvent BaseFleetConnectionEvent
@@ -136,6 +136,11 @@ func (o BaseFleetConnectionEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["fleet_id"] = o.FleetId
 	toSerialize["connection_id"] = o.ConnectionId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *BaseFleetConnectionEvent) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseFleetConnectionEvent := _BaseFleetConnectionEvent{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseFleetConnectionEvent)
+	err = json.Unmarshal(data, &varBaseFleetConnectionEvent)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseFleetConnectionEvent(varBaseFleetConnectionEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "connection_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

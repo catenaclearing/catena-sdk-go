@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,44 +31,49 @@ type TrailerRead struct {
 	UpdatedAt time.Time    `json:"updated_at"`
 	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	// Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing.
-	ConnectionId string `json:"connection_id"`
-	// An enumeration identifying the TSP from which this record was sourced.
+	ConnectionId string         `json:"connection_id"`
+	TspId        NullableString `json:"tsp_id,omitempty"`
+	TspSlug      NullableString `json:"tsp_slug,omitempty"`
+	// The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name — use `tsp_id` or `tsp_slug` to identify the specific ELD provider.
 	SourceName TspEnum `json:"source_name"`
 	// Raw source payload as ingested from the TSP. **Note: use it for audit/debugging.**
 	SourceData map[string]interface{} `json:"source_data,omitempty"`
 	// Unique identifier of the record in the TSP. **Note: we generate a unique composite key based on available fields if the TSP does not provide an unique ID.**
 	SourceId string `json:"source_id"`
 	// SHA-256 hash of the source data payload. **Note: we use it internally for idempotence and deduplication.**
-	SourceDataHash      string                 `json:"source_data_hash"`
-	OccurredAt          NullableTime           `json:"occurred_at,omitempty"`
-	ExecutionId         NullableString         `json:"execution_id,omitempty"`
-	ScheduleId          NullableString         `json:"schedule_id,omitempty"`
-	TrailerName         NullableString         `json:"trailer_name,omitempty"`
-	Oem                 NullableString         `json:"oem,omitempty"`
-	ModelType           NullableString         `json:"model_type,omitempty"`
-	ModelYear           NullableInt32          `json:"model_year,omitempty"`
-	Vin                 NullableString         `json:"vin,omitempty"`
-	LicensePlateRegion  NullableString         `json:"license_plate_region,omitempty"`
-	LicensePlateCountry NullableString         `json:"license_plate_country,omitempty"`
-	StartedAt           NullableTime           `json:"started_at,omitempty"`
-	EndedAt             NullableTime           `json:"ended_at,omitempty"`
-	IsActive            NullableBool           `json:"is_active,omitempty"`
-	Status              NullableString         `json:"status,omitempty"`
-	Notes               NullableString         `json:"notes,omitempty"`
-	EldId               NullableString         `json:"eld_id,omitempty"`
-	EldSerialNumber     NullableString         `json:"eld_serial_number,omitempty"`
-	EldDeviceType       NullableString         `json:"eld_device_type,omitempty"`
-	EldProductId        NullableString         `json:"eld_product_id,omitempty"`
-	TotalAxles          NullableInt32          `json:"total_axles,omitempty"`
-	TrailerGroups       map[string]interface{} `json:"trailer_groups,omitempty"`
-	ExternalId          NullableString         `json:"external_id,omitempty"`
-	TrailerLength       NullableFloat32        `json:"trailer_length,omitempty"`
-	TrailerType         NullableString         `json:"trailer_type,omitempty"`
-	SpeedUnit           NullableString         `json:"speed_unit,omitempty"`
-	OdometerUnit        NullableString         `json:"odometer_unit,omitempty"`
-	FuelUnit            NullableString         `json:"fuel_unit,omitempty"`
-	FuelCapacity        NullableString         `json:"fuel_capacity,omitempty"`
-	EngineType          NullableString         `json:"engine_type,omitempty"`
+	SourceDataHash       string                 `json:"source_data_hash"`
+	OccurredAt           NullableTime           `json:"occurred_at,omitempty"`
+	ExecutionId          NullableString         `json:"execution_id,omitempty"`
+	ScheduleId           NullableString         `json:"schedule_id,omitempty"`
+	Extras               map[string]interface{} `json:"extras,omitempty"`
+	TrailerName          NullableString         `json:"trailer_name,omitempty"`
+	Oem                  NullableString         `json:"oem,omitempty"`
+	ModelType            NullableString         `json:"model_type,omitempty"`
+	ModelYear            NullableInt32          `json:"model_year,omitempty"`
+	Vin                  NullableString         `json:"vin,omitempty"`
+	LicensePlateRegion   NullableString         `json:"license_plate_region,omitempty"`
+	LicensePlateCountry  NullableString         `json:"license_plate_country,omitempty"`
+	LicensePlateNumber   NullableString         `json:"license_plate_number,omitempty"`
+	StartedAt            NullableTime           `json:"started_at,omitempty"`
+	EndedAt              NullableTime           `json:"ended_at,omitempty"`
+	IsActive             NullableBool           `json:"is_active,omitempty"`
+	Status               NullableString         `json:"status,omitempty"`
+	Notes                NullableString         `json:"notes,omitempty"`
+	EldId                NullableString         `json:"eld_id,omitempty"`
+	EldSerialNumber      NullableString         `json:"eld_serial_number,omitempty"`
+	EldDeviceType        NullableString         `json:"eld_device_type,omitempty"`
+	EldProductId         NullableString         `json:"eld_product_id,omitempty"`
+	TotalAxles           NullableInt32          `json:"total_axles,omitempty"`
+	TrailerGroups        map[string]interface{} `json:"trailer_groups,omitempty"`
+	ExternalId           NullableString         `json:"external_id,omitempty"`
+	TrailerLength        NullableFloat32        `json:"trailer_length,omitempty"`
+	TrailerType          NullableString         `json:"trailer_type,omitempty"`
+	SpeedUnit            NullableString         `json:"speed_unit,omitempty"`
+	OdometerUnit         NullableString         `json:"odometer_unit,omitempty"`
+	FuelUnit             NullableString         `json:"fuel_unit,omitempty"`
+	FuelCapacity         NullableString         `json:"fuel_capacity,omitempty"`
+	EngineType           NullableString         `json:"engine_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TrailerRead TrailerRead
@@ -307,6 +311,92 @@ func (o *TrailerRead) SetConnectionId(v string) {
 	o.ConnectionId = v
 }
 
+// GetTspId returns the TspId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TrailerRead) GetTspId() string {
+	if o == nil || IsNil(o.TspId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TrailerRead) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// HasTspId returns a boolean if a field has been set.
+func (o *TrailerRead) HasTspId() bool {
+	if o != nil && o.TspId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspId gets a reference to the given NullableString and assigns it to the TspId field.
+func (o *TrailerRead) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// SetTspIdNil sets the value for TspId to be an explicit nil
+func (o *TrailerRead) SetTspIdNil() {
+	o.TspId.Set(nil)
+}
+
+// UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+func (o *TrailerRead) UnsetTspId() {
+	o.TspId.Unset()
+}
+
+// GetTspSlug returns the TspSlug field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TrailerRead) GetTspSlug() string {
+	if o == nil || IsNil(o.TspSlug.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TrailerRead) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// HasTspSlug returns a boolean if a field has been set.
+func (o *TrailerRead) HasTspSlug() bool {
+	if o != nil && o.TspSlug.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspSlug gets a reference to the given NullableString and assigns it to the TspSlug field.
+func (o *TrailerRead) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// SetTspSlugNil sets the value for TspSlug to be an explicit nil
+func (o *TrailerRead) SetTspSlugNil() {
+	o.TspSlug.Set(nil)
+}
+
+// UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
+func (o *TrailerRead) UnsetTspSlug() {
+	o.TspSlug.Unset()
+}
+
 // GetSourceName returns the SourceName field value
 func (o *TrailerRead) GetSourceName() TspEnum {
 	if o == nil {
@@ -538,6 +628,39 @@ func (o *TrailerRead) SetScheduleIdNil() {
 // UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
 func (o *TrailerRead) UnsetScheduleId() {
 	o.ScheduleId.Unset()
+}
+
+// GetExtras returns the Extras field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TrailerRead) GetExtras() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Extras
+}
+
+// GetExtrasOk returns a tuple with the Extras field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TrailerRead) GetExtrasOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Extras) {
+		return map[string]interface{}{}, false
+	}
+	return o.Extras, true
+}
+
+// HasExtras returns a boolean if a field has been set.
+func (o *TrailerRead) HasExtras() bool {
+	if o != nil && !IsNil(o.Extras) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtras gets a reference to the given map[string]interface{} and assigns it to the Extras field.
+func (o *TrailerRead) SetExtras(v map[string]interface{}) {
+	o.Extras = v
 }
 
 // GetTrailerName returns the TrailerName field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -839,6 +962,49 @@ func (o *TrailerRead) SetLicensePlateCountryNil() {
 // UnsetLicensePlateCountry ensures that no value is present for LicensePlateCountry, not even an explicit nil
 func (o *TrailerRead) UnsetLicensePlateCountry() {
 	o.LicensePlateCountry.Unset()
+}
+
+// GetLicensePlateNumber returns the LicensePlateNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TrailerRead) GetLicensePlateNumber() string {
+	if o == nil || IsNil(o.LicensePlateNumber.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LicensePlateNumber.Get()
+}
+
+// GetLicensePlateNumberOk returns a tuple with the LicensePlateNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TrailerRead) GetLicensePlateNumberOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LicensePlateNumber.Get(), o.LicensePlateNumber.IsSet()
+}
+
+// HasLicensePlateNumber returns a boolean if a field has been set.
+func (o *TrailerRead) HasLicensePlateNumber() bool {
+	if o != nil && o.LicensePlateNumber.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLicensePlateNumber gets a reference to the given NullableString and assigns it to the LicensePlateNumber field.
+func (o *TrailerRead) SetLicensePlateNumber(v string) {
+	o.LicensePlateNumber.Set(&v)
+}
+
+// SetLicensePlateNumberNil sets the value for LicensePlateNumber to be an explicit nil
+func (o *TrailerRead) SetLicensePlateNumberNil() {
+	o.LicensePlateNumber.Set(nil)
+}
+
+// UnsetLicensePlateNumber ensures that no value is present for LicensePlateNumber, not even an explicit nil
+func (o *TrailerRead) UnsetLicensePlateNumber() {
+	o.LicensePlateNumber.Unset()
 }
 
 // GetStartedAt returns the StartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1669,6 +1835,12 @@ func (o TrailerRead) ToMap() (map[string]interface{}, error) {
 		toSerialize["deleted_at"] = o.DeletedAt.Get()
 	}
 	toSerialize["connection_id"] = o.ConnectionId
+	if o.TspId.IsSet() {
+		toSerialize["tsp_id"] = o.TspId.Get()
+	}
+	if o.TspSlug.IsSet() {
+		toSerialize["tsp_slug"] = o.TspSlug.Get()
+	}
 	toSerialize["source_name"] = o.SourceName
 	if !IsNil(o.SourceData) {
 		toSerialize["source_data"] = o.SourceData
@@ -1683,6 +1855,9 @@ func (o TrailerRead) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ScheduleId.IsSet() {
 		toSerialize["schedule_id"] = o.ScheduleId.Get()
+	}
+	if o.Extras != nil {
+		toSerialize["extras"] = o.Extras
 	}
 	if o.TrailerName.IsSet() {
 		toSerialize["trailer_name"] = o.TrailerName.Get()
@@ -1704,6 +1879,9 @@ func (o TrailerRead) ToMap() (map[string]interface{}, error) {
 	}
 	if o.LicensePlateCountry.IsSet() {
 		toSerialize["license_plate_country"] = o.LicensePlateCountry.Get()
+	}
+	if o.LicensePlateNumber.IsSet() {
+		toSerialize["license_plate_number"] = o.LicensePlateNumber.Get()
 	}
 	if o.StartedAt.IsSet() {
 		toSerialize["started_at"] = o.StartedAt.Get()
@@ -1762,6 +1940,11 @@ func (o TrailerRead) ToMap() (map[string]interface{}, error) {
 	if o.EngineType.IsSet() {
 		toSerialize["engine_type"] = o.EngineType.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1796,15 +1979,63 @@ func (o *TrailerRead) UnmarshalJSON(data []byte) (err error) {
 
 	varTrailerRead := _TrailerRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTrailerRead)
+	err = json.Unmarshal(data, &varTrailerRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TrailerRead(varTrailerRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "source_data")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "source_data_hash")
+		delete(additionalProperties, "occurred_at")
+		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "schedule_id")
+		delete(additionalProperties, "extras")
+		delete(additionalProperties, "trailer_name")
+		delete(additionalProperties, "oem")
+		delete(additionalProperties, "model_type")
+		delete(additionalProperties, "model_year")
+		delete(additionalProperties, "vin")
+		delete(additionalProperties, "license_plate_region")
+		delete(additionalProperties, "license_plate_country")
+		delete(additionalProperties, "license_plate_number")
+		delete(additionalProperties, "started_at")
+		delete(additionalProperties, "ended_at")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "notes")
+		delete(additionalProperties, "eld_id")
+		delete(additionalProperties, "eld_serial_number")
+		delete(additionalProperties, "eld_device_type")
+		delete(additionalProperties, "eld_product_id")
+		delete(additionalProperties, "total_axles")
+		delete(additionalProperties, "trailer_groups")
+		delete(additionalProperties, "external_id")
+		delete(additionalProperties, "trailer_length")
+		delete(additionalProperties, "trailer_type")
+		delete(additionalProperties, "speed_unit")
+		delete(additionalProperties, "odometer_unit")
+		delete(additionalProperties, "fuel_unit")
+		delete(additionalProperties, "fuel_capacity")
+		delete(additionalProperties, "engine_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

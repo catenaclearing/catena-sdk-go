@@ -5,23 +5,25 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TrailerId** | **string** | Unique Catena identifier for the trailer. | 
-**SourceName** | Pointer to **NullableString** |  | [optional] 
-**TrailerName** | Pointer to **NullableString** |  | [optional] 
-**VehicleId** | Pointer to **NullableString** |  | [optional] 
-**DriverId** | Pointer to **NullableString** |  | [optional] 
-**DriverName** | Pointer to **NullableString** |  | [optional] 
-**TrailerH3Index11** | Pointer to **NullableInt32** |  | [optional] 
+**TspId** | **NullableString** |  | 
+**TspSlug** | **NullableString** |  | 
+**SourceName** | [**NullableTspEnum**](TspEnum.md) |  | 
+**TrailerName** | **NullableString** |  | 
+**VehicleId** | **NullableString** |  | 
+**DriverId** | **NullableString** |  | 
+**DriverName** | **NullableString** |  | 
+**TrailerH3Index11** | **NullableInt32** |  | 
 **TrailerLocationOccurredAt** | **time.Time** | Timestamp (UTC) when this telemetry data was recorded by the trailer. | 
-**TrailerLocation** | Pointer to [**NullableTrailerLocation**](TrailerLocation.md) |  | [optional] 
-**VehicleH3Index11** | Pointer to **NullableInt32** |  | [optional] 
-**VehicleLocationOccurredAt** | Pointer to **NullableTime** |  | [optional] 
-**VehicleLocation** | Pointer to [**NullableVehicleLocation**](VehicleLocation.md) |  | [optional] 
+**TrailerLocation** | [**NullableTrailerLocation**](TrailerLocation.md) |  | 
+**VehicleH3Index11** | **NullableInt32** |  | 
+**VehicleLocationOccurredAt** | **NullableTime** |  | 
+**VehicleLocation** | [**NullableVehicleLocation**](VehicleLocation.md) |  | 
 
 ## Methods
 
 ### NewTrailerLiveLocation
 
-`func NewTrailerLiveLocation(trailerId string, trailerLocationOccurredAt time.Time, ) *TrailerLiveLocation`
+`func NewTrailerLiveLocation(trailerId string, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, trailerName NullableString, vehicleId NullableString, driverId NullableString, driverName NullableString, trailerH3Index11 NullableInt32, trailerLocationOccurredAt time.Time, trailerLocation NullableTrailerLocation, vehicleH3Index11 NullableInt32, vehicleLocationOccurredAt NullableTime, vehicleLocation NullableVehicleLocation, ) *TrailerLiveLocation`
 
 NewTrailerLiveLocation instantiates a new TrailerLiveLocation object
 This constructor will assign default values to properties that have it defined,
@@ -56,30 +58,85 @@ and a boolean to check if the value has been set.
 SetTrailerId sets TrailerId field to given value.
 
 
+### GetTspId
+
+`func (o *TrailerLiveLocation) GetTspId() string`
+
+GetTspId returns the TspId field if non-nil, zero value otherwise.
+
+### GetTspIdOk
+
+`func (o *TrailerLiveLocation) GetTspIdOk() (*string, bool)`
+
+GetTspIdOk returns a tuple with the TspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspId
+
+`func (o *TrailerLiveLocation) SetTspId(v string)`
+
+SetTspId sets TspId field to given value.
+
+
+### SetTspIdNil
+
+`func (o *TrailerLiveLocation) SetTspIdNil(b bool)`
+
+ SetTspIdNil sets the value for TspId to be an explicit nil
+
+### UnsetTspId
+`func (o *TrailerLiveLocation) UnsetTspId()`
+
+UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+### GetTspSlug
+
+`func (o *TrailerLiveLocation) GetTspSlug() string`
+
+GetTspSlug returns the TspSlug field if non-nil, zero value otherwise.
+
+### GetTspSlugOk
+
+`func (o *TrailerLiveLocation) GetTspSlugOk() (*string, bool)`
+
+GetTspSlugOk returns a tuple with the TspSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspSlug
+
+`func (o *TrailerLiveLocation) SetTspSlug(v string)`
+
+SetTspSlug sets TspSlug field to given value.
+
+
+### SetTspSlugNil
+
+`func (o *TrailerLiveLocation) SetTspSlugNil(b bool)`
+
+ SetTspSlugNil sets the value for TspSlug to be an explicit nil
+
+### UnsetTspSlug
+`func (o *TrailerLiveLocation) UnsetTspSlug()`
+
+UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
 ### GetSourceName
 
-`func (o *TrailerLiveLocation) GetSourceName() string`
+`func (o *TrailerLiveLocation) GetSourceName() TspEnum`
 
 GetSourceName returns the SourceName field if non-nil, zero value otherwise.
 
 ### GetSourceNameOk
 
-`func (o *TrailerLiveLocation) GetSourceNameOk() (*string, bool)`
+`func (o *TrailerLiveLocation) GetSourceNameOk() (*TspEnum, bool)`
 
 GetSourceNameOk returns a tuple with the SourceName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceName
 
-`func (o *TrailerLiveLocation) SetSourceName(v string)`
+`func (o *TrailerLiveLocation) SetSourceName(v TspEnum)`
 
 SetSourceName sets SourceName field to given value.
 
-### HasSourceName
-
-`func (o *TrailerLiveLocation) HasSourceName() bool`
-
-HasSourceName returns a boolean if a field has been set.
 
 ### SetSourceNameNil
 
@@ -110,11 +167,6 @@ and a boolean to check if the value has been set.
 
 SetTrailerName sets TrailerName field to given value.
 
-### HasTrailerName
-
-`func (o *TrailerLiveLocation) HasTrailerName() bool`
-
-HasTrailerName returns a boolean if a field has been set.
 
 ### SetTrailerNameNil
 
@@ -145,11 +197,6 @@ and a boolean to check if the value has been set.
 
 SetVehicleId sets VehicleId field to given value.
 
-### HasVehicleId
-
-`func (o *TrailerLiveLocation) HasVehicleId() bool`
-
-HasVehicleId returns a boolean if a field has been set.
 
 ### SetVehicleIdNil
 
@@ -180,11 +227,6 @@ and a boolean to check if the value has been set.
 
 SetDriverId sets DriverId field to given value.
 
-### HasDriverId
-
-`func (o *TrailerLiveLocation) HasDriverId() bool`
-
-HasDriverId returns a boolean if a field has been set.
 
 ### SetDriverIdNil
 
@@ -215,11 +257,6 @@ and a boolean to check if the value has been set.
 
 SetDriverName sets DriverName field to given value.
 
-### HasDriverName
-
-`func (o *TrailerLiveLocation) HasDriverName() bool`
-
-HasDriverName returns a boolean if a field has been set.
 
 ### SetDriverNameNil
 
@@ -250,11 +287,6 @@ and a boolean to check if the value has been set.
 
 SetTrailerH3Index11 sets TrailerH3Index11 field to given value.
 
-### HasTrailerH3Index11
-
-`func (o *TrailerLiveLocation) HasTrailerH3Index11() bool`
-
-HasTrailerH3Index11 returns a boolean if a field has been set.
 
 ### SetTrailerH3Index11Nil
 
@@ -305,11 +337,6 @@ and a boolean to check if the value has been set.
 
 SetTrailerLocation sets TrailerLocation field to given value.
 
-### HasTrailerLocation
-
-`func (o *TrailerLiveLocation) HasTrailerLocation() bool`
-
-HasTrailerLocation returns a boolean if a field has been set.
 
 ### SetTrailerLocationNil
 
@@ -340,11 +367,6 @@ and a boolean to check if the value has been set.
 
 SetVehicleH3Index11 sets VehicleH3Index11 field to given value.
 
-### HasVehicleH3Index11
-
-`func (o *TrailerLiveLocation) HasVehicleH3Index11() bool`
-
-HasVehicleH3Index11 returns a boolean if a field has been set.
 
 ### SetVehicleH3Index11Nil
 
@@ -375,11 +397,6 @@ and a boolean to check if the value has been set.
 
 SetVehicleLocationOccurredAt sets VehicleLocationOccurredAt field to given value.
 
-### HasVehicleLocationOccurredAt
-
-`func (o *TrailerLiveLocation) HasVehicleLocationOccurredAt() bool`
-
-HasVehicleLocationOccurredAt returns a boolean if a field has been set.
 
 ### SetVehicleLocationOccurredAtNil
 
@@ -410,11 +427,6 @@ and a boolean to check if the value has been set.
 
 SetVehicleLocation sets VehicleLocation field to given value.
 
-### HasVehicleLocation
-
-`func (o *TrailerLiveLocation) HasVehicleLocation() bool`
-
-HasVehicleLocation returns a boolean if a field has been set.
 
 ### SetVehicleLocationNil
 

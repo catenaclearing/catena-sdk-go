@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,8 +20,9 @@ var _ MappedNullable = &AzugaSLCOutput{}
 
 // AzugaSLCOutput Azuga Short-lived Credentials model
 type AzugaSLCOutput struct {
-	ApiKey interface{} `json:"api_key"`
-	Token  interface{} `json:"token"`
+	ApiKey               interface{} `json:"api_key"`
+	Token                interface{} `json:"token"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AzugaSLCOutput AzugaSLCOutput
@@ -114,6 +114,11 @@ func (o AzugaSLCOutput) ToMap() (map[string]interface{}, error) {
 	if o.Token != nil {
 		toSerialize["token"] = o.Token
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,15 +147,21 @@ func (o *AzugaSLCOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varAzugaSLCOutput := _AzugaSLCOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAzugaSLCOutput)
+	err = json.Unmarshal(data, &varAzugaSLCOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AzugaSLCOutput(varAzugaSLCOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "token")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

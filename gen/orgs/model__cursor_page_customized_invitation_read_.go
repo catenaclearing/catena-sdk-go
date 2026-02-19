@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -26,6 +25,7 @@ type CursorPageCustomizedInvitationRead struct {
 	CurrentPageBackwards NullableString   `json:"current_page_backwards,omitempty"`
 	PreviousPage         NullableString   `json:"previous_page,omitempty"`
 	NextPage             NullableString   `json:"next_page,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CursorPageCustomizedInvitationRead CursorPageCustomizedInvitationRead
@@ -267,6 +267,11 @@ func (o CursorPageCustomizedInvitationRead) ToMap() (map[string]interface{}, err
 	if o.NextPage.IsSet() {
 		toSerialize["next_page"] = o.NextPage.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -294,15 +299,24 @@ func (o *CursorPageCustomizedInvitationRead) UnmarshalJSON(data []byte) (err err
 
 	varCursorPageCustomizedInvitationRead := _CursorPageCustomizedInvitationRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCursorPageCustomizedInvitationRead)
+	err = json.Unmarshal(data, &varCursorPageCustomizedInvitationRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CursorPageCustomizedInvitationRead(varCursorPageCustomizedInvitationRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "current_page")
+		delete(additionalProperties, "current_page_backwards")
+		delete(additionalProperties, "previous_page")
+		delete(additionalProperties, "next_page")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

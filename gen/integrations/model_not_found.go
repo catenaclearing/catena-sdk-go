@@ -19,10 +19,13 @@ var _ MappedNullable = &NotFound{}
 
 // NotFound struct for NotFound
 type NotFound struct {
-	Code    *int32         `json:"code,omitempty"`
-	Message *string        `json:"message,omitempty"`
-	Detail  NullableString `json:"detail,omitempty"`
+	Code                 *int32         `json:"code,omitempty"`
+	Message              *string        `json:"message,omitempty"`
+	Detail               NullableString `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotFound NotFound
 
 // NewNotFound instantiates a new NotFound object
 // This constructor will assign default values to properties that have it defined,
@@ -175,7 +178,35 @@ func (o NotFound) ToMap() (map[string]interface{}, error) {
 	if o.Detail.IsSet() {
 		toSerialize["detail"] = o.Detail.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotFound) UnmarshalJSON(data []byte) (err error) {
+	varNotFound := _NotFound{}
+
+	err = json.Unmarshal(data, &varNotFound)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotFound(varNotFound)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotFound struct {

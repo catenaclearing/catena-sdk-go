@@ -12,6 +12,7 @@ package orgsapi
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the InvitationCreate type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,8 @@ var _ MappedNullable = &InvitationCreate{}
 
 // InvitationCreate API model for creating a fleet invitation
 type InvitationCreate struct {
-	FleetRef                             NullableString `json:"fleet_ref,omitempty"`
+	// Your internal fleet identifier. Use this to map Catena fleets back to your system. This value will be returned in webhooks and redirect URLs. Only letters, numbers, spaces, dashes, and underscores are allowed.
+	FleetRef                             string         `json:"fleet_ref"`
 	PartnerProvidedFleetName             NullableString `json:"partner_provided_fleet_name,omitempty"`
 	PartnerProvidedFleetEmail            NullableString `json:"partner_provided_fleet_email,omitempty"`
 	PartnerProvidedFleetRegulatoryId     NullableString `json:"partner_provided_fleet_regulatory_id,omitempty"`
@@ -32,15 +34,19 @@ type InvitationCreate struct {
 	CallbackUrl                          NullableString `json:"callback_url,omitempty"`
 	LimitTsps                            []string       `json:"limit_tsps,omitempty"`
 	// How long the invitation link remains valid (1-672 hours). Default is 24 hours. *Consider longer durations for email campaigns.*
-	ExpiresInHours *int32 `json:"expires_in_hours,omitempty"`
+	ExpiresInHours       *int32 `json:"expires_in_hours,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvitationCreate InvitationCreate
 
 // NewInvitationCreate instantiates a new InvitationCreate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvitationCreate() *InvitationCreate {
+func NewInvitationCreate(fleetRef string) *InvitationCreate {
 	this := InvitationCreate{}
+	this.FleetRef = fleetRef
 	var expiresInHours int32 = 24
 	this.ExpiresInHours = &expiresInHours
 	return &this
@@ -56,47 +62,28 @@ func NewInvitationCreateWithDefaults() *InvitationCreate {
 	return &this
 }
 
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFleetRef returns the FleetRef field value
 func (o *InvitationCreate) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FleetRef.Get()
+
+	return o.FleetRef
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetFleetRefOk returns a tuple with the FleetRef field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationCreate) GetFleetRefOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.FleetRef.Get(), o.FleetRef.IsSet()
+	return &o.FleetRef, true
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *InvitationCreate) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
+// SetFleetRef sets field value
 func (o *InvitationCreate) SetFleetRef(v string) {
-	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *InvitationCreate) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *InvitationCreate) UnsetFleetRef() {
-	o.FleetRef.Unset()
+	o.FleetRef = v
 }
 
 // GetPartnerProvidedFleetName returns the PartnerProvidedFleetName field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -604,9 +591,7 @@ func (o InvitationCreate) MarshalJSON() ([]byte, error) {
 
 func (o InvitationCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
+	toSerialize["fleet_ref"] = o.FleetRef
 	if o.PartnerProvidedFleetName.IsSet() {
 		toSerialize["partner_provided_fleet_name"] = o.PartnerProvidedFleetName.Get()
 	}
@@ -643,7 +628,66 @@ func (o InvitationCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExpiresInHours) {
 		toSerialize["expires_in_hours"] = o.ExpiresInHours
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvitationCreate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fleet_ref",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varInvitationCreate := _InvitationCreate{}
+
+	err = json.Unmarshal(data, &varInvitationCreate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvitationCreate(varInvitationCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "partner_provided_fleet_name")
+		delete(additionalProperties, "partner_provided_fleet_email")
+		delete(additionalProperties, "partner_provided_fleet_regulatory_id")
+		delete(additionalProperties, "partner_provided_fleet_regulatory_id_type")
+		delete(additionalProperties, "partner_provided_fleet_phone")
+		delete(additionalProperties, "partner_provided_fleet_website")
+		delete(additionalProperties, "partner_provided_fleet_country_code")
+		delete(additionalProperties, "success_redirect_url")
+		delete(additionalProperties, "failure_redirect_url")
+		delete(additionalProperties, "callback_url")
+		delete(additionalProperties, "limit_tsps")
+		delete(additionalProperties, "expires_in_hours")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvitationCreate struct {

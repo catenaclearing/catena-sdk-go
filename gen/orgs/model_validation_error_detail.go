@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &ValidationErrorDetail{}
 
 // ValidationErrorDetail struct for ValidationErrorDetail
 type ValidationErrorDetail struct {
-	Path      string `json:"path"`
-	Input     string `json:"input"`
-	Message   string `json:"message"`
-	ErrorType string `json:"error_type"`
+	Path                 string `json:"path"`
+	Input                string `json:"input"`
+	Message              string `json:"message"`
+	ErrorType            string `json:"error_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ValidationErrorDetail ValidationErrorDetail
@@ -160,6 +160,11 @@ func (o ValidationErrorDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize["input"] = o.Input
 	toSerialize["message"] = o.Message
 	toSerialize["error_type"] = o.ErrorType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -190,15 +195,23 @@ func (o *ValidationErrorDetail) UnmarshalJSON(data []byte) (err error) {
 
 	varValidationErrorDetail := _ValidationErrorDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varValidationErrorDetail)
+	err = json.Unmarshal(data, &varValidationErrorDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ValidationErrorDetail(varValidationErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "path")
+		delete(additionalProperties, "input")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "error_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

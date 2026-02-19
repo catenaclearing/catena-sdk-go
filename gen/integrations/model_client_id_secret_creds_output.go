@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,9 +20,10 @@ var _ MappedNullable = &ClientIdSecretCredsOutput{}
 
 // ClientIdSecretCredsOutput Client ID Secret Connection model
 type ClientIdSecretCredsOutput struct {
-	ClientId     string      `json:"client_id"`
-	ClientSecret interface{} `json:"client_secret"`
-	Url          string      `json:"url"`
+	ClientId             string      `json:"client_id"`
+	ClientSecret         interface{} `json:"client_secret"`
+	Url                  string      `json:"url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ClientIdSecretCredsOutput ClientIdSecretCredsOutput
@@ -137,6 +137,11 @@ func (o ClientIdSecretCredsOutput) ToMap() (map[string]interface{}, error) {
 		toSerialize["client_secret"] = o.ClientSecret
 	}
 	toSerialize["url"] = o.Url
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -166,15 +171,22 @@ func (o *ClientIdSecretCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varClientIdSecretCredsOutput := _ClientIdSecretCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varClientIdSecretCredsOutput)
+	err = json.Unmarshal(data, &varClientIdSecretCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ClientIdSecretCredsOutput(varClientIdSecretCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "client_id")
+		delete(additionalProperties, "client_secret")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

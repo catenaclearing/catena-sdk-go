@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &ScheduleBackfillResponse{}
 // ScheduleBackfillResponse API Model for backfill response
 type ScheduleBackfillResponse struct {
 	// List of connection IDs where schedules were created.
-	ConnectionIds []string `json:"connection_ids"`
+	ConnectionIds        []string `json:"connection_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduleBackfillResponse ScheduleBackfillResponse
@@ -80,6 +80,11 @@ func (o ScheduleBackfillResponse) MarshalJSON() ([]byte, error) {
 func (o ScheduleBackfillResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["connection_ids"] = o.ConnectionIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ScheduleBackfillResponse) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduleBackfillResponse := _ScheduleBackfillResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduleBackfillResponse)
+	err = json.Unmarshal(data, &varScheduleBackfillResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduleBackfillResponse(varScheduleBackfillResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connection_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -52,6 +52,38 @@ type WebhookEventsAPI interface {
 	ConnectionStaledconnectionStaledPostExecute(r ApiConnectionStaledconnectionStaledPostRequest) (interface{}, *http.Response, error)
 
 	/*
+			EngineLogAddedengineLogAddedPost Engine Log Added
+
+			Emitted when a new engine log is added to our database.
+
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiEngineLogAddedengineLogAddedPostRequest
+	*/
+	EngineLogAddedengineLogAddedPost(ctx context.Context) ApiEngineLogAddedengineLogAddedPostRequest
+
+	// EngineLogAddedengineLogAddedPostExecute executes the request
+	//  @return interface{}
+	EngineLogAddedengineLogAddedPostExecute(r ApiEngineLogAddedengineLogAddedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+			EngineLogModifiedengineLogModifiedPost Engine Log Modified
+
+			Emitted when an engine log is modified in our database.
+
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiEngineLogModifiedengineLogModifiedPostRequest
+	*/
+	EngineLogModifiedengineLogModifiedPost(ctx context.Context) ApiEngineLogModifiedengineLogModifiedPostRequest
+
+	// EngineLogModifiedengineLogModifiedPostExecute executes the request
+	//  @return interface{}
+	EngineLogModifiedengineLogModifiedPostExecute(r ApiEngineLogModifiedengineLogModifiedPostRequest) (interface{}, *http.Response, error)
+
+	/*
 		ExecutionFailedexecutionFailedPost Execution Failed
 
 		Emitted when an execution fails.
@@ -967,6 +999,252 @@ func (a *WebhookEventsAPIService) ConnectionStaledconnectionStaledPostExecute(r 
 	}
 	// body params
 	localVarPostBody = r.connectionStaled
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiEngineLogAddedengineLogAddedPostRequest struct {
+	ctx            context.Context
+	ApiService     WebhookEventsAPI
+	engineLogAdded *EngineLogAdded
+}
+
+func (r ApiEngineLogAddedengineLogAddedPostRequest) EngineLogAdded(engineLogAdded EngineLogAdded) ApiEngineLogAddedengineLogAddedPostRequest {
+	r.engineLogAdded = &engineLogAdded
+	return r
+}
+
+func (r ApiEngineLogAddedengineLogAddedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.EngineLogAddedengineLogAddedPostExecute(r)
+}
+
+/*
+EngineLogAddedengineLogAddedPost Engine Log Added
+
+Emitted when a new engine log is added to our database.
+
+e.g. The record fetched from the TSP is new and generated a new record in our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEngineLogAddedengineLogAddedPostRequest
+*/
+func (a *WebhookEventsAPIService) EngineLogAddedengineLogAddedPost(ctx context.Context) ApiEngineLogAddedengineLogAddedPostRequest {
+	return ApiEngineLogAddedengineLogAddedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) EngineLogAddedengineLogAddedPostExecute(r ApiEngineLogAddedengineLogAddedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.EngineLogAddedengineLogAddedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/engine_log.added"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.engineLogAdded == nil {
+		return localVarReturnValue, nil, reportError("engineLogAdded is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.engineLogAdded
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiEngineLogModifiedengineLogModifiedPostRequest struct {
+	ctx               context.Context
+	ApiService        WebhookEventsAPI
+	engineLogModified *EngineLogModified
+}
+
+func (r ApiEngineLogModifiedengineLogModifiedPostRequest) EngineLogModified(engineLogModified EngineLogModified) ApiEngineLogModifiedengineLogModifiedPostRequest {
+	r.engineLogModified = &engineLogModified
+	return r
+}
+
+func (r ApiEngineLogModifiedengineLogModifiedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.EngineLogModifiedengineLogModifiedPostExecute(r)
+}
+
+/*
+EngineLogModifiedengineLogModifiedPost Engine Log Modified
+
+Emitted when an engine log is modified in our database.
+
+e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEngineLogModifiedengineLogModifiedPostRequest
+*/
+func (a *WebhookEventsAPIService) EngineLogModifiedengineLogModifiedPost(ctx context.Context) ApiEngineLogModifiedengineLogModifiedPostRequest {
+	return ApiEngineLogModifiedengineLogModifiedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) EngineLogModifiedengineLogModifiedPostExecute(r ApiEngineLogModifiedengineLogModifiedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.EngineLogModifiedengineLogModifiedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/engine_log.modified"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.engineLogModified == nil {
+		return localVarReturnValue, nil, reportError("engineLogModified is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.engineLogModified
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

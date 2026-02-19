@@ -11,7 +11,6 @@ API version: 0.1.0
 package integrationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -21,10 +20,11 @@ var _ MappedNullable = &OAuth2InitiateCredsOutput{}
 
 // OAuth2InitiateCredsOutput OAuth2 Initiate Connection model
 type OAuth2InitiateCredsOutput struct {
-	Code        interface{}    `json:"code"`
-	GrantType   NullableString `json:"grant_type,omitempty"`
-	TokenUrl    NullableString `json:"token_url,omitempty"`
-	RedirectUri NullableString `json:"redirect_uri,omitempty"`
+	Code                 interface{}    `json:"code"`
+	GrantType            NullableString `json:"grant_type,omitempty"`
+	TokenUrl             NullableString `json:"token_url,omitempty"`
+	RedirectUri          NullableString `json:"redirect_uri,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OAuth2InitiateCredsOutput OAuth2InitiateCredsOutput
@@ -224,6 +224,11 @@ func (o OAuth2InitiateCredsOutput) ToMap() (map[string]interface{}, error) {
 	if o.RedirectUri.IsSet() {
 		toSerialize["redirect_uri"] = o.RedirectUri.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -251,15 +256,23 @@ func (o *OAuth2InitiateCredsOutput) UnmarshalJSON(data []byte) (err error) {
 
 	varOAuth2InitiateCredsOutput := _OAuth2InitiateCredsOutput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOAuth2InitiateCredsOutput)
+	err = json.Unmarshal(data, &varOAuth2InitiateCredsOutput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OAuth2InitiateCredsOutput(varOAuth2InitiateCredsOutput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "grant_type")
+		delete(additionalProperties, "token_url")
+		delete(additionalProperties, "redirect_uri")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

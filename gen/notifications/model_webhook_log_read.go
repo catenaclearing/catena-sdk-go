@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -33,9 +32,10 @@ type WebhookLogRead struct {
 	// The status of the webhook message
 	Status StatusEnum `json:"status"`
 	// The HTTP status code of the webhook delivery
-	StatusCode     int32          `json:"status_code"`
-	ErrorMessage   NullableString `json:"error_message"`
-	ResponseTimeMs NullableInt32  `json:"response_time_ms"`
+	StatusCode           int32          `json:"status_code"`
+	ErrorMessage         NullableString `json:"error_message"`
+	ResponseTimeMs       NullableInt32  `json:"response_time_ms"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WebhookLogRead WebhookLogRead
@@ -279,6 +279,11 @@ func (o WebhookLogRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["status_code"] = o.StatusCode
 	toSerialize["error_message"] = o.ErrorMessage.Get()
 	toSerialize["response_time_ms"] = o.ResponseTimeMs.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -313,15 +318,27 @@ func (o *WebhookLogRead) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhookLogRead := _WebhookLogRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWebhookLogRead)
+	err = json.Unmarshal(data, &varWebhookLogRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WebhookLogRead(varWebhookLogRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "webhook_id")
+		delete(additionalProperties, "message_id")
+		delete(additionalProperties, "event_name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "status_code")
+		delete(additionalProperties, "error_message")
+		delete(additionalProperties, "response_time_ms")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

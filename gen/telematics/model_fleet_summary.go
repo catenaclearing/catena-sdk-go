@@ -12,6 +12,7 @@ package telematicsapi
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the FleetSummary type satisfies the MappedNullable interface at compile time
@@ -19,7 +20,7 @@ var _ MappedNullable = &FleetSummary{}
 
 // FleetSummary Aggregated metrics for a fleet, grouped by your fleet reference.  Use this to populate fleet management tables or summary cards showing connection health, driver count, vehicle count, and location coverage.
 type FleetSummary struct {
-	FleetRef NullableString `json:"fleet_ref,omitempty"`
+	FleetRef NullableString `json:"fleet_ref"`
 	// List of Catena fleet IDs associated with this reference (multiple if the same fleet reconnected).
 	FleetIds []string `json:"fleet_ids,omitempty"`
 	// Number of active data connections for this fleet.
@@ -30,14 +31,18 @@ type FleetSummary struct {
 	Vehicles *int32 `json:"vehicles,omitempty"`
 	// Number of vehicles that have reported at least one location update (indicates active telematics).
 	VehiclesWithLocations *int32 `json:"vehicles_with_locations,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
+
+type _FleetSummary FleetSummary
 
 // NewFleetSummary instantiates a new FleetSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFleetSummary() *FleetSummary {
+func NewFleetSummary(fleetRef NullableString) *FleetSummary {
 	this := FleetSummary{}
+	this.FleetRef = fleetRef
 	var connections int32 = 0
 	this.Connections = &connections
 	var drivers int32 = 0
@@ -65,16 +70,18 @@ func NewFleetSummaryWithDefaults() *FleetSummary {
 	return &this
 }
 
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFleetRef returns the FleetRef field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *FleetSummary) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+	if o == nil || o.FleetRef.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.FleetRef.Get()
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetFleetRefOk returns a tuple with the FleetRef field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FleetSummary) GetFleetRefOk() (*string, bool) {
@@ -84,28 +91,9 @@ func (o *FleetSummary) GetFleetRefOk() (*string, bool) {
 	return o.FleetRef.Get(), o.FleetRef.IsSet()
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *FleetSummary) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
+// SetFleetRef sets field value
 func (o *FleetSummary) SetFleetRef(v string) {
 	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *FleetSummary) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *FleetSummary) UnsetFleetRef() {
-	o.FleetRef.Unset()
 }
 
 // GetFleetIds returns the FleetIds field value if set, zero value otherwise.
@@ -278,9 +266,7 @@ func (o FleetSummary) MarshalJSON() ([]byte, error) {
 
 func (o FleetSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
+	toSerialize["fleet_ref"] = o.FleetRef.Get()
 	if !IsNil(o.FleetIds) {
 		toSerialize["fleet_ids"] = o.FleetIds
 	}
@@ -296,7 +282,59 @@ func (o FleetSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VehiclesWithLocations) {
 		toSerialize["vehicles_with_locations"] = o.VehiclesWithLocations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FleetSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fleet_ref",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFleetSummary := _FleetSummary{}
+
+	err = json.Unmarshal(data, &varFleetSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FleetSummary(varFleetSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "fleet_ids")
+		delete(additionalProperties, "connections")
+		delete(additionalProperties, "drivers")
+		delete(additionalProperties, "vehicles")
+		delete(additionalProperties, "vehicles_with_locations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFleetSummary struct {

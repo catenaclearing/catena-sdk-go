@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ type PartnerPropertyCreate struct {
 	// The key of the property
 	Key PartnerPropertyKeyEnum `json:"key"`
 	// The value of the property
-	Value string `json:"value"`
+	Value                string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartnerPropertyCreate PartnerPropertyCreate
@@ -108,6 +108,11 @@ func (o PartnerPropertyCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *PartnerPropertyCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varPartnerPropertyCreate := _PartnerPropertyCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartnerPropertyCreate)
+	err = json.Unmarshal(data, &varPartnerPropertyCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartnerPropertyCreate(varPartnerPropertyCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

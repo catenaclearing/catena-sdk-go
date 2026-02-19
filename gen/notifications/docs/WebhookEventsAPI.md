@@ -6,6 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ConnectionCreatedconnectionCreatedPost**](WebhookEventsAPI.md#ConnectionCreatedconnectionCreatedPost) | **Post** /connection.created | Connection Created
 [**ConnectionStaledconnectionStaledPost**](WebhookEventsAPI.md#ConnectionStaledconnectionStaledPost) | **Post** /connection.staled | Connection Staled
+[**EngineLogAddedengineLogAddedPost**](WebhookEventsAPI.md#EngineLogAddedengineLogAddedPost) | **Post** /engine_log.added | Engine Log Added
+[**EngineLogModifiedengineLogModifiedPost**](WebhookEventsAPI.md#EngineLogModifiedengineLogModifiedPost) | **Post** /engine_log.modified | Engine Log Modified
 [**ExecutionFailedexecutionFailedPost**](WebhookEventsAPI.md#ExecutionFailedexecutionFailedPost) | **Post** /execution.failed | Execution Failed
 [**ExecutionStaledexecutionStaledPost**](WebhookEventsAPI.md#ExecutionStaledexecutionStaledPost) | **Post** /execution.staled | Execution Staled
 [**FleetConnectionCreatedfleetConnectionCreatedPost**](WebhookEventsAPI.md#FleetConnectionCreatedfleetConnectionCreatedPost) | **Post** /fleet_connection.created | Fleet Connection Created
@@ -169,6 +171,138 @@ Other parameters are passed through a pointer to a apiConnectionStaledconnection
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **connectionStaled** | [**ConnectionStaled**](ConnectionStaled.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EngineLogAddedengineLogAddedPost
+
+> interface{} EngineLogAddedengineLogAddedPost(ctx).EngineLogAdded(engineLogAdded).Execute()
+
+Engine Log Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	engineLogAdded :=  // EngineLogAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.EngineLogAddedengineLogAddedPost(context.Background()).EngineLogAdded(engineLogAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.EngineLogAddedengineLogAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EngineLogAddedengineLogAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.EngineLogAddedengineLogAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEngineLogAddedengineLogAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **engineLogAdded** | [**EngineLogAdded**](EngineLogAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EngineLogModifiedengineLogModifiedPost
+
+> interface{} EngineLogModifiedengineLogModifiedPost(ctx).EngineLogModified(engineLogModified).Execute()
+
+Engine Log Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	engineLogModified :=  // EngineLogModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.EngineLogModifiedengineLogModifiedPost(context.Background()).EngineLogModified(engineLogModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.EngineLogModifiedengineLogModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EngineLogModifiedengineLogModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.EngineLogModifiedengineLogModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEngineLogModifiedengineLogModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **engineLogModified** | [**EngineLogModified**](EngineLogModified.md) |  | 
 
 ### Return type
 

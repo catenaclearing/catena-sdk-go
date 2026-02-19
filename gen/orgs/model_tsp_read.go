@@ -11,7 +11,6 @@ API version: 0.1.0
 package orgsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,7 +31,9 @@ type TspRead struct {
 	// The type of connection usedt to authenticate with the TSP
 	ConnType ConnectionTypeEnum `json:"conn_type"`
 	// Indicates whether the TSP is a sandbox integrations for testing purposes.
-	IsSandbox *bool `json:"is_sandbox,omitempty"`
+	IsSandbox   *bool          `json:"is_sandbox,omitempty"`
+	LogoUrl     NullableString `json:"logo_url,omitempty"`
+	LogoDarkUrl NullableString `json:"logo_dark_url,omitempty"`
 	// Unique Catena TSP identifier
 	Id string `json:"id"`
 	// URL-friendly TSP identifier
@@ -40,7 +41,8 @@ type TspRead struct {
 	// When the TSP was added to Catena
 	CreatedAt time.Time `json:"created_at"`
 	// Last modification timestamp
-	UpdatedAt time.Time `json:"updated_at"`
+	UpdatedAt            time.Time `json:"updated_at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TspRead TspRead
@@ -285,6 +287,92 @@ func (o *TspRead) SetIsSandbox(v bool) {
 	o.IsSandbox = &v
 }
 
+// GetLogoUrl returns the LogoUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TspRead) GetLogoUrl() string {
+	if o == nil || IsNil(o.LogoUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LogoUrl.Get()
+}
+
+// GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TspRead) GetLogoUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LogoUrl.Get(), o.LogoUrl.IsSet()
+}
+
+// HasLogoUrl returns a boolean if a field has been set.
+func (o *TspRead) HasLogoUrl() bool {
+	if o != nil && o.LogoUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoUrl gets a reference to the given NullableString and assigns it to the LogoUrl field.
+func (o *TspRead) SetLogoUrl(v string) {
+	o.LogoUrl.Set(&v)
+}
+
+// SetLogoUrlNil sets the value for LogoUrl to be an explicit nil
+func (o *TspRead) SetLogoUrlNil() {
+	o.LogoUrl.Set(nil)
+}
+
+// UnsetLogoUrl ensures that no value is present for LogoUrl, not even an explicit nil
+func (o *TspRead) UnsetLogoUrl() {
+	o.LogoUrl.Unset()
+}
+
+// GetLogoDarkUrl returns the LogoDarkUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TspRead) GetLogoDarkUrl() string {
+	if o == nil || IsNil(o.LogoDarkUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LogoDarkUrl.Get()
+}
+
+// GetLogoDarkUrlOk returns a tuple with the LogoDarkUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TspRead) GetLogoDarkUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LogoDarkUrl.Get(), o.LogoDarkUrl.IsSet()
+}
+
+// HasLogoDarkUrl returns a boolean if a field has been set.
+func (o *TspRead) HasLogoDarkUrl() bool {
+	if o != nil && o.LogoDarkUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLogoDarkUrl gets a reference to the given NullableString and assigns it to the LogoDarkUrl field.
+func (o *TspRead) SetLogoDarkUrl(v string) {
+	o.LogoDarkUrl.Set(&v)
+}
+
+// SetLogoDarkUrlNil sets the value for LogoDarkUrl to be an explicit nil
+func (o *TspRead) SetLogoDarkUrlNil() {
+	o.LogoDarkUrl.Set(nil)
+}
+
+// UnsetLogoDarkUrl ensures that no value is present for LogoDarkUrl, not even an explicit nil
+func (o *TspRead) UnsetLogoDarkUrl() {
+	o.LogoDarkUrl.Unset()
+}
+
 // GetId returns the Id field value
 func (o *TspRead) GetId() string {
 	if o == nil {
@@ -406,10 +494,21 @@ func (o TspRead) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsSandbox) {
 		toSerialize["is_sandbox"] = o.IsSandbox
 	}
+	if o.LogoUrl.IsSet() {
+		toSerialize["logo_url"] = o.LogoUrl.Get()
+	}
+	if o.LogoDarkUrl.IsSet() {
+		toSerialize["logo_dark_url"] = o.LogoDarkUrl.Get()
+	}
 	toSerialize["id"] = o.Id
 	toSerialize["slug"] = o.Slug
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -443,15 +542,32 @@ func (o *TspRead) UnmarshalJSON(data []byte) (err error) {
 
 	varTspRead := _TspRead{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTspRead)
+	err = json.Unmarshal(data, &varTspRead)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TspRead(varTspRead)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "websites")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "conn_type")
+		delete(additionalProperties, "is_sandbox")
+		delete(additionalProperties, "logo_url")
+		delete(additionalProperties, "logo_dark_url")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

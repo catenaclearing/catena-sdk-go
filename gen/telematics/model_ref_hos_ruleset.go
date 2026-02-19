@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -58,6 +57,7 @@ type RefHosRuleset struct {
 	IsSchoolPupil         NullableBool   `json:"is_school_pupil,omitempty"`
 	IsSeasonalExemption   NullableBool   `json:"is_seasonal_exemption,omitempty"`
 	IsSpecialExemption    NullableString `json:"is_special_exemption,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _RefHosRuleset RefHosRuleset
@@ -1395,6 +1395,11 @@ func (o RefHosRuleset) ToMap() (map[string]interface{}, error) {
 	if o.IsSpecialExemption.IsSet() {
 		toSerialize["is_special_exemption"] = o.IsSpecialExemption.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1427,15 +1432,50 @@ func (o *RefHosRuleset) UnmarshalJSON(data []byte) (err error) {
 
 	varRefHosRuleset := _RefHosRuleset{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRefHosRuleset)
+	err = json.Unmarshal(data, &varRefHosRuleset)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RefHosRuleset(varRefHosRuleset)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hos_ruleset_code")
+		delete(additionalProperties, "hos_ruleset_name")
+		delete(additionalProperties, "jurisdiction_type")
+		delete(additionalProperties, "issue_authority")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "cycle_days")
+		delete(additionalProperties, "max_cycle_hours")
+		delete(additionalProperties, "max_drive_hours_per_day")
+		delete(additionalProperties, "max_work_hours_per_day")
+		delete(additionalProperties, "min_offduty_per_day")
+		delete(additionalProperties, "is_break_required")
+		delete(additionalProperties, "break_interval_hours")
+		delete(additionalProperties, "is_restart_allowed")
+		delete(additionalProperties, "restart_hours")
+		delete(additionalProperties, "restart_frequency_days")
+		delete(additionalProperties, "is_sleeper_split_allowed")
+		delete(additionalProperties, "sleeper_split_notes")
+		delete(additionalProperties, "is_team_rules")
+		delete(additionalProperties, "is_big_day_allowed")
+		delete(additionalProperties, "is_short_haul_exemption")
+		delete(additionalProperties, "short_haul_airmiles")
+		delete(additionalProperties, "short_haul_max_duty_hours")
+		delete(additionalProperties, "is_passenger")
+		delete(additionalProperties, "is_railroad_exemption")
+		delete(additionalProperties, "is_oilfield")
+		delete(additionalProperties, "is_farm_product")
+		delete(additionalProperties, "is_flammable")
+		delete(additionalProperties, "is_school_pupil")
+		delete(additionalProperties, "is_seasonal_exemption")
+		delete(additionalProperties, "is_special_exemption")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

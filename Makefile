@@ -67,7 +67,7 @@ specs.combine: ## Combine and validate OpenAPI specifications
 	@chmod +x $(BUILD_DIR)/combine-specs.sh
 	@$(BUILD_DIR)/combine-specs.sh
 
-generate: specs.combine ## Generate Go client code from OpenAPI specs
+generate: specs.fetch specs.combine ## Generate Go client code from OpenAPI specs
 	@echo "==> Generating code..."
 	@chmod +x $(BUILD_DIR)/generate.sh
 	@$(BUILD_DIR)/generate.sh

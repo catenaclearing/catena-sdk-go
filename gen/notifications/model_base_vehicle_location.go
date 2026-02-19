@@ -11,7 +11,6 @@ API version: 0.1.0
 package notificationsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -27,7 +26,9 @@ type BaseVehicleLocation struct {
 	// The Catena fleet this record belongs to (multi-tenant scope).
 	FleetId  string         `json:"fleet_id"`
 	FleetRef NullableString `json:"fleet_ref"`
-	// The name of the source
+	TspId    NullableString `json:"tsp_id,omitempty"`
+	TspSlug  NullableString `json:"tsp_slug,omitempty"`
+	// The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name — use `tsp_id` or `tsp_slug` to identify the specific ELD provider.
 	SourceName TspEnum `json:"source_name"`
 	// The specific fleet↔TSP connection through which this record was sourced.
 	ConnectionId string `json:"connection_id"`
@@ -39,23 +40,25 @@ type BaseVehicleLocation struct {
 	UpdatedAt time.Time    `json:"updated_at"`
 	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	// When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available.
-	OccurredAt         time.Time       `json:"occurred_at"`
-	ExecutionId        NullableString  `json:"execution_id,omitempty"`
-	ScheduleId         NullableString  `json:"schedule_id,omitempty"`
-	VehicleId          NullableString  `json:"vehicle_id,omitempty"`
-	DriverId           NullableString  `json:"driver_id,omitempty"`
-	CoDriverId         NullableString  `json:"co_driver_id,omitempty"`
-	SourceDriverId     NullableString  `json:"source_driver_id,omitempty"`
-	SourceVehicleId    NullableString  `json:"source_vehicle_id,omitempty"`
-	SourceCoDriverId   NullableString  `json:"source_co_driver_id,omitempty"`
-	Location           NullablePoint   `json:"location,omitempty"`
-	H3Index11          NullableInt32   `json:"h3_index_11,omitempty"`
-	Speed              NullableInt32   `json:"speed,omitempty"`
-	Odometer           NullableFloat32 `json:"odometer,omitempty"`
-	FuelLevel          NullableFloat32 `json:"fuel_level,omitempty"`
-	EngineHours        NullableFloat32 `json:"engine_hours,omitempty"`
-	OilPressure        NullableFloat32 `json:"oil_pressure,omitempty"`
-	CoolantTemperature NullableFloat32 `json:"coolant_temperature,omitempty"`
+	OccurredAt           time.Time              `json:"occurred_at"`
+	ExecutionId          NullableString         `json:"execution_id,omitempty"`
+	ScheduleId           NullableString         `json:"schedule_id,omitempty"`
+	Extras               map[string]interface{} `json:"extras,omitempty"`
+	VehicleId            NullableString         `json:"vehicle_id,omitempty"`
+	DriverId             NullableString         `json:"driver_id,omitempty"`
+	CoDriverId           NullableString         `json:"co_driver_id,omitempty"`
+	SourceDriverId       NullableString         `json:"source_driver_id,omitempty"`
+	SourceVehicleId      NullableString         `json:"source_vehicle_id,omitempty"`
+	SourceCoDriverId     NullableString         `json:"source_co_driver_id,omitempty"`
+	Location             NullablePoint          `json:"location,omitempty"`
+	H3Index11            NullableInt32          `json:"h3_index_11,omitempty"`
+	Speed                NullableInt32          `json:"speed,omitempty"`
+	Odometer             NullableFloat32        `json:"odometer,omitempty"`
+	FuelLevel            NullableFloat32        `json:"fuel_level,omitempty"`
+	EngineHours          NullableFloat32        `json:"engine_hours,omitempty"`
+	OilPressure          NullableFloat32        `json:"oil_pressure,omitempty"`
+	CoolantTemperature   NullableFloat32        `json:"coolant_temperature,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BaseVehicleLocation BaseVehicleLocation
@@ -158,6 +161,92 @@ func (o *BaseVehicleLocation) GetFleetRefOk() (*string, bool) {
 // SetFleetRef sets field value
 func (o *BaseVehicleLocation) SetFleetRef(v string) {
 	o.FleetRef.Set(&v)
+}
+
+// GetTspId returns the TspId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseVehicleLocation) GetTspId() string {
+	if o == nil || IsNil(o.TspId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspId.Get()
+}
+
+// GetTspIdOk returns a tuple with the TspId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseVehicleLocation) GetTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspId.Get(), o.TspId.IsSet()
+}
+
+// HasTspId returns a boolean if a field has been set.
+func (o *BaseVehicleLocation) HasTspId() bool {
+	if o != nil && o.TspId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspId gets a reference to the given NullableString and assigns it to the TspId field.
+func (o *BaseVehicleLocation) SetTspId(v string) {
+	o.TspId.Set(&v)
+}
+
+// SetTspIdNil sets the value for TspId to be an explicit nil
+func (o *BaseVehicleLocation) SetTspIdNil() {
+	o.TspId.Set(nil)
+}
+
+// UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+func (o *BaseVehicleLocation) UnsetTspId() {
+	o.TspId.Unset()
+}
+
+// GetTspSlug returns the TspSlug field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseVehicleLocation) GetTspSlug() string {
+	if o == nil || IsNil(o.TspSlug.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.TspSlug.Get()
+}
+
+// GetTspSlugOk returns a tuple with the TspSlug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseVehicleLocation) GetTspSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TspSlug.Get(), o.TspSlug.IsSet()
+}
+
+// HasTspSlug returns a boolean if a field has been set.
+func (o *BaseVehicleLocation) HasTspSlug() bool {
+	if o != nil && o.TspSlug.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTspSlug gets a reference to the given NullableString and assigns it to the TspSlug field.
+func (o *BaseVehicleLocation) SetTspSlug(v string) {
+	o.TspSlug.Set(&v)
+}
+
+// SetTspSlugNil sets the value for TspSlug to be an explicit nil
+func (o *BaseVehicleLocation) SetTspSlugNil() {
+	o.TspSlug.Set(nil)
+}
+
+// UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
+func (o *BaseVehicleLocation) UnsetTspSlug() {
+	o.TspSlug.Unset()
 }
 
 // GetSourceName returns the SourceName field value
@@ -431,6 +520,39 @@ func (o *BaseVehicleLocation) SetScheduleIdNil() {
 // UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
 func (o *BaseVehicleLocation) UnsetScheduleId() {
 	o.ScheduleId.Unset()
+}
+
+// GetExtras returns the Extras field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseVehicleLocation) GetExtras() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Extras
+}
+
+// GetExtrasOk returns a tuple with the Extras field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseVehicleLocation) GetExtrasOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Extras) {
+		return map[string]interface{}{}, false
+	}
+	return o.Extras, true
+}
+
+// HasExtras returns a boolean if a field has been set.
+func (o *BaseVehicleLocation) HasExtras() bool {
+	if o != nil && !IsNil(o.Extras) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtras gets a reference to the given map[string]interface{} and assigns it to the Extras field.
+func (o *BaseVehicleLocation) SetExtras(v map[string]interface{}) {
+	o.Extras = v
 }
 
 // GetVehicleId returns the VehicleId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1048,6 +1170,12 @@ func (o BaseVehicleLocation) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["fleet_id"] = o.FleetId
 	toSerialize["fleet_ref"] = o.FleetRef.Get()
+	if o.TspId.IsSet() {
+		toSerialize["tsp_id"] = o.TspId.Get()
+	}
+	if o.TspSlug.IsSet() {
+		toSerialize["tsp_slug"] = o.TspSlug.Get()
+	}
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["connection_id"] = o.ConnectionId
 	toSerialize["source_id"] = o.SourceId
@@ -1062,6 +1190,9 @@ func (o BaseVehicleLocation) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ScheduleId.IsSet() {
 		toSerialize["schedule_id"] = o.ScheduleId.Get()
+	}
+	if o.Extras != nil {
+		toSerialize["extras"] = o.Extras
 	}
 	if o.VehicleId.IsSet() {
 		toSerialize["vehicle_id"] = o.VehicleId.Get()
@@ -1105,6 +1236,11 @@ func (o BaseVehicleLocation) ToMap() (map[string]interface{}, error) {
 	if o.CoolantTemperature.IsSet() {
 		toSerialize["coolant_temperature"] = o.CoolantTemperature.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1140,15 +1276,48 @@ func (o *BaseVehicleLocation) UnmarshalJSON(data []byte) (err error) {
 
 	varBaseVehicleLocation := _BaseVehicleLocation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBaseVehicleLocation)
+	err = json.Unmarshal(data, &varBaseVehicleLocation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BaseVehicleLocation(varBaseVehicleLocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fleet_id")
+		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "tsp_id")
+		delete(additionalProperties, "tsp_slug")
+		delete(additionalProperties, "source_name")
+		delete(additionalProperties, "connection_id")
+		delete(additionalProperties, "source_id")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "occurred_at")
+		delete(additionalProperties, "execution_id")
+		delete(additionalProperties, "schedule_id")
+		delete(additionalProperties, "extras")
+		delete(additionalProperties, "vehicle_id")
+		delete(additionalProperties, "driver_id")
+		delete(additionalProperties, "co_driver_id")
+		delete(additionalProperties, "source_driver_id")
+		delete(additionalProperties, "source_vehicle_id")
+		delete(additionalProperties, "source_co_driver_id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "h3_index_11")
+		delete(additionalProperties, "speed")
+		delete(additionalProperties, "odometer")
+		delete(additionalProperties, "fuel_level")
+		delete(additionalProperties, "engine_hours")
+		delete(additionalProperties, "oil_pressure")
+		delete(additionalProperties, "coolant_temperature")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

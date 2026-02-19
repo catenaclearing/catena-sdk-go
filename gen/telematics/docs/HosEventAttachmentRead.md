@@ -11,13 +11,16 @@ Name | Type | Description | Notes
 **UpdatedAt** | **time.Time** | The dateime the record was last modified in Catena Telematics. | 
 **DeletedAt** | Pointer to **NullableTime** |  | [optional] 
 **ConnectionId** | **string** | Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing. | 
-**SourceName** | [**TspEnum**](TspEnum.md) | An enumeration identifying the TSP from which this record was sourced. | 
+**TspId** | Pointer to **NullableString** |  | [optional] 
+**TspSlug** | Pointer to **NullableString** |  | [optional] 
+**SourceName** | [**TspEnum**](TspEnum.md) | The underlying telematics platform that provided this data (e.g., &#x60;samsara&#x60;, &#x60;motive&#x60;, &#x60;hos247&#x60;). Note: Some platforms like &#x60;hos247&#x60; offer white-labeling, so multiple TSPs may share the same source_name — use &#x60;tsp_id&#x60; or &#x60;tsp_slug&#x60; to identify the specific ELD provider. | 
 **SourceData** | Pointer to **map[string]interface{}** | Raw source payload as ingested from the TSP. **Note: use it for audit/debugging.** | [optional] 
 **SourceId** | **string** | Unique identifier of the record in the TSP. **Note: we generate a unique composite key based on available fields if the TSP does not provide an unique ID.** | 
 **SourceDataHash** | **string** | SHA-256 hash of the source data payload. **Note: we use it internally for idempotence and deduplication.** | 
 **OccurredAt** | Pointer to **NullableTime** |  | [optional] 
 **ExecutionId** | Pointer to **NullableString** |  | [optional] 
 **ScheduleId** | Pointer to **NullableString** |  | [optional] 
+**Extras** | Pointer to **map[string]interface{}** |  | [optional] 
 **HosEventId** | Pointer to **NullableString** |  | [optional] 
 **LastEditAt** | Pointer to **NullableTime** |  | [optional] 
 **UploadedBy** | Pointer to **NullableString** |  | [optional] 
@@ -228,6 +231,76 @@ and a boolean to check if the value has been set.
 SetConnectionId sets ConnectionId field to given value.
 
 
+### GetTspId
+
+`func (o *HosEventAttachmentRead) GetTspId() string`
+
+GetTspId returns the TspId field if non-nil, zero value otherwise.
+
+### GetTspIdOk
+
+`func (o *HosEventAttachmentRead) GetTspIdOk() (*string, bool)`
+
+GetTspIdOk returns a tuple with the TspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspId
+
+`func (o *HosEventAttachmentRead) SetTspId(v string)`
+
+SetTspId sets TspId field to given value.
+
+### HasTspId
+
+`func (o *HosEventAttachmentRead) HasTspId() bool`
+
+HasTspId returns a boolean if a field has been set.
+
+### SetTspIdNil
+
+`func (o *HosEventAttachmentRead) SetTspIdNil(b bool)`
+
+ SetTspIdNil sets the value for TspId to be an explicit nil
+
+### UnsetTspId
+`func (o *HosEventAttachmentRead) UnsetTspId()`
+
+UnsetTspId ensures that no value is present for TspId, not even an explicit nil
+### GetTspSlug
+
+`func (o *HosEventAttachmentRead) GetTspSlug() string`
+
+GetTspSlug returns the TspSlug field if non-nil, zero value otherwise.
+
+### GetTspSlugOk
+
+`func (o *HosEventAttachmentRead) GetTspSlugOk() (*string, bool)`
+
+GetTspSlugOk returns a tuple with the TspSlug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTspSlug
+
+`func (o *HosEventAttachmentRead) SetTspSlug(v string)`
+
+SetTspSlug sets TspSlug field to given value.
+
+### HasTspSlug
+
+`func (o *HosEventAttachmentRead) HasTspSlug() bool`
+
+HasTspSlug returns a boolean if a field has been set.
+
+### SetTspSlugNil
+
+`func (o *HosEventAttachmentRead) SetTspSlugNil(b bool)`
+
+ SetTspSlugNil sets the value for TspSlug to be an explicit nil
+
+### UnsetTspSlug
+`func (o *HosEventAttachmentRead) UnsetTspSlug()`
+
+UnsetTspSlug ensures that no value is present for TspSlug, not even an explicit nil
 ### GetSourceName
 
 `func (o *HosEventAttachmentRead) GetSourceName() TspEnum`
@@ -418,6 +491,41 @@ HasScheduleId returns a boolean if a field has been set.
 `func (o *HosEventAttachmentRead) UnsetScheduleId()`
 
 UnsetScheduleId ensures that no value is present for ScheduleId, not even an explicit nil
+### GetExtras
+
+`func (o *HosEventAttachmentRead) GetExtras() map[string]interface{}`
+
+GetExtras returns the Extras field if non-nil, zero value otherwise.
+
+### GetExtrasOk
+
+`func (o *HosEventAttachmentRead) GetExtrasOk() (*map[string]interface{}, bool)`
+
+GetExtrasOk returns a tuple with the Extras field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtras
+
+`func (o *HosEventAttachmentRead) SetExtras(v map[string]interface{})`
+
+SetExtras sets Extras field to given value.
+
+### HasExtras
+
+`func (o *HosEventAttachmentRead) HasExtras() bool`
+
+HasExtras returns a boolean if a field has been set.
+
+### SetExtrasNil
+
+`func (o *HosEventAttachmentRead) SetExtrasNil(b bool)`
+
+ SetExtrasNil sets the value for Extras to be an explicit nil
+
+### UnsetExtras
+`func (o *HosEventAttachmentRead) UnsetExtras()`
+
+UnsetExtras ensures that no value is present for Extras, not even an explicit nil
 ### GetHosEventId
 
 `func (o *HosEventAttachmentRead) GetHosEventId() string`

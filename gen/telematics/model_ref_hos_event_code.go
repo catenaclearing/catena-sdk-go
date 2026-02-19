@@ -11,7 +11,6 @@ API version: 0.1.0
 package telematicsapi
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,7 +31,8 @@ type RefHosEventCode struct {
 	// ELD 'Event Code' within the event type (normalized vendor/ELD spec value).
 	EldCode string `json:"eld_code"`
 	// Human-readable description of the specific event code (display).
-	Description string `json:"description"`
+	Description          string `json:"description"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RefHosEventCode RefHosEventCode
@@ -220,6 +220,11 @@ func (o RefHosEventCode) ToMap() (map[string]interface{}, error) {
 	toSerialize["eld_event_type_description"] = o.EldEventTypeDescription
 	toSerialize["eld_code"] = o.EldCode
 	toSerialize["description"] = o.Description
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,25 @@ func (o *RefHosEventCode) UnmarshalJSON(data []byte) (err error) {
 
 	varRefHosEventCode := _RefHosEventCode{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRefHosEventCode)
+	err = json.Unmarshal(data, &varRefHosEventCode)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RefHosEventCode(varRefHosEventCode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_code")
+		delete(additionalProperties, "eld_event_type_code")
+		delete(additionalProperties, "eld_event_type_name")
+		delete(additionalProperties, "eld_event_type_description")
+		delete(additionalProperties, "eld_code")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
