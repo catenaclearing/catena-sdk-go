@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Credentials** | Pointer to [**NullableCredentials2**](Credentials2.md) |  | [optional] 
 **Description** | Pointer to **NullableString** |  | [optional] 
-**Status** | Pointer to [**NullableStatusEnum**](StatusEnum.md) |  | [optional] 
+**Status** | Pointer to [**NullableConnectionStatusEnum**](ConnectionStatusEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -99,20 +99,20 @@ HasDescription returns a boolean if a field has been set.
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetStatus
 
-`func (o *ConnectionUpdate) GetStatus() StatusEnum`
+`func (o *ConnectionUpdate) GetStatus() ConnectionStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ConnectionUpdate) GetStatusOk() (*StatusEnum, bool)`
+`func (o *ConnectionUpdate) GetStatusOk() (*ConnectionStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ConnectionUpdate) SetStatus(v StatusEnum)`
+`func (o *ConnectionUpdate) SetStatus(v ConnectionStatusEnum)`
 
 SetStatus sets Status field to given value.
 

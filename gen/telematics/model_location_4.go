@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// Location4 Last known location as a GeoJSON Point.
+// Location4 Geographic point of the event (lat/lng, SRID 4326; GeoJSON Point or WKB/EWKB).
 type Location4 struct {
 	Point             *Point
 	MapmapOfStringAny *map[string]interface{}

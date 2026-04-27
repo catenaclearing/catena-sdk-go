@@ -43,11 +43,15 @@
 
 * `BUDGETGPS` (value: `"budgetgps"`)
 
+* `CATENA_SIMULATOR` (value: `"catena_simulator"`)
+
 * `CAPTAIN_ELD` (value: `"captain_eld"`)
 
 * `CARRIER_LYNX` (value: `"carrier_lynx"`)
 
 * `CLUB_ELD` (value: `"club_eld"`)
+
+* `COUNTING_TRUCKS_ELD` (value: `"counting_trucks_eld"`)
 
 * `CYNTRX` (value: `"cyntrx"`)
 
@@ -84,6 +88,8 @@
 * `EXTREME_ELD` (value: `"extreme_eld"`)
 
 * `EZLOGZ` (value: `"ezlogz"`)
+
+* `EZ_LYNK` (value: `"ez_lynk"`)
 
 * `FACTOR_ELD` (value: `"factor_eld"`)
 
@@ -143,6 +149,8 @@
 
 * `LINXUP` (value: `"linxup"`)
 
+* `LOOP_ELD` (value: `"loop_eld"`)
+
 * `LUCID_ELD` (value: `"lucid_eld"`)
 
 * `LUNA_ELD` (value: `"luna_eld"`)
@@ -157,6 +165,8 @@
 
 * `MAVEN` (value: `"maven"`)
 
+* `MDM_ELD` (value: `"mdm_eld"`)
+
 * `MOBILEFLEET` (value: `"mobilefleet"`)
 
 * `MOONLIGHT_ELD` (value: `"moonlight_eld"`)
@@ -164,6 +174,8 @@
 * `MOTION_ELD` (value: `"motion_eld"`)
 
 * `MOTIVE` (value: `"motive"`)
+
+* `MY_DRIVEBOOK` (value: `"my_drivebook"`)
 
 * `MY_LOGS_ELD` (value: `"my_logs_eld"`)
 
@@ -213,17 +225,25 @@
 
 * `RASTRAC` (value: `"rastrac"`)
 
+* `RAVEN` (value: `"raven"`)
+
 * `REDFOX` (value: `"redfox"`)
 
 * `REGULOG_ELD` (value: `"regulog_eld"`)
 
 * `RIDEHUB` (value: `"ridehub"`)
 
+* `ROADEAZY` (value: `"roadeazy"`)
+
 * `ROCK_ELD` (value: `"rock_eld"`)
+
+* `ROLLINGTRANS` (value: `"rollingtrans"`)
 
 * `ROUTEMATE` (value: `"routemate"`)
 
 * `ROYAL_ELD` (value: `"royal_eld"`)
+
+* `SAFELANE` (value: `"safelane"`)
 
 * `SAMSARA` (value: `"samsara"`)
 
@@ -238,6 +258,8 @@
 * `SPARKLE_ELD` (value: `"sparkle_eld"`)
 
 * `SPIREON` (value: `"spireon"`)
+
+* `SUN_ELD` (value: `"sun_eld"`)
 
 * `SURFSIGHT` (value: `"surfsight"`)
 
@@ -285,9 +307,11 @@
 
 * `TT` (value: `"tt"`)
 
+* `TXT_ELD` (value: `"txt_eld"`)
+
 * `US_FAST_ELD` (value: `"us_fast_eld"`)
 
-* `VERIZON` (value: `"verizon"`)
+* `VERIZON_CONNECT` (value: `"verizon_connect"`)
 
 * `VISTA_ELD` (value: `"vista_eld"`)
 
@@ -302,6 +326,8 @@
 * `WEBFLEET` (value: `"webfleet"`)
 
 * `XPLORE_ELD` (value: `"xplore_eld"`)
+
+* `ZIGZAG_ELD` (value: `"zigzag_eld"`)
 
 * `ZMS_ELD` (value: `"zms_eld"`)
 

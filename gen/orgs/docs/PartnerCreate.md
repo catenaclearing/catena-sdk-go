@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Websites** | Pointer to **[]string** |  | [optional] 
 **Categories** | Pointer to [**[]PartnerCategory**](PartnerCategory.md) | A list of categories for the services offered by your organization | [optional] 
 **IsSandbox** | Pointer to **bool** | Indicates whether the account is a sandbox account for testing purposes. | [optional] [default to false]
+**ParentPartnerId** | Pointer to **NullableString** |  | [optional] 
 **Properties** | Pointer to [**[]PartnerPropertyCreate**](PartnerPropertyCreate.md) | Optional custom properties for the partner organization | [optional] [default to []]
 
 ## Methods
@@ -170,6 +171,41 @@ SetIsSandbox sets IsSandbox field to given value.
 
 HasIsSandbox returns a boolean if a field has been set.
 
+### GetParentPartnerId
+
+`func (o *PartnerCreate) GetParentPartnerId() string`
+
+GetParentPartnerId returns the ParentPartnerId field if non-nil, zero value otherwise.
+
+### GetParentPartnerIdOk
+
+`func (o *PartnerCreate) GetParentPartnerIdOk() (*string, bool)`
+
+GetParentPartnerIdOk returns a tuple with the ParentPartnerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentPartnerId
+
+`func (o *PartnerCreate) SetParentPartnerId(v string)`
+
+SetParentPartnerId sets ParentPartnerId field to given value.
+
+### HasParentPartnerId
+
+`func (o *PartnerCreate) HasParentPartnerId() bool`
+
+HasParentPartnerId returns a boolean if a field has been set.
+
+### SetParentPartnerIdNil
+
+`func (o *PartnerCreate) SetParentPartnerIdNil(b bool)`
+
+ SetParentPartnerIdNil sets the value for ParentPartnerId to be an explicit nil
+
+### UnsetParentPartnerId
+`func (o *PartnerCreate) UnsetParentPartnerId()`
+
+UnsetParentPartnerId ensures that no value is present for ParentPartnerId, not even an explicit nil
 ### GetProperties
 
 `func (o *PartnerCreate) GetProperties() []PartnerPropertyCreate`

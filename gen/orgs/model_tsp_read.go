@@ -27,7 +27,7 @@ type TspRead struct {
 	// TSP enum identifier for API references
 	SourceName TspEnum `json:"source_name"`
 	// The status of the TSP
-	Status *StatusEnum `json:"status,omitempty"`
+	Status *TspStatusEnum `json:"status,omitempty"`
 	// The type of connection usedt to authenticate with the TSP
 	ConnType ConnectionTypeEnum `json:"conn_type"`
 	// Indicates whether the TSP is a sandbox integrations for testing purposes.
@@ -37,11 +37,15 @@ type TspRead struct {
 	// Unique Catena TSP identifier
 	Id string `json:"id"`
 	// URL-friendly TSP identifier
-	Slug string `json:"slug"`
+	Slug     string         `json:"slug"`
+	ExtTspId NullableString `json:"ext_tsp_id,omitempty"`
 	// When the TSP was added to Catena
 	CreatedAt time.Time `json:"created_at"`
 	// Last modification timestamp
-	UpdatedAt            time.Time `json:"updated_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
+	Registry  NullableString `json:"registry,omitempty"`
+	// ELD compliance status. 'compliant' means at least one device is registered. 'non_compliant' means ALL devices have been revoked. 'unknown' means the TSP is not linked to a regulatory registry or has no registered devices.
+	ComplianceStatus     *TspComplianceStatusEnum `json:"compliance_status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -200,9 +204,9 @@ func (o *TspRead) SetSourceName(v TspEnum) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *TspRead) GetStatus() StatusEnum {
+func (o *TspRead) GetStatus() TspStatusEnum {
 	if o == nil || IsNil(o.Status) {
-		var ret StatusEnum
+		var ret TspStatusEnum
 		return ret
 	}
 	return *o.Status
@@ -210,7 +214,7 @@ func (o *TspRead) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TspRead) GetStatusOk() (*StatusEnum, bool) {
+func (o *TspRead) GetStatusOk() (*TspStatusEnum, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -226,8 +230,8 @@ func (o *TspRead) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given StatusEnum and assigns it to the Status field.
-func (o *TspRead) SetStatus(v StatusEnum) {
+// SetStatus gets a reference to the given TspStatusEnum and assigns it to the Status field.
+func (o *TspRead) SetStatus(v TspStatusEnum) {
 	o.Status = &v
 }
 
@@ -421,6 +425,49 @@ func (o *TspRead) SetSlug(v string) {
 	o.Slug = v
 }
 
+// GetExtTspId returns the ExtTspId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TspRead) GetExtTspId() string {
+	if o == nil || IsNil(o.ExtTspId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ExtTspId.Get()
+}
+
+// GetExtTspIdOk returns a tuple with the ExtTspId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TspRead) GetExtTspIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ExtTspId.Get(), o.ExtTspId.IsSet()
+}
+
+// HasExtTspId returns a boolean if a field has been set.
+func (o *TspRead) HasExtTspId() bool {
+	if o != nil && o.ExtTspId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExtTspId gets a reference to the given NullableString and assigns it to the ExtTspId field.
+func (o *TspRead) SetExtTspId(v string) {
+	o.ExtTspId.Set(&v)
+}
+
+// SetExtTspIdNil sets the value for ExtTspId to be an explicit nil
+func (o *TspRead) SetExtTspIdNil() {
+	o.ExtTspId.Set(nil)
+}
+
+// UnsetExtTspId ensures that no value is present for ExtTspId, not even an explicit nil
+func (o *TspRead) UnsetExtTspId() {
+	o.ExtTspId.Unset()
+}
+
 // GetCreatedAt returns the CreatedAt field value
 func (o *TspRead) GetCreatedAt() time.Time {
 	if o == nil {
@@ -469,6 +516,81 @@ func (o *TspRead) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
+// GetRegistry returns the Registry field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TspRead) GetRegistry() string {
+	if o == nil || IsNil(o.Registry.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Registry.Get()
+}
+
+// GetRegistryOk returns a tuple with the Registry field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TspRead) GetRegistryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Registry.Get(), o.Registry.IsSet()
+}
+
+// HasRegistry returns a boolean if a field has been set.
+func (o *TspRead) HasRegistry() bool {
+	if o != nil && o.Registry.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRegistry gets a reference to the given NullableString and assigns it to the Registry field.
+func (o *TspRead) SetRegistry(v string) {
+	o.Registry.Set(&v)
+}
+
+// SetRegistryNil sets the value for Registry to be an explicit nil
+func (o *TspRead) SetRegistryNil() {
+	o.Registry.Set(nil)
+}
+
+// UnsetRegistry ensures that no value is present for Registry, not even an explicit nil
+func (o *TspRead) UnsetRegistry() {
+	o.Registry.Unset()
+}
+
+// GetComplianceStatus returns the ComplianceStatus field value if set, zero value otherwise.
+func (o *TspRead) GetComplianceStatus() TspComplianceStatusEnum {
+	if o == nil || IsNil(o.ComplianceStatus) {
+		var ret TspComplianceStatusEnum
+		return ret
+	}
+	return *o.ComplianceStatus
+}
+
+// GetComplianceStatusOk returns a tuple with the ComplianceStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TspRead) GetComplianceStatusOk() (*TspComplianceStatusEnum, bool) {
+	if o == nil || IsNil(o.ComplianceStatus) {
+		return nil, false
+	}
+	return o.ComplianceStatus, true
+}
+
+// HasComplianceStatus returns a boolean if a field has been set.
+func (o *TspRead) HasComplianceStatus() bool {
+	if o != nil && !IsNil(o.ComplianceStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetComplianceStatus gets a reference to the given TspComplianceStatusEnum and assigns it to the ComplianceStatus field.
+func (o *TspRead) SetComplianceStatus(v TspComplianceStatusEnum) {
+	o.ComplianceStatus = &v
+}
+
 func (o TspRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -502,8 +624,17 @@ func (o TspRead) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["slug"] = o.Slug
+	if o.ExtTspId.IsSet() {
+		toSerialize["ext_tsp_id"] = o.ExtTspId.Get()
+	}
 	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["updated_at"] = o.UpdatedAt
+	if o.Registry.IsSet() {
+		toSerialize["registry"] = o.Registry.Get()
+	}
+	if !IsNil(o.ComplianceStatus) {
+		toSerialize["compliance_status"] = o.ComplianceStatus
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -564,8 +695,11 @@ func (o *TspRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "logo_dark_url")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "slug")
+		delete(additionalProperties, "ext_tsp_id")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "registry")
+		delete(additionalProperties, "compliance_status")
 		o.AdditionalProperties = additionalProperties
 	}
 

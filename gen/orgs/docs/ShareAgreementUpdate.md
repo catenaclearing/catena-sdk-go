@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**NullableStatusEnum**](StatusEnum.md) |  | [optional] 
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
 **EffectiveDate** | Pointer to **NullableTime** |  | [optional] 
 **ExpirationDate** | Pointer to **NullableTime** |  | [optional] 
 
@@ -28,76 +26,6 @@ NewShareAgreementUpdateWithDefaults instantiates a new ShareAgreementUpdate obje
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetStatus
-
-`func (o *ShareAgreementUpdate) GetStatus() StatusEnum`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *ShareAgreementUpdate) GetStatusOk() (*StatusEnum, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *ShareAgreementUpdate) SetStatus(v StatusEnum)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *ShareAgreementUpdate) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
-
-### SetStatusNil
-
-`func (o *ShareAgreementUpdate) SetStatusNil(b bool)`
-
- SetStatusNil sets the value for Status to be an explicit nil
-
-### UnsetStatus
-`func (o *ShareAgreementUpdate) UnsetStatus()`
-
-UnsetStatus ensures that no value is present for Status, not even an explicit nil
-### GetFleetRef
-
-`func (o *ShareAgreementUpdate) GetFleetRef() string`
-
-GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
-
-### GetFleetRefOk
-
-`func (o *ShareAgreementUpdate) GetFleetRefOk() (*string, bool)`
-
-GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFleetRef
-
-`func (o *ShareAgreementUpdate) SetFleetRef(v string)`
-
-SetFleetRef sets FleetRef field to given value.
-
-### HasFleetRef
-
-`func (o *ShareAgreementUpdate) HasFleetRef() bool`
-
-HasFleetRef returns a boolean if a field has been set.
-
-### SetFleetRefNil
-
-`func (o *ShareAgreementUpdate) SetFleetRefNil(b bool)`
-
- SetFleetRefNil sets the value for FleetRef to be an explicit nil
-
-### UnsetFleetRef
-`func (o *ShareAgreementUpdate) UnsetFleetRef()`
-
-UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 ### GetEffectiveDate
 
 `func (o *ShareAgreementUpdate) GetEffectiveDate() time.Time`

@@ -18,7 +18,7 @@ import (
 // checks if the ZubieCredsInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ZubieCredsInput{}
 
-// ZubieCredsInput Motive Connection model
+// ZubieCredsInput Zubie Connection model
 type ZubieCredsInput struct {
 	ClientId             string `json:"client_id"`
 	ClientSecret         string `json:"client_secret"`

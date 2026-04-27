@@ -81,10 +81,10 @@ func ListWebhookSubscriptionsEach(c *catena.Client, ctx context.Context, opts Li
 	fetch := func(ctx context.Context, cursor string) ([]notificationsapi.WebhookRead, string, error) {
 		req := c.Notifications().WebhookSubscriptionsAPI.ListWebhookSubscriptions(ctx)
 		if opts.EventName != nil {
-			req = req.EventName(notificationsapi.WebhookEventName(*opts.EventName))
+			req = req.EventName(notificationsapi.WebhookEventNameEnum(*opts.EventName))
 		}
 		if opts.Status != nil {
-			req = req.Status(notificationsapi.StatusEnum(*opts.Status))
+			req = req.Status(notificationsapi.WebhookStatusEnum(*opts.Status))
 		}
 		if cursor != "" {
 			req = req.Cursor(cursor)

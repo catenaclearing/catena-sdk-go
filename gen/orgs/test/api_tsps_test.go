@@ -63,11 +63,49 @@ func Test_orgsapi_TSPsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test TSPsAPIService ListExtTsps", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.TSPsAPI.ListExtTsps(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test TSPsAPIService ListPartnerIntegrationRequests", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.TSPsAPI.ListPartnerIntegrationRequests(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test TSPsAPIService ListTsps", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.TSPsAPI.ListTsps(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test TSPsAPIService RequestExtTspIntegration", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var extTspId string
+
+		resp, httpRes, err := apiClient.TSPsAPI.RequestExtTspIntegration(context.Background(), extTspId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

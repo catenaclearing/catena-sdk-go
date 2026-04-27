@@ -23,6 +23,10 @@
 
 * `DATABASE` (value: `"database"`)
 
+* `EZ_LYNK` (value: `"ez_lynk"`)
+
+* `EZ_LYNK_ACCESS` (value: `"ez_lynk_access"`)
+
 * `EZLOGZ` (value: `"ezlogz"`)
 
 * `FACTOR_ELD` (value: `"factor_eld"`)
@@ -66,6 +70,10 @@
 * `TRUCKX_CREDS` (value: `"truckx_creds"`)
 
 * `TRUCKX_SLC` (value: `"truckx_slc"`)
+
+* `VERIZON_CONNECT` (value: `"verizon_connect"`)
+
+* `VERIZON_CONNECT_SLC` (value: `"verizon_connect_slc"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

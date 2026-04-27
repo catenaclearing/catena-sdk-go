@@ -26,7 +26,8 @@ const (
 	TSPENUM_ALFA_ELD                TspEnum = "alfa_eld"
 	TSPENUM_ALPHA_ELD               TspEnum = "alpha_eld"
 	TSPENUM_ALS                     TspEnum = "als"
-	TSPENUM_ANYTREK                 TspEnum = "anytrek"
+	TSPENUM_ANYTREK_PRO             TspEnum = "anytrek_pro"
+	TSPENUM_ANYTREK_CLASSIC         TspEnum = "anytrek_classic"
 	TSPENUM_APEX_ELD                TspEnum = "apex_eld"
 	TSPENUM_APOLLO                  TspEnum = "apollo"
 	TSPENUM_APOLLOCLOUD             TspEnum = "apollocloud"
@@ -39,9 +40,11 @@ const (
 	TSPENUM_BLUEINKTECH             TspEnum = "blueinktech"
 	TSPENUM_BOUNCIE                 TspEnum = "bouncie"
 	TSPENUM_BUDGETGPS               TspEnum = "budgetgps"
+	TSPENUM_CATENA_SIMULATOR        TspEnum = "catena_simulator"
 	TSPENUM_CAPTAIN_ELD             TspEnum = "captain_eld"
 	TSPENUM_CARRIER_LYNX            TspEnum = "carrier_lynx"
 	TSPENUM_CLUB_ELD                TspEnum = "club_eld"
+	TSPENUM_COUNTING_TRUCKS_ELD     TspEnum = "counting_trucks_eld"
 	TSPENUM_CYNTRX                  TspEnum = "cyntrx"
 	TSPENUM_DIGITAL_ELD             TspEnum = "digital_eld"
 	TSPENUM_DRAGON_ELD              TspEnum = "dragon_eld"
@@ -60,6 +63,7 @@ const (
 	TSPENUM_EXPRESSWAY_ELD          TspEnum = "expressway_eld"
 	TSPENUM_EXTREME_ELD             TspEnum = "extreme_eld"
 	TSPENUM_EZLOGZ                  TspEnum = "ezlogz"
+	TSPENUM_EZ_LYNK                 TspEnum = "ez_lynk"
 	TSPENUM_FACTOR_ELD              TspEnum = "factor_eld"
 	TSPENUM_FIRSTGATE               TspEnum = "firstgate"
 	TSPENUM_FLEETCOMPLETE           TspEnum = "fleetcomplete"
@@ -89,6 +93,7 @@ const (
 	TSPENUM_KONEXIAL                TspEnum = "konexial"
 	TSPENUM_LIONEIGHT               TspEnum = "lioneight"
 	TSPENUM_LINXUP                  TspEnum = "linxup"
+	TSPENUM_LOOP_ELD                TspEnum = "loop_eld"
 	TSPENUM_LUCID_ELD               TspEnum = "lucid_eld"
 	TSPENUM_LUNA_ELD                TspEnum = "luna_eld"
 	TSPENUM_LYTX                    TspEnum = "lytx"
@@ -96,10 +101,12 @@ const (
 	TSPENUM_MAPON                   TspEnum = "mapon"
 	TSPENUM_MATRACK                 TspEnum = "matrack"
 	TSPENUM_MAVEN                   TspEnum = "maven"
+	TSPENUM_MDM_ELD                 TspEnum = "mdm_eld"
 	TSPENUM_MOBILEFLEET             TspEnum = "mobilefleet"
 	TSPENUM_MOONLIGHT_ELD           TspEnum = "moonlight_eld"
 	TSPENUM_MOTION_ELD              TspEnum = "motion_eld"
 	TSPENUM_MOTIVE                  TspEnum = "motive"
+	TSPENUM_MY_DRIVEBOOK            TspEnum = "my_drivebook"
 	TSPENUM_MY_LOGS_ELD             TspEnum = "my_logs_eld"
 	TSPENUM_NERO                    TspEnum = "nero"
 	TSPENUM_NETRADYNE               TspEnum = "netradyne"
@@ -124,12 +131,16 @@ const (
 	TSPENUM_QUALITYLOGS_ELD         TspEnum = "qualitylogs_eld"
 	TSPENUM_RANDMCNALLY             TspEnum = "randmcnally"
 	TSPENUM_RASTRAC                 TspEnum = "rastrac"
+	TSPENUM_RAVEN                   TspEnum = "raven"
 	TSPENUM_REDFOX                  TspEnum = "redfox"
 	TSPENUM_REGULOG_ELD             TspEnum = "regulog_eld"
 	TSPENUM_RIDEHUB                 TspEnum = "ridehub"
+	TSPENUM_ROADEAZY                TspEnum = "roadeazy"
 	TSPENUM_ROCK_ELD                TspEnum = "rock_eld"
+	TSPENUM_ROLLINGTRANS            TspEnum = "rollingtrans"
 	TSPENUM_ROUTEMATE               TspEnum = "routemate"
 	TSPENUM_ROYAL_ELD               TspEnum = "royal_eld"
+	TSPENUM_SAFELANE                TspEnum = "safelane"
 	TSPENUM_SAMSARA                 TspEnum = "samsara"
 	TSPENUM_SELECTIVEDRIVE          TspEnum = "selectivedrive"
 	TSPENUM_SIMBA_ELD               TspEnum = "simba_eld"
@@ -137,6 +148,7 @@ const (
 	TSPENUM_SMART_ELDS              TspEnum = "smart_elds"
 	TSPENUM_SPARKLE_ELD             TspEnum = "sparkle_eld"
 	TSPENUM_SPIREON                 TspEnum = "spireon"
+	TSPENUM_SUN_ELD                 TspEnum = "sun_eld"
 	TSPENUM_SURFSIGHT               TspEnum = "surfsight"
 	TSPENUM_SWIFT                   TspEnum = "swift"
 	TSPENUM_SWITCHBOARD             TspEnum = "switchboard"
@@ -160,8 +172,9 @@ const (
 	TSPENUM_TRUCKX                  TspEnum = "truckx"
 	TSPENUM_TRUEROAD_ELD            TspEnum = "trueroad_eld"
 	TSPENUM_TT                      TspEnum = "tt"
+	TSPENUM_TXT_ELD                 TspEnum = "txt_eld"
 	TSPENUM_US_FAST_ELD             TspEnum = "us_fast_eld"
-	TSPENUM_VERIZON                 TspEnum = "verizon"
+	TSPENUM_VERIZON_CONNECT         TspEnum = "verizon_connect"
 	TSPENUM_VISTA_ELD               TspEnum = "vista_eld"
 	TSPENUM_VISTRACKS               TspEnum = "vistracks"
 	TSPENUM_VLOG_ELD                TspEnum = "vlog_eld"
@@ -169,6 +182,7 @@ const (
 	TSPENUM_WIALON                  TspEnum = "wialon"
 	TSPENUM_WEBFLEET                TspEnum = "webfleet"
 	TSPENUM_XPLORE_ELD              TspEnum = "xplore_eld"
+	TSPENUM_ZIGZAG_ELD              TspEnum = "zigzag_eld"
 	TSPENUM_ZMS_ELD                 TspEnum = "zms_eld"
 	TSPENUM_ZONAR                   TspEnum = "zonar"
 	TSPENUM_ZUBIE                   TspEnum = "zubie"
@@ -182,7 +196,8 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"alfa_eld",
 	"alpha_eld",
 	"als",
-	"anytrek",
+	"anytrek_pro",
+	"anytrek_classic",
 	"apex_eld",
 	"apollo",
 	"apollocloud",
@@ -195,9 +210,11 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"blueinktech",
 	"bouncie",
 	"budgetgps",
+	"catena_simulator",
 	"captain_eld",
 	"carrier_lynx",
 	"club_eld",
+	"counting_trucks_eld",
 	"cyntrx",
 	"digital_eld",
 	"dragon_eld",
@@ -216,6 +233,7 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"expressway_eld",
 	"extreme_eld",
 	"ezlogz",
+	"ez_lynk",
 	"factor_eld",
 	"firstgate",
 	"fleetcomplete",
@@ -245,6 +263,7 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"konexial",
 	"lioneight",
 	"linxup",
+	"loop_eld",
 	"lucid_eld",
 	"luna_eld",
 	"lytx",
@@ -252,10 +271,12 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"mapon",
 	"matrack",
 	"maven",
+	"mdm_eld",
 	"mobilefleet",
 	"moonlight_eld",
 	"motion_eld",
 	"motive",
+	"my_drivebook",
 	"my_logs_eld",
 	"nero",
 	"netradyne",
@@ -280,12 +301,16 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"qualitylogs_eld",
 	"randmcnally",
 	"rastrac",
+	"raven",
 	"redfox",
 	"regulog_eld",
 	"ridehub",
+	"roadeazy",
 	"rock_eld",
+	"rollingtrans",
 	"routemate",
 	"royal_eld",
+	"safelane",
 	"samsara",
 	"selectivedrive",
 	"simba_eld",
@@ -293,6 +318,7 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"smart_elds",
 	"sparkle_eld",
 	"spireon",
+	"sun_eld",
 	"surfsight",
 	"swift",
 	"switchboard",
@@ -316,8 +342,9 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"truckx",
 	"trueroad_eld",
 	"tt",
+	"txt_eld",
 	"us_fast_eld",
-	"verizon",
+	"verizon_connect",
 	"vista_eld",
 	"vistracks",
 	"vlog_eld",
@@ -325,6 +352,7 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"wialon",
 	"webfleet",
 	"xplore_eld",
+	"zigzag_eld",
 	"zms_eld",
 	"zonar",
 	"zubie",

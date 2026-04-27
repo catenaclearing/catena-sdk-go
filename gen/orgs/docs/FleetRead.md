@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **LegalName** | Pointer to **NullableString** |  | [optional] 
 **DbaName** | Pointer to **NullableString** |  | [optional] 
 **Websites** | Pointer to **[]string** |  | [optional] 
+**InvitationId** | Pointer to **NullableString** |  | [optional] 
+**FleetRef** | **string** | An optional reference for the fleet. Used to store an external identifier for the fleet in your system. | 
 **RegulatoryId** | Pointer to **NullableString** |  | [optional] 
 **RegulatoryIdType** | Pointer to **NullableString** |  | [optional] 
 **RegulatoryIdDate** | Pointer to **NullableString** |  | [optional] 
@@ -30,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewFleetRead
 
-`func NewFleetRead(name string, id string, createdAt time.Time, updatedAt time.Time, ) *FleetRead`
+`func NewFleetRead(name string, fleetRef string, id string, createdAt time.Time, updatedAt time.Time, ) *FleetRead`
 
 NewFleetRead instantiates a new FleetRead object
 This constructor will assign default values to properties that have it defined,
@@ -240,6 +242,61 @@ HasWebsites returns a boolean if a field has been set.
 `func (o *FleetRead) UnsetWebsites()`
 
 UnsetWebsites ensures that no value is present for Websites, not even an explicit nil
+### GetInvitationId
+
+`func (o *FleetRead) GetInvitationId() string`
+
+GetInvitationId returns the InvitationId field if non-nil, zero value otherwise.
+
+### GetInvitationIdOk
+
+`func (o *FleetRead) GetInvitationIdOk() (*string, bool)`
+
+GetInvitationIdOk returns a tuple with the InvitationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvitationId
+
+`func (o *FleetRead) SetInvitationId(v string)`
+
+SetInvitationId sets InvitationId field to given value.
+
+### HasInvitationId
+
+`func (o *FleetRead) HasInvitationId() bool`
+
+HasInvitationId returns a boolean if a field has been set.
+
+### SetInvitationIdNil
+
+`func (o *FleetRead) SetInvitationIdNil(b bool)`
+
+ SetInvitationIdNil sets the value for InvitationId to be an explicit nil
+
+### UnsetInvitationId
+`func (o *FleetRead) UnsetInvitationId()`
+
+UnsetInvitationId ensures that no value is present for InvitationId, not even an explicit nil
+### GetFleetRef
+
+`func (o *FleetRead) GetFleetRef() string`
+
+GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
+
+### GetFleetRefOk
+
+`func (o *FleetRead) GetFleetRefOk() (*string, bool)`
+
+GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetRef
+
+`func (o *FleetRead) SetFleetRef(v string)`
+
+SetFleetRef sets FleetRef field to given value.
+
+
 ### GetRegulatoryId
 
 `func (o *FleetRead) GetRegulatoryId() string`

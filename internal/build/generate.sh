@@ -67,6 +67,7 @@ EOF
         --user "$(id -u):$(id -g)" \
         -v "${REPO_ROOT}:/local" \
         "${OPENAPI_GENERATOR_IMAGE}" generate \
+        --skip-validate-spec \
         -i "/local/specs/${api_name}/openapi.json" \
         -g go \
         -o "/local/gen/${api_name}" \

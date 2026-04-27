@@ -40,14 +40,15 @@ type BaseTrailerLocation struct {
 	UpdatedAt time.Time    `json:"updated_at"`
 	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	// When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available.
-	OccurredAt           time.Time              `json:"occurred_at"`
-	ExecutionId          NullableString         `json:"execution_id,omitempty"`
-	ScheduleId           NullableString         `json:"schedule_id,omitempty"`
-	Extras               map[string]interface{} `json:"extras,omitempty"`
-	TrailerId            NullableString         `json:"trailer_id,omitempty"`
-	SourceTrailerId      NullableString         `json:"source_trailer_id,omitempty"`
-	Location             NullablePoint          `json:"location,omitempty"`
-	H3Index11            NullableInt32          `json:"h3_index_11,omitempty"`
+	OccurredAt           time.Time               `json:"occurred_at"`
+	ExecutionId          NullableString          `json:"execution_id,omitempty"`
+	ScheduleId           NullableString          `json:"schedule_id,omitempty"`
+	Extras               map[string]interface{}  `json:"extras,omitempty"`
+	TrailerId            NullableString          `json:"trailer_id,omitempty"`
+	SourceTrailerId      NullableString          `json:"source_trailer_id,omitempty"`
+	Location             NullablePoint           `json:"location,omitempty"`
+	H3Index11            NullableInt32           `json:"h3_index_11,omitempty"`
+	InferredAddress      NullableInferredAddress `json:"inferred_address,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -717,6 +718,49 @@ func (o *BaseTrailerLocation) UnsetH3Index11() {
 	o.H3Index11.Unset()
 }
 
+// GetInferredAddress returns the InferredAddress field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseTrailerLocation) GetInferredAddress() InferredAddress {
+	if o == nil || IsNil(o.InferredAddress.Get()) {
+		var ret InferredAddress
+		return ret
+	}
+	return *o.InferredAddress.Get()
+}
+
+// GetInferredAddressOk returns a tuple with the InferredAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseTrailerLocation) GetInferredAddressOk() (*InferredAddress, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InferredAddress.Get(), o.InferredAddress.IsSet()
+}
+
+// HasInferredAddress returns a boolean if a field has been set.
+func (o *BaseTrailerLocation) HasInferredAddress() bool {
+	if o != nil && o.InferredAddress.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInferredAddress gets a reference to the given NullableInferredAddress and assigns it to the InferredAddress field.
+func (o *BaseTrailerLocation) SetInferredAddress(v InferredAddress) {
+	o.InferredAddress.Set(&v)
+}
+
+// SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+func (o *BaseTrailerLocation) SetInferredAddressNil() {
+	o.InferredAddress.Set(nil)
+}
+
+// UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
+func (o *BaseTrailerLocation) UnsetInferredAddress() {
+	o.InferredAddress.Unset()
+}
+
 func (o BaseTrailerLocation) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -765,6 +809,9 @@ func (o BaseTrailerLocation) ToMap() (map[string]interface{}, error) {
 	}
 	if o.H3Index11.IsSet() {
 		toSerialize["h3_index_11"] = o.H3Index11.Get()
+	}
+	if o.InferredAddress.IsSet() {
+		toSerialize["inferred_address"] = o.InferredAddress.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -836,6 +883,7 @@ func (o *BaseTrailerLocation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "source_trailer_id")
 		delete(additionalProperties, "location")
 		delete(additionalProperties, "h3_index_11")
+		delete(additionalProperties, "inferred_address")
 		o.AdditionalProperties = additionalProperties
 	}
 

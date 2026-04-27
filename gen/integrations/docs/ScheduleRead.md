@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ConnectionId** | **string** | The ID of the connection that this schedule belongs to. | 
 **Resource** | [**ResourceEnum**](ResourceEnum.md) | The type of resource being fetched on this schedule (e.g., VEHICLE, DRIVER, HOS, IFTA). | 
 **ExecutionIntervalSeconds** | **int32** | The interval between scheduled executions in seconds. | 
-**Status** | [**StatusEnum**](StatusEnum.md) | The current status of the schedule (ACTIVE, INACTIVE). | 
+**Status** | [**ScheduleStatusEnum**](ScheduleStatusEnum.md) | The current status of the schedule (ACTIVE, INACTIVE). | 
 **ConsecutiveErrorCount** | **int32** | The number of consecutive errors that have occurred for this schedule. | 
 **ConsecutiveErrorThreshold** | **int32** | The number of consecutive errors allowed before the schedule is automatically set to INACTIVE. | 
 **MaxConcurrentExecutions** | **int32** | The maximum number of concurrent executions allowed for this schedule. | 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewScheduleRead
 
-`func NewScheduleRead(id string, connectionId string, resource ResourceEnum, executionIntervalSeconds int32, status StatusEnum, consecutiveErrorCount int32, consecutiveErrorThreshold int32, maxConcurrentExecutions int32, ) *ScheduleRead`
+`func NewScheduleRead(id string, connectionId string, resource ResourceEnum, executionIntervalSeconds int32, status ScheduleStatusEnum, consecutiveErrorCount int32, consecutiveErrorThreshold int32, maxConcurrentExecutions int32, ) *ScheduleRead`
 
 NewScheduleRead instantiates a new ScheduleRead object
 This constructor will assign default values to properties that have it defined,
@@ -115,20 +115,20 @@ SetExecutionIntervalSeconds sets ExecutionIntervalSeconds field to given value.
 
 ### GetStatus
 
-`func (o *ScheduleRead) GetStatus() StatusEnum`
+`func (o *ScheduleRead) GetStatus() ScheduleStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ScheduleRead) GetStatusOk() (*StatusEnum, bool)`
+`func (o *ScheduleRead) GetStatusOk() (*ScheduleStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ScheduleRead) SetStatus(v StatusEnum)`
+`func (o *ScheduleRead) SetStatus(v ScheduleStatusEnum)`
 
 SetStatus sets Status field to given value.
 

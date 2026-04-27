@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The unique identifier of the webhook subscription | 
 **Url** | **interface{}** |  | 
-**EventName** | [**WebhookEventName**](WebhookEventName.md) | The event name that triggers this webhook | 
+**EventName** | [**WebhookEventNameEnum**](WebhookEventNameEnum.md) | The event name that triggers this webhook | 
 **Filters** | Pointer to [**NullableWebhookFilters**](WebhookFilters.md) |  | [optional] 
 **Secret** | **interface{}** |  | 
-**Status** | [**StatusEnum**](StatusEnum.md) | The current status of the webhook subscription (active, inactive, or stale) | 
+**Status** | [**WebhookStatusEnum**](WebhookStatusEnum.md) | The current status of the webhook subscription (active, inactive, stale, or deleted) | 
 **CreatedAt** | **time.Time** | The timestamp when the webhook subscription was created | 
 **UpdatedAt** | **time.Time** | The timestamp when the webhook subscription was last updated | 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewWebhookRead
 
-`func NewWebhookRead(id string, url interface{}, eventName WebhookEventName, secret interface{}, status StatusEnum, createdAt time.Time, updatedAt time.Time, ) *WebhookRead`
+`func NewWebhookRead(id string, url interface{}, eventName WebhookEventNameEnum, secret interface{}, status WebhookStatusEnum, createdAt time.Time, updatedAt time.Time, ) *WebhookRead`
 
 NewWebhookRead instantiates a new WebhookRead object
 This constructor will assign default values to properties that have it defined,
@@ -84,20 +84,20 @@ SetUrl sets Url field to given value.
 UnsetUrl ensures that no value is present for Url, not even an explicit nil
 ### GetEventName
 
-`func (o *WebhookRead) GetEventName() WebhookEventName`
+`func (o *WebhookRead) GetEventName() WebhookEventNameEnum`
 
 GetEventName returns the EventName field if non-nil, zero value otherwise.
 
 ### GetEventNameOk
 
-`func (o *WebhookRead) GetEventNameOk() (*WebhookEventName, bool)`
+`func (o *WebhookRead) GetEventNameOk() (*WebhookEventNameEnum, bool)`
 
 GetEventNameOk returns a tuple with the EventName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEventName
 
-`func (o *WebhookRead) SetEventName(v WebhookEventName)`
+`func (o *WebhookRead) SetEventName(v WebhookEventNameEnum)`
 
 SetEventName sets EventName field to given value.
 
@@ -169,20 +169,20 @@ SetSecret sets Secret field to given value.
 UnsetSecret ensures that no value is present for Secret, not even an explicit nil
 ### GetStatus
 
-`func (o *WebhookRead) GetStatus() StatusEnum`
+`func (o *WebhookRead) GetStatus() WebhookStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *WebhookRead) GetStatusOk() (*StatusEnum, bool)`
+`func (o *WebhookRead) GetStatusOk() (*WebhookStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *WebhookRead) SetStatus(v StatusEnum)`
+`func (o *WebhookRead) SetStatus(v WebhookStatusEnum)`
 
 SetStatus sets Status field to given value.
 

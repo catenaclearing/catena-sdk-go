@@ -79,7 +79,6 @@ All URIs are relative to *https://api.catenatelematics.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FleetsAPI* | [**CreateFleet**](docs/FleetsAPI.md#createfleet) | **Post** /v2/orgs/fleets | Create Fleet
 *FleetsAPI* | [**CreateFleetProperties**](docs/FleetsAPI.md#createfleetproperties) | **Post** /v2/orgs/fleets/{fleet_id}/properties | Create Fleet Properties
 *FleetsAPI* | [**DeleteFleet**](docs/FleetsAPI.md#deletefleet) | **Delete** /v2/orgs/fleets/{fleet_id} | Delete Fleet
 *FleetsAPI* | [**DeleteFleetProperty**](docs/FleetsAPI.md#deletefleetproperty) | **Delete** /v2/orgs/fleets/{fleet_id}/properties/{property_id} | Delete Fleet Property
@@ -101,15 +100,21 @@ Class | Method | HTTP request | Description
 *PartnersAPI* | [**ListPartnerProperties**](docs/PartnersAPI.md#listpartnerproperties) | **Get** /v2/orgs/partners/{partner_id}/properties | List Partner Properties
 *PartnersAPI* | [**ListPartners**](docs/PartnersAPI.md#listpartners) | **Get** /v2/orgs/partners | List Partners
 *PartnersAPI* | [**UpdatePartner**](docs/PartnersAPI.md#updatepartner) | **Patch** /v2/orgs/partners/{partner_id} | Update Partner
-*ShareAgreementsAPI* | [**CreateShareAgreement**](docs/ShareAgreementsAPI.md#createshareagreement) | **Post** /v2/orgs/share_agreements | Create Share Agreement
-*ShareAgreementsAPI* | [**DeleteShareAgreement**](docs/ShareAgreementsAPI.md#deleteshareagreement) | **Delete** /v2/orgs/share_agreements/{share_agreement_id} | Delete Share Agreement
-*ShareAgreementsAPI* | [**GetShareAgreement**](docs/ShareAgreementsAPI.md#getshareagreement) | **Get** /v2/orgs/share_agreements/{share_agreement_id} | Get Share Agreement
-*ShareAgreementsAPI* | [**ListShareAgreements**](docs/ShareAgreementsAPI.md#listshareagreements) | **Get** /v2/orgs/share_agreements | List Share Agreements
-*ShareAgreementsAPI* | [**UpdateShareAgreement**](docs/ShareAgreementsAPI.md#updateshareagreement) | **Patch** /v2/orgs/share_agreements/{share_agreement_id} | Update Share Agreement
+*ShareAgreementsAPI* | [**ActivateShareAgreement**](docs/ShareAgreementsAPI.md#activateshareagreement) | **Post** /v2/orgs/share-agreements/{share_agreement_id}/activate | Activate Share Agreement
+*ShareAgreementsAPI* | [**BackfillShareAgreements**](docs/ShareAgreementsAPI.md#backfillshareagreements) | **Post** /v2/orgs/share-agreements/backfill | Backfill Share Agreements
+*ShareAgreementsAPI* | [**CancelShareAgreement**](docs/ShareAgreementsAPI.md#cancelshareagreement) | **Post** /v2/orgs/share-agreements/{share_agreement_id}/cancel | Cancel Share Agreement
+*ShareAgreementsAPI* | [**DeleteShareAgreement**](docs/ShareAgreementsAPI.md#deleteshareagreement) | **Delete** /v2/orgs/share-agreements/{share_agreement_id} | Delete Share Agreement
+*ShareAgreementsAPI* | [**GetShareAgreement**](docs/ShareAgreementsAPI.md#getshareagreement) | **Get** /v2/orgs/share-agreements/{share_agreement_id} | Get Share Agreement
+*ShareAgreementsAPI* | [**ListShareAgreements**](docs/ShareAgreementsAPI.md#listshareagreements) | **Get** /v2/orgs/share-agreements | List Share Agreements
+*ShareAgreementsAPI* | [**PauseShareAgreement**](docs/ShareAgreementsAPI.md#pauseshareagreement) | **Post** /v2/orgs/share-agreements/{share_agreement_id}/pause | Pause Share Agreement
+*ShareAgreementsAPI* | [**UpdateShareAgreement**](docs/ShareAgreementsAPI.md#updateshareagreement) | **Patch** /v2/orgs/share-agreements/{share_agreement_id} | Update Share Agreement
 *TSPsAPI* | [**CreateTsp**](docs/TSPsAPI.md#createtsp) | **Post** /v2/orgs/tsps | Create Tsp
 *TSPsAPI* | [**DeleteTsp**](docs/TSPsAPI.md#deletetsp) | **Delete** /v2/orgs/tsps/{tsp_id} | Delete Tsp
 *TSPsAPI* | [**GetTsp**](docs/TSPsAPI.md#gettsp) | **Get** /v2/orgs/tsps/{tsp_id} | Get TSP
+*TSPsAPI* | [**ListExtTsps**](docs/TSPsAPI.md#listexttsps) | **Get** /v2/orgs/external-tsps | List External TSPs
+*TSPsAPI* | [**ListPartnerIntegrationRequests**](docs/TSPsAPI.md#listpartnerintegrationrequests) | **Get** /v2/orgs/external-tsps/integration-requests | List Partner Integration Requests
 *TSPsAPI* | [**ListTsps**](docs/TSPsAPI.md#listtsps) | **Get** /v2/orgs/tsps | List TSPs
+*TSPsAPI* | [**RequestExtTspIntegration**](docs/TSPsAPI.md#requestexttspintegration) | **Post** /v2/orgs/external-tsps/{ext_tsp_id}/request-integration | Request External TSP Integration
 *TSPsAPI* | [**UpdateTsp**](docs/TSPsAPI.md#updatetsp) | **Patch** /v2/orgs/tsps/{tsp_id} | Update Tsp
 
 
@@ -118,22 +123,25 @@ Class | Method | HTTP request | Description
  - [BadRequest](docs/BadRequest.md)
  - [Conflict](docs/Conflict.md)
  - [ConnectionTypeEnum](docs/ConnectionTypeEnum.md)
- - [CursorPageCustomizedFleetRead](docs/CursorPageCustomizedFleetRead.md)
- - [CursorPageCustomizedInvitationRead](docs/CursorPageCustomizedInvitationRead.md)
- - [CursorPageCustomizedPartnerRead](docs/CursorPageCustomizedPartnerRead.md)
- - [CursorPageCustomizedShareAgreementRead](docs/CursorPageCustomizedShareAgreementRead.md)
- - [FleetCreate](docs/FleetCreate.md)
+ - [CursorPageFleetRead](docs/CursorPageFleetRead.md)
+ - [CursorPageInvitationRead](docs/CursorPageInvitationRead.md)
+ - [CursorPagePartnerRead](docs/CursorPagePartnerRead.md)
+ - [CursorPageShareAgreementRead](docs/CursorPageShareAgreementRead.md)
+ - [ExtTspIntegrationRequestRead](docs/ExtTspIntegrationRequestRead.md)
+ - [ExtTspRead](docs/ExtTspRead.md)
+ - [ExtTspRegistryEnum](docs/ExtTspRegistryEnum.md)
  - [FleetPropertyCreate](docs/FleetPropertyCreate.md)
  - [FleetPropertyKeyEnum](docs/FleetPropertyKeyEnum.md)
  - [FleetPropertyRead](docs/FleetPropertyRead.md)
  - [FleetRead](docs/FleetRead.md)
  - [FleetUpdate](docs/FleetUpdate.md)
  - [Forbidden](docs/Forbidden.md)
+ - [IntegrationRequestBody](docs/IntegrationRequestBody.md)
  - [InternalServerError](docs/InternalServerError.md)
- - [InvitationAccept](docs/InvitationAccept.md)
  - [InvitationCreate](docs/InvitationCreate.md)
  - [InvitationDecline](docs/InvitationDecline.md)
  - [InvitationRead](docs/InvitationRead.md)
+ - [InvitationStatusEnum](docs/InvitationStatusEnum.md)
  - [MethodNotAllowed](docs/MethodNotAllowed.md)
  - [NotFound](docs/NotFound.md)
  - [PartnerCategory](docs/PartnerCategory.md)
@@ -145,15 +153,18 @@ Class | Method | HTTP request | Description
  - [PartnerUpdate](docs/PartnerUpdate.md)
  - [ResourceEnum](docs/ResourceEnum.md)
  - [RetryAfterDetail](docs/RetryAfterDetail.md)
- - [ShareAgreementCreate](docs/ShareAgreementCreate.md)
+ - [ShareAgreementBackfill](docs/ShareAgreementBackfill.md)
+ - [ShareAgreementBackfillResult](docs/ShareAgreementBackfillResult.md)
  - [ShareAgreementRead](docs/ShareAgreementRead.md)
+ - [ShareAgreementStatusEnum](docs/ShareAgreementStatusEnum.md)
  - [ShareAgreementUpdate](docs/ShareAgreementUpdate.md)
  - [ShareLevelEnum](docs/ShareLevelEnum.md)
- - [StatusEnum](docs/StatusEnum.md)
  - [TooManyRequests](docs/TooManyRequests.md)
+ - [TspComplianceStatusEnum](docs/TspComplianceStatusEnum.md)
  - [TspCreate](docs/TspCreate.md)
  - [TspEnum](docs/TspEnum.md)
  - [TspRead](docs/TspRead.md)
+ - [TspStatusEnum](docs/TspStatusEnum.md)
  - [TspUpdate](docs/TspUpdate.md)
  - [Unauthorized](docs/Unauthorized.md)
  - [UnprocessableEntity](docs/UnprocessableEntity.md)

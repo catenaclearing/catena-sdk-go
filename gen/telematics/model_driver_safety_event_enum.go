@@ -20,32 +20,34 @@ type DriverSafetyEventEnum string
 
 // List of DriverSafetyEventEnum
 const (
-	DRIVERSAFETYEVENTENUM_COLLISION                 DriverSafetyEventEnum = "collision"
-	DRIVERSAFETYEVENTENUM_ROLLOVER                  DriverSafetyEventEnum = "rollover"
-	DRIVERSAFETYEVENTENUM_FORWARD_COLLISION_WARNING DriverSafetyEventEnum = "forward_collision_warning"
-	DRIVERSAFETYEVENTENUM_NEAR_COLLISION            DriverSafetyEventEnum = "near_collision"
-	DRIVERSAFETYEVENTENUM_HARD_ACCELERATION         DriverSafetyEventEnum = "hard_acceleration"
-	DRIVERSAFETYEVENTENUM_HARD_BRAKING              DriverSafetyEventEnum = "hard_braking"
-	DRIVERSAFETYEVENTENUM_HARSH_TURN                DriverSafetyEventEnum = "harsh_turn"
-	DRIVERSAFETYEVENTENUM_SPEEDING                  DriverSafetyEventEnum = "speeding"
-	DRIVERSAFETYEVENTENUM_ROLLING_STOP              DriverSafetyEventEnum = "rolling_stop"
-	DRIVERSAFETYEVENTENUM_RAN_RED_LIGHT             DriverSafetyEventEnum = "ran_red_light"
-	DRIVERSAFETYEVENTENUM_DID_NOT_YIELD             DriverSafetyEventEnum = "did_not_yield"
-	DRIVERSAFETYEVENTENUM_DEFENSIVE_DRIVING         DriverSafetyEventEnum = "defensive_driving"
-	DRIVERSAFETYEVENTENUM_NO_SEATBELT               DriverSafetyEventEnum = "no_seatbelt"
-	DRIVERSAFETYEVENTENUM_MOBILE_USAGE              DriverSafetyEventEnum = "mobile_usage"
-	DRIVERSAFETYEVENTENUM_DISTRACTION               DriverSafetyEventEnum = "distraction"
-	DRIVERSAFETYEVENTENUM_DROWSY                    DriverSafetyEventEnum = "drowsy"
-	DRIVERSAFETYEVENTENUM_EATING_DRINKING           DriverSafetyEventEnum = "eating_drinking"
-	DRIVERSAFETYEVENTENUM_SMOKING                   DriverSafetyEventEnum = "smoking"
-	DRIVERSAFETYEVENTENUM_LATE_RESPONSE             DriverSafetyEventEnum = "late_response"
-	DRIVERSAFETYEVENTENUM_FOLLOWING_DISTANCE        DriverSafetyEventEnum = "following_distance"
-	DRIVERSAFETYEVENTENUM_LANE_DEPARTURE            DriverSafetyEventEnum = "lane_departure"
-	DRIVERSAFETYEVENTENUM_TAILGATING                DriverSafetyEventEnum = "tailgating"
-	DRIVERSAFETYEVENTENUM_YAW_CONTROL               DriverSafetyEventEnum = "yaw_control"
-	DRIVERSAFETYEVENTENUM_CAMERA_OBSTRUCTED         DriverSafetyEventEnum = "camera_obstructed"
-	DRIVERSAFETYEVENTENUM_MANUAL_EVENT              DriverSafetyEventEnum = "manual_event"
-	DRIVERSAFETYEVENTENUM_IDLING                    DriverSafetyEventEnum = "idling"
+	DRIVERSAFETYEVENTENUM_COLLISION                   DriverSafetyEventEnum = "collision"
+	DRIVERSAFETYEVENTENUM_ROLLOVER                    DriverSafetyEventEnum = "rollover"
+	DRIVERSAFETYEVENTENUM_FORWARD_COLLISION_WARNING   DriverSafetyEventEnum = "forward_collision_warning"
+	DRIVERSAFETYEVENTENUM_NEAR_COLLISION              DriverSafetyEventEnum = "near_collision"
+	DRIVERSAFETYEVENTENUM_HARD_ACCELERATION           DriverSafetyEventEnum = "hard_acceleration"
+	DRIVERSAFETYEVENTENUM_HARD_BRAKING                DriverSafetyEventEnum = "hard_braking"
+	DRIVERSAFETYEVENTENUM_HARSH_TURN                  DriverSafetyEventEnum = "harsh_turn"
+	DRIVERSAFETYEVENTENUM_SPEEDING                    DriverSafetyEventEnum = "speeding"
+	DRIVERSAFETYEVENTENUM_ROLLING_STOP                DriverSafetyEventEnum = "rolling_stop"
+	DRIVERSAFETYEVENTENUM_RAN_RED_LIGHT               DriverSafetyEventEnum = "ran_red_light"
+	DRIVERSAFETYEVENTENUM_DID_NOT_YIELD               DriverSafetyEventEnum = "did_not_yield"
+	DRIVERSAFETYEVENTENUM_DEFENSIVE_DRIVING           DriverSafetyEventEnum = "defensive_driving"
+	DRIVERSAFETYEVENTENUM_UNSAFE_PARKING              DriverSafetyEventEnum = "unsafe_parking"
+	DRIVERSAFETYEVENTENUM_RAILROAD_CROSSING_VIOLATION DriverSafetyEventEnum = "railroad_crossing_violation"
+	DRIVERSAFETYEVENTENUM_NO_SEATBELT                 DriverSafetyEventEnum = "no_seatbelt"
+	DRIVERSAFETYEVENTENUM_MOBILE_USAGE                DriverSafetyEventEnum = "mobile_usage"
+	DRIVERSAFETYEVENTENUM_DISTRACTION                 DriverSafetyEventEnum = "distraction"
+	DRIVERSAFETYEVENTENUM_DROWSY                      DriverSafetyEventEnum = "drowsy"
+	DRIVERSAFETYEVENTENUM_EATING_DRINKING             DriverSafetyEventEnum = "eating_drinking"
+	DRIVERSAFETYEVENTENUM_SMOKING                     DriverSafetyEventEnum = "smoking"
+	DRIVERSAFETYEVENTENUM_LATE_RESPONSE               DriverSafetyEventEnum = "late_response"
+	DRIVERSAFETYEVENTENUM_FOLLOWING_DISTANCE          DriverSafetyEventEnum = "following_distance"
+	DRIVERSAFETYEVENTENUM_LANE_DEPARTURE              DriverSafetyEventEnum = "lane_departure"
+	DRIVERSAFETYEVENTENUM_TAILGATING                  DriverSafetyEventEnum = "tailgating"
+	DRIVERSAFETYEVENTENUM_YAW_CONTROL                 DriverSafetyEventEnum = "yaw_control"
+	DRIVERSAFETYEVENTENUM_CAMERA_OBSTRUCTED           DriverSafetyEventEnum = "camera_obstructed"
+	DRIVERSAFETYEVENTENUM_MANUAL_EVENT                DriverSafetyEventEnum = "manual_event"
+	DRIVERSAFETYEVENTENUM_IDLING                      DriverSafetyEventEnum = "idling"
 )
 
 // All allowed values of DriverSafetyEventEnum enum
@@ -62,6 +64,8 @@ var AllowedDriverSafetyEventEnumEnumValues = []DriverSafetyEventEnum{
 	"ran_red_light",
 	"did_not_yield",
 	"defensive_driving",
+	"unsafe_parking",
+	"railroad_crossing_violation",
 	"no_seatbelt",
 	"mobile_usage",
 	"distraction",

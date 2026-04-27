@@ -48,6 +48,30 @@ func Test_notificationsapi_WebhookEventsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test WebhookEventsAPIService DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WebhookEventsAPIService EngineLogAddedengineLogAddedPost", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -65,6 +89,30 @@ func Test_notificationsapi_WebhookEventsAPIService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.WebhookEventsAPI.EngineLogModifiedengineLogModifiedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService EngineStatusAddedengineStatusAddedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.EngineStatusAddedengineStatusAddedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService EngineStatusModifiedengineStatusModifiedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.EngineStatusModifiedengineStatusModifiedPost(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -101,6 +149,30 @@ func Test_notificationsapi_WebhookEventsAPIService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.WebhookEventsAPI.FleetConnectionCreatedfleetConnectionCreatedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService FuelTransactionAddedfuelTransactionAddedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.FuelTransactionAddedfuelTransactionAddedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService FuelTransactionModifiedfuelTransactionModifiedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.FuelTransactionModifiedfuelTransactionModifiedPost(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -384,6 +456,66 @@ func Test_notificationsapi_WebhookEventsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test WebhookEventsAPIService MessageAddedmessageAddedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.MessageAddedmessageAddedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService MessageModifiedmessageModifiedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.MessageModifiedmessageModifiedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService ResourceOperationCreatedresourceOperationCreatedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.ResourceOperationCreatedresourceOperationCreatedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService ResourceOperationFailedresourceOperationFailedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.ResourceOperationFailedresourceOperationFailedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService ResourceOperationSucceededresourceOperationSucceededPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.ResourceOperationSucceededresourceOperationSucceededPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test WebhookEventsAPIService ScheduleDeactivatedscheduleDeactivatedPost", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -485,6 +617,54 @@ func Test_notificationsapi_WebhookEventsAPIService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.WebhookEventsAPI.TrailerRemovedtrailerRemovedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService TrailerStatusAddedtrailerStatusAddedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.TrailerStatusAddedtrailerStatusAddedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService TrailerStatusModifiedtrailerStatusModifiedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.TrailerStatusModifiedtrailerStatusModifiedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test WebhookEventsAPIService TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.WebhookEventsAPI.TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

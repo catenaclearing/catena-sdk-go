@@ -27,12 +27,14 @@ Name | Type | Description | Notes
 **SourceCoDriverId** | Pointer to **NullableString** |  | [optional] 
 **Location** | Pointer to [**NullablePoint**](Point.md) |  | [optional] 
 **H3Index11** | Pointer to **NullableInt32** |  | [optional] 
-**Speed** | Pointer to **NullableInt32** |  | [optional] 
+**Speed** | Pointer to **NullableFloat32** |  | [optional] 
 **Odometer** | Pointer to **NullableFloat32** |  | [optional] 
 **FuelLevel** | Pointer to **NullableFloat32** |  | [optional] 
+**FuelValue** | Pointer to **NullableFloat32** |  | [optional] 
 **EngineHours** | Pointer to **NullableFloat32** |  | [optional] 
 **OilPressure** | Pointer to **NullableFloat32** |  | [optional] 
 **CoolantTemperature** | Pointer to **NullableFloat32** |  | [optional] 
+**InferredAddress** | Pointer to [**NullableInferredAddress**](InferredAddress.md) |  | [optional] 
 
 ## Methods
 
@@ -735,20 +737,20 @@ HasH3Index11 returns a boolean if a field has been set.
 UnsetH3Index11 ensures that no value is present for H3Index11, not even an explicit nil
 ### GetSpeed
 
-`func (o *BaseVehicleLocation) GetSpeed() int32`
+`func (o *BaseVehicleLocation) GetSpeed() float32`
 
 GetSpeed returns the Speed field if non-nil, zero value otherwise.
 
 ### GetSpeedOk
 
-`func (o *BaseVehicleLocation) GetSpeedOk() (*int32, bool)`
+`func (o *BaseVehicleLocation) GetSpeedOk() (*float32, bool)`
 
 GetSpeedOk returns a tuple with the Speed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpeed
 
-`func (o *BaseVehicleLocation) SetSpeed(v int32)`
+`func (o *BaseVehicleLocation) SetSpeed(v float32)`
 
 SetSpeed sets Speed field to given value.
 
@@ -838,6 +840,41 @@ HasFuelLevel returns a boolean if a field has been set.
 `func (o *BaseVehicleLocation) UnsetFuelLevel()`
 
 UnsetFuelLevel ensures that no value is present for FuelLevel, not even an explicit nil
+### GetFuelValue
+
+`func (o *BaseVehicleLocation) GetFuelValue() float32`
+
+GetFuelValue returns the FuelValue field if non-nil, zero value otherwise.
+
+### GetFuelValueOk
+
+`func (o *BaseVehicleLocation) GetFuelValueOk() (*float32, bool)`
+
+GetFuelValueOk returns a tuple with the FuelValue field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFuelValue
+
+`func (o *BaseVehicleLocation) SetFuelValue(v float32)`
+
+SetFuelValue sets FuelValue field to given value.
+
+### HasFuelValue
+
+`func (o *BaseVehicleLocation) HasFuelValue() bool`
+
+HasFuelValue returns a boolean if a field has been set.
+
+### SetFuelValueNil
+
+`func (o *BaseVehicleLocation) SetFuelValueNil(b bool)`
+
+ SetFuelValueNil sets the value for FuelValue to be an explicit nil
+
+### UnsetFuelValue
+`func (o *BaseVehicleLocation) UnsetFuelValue()`
+
+UnsetFuelValue ensures that no value is present for FuelValue, not even an explicit nil
 ### GetEngineHours
 
 `func (o *BaseVehicleLocation) GetEngineHours() float32`
@@ -943,6 +980,41 @@ HasCoolantTemperature returns a boolean if a field has been set.
 `func (o *BaseVehicleLocation) UnsetCoolantTemperature()`
 
 UnsetCoolantTemperature ensures that no value is present for CoolantTemperature, not even an explicit nil
+### GetInferredAddress
+
+`func (o *BaseVehicleLocation) GetInferredAddress() InferredAddress`
+
+GetInferredAddress returns the InferredAddress field if non-nil, zero value otherwise.
+
+### GetInferredAddressOk
+
+`func (o *BaseVehicleLocation) GetInferredAddressOk() (*InferredAddress, bool)`
+
+GetInferredAddressOk returns a tuple with the InferredAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInferredAddress
+
+`func (o *BaseVehicleLocation) SetInferredAddress(v InferredAddress)`
+
+SetInferredAddress sets InferredAddress field to given value.
+
+### HasInferredAddress
+
+`func (o *BaseVehicleLocation) HasInferredAddress() bool`
+
+HasInferredAddress returns a boolean if a field has been set.
+
+### SetInferredAddressNil
+
+`func (o *BaseVehicleLocation) SetInferredAddressNil(b bool)`
+
+ SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+
+### UnsetInferredAddress
+`func (o *BaseVehicleLocation) UnsetInferredAddress()`
+
+UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

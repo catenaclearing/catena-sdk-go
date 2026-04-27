@@ -20,38 +20,42 @@ type ConnectionTypeEnum string
 
 // List of ConnectionTypeEnum
 const (
-	CONNECTIONTYPEENUM_ACCESS_TOKEN       ConnectionTypeEnum = "access_token"
-	CONNECTIONTYPEENUM_API_AUTH           ConnectionTypeEnum = "api_auth"
-	CONNECTIONTYPEENUM_API_BASIC          ConnectionTypeEnum = "api_basic"
-	CONNECTIONTYPEENUM_API_KEY            ConnectionTypeEnum = "api_key"
-	CONNECTIONTYPEENUM_AZUGA_SLC          ConnectionTypeEnum = "azuga_slc"
-	CONNECTIONTYPEENUM_BOUNCIE            ConnectionTypeEnum = "bouncie"
-	CONNECTIONTYPEENUM_CLIENT_ID_SECRET   ConnectionTypeEnum = "client_id_secret"
-	CONNECTIONTYPEENUM_COMPANY_ACCESS     ConnectionTypeEnum = "company_access"
-	CONNECTIONTYPEENUM_COMPANY_ID         ConnectionTypeEnum = "company_id"
-	CONNECTIONTYPEENUM_DATABASE           ConnectionTypeEnum = "database"
-	CONNECTIONTYPEENUM_EZLOGZ             ConnectionTypeEnum = "ezlogz"
-	CONNECTIONTYPEENUM_FACTOR_ELD         ConnectionTypeEnum = "factor_eld"
-	CONNECTIONTYPEENUM_FLEETUP            ConnectionTypeEnum = "fleetup"
-	CONNECTIONTYPEENUM_FLEETUP_SLC        ConnectionTypeEnum = "fleetup_slc"
-	CONNECTIONTYPEENUM_GEOTAB             ConnectionTypeEnum = "geotab"
-	CONNECTIONTYPEENUM_ISAAC              ConnectionTypeEnum = "isaac"
-	CONNECTIONTYPEENUM_MOTIVE             ConnectionTypeEnum = "motive"
-	CONNECTIONTYPEENUM_OAUTH1             ConnectionTypeEnum = "oauth1"
-	CONNECTIONTYPEENUM_OAUTH2             ConnectionTypeEnum = "oauth2"
-	CONNECTIONTYPEENUM_OAUTH2_INITIATE    ConnectionTypeEnum = "oauth2_initiate"
-	CONNECTIONTYPEENUM_OAUTH2_PRIVATE_KEY ConnectionTypeEnum = "oauth2_private_key"
-	CONNECTIONTYPEENUM_ONTIME             ConnectionTypeEnum = "ontime"
-	CONNECTIONTYPEENUM_PRIVATE_KEY        ConnectionTypeEnum = "private_key"
-	CONNECTIONTYPEENUM_S3                 ConnectionTypeEnum = "s3"
-	CONNECTIONTYPEENUM_SAMSARA            ConnectionTypeEnum = "samsara"
-	CONNECTIONTYPEENUM_SWITCHBOARD        ConnectionTypeEnum = "switchboard"
-	CONNECTIONTYPEENUM_SPIREON_SLC        ConnectionTypeEnum = "spireon_slc"
-	CONNECTIONTYPEENUM_SFTP               ConnectionTypeEnum = "sftp"
-	CONNECTIONTYPEENUM_TOKEN              ConnectionTypeEnum = "token"
-	CONNECTIONTYPEENUM_TT_CREDS           ConnectionTypeEnum = "tt_creds"
-	CONNECTIONTYPEENUM_TRUCKX_CREDS       ConnectionTypeEnum = "truckx_creds"
-	CONNECTIONTYPEENUM_TRUCKX_SLC         ConnectionTypeEnum = "truckx_slc"
+	CONNECTIONTYPEENUM_ACCESS_TOKEN        ConnectionTypeEnum = "access_token"
+	CONNECTIONTYPEENUM_API_AUTH            ConnectionTypeEnum = "api_auth"
+	CONNECTIONTYPEENUM_API_BASIC           ConnectionTypeEnum = "api_basic"
+	CONNECTIONTYPEENUM_API_KEY             ConnectionTypeEnum = "api_key"
+	CONNECTIONTYPEENUM_AZUGA_SLC           ConnectionTypeEnum = "azuga_slc"
+	CONNECTIONTYPEENUM_BOUNCIE             ConnectionTypeEnum = "bouncie"
+	CONNECTIONTYPEENUM_CLIENT_ID_SECRET    ConnectionTypeEnum = "client_id_secret"
+	CONNECTIONTYPEENUM_COMPANY_ACCESS      ConnectionTypeEnum = "company_access"
+	CONNECTIONTYPEENUM_COMPANY_ID          ConnectionTypeEnum = "company_id"
+	CONNECTIONTYPEENUM_DATABASE            ConnectionTypeEnum = "database"
+	CONNECTIONTYPEENUM_EZ_LYNK             ConnectionTypeEnum = "ez_lynk"
+	CONNECTIONTYPEENUM_EZ_LYNK_ACCESS      ConnectionTypeEnum = "ez_lynk_access"
+	CONNECTIONTYPEENUM_EZLOGZ              ConnectionTypeEnum = "ezlogz"
+	CONNECTIONTYPEENUM_FACTOR_ELD          ConnectionTypeEnum = "factor_eld"
+	CONNECTIONTYPEENUM_FLEETUP             ConnectionTypeEnum = "fleetup"
+	CONNECTIONTYPEENUM_FLEETUP_SLC         ConnectionTypeEnum = "fleetup_slc"
+	CONNECTIONTYPEENUM_GEOTAB              ConnectionTypeEnum = "geotab"
+	CONNECTIONTYPEENUM_ISAAC               ConnectionTypeEnum = "isaac"
+	CONNECTIONTYPEENUM_MOTIVE              ConnectionTypeEnum = "motive"
+	CONNECTIONTYPEENUM_OAUTH1              ConnectionTypeEnum = "oauth1"
+	CONNECTIONTYPEENUM_OAUTH2              ConnectionTypeEnum = "oauth2"
+	CONNECTIONTYPEENUM_OAUTH2_INITIATE     ConnectionTypeEnum = "oauth2_initiate"
+	CONNECTIONTYPEENUM_OAUTH2_PRIVATE_KEY  ConnectionTypeEnum = "oauth2_private_key"
+	CONNECTIONTYPEENUM_ONTIME              ConnectionTypeEnum = "ontime"
+	CONNECTIONTYPEENUM_PRIVATE_KEY         ConnectionTypeEnum = "private_key"
+	CONNECTIONTYPEENUM_S3                  ConnectionTypeEnum = "s3"
+	CONNECTIONTYPEENUM_SAMSARA             ConnectionTypeEnum = "samsara"
+	CONNECTIONTYPEENUM_SWITCHBOARD         ConnectionTypeEnum = "switchboard"
+	CONNECTIONTYPEENUM_SPIREON_SLC         ConnectionTypeEnum = "spireon_slc"
+	CONNECTIONTYPEENUM_SFTP                ConnectionTypeEnum = "sftp"
+	CONNECTIONTYPEENUM_TOKEN               ConnectionTypeEnum = "token"
+	CONNECTIONTYPEENUM_TT_CREDS            ConnectionTypeEnum = "tt_creds"
+	CONNECTIONTYPEENUM_TRUCKX_CREDS        ConnectionTypeEnum = "truckx_creds"
+	CONNECTIONTYPEENUM_TRUCKX_SLC          ConnectionTypeEnum = "truckx_slc"
+	CONNECTIONTYPEENUM_VERIZON_CONNECT     ConnectionTypeEnum = "verizon_connect"
+	CONNECTIONTYPEENUM_VERIZON_CONNECT_SLC ConnectionTypeEnum = "verizon_connect_slc"
 )
 
 // All allowed values of ConnectionTypeEnum enum
@@ -66,6 +70,8 @@ var AllowedConnectionTypeEnumEnumValues = []ConnectionTypeEnum{
 	"company_access",
 	"company_id",
 	"database",
+	"ez_lynk",
+	"ez_lynk_access",
 	"ezlogz",
 	"factor_eld",
 	"fleetup",
@@ -88,6 +94,8 @@ var AllowedConnectionTypeEnumEnumValues = []ConnectionTypeEnum{
 	"tt_creds",
 	"truckx_creds",
 	"truckx_slc",
+	"verizon_connect",
+	"verizon_connect_slc",
 }
 
 func (v *ConnectionTypeEnum) UnmarshalJSON(src []byte) error {

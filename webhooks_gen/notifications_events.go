@@ -9,57 +9,72 @@ import (
 )
 
 var NotificationsDecoders = map[string]func(json.RawMessage) (any, error){
-	"connection.created":          decodeBaseConnectionEvent,
-	"connection.staled":           decodeBaseConnectionEvent,
-	"engine_log.added":            decodeBaseEngineLog,
-	"engine_log.modified":         decodeBaseEngineLog,
-	"execution.failed":            decodeBaseExecutionEvent,
-	"execution.staled":            decodeBaseExecutionEvent,
-	"fleet_connection.created":    decodeBaseFleetConnectionEvent,
-	"hos_availability.added":      decodeBaseHosAvailability,
-	"hos_availability.modified":   decodeBaseHosAvailability,
-	"hos_availability.removed":    decodeBaseTelematicsEvent,
-	"hos_daily_snapshot.added":    decodeBaseHosDailySnapshot,
-	"hos_daily_snapshot.modified": decodeBaseHosDailySnapshot,
-	"hos_daily_snapshot.removed":  decodeBaseTelematicsEvent,
-	"hos_event.added":             decodeBaseHosEvent,
-	"hos_event.modified":          decodeBaseHosEvent,
-	"hos_event.removed":           decodeBaseTelematicsEvent,
-	"hos_violation.added":         decodeBaseHosViolation,
-	"hos_violation.modified":      decodeBaseHosViolation,
-	"hos_violation.removed":       decodeBaseTelematicsEvent,
-	"ifta_summary.added":          decodeBaseIftaSummary,
-	"ifta_summary.modified":       decodeBaseIftaSummary,
-	"ifta_summary.removed":        decodeBaseTelematicsEvent,
-	"invitation.accepted":         decodeBaseInvitationEvent,
-	"invitation.created":          decodeBaseInvitationEvent,
-	"invitation.declined":         decodeBaseInvitationEvent,
-	"invitation.deleted":          decodeBaseInvitationEvent,
-	"invitation.expired":          decodeBaseInvitationEvent,
-	"invitation.rejected":         decodeBaseInvitationEvent,
-	"invitation.sent":             decodeBaseInvitationEvent,
-	"invitation.viewed":           decodeBaseInvitationEvent,
-	"schedule.deactivated":        decodeBaseScheduleEvent,
-	"share_agreement.created":     decodeBaseShareAgreementEvent,
-	"share_agreement.deleted":     decodeBaseShareAgreementEvent,
-	"share_agreement.updated":     decodeBaseShareAgreementEvent,
-	"trailer.added":               decodeBaseTrailer,
-	"trailer.modified":            decodeBaseTrailer,
-	"trailer.removed":             decodeBaseTelematicsEvent,
-	"trailer_location.added":      decodeBaseTrailerLocation,
-	"trailer_location.modified":   decodeBaseTrailerLocation,
-	"tsp.created":                 decodeBaseTspEvent,
-	"user.added":                  decodeBaseUser,
-	"user.modified":               decodeBaseUser,
-	"user.removed":                decodeBaseTelematicsEvent,
-	"vehicle.added":               decodeBaseVehicle,
-	"vehicle.modified":            decodeBaseVehicle,
-	"vehicle.removed":             decodeBaseTelematicsEvent,
-	"vehicle_location.added":      decodeBaseVehicleLocation,
-	"webhook.created":             decodeBaseWebhookEvent,
-	"webhook.deleted":             decodeBaseWebhookEvent,
-	"webhook.staled":              decodeBaseWebhookEvent,
-	"webhook.updated":             decodeBaseWebhookEvent,
+	"connection.created":                   decodeBaseConnectionEvent,
+	"connection.staled":                    decodeBaseConnectionEvent,
+	"driver_vehicle_association.added":     decodeBaseDriverVehicleAssociation,
+	"driver_vehicle_association.modified":  decodeBaseDriverVehicleAssociation,
+	"engine_log.added":                     decodeBaseEngineLog,
+	"engine_log.modified":                  decodeBaseEngineLog,
+	"engine_status.added":                  decodeBaseEngineStatus,
+	"engine_status.modified":               decodeBaseEngineStatus,
+	"execution.failed":                     decodeBaseExecutionEvent,
+	"execution.staled":                     decodeBaseExecutionEvent,
+	"fleet_connection.created":             decodeBaseFleetConnectionEvent,
+	"fuel_transaction.added":               decodeBaseFuelTransaction,
+	"fuel_transaction.modified":            decodeBaseFuelTransaction,
+	"hos_availability.added":               decodeBaseHosAvailability,
+	"hos_availability.modified":            decodeBaseHosAvailability,
+	"hos_availability.removed":             decodeBaseTelematicsEvent,
+	"hos_daily_snapshot.added":             decodeBaseHosDailySnapshot,
+	"hos_daily_snapshot.modified":          decodeBaseHosDailySnapshot,
+	"hos_daily_snapshot.removed":           decodeBaseTelematicsEvent,
+	"hos_event.added":                      decodeBaseHosEvent,
+	"hos_event.modified":                   decodeBaseHosEvent,
+	"hos_event.removed":                    decodeBaseTelematicsEvent,
+	"hos_violation.added":                  decodeBaseHosViolation,
+	"hos_violation.modified":               decodeBaseHosViolation,
+	"hos_violation.removed":                decodeBaseTelematicsEvent,
+	"ifta_summary.added":                   decodeBaseIftaSummary,
+	"ifta_summary.modified":                decodeBaseIftaSummary,
+	"ifta_summary.removed":                 decodeBaseTelematicsEvent,
+	"invitation.accepted":                  decodeBaseInvitationEvent,
+	"invitation.created":                   decodeBaseInvitationEvent,
+	"invitation.declined":                  decodeBaseInvitationEvent,
+	"invitation.deleted":                   decodeBaseInvitationEvent,
+	"invitation.expired":                   decodeBaseInvitationEvent,
+	"invitation.rejected":                  decodeBaseInvitationEvent,
+	"invitation.sent":                      decodeBaseInvitationEvent,
+	"invitation.viewed":                    decodeBaseInvitationEvent,
+	"message.added":                        decodeBaseMessage,
+	"message.modified":                     decodeBaseMessage,
+	"resource_operation.created":           decodeBaseResourceOperationEvent,
+	"resource_operation.failed":            decodeBaseResourceOperationEvent,
+	"resource_operation.succeeded":         decodeBaseResourceOperationEvent,
+	"schedule.deactivated":                 decodeBaseScheduleEvent,
+	"share_agreement.created":              decodeBaseShareAgreementEvent,
+	"share_agreement.deleted":              decodeBaseShareAgreementEvent,
+	"share_agreement.updated":              decodeBaseShareAgreementEvent,
+	"trailer.added":                        decodeBaseTrailer,
+	"trailer.modified":                     decodeBaseTrailer,
+	"trailer.removed":                      decodeBaseTelematicsEvent,
+	"trailer_location.added":               decodeBaseTrailerLocation,
+	"trailer_location.modified":            decodeBaseTrailerLocation,
+	"trailer_status.added":                 decodeBaseTrailerStatus,
+	"trailer_status.modified":              decodeBaseTrailerStatus,
+	"trailer_vehicle_association.added":    decodeBaseTrailerVehicleAssociation,
+	"trailer_vehicle_association.modified": decodeBaseTrailerVehicleAssociation,
+	"tsp.created":                          decodeBaseTspEvent,
+	"user.added":                           decodeBaseUser,
+	"user.modified":                        decodeBaseUser,
+	"user.removed":                         decodeBaseTelematicsEvent,
+	"vehicle.added":                        decodeBaseVehicle,
+	"vehicle.modified":                     decodeBaseVehicle,
+	"vehicle.removed":                      decodeBaseTelematicsEvent,
+	"vehicle_location.added":               decodeBaseVehicleLocation,
+	"webhook.created":                      decodeBaseWebhookEvent,
+	"webhook.deleted":                      decodeBaseWebhookEvent,
+	"webhook.staled":                       decodeBaseWebhookEvent,
+	"webhook.updated":                      decodeBaseWebhookEvent,
 }
 
 func decodeBaseConnectionEvent(data json.RawMessage) (any, error) {
@@ -70,8 +85,24 @@ func decodeBaseConnectionEvent(data json.RawMessage) (any, error) {
 	return out, nil
 }
 
+func decodeBaseDriverVehicleAssociation(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseDriverVehicleAssociation
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func decodeBaseEngineLog(data json.RawMessage) (any, error) {
 	var out []notificationsapi.BaseEngineLog
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseEngineStatus(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseEngineStatus
 	if err := json.Unmarshal(data, &out); err != nil {
 		return nil, err
 	}
@@ -88,6 +119,14 @@ func decodeBaseExecutionEvent(data json.RawMessage) (any, error) {
 
 func decodeBaseFleetConnectionEvent(data json.RawMessage) (any, error) {
 	var out []notificationsapi.BaseFleetConnectionEvent
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseFuelTransaction(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseFuelTransaction
 	if err := json.Unmarshal(data, &out); err != nil {
 		return nil, err
 	}
@@ -142,6 +181,22 @@ func decodeBaseInvitationEvent(data json.RawMessage) (any, error) {
 	return out, nil
 }
 
+func decodeBaseMessage(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseMessage
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseResourceOperationEvent(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseResourceOperationEvent
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func decodeBaseScheduleEvent(data json.RawMessage) (any, error) {
 	var out []notificationsapi.BaseScheduleEvent
 	if err := json.Unmarshal(data, &out); err != nil {
@@ -176,6 +231,22 @@ func decodeBaseTrailer(data json.RawMessage) (any, error) {
 
 func decodeBaseTrailerLocation(data json.RawMessage) (any, error) {
 	var out []notificationsapi.BaseTrailerLocation
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseTrailerStatus(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseTrailerStatus
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseTrailerVehicleAssociation(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseTrailerVehicleAssociation
 	if err := json.Unmarshal(data, &out); err != nil {
 		return nil, err
 	}

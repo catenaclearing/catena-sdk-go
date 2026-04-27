@@ -19,9 +19,9 @@ var _ MappedNullable = &ConnectionUpdate{}
 
 // ConnectionUpdate API Model for updating a connection
 type ConnectionUpdate struct {
-	Credentials          NullableCredentials2 `json:"credentials,omitempty"`
-	Description          NullableString       `json:"description,omitempty"`
-	Status               NullableStatusEnum   `json:"status,omitempty"`
+	Credentials          NullableCredentials2         `json:"credentials,omitempty"`
+	Description          NullableString               `json:"description,omitempty"`
+	Status               NullableConnectionStatusEnum `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -131,9 +131,9 @@ func (o *ConnectionUpdate) UnsetDescription() {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConnectionUpdate) GetStatus() StatusEnum {
+func (o *ConnectionUpdate) GetStatus() ConnectionStatusEnum {
 	if o == nil || IsNil(o.Status.Get()) {
-		var ret StatusEnum
+		var ret ConnectionStatusEnum
 		return ret
 	}
 	return *o.Status.Get()
@@ -142,7 +142,7 @@ func (o *ConnectionUpdate) GetStatus() StatusEnum {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConnectionUpdate) GetStatusOk() (*StatusEnum, bool) {
+func (o *ConnectionUpdate) GetStatusOk() (*ConnectionStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -158,8 +158,8 @@ func (o *ConnectionUpdate) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given NullableStatusEnum and assigns it to the Status field.
-func (o *ConnectionUpdate) SetStatus(v StatusEnum) {
+// SetStatus gets a reference to the given NullableConnectionStatusEnum and assigns it to the Status field.
+func (o *ConnectionUpdate) SetStatus(v ConnectionStatusEnum) {
 	o.Status.Set(&v)
 }
 

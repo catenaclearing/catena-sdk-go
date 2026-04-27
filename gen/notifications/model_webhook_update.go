@@ -22,7 +22,6 @@ type WebhookUpdate struct {
 	Url                  NullableString         `json:"url,omitempty"`
 	Filters              NullableWebhookFilters `json:"filters,omitempty"`
 	Secret               NullableString         `json:"secret,omitempty"`
-	Status               NullableStatusEnum     `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -174,49 +173,6 @@ func (o *WebhookUpdate) UnsetSecret() {
 	o.Secret.Unset()
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *WebhookUpdate) GetStatus() StatusEnum {
-	if o == nil || IsNil(o.Status.Get()) {
-		var ret StatusEnum
-		return ret
-	}
-	return *o.Status.Get()
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WebhookUpdate) GetStatusOk() (*StatusEnum, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Status.Get(), o.Status.IsSet()
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *WebhookUpdate) HasStatus() bool {
-	if o != nil && o.Status.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given NullableStatusEnum and assigns it to the Status field.
-func (o *WebhookUpdate) SetStatus(v StatusEnum) {
-	o.Status.Set(&v)
-}
-
-// SetStatusNil sets the value for Status to be an explicit nil
-func (o *WebhookUpdate) SetStatusNil() {
-	o.Status.Set(nil)
-}
-
-// UnsetStatus ensures that no value is present for Status, not even an explicit nil
-func (o *WebhookUpdate) UnsetStatus() {
-	o.Status.Unset()
-}
-
 func (o WebhookUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -235,9 +191,6 @@ func (o WebhookUpdate) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Secret.IsSet() {
 		toSerialize["secret"] = o.Secret.Get()
-	}
-	if o.Status.IsSet() {
-		toSerialize["status"] = o.Status.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -264,7 +217,6 @@ func (o *WebhookUpdate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "filters")
 		delete(additionalProperties, "secret")
-		delete(additionalProperties, "status")
 		o.AdditionalProperties = additionalProperties
 	}
 

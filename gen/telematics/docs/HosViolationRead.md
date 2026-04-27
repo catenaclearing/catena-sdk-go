@@ -32,8 +32,6 @@ Name | Type | Description | Notes
 **EndTime** | Pointer to **NullableTime** |  | [optional] 
 **Duration** | Pointer to **NullableInt32** |  | [optional] 
 **HoursLimit** | Pointer to **NullableFloat32** |  | [optional] 
-**HosLogId** | Pointer to **NullableString** |  | [optional] 
-**SourceHosLogId** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -914,76 +912,6 @@ HasHoursLimit returns a boolean if a field has been set.
 `func (o *HosViolationRead) UnsetHoursLimit()`
 
 UnsetHoursLimit ensures that no value is present for HoursLimit, not even an explicit nil
-### GetHosLogId
-
-`func (o *HosViolationRead) GetHosLogId() string`
-
-GetHosLogId returns the HosLogId field if non-nil, zero value otherwise.
-
-### GetHosLogIdOk
-
-`func (o *HosViolationRead) GetHosLogIdOk() (*string, bool)`
-
-GetHosLogIdOk returns a tuple with the HosLogId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHosLogId
-
-`func (o *HosViolationRead) SetHosLogId(v string)`
-
-SetHosLogId sets HosLogId field to given value.
-
-### HasHosLogId
-
-`func (o *HosViolationRead) HasHosLogId() bool`
-
-HasHosLogId returns a boolean if a field has been set.
-
-### SetHosLogIdNil
-
-`func (o *HosViolationRead) SetHosLogIdNil(b bool)`
-
- SetHosLogIdNil sets the value for HosLogId to be an explicit nil
-
-### UnsetHosLogId
-`func (o *HosViolationRead) UnsetHosLogId()`
-
-UnsetHosLogId ensures that no value is present for HosLogId, not even an explicit nil
-### GetSourceHosLogId
-
-`func (o *HosViolationRead) GetSourceHosLogId() string`
-
-GetSourceHosLogId returns the SourceHosLogId field if non-nil, zero value otherwise.
-
-### GetSourceHosLogIdOk
-
-`func (o *HosViolationRead) GetSourceHosLogIdOk() (*string, bool)`
-
-GetSourceHosLogIdOk returns a tuple with the SourceHosLogId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSourceHosLogId
-
-`func (o *HosViolationRead) SetSourceHosLogId(v string)`
-
-SetSourceHosLogId sets SourceHosLogId field to given value.
-
-### HasSourceHosLogId
-
-`func (o *HosViolationRead) HasSourceHosLogId() bool`
-
-HasSourceHosLogId returns a boolean if a field has been set.
-
-### SetSourceHosLogIdNil
-
-`func (o *HosViolationRead) SetSourceHosLogIdNil(b bool)`
-
- SetSourceHosLogIdNil sets the value for SourceHosLogId to be an explicit nil
-
-### UnsetSourceHosLogId
-`func (o *HosViolationRead) UnsetSourceHosLogId()`
-
-UnsetSourceHosLogId ensures that no value is present for SourceHosLogId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

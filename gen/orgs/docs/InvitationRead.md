@@ -9,27 +9,41 @@ Name | Type | Description | Notes
 **MagicLink** | **string** | The magic link that is used to open Catena Connect and accept the invitation. Share this URL with the fleet to begin onboarding. | 
 **ExpiresAt** | **time.Time** | The expiration date and time of the invitation | 
 **ExpiresInHours** | **int32** | The number of hours the invitation is valid for. | 
-**Status** | [**StatusEnum**](StatusEnum.md) | The current status of the invitation (ACTIVE, ACCEPTED, DECLINED, or EXPIRED) | 
-**PartnerProvidedFleetName** | Pointer to **NullableString** |  | [optional] 
-**AcceptedAt** | Pointer to **NullableTime** |  | [optional] 
-**PreRegistrationAccessToken** | Pointer to **NullableString** |  | [optional] 
-**PreRegistrationRefreshToken** | Pointer to **NullableString** |  | [optional] 
-**CallbackUrl** | Pointer to **NullableString** |  | [optional] 
-**SuccessRedirectUrl** | Pointer to **NullableString** |  | [optional] 
-**FailureRedirectUrl** | Pointer to **NullableString** |  | [optional] 
-**LimitTsps** | Pointer to **[]string** |  | [optional] 
+**Status** | [**InvitationStatusEnum**](InvitationStatusEnum.md) | The current status of the invitation (active, accepted, declined, or expired) | 
+**FleetName** | **NullableString** |  | 
+**AcceptedAt** | **NullableTime** |  | 
+**PreRegistrationAccessToken** | **NullableString** |  | 
+**PreRegistrationRefreshToken** | **NullableString** |  | 
+**CallbackUrl** | **NullableString** |  | 
+**SuccessRedirectUrl** | **NullableString** |  | 
+**FailureRedirectUrl** | **NullableString** |  | 
+**LimitTsps** | **[]string** |  | 
 **FleetId** | Pointer to **NullableString** |  | [optional] 
-**PartnerSlug** | Pointer to **NullableString** |  | [optional] 
-**PartnerId** | Pointer to **NullableString** |  | [optional] 
-**DeclineReason** | Pointer to **NullableString** |  | [optional] 
-**DeclinedAt** | Pointer to **NullableTime** |  | [optional] 
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
+**PartnerSlug** | **NullableString** |  | 
+**PartnerId** | **string** | Your organization ID requesting access to fleet data | 
+**DeclineReason** | **NullableString** |  | 
+**DeclinedAt** | **NullableTime** |  | 
+**FleetRef** | **string** | Your internal fleet identifier. Use this to map Catena fleets back to your system. This value will be returned in webhooks and redirect URLs. | 
+**Permissions** | [**map[string]ShareLevelEnum**](ShareLevelEnum.md) | Defines which resources (vehicle, locations, users, etc.) the fleet must grant access to and the permission level (read, write) for each. | 
+**FleetEmail** | **NullableString** |  | 
+**FleetRegulatoryId** | **NullableString** |  | 
+**FleetRegulatoryIdType** | **NullableString** |  | 
+**FleetPhone** | **NullableString** |  | 
+**FleetWebsite** | **NullableString** |  | 
+**FleetCountryCode** | **NullableString** |  | 
+**PartnerProvidedFleetName** | **NullableString** |  | 
+**PartnerProvidedFleetEmail** | **NullableString** |  | 
+**PartnerProvidedFleetRegulatoryId** | **NullableString** |  | 
+**PartnerProvidedFleetRegulatoryIdType** | **NullableString** |  | 
+**PartnerProvidedFleetPhone** | **NullableString** |  | 
+**PartnerProvidedFleetWebsite** | **NullableString** |  | 
+**PartnerProvidedFleetCountryCode** | **NullableString** |  | 
 
 ## Methods
 
 ### NewInvitationRead
 
-`func NewInvitationRead(id string, createdAt time.Time, magicLink string, expiresAt time.Time, expiresInHours int32, status StatusEnum, ) *InvitationRead`
+`func NewInvitationRead(id string, createdAt time.Time, magicLink string, expiresAt time.Time, expiresInHours int32, status InvitationStatusEnum, fleetName NullableString, acceptedAt NullableTime, preRegistrationAccessToken NullableString, preRegistrationRefreshToken NullableString, callbackUrl NullableString, successRedirectUrl NullableString, failureRedirectUrl NullableString, limitTsps []string, partnerSlug NullableString, partnerId string, declineReason NullableString, declinedAt NullableTime, fleetRef string, permissions map[string]ShareLevelEnum, fleetEmail NullableString, fleetRegulatoryId NullableString, fleetRegulatoryIdType NullableString, fleetPhone NullableString, fleetWebsite NullableString, fleetCountryCode NullableString, partnerProvidedFleetName NullableString, partnerProvidedFleetEmail NullableString, partnerProvidedFleetRegulatoryId NullableString, partnerProvidedFleetRegulatoryIdType NullableString, partnerProvidedFleetPhone NullableString, partnerProvidedFleetWebsite NullableString, partnerProvidedFleetCountryCode NullableString, ) *InvitationRead`
 
 NewInvitationRead instantiates a new InvitationRead object
 This constructor will assign default values to properties that have it defined,
@@ -146,59 +160,54 @@ SetExpiresInHours sets ExpiresInHours field to given value.
 
 ### GetStatus
 
-`func (o *InvitationRead) GetStatus() StatusEnum`
+`func (o *InvitationRead) GetStatus() InvitationStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *InvitationRead) GetStatusOk() (*StatusEnum, bool)`
+`func (o *InvitationRead) GetStatusOk() (*InvitationStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *InvitationRead) SetStatus(v StatusEnum)`
+`func (o *InvitationRead) SetStatus(v InvitationStatusEnum)`
 
 SetStatus sets Status field to given value.
 
 
-### GetPartnerProvidedFleetName
+### GetFleetName
 
-`func (o *InvitationRead) GetPartnerProvidedFleetName() string`
+`func (o *InvitationRead) GetFleetName() string`
 
-GetPartnerProvidedFleetName returns the PartnerProvidedFleetName field if non-nil, zero value otherwise.
+GetFleetName returns the FleetName field if non-nil, zero value otherwise.
 
-### GetPartnerProvidedFleetNameOk
+### GetFleetNameOk
 
-`func (o *InvitationRead) GetPartnerProvidedFleetNameOk() (*string, bool)`
+`func (o *InvitationRead) GetFleetNameOk() (*string, bool)`
 
-GetPartnerProvidedFleetNameOk returns a tuple with the PartnerProvidedFleetName field if it's non-nil, zero value otherwise
+GetFleetNameOk returns a tuple with the FleetName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPartnerProvidedFleetName
+### SetFleetName
 
-`func (o *InvitationRead) SetPartnerProvidedFleetName(v string)`
+`func (o *InvitationRead) SetFleetName(v string)`
 
-SetPartnerProvidedFleetName sets PartnerProvidedFleetName field to given value.
+SetFleetName sets FleetName field to given value.
 
-### HasPartnerProvidedFleetName
 
-`func (o *InvitationRead) HasPartnerProvidedFleetName() bool`
+### SetFleetNameNil
 
-HasPartnerProvidedFleetName returns a boolean if a field has been set.
+`func (o *InvitationRead) SetFleetNameNil(b bool)`
 
-### SetPartnerProvidedFleetNameNil
+ SetFleetNameNil sets the value for FleetName to be an explicit nil
 
-`func (o *InvitationRead) SetPartnerProvidedFleetNameNil(b bool)`
+### UnsetFleetName
+`func (o *InvitationRead) UnsetFleetName()`
 
- SetPartnerProvidedFleetNameNil sets the value for PartnerProvidedFleetName to be an explicit nil
-
-### UnsetPartnerProvidedFleetName
-`func (o *InvitationRead) UnsetPartnerProvidedFleetName()`
-
-UnsetPartnerProvidedFleetName ensures that no value is present for PartnerProvidedFleetName, not even an explicit nil
+UnsetFleetName ensures that no value is present for FleetName, not even an explicit nil
 ### GetAcceptedAt
 
 `func (o *InvitationRead) GetAcceptedAt() time.Time`
@@ -218,11 +227,6 @@ and a boolean to check if the value has been set.
 
 SetAcceptedAt sets AcceptedAt field to given value.
 
-### HasAcceptedAt
-
-`func (o *InvitationRead) HasAcceptedAt() bool`
-
-HasAcceptedAt returns a boolean if a field has been set.
 
 ### SetAcceptedAtNil
 
@@ -253,11 +257,6 @@ and a boolean to check if the value has been set.
 
 SetPreRegistrationAccessToken sets PreRegistrationAccessToken field to given value.
 
-### HasPreRegistrationAccessToken
-
-`func (o *InvitationRead) HasPreRegistrationAccessToken() bool`
-
-HasPreRegistrationAccessToken returns a boolean if a field has been set.
 
 ### SetPreRegistrationAccessTokenNil
 
@@ -288,11 +287,6 @@ and a boolean to check if the value has been set.
 
 SetPreRegistrationRefreshToken sets PreRegistrationRefreshToken field to given value.
 
-### HasPreRegistrationRefreshToken
-
-`func (o *InvitationRead) HasPreRegistrationRefreshToken() bool`
-
-HasPreRegistrationRefreshToken returns a boolean if a field has been set.
 
 ### SetPreRegistrationRefreshTokenNil
 
@@ -323,11 +317,6 @@ and a boolean to check if the value has been set.
 
 SetCallbackUrl sets CallbackUrl field to given value.
 
-### HasCallbackUrl
-
-`func (o *InvitationRead) HasCallbackUrl() bool`
-
-HasCallbackUrl returns a boolean if a field has been set.
 
 ### SetCallbackUrlNil
 
@@ -358,11 +347,6 @@ and a boolean to check if the value has been set.
 
 SetSuccessRedirectUrl sets SuccessRedirectUrl field to given value.
 
-### HasSuccessRedirectUrl
-
-`func (o *InvitationRead) HasSuccessRedirectUrl() bool`
-
-HasSuccessRedirectUrl returns a boolean if a field has been set.
 
 ### SetSuccessRedirectUrlNil
 
@@ -393,11 +377,6 @@ and a boolean to check if the value has been set.
 
 SetFailureRedirectUrl sets FailureRedirectUrl field to given value.
 
-### HasFailureRedirectUrl
-
-`func (o *InvitationRead) HasFailureRedirectUrl() bool`
-
-HasFailureRedirectUrl returns a boolean if a field has been set.
 
 ### SetFailureRedirectUrlNil
 
@@ -428,11 +407,6 @@ and a boolean to check if the value has been set.
 
 SetLimitTsps sets LimitTsps field to given value.
 
-### HasLimitTsps
-
-`func (o *InvitationRead) HasLimitTsps() bool`
-
-HasLimitTsps returns a boolean if a field has been set.
 
 ### SetLimitTspsNil
 
@@ -498,11 +472,6 @@ and a boolean to check if the value has been set.
 
 SetPartnerSlug sets PartnerSlug field to given value.
 
-### HasPartnerSlug
-
-`func (o *InvitationRead) HasPartnerSlug() bool`
-
-HasPartnerSlug returns a boolean if a field has been set.
 
 ### SetPartnerSlugNil
 
@@ -533,22 +502,7 @@ and a boolean to check if the value has been set.
 
 SetPartnerId sets PartnerId field to given value.
 
-### HasPartnerId
 
-`func (o *InvitationRead) HasPartnerId() bool`
-
-HasPartnerId returns a boolean if a field has been set.
-
-### SetPartnerIdNil
-
-`func (o *InvitationRead) SetPartnerIdNil(b bool)`
-
- SetPartnerIdNil sets the value for PartnerId to be an explicit nil
-
-### UnsetPartnerId
-`func (o *InvitationRead) UnsetPartnerId()`
-
-UnsetPartnerId ensures that no value is present for PartnerId, not even an explicit nil
 ### GetDeclineReason
 
 `func (o *InvitationRead) GetDeclineReason() string`
@@ -568,11 +522,6 @@ and a boolean to check if the value has been set.
 
 SetDeclineReason sets DeclineReason field to given value.
 
-### HasDeclineReason
-
-`func (o *InvitationRead) HasDeclineReason() bool`
-
-HasDeclineReason returns a boolean if a field has been set.
 
 ### SetDeclineReasonNil
 
@@ -603,11 +552,6 @@ and a boolean to check if the value has been set.
 
 SetDeclinedAt sets DeclinedAt field to given value.
 
-### HasDeclinedAt
-
-`func (o *InvitationRead) HasDeclinedAt() bool`
-
-HasDeclinedAt returns a boolean if a field has been set.
 
 ### SetDeclinedAtNil
 
@@ -638,22 +582,417 @@ and a boolean to check if the value has been set.
 
 SetFleetRef sets FleetRef field to given value.
 
-### HasFleetRef
 
-`func (o *InvitationRead) HasFleetRef() bool`
+### GetPermissions
 
-HasFleetRef returns a boolean if a field has been set.
+`func (o *InvitationRead) GetPermissions() map[string]ShareLevelEnum`
 
-### SetFleetRefNil
+GetPermissions returns the Permissions field if non-nil, zero value otherwise.
 
-`func (o *InvitationRead) SetFleetRefNil(b bool)`
+### GetPermissionsOk
 
- SetFleetRefNil sets the value for FleetRef to be an explicit nil
+`func (o *InvitationRead) GetPermissionsOk() (*map[string]ShareLevelEnum, bool)`
 
-### UnsetFleetRef
-`func (o *InvitationRead) UnsetFleetRef()`
+GetPermissionsOk returns a tuple with the Permissions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
+### SetPermissions
+
+`func (o *InvitationRead) SetPermissions(v map[string]ShareLevelEnum)`
+
+SetPermissions sets Permissions field to given value.
+
+
+### GetFleetEmail
+
+`func (o *InvitationRead) GetFleetEmail() string`
+
+GetFleetEmail returns the FleetEmail field if non-nil, zero value otherwise.
+
+### GetFleetEmailOk
+
+`func (o *InvitationRead) GetFleetEmailOk() (*string, bool)`
+
+GetFleetEmailOk returns a tuple with the FleetEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetEmail
+
+`func (o *InvitationRead) SetFleetEmail(v string)`
+
+SetFleetEmail sets FleetEmail field to given value.
+
+
+### SetFleetEmailNil
+
+`func (o *InvitationRead) SetFleetEmailNil(b bool)`
+
+ SetFleetEmailNil sets the value for FleetEmail to be an explicit nil
+
+### UnsetFleetEmail
+`func (o *InvitationRead) UnsetFleetEmail()`
+
+UnsetFleetEmail ensures that no value is present for FleetEmail, not even an explicit nil
+### GetFleetRegulatoryId
+
+`func (o *InvitationRead) GetFleetRegulatoryId() string`
+
+GetFleetRegulatoryId returns the FleetRegulatoryId field if non-nil, zero value otherwise.
+
+### GetFleetRegulatoryIdOk
+
+`func (o *InvitationRead) GetFleetRegulatoryIdOk() (*string, bool)`
+
+GetFleetRegulatoryIdOk returns a tuple with the FleetRegulatoryId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetRegulatoryId
+
+`func (o *InvitationRead) SetFleetRegulatoryId(v string)`
+
+SetFleetRegulatoryId sets FleetRegulatoryId field to given value.
+
+
+### SetFleetRegulatoryIdNil
+
+`func (o *InvitationRead) SetFleetRegulatoryIdNil(b bool)`
+
+ SetFleetRegulatoryIdNil sets the value for FleetRegulatoryId to be an explicit nil
+
+### UnsetFleetRegulatoryId
+`func (o *InvitationRead) UnsetFleetRegulatoryId()`
+
+UnsetFleetRegulatoryId ensures that no value is present for FleetRegulatoryId, not even an explicit nil
+### GetFleetRegulatoryIdType
+
+`func (o *InvitationRead) GetFleetRegulatoryIdType() string`
+
+GetFleetRegulatoryIdType returns the FleetRegulatoryIdType field if non-nil, zero value otherwise.
+
+### GetFleetRegulatoryIdTypeOk
+
+`func (o *InvitationRead) GetFleetRegulatoryIdTypeOk() (*string, bool)`
+
+GetFleetRegulatoryIdTypeOk returns a tuple with the FleetRegulatoryIdType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetRegulatoryIdType
+
+`func (o *InvitationRead) SetFleetRegulatoryIdType(v string)`
+
+SetFleetRegulatoryIdType sets FleetRegulatoryIdType field to given value.
+
+
+### SetFleetRegulatoryIdTypeNil
+
+`func (o *InvitationRead) SetFleetRegulatoryIdTypeNil(b bool)`
+
+ SetFleetRegulatoryIdTypeNil sets the value for FleetRegulatoryIdType to be an explicit nil
+
+### UnsetFleetRegulatoryIdType
+`func (o *InvitationRead) UnsetFleetRegulatoryIdType()`
+
+UnsetFleetRegulatoryIdType ensures that no value is present for FleetRegulatoryIdType, not even an explicit nil
+### GetFleetPhone
+
+`func (o *InvitationRead) GetFleetPhone() string`
+
+GetFleetPhone returns the FleetPhone field if non-nil, zero value otherwise.
+
+### GetFleetPhoneOk
+
+`func (o *InvitationRead) GetFleetPhoneOk() (*string, bool)`
+
+GetFleetPhoneOk returns a tuple with the FleetPhone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetPhone
+
+`func (o *InvitationRead) SetFleetPhone(v string)`
+
+SetFleetPhone sets FleetPhone field to given value.
+
+
+### SetFleetPhoneNil
+
+`func (o *InvitationRead) SetFleetPhoneNil(b bool)`
+
+ SetFleetPhoneNil sets the value for FleetPhone to be an explicit nil
+
+### UnsetFleetPhone
+`func (o *InvitationRead) UnsetFleetPhone()`
+
+UnsetFleetPhone ensures that no value is present for FleetPhone, not even an explicit nil
+### GetFleetWebsite
+
+`func (o *InvitationRead) GetFleetWebsite() string`
+
+GetFleetWebsite returns the FleetWebsite field if non-nil, zero value otherwise.
+
+### GetFleetWebsiteOk
+
+`func (o *InvitationRead) GetFleetWebsiteOk() (*string, bool)`
+
+GetFleetWebsiteOk returns a tuple with the FleetWebsite field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetWebsite
+
+`func (o *InvitationRead) SetFleetWebsite(v string)`
+
+SetFleetWebsite sets FleetWebsite field to given value.
+
+
+### SetFleetWebsiteNil
+
+`func (o *InvitationRead) SetFleetWebsiteNil(b bool)`
+
+ SetFleetWebsiteNil sets the value for FleetWebsite to be an explicit nil
+
+### UnsetFleetWebsite
+`func (o *InvitationRead) UnsetFleetWebsite()`
+
+UnsetFleetWebsite ensures that no value is present for FleetWebsite, not even an explicit nil
+### GetFleetCountryCode
+
+`func (o *InvitationRead) GetFleetCountryCode() string`
+
+GetFleetCountryCode returns the FleetCountryCode field if non-nil, zero value otherwise.
+
+### GetFleetCountryCodeOk
+
+`func (o *InvitationRead) GetFleetCountryCodeOk() (*string, bool)`
+
+GetFleetCountryCodeOk returns a tuple with the FleetCountryCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetCountryCode
+
+`func (o *InvitationRead) SetFleetCountryCode(v string)`
+
+SetFleetCountryCode sets FleetCountryCode field to given value.
+
+
+### SetFleetCountryCodeNil
+
+`func (o *InvitationRead) SetFleetCountryCodeNil(b bool)`
+
+ SetFleetCountryCodeNil sets the value for FleetCountryCode to be an explicit nil
+
+### UnsetFleetCountryCode
+`func (o *InvitationRead) UnsetFleetCountryCode()`
+
+UnsetFleetCountryCode ensures that no value is present for FleetCountryCode, not even an explicit nil
+### GetPartnerProvidedFleetName
+
+`func (o *InvitationRead) GetPartnerProvidedFleetName() string`
+
+GetPartnerProvidedFleetName returns the PartnerProvidedFleetName field if non-nil, zero value otherwise.
+
+### GetPartnerProvidedFleetNameOk
+
+`func (o *InvitationRead) GetPartnerProvidedFleetNameOk() (*string, bool)`
+
+GetPartnerProvidedFleetNameOk returns a tuple with the PartnerProvidedFleetName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartnerProvidedFleetName
+
+`func (o *InvitationRead) SetPartnerProvidedFleetName(v string)`
+
+SetPartnerProvidedFleetName sets PartnerProvidedFleetName field to given value.
+
+
+### SetPartnerProvidedFleetNameNil
+
+`func (o *InvitationRead) SetPartnerProvidedFleetNameNil(b bool)`
+
+ SetPartnerProvidedFleetNameNil sets the value for PartnerProvidedFleetName to be an explicit nil
+
+### UnsetPartnerProvidedFleetName
+`func (o *InvitationRead) UnsetPartnerProvidedFleetName()`
+
+UnsetPartnerProvidedFleetName ensures that no value is present for PartnerProvidedFleetName, not even an explicit nil
+### GetPartnerProvidedFleetEmail
+
+`func (o *InvitationRead) GetPartnerProvidedFleetEmail() string`
+
+GetPartnerProvidedFleetEmail returns the PartnerProvidedFleetEmail field if non-nil, zero value otherwise.
+
+### GetPartnerProvidedFleetEmailOk
+
+`func (o *InvitationRead) GetPartnerProvidedFleetEmailOk() (*string, bool)`
+
+GetPartnerProvidedFleetEmailOk returns a tuple with the PartnerProvidedFleetEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartnerProvidedFleetEmail
+
+`func (o *InvitationRead) SetPartnerProvidedFleetEmail(v string)`
+
+SetPartnerProvidedFleetEmail sets PartnerProvidedFleetEmail field to given value.
+
+
+### SetPartnerProvidedFleetEmailNil
+
+`func (o *InvitationRead) SetPartnerProvidedFleetEmailNil(b bool)`
+
+ SetPartnerProvidedFleetEmailNil sets the value for PartnerProvidedFleetEmail to be an explicit nil
+
+### UnsetPartnerProvidedFleetEmail
+`func (o *InvitationRead) UnsetPartnerProvidedFleetEmail()`
+
+UnsetPartnerProvidedFleetEmail ensures that no value is present for PartnerProvidedFleetEmail, not even an explicit nil
+### GetPartnerProvidedFleetRegulatoryId
+
+`func (o *InvitationRead) GetPartnerProvidedFleetRegulatoryId() string`
+
+GetPartnerProvidedFleetRegulatoryId returns the PartnerProvidedFleetRegulatoryId field if non-nil, zero value otherwise.
+
+### GetPartnerProvidedFleetRegulatoryIdOk
+
+`func (o *InvitationRead) GetPartnerProvidedFleetRegulatoryIdOk() (*string, bool)`
+
+GetPartnerProvidedFleetRegulatoryIdOk returns a tuple with the PartnerProvidedFleetRegulatoryId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartnerProvidedFleetRegulatoryId
+
+`func (o *InvitationRead) SetPartnerProvidedFleetRegulatoryId(v string)`
+
+SetPartnerProvidedFleetRegulatoryId sets PartnerProvidedFleetRegulatoryId field to given value.
+
+
+### SetPartnerProvidedFleetRegulatoryIdNil
+
+`func (o *InvitationRead) SetPartnerProvidedFleetRegulatoryIdNil(b bool)`
+
+ SetPartnerProvidedFleetRegulatoryIdNil sets the value for PartnerProvidedFleetRegulatoryId to be an explicit nil
+
+### UnsetPartnerProvidedFleetRegulatoryId
+`func (o *InvitationRead) UnsetPartnerProvidedFleetRegulatoryId()`
+
+UnsetPartnerProvidedFleetRegulatoryId ensures that no value is present for PartnerProvidedFleetRegulatoryId, not even an explicit nil
+### GetPartnerProvidedFleetRegulatoryIdType
+
+`func (o *InvitationRead) GetPartnerProvidedFleetRegulatoryIdType() string`
+
+GetPartnerProvidedFleetRegulatoryIdType returns the PartnerProvidedFleetRegulatoryIdType field if non-nil, zero value otherwise.
+
+### GetPartnerProvidedFleetRegulatoryIdTypeOk
+
+`func (o *InvitationRead) GetPartnerProvidedFleetRegulatoryIdTypeOk() (*string, bool)`
+
+GetPartnerProvidedFleetRegulatoryIdTypeOk returns a tuple with the PartnerProvidedFleetRegulatoryIdType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartnerProvidedFleetRegulatoryIdType
+
+`func (o *InvitationRead) SetPartnerProvidedFleetRegulatoryIdType(v string)`
+
+SetPartnerProvidedFleetRegulatoryIdType sets PartnerProvidedFleetRegulatoryIdType field to given value.
+
+
+### SetPartnerProvidedFleetRegulatoryIdTypeNil
+
+`func (o *InvitationRead) SetPartnerProvidedFleetRegulatoryIdTypeNil(b bool)`
+
+ SetPartnerProvidedFleetRegulatoryIdTypeNil sets the value for PartnerProvidedFleetRegulatoryIdType to be an explicit nil
+
+### UnsetPartnerProvidedFleetRegulatoryIdType
+`func (o *InvitationRead) UnsetPartnerProvidedFleetRegulatoryIdType()`
+
+UnsetPartnerProvidedFleetRegulatoryIdType ensures that no value is present for PartnerProvidedFleetRegulatoryIdType, not even an explicit nil
+### GetPartnerProvidedFleetPhone
+
+`func (o *InvitationRead) GetPartnerProvidedFleetPhone() string`
+
+GetPartnerProvidedFleetPhone returns the PartnerProvidedFleetPhone field if non-nil, zero value otherwise.
+
+### GetPartnerProvidedFleetPhoneOk
+
+`func (o *InvitationRead) GetPartnerProvidedFleetPhoneOk() (*string, bool)`
+
+GetPartnerProvidedFleetPhoneOk returns a tuple with the PartnerProvidedFleetPhone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartnerProvidedFleetPhone
+
+`func (o *InvitationRead) SetPartnerProvidedFleetPhone(v string)`
+
+SetPartnerProvidedFleetPhone sets PartnerProvidedFleetPhone field to given value.
+
+
+### SetPartnerProvidedFleetPhoneNil
+
+`func (o *InvitationRead) SetPartnerProvidedFleetPhoneNil(b bool)`
+
+ SetPartnerProvidedFleetPhoneNil sets the value for PartnerProvidedFleetPhone to be an explicit nil
+
+### UnsetPartnerProvidedFleetPhone
+`func (o *InvitationRead) UnsetPartnerProvidedFleetPhone()`
+
+UnsetPartnerProvidedFleetPhone ensures that no value is present for PartnerProvidedFleetPhone, not even an explicit nil
+### GetPartnerProvidedFleetWebsite
+
+`func (o *InvitationRead) GetPartnerProvidedFleetWebsite() string`
+
+GetPartnerProvidedFleetWebsite returns the PartnerProvidedFleetWebsite field if non-nil, zero value otherwise.
+
+### GetPartnerProvidedFleetWebsiteOk
+
+`func (o *InvitationRead) GetPartnerProvidedFleetWebsiteOk() (*string, bool)`
+
+GetPartnerProvidedFleetWebsiteOk returns a tuple with the PartnerProvidedFleetWebsite field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartnerProvidedFleetWebsite
+
+`func (o *InvitationRead) SetPartnerProvidedFleetWebsite(v string)`
+
+SetPartnerProvidedFleetWebsite sets PartnerProvidedFleetWebsite field to given value.
+
+
+### SetPartnerProvidedFleetWebsiteNil
+
+`func (o *InvitationRead) SetPartnerProvidedFleetWebsiteNil(b bool)`
+
+ SetPartnerProvidedFleetWebsiteNil sets the value for PartnerProvidedFleetWebsite to be an explicit nil
+
+### UnsetPartnerProvidedFleetWebsite
+`func (o *InvitationRead) UnsetPartnerProvidedFleetWebsite()`
+
+UnsetPartnerProvidedFleetWebsite ensures that no value is present for PartnerProvidedFleetWebsite, not even an explicit nil
+### GetPartnerProvidedFleetCountryCode
+
+`func (o *InvitationRead) GetPartnerProvidedFleetCountryCode() string`
+
+GetPartnerProvidedFleetCountryCode returns the PartnerProvidedFleetCountryCode field if non-nil, zero value otherwise.
+
+### GetPartnerProvidedFleetCountryCodeOk
+
+`func (o *InvitationRead) GetPartnerProvidedFleetCountryCodeOk() (*string, bool)`
+
+GetPartnerProvidedFleetCountryCodeOk returns a tuple with the PartnerProvidedFleetCountryCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartnerProvidedFleetCountryCode
+
+`func (o *InvitationRead) SetPartnerProvidedFleetCountryCode(v string)`
+
+SetPartnerProvidedFleetCountryCode sets PartnerProvidedFleetCountryCode field to given value.
+
+
+### SetPartnerProvidedFleetCountryCodeNil
+
+`func (o *InvitationRead) SetPartnerProvidedFleetCountryCodeNil(b bool)`
+
+ SetPartnerProvidedFleetCountryCodeNil sets the value for PartnerProvidedFleetCountryCode to be an explicit nil
+
+### UnsetPartnerProvidedFleetCountryCode
+`func (o *InvitationRead) UnsetPartnerProvidedFleetCountryCode()`
+
+UnsetPartnerProvidedFleetCountryCode ensures that no value is present for PartnerProvidedFleetCountryCode, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

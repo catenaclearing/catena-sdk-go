@@ -6,13 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClientId** | **string** |  | 
 **ClientSecret** | **string** |  | 
-**Url** | **string** |  | 
+**Url** | Pointer to **NullableString** |  | [optional] 
+**AccountId** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
 ### NewClientIdSecretCredsInput
 
-`func NewClientIdSecretCredsInput(clientId string, clientSecret string, url string, ) *ClientIdSecretCredsInput`
+`func NewClientIdSecretCredsInput(clientId string, clientSecret string, ) *ClientIdSecretCredsInput`
 
 NewClientIdSecretCredsInput instantiates a new ClientIdSecretCredsInput object
 This constructor will assign default values to properties that have it defined,
@@ -86,7 +87,57 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
+### HasUrl
 
+`func (o *ClientIdSecretCredsInput) HasUrl() bool`
+
+HasUrl returns a boolean if a field has been set.
+
+### SetUrlNil
+
+`func (o *ClientIdSecretCredsInput) SetUrlNil(b bool)`
+
+ SetUrlNil sets the value for Url to be an explicit nil
+
+### UnsetUrl
+`func (o *ClientIdSecretCredsInput) UnsetUrl()`
+
+UnsetUrl ensures that no value is present for Url, not even an explicit nil
+### GetAccountId
+
+`func (o *ClientIdSecretCredsInput) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *ClientIdSecretCredsInput) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *ClientIdSecretCredsInput) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
+
+### HasAccountId
+
+`func (o *ClientIdSecretCredsInput) HasAccountId() bool`
+
+HasAccountId returns a boolean if a field has been set.
+
+### SetAccountIdNil
+
+`func (o *ClientIdSecretCredsInput) SetAccountIdNil(b bool)`
+
+ SetAccountIdNil sets the value for AccountId to be an explicit nil
+
+### UnsetAccountId
+`func (o *ClientIdSecretCredsInput) UnsetAccountId()`
+
+UnsetAccountId ensures that no value is present for AccountId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

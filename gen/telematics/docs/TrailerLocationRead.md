@@ -25,8 +25,9 @@ Name | Type | Description | Notes
 **SourceTrailerId** | Pointer to **NullableString** |  | [optional] 
 **SourceVehicleId** | Pointer to **NullableString** |  | [optional] 
 **VehicleId** | Pointer to **NullableString** |  | [optional] 
-**Location** | Pointer to [**NullableLocation3**](Location3.md) |  | [optional] 
+**Location** | Pointer to [**NullableLocation5**](Location5.md) |  | [optional] 
 **H3Index11** | Pointer to **NullableInt32** |  | [optional] 
+**InferredAddress** | Pointer to [**NullableInferredAddress**](InferredAddress.md) |  | [optional] 
 
 ## Methods
 
@@ -654,20 +655,20 @@ HasVehicleId returns a boolean if a field has been set.
 UnsetVehicleId ensures that no value is present for VehicleId, not even an explicit nil
 ### GetLocation
 
-`func (o *TrailerLocationRead) GetLocation() Location3`
+`func (o *TrailerLocationRead) GetLocation() Location5`
 
 GetLocation returns the Location field if non-nil, zero value otherwise.
 
 ### GetLocationOk
 
-`func (o *TrailerLocationRead) GetLocationOk() (*Location3, bool)`
+`func (o *TrailerLocationRead) GetLocationOk() (*Location5, bool)`
 
 GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocation
 
-`func (o *TrailerLocationRead) SetLocation(v Location3)`
+`func (o *TrailerLocationRead) SetLocation(v Location5)`
 
 SetLocation sets Location field to given value.
 
@@ -722,6 +723,41 @@ HasH3Index11 returns a boolean if a field has been set.
 `func (o *TrailerLocationRead) UnsetH3Index11()`
 
 UnsetH3Index11 ensures that no value is present for H3Index11, not even an explicit nil
+### GetInferredAddress
+
+`func (o *TrailerLocationRead) GetInferredAddress() InferredAddress`
+
+GetInferredAddress returns the InferredAddress field if non-nil, zero value otherwise.
+
+### GetInferredAddressOk
+
+`func (o *TrailerLocationRead) GetInferredAddressOk() (*InferredAddress, bool)`
+
+GetInferredAddressOk returns a tuple with the InferredAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInferredAddress
+
+`func (o *TrailerLocationRead) SetInferredAddress(v InferredAddress)`
+
+SetInferredAddress sets InferredAddress field to given value.
+
+### HasInferredAddress
+
+`func (o *TrailerLocationRead) HasInferredAddress() bool`
+
+HasInferredAddress returns a boolean if a field has been set.
+
+### SetInferredAddressNil
+
+`func (o *TrailerLocationRead) SetInferredAddressNil(b bool)`
+
+ SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+
+### UnsetInferredAddress
+`func (o *TrailerLocationRead) UnsetInferredAddress()`
+
+UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

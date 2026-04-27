@@ -21,11 +21,12 @@ var _ MappedNullable = &AccessTokenCredsInput{}
 // AccessTokenCredsInput Access Token Credentials
 type AccessTokenCredsInput struct {
 	AccessToken          string         `json:"access_token"`
-	TokenType            string         `json:"token_type"`
+	TokenType            NullableString `json:"token_type,omitempty"`
 	ExpiresIn            NullableInt32  `json:"expires_in,omitempty"`
 	RefreshToken         NullableString `json:"refresh_token,omitempty"`
 	Scope                NullableString `json:"scope,omitempty"`
 	UserId               NullableString `json:"user_id,omitempty"`
+	AccountId            NullableString `json:"account_id,omitempty"`
 	Host                 NullableString `json:"host,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -36,10 +37,9 @@ type _AccessTokenCredsInput AccessTokenCredsInput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccessTokenCredsInput(accessToken string, tokenType string) *AccessTokenCredsInput {
+func NewAccessTokenCredsInput(accessToken string) *AccessTokenCredsInput {
 	this := AccessTokenCredsInput{}
 	this.AccessToken = accessToken
-	this.TokenType = tokenType
 	return &this
 }
 
@@ -75,28 +75,47 @@ func (o *AccessTokenCredsInput) SetAccessToken(v string) {
 	o.AccessToken = v
 }
 
-// GetTokenType returns the TokenType field value
+// GetTokenType returns the TokenType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessTokenCredsInput) GetTokenType() string {
-	if o == nil {
+	if o == nil || IsNil(o.TokenType.Get()) {
 		var ret string
 		return ret
 	}
-
-	return o.TokenType
+	return *o.TokenType.Get()
 }
 
-// GetTokenTypeOk returns a tuple with the TokenType field value
+// GetTokenTypeOk returns a tuple with the TokenType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccessTokenCredsInput) GetTokenTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TokenType, true
+	return o.TokenType.Get(), o.TokenType.IsSet()
 }
 
-// SetTokenType sets field value
+// HasTokenType returns a boolean if a field has been set.
+func (o *AccessTokenCredsInput) HasTokenType() bool {
+	if o != nil && o.TokenType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenType gets a reference to the given NullableString and assigns it to the TokenType field.
 func (o *AccessTokenCredsInput) SetTokenType(v string) {
-	o.TokenType = v
+	o.TokenType.Set(&v)
+}
+
+// SetTokenTypeNil sets the value for TokenType to be an explicit nil
+func (o *AccessTokenCredsInput) SetTokenTypeNil() {
+	o.TokenType.Set(nil)
+}
+
+// UnsetTokenType ensures that no value is present for TokenType, not even an explicit nil
+func (o *AccessTokenCredsInput) UnsetTokenType() {
+	o.TokenType.Unset()
 }
 
 // GetExpiresIn returns the ExpiresIn field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -271,6 +290,49 @@ func (o *AccessTokenCredsInput) UnsetUserId() {
 	o.UserId.Unset()
 }
 
+// GetAccountId returns the AccountId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccessTokenCredsInput) GetAccountId() string {
+	if o == nil || IsNil(o.AccountId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AccountId.Get()
+}
+
+// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccessTokenCredsInput) GetAccountIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AccountId.Get(), o.AccountId.IsSet()
+}
+
+// HasAccountId returns a boolean if a field has been set.
+func (o *AccessTokenCredsInput) HasAccountId() bool {
+	if o != nil && o.AccountId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountId gets a reference to the given NullableString and assigns it to the AccountId field.
+func (o *AccessTokenCredsInput) SetAccountId(v string) {
+	o.AccountId.Set(&v)
+}
+
+// SetAccountIdNil sets the value for AccountId to be an explicit nil
+func (o *AccessTokenCredsInput) SetAccountIdNil() {
+	o.AccountId.Set(nil)
+}
+
+// UnsetAccountId ensures that no value is present for AccountId, not even an explicit nil
+func (o *AccessTokenCredsInput) UnsetAccountId() {
+	o.AccountId.Unset()
+}
+
 // GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessTokenCredsInput) GetHost() string {
 	if o == nil || IsNil(o.Host.Get()) {
@@ -325,7 +387,9 @@ func (o AccessTokenCredsInput) MarshalJSON() ([]byte, error) {
 func (o AccessTokenCredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["access_token"] = o.AccessToken
-	toSerialize["token_type"] = o.TokenType
+	if o.TokenType.IsSet() {
+		toSerialize["token_type"] = o.TokenType.Get()
+	}
 	if o.ExpiresIn.IsSet() {
 		toSerialize["expires_in"] = o.ExpiresIn.Get()
 	}
@@ -337,6 +401,9 @@ func (o AccessTokenCredsInput) ToMap() (map[string]interface{}, error) {
 	}
 	if o.UserId.IsSet() {
 		toSerialize["user_id"] = o.UserId.Get()
+	}
+	if o.AccountId.IsSet() {
+		toSerialize["account_id"] = o.AccountId.Get()
 	}
 	if o.Host.IsSet() {
 		toSerialize["host"] = o.Host.Get()
@@ -355,7 +422,6 @@ func (o *AccessTokenCredsInput) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"access_token",
-		"token_type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -391,6 +457,7 @@ func (o *AccessTokenCredsInput) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "refresh_token")
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "account_id")
 		delete(additionalProperties, "host")
 		o.AdditionalProperties = additionalProperties
 	}

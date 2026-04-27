@@ -6,11 +6,17 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ConnectionCreatedconnectionCreatedPost**](WebhookEventsAPI.md#ConnectionCreatedconnectionCreatedPost) | **Post** /connection.created | Connection Created
 [**ConnectionStaledconnectionStaledPost**](WebhookEventsAPI.md#ConnectionStaledconnectionStaledPost) | **Post** /connection.staled | Connection Staled
+[**DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost**](WebhookEventsAPI.md#DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost) | **Post** /driver_vehicle_association.added | Driver Vehicle Association Added
+[**DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost**](WebhookEventsAPI.md#DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost) | **Post** /driver_vehicle_association.modified | Driver Vehicle Association Modified
 [**EngineLogAddedengineLogAddedPost**](WebhookEventsAPI.md#EngineLogAddedengineLogAddedPost) | **Post** /engine_log.added | Engine Log Added
 [**EngineLogModifiedengineLogModifiedPost**](WebhookEventsAPI.md#EngineLogModifiedengineLogModifiedPost) | **Post** /engine_log.modified | Engine Log Modified
+[**EngineStatusAddedengineStatusAddedPost**](WebhookEventsAPI.md#EngineStatusAddedengineStatusAddedPost) | **Post** /engine_status.added | Engine Status Added
+[**EngineStatusModifiedengineStatusModifiedPost**](WebhookEventsAPI.md#EngineStatusModifiedengineStatusModifiedPost) | **Post** /engine_status.modified | Engine Status Modified
 [**ExecutionFailedexecutionFailedPost**](WebhookEventsAPI.md#ExecutionFailedexecutionFailedPost) | **Post** /execution.failed | Execution Failed
 [**ExecutionStaledexecutionStaledPost**](WebhookEventsAPI.md#ExecutionStaledexecutionStaledPost) | **Post** /execution.staled | Execution Staled
 [**FleetConnectionCreatedfleetConnectionCreatedPost**](WebhookEventsAPI.md#FleetConnectionCreatedfleetConnectionCreatedPost) | **Post** /fleet_connection.created | Fleet Connection Created
+[**FuelTransactionAddedfuelTransactionAddedPost**](WebhookEventsAPI.md#FuelTransactionAddedfuelTransactionAddedPost) | **Post** /fuel_transaction.added | Fuel Transaction Added
+[**FuelTransactionModifiedfuelTransactionModifiedPost**](WebhookEventsAPI.md#FuelTransactionModifiedfuelTransactionModifiedPost) | **Post** /fuel_transaction.modified | Fuel Transaction Modified
 [**HosAvailabilityAddedhosAvailabilityAddedPost**](WebhookEventsAPI.md#HosAvailabilityAddedhosAvailabilityAddedPost) | **Post** /hos_availability.added | Hos Availability Added
 [**HosAvailabilityModifiedhosAvailabilityModifiedPost**](WebhookEventsAPI.md#HosAvailabilityModifiedhosAvailabilityModifiedPost) | **Post** /hos_availability.modified | Hos Availability Modified
 [**HosAvailabilityRemovedhosAvailabilityRemovedPost**](WebhookEventsAPI.md#HosAvailabilityRemovedhosAvailabilityRemovedPost) | **Post** /hos_availability.removed | Hos Availability Removed
@@ -34,6 +40,11 @@ Method | HTTP request | Description
 [**InvitationRejectedinvitationRejectedPost**](WebhookEventsAPI.md#InvitationRejectedinvitationRejectedPost) | **Post** /invitation.rejected | Invitation Rejected
 [**InvitationSentinvitationSentPost**](WebhookEventsAPI.md#InvitationSentinvitationSentPost) | **Post** /invitation.sent | Invitation Sent
 [**InvitationViewedinvitationViewedPost**](WebhookEventsAPI.md#InvitationViewedinvitationViewedPost) | **Post** /invitation.viewed | Invitation Viewed
+[**MessageAddedmessageAddedPost**](WebhookEventsAPI.md#MessageAddedmessageAddedPost) | **Post** /message.added | Message Added
+[**MessageModifiedmessageModifiedPost**](WebhookEventsAPI.md#MessageModifiedmessageModifiedPost) | **Post** /message.modified | Message Modified
+[**ResourceOperationCreatedresourceOperationCreatedPost**](WebhookEventsAPI.md#ResourceOperationCreatedresourceOperationCreatedPost) | **Post** /resource_operation.created | Resource Operation Created
+[**ResourceOperationFailedresourceOperationFailedPost**](WebhookEventsAPI.md#ResourceOperationFailedresourceOperationFailedPost) | **Post** /resource_operation.failed | Resource Operation Failed
+[**ResourceOperationSucceededresourceOperationSucceededPost**](WebhookEventsAPI.md#ResourceOperationSucceededresourceOperationSucceededPost) | **Post** /resource_operation.succeeded | Resource Operation Succeeded
 [**ScheduleDeactivatedscheduleDeactivatedPost**](WebhookEventsAPI.md#ScheduleDeactivatedscheduleDeactivatedPost) | **Post** /schedule.deactivated | Schedule Deactivated
 [**ShareAgreementCreatedshareAgreementCreatedPost**](WebhookEventsAPI.md#ShareAgreementCreatedshareAgreementCreatedPost) | **Post** /share_agreement.created | Share Agreement Created
 [**ShareAgreementDeletedshareAgreementDeletedPost**](WebhookEventsAPI.md#ShareAgreementDeletedshareAgreementDeletedPost) | **Post** /share_agreement.deleted | Share Agreement Deleted
@@ -43,6 +54,10 @@ Method | HTTP request | Description
 [**TrailerLocationModifiedtrailerLocationModifiedPost**](WebhookEventsAPI.md#TrailerLocationModifiedtrailerLocationModifiedPost) | **Post** /trailer_location.modified | Trailer Location Modified
 [**TrailerModifiedtrailerModifiedPost**](WebhookEventsAPI.md#TrailerModifiedtrailerModifiedPost) | **Post** /trailer.modified | Trailer Modified
 [**TrailerRemovedtrailerRemovedPost**](WebhookEventsAPI.md#TrailerRemovedtrailerRemovedPost) | **Post** /trailer.removed | Trailer Removed
+[**TrailerStatusAddedtrailerStatusAddedPost**](WebhookEventsAPI.md#TrailerStatusAddedtrailerStatusAddedPost) | **Post** /trailer_status.added | Trailer Status Added
+[**TrailerStatusModifiedtrailerStatusModifiedPost**](WebhookEventsAPI.md#TrailerStatusModifiedtrailerStatusModifiedPost) | **Post** /trailer_status.modified | Trailer Status Modified
+[**TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost**](WebhookEventsAPI.md#TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost) | **Post** /trailer_vehicle_association.added | Trailer Vehicle Association Added
+[**TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost**](WebhookEventsAPI.md#TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost) | **Post** /trailer_vehicle_association.modified | Trailer Vehicle Association Modified
 [**TspCreatedtspCreatedPost**](WebhookEventsAPI.md#TspCreatedtspCreatedPost) | **Post** /tsp.created | Tsp Created
 [**UserAddeduserAddedPost**](WebhookEventsAPI.md#UserAddeduserAddedPost) | **Post** /user.added | User Added
 [**UserModifieduserModifiedPost**](WebhookEventsAPI.md#UserModifieduserModifiedPost) | **Post** /user.modified | User Modified
@@ -190,6 +205,138 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost
+
+> interface{} DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost(ctx).DriverVehicleAssociationAdded(driverVehicleAssociationAdded).Execute()
+
+Driver Vehicle Association Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	driverVehicleAssociationAdded :=  // DriverVehicleAssociationAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost(context.Background()).DriverVehicleAssociationAdded(driverVehicleAssociationAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.DriverVehicleAssociationAddeddriverVehicleAssociationAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDriverVehicleAssociationAddeddriverVehicleAssociationAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **driverVehicleAssociationAdded** | [**DriverVehicleAssociationAdded**](DriverVehicleAssociationAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost
+
+> interface{} DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost(ctx).DriverVehicleAssociationModified(driverVehicleAssociationModified).Execute()
+
+Driver Vehicle Association Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	driverVehicleAssociationModified :=  // DriverVehicleAssociationModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost(context.Background()).DriverVehicleAssociationModified(driverVehicleAssociationModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDriverVehicleAssociationModifieddriverVehicleAssociationModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **driverVehicleAssociationModified** | [**DriverVehicleAssociationModified**](DriverVehicleAssociationModified.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## EngineLogAddedengineLogAddedPost
 
 > interface{} EngineLogAddedengineLogAddedPost(ctx).EngineLogAdded(engineLogAdded).Execute()
@@ -303,6 +450,138 @@ Other parameters are passed through a pointer to a apiEngineLogModifiedengineLog
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **engineLogModified** | [**EngineLogModified**](EngineLogModified.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EngineStatusAddedengineStatusAddedPost
+
+> interface{} EngineStatusAddedengineStatusAddedPost(ctx).EngineStatusAdded(engineStatusAdded).Execute()
+
+Engine Status Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	engineStatusAdded :=  // EngineStatusAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.EngineStatusAddedengineStatusAddedPost(context.Background()).EngineStatusAdded(engineStatusAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.EngineStatusAddedengineStatusAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EngineStatusAddedengineStatusAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.EngineStatusAddedengineStatusAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEngineStatusAddedengineStatusAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **engineStatusAdded** | [**EngineStatusAdded**](EngineStatusAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EngineStatusModifiedengineStatusModifiedPost
+
+> interface{} EngineStatusModifiedengineStatusModifiedPost(ctx).EngineStatusModified(engineStatusModified).Execute()
+
+Engine Status Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	engineStatusModified :=  // EngineStatusModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.EngineStatusModifiedengineStatusModifiedPost(context.Background()).EngineStatusModified(engineStatusModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.EngineStatusModifiedengineStatusModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EngineStatusModifiedengineStatusModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.EngineStatusModifiedengineStatusModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEngineStatusModifiedengineStatusModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **engineStatusModified** | [**EngineStatusModified**](EngineStatusModified.md) |  | 
 
 ### Return type
 
@@ -501,6 +780,138 @@ Other parameters are passed through a pointer to a apiFleetConnectionCreatedflee
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetConnectionCreated** | [**FleetConnectionCreated**](FleetConnectionCreated.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## FuelTransactionAddedfuelTransactionAddedPost
+
+> interface{} FuelTransactionAddedfuelTransactionAddedPost(ctx).FuelTransactionAdded(fuelTransactionAdded).Execute()
+
+Fuel Transaction Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	fuelTransactionAdded :=  // FuelTransactionAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.FuelTransactionAddedfuelTransactionAddedPost(context.Background()).FuelTransactionAdded(fuelTransactionAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.FuelTransactionAddedfuelTransactionAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `FuelTransactionAddedfuelTransactionAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.FuelTransactionAddedfuelTransactionAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFuelTransactionAddedfuelTransactionAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fuelTransactionAdded** | [**FuelTransactionAdded**](FuelTransactionAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## FuelTransactionModifiedfuelTransactionModifiedPost
+
+> interface{} FuelTransactionModifiedfuelTransactionModifiedPost(ctx).FuelTransactionModified(fuelTransactionModified).Execute()
+
+Fuel Transaction Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	fuelTransactionModified :=  // FuelTransactionModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.FuelTransactionModifiedfuelTransactionModifiedPost(context.Background()).FuelTransactionModified(fuelTransactionModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.FuelTransactionModifiedfuelTransactionModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `FuelTransactionModifiedfuelTransactionModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.FuelTransactionModifiedfuelTransactionModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFuelTransactionModifiedfuelTransactionModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fuelTransactionModified** | [**FuelTransactionModified**](FuelTransactionModified.md) |  | 
 
 ### Return type
 
@@ -2038,6 +2449,336 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## MessageAddedmessageAddedPost
+
+> interface{} MessageAddedmessageAddedPost(ctx).MessageAdded(messageAdded).Execute()
+
+Message Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	messageAdded :=  // MessageAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.MessageAddedmessageAddedPost(context.Background()).MessageAdded(messageAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.MessageAddedmessageAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `MessageAddedmessageAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.MessageAddedmessageAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiMessageAddedmessageAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **messageAdded** | [**MessageAdded**](MessageAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## MessageModifiedmessageModifiedPost
+
+> interface{} MessageModifiedmessageModifiedPost(ctx).MessageModified(messageModified).Execute()
+
+Message Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	messageModified :=  // MessageModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.MessageModifiedmessageModifiedPost(context.Background()).MessageModified(messageModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.MessageModifiedmessageModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `MessageModifiedmessageModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.MessageModifiedmessageModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiMessageModifiedmessageModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **messageModified** | [**MessageModified**](MessageModified.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResourceOperationCreatedresourceOperationCreatedPost
+
+> interface{} ResourceOperationCreatedresourceOperationCreatedPost(ctx).ResourceOperationCreated(resourceOperationCreated).Execute()
+
+Resource Operation Created
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	resourceOperationCreated :=  // ResourceOperationCreated | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.ResourceOperationCreatedresourceOperationCreatedPost(context.Background()).ResourceOperationCreated(resourceOperationCreated).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.ResourceOperationCreatedresourceOperationCreatedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResourceOperationCreatedresourceOperationCreatedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.ResourceOperationCreatedresourceOperationCreatedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResourceOperationCreatedresourceOperationCreatedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resourceOperationCreated** | [**ResourceOperationCreated**](ResourceOperationCreated.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResourceOperationFailedresourceOperationFailedPost
+
+> interface{} ResourceOperationFailedresourceOperationFailedPost(ctx).ResourceOperationFailed(resourceOperationFailed).Execute()
+
+Resource Operation Failed
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	resourceOperationFailed :=  // ResourceOperationFailed | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.ResourceOperationFailedresourceOperationFailedPost(context.Background()).ResourceOperationFailed(resourceOperationFailed).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.ResourceOperationFailedresourceOperationFailedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResourceOperationFailedresourceOperationFailedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.ResourceOperationFailedresourceOperationFailedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResourceOperationFailedresourceOperationFailedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resourceOperationFailed** | [**ResourceOperationFailed**](ResourceOperationFailed.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResourceOperationSucceededresourceOperationSucceededPost
+
+> interface{} ResourceOperationSucceededresourceOperationSucceededPost(ctx).ResourceOperationSucceeded(resourceOperationSucceeded).Execute()
+
+Resource Operation Succeeded
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	resourceOperationSucceeded :=  // ResourceOperationSucceeded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.ResourceOperationSucceededresourceOperationSucceededPost(context.Background()).ResourceOperationSucceeded(resourceOperationSucceeded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.ResourceOperationSucceededresourceOperationSucceededPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResourceOperationSucceededresourceOperationSucceededPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.ResourceOperationSucceededresourceOperationSucceededPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResourceOperationSucceededresourceOperationSucceededPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resourceOperationSucceeded** | [**ResourceOperationSucceeded**](ResourceOperationSucceeded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ScheduleDeactivatedscheduleDeactivatedPost
 
 > interface{} ScheduleDeactivatedscheduleDeactivatedPost(ctx).ScheduleDeactivated(scheduleDeactivated).Execute()
@@ -2613,6 +3354,270 @@ Other parameters are passed through a pointer to a apiTrailerRemovedtrailerRemov
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **trailerRemoved** | [**TrailerRemoved**](TrailerRemoved.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerStatusAddedtrailerStatusAddedPost
+
+> interface{} TrailerStatusAddedtrailerStatusAddedPost(ctx).TrailerStatusAdded(trailerStatusAdded).Execute()
+
+Trailer Status Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerStatusAdded :=  // TrailerStatusAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerStatusAddedtrailerStatusAddedPost(context.Background()).TrailerStatusAdded(trailerStatusAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerStatusAddedtrailerStatusAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerStatusAddedtrailerStatusAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerStatusAddedtrailerStatusAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerStatusAddedtrailerStatusAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerStatusAdded** | [**TrailerStatusAdded**](TrailerStatusAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerStatusModifiedtrailerStatusModifiedPost
+
+> interface{} TrailerStatusModifiedtrailerStatusModifiedPost(ctx).TrailerStatusModified(trailerStatusModified).Execute()
+
+Trailer Status Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerStatusModified :=  // TrailerStatusModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerStatusModifiedtrailerStatusModifiedPost(context.Background()).TrailerStatusModified(trailerStatusModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerStatusModifiedtrailerStatusModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerStatusModifiedtrailerStatusModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerStatusModifiedtrailerStatusModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerStatusModifiedtrailerStatusModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerStatusModified** | [**TrailerStatusModified**](TrailerStatusModified.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost
+
+> interface{} TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost(ctx).TrailerVehicleAssociationAdded(trailerVehicleAssociationAdded).Execute()
+
+Trailer Vehicle Association Added
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerVehicleAssociationAdded :=  // TrailerVehicleAssociationAdded | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost(context.Background()).TrailerVehicleAssociationAdded(trailerVehicleAssociationAdded).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerVehicleAssociationAddedtrailerVehicleAssociationAddedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerVehicleAssociationAdded** | [**TrailerVehicleAssociationAdded**](TrailerVehicleAssociationAdded.md) |  | 
+
+### Return type
+
+**interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost
+
+> interface{} TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost(ctx).TrailerVehicleAssociationModified(trailerVehicleAssociationModified).Execute()
+
+Trailer Vehicle Association Modified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/notifications"
+)
+
+func main() {
+	trailerVehicleAssociationModified :=  // TrailerVehicleAssociationModified | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhookEventsAPI.TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost(context.Background()).TrailerVehicleAssociationModified(trailerVehicleAssociationModified).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhookEventsAPI.TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost`: interface{}
+	fmt.Fprintf(os.Stdout, "Response from `WebhookEventsAPI.TrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTrailerVehicleAssociationModifiedtrailerVehicleAssociationModifiedPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerVehicleAssociationModified** | [**TrailerVehicleAssociationModified**](TrailerVehicleAssociationModified.md) |  | 
 
 ### Return type
 

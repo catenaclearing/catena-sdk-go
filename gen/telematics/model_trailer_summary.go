@@ -32,7 +32,7 @@ type TrailerSummary struct {
 	TspId                NullableString    `json:"tsp_id"`
 	TspSlug              NullableString    `json:"tsp_slug"`
 	SourceName           NullableTspEnum   `json:"source_name"`
-	Location             NullableLocation4 `json:"location"`
+	Location             NullableLocation6 `json:"location"`
 	H3Index11            NullableInt32     `json:"h3_index_11"`
 	AdditionalProperties map[string]interface{}
 }
@@ -43,7 +43,7 @@ type _TrailerSummary TrailerSummary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTrailerSummary(fleetId string, fleetRef NullableString, connectionId string, trailerId string, sourceId NullableString, trailerName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, location NullableLocation4, h3Index11 NullableInt32) *TrailerSummary {
+func NewTrailerSummary(fleetId string, fleetRef NullableString, connectionId string, trailerId string, sourceId NullableString, trailerName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, location NullableLocation6, h3Index11 NullableInt32) *TrailerSummary {
 	this := TrailerSummary{}
 	this.FleetId = fleetId
 	this.FleetRef = fleetRef
@@ -296,10 +296,10 @@ func (o *TrailerSummary) SetSourceName(v TspEnum) {
 }
 
 // GetLocation returns the Location field value
-// If the value is explicit nil, the zero value for Location4 will be returned
-func (o *TrailerSummary) GetLocation() Location4 {
+// If the value is explicit nil, the zero value for Location6 will be returned
+func (o *TrailerSummary) GetLocation() Location6 {
 	if o == nil || o.Location.Get() == nil {
-		var ret Location4
+		var ret Location6
 		return ret
 	}
 
@@ -309,7 +309,7 @@ func (o *TrailerSummary) GetLocation() Location4 {
 // GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TrailerSummary) GetLocationOk() (*Location4, bool) {
+func (o *TrailerSummary) GetLocationOk() (*Location6, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -317,7 +317,7 @@ func (o *TrailerSummary) GetLocationOk() (*Location4, bool) {
 }
 
 // SetLocation sets field value
-func (o *TrailerSummary) SetLocation(v Location4) {
+func (o *TrailerSummary) SetLocation(v Location6) {
 	o.Location.Set(&v)
 }
 

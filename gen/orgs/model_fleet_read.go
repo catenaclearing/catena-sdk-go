@@ -21,12 +21,15 @@ var _ MappedNullable = &FleetRead{}
 
 // FleetRead API model for reading a fleet  Contains all fleet information including system-generated fields. Partners can only read fleets they invited or have share agreements with.
 type FleetRead struct {
-	Name               string         `json:"name"`
-	Description        NullableString `json:"description,omitempty"`
-	DisplayName        NullableString `json:"display_name,omitempty"`
-	LegalName          NullableString `json:"legal_name,omitempty"`
-	DbaName            NullableString `json:"dba_name,omitempty"`
-	Websites           []string       `json:"websites,omitempty"`
+	Name         string         `json:"name"`
+	Description  NullableString `json:"description,omitempty"`
+	DisplayName  NullableString `json:"display_name,omitempty"`
+	LegalName    NullableString `json:"legal_name,omitempty"`
+	DbaName      NullableString `json:"dba_name,omitempty"`
+	Websites     []string       `json:"websites,omitempty"`
+	InvitationId NullableString `json:"invitation_id,omitempty"`
+	// An optional reference for the fleet. Used to store an external identifier for the fleet in your system.
+	FleetRef           string         `json:"fleet_ref"`
 	RegulatoryId       NullableString `json:"regulatory_id,omitempty"`
 	RegulatoryIdType   NullableString `json:"regulatory_id_type,omitempty"`
 	RegulatoryIdDate   NullableString `json:"regulatory_id_date,omitempty"`
@@ -54,9 +57,10 @@ type _FleetRead FleetRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFleetRead(name string, id string, createdAt time.Time, updatedAt time.Time) *FleetRead {
+func NewFleetRead(name string, fleetRef string, id string, createdAt time.Time, updatedAt time.Time) *FleetRead {
 	this := FleetRead{}
 	this.Name = name
+	this.FleetRef = fleetRef
 	this.Id = id
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
@@ -298,6 +302,73 @@ func (o *FleetRead) HasWebsites() bool {
 // SetWebsites gets a reference to the given []string and assigns it to the Websites field.
 func (o *FleetRead) SetWebsites(v []string) {
 	o.Websites = v
+}
+
+// GetInvitationId returns the InvitationId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FleetRead) GetInvitationId() string {
+	if o == nil || IsNil(o.InvitationId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.InvitationId.Get()
+}
+
+// GetInvitationIdOk returns a tuple with the InvitationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FleetRead) GetInvitationIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InvitationId.Get(), o.InvitationId.IsSet()
+}
+
+// HasInvitationId returns a boolean if a field has been set.
+func (o *FleetRead) HasInvitationId() bool {
+	if o != nil && o.InvitationId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInvitationId gets a reference to the given NullableString and assigns it to the InvitationId field.
+func (o *FleetRead) SetInvitationId(v string) {
+	o.InvitationId.Set(&v)
+}
+
+// SetInvitationIdNil sets the value for InvitationId to be an explicit nil
+func (o *FleetRead) SetInvitationIdNil() {
+	o.InvitationId.Set(nil)
+}
+
+// UnsetInvitationId ensures that no value is present for InvitationId, not even an explicit nil
+func (o *FleetRead) UnsetInvitationId() {
+	o.InvitationId.Unset()
+}
+
+// GetFleetRef returns the FleetRef field value
+func (o *FleetRead) GetFleetRef() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.FleetRef
+}
+
+// GetFleetRefOk returns a tuple with the FleetRef field value
+// and a boolean to check if the value has been set.
+func (o *FleetRead) GetFleetRefOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.FleetRef, true
+}
+
+// SetFleetRef sets field value
+func (o *FleetRead) SetFleetRef(v string) {
+	o.FleetRef = v
 }
 
 // GetRegulatoryId returns the RegulatoryId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -914,6 +985,10 @@ func (o FleetRead) ToMap() (map[string]interface{}, error) {
 	if o.Websites != nil {
 		toSerialize["websites"] = o.Websites
 	}
+	if o.InvitationId.IsSet() {
+		toSerialize["invitation_id"] = o.InvitationId.Get()
+	}
+	toSerialize["fleet_ref"] = o.FleetRef
 	if o.RegulatoryId.IsSet() {
 		toSerialize["regulatory_id"] = o.RegulatoryId.Get()
 	}
@@ -967,6 +1042,7 @@ func (o *FleetRead) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
+		"fleet_ref",
 		"id",
 		"created_at",
 		"updated_at",
@@ -1005,6 +1081,8 @@ func (o *FleetRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "legal_name")
 		delete(additionalProperties, "dba_name")
 		delete(additionalProperties, "websites")
+		delete(additionalProperties, "invitation_id")
+		delete(additionalProperties, "fleet_ref")
 		delete(additionalProperties, "regulatory_id")
 		delete(additionalProperties, "regulatory_id_type")
 		delete(additionalProperties, "regulatory_id_date")

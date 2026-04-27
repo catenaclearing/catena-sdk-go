@@ -47,12 +47,13 @@ type TrailerLocationRead struct {
 	ScheduleId     NullableString         `json:"schedule_id,omitempty"`
 	Extras         map[string]interface{} `json:"extras,omitempty"`
 	// Internal trailer identifier (Catena FK).
-	TrailerId            *string           `json:"trailer_id,omitempty"`
-	SourceTrailerId      NullableString    `json:"source_trailer_id,omitempty"`
-	SourceVehicleId      NullableString    `json:"source_vehicle_id,omitempty"`
-	VehicleId            NullableString    `json:"vehicle_id,omitempty"`
-	Location             NullableLocation3 `json:"location,omitempty"`
-	H3Index11            NullableInt32     `json:"h3_index_11,omitempty"`
+	TrailerId            *string                 `json:"trailer_id,omitempty"`
+	SourceTrailerId      NullableString          `json:"source_trailer_id,omitempty"`
+	SourceVehicleId      NullableString          `json:"source_vehicle_id,omitempty"`
+	VehicleId            NullableString          `json:"vehicle_id,omitempty"`
+	Location             NullableLocation5       `json:"location,omitempty"`
+	H3Index11            NullableInt32           `json:"h3_index_11,omitempty"`
+	InferredAddress      NullableInferredAddress `json:"inferred_address,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -805,9 +806,9 @@ func (o *TrailerLocationRead) UnsetVehicleId() {
 }
 
 // GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TrailerLocationRead) GetLocation() Location3 {
+func (o *TrailerLocationRead) GetLocation() Location5 {
 	if o == nil || IsNil(o.Location.Get()) {
-		var ret Location3
+		var ret Location5
 		return ret
 	}
 	return *o.Location.Get()
@@ -816,7 +817,7 @@ func (o *TrailerLocationRead) GetLocation() Location3 {
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TrailerLocationRead) GetLocationOk() (*Location3, bool) {
+func (o *TrailerLocationRead) GetLocationOk() (*Location5, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -832,8 +833,8 @@ func (o *TrailerLocationRead) HasLocation() bool {
 	return false
 }
 
-// SetLocation gets a reference to the given NullableLocation3 and assigns it to the Location field.
-func (o *TrailerLocationRead) SetLocation(v Location3) {
+// SetLocation gets a reference to the given NullableLocation5 and assigns it to the Location field.
+func (o *TrailerLocationRead) SetLocation(v Location5) {
 	o.Location.Set(&v)
 }
 
@@ -888,6 +889,49 @@ func (o *TrailerLocationRead) SetH3Index11Nil() {
 // UnsetH3Index11 ensures that no value is present for H3Index11, not even an explicit nil
 func (o *TrailerLocationRead) UnsetH3Index11() {
 	o.H3Index11.Unset()
+}
+
+// GetInferredAddress returns the InferredAddress field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TrailerLocationRead) GetInferredAddress() InferredAddress {
+	if o == nil || IsNil(o.InferredAddress.Get()) {
+		var ret InferredAddress
+		return ret
+	}
+	return *o.InferredAddress.Get()
+}
+
+// GetInferredAddressOk returns a tuple with the InferredAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TrailerLocationRead) GetInferredAddressOk() (*InferredAddress, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InferredAddress.Get(), o.InferredAddress.IsSet()
+}
+
+// HasInferredAddress returns a boolean if a field has been set.
+func (o *TrailerLocationRead) HasInferredAddress() bool {
+	if o != nil && o.InferredAddress.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInferredAddress gets a reference to the given NullableInferredAddress and assigns it to the InferredAddress field.
+func (o *TrailerLocationRead) SetInferredAddress(v InferredAddress) {
+	o.InferredAddress.Set(&v)
+}
+
+// SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+func (o *TrailerLocationRead) SetInferredAddressNil() {
+	o.InferredAddress.Set(nil)
+}
+
+// UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
+func (o *TrailerLocationRead) UnsetInferredAddress() {
+	o.InferredAddress.Unset()
 }
 
 func (o TrailerLocationRead) MarshalJSON() ([]byte, error) {
@@ -952,6 +996,9 @@ func (o TrailerLocationRead) ToMap() (map[string]interface{}, error) {
 	}
 	if o.H3Index11.IsSet() {
 		toSerialize["h3_index_11"] = o.H3Index11.Get()
+	}
+	if o.InferredAddress.IsSet() {
+		toSerialize["inferred_address"] = o.InferredAddress.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -1026,6 +1073,7 @@ func (o *TrailerLocationRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "vehicle_id")
 		delete(additionalProperties, "location")
 		delete(additionalProperties, "h3_index_11")
+		delete(additionalProperties, "inferred_address")
 		o.AdditionalProperties = additionalProperties
 	}
 

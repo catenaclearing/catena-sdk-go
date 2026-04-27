@@ -12,14 +12,14 @@ Name | Type | Description | Notes
 **TspId** | **string** | The ID of the Telematics Service Provider (TSP). | 
 **SourceName** | [**TspEnum**](TspEnum.md) | The name of the TSP integration used for this connection. | 
 **Credentials** | [**Credentials1**](Credentials1.md) |  | 
-**Status** | [**StatusEnum**](StatusEnum.md) | The current status of the connection. | 
+**Status** | [**ConnectionStatusEnum**](ConnectionStatusEnum.md) | The current status of the connection. | 
 **Description** | **NullableString** |  | 
 
 ## Methods
 
 ### NewConnectionRead
 
-`func NewConnectionRead(id string, createdAt time.Time, updatedAt time.Time, fleetId NullableString, tspId string, sourceName TspEnum, credentials Credentials1, status StatusEnum, description NullableString, ) *ConnectionRead`
+`func NewConnectionRead(id string, createdAt time.Time, updatedAt time.Time, fleetId NullableString, tspId string, sourceName TspEnum, credentials Credentials1, status ConnectionStatusEnum, description NullableString, ) *ConnectionRead`
 
 NewConnectionRead instantiates a new ConnectionRead object
 This constructor will assign default values to properties that have it defined,
@@ -221,20 +221,20 @@ SetCredentials sets Credentials field to given value.
 
 ### GetStatus
 
-`func (o *ConnectionRead) GetStatus() StatusEnum`
+`func (o *ConnectionRead) GetStatus() ConnectionStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ConnectionRead) GetStatusOk() (*StatusEnum, bool)`
+`func (o *ConnectionRead) GetStatusOk() (*ConnectionStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ConnectionRead) SetStatus(v StatusEnum)`
+`func (o *ConnectionRead) SetStatus(v ConnectionStatusEnum)`
 
 SetStatus sets Status field to given value.
 

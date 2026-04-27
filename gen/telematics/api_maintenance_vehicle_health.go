@@ -23,6 +23,20 @@ import (
 type MaintenanceVehicleHealthAPI interface {
 
 	/*
+		CreateFuelTransaction Create Fuel Transaction
+
+		Create a new fuel transaction. The fuel transaction will be created asynchronously, and you can check the status of the operation using the returned operation ID.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiCreateFuelTransactionRequest
+	*/
+	CreateFuelTransaction(ctx context.Context) ApiCreateFuelTransactionRequest
+
+	// CreateFuelTransactionExecute executes the request
+	//  @return ResourceOperationAccept
+	CreateFuelTransactionExecute(r ApiCreateFuelTransactionRequest) (*ResourceOperationAccept, *http.Response, error)
+
+	/*
 		ListEngineLogs List Engine Logs
 
 		List all engine logs.
@@ -35,16 +49,265 @@ type MaintenanceVehicleHealthAPI interface {
 	// ListEngineLogsExecute executes the request
 	//  @return CursorPageEngineLogRead
 	ListEngineLogsExecute(r ApiListEngineLogsRequest) (*CursorPageEngineLogRead, *http.Response, error)
+
+	/*
+		ListFuelTransactions List Fuel Transactions
+
+		List all fuel transactions.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiListFuelTransactionsRequest
+	*/
+	ListFuelTransactions(ctx context.Context) ApiListFuelTransactionsRequest
+
+	// ListFuelTransactionsExecute executes the request
+	//  @return CursorPageFuelTransactionRead
+	ListFuelTransactionsExecute(r ApiListFuelTransactionsRequest) (*CursorPageFuelTransactionRead, *http.Response, error)
+
+	/*
+		ListVehicleSensorEvents List Vehicle Sensor Events
+
+		Get a paginated list of vehicle sensor events accessible to your organization.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiListVehicleSensorEventsRequest
+	*/
+	ListVehicleSensorEvents(ctx context.Context) ApiListVehicleSensorEventsRequest
+
+	// ListVehicleSensorEventsExecute executes the request
+	//  @return CursorPageVehicleSensorRead
+	ListVehicleSensorEventsExecute(r ApiListVehicleSensorEventsRequest) (*CursorPageVehicleSensorRead, *http.Response, error)
 }
 
 // MaintenanceVehicleHealthAPIService MaintenanceVehicleHealthAPI service
 type MaintenanceVehicleHealthAPIService service
+
+type ApiCreateFuelTransactionRequest struct {
+	ctx                   context.Context
+	ApiService            MaintenanceVehicleHealthAPI
+	fuelTransactionCreate *FuelTransactionCreate
+}
+
+func (r ApiCreateFuelTransactionRequest) FuelTransactionCreate(fuelTransactionCreate FuelTransactionCreate) ApiCreateFuelTransactionRequest {
+	r.fuelTransactionCreate = &fuelTransactionCreate
+	return r
+}
+
+func (r ApiCreateFuelTransactionRequest) Execute() (*ResourceOperationAccept, *http.Response, error) {
+	return r.ApiService.CreateFuelTransactionExecute(r)
+}
+
+/*
+CreateFuelTransaction Create Fuel Transaction
+
+Create a new fuel transaction. The fuel transaction will be created asynchronously, and you can check the status of the operation using the returned operation ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFuelTransactionRequest
+*/
+func (a *MaintenanceVehicleHealthAPIService) CreateFuelTransaction(ctx context.Context) ApiCreateFuelTransactionRequest {
+	return ApiCreateFuelTransactionRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ResourceOperationAccept
+func (a *MaintenanceVehicleHealthAPIService) CreateFuelTransactionExecute(r ApiCreateFuelTransactionRequest) (*ResourceOperationAccept, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceOperationAccept
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceVehicleHealthAPIService.CreateFuelTransaction")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/telematics/fuel-transactions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.fuelTransactionCreate == nil {
+		return localVarReturnValue, nil, reportError("fuelTransactionCreate is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.fuelTransactionCreate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ApiListEngineLogsRequest struct {
 	ctx               context.Context
 	ApiService        MaintenanceVehicleHealthAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	fromDatetime      *time.Time
 	toDatetime        *time.Time
 	includeSourceData *bool
@@ -56,15 +319,21 @@ type ApiListEngineLogsRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListEngineLogsRequest) FleetIds(fleetIds []string) ApiListEngineLogsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListEngineLogsRequest) FleetRefs(fleetRefs []string) ApiListEngineLogsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListEngineLogsRequest) ConnectionId(connectionId string) ApiListEngineLogsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -86,13 +355,13 @@ func (r ApiListEngineLogsRequest) IncludeSourceData(includeSourceData bool) ApiL
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListEngineLogsRequest) DriverIds(driverIds []string) ApiListEngineLogsRequest {
 	r.driverIds = &driverIds
 	return r
 }
 
-// Limit results to specific vehicles. **Maximum:** 100 IDs
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
 func (r ApiListEngineLogsRequest) VehicleIds(vehicleIds []string) ApiListEngineLogsRequest {
 	r.vehicleIds = &vehicleIds
 	return r
@@ -185,6 +454,9 @@ func (a *MaintenanceVehicleHealthAPIService) ListEngineLogsExecute(r ApiListEngi
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
 	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
+	}
 	if r.fromDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
 	}
@@ -207,6 +479,746 @@ func (a *MaintenanceVehicleHealthAPIService) ListEngineLogsExecute(r ApiListEngi
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "driver_ids", t, "form", "multi")
 		}
+	}
+	if r.vehicleIds != nil {
+		t := *r.vehicleIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", t, "form", "multi")
+		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int32 = 300
+		r.size = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListFuelTransactionsRequest struct {
+	ctx               context.Context
+	ApiService        MaintenanceVehicleHealthAPI
+	fleetIds          *[]string
+	fleetRefs         *[]string
+	connectionId      *string
+	fromDatetime      *time.Time
+	toDatetime        *time.Time
+	includeSourceData *bool
+	driverIds         *[]string
+	sourceDriverIds   *[]string
+	vehicleIds        *[]string
+	sortBy            *string
+	sortOrder         *string
+	cursor            *string
+	size              *int32
+}
+
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
+func (r ApiListFuelTransactionsRequest) FleetIds(fleetIds []string) ApiListFuelTransactionsRequest {
+	r.fleetIds = &fleetIds
+	return r
+}
+
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
+func (r ApiListFuelTransactionsRequest) FleetRefs(fleetRefs []string) ApiListFuelTransactionsRequest {
+	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListFuelTransactionsRequest) ConnectionId(connectionId string) ApiListFuelTransactionsRequest {
+	r.connectionId = &connectionId
+	return r
+}
+
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
+func (r ApiListFuelTransactionsRequest) FromDatetime(fromDatetime time.Time) ApiListFuelTransactionsRequest {
+	r.fromDatetime = &fromDatetime
+	return r
+}
+
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
+func (r ApiListFuelTransactionsRequest) ToDatetime(toDatetime time.Time) ApiListFuelTransactionsRequest {
+	r.toDatetime = &toDatetime
+	return r
+}
+
+// Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena*
+func (r ApiListFuelTransactionsRequest) IncludeSourceData(includeSourceData bool) ApiListFuelTransactionsRequest {
+	r.includeSourceData = &includeSourceData
+	return r
+}
+
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
+func (r ApiListFuelTransactionsRequest) DriverIds(driverIds []string) ApiListFuelTransactionsRequest {
+	r.driverIds = &driverIds
+	return r
+}
+
+// Limit results to specific source driver IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?source_driver_ids&#x3D;id1&amp;source_driver_ids&#x3D;id2&#x60;).
+func (r ApiListFuelTransactionsRequest) SourceDriverIds(sourceDriverIds []string) ApiListFuelTransactionsRequest {
+	r.sourceDriverIds = &sourceDriverIds
+	return r
+}
+
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
+func (r ApiListFuelTransactionsRequest) VehicleIds(vehicleIds []string) ApiListFuelTransactionsRequest {
+	r.vehicleIds = &vehicleIds
+	return r
+}
+
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListFuelTransactionsRequest) SortBy(sortBy string) ApiListFuelTransactionsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListFuelTransactionsRequest) SortOrder(sortOrder string) ApiListFuelTransactionsRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
+// Cursor for the next page
+func (r ApiListFuelTransactionsRequest) Cursor(cursor string) ApiListFuelTransactionsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size
+func (r ApiListFuelTransactionsRequest) Size(size int32) ApiListFuelTransactionsRequest {
+	r.size = &size
+	return r
+}
+
+func (r ApiListFuelTransactionsRequest) Execute() (*CursorPageFuelTransactionRead, *http.Response, error) {
+	return r.ApiService.ListFuelTransactionsExecute(r)
+}
+
+/*
+ListFuelTransactions List Fuel Transactions
+
+List all fuel transactions.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListFuelTransactionsRequest
+*/
+func (a *MaintenanceVehicleHealthAPIService) ListFuelTransactions(ctx context.Context) ApiListFuelTransactionsRequest {
+	return ApiListFuelTransactionsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CursorPageFuelTransactionRead
+func (a *MaintenanceVehicleHealthAPIService) ListFuelTransactionsExecute(r ApiListFuelTransactionsRequest) (*CursorPageFuelTransactionRead, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CursorPageFuelTransactionRead
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceVehicleHealthAPIService.ListFuelTransactions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/telematics/fuel-transactions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.fleetIds != nil {
+		t := *r.fleetIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_ids", t, "form", "multi")
+		}
+	}
+	if r.fleetRefs != nil {
+		t := *r.fleetRefs
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
+		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
+	}
+	if r.fromDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
+	}
+	if r.toDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to_datetime", r.toDatetime, "form", "")
+	}
+	if r.includeSourceData != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_source_data", r.includeSourceData, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.includeSourceData = &defaultValue
+	}
+	if r.driverIds != nil {
+		t := *r.driverIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "driver_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "driver_ids", t, "form", "multi")
+		}
+	}
+	if r.sourceDriverIds != nil {
+		t := *r.sourceDriverIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "source_driver_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "source_driver_ids", t, "form", "multi")
+		}
+	}
+	if r.vehicleIds != nil {
+		t := *r.vehicleIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "vehicle_ids", t, "form", "multi")
+		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int32 = 300
+		r.size = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListVehicleSensorEventsRequest struct {
+	ctx               context.Context
+	ApiService        MaintenanceVehicleHealthAPI
+	fleetIds          *[]string
+	fleetRefs         *[]string
+	connectionId      *string
+	fromDatetime      *time.Time
+	toDatetime        *time.Time
+	includeSourceData *bool
+	vehicleIds        *[]string
+	sortBy            *string
+	sortOrder         *string
+	cursor            *string
+	size              *int32
+}
+
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
+func (r ApiListVehicleSensorEventsRequest) FleetIds(fleetIds []string) ApiListVehicleSensorEventsRequest {
+	r.fleetIds = &fleetIds
+	return r
+}
+
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
+func (r ApiListVehicleSensorEventsRequest) FleetRefs(fleetRefs []string) ApiListVehicleSensorEventsRequest {
+	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListVehicleSensorEventsRequest) ConnectionId(connectionId string) ApiListVehicleSensorEventsRequest {
+	r.connectionId = &connectionId
+	return r
+}
+
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
+func (r ApiListVehicleSensorEventsRequest) FromDatetime(fromDatetime time.Time) ApiListVehicleSensorEventsRequest {
+	r.fromDatetime = &fromDatetime
+	return r
+}
+
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
+func (r ApiListVehicleSensorEventsRequest) ToDatetime(toDatetime time.Time) ApiListVehicleSensorEventsRequest {
+	r.toDatetime = &toDatetime
+	return r
+}
+
+// Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena*
+func (r ApiListVehicleSensorEventsRequest) IncludeSourceData(includeSourceData bool) ApiListVehicleSensorEventsRequest {
+	r.includeSourceData = &includeSourceData
+	return r
+}
+
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
+func (r ApiListVehicleSensorEventsRequest) VehicleIds(vehicleIds []string) ApiListVehicleSensorEventsRequest {
+	r.vehicleIds = &vehicleIds
+	return r
+}
+
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListVehicleSensorEventsRequest) SortBy(sortBy string) ApiListVehicleSensorEventsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListVehicleSensorEventsRequest) SortOrder(sortOrder string) ApiListVehicleSensorEventsRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
+// Cursor for the next page
+func (r ApiListVehicleSensorEventsRequest) Cursor(cursor string) ApiListVehicleSensorEventsRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size
+func (r ApiListVehicleSensorEventsRequest) Size(size int32) ApiListVehicleSensorEventsRequest {
+	r.size = &size
+	return r
+}
+
+func (r ApiListVehicleSensorEventsRequest) Execute() (*CursorPageVehicleSensorRead, *http.Response, error) {
+	return r.ApiService.ListVehicleSensorEventsExecute(r)
+}
+
+/*
+ListVehicleSensorEvents List Vehicle Sensor Events
+
+Get a paginated list of vehicle sensor events accessible to your organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListVehicleSensorEventsRequest
+*/
+func (a *MaintenanceVehicleHealthAPIService) ListVehicleSensorEvents(ctx context.Context) ApiListVehicleSensorEventsRequest {
+	return ApiListVehicleSensorEventsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CursorPageVehicleSensorRead
+func (a *MaintenanceVehicleHealthAPIService) ListVehicleSensorEventsExecute(r ApiListVehicleSensorEventsRequest) (*CursorPageVehicleSensorRead, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CursorPageVehicleSensorRead
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceVehicleHealthAPIService.ListVehicleSensorEvents")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/telematics/vehicle-sensor-events"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.fleetIds != nil {
+		t := *r.fleetIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_ids", t, "form", "multi")
+		}
+	}
+	if r.fleetRefs != nil {
+		t := *r.fleetRefs
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
+		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
+	}
+	if r.fromDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
+	}
+	if r.toDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to_datetime", r.toDatetime, "form", "")
+	}
+	if r.includeSourceData != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_source_data", r.includeSourceData, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.includeSourceData = &defaultValue
 	}
 	if r.vehicleIds != nil {
 		t := *r.vehicleIds

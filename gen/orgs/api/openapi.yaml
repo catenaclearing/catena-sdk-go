@@ -28,8 +28,9 @@ paths:
       description: Get a paginated list of Fleets accessible to your organization.
       operationId: list_fleets
       parameters:
-      - description: Limit results to specific fleets using your organization's fleet
-          reference identifiers
+      - description: "Limit results to specific fleets using your organization's fleet\
+          \ reference identifiers. To specify multiple values, repeat the parameter\
+          \ for each value (e.g., `?fleet_refs=ref1&fleet_refs=ref2`)."
         explode: true
         in: query
         name: fleet_refs
@@ -56,7 +57,7 @@ paths:
         name: size
         required: false
         schema:
-          default: 500
+          default: 300
           description: Page size
           maximum: 1000
           minimum: 1
@@ -68,7 +69,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_CursorPageCustomized_FleetRead_'
+                $ref: '#/components/schemas/_CursorPage_FleetRead_'
           description: Successful Response
         "400":
           content:
@@ -133,83 +134,6 @@ paths:
       x-mint:
         content: <Info>Partners can only list fleets they have active share agreements
           with</Info>
-    post:
-      description: Create a new fleet.
-      operationId: create_fleet
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FleetCreate'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FleetRead'
-          description: Successful Response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequest'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Unauthorized'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Forbidden'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFound'
-          description: Not Found
-        "405":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MethodNotAllowed'
-          description: Method Not Allowed
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Conflict'
-          description: Conflict
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnprocessableEntity'
-          description: Unprocessable Entity
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequests'
-          description: Too Many Requests
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerError'
-          description: Internal Server Error
-      security:
-      - Bearer:
-        - fleet:create
-      summary: Create Fleet
-      tags:
-      - Fleets
-      x-excluded: "true"
   /v2/orgs/fleets/{fleet_id}:
     delete:
       description: Delete a fleet.
@@ -748,7 +672,7 @@ paths:
         name: size
         required: false
         schema:
-          default: 500
+          default: 300
           description: Page size
           maximum: 1000
           minimum: 1
@@ -760,7 +684,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_CursorPageCustomized_PartnerRead_'
+                $ref: '#/components/schemas/_CursorPage_PartnerRead_'
           description: Successful Response
         "400":
           content:
@@ -822,6 +746,7 @@ paths:
       summary: List Partners
       tags:
       - Partners
+      x-excluded: "true"
     post:
       description: Create a new partner.
       operationId: create_partner
@@ -1057,6 +982,7 @@ paths:
       summary: Get Partner
       tags:
       - Partners
+      x-excluded: "true"
     patch:
       description: Update an existing partner.
       operationId: update_partner
@@ -1143,6 +1069,7 @@ paths:
       summary: Update Partner
       tags:
       - Partners
+      x-excluded: "true"
   /v2/orgs/partners/{partner_id}/properties:
     get:
       description: Retrieve a list of partner properties for a specific partner.
@@ -1226,6 +1153,7 @@ paths:
       summary: List Partner Properties
       tags:
       - Partners
+      x-excluded: "true"
     post:
       description: Create new partner properties.
       operationId: create_partner_properties
@@ -1316,6 +1244,7 @@ paths:
       summary: Create Partner Properties
       tags:
       - Partners
+      x-excluded: "true"
       x-mint:
         content: "<Info>If you need to update existing properties, please use the\
           \ delete endpoint followed by create.</Info>"
@@ -1405,6 +1334,7 @@ paths:
       summary: Delete Partner Property
       tags:
       - Partners
+      x-excluded: "true"
   /v2/orgs/tsps:
     get:
       description: Get a list of TSPs integrated with Catena Telematics.
@@ -1839,7 +1769,7 @@ paths:
         name: size
         required: false
         schema:
-          default: 500
+          default: 300
           description: Page size
           maximum: 1000
           minimum: 1
@@ -1851,7 +1781,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_CursorPageCustomized_InvitationRead_'
+                $ref: '#/components/schemas/_CursorPage_InvitationRead_'
           description: Successful Response
         "400":
           content:
@@ -1920,6 +1850,10 @@ paths:
         Returns an invitation object with a unique ID that serves as the magic link token.
         Share this link with the fleet to begin the onboarding process.
         Once accepted, a share agreement is automatically created to enable data sharing.
+
+        **Note:** If an active, accepted, or declined invitation already exists for the same `fleet_ref`,
+        the invitation is refreshed (expiration extended, tokens regenerated if accepted,
+        reactivated if declined) and returned with status code 200 instead of 201.
       operationId: create_invitation
       requestBody:
         content:
@@ -1933,7 +1867,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvitationRead'
-          description: Successful Response
+          description: New invitation created
         "400":
           content:
             application/json:
@@ -1988,6 +1922,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
           description: Internal Server Error
+        "200":
+          description: Existing invitation refreshed (already exists for this fleet_ref)
       security:
       - Bearer:
         - invitation:create
@@ -2171,12 +2107,6 @@ paths:
           title: Invitation Id
           type: string
         style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InvitationAccept'
-        required: true
       responses:
         "200":
           content:
@@ -2238,16 +2168,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
           description: Internal Server Error
-      security:
-      - Bearer: []
       summary: Accept Invitation
       tags:
       - Invitations
       x-excluded: "true"
-      x-mint:
-        content: "<Info>This endpoint is optionally authenticated and can only be\
-          \ used by fleets. If authenticated, the invitation is linked to the existing\
-          \ fleet. If unauthenticated, a new fleet is created.</Info>"
   /v2/orgs/invitations/{invitation_id}/decline:
     post:
       description: Decline an invitation to share data after being invited by a partner.
@@ -2329,16 +2253,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
           description: Internal Server Error
-      security:
-      - Bearer: []
       summary: Decline Invitation
       tags:
       - Invitations
       x-excluded: "true"
-      x-mint:
-        content: <Info>This endpoint is optionally authenticated and can only be used
-          by fleets. You cannot decline an invitation that has already been accepted.</Info>
-  /v2/orgs/share_agreements:
+  /v2/orgs/share-agreements:
     get:
       description: Get a paginated list of Share Agreements accessible to your organization.
       operationId: list_share_agreements
@@ -2353,13 +2272,12 @@ paths:
           nullable: true
           type: string
         style: form
-      - description: Limit results to specific invitation
+      - description: Limit results to specific fleet reference
         explode: true
         in: query
-        name: invitation_id
+        name: fleet_ref
         required: false
         schema:
-          format: uuid
           nullable: true
           type: string
         style: form
@@ -2369,7 +2287,7 @@ paths:
         name: share_agreement_status
         required: false
         schema:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/ShareAgreementStatusEnum'
         style: form
       - description: Cursor for the next page
         explode: true
@@ -2386,7 +2304,7 @@ paths:
         name: size
         required: false
         schema:
-          default: 500
+          default: 300
           description: Page size
           maximum: 1000
           minimum: 1
@@ -2398,7 +2316,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_CursorPageCustomized_ShareAgreementRead_'
+                $ref: '#/components/schemas/_CursorPage_ShareAgreementRead_'
           description: Successful Response
         "400":
           content:
@@ -2460,86 +2378,7 @@ paths:
       summary: List Share Agreements
       tags:
       - Share Agreements
-    post:
-      description: Create a new Share Agreement.
-      operationId: create_share_agreement
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ShareAgreementCreate'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ShareAgreementRead'
-          description: Successful Response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequest'
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Unauthorized'
-          description: Unauthorized
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Forbidden'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFound'
-          description: Not Found
-        "405":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MethodNotAllowed'
-          description: Method Not Allowed
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Conflict'
-          description: Conflict
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnprocessableEntity'
-          description: Unprocessable Entity
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequests'
-          description: Too Many Requests
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerError'
-          description: Internal Server Error
-      security:
-      - Bearer:
-        - share-agreement:create
-      summary: Create Share Agreement
-      tags:
-      - Share Agreements
-      x-excluded: "true"
-      x-mint:
-        content: <Warning>Only fleets can create Share Agreements</Warning>
-  /v2/orgs/share_agreements/{share_agreement_id}:
+  /v2/orgs/share-agreements/{share_agreement_id}:
     delete:
       description: Delete a Share Agreement.
       operationId: delete_share_agreement
@@ -2616,9 +2455,6 @@ paths:
       summary: Delete Share Agreement
       tags:
       - Share Agreements
-      x-excluded: "true"
-      x-mint:
-        content: <Warning>Only fleets can delete Share Agreements</Warning>
     get:
       description: Get detailed information about a specific Share Agreement.
       operationId: get_share_agreement
@@ -2787,16 +2623,602 @@ paths:
       summary: Update Share Agreement
       tags:
       - Share Agreements
-      x-mint:
-        content: "<Warning><b>Update permissions:</b><br/><br/>- <b>Fleets</b> can\
-          \ update <code>effective_date</code>, <code>expiration_date</code>, and\
-          \ <code>status</code><br/>- <b>Partners</b> can update <code>status</code>\
-          \ and <code>fleet_ref</code> (your fleet reference)</Warning>"
+  /v2/orgs/share-agreements/backfill:
+    post:
+      description: |-
+        Add a new resource to all existing share agreements that don't already have it.
+
+        Useful when a new resource is introduced and existing agreements need to be updated
+        without running manual database queries. Share agreements that already include the
+        resource are skipped. Optionally restrict the update to specific fleets.
+      operationId: backfill_share_agreements
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareAgreementBackfill'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareAgreementBackfillResult'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+      security:
+      - Bearer:
+        - share-agreement:update
+      summary: Backfill Share Agreements
+      tags:
+      - Share Agreements
+      x-excluded: "true"
+  /v2/orgs/share-agreements/{share_agreement_id}/pause:
+    post:
+      description: Pause a Share Agreement.
+      operationId: pause_share_agreement
+      parameters:
+      - explode: false
+        in: path
+        name: share_agreement_id
+        required: true
+        schema:
+          format: uuid
+          title: Share Agreement Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareAgreementRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+      security:
+      - Bearer:
+        - share-agreement:update
+      summary: Pause Share Agreement
+      tags:
+      - Share Agreements
+  /v2/orgs/share-agreements/{share_agreement_id}/activate:
+    post:
+      description: Activate a Share Agreement.
+      operationId: activate_share_agreement
+      parameters:
+      - explode: false
+        in: path
+        name: share_agreement_id
+        required: true
+        schema:
+          format: uuid
+          title: Share Agreement Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareAgreementRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+      security:
+      - Bearer:
+        - share-agreement:update
+      summary: Activate Share Agreement
+      tags:
+      - Share Agreements
+  /v2/orgs/share-agreements/{share_agreement_id}/cancel:
+    post:
+      description: Cancel a Share Agreement.
+      operationId: cancel_share_agreement
+      parameters:
+      - explode: false
+        in: path
+        name: share_agreement_id
+        required: true
+        schema:
+          format: uuid
+          title: Share Agreement Id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareAgreementRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+      security:
+      - Bearer:
+        - share-agreement:update
+      summary: Cancel Share Agreement
+      tags:
+      - Share Agreements
+  /v2/orgs/external-tsps:
+    get:
+      description: Get a list of external TSPs from supported registries.
+      operationId: list_ext_tsps
+      parameters:
+      - description: "Fuzzy search by name, website, or email domain"
+        explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExtTspRead'
+                type: array
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: List External TSPs
+      tags:
+      - TSPs
+      x-excluded: true
+  /v2/orgs/external-tsps/integration-requests:
+    get:
+      description: List integration requests for the partner's invitations/fleets.
+      operationId: list_partner_integration_requests
+      parameters:
+      - description: Filter by fleet_id
+        explode: true
+        in: query
+        name: fleet_id
+        required: false
+        schema:
+          format: uuid
+          nullable: true
+          type: string
+        style: form
+      - description: Filter by fleet_ref
+        explode: true
+        in: query
+        name: fleet_ref
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExtTspIntegrationRequestRead'
+                type: array
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: List Partner Integration Requests
+      tags:
+      - TSPs
+      x-excluded: true
+  /v2/orgs/external-tsps/{ext_tsp_id}/request-integration:
+    post:
+      description: Request integration for an external TSP on behalf of a fleet during
+        onboarding.
+      operationId: request_ext_tsp_integration
+      parameters:
+      - description: The ID of the external TSP to request integration for
+        explode: false
+        in: path
+        name: ext_tsp_id
+        required: true
+        schema:
+          description: The ID of the external TSP to request integration for
+          format: uuid
+          title: Ext Tsp Id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationRequestBody'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtTspIntegrationRequestRead'
+          description: Successful Response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+      security:
+      - Bearer: []
+      summary: Request External TSP Integration
+      tags:
+      - TSPs
+      x-excluded: true
 components:
   schemas:
     BadRequest:
       example:
-        code: 0
+        code: 6
         detail: detail
         message: Bad Request
       properties:
@@ -2814,7 +3236,7 @@ components:
       title: BadRequest
     Conflict:
       example:
-        code: 2
+        code: 7
         detail: detail
         message: Conflict
       properties:
@@ -2843,6 +3265,8 @@ components:
       - company_access
       - company_id
       - database
+      - ez_lynk
+      - ez_lynk_access
       - ezlogz
       - factor_eld
       - fleetup
@@ -2865,114 +3289,158 @@ components:
       - tt_creds
       - truckx_creds
       - truckx_slc
+      - verizon_connect
+      - verizon_connect_slc
       title: ConnectionTypeEnum
       type: string
-    FleetCreate:
-      description: |-
-        API model for creating a fleet
-
-        Used by Catena admins to create fleets directly.
-        Most fleets are created automatically when accepting invitations.
+    ExtTspIntegrationRequestRead:
+      description: API model for reading an integration request
       example:
-        regulatory_id_date: 2000-01-23
-        registered_fax: registered_fax
-        address: address
-        regulatory_id_type: regulatory_id_type
-        city: city
-        description: description
-        dba_name: dba_name
-        display_name: display_name
-        registered_phone: registered_phone
-        country_code: country_code
-        regulatory_id: regulatory_id
-        province: province
-        name: name
-        websites:
-        - https://openapi-generator.tech
-        - https://openapi-generator.tech
-        registered_email: registered_email
-        legal_name: legal_name
-        regulatory_id_status: regulatory_id_status
-        postal_code: postal_code
-        properties:
-        - value: value
-          key: dot_number
-        - value: value
-          key: dot_number
+        created_at: 2025-06-01T12:00:00Z
+        ext_tsp_compliance_status: compliant
+        ext_tsp_id: dddddddd-dddd-dddd-dddd-dddddddddddd
+        ext_tsp_name: Samsara Inc.
+        fleet_id: bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb
+        fleet_ref: EXT-FLEET-123
+        id: 01927a3b-4c5d-7e8f-9a0b-1c2d3e4f5a6b
+        invitation_id: eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee
+        partner_id: cccccccc-cccc-cccc-cccc-cccccccccccc
+        updated_at: 2025-06-01T12:00:00Z
       properties:
-        name:
-          title: Name
+        id:
+          description: Unique integration request identifier
+          format: uuid
+          title: Id
           type: string
-        description:
+        ext_tsp_id:
+          description: The external TSP that was requested for integration
+          format: uuid
+          title: Ext Tsp Id
+          type: string
+        ext_tsp_name:
+          description: Name of the external TSP at the time of request
+          title: Ext Tsp Name
+          type: string
+        ext_tsp_compliance_status:
+          $ref: '#/components/schemas/TspComplianceStatusEnum'
+        fleet_id:
+          description: The fleet requesting integration
+          format: uuid
+          title: Fleet Id
+          type: string
+        fleet_ref:
+          description: External fleet identifier from the partner's system
+          title: Fleet Ref
+          type: string
+        partner_id:
+          description: The partner requesting the integration
+          format: uuid
+          title: Partner Id
+          type: string
+        invitation_id:
+          description: The related invitation for the fleet requesting the integration
+          format: uuid
+          title: Invitation Id
+          type: string
+        fleet_contact_name:
           nullable: true
           type: string
-        display_name:
+        fleet_contact_notes:
           nullable: true
           type: string
-        legal_name:
-          nullable: true
+        created_at:
+          description: When the integration request was created
+          format: date-time
+          title: Created At
           type: string
-        dba_name:
-          nullable: true
+        updated_at:
+          description: Last modification timestamp
+          format: date-time
+          title: Updated At
           type: string
-        websites:
+        integrated_tsp_ids:
+          description: List of TSP IDs that are integrated for this external TSP.
+            Empty if not yet integrated.
           items:
-            format: uri
-            maxLength: 2083
-            minLength: 1
+            format: uuid
             type: string
-          nullable: true
-          type: array
-        regulatory_id:
-          nullable: true
-          type: string
-        regulatory_id_type:
-          nullable: true
-          type: string
-        regulatory_id_date:
-          format: date
-          nullable: true
-          type: string
-        regulatory_id_status:
-          nullable: true
-          type: string
-        registered_email:
-          format: email
-          nullable: true
-          type: string
-        registered_phone:
-          format: phone
-          nullable: true
-          type: string
-        registered_fax:
-          format: phone
-          nullable: true
-          type: string
-        address:
-          nullable: true
-          type: string
-        city:
-          nullable: true
-          type: string
-        province:
-          nullable: true
-          type: string
-        postal_code:
-          nullable: true
-          type: string
-        country_code:
-          nullable: true
-          pattern: "^\\w{3}$"
-          type: string
-        properties:
-          default: []
-          description: Optional custom properties for the fleet
-          items:
-            $ref: '#/components/schemas/FleetPropertyCreate'
           type: array
       required:
+      - created_at
+      - ext_tsp_compliance_status
+      - ext_tsp_id
+      - ext_tsp_name
+      - fleet_id
+      - fleet_ref
+      - id
+      - invitation_id
+      - partner_id
+      - updated_at
+      title: ExtTspIntegrationRequestRead
+    ExtTspRead:
+      description: API model for reading an external TSP
+      example:
+        created_at: 2025-06-01T12:00:00Z
+        id: 01927a3b-4c5d-7e8f-9a0b-1c2d3e4f5a6b
+        name: Samsara Inc.
+        registry: fmcsa
+        updated_at: 2025-06-01T12:00:00Z
+        website: https://www.samsara.com
+      properties:
+        id:
+          description: Unique external TSP identifier
+          format: uuid
+          title: Id
+          type: string
+        name:
+          description: Company name as listed in the registry
+          title: Name
+          type: string
+        registry:
+          $ref: '#/components/schemas/ExtTspRegistryEnum'
+        email:
+          nullable: true
+          type: string
+        phone:
+          nullable: true
+          type: string
+        website:
+          nullable: true
+          type: string
+        created_at:
+          description: When the external TSP was created in our system
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: Last modification timestamp for the external TSP record in
+            our system
+          format: date-time
+          title: Updated At
+          type: string
+        integrated_tsp_ids:
+          description: List of TSP IDs that are integrated for this external TSP.
+            Empty if not yet integrated.
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - created_at
+      - email
+      - id
       - name
-      title: FleetCreate
+      - phone
+      - registry
+      - updated_at
+      - website
+      title: ExtTspRead
+    ExtTspRegistryEnum:
+      description: Registry/authority that certified the ELD devices
+      enum:
+      - fmcsa
+      title: ExtTspRegistryEnum
+      type: string
     FleetPropertyCreate:
       description: API model for creating a fleet Property
       example:
@@ -3046,6 +3514,7 @@ components:
         description: Regional freight carrier specializing in temperature-controlled
           transport
         display_name: Swift Transport
+        fleet_ref: external-system-12345
         id: 98765432-10fe-dcba-9876-543210fedcba
         legal_name: Swift Transport LLC
         name: Swift Transport LLC
@@ -3086,6 +3555,15 @@ components:
             type: string
           nullable: true
           type: array
+        invitation_id:
+          format: uuid
+          nullable: true
+          type: string
+        fleet_ref:
+          description: An optional reference for the fleet. Used to store an external
+            identifier for the fleet in your system.
+          title: Fleet Reference
+          type: string
         regulatory_id:
           nullable: true
           type: string
@@ -3144,6 +3622,7 @@ components:
           type: string
       required:
       - created_at
+      - fleet_ref
       - id
       - name
       - updated_at
@@ -3158,6 +3637,7 @@ components:
         regulatory_id_date: 2000-01-23
         registered_fax: registered_fax
         address: address
+        fleet_ref: fleet_ref
         regulatory_id_type: regulatory_id_type
         city: city
         description: description
@@ -3229,10 +3709,13 @@ components:
           nullable: true
           pattern: "^\\w{3}$"
           type: string
+        fleet_ref:
+          nullable: true
+          type: string
       title: FleetUpdate
     Forbidden:
       example:
-        code: 1
+        code: 5
         detail: detail
         message: Forbidden
       properties:
@@ -3248,6 +3731,24 @@ components:
           nullable: true
           type: string
       title: Forbidden
+    IntegrationRequestBody:
+      description: Optional request body for integration requests.
+      example:
+        fleet_contact_name: fleet_contact_name
+        fleet_contact_email: fleet_contact_email
+        fleet_contact_notes: fleet_contact_notes
+      properties:
+        fleet_contact_name:
+          nullable: true
+          type: string
+        fleet_contact_email:
+          format: email
+          nullable: true
+          type: string
+        fleet_contact_notes:
+          nullable: true
+          type: string
+      title: IntegrationRequestBody
     InternalServerError:
       example:
         message: Internal Server Error
@@ -3257,14 +3758,16 @@ components:
           title: Message
           type: string
       title: InternalServerError
-    InvitationAccept:
-      description: |-
-        API model for accepting a fleet invitation
-
-        Optional data that fleets can provide when accepting an invitation.
-        These fields supplement or override partner-provided values.
+    InvitationCreate:
+      description: API model for creating a fleet invitation
       example: {}
       properties:
+        fleet_ref:
+          description: Your internal fleet identifier. Use this to map Catena fleets
+            back to your system. This value will be returned in webhooks and redirect
+            URLs.
+          title: Fleet Reference
+          type: string
         fleet_name:
           nullable: true
           type: string
@@ -3292,17 +3795,41 @@ components:
           nullable: true
           pattern: "^\\w{3}$"
           type: string
-      title: InvitationAccept
-    InvitationCreate:
-      description: API model for creating a fleet invitation
-      example: {}
-      properties:
-        fleet_ref:
-          description: "Your internal fleet identifier. Use this to map Catena fleets\
-            \ back to your system. This value will be returned in webhooks and redirect\
-            \ URLs. Only letters, numbers, spaces, dashes, and underscores are allowed."
-          title: Fleet Reference
+        success_redirect_url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          nullable: true
           type: string
+        failure_redirect_url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          nullable: true
+          type: string
+        callback_url:
+          format: uri
+          maxLength: 2083
+          minLength: 1
+          nullable: true
+          type: string
+        limit_tsps:
+          items:
+            type: string
+          nullable: true
+          type: array
+        permissions:
+          additionalProperties:
+            $ref: '#/components/schemas/ShareLevelEnum'
+          nullable: true
+        expires_in_hours:
+          default: 24
+          description: How long the invitation link remains valid (1-672 hours). Default
+            is 24 hours. *Consider longer durations for email campaigns.*
+          maximum: 672.0
+          minimum: 1.0
+          title: Expires In Hours
+          type: integer
         partner_provided_fleet_name:
           nullable: true
           type: string
@@ -3330,37 +3857,6 @@ components:
           nullable: true
           pattern: "^\\w{3}$"
           type: string
-        success_redirect_url:
-          format: uri
-          maxLength: 2083
-          minLength: 1
-          nullable: true
-          type: string
-        failure_redirect_url:
-          format: uri
-          maxLength: 2083
-          minLength: 1
-          nullable: true
-          type: string
-        callback_url:
-          format: uri
-          maxLength: 2083
-          minLength: 1
-          nullable: true
-          type: string
-        limit_tsps:
-          items:
-            type: string
-          nullable: true
-          type: array
-        expires_in_hours:
-          default: 24
-          description: How long the invitation link remains valid (1-672 hours). Default
-            is 24 hours. *Consider longer durations for email campaigns.*
-          maximum: 672.0
-          minimum: 1.0
-          title: Expires In Hours
-          type: integer
       required:
       - fleet_ref
       title: InvitationCreate
@@ -3391,6 +3887,7 @@ components:
         expires_in_hours: 24
         failure_redirect_url: https://app.example.com/onboarding/failure
         fleet_id: 98765432-10fe-dcba-9876-543210fedcba
+        fleet_name: Swift Transport LLC
         fleet_ref: FLEET-12345
         id: 01234567-89ab-cdef-0123-456789abcdef
         limit_tsps:
@@ -3398,11 +3895,15 @@ components:
         - geotab
         magic_link: https://connect.catena.eu/?invite=01234567-89ab-cdef-0123-456789abcdef
         partner_id: 11223344-5566-7788-99aa-bbccddeeff00
-        partner_provided_fleet_name: Swift Transport LLC
         partner_slug: acme-logistics
+        permissions:
+          hos_events: read
+          user: read_write
+          vehicle: read_write
+          vehicle_location: read
         pre_registration_access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
         pre_registration_refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-        status: ACCEPTED
+        status: accepted
         success_redirect_url: https://app.example.com/onboarding/success
       properties:
         id:
@@ -3430,8 +3931,8 @@ components:
           title: Expires In Hours
           type: integer
         status:
-          $ref: '#/components/schemas/StatusEnum'
-        partner_provided_fleet_name:
+          $ref: '#/components/schemas/InvitationStatusEnum'
+        fleet_name:
           nullable: true
           type: string
         accepted_at:
@@ -3475,8 +3976,9 @@ components:
           nullable: true
           type: string
         partner_id:
+          description: Your organization ID requesting access to fleet data
           format: uuid
-          nullable: true
+          title: Partner ID
           type: string
         decline_reason:
           nullable: true
@@ -3486,19 +3988,107 @@ components:
           nullable: true
           type: string
         fleet_ref:
+          description: Your internal fleet identifier. Use this to map Catena fleets
+            back to your system. This value will be returned in webhooks and redirect
+            URLs.
+          title: Fleet Reference
+          type: string
+        permissions:
+          additionalProperties:
+            $ref: '#/components/schemas/ShareLevelEnum'
+          description: "Defines which resources (vehicle, locations, users, etc.)\
+            \ the fleet must grant access to and the permission level (read, write)\
+            \ for each."
+          title: Required Permissions
+        fleet_email:
+          format: email
+          nullable: true
+          type: string
+        fleet_regulatory_id:
+          nullable: true
+          type: string
+        fleet_regulatory_id_type:
+          nullable: true
+          type: string
+        fleet_phone:
+          nullable: true
+          type: string
+        fleet_website:
+          nullable: true
+          type: string
+        fleet_country_code:
+          nullable: true
+          type: string
+        partner_provided_fleet_name:
+          nullable: true
+          type: string
+        partner_provided_fleet_email:
+          format: email
+          nullable: true
+          type: string
+        partner_provided_fleet_regulatory_id:
+          nullable: true
+          type: string
+        partner_provided_fleet_regulatory_id_type:
+          nullable: true
+          type: string
+        partner_provided_fleet_phone:
+          nullable: true
+          type: string
+        partner_provided_fleet_website:
+          nullable: true
+          type: string
+        partner_provided_fleet_country_code:
           nullable: true
           type: string
       required:
+      - accepted_at
+      - callback_url
       - created_at
+      - decline_reason
+      - declined_at
       - expires_at
       - expires_in_hours
+      - failure_redirect_url
+      - fleet_country_code
+      - fleet_email
+      - fleet_name
+      - fleet_phone
+      - fleet_ref
+      - fleet_regulatory_id
+      - fleet_regulatory_id_type
+      - fleet_website
       - id
+      - limit_tsps
       - magic_link
+      - partner_id
+      - partner_provided_fleet_country_code
+      - partner_provided_fleet_email
+      - partner_provided_fleet_name
+      - partner_provided_fleet_phone
+      - partner_provided_fleet_regulatory_id
+      - partner_provided_fleet_regulatory_id_type
+      - partner_provided_fleet_website
+      - partner_slug
+      - permissions
+      - pre_registration_access_token
+      - pre_registration_refresh_token
       - status
+      - success_redirect_url
       title: InvitationRead
+    InvitationStatusEnum:
+      description: Enum for invitation status
+      enum:
+      - active
+      - accepted
+      - declined
+      - expired
+      - deleted
+      title: InvitationStatusEnum
+      type: string
     MethodNotAllowed:
       example:
-        code: 5
+        code: 2
         detail: detail
         message: Method Not Allowed
       properties:
@@ -3569,6 +4159,7 @@ components:
           key: default_failure_redirect_url
         - value: value
           key: default_failure_redirect_url
+        parent_partner_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         name:
           description: The name of your organization
@@ -3596,6 +4187,10 @@ components:
             purposes.
           title: Is Sandbox
           type: boolean
+        parent_partner_id:
+          format: uuid
+          nullable: true
+          type: string
         properties:
           default: []
           description: Optional custom properties for the partner organization
@@ -3628,6 +4223,13 @@ components:
       - default_success_redirect_url
       - default_callback_url
       - default_invitation_expires_in_hours
+      - contract_signed
+      - contract_url
+      - contract_started_at
+      - billing_model
+      - billing_day_of_month
+      - account_status
+      - notes
       title: PartnerPropertyKeyEnum
       type: string
     PartnerPropertyRead:
@@ -3712,6 +4314,10 @@ components:
             purposes.
           title: Is Sandbox
           type: boolean
+        parent_partner_id:
+          format: uuid
+          nullable: true
+          type: string
         id:
           description: Unique Catena partner identifier
           format: uuid
@@ -3757,11 +4363,15 @@ components:
       description: Enum for resources
       enum:
       - asset
+      - driver_association
+      - driver_vehicle_association
       - driver_event_log
       - driver_safety_event
       - dvir_log
       - dvir_log_defect
       - engine_log
+      - engine_status
+      - fuel_transaction
       - hos_availability
       - hos_daily_snapshot
       - hos_event
@@ -3770,18 +4380,22 @@ components:
       - hos_violation
       - ifta_summary
       - location_segment
-      - reefer_status
+      - message
       - user
       - vehicle
       - vehicle_location
       - vehicle_sensor
+      - vehicle_region_segment
       - trailer
+      - trailer_association
+      - trailer_vehicle_association
       - trailer_location
+      - trailer_status
       title: ResourceEnum
       type: string
     RetryAfterDetail:
       example:
-        retry_after_seconds: 3
+        retry_after_seconds: 2
         message: message
       properties:
         retry_after_seconds:
@@ -3794,56 +4408,46 @@ components:
       - message
       - retry_after_seconds
       title: RetryAfterDetail
-    ShareAgreementCreate:
-      description: |-
-        API model for creating a sharing agreement between fleet and partner
-
-        Create a share agreement to define what data you can access from a fleet.
-        Typically created automatically when a fleet accepts your invitation.
+    ShareAgreementBackfill:
+      description: Request body for backfilling a new resource into existing share
+        agreements.
       example:
-        invitation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        partner_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        fleet_ref: fleet_ref
-        effective_date: 2000-01-23T04:56:07.000+00:00
-        scopes:
-          key: read
-        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        expiration_date: 2000-01-23T04:56:07.000+00:00
+        resource: asset
+        fleet_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        share_level: read
       properties:
-        partner_id:
-          description: Your organization ID receiving access to fleet data
-          format: uuid
-          title: Partner ID
-          type: string
-        scopes:
-          additionalProperties:
-            $ref: '#/components/schemas/ShareLevelEnum'
-          description: "Defines which resources (vehicle, locations, users, etc.)\
-            \ you can access and the permission level (read, write) for each."
-          title: Shared Scopes
-        fleet_id:
-          format: uuid
+        resource:
+          $ref: '#/components/schemas/ResourceEnum'
+        share_level:
+          $ref: '#/components/schemas/ShareLevelEnum'
+        fleet_ids:
+          items:
+            format: uuid
+            type: string
+          minItems: 1
           nullable: true
-          type: string
-        fleet_ref:
-          nullable: true
-          type: string
-        invitation_id:
-          format: uuid
-          nullable: true
-          type: string
-        effective_date:
-          format: date-time
-          nullable: true
-          type: string
-        expiration_date:
-          format: date-time
-          nullable: true
-          type: string
+          type: array
       required:
-      - partner_id
-      - scopes
-      title: ShareAgreementCreate
+      - resource
+      title: ShareAgreementBackfill
+    ShareAgreementBackfillResult:
+      description: Response for the share agreement backfill operation.
+      example:
+        share_agreement_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        share_agreement_ids:
+          description: IDs of the share agreements that were updated
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - share_agreement_ids
+      title: ShareAgreementBackfillResult
     ShareAgreementRead:
       description: |-
         API model for reading a sharing agreement
@@ -3858,10 +4462,10 @@ components:
         invitation_id: 01234567-89ab-cdef-0123-456789abcdef
         partner_id: 11223344-5566-7788-99aa-bbccddeeff00
         scopes:
-          hos-events: read
+          hos_events: read
           user: read
-          vehicle: read-write
-          vehicle-location: read-write
+          vehicle: read_write
+          vehicle_location: read_write
         status: active
       properties:
         id:
@@ -3882,12 +4486,8 @@ components:
         fleet_ref:
           nullable: true
           type: string
-        invitation_id:
-          format: uuid
-          nullable: true
-          type: string
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/ShareAgreementStatusEnum'
         effective_date:
           description: When data access begins. Check this before attempting to fetch
             fleet data.
@@ -3910,28 +4510,28 @@ components:
       - fleet_id
       - fleet_ref
       - id
-      - invitation_id
       - partner_id
       - scopes
       - status
       title: ShareAgreementRead
+    ShareAgreementStatusEnum:
+      description: Enum for share agreement status
+      enum:
+      - active
+      - paused
+      - cancelled
+      - deleted
+      - expired
+      title: ShareAgreementStatusEnum
+      type: string
     ShareAgreementUpdate:
       description: |-
         API model for updating a sharing agreement
 
         Update agreement status or dates. Note: Fleets own their share agreements,
         so partners typically cannot modify these directly.
-      example:
-        effective_date: ""
-        expiration_date: ""
-        fleet_ref: FLEET-12345
-        status: cancelled
+      example: {}
       properties:
-        status:
-          $ref: '#/components/schemas/StatusEnum'
-        fleet_ref:
-          nullable: true
-          type: string
         effective_date:
           format: date-time
           nullable: true
@@ -3948,29 +4548,11 @@ components:
       - read_write
       title: ShareLevelEnum
       type: string
-    StatusEnum:
-      description: Enum for statuses
-      enum:
-      - active
-      - inactive
-      - paused
-      - expired
-      - cancelled
-      - pending
-      - deleted
-      - stale
-      - success
-      - failed
-      - scheduled
-      - accepted
-      - declined
-      title: StatusEnum
-      type: string
     TooManyRequests:
       example:
-        code: 9
+        code: 3
         detail:
-          retry_after_seconds: 3
+          retry_after_seconds: 2
           message: message
         message: Too Many Requests
       properties:
@@ -3985,6 +4567,20 @@ components:
         detail:
           $ref: '#/components/schemas/RetryAfterDetail'
       title: TooManyRequests
+    TspComplianceStatusEnum:
+      description: |-
+        Enum for TSP compliance status based on ELD device registration.
+
+        Compliance is determined by the registration status of ELD devices linked
+        to the TSP's entry in a regulatory registry. Since we don't know which specific
+        ELD device a fleet is using, we can only flag a TSP as non-compliant when
+        ALL of their registered devices have been revoked.
+      enum:
+      - compliant
+      - non_compliant
+      - unknown
+      title: TspComplianceStatusEnum
+      type: string
     TspCreate:
       description: |-
         API model for creating a TSP
@@ -4022,7 +4618,7 @@ components:
         source_name:
           $ref: '#/components/schemas/TspEnum'
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/TspStatusEnum'
         conn_type:
           $ref: '#/components/schemas/ConnectionTypeEnum'
         is_sandbox:
@@ -4057,7 +4653,8 @@ components:
       - alfa_eld
       - alpha_eld
       - als
-      - anytrek
+      - anytrek_pro
+      - anytrek_classic
       - apex_eld
       - apollo
       - apollocloud
@@ -4070,9 +4667,11 @@ components:
       - blueinktech
       - bouncie
       - budgetgps
+      - catena_simulator
       - captain_eld
       - carrier_lynx
       - club_eld
+      - counting_trucks_eld
       - cyntrx
       - digital_eld
       - dragon_eld
@@ -4091,6 +4690,7 @@ components:
       - expressway_eld
       - extreme_eld
       - ezlogz
+      - ez_lynk
       - factor_eld
       - firstgate
       - fleetcomplete
@@ -4120,6 +4720,7 @@ components:
       - konexial
       - lioneight
       - linxup
+      - loop_eld
       - lucid_eld
       - luna_eld
       - lytx
@@ -4127,10 +4728,12 @@ components:
       - mapon
       - matrack
       - maven
+      - mdm_eld
       - mobilefleet
       - moonlight_eld
       - motion_eld
       - motive
+      - my_drivebook
       - my_logs_eld
       - nero
       - netradyne
@@ -4155,12 +4758,16 @@ components:
       - qualitylogs_eld
       - randmcnally
       - rastrac
+      - raven
       - redfox
       - regulog_eld
       - ridehub
+      - roadeazy
       - rock_eld
+      - rollingtrans
       - routemate
       - royal_eld
+      - safelane
       - samsara
       - selectivedrive
       - simba_eld
@@ -4168,6 +4775,7 @@ components:
       - smart_elds
       - sparkle_eld
       - spireon
+      - sun_eld
       - surfsight
       - swift
       - switchboard
@@ -4191,8 +4799,9 @@ components:
       - truckx
       - trueroad_eld
       - tt
+      - txt_eld
       - us_fast_eld
-      - verizon
+      - verizon_connect
       - vista_eld
       - vistracks
       - vlog_eld
@@ -4200,6 +4809,7 @@ components:
       - wialon
       - webfleet
       - xplore_eld
+      - zigzag_eld
       - zms_eld
       - zonar
       - zubie
@@ -4212,6 +4822,7 @@ components:
         Contains TSP details visible to fleets and partners.
         Fleets see TSPs when connecting their telematics data.
       example:
+        compliance_status: compliant
         conn_type: oauth2
         created_at: 2024-01-15T09:00:00Z
         description: Connected operations platform for fleet management and industrial
@@ -4221,6 +4832,7 @@ components:
         logo_dark_url: https://cdn.sanity.io/images/abc123/samsara-logo-dark.png
         logo_url: https://cdn.sanity.io/images/abc123/samsara-logo.png
         name: Samsara
+        registry: fmcsa
         slug: samsara
         source_name: samsara
         status: active
@@ -4245,7 +4857,7 @@ components:
         source_name:
           $ref: '#/components/schemas/TspEnum'
         status:
-          $ref: '#/components/schemas/StatusEnum'
+          $ref: '#/components/schemas/TspStatusEnum'
         conn_type:
           $ref: '#/components/schemas/ConnectionTypeEnum'
         is_sandbox:
@@ -4275,6 +4887,10 @@ components:
           description: URL-friendly TSP identifier
           title: Slug
           type: string
+        ext_tsp_id:
+          format: uuid
+          nullable: true
+          type: string
         created_at:
           description: When the TSP was added to Catena
           format: date-time
@@ -4285,6 +4901,11 @@ components:
           format: date-time
           title: Updated At
           type: string
+        registry:
+          nullable: true
+          type: string
+        compliance_status:
+          $ref: '#/components/schemas/TspComplianceStatusEnum'
       required:
       - conn_type
       - created_at
@@ -4294,6 +4915,14 @@ components:
       - source_name
       - updated_at
       title: TspRead
+    TspStatusEnum:
+      description: Enum for TSP status
+      enum:
+      - active
+      - inactive
+      - deleted
+      title: TspStatusEnum
+      type: string
     TspUpdate:
       description: |-
         API model for updating a TSP
@@ -4319,7 +4948,7 @@ components:
       title: TspUpdate
     Unauthorized:
       example:
-        code: 6
+        code: 1
         detail: detail
         message: Unauthorized
       properties:
@@ -4337,7 +4966,7 @@ components:
       title: Unauthorized
     UnprocessableEntity:
       example:
-        code: 7
+        code: 9
         detail:
         - path: path
           input: input
@@ -4388,9 +5017,10 @@ components:
       - message
       - path
       title: ValidationErrorDetail
-    _CursorPageCustomized_FleetRead_:
+    _CursorPage_FleetRead_:
       example:
         next_page: next_page
+        total: 0
         current_page_backwards: current_page_backwards
         previous_page: previous_page
         items:
@@ -4402,6 +5032,7 @@ components:
           description: Regional freight carrier specializing in temperature-controlled
             transport
           display_name: Swift Transport
+          fleet_ref: external-system-12345
           id: 98765432-10fe-dcba-9876-543210fedcba
           legal_name: Swift Transport LLC
           name: Swift Transport LLC
@@ -4426,6 +5057,7 @@ components:
           description: Regional freight carrier specializing in temperature-controlled
             transport
           display_name: Swift Transport
+          fleet_ref: external-system-12345
           id: 98765432-10fe-dcba-9876-543210fedcba
           legal_name: Swift Transport LLC
           name: Swift Transport LLC
@@ -4448,6 +5080,10 @@ components:
           items:
             $ref: '#/components/schemas/FleetRead'
           type: array
+        total:
+          minimum: 0.0
+          title: Total
+          type: integer
         current_page:
           nullable: true
           type: string
@@ -4462,10 +5098,12 @@ components:
           type: string
       required:
       - items
-      title: "_CursorPageCustomized[FleetRead]"
-    _CursorPageCustomized_InvitationRead_:
+      - total
+      title: "_CursorPage[FleetRead]"
+    _CursorPage_InvitationRead_:
       example:
         next_page: next_page
+        total: 0
         current_page_backwards: current_page_backwards
         previous_page: previous_page
         items:
@@ -4476,6 +5114,7 @@ components:
           expires_in_hours: 24
           failure_redirect_url: https://app.example.com/onboarding/failure
           fleet_id: 98765432-10fe-dcba-9876-543210fedcba
+          fleet_name: Swift Transport LLC
           fleet_ref: FLEET-12345
           id: 01234567-89ab-cdef-0123-456789abcdef
           limit_tsps:
@@ -4483,11 +5122,15 @@ components:
           - geotab
           magic_link: https://connect.catena.eu/?invite=01234567-89ab-cdef-0123-456789abcdef
           partner_id: 11223344-5566-7788-99aa-bbccddeeff00
-          partner_provided_fleet_name: Swift Transport LLC
           partner_slug: acme-logistics
+          permissions:
+            hos_events: read
+            user: read_write
+            vehicle: read_write
+            vehicle_location: read
           pre_registration_access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
           pre_registration_refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-          status: ACCEPTED
+          status: accepted
           success_redirect_url: https://app.example.com/onboarding/success
         - accepted_at: 2025-12-11T14:22:00Z
           callback_url: https://api.example.com/webhooks/catena
@@ -4496,6 +5139,7 @@ components:
           expires_in_hours: 24
           failure_redirect_url: https://app.example.com/onboarding/failure
           fleet_id: 98765432-10fe-dcba-9876-543210fedcba
+          fleet_name: Swift Transport LLC
           fleet_ref: FLEET-12345
           id: 01234567-89ab-cdef-0123-456789abcdef
           limit_tsps:
@@ -4503,11 +5147,15 @@ components:
           - geotab
           magic_link: https://connect.catena.eu/?invite=01234567-89ab-cdef-0123-456789abcdef
           partner_id: 11223344-5566-7788-99aa-bbccddeeff00
-          partner_provided_fleet_name: Swift Transport LLC
           partner_slug: acme-logistics
+          permissions:
+            hos_events: read
+            user: read_write
+            vehicle: read_write
+            vehicle_location: read
           pre_registration_access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
           pre_registration_refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-          status: ACCEPTED
+          status: accepted
           success_redirect_url: https://app.example.com/onboarding/success
         current_page: current_page
       properties:
@@ -4515,6 +5163,10 @@ components:
           items:
             $ref: '#/components/schemas/InvitationRead'
           type: array
+        total:
+          minimum: 0.0
+          title: Total
+          type: integer
         current_page:
           nullable: true
           type: string
@@ -4529,10 +5181,12 @@ components:
           type: string
       required:
       - items
-      title: "_CursorPageCustomized[InvitationRead]"
-    _CursorPageCustomized_PartnerRead_:
+      - total
+      title: "_CursorPage[InvitationRead]"
+    _CursorPage_PartnerRead_:
       example:
         next_page: next_page
+        total: 0
         current_page_backwards: current_page_backwards
         previous_page: previous_page
         items:
@@ -4570,6 +5224,10 @@ components:
           items:
             $ref: '#/components/schemas/PartnerRead'
           type: array
+        total:
+          minimum: 0.0
+          title: Total
+          type: integer
         current_page:
           nullable: true
           type: string
@@ -4584,10 +5242,12 @@ components:
           type: string
       required:
       - items
-      title: "_CursorPageCustomized[PartnerRead]"
-    _CursorPageCustomized_ShareAgreementRead_:
+      - total
+      title: "_CursorPage[PartnerRead]"
+    _CursorPage_ShareAgreementRead_:
       example:
         next_page: next_page
+        total: 0
         current_page_backwards: current_page_backwards
         previous_page: previous_page
         items:
@@ -4598,10 +5258,10 @@ components:
           invitation_id: 01234567-89ab-cdef-0123-456789abcdef
           partner_id: 11223344-5566-7788-99aa-bbccddeeff00
           scopes:
-            hos-events: read
+            hos_events: read
             user: read
-            vehicle: read-write
-            vehicle-location: read-write
+            vehicle: read_write
+            vehicle_location: read_write
           status: active
         - effective_date: 2025-12-11T14:22:00Z
           fleet_id: 98765432-10fe-dcba-9876-543210fedcba
@@ -4610,10 +5270,10 @@ components:
           invitation_id: 01234567-89ab-cdef-0123-456789abcdef
           partner_id: 11223344-5566-7788-99aa-bbccddeeff00
           scopes:
-            hos-events: read
+            hos_events: read
             user: read
-            vehicle: read-write
-            vehicle-location: read-write
+            vehicle: read_write
+            vehicle_location: read_write
           status: active
         current_page: current_page
       properties:
@@ -4621,6 +5281,10 @@ components:
           items:
             $ref: '#/components/schemas/ShareAgreementRead'
           type: array
+        total:
+          minimum: 0.0
+          title: Total
+          type: integer
         current_page:
           nullable: true
           type: string
@@ -4635,7 +5299,8 @@ components:
           type: string
       required:
       - items
-      title: "_CursorPageCustomized[ShareAgreementRead]"
+      - total
+      title: "_CursorPage[ShareAgreementRead]"
   securitySchemes:
     Bearer:
       flows:

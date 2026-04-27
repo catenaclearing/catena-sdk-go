@@ -36,6 +36,7 @@ type FleetUpdate struct {
 	Province             NullableString `json:"province,omitempty"`
 	PostalCode           NullableString `json:"postal_code,omitempty"`
 	CountryCode          NullableString `json:"country_code,omitempty" validate:"regexp=^\\\\w{3}$"`
+	FleetRef             NullableString `json:"fleet_ref,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -789,6 +790,49 @@ func (o *FleetUpdate) UnsetCountryCode() {
 	o.CountryCode.Unset()
 }
 
+// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FleetUpdate) GetFleetRef() string {
+	if o == nil || IsNil(o.FleetRef.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetRef.Get()
+}
+
+// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FleetUpdate) GetFleetRefOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRef.Get(), o.FleetRef.IsSet()
+}
+
+// HasFleetRef returns a boolean if a field has been set.
+func (o *FleetUpdate) HasFleetRef() bool {
+	if o != nil && o.FleetRef.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
+func (o *FleetUpdate) SetFleetRef(v string) {
+	o.FleetRef.Set(&v)
+}
+
+// SetFleetRefNil sets the value for FleetRef to be an explicit nil
+func (o *FleetUpdate) SetFleetRefNil() {
+	o.FleetRef.Set(nil)
+}
+
+// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
+func (o *FleetUpdate) UnsetFleetRef() {
+	o.FleetRef.Unset()
+}
+
 func (o FleetUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -850,6 +894,9 @@ func (o FleetUpdate) ToMap() (map[string]interface{}, error) {
 	if o.CountryCode.IsSet() {
 		toSerialize["country_code"] = o.CountryCode.Get()
 	}
+	if o.FleetRef.IsSet() {
+		toSerialize["fleet_ref"] = o.FleetRef.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -889,6 +936,7 @@ func (o *FleetUpdate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "province")
 		delete(additionalProperties, "postal_code")
 		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "fleet_ref")
 		o.AdditionalProperties = additionalProperties
 	}
 

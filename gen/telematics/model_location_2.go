@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// Location2 Geographic point of the event (lat/lng, SRID 4326; GeoJSON Point or WKB/EWKB).
+// Location2 Location encoded as GeoJSON Point
 type Location2 struct {
 	Point             *Point
 	MapmapOfStringAny *map[string]interface{}

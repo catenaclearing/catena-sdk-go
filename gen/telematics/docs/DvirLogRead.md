@@ -23,10 +23,10 @@ Name | Type | Description | Notes
 **Extras** | Pointer to **map[string]interface{}** |  | [optional] 
 **VehicleId** | Pointer to **NullableString** |  | [optional] 
 **DriverId** | Pointer to **NullableString** |  | [optional] 
-**TspTrailerId** | Pointer to **NullableString** |  | [optional] 
+**TrailerId** | Pointer to **NullableString** |  | [optional] 
 **SourceDriverId** | Pointer to **NullableString** |  | [optional] 
 **SourceVehicleId** | Pointer to **NullableString** |  | [optional] 
-**SourceTspTrailerId** | Pointer to **NullableString** |  | [optional] 
+**SourceTrailerId** | Pointer to **NullableString** |  | [optional] 
 **LogType** | Pointer to **NullableString** |  | [optional] 
 **AuthorityName** | Pointer to **NullableString** |  | [optional] 
 **AuthorityAddress** | Pointer to **NullableString** |  | [optional] 
@@ -607,41 +607,41 @@ HasDriverId returns a boolean if a field has been set.
 `func (o *DvirLogRead) UnsetDriverId()`
 
 UnsetDriverId ensures that no value is present for DriverId, not even an explicit nil
-### GetTspTrailerId
+### GetTrailerId
 
-`func (o *DvirLogRead) GetTspTrailerId() string`
+`func (o *DvirLogRead) GetTrailerId() string`
 
-GetTspTrailerId returns the TspTrailerId field if non-nil, zero value otherwise.
+GetTrailerId returns the TrailerId field if non-nil, zero value otherwise.
 
-### GetTspTrailerIdOk
+### GetTrailerIdOk
 
-`func (o *DvirLogRead) GetTspTrailerIdOk() (*string, bool)`
+`func (o *DvirLogRead) GetTrailerIdOk() (*string, bool)`
 
-GetTspTrailerIdOk returns a tuple with the TspTrailerId field if it's non-nil, zero value otherwise
+GetTrailerIdOk returns a tuple with the TrailerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTspTrailerId
+### SetTrailerId
 
-`func (o *DvirLogRead) SetTspTrailerId(v string)`
+`func (o *DvirLogRead) SetTrailerId(v string)`
 
-SetTspTrailerId sets TspTrailerId field to given value.
+SetTrailerId sets TrailerId field to given value.
 
-### HasTspTrailerId
+### HasTrailerId
 
-`func (o *DvirLogRead) HasTspTrailerId() bool`
+`func (o *DvirLogRead) HasTrailerId() bool`
 
-HasTspTrailerId returns a boolean if a field has been set.
+HasTrailerId returns a boolean if a field has been set.
 
-### SetTspTrailerIdNil
+### SetTrailerIdNil
 
-`func (o *DvirLogRead) SetTspTrailerIdNil(b bool)`
+`func (o *DvirLogRead) SetTrailerIdNil(b bool)`
 
- SetTspTrailerIdNil sets the value for TspTrailerId to be an explicit nil
+ SetTrailerIdNil sets the value for TrailerId to be an explicit nil
 
-### UnsetTspTrailerId
-`func (o *DvirLogRead) UnsetTspTrailerId()`
+### UnsetTrailerId
+`func (o *DvirLogRead) UnsetTrailerId()`
 
-UnsetTspTrailerId ensures that no value is present for TspTrailerId, not even an explicit nil
+UnsetTrailerId ensures that no value is present for TrailerId, not even an explicit nil
 ### GetSourceDriverId
 
 `func (o *DvirLogRead) GetSourceDriverId() string`
@@ -712,41 +712,41 @@ HasSourceVehicleId returns a boolean if a field has been set.
 `func (o *DvirLogRead) UnsetSourceVehicleId()`
 
 UnsetSourceVehicleId ensures that no value is present for SourceVehicleId, not even an explicit nil
-### GetSourceTspTrailerId
+### GetSourceTrailerId
 
-`func (o *DvirLogRead) GetSourceTspTrailerId() string`
+`func (o *DvirLogRead) GetSourceTrailerId() string`
 
-GetSourceTspTrailerId returns the SourceTspTrailerId field if non-nil, zero value otherwise.
+GetSourceTrailerId returns the SourceTrailerId field if non-nil, zero value otherwise.
 
-### GetSourceTspTrailerIdOk
+### GetSourceTrailerIdOk
 
-`func (o *DvirLogRead) GetSourceTspTrailerIdOk() (*string, bool)`
+`func (o *DvirLogRead) GetSourceTrailerIdOk() (*string, bool)`
 
-GetSourceTspTrailerIdOk returns a tuple with the SourceTspTrailerId field if it's non-nil, zero value otherwise
+GetSourceTrailerIdOk returns a tuple with the SourceTrailerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceTspTrailerId
+### SetSourceTrailerId
 
-`func (o *DvirLogRead) SetSourceTspTrailerId(v string)`
+`func (o *DvirLogRead) SetSourceTrailerId(v string)`
 
-SetSourceTspTrailerId sets SourceTspTrailerId field to given value.
+SetSourceTrailerId sets SourceTrailerId field to given value.
 
-### HasSourceTspTrailerId
+### HasSourceTrailerId
 
-`func (o *DvirLogRead) HasSourceTspTrailerId() bool`
+`func (o *DvirLogRead) HasSourceTrailerId() bool`
 
-HasSourceTspTrailerId returns a boolean if a field has been set.
+HasSourceTrailerId returns a boolean if a field has been set.
 
-### SetSourceTspTrailerIdNil
+### SetSourceTrailerIdNil
 
-`func (o *DvirLogRead) SetSourceTspTrailerIdNil(b bool)`
+`func (o *DvirLogRead) SetSourceTrailerIdNil(b bool)`
 
- SetSourceTspTrailerIdNil sets the value for SourceTspTrailerId to be an explicit nil
+ SetSourceTrailerIdNil sets the value for SourceTrailerId to be an explicit nil
 
-### UnsetSourceTspTrailerId
-`func (o *DvirLogRead) UnsetSourceTspTrailerId()`
+### UnsetSourceTrailerId
+`func (o *DvirLogRead) UnsetSourceTrailerId()`
 
-UnsetSourceTspTrailerId ensures that no value is present for SourceTspTrailerId, not even an explicit nil
+UnsetSourceTrailerId ensures that no value is present for SourceTrailerId, not even an explicit nil
 ### GetLogType
 
 `func (o *DvirLogRead) GetLogType() string`

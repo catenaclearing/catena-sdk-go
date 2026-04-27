@@ -10,16 +10,17 @@ Name | Type | Description | Notes
 **ScheduleId** | **string** | The ID of the schedule that this execution belongs to. | 
 **ConnectionId** | **string** | The ID of the connection used for this execution. | 
 **FleetId** | **string** | The ID of the fleet that owns this execution. | 
-**Status** | [**StatusEnum**](StatusEnum.md) | The current status of the execution. | 
+**Status** | [**ExecutionStatusEnum**](ExecutionStatusEnum.md) | The current status of the execution. | 
 **SourceName** | [**TspEnum**](TspEnum.md) | The name of the TSP integration used for this execution. | 
 **Resource** | [**ResourceEnum**](ResourceEnum.md) | The type of resource being fetched (e.g., VEHICLE, DRIVER, HOS, IFTA). | 
 **Cursor** | Pointer to **NullableString** |  | [optional] 
+**Response** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
 ### NewExecutionRead
 
-`func NewExecutionRead(id string, createdAt time.Time, updatedAt time.Time, scheduleId string, connectionId string, fleetId string, status StatusEnum, sourceName TspEnum, resource ResourceEnum, ) *ExecutionRead`
+`func NewExecutionRead(id string, createdAt time.Time, updatedAt time.Time, scheduleId string, connectionId string, fleetId string, status ExecutionStatusEnum, sourceName TspEnum, resource ResourceEnum, ) *ExecutionRead`
 
 NewExecutionRead instantiates a new ExecutionRead object
 This constructor will assign default values to properties that have it defined,
@@ -156,20 +157,20 @@ SetFleetId sets FleetId field to given value.
 
 ### GetStatus
 
-`func (o *ExecutionRead) GetStatus() StatusEnum`
+`func (o *ExecutionRead) GetStatus() ExecutionStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ExecutionRead) GetStatusOk() (*StatusEnum, bool)`
+`func (o *ExecutionRead) GetStatusOk() (*ExecutionStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ExecutionRead) SetStatus(v StatusEnum)`
+`func (o *ExecutionRead) SetStatus(v ExecutionStatusEnum)`
 
 SetStatus sets Status field to given value.
 
@@ -249,6 +250,41 @@ HasCursor returns a boolean if a field has been set.
 `func (o *ExecutionRead) UnsetCursor()`
 
 UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
+### GetResponse
+
+`func (o *ExecutionRead) GetResponse() map[string]interface{}`
+
+GetResponse returns the Response field if non-nil, zero value otherwise.
+
+### GetResponseOk
+
+`func (o *ExecutionRead) GetResponseOk() (*map[string]interface{}, bool)`
+
+GetResponseOk returns a tuple with the Response field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponse
+
+`func (o *ExecutionRead) SetResponse(v map[string]interface{})`
+
+SetResponse sets Response field to given value.
+
+### HasResponse
+
+`func (o *ExecutionRead) HasResponse() bool`
+
+HasResponse returns a boolean if a field has been set.
+
+### SetResponseNil
+
+`func (o *ExecutionRead) SetResponseNil(b bool)`
+
+ SetResponseNil sets the value for Response to be an explicit nil
+
+### UnsetResponse
+`func (o *ExecutionRead) UnsetResponse()`
+
+UnsetResponse ensures that no value is present for Response, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

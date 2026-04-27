@@ -19,7 +19,7 @@ import (
 // checks if the ExecutionRead type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExecutionRead{}
 
-// ExecutionRead API Model for reading an execution
+// ExecutionRead API Model for reading an execution.  Executions are retained for 7 days. After this period, they are automatically removed and will no longer be accessible via the API.
 type ExecutionRead struct {
 	// Unique identifier for the execution. Use this ID to trace which execution ingested specific data.
 	Id string `json:"id"`
@@ -34,12 +34,13 @@ type ExecutionRead struct {
 	// The ID of the fleet that owns this execution.
 	FleetId string `json:"fleet_id"`
 	// The current status of the execution.
-	Status StatusEnum `json:"status"`
+	Status ExecutionStatusEnum `json:"status"`
 	// The name of the TSP integration used for this execution.
 	SourceName TspEnum `json:"source_name"`
 	// The type of resource being fetched (e.g., VEHICLE, DRIVER, HOS, IFTA).
-	Resource             ResourceEnum   `json:"resource"`
-	Cursor               NullableString `json:"cursor,omitempty"`
+	Resource             ResourceEnum           `json:"resource"`
+	Cursor               NullableString         `json:"cursor,omitempty"`
+	Response             map[string]interface{} `json:"response,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,7 +50,7 @@ type _ExecutionRead ExecutionRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExecutionRead(id string, createdAt time.Time, updatedAt time.Time, scheduleId string, connectionId string, fleetId string, status StatusEnum, sourceName TspEnum, resource ResourceEnum) *ExecutionRead {
+func NewExecutionRead(id string, createdAt time.Time, updatedAt time.Time, scheduleId string, connectionId string, fleetId string, status ExecutionStatusEnum, sourceName TspEnum, resource ResourceEnum) *ExecutionRead {
 	this := ExecutionRead{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -216,9 +217,9 @@ func (o *ExecutionRead) SetFleetId(v string) {
 }
 
 // GetStatus returns the Status field value
-func (o *ExecutionRead) GetStatus() StatusEnum {
+func (o *ExecutionRead) GetStatus() ExecutionStatusEnum {
 	if o == nil {
-		var ret StatusEnum
+		var ret ExecutionStatusEnum
 		return ret
 	}
 
@@ -227,7 +228,7 @@ func (o *ExecutionRead) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ExecutionRead) GetStatusOk() (*StatusEnum, bool) {
+func (o *ExecutionRead) GetStatusOk() (*ExecutionStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -235,7 +236,7 @@ func (o *ExecutionRead) GetStatusOk() (*StatusEnum, bool) {
 }
 
 // SetStatus sets field value
-func (o *ExecutionRead) SetStatus(v StatusEnum) {
+func (o *ExecutionRead) SetStatus(v ExecutionStatusEnum) {
 	o.Status = v
 }
 
@@ -330,6 +331,39 @@ func (o *ExecutionRead) UnsetCursor() {
 	o.Cursor.Unset()
 }
 
+// GetResponse returns the Response field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ExecutionRead) GetResponse() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Response
+}
+
+// GetResponseOk returns a tuple with the Response field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ExecutionRead) GetResponseOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Response) {
+		return map[string]interface{}{}, false
+	}
+	return o.Response, true
+}
+
+// HasResponse returns a boolean if a field has been set.
+func (o *ExecutionRead) HasResponse() bool {
+	if o != nil && !IsNil(o.Response) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponse gets a reference to the given map[string]interface{} and assigns it to the Response field.
+func (o *ExecutionRead) SetResponse(v map[string]interface{}) {
+	o.Response = v
+}
+
 func (o ExecutionRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -351,6 +385,9 @@ func (o ExecutionRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["resource"] = o.Resource
 	if o.Cursor.IsSet() {
 		toSerialize["cursor"] = o.Cursor.Get()
+	}
+	if o.Response != nil {
+		toSerialize["response"] = o.Response
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -413,6 +450,7 @@ func (o *ExecutionRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "source_name")
 		delete(additionalProperties, "resource")
 		delete(additionalProperties, "cursor")
+		delete(additionalProperties, "response")
 		o.AdditionalProperties = additionalProperties
 	}
 

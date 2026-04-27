@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] 
 **Websites** | Pointer to **[]string** |  | [optional] 
 **SourceName** | [**TspEnum**](TspEnum.md) | Unique TSP identifier enum value | 
-**Status** | Pointer to [**StatusEnum**](StatusEnum.md) | The status of the TSP | [optional] 
+**Status** | Pointer to [**TspStatusEnum**](TspStatusEnum.md) | The status of the TSP | [optional] 
 **ConnType** | [**ConnectionTypeEnum**](ConnectionTypeEnum.md) | Authentication method (OAuth, API Key, etc.) | 
 **IsSandbox** | Pointer to **bool** | Indicates whether the TSP is a sandbox integrations for testing purposes. | [optional] [default to false]
 **LogoUrl** | Pointer to **NullableString** |  | [optional] 
@@ -145,20 +145,20 @@ SetSourceName sets SourceName field to given value.
 
 ### GetStatus
 
-`func (o *TspCreate) GetStatus() StatusEnum`
+`func (o *TspCreate) GetStatus() TspStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *TspCreate) GetStatusOk() (*StatusEnum, bool)`
+`func (o *TspCreate) GetStatusOk() (*TspStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *TspCreate) SetStatus(v StatusEnum)`
+`func (o *TspCreate) SetStatus(v TspStatusEnum)`
 
 SetStatus sets Status field to given value.
 

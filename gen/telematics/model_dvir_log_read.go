@@ -48,10 +48,10 @@ type DvirLogRead struct {
 	Extras               map[string]interface{} `json:"extras,omitempty"`
 	VehicleId            NullableString         `json:"vehicle_id,omitempty"`
 	DriverId             NullableString         `json:"driver_id,omitempty"`
-	TspTrailerId         NullableString         `json:"tsp_trailer_id,omitempty"`
+	TrailerId            NullableString         `json:"trailer_id,omitempty"`
 	SourceDriverId       NullableString         `json:"source_driver_id,omitempty"`
 	SourceVehicleId      NullableString         `json:"source_vehicle_id,omitempty"`
-	SourceTspTrailerId   NullableString         `json:"source_tsp_trailer_id,omitempty"`
+	SourceTrailerId      NullableString         `json:"source_trailer_id,omitempty"`
 	LogType              NullableString         `json:"log_type,omitempty"`
 	AuthorityName        NullableString         `json:"authority_name,omitempty"`
 	AuthorityAddress     NullableString         `json:"authority_address,omitempty"`
@@ -743,47 +743,47 @@ func (o *DvirLogRead) UnsetDriverId() {
 	o.DriverId.Unset()
 }
 
-// GetTspTrailerId returns the TspTrailerId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DvirLogRead) GetTspTrailerId() string {
-	if o == nil || IsNil(o.TspTrailerId.Get()) {
+// GetTrailerId returns the TrailerId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DvirLogRead) GetTrailerId() string {
+	if o == nil || IsNil(o.TrailerId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.TspTrailerId.Get()
+	return *o.TrailerId.Get()
 }
 
-// GetTspTrailerIdOk returns a tuple with the TspTrailerId field value if set, nil otherwise
+// GetTrailerIdOk returns a tuple with the TrailerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DvirLogRead) GetTspTrailerIdOk() (*string, bool) {
+func (o *DvirLogRead) GetTrailerIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.TspTrailerId.Get(), o.TspTrailerId.IsSet()
+	return o.TrailerId.Get(), o.TrailerId.IsSet()
 }
 
-// HasTspTrailerId returns a boolean if a field has been set.
-func (o *DvirLogRead) HasTspTrailerId() bool {
-	if o != nil && o.TspTrailerId.IsSet() {
+// HasTrailerId returns a boolean if a field has been set.
+func (o *DvirLogRead) HasTrailerId() bool {
+	if o != nil && o.TrailerId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTspTrailerId gets a reference to the given NullableString and assigns it to the TspTrailerId field.
-func (o *DvirLogRead) SetTspTrailerId(v string) {
-	o.TspTrailerId.Set(&v)
+// SetTrailerId gets a reference to the given NullableString and assigns it to the TrailerId field.
+func (o *DvirLogRead) SetTrailerId(v string) {
+	o.TrailerId.Set(&v)
 }
 
-// SetTspTrailerIdNil sets the value for TspTrailerId to be an explicit nil
-func (o *DvirLogRead) SetTspTrailerIdNil() {
-	o.TspTrailerId.Set(nil)
+// SetTrailerIdNil sets the value for TrailerId to be an explicit nil
+func (o *DvirLogRead) SetTrailerIdNil() {
+	o.TrailerId.Set(nil)
 }
 
-// UnsetTspTrailerId ensures that no value is present for TspTrailerId, not even an explicit nil
-func (o *DvirLogRead) UnsetTspTrailerId() {
-	o.TspTrailerId.Unset()
+// UnsetTrailerId ensures that no value is present for TrailerId, not even an explicit nil
+func (o *DvirLogRead) UnsetTrailerId() {
+	o.TrailerId.Unset()
 }
 
 // GetSourceDriverId returns the SourceDriverId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -872,47 +872,47 @@ func (o *DvirLogRead) UnsetSourceVehicleId() {
 	o.SourceVehicleId.Unset()
 }
 
-// GetSourceTspTrailerId returns the SourceTspTrailerId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DvirLogRead) GetSourceTspTrailerId() string {
-	if o == nil || IsNil(o.SourceTspTrailerId.Get()) {
+// GetSourceTrailerId returns the SourceTrailerId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DvirLogRead) GetSourceTrailerId() string {
+	if o == nil || IsNil(o.SourceTrailerId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.SourceTspTrailerId.Get()
+	return *o.SourceTrailerId.Get()
 }
 
-// GetSourceTspTrailerIdOk returns a tuple with the SourceTspTrailerId field value if set, nil otherwise
+// GetSourceTrailerIdOk returns a tuple with the SourceTrailerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DvirLogRead) GetSourceTspTrailerIdOk() (*string, bool) {
+func (o *DvirLogRead) GetSourceTrailerIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SourceTspTrailerId.Get(), o.SourceTspTrailerId.IsSet()
+	return o.SourceTrailerId.Get(), o.SourceTrailerId.IsSet()
 }
 
-// HasSourceTspTrailerId returns a boolean if a field has been set.
-func (o *DvirLogRead) HasSourceTspTrailerId() bool {
-	if o != nil && o.SourceTspTrailerId.IsSet() {
+// HasSourceTrailerId returns a boolean if a field has been set.
+func (o *DvirLogRead) HasSourceTrailerId() bool {
+	if o != nil && o.SourceTrailerId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceTspTrailerId gets a reference to the given NullableString and assigns it to the SourceTspTrailerId field.
-func (o *DvirLogRead) SetSourceTspTrailerId(v string) {
-	o.SourceTspTrailerId.Set(&v)
+// SetSourceTrailerId gets a reference to the given NullableString and assigns it to the SourceTrailerId field.
+func (o *DvirLogRead) SetSourceTrailerId(v string) {
+	o.SourceTrailerId.Set(&v)
 }
 
-// SetSourceTspTrailerIdNil sets the value for SourceTspTrailerId to be an explicit nil
-func (o *DvirLogRead) SetSourceTspTrailerIdNil() {
-	o.SourceTspTrailerId.Set(nil)
+// SetSourceTrailerIdNil sets the value for SourceTrailerId to be an explicit nil
+func (o *DvirLogRead) SetSourceTrailerIdNil() {
+	o.SourceTrailerId.Set(nil)
 }
 
-// UnsetSourceTspTrailerId ensures that no value is present for SourceTspTrailerId, not even an explicit nil
-func (o *DvirLogRead) UnsetSourceTspTrailerId() {
-	o.SourceTspTrailerId.Unset()
+// UnsetSourceTrailerId ensures that no value is present for SourceTrailerId, not even an explicit nil
+func (o *DvirLogRead) UnsetSourceTrailerId() {
+	o.SourceTrailerId.Unset()
 }
 
 // GetLogType returns the LogType field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1601,8 +1601,8 @@ func (o DvirLogRead) ToMap() (map[string]interface{}, error) {
 	if o.DriverId.IsSet() {
 		toSerialize["driver_id"] = o.DriverId.Get()
 	}
-	if o.TspTrailerId.IsSet() {
-		toSerialize["tsp_trailer_id"] = o.TspTrailerId.Get()
+	if o.TrailerId.IsSet() {
+		toSerialize["trailer_id"] = o.TrailerId.Get()
 	}
 	if o.SourceDriverId.IsSet() {
 		toSerialize["source_driver_id"] = o.SourceDriverId.Get()
@@ -1610,8 +1610,8 @@ func (o DvirLogRead) ToMap() (map[string]interface{}, error) {
 	if o.SourceVehicleId.IsSet() {
 		toSerialize["source_vehicle_id"] = o.SourceVehicleId.Get()
 	}
-	if o.SourceTspTrailerId.IsSet() {
-		toSerialize["source_tsp_trailer_id"] = o.SourceTspTrailerId.Get()
+	if o.SourceTrailerId.IsSet() {
+		toSerialize["source_trailer_id"] = o.SourceTrailerId.Get()
 	}
 	if o.LogType.IsSet() {
 		toSerialize["log_type"] = o.LogType.Get()
@@ -1727,10 +1727,10 @@ func (o *DvirLogRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "extras")
 		delete(additionalProperties, "vehicle_id")
 		delete(additionalProperties, "driver_id")
-		delete(additionalProperties, "tsp_trailer_id")
+		delete(additionalProperties, "trailer_id")
 		delete(additionalProperties, "source_driver_id")
 		delete(additionalProperties, "source_vehicle_id")
-		delete(additionalProperties, "source_tsp_trailer_id")
+		delete(additionalProperties, "source_trailer_id")
 		delete(additionalProperties, "log_type")
 		delete(additionalProperties, "authority_name")
 		delete(additionalProperties, "authority_address")

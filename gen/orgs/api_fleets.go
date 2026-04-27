@@ -23,20 +23,6 @@ import (
 type FleetsAPI interface {
 
 	/*
-		CreateFleet Create Fleet
-
-		Create a new fleet.
-
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiCreateFleetRequest
-	*/
-	CreateFleet(ctx context.Context) ApiCreateFleetRequest
-
-	// CreateFleetExecute executes the request
-	//  @return FleetRead
-	CreateFleetExecute(r ApiCreateFleetRequest) (*FleetRead, *http.Response, error)
-
-	/*
 			CreateFleetProperties Create Fleet Properties
 
 			Create new fleet properties.
@@ -123,8 +109,8 @@ type FleetsAPI interface {
 	ListFleets(ctx context.Context) ApiListFleetsRequest
 
 	// ListFleetsExecute executes the request
-	//  @return CursorPageCustomizedFleetRead
-	ListFleetsExecute(r ApiListFleetsRequest) (*CursorPageCustomizedFleetRead, *http.Response, error)
+	//  @return CursorPageFleetRead
+	ListFleetsExecute(r ApiListFleetsRequest) (*CursorPageFleetRead, *http.Response, error)
 
 	/*
 		UpdateFleet Update Fleet
@@ -144,215 +130,6 @@ type FleetsAPI interface {
 
 // FleetsAPIService FleetsAPI service
 type FleetsAPIService service
-
-type ApiCreateFleetRequest struct {
-	ctx         context.Context
-	ApiService  FleetsAPI
-	fleetCreate *FleetCreate
-}
-
-func (r ApiCreateFleetRequest) FleetCreate(fleetCreate FleetCreate) ApiCreateFleetRequest {
-	r.fleetCreate = &fleetCreate
-	return r
-}
-
-func (r ApiCreateFleetRequest) Execute() (*FleetRead, *http.Response, error) {
-	return r.ApiService.CreateFleetExecute(r)
-}
-
-/*
-CreateFleet Create Fleet
-
-Create a new fleet.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFleetRequest
-*/
-func (a *FleetsAPIService) CreateFleet(ctx context.Context) ApiCreateFleetRequest {
-	return ApiCreateFleetRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FleetRead
-func (a *FleetsAPIService) CreateFleetExecute(r ApiCreateFleetRequest) (*FleetRead, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FleetRead
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetsAPIService.CreateFleet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v2/orgs/fleets"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.fleetCreate == nil {
-		return localVarReturnValue, nil, reportError("fleetCreate is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.fleetCreate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v BadRequest
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Forbidden
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v NotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 405 {
-			var v MethodNotAllowed
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v Conflict
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v UnprocessableEntity
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v TooManyRequests
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v InternalServerError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
 
 type ApiCreateFleetPropertiesRequest struct {
 	ctx                 context.Context
@@ -1365,7 +1142,7 @@ type ApiListFleetsRequest struct {
 	size       *int32
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListFleetsRequest) FleetRefs(fleetRefs []string) ApiListFleetsRequest {
 	r.fleetRefs = &fleetRefs
 	return r
@@ -1383,7 +1160,7 @@ func (r ApiListFleetsRequest) Size(size int32) ApiListFleetsRequest {
 	return r
 }
 
-func (r ApiListFleetsRequest) Execute() (*CursorPageCustomizedFleetRead, *http.Response, error) {
+func (r ApiListFleetsRequest) Execute() (*CursorPageFleetRead, *http.Response, error) {
 	return r.ApiService.ListFleetsExecute(r)
 }
 
@@ -1404,13 +1181,13 @@ func (a *FleetsAPIService) ListFleets(ctx context.Context) ApiListFleetsRequest 
 
 // Execute executes the request
 //
-//	@return CursorPageCustomizedFleetRead
-func (a *FleetsAPIService) ListFleetsExecute(r ApiListFleetsRequest) (*CursorPageCustomizedFleetRead, *http.Response, error) {
+//	@return CursorPageFleetRead
+func (a *FleetsAPIService) ListFleetsExecute(r ApiListFleetsRequest) (*CursorPageFleetRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageCustomizedFleetRead
+		localVarReturnValue *CursorPageFleetRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetsAPIService.ListFleets")
@@ -1441,7 +1218,7 @@ func (a *FleetsAPIService) ListFleetsExecute(r ApiListFleetsRequest) (*CursorPag
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-		var defaultValue int32 = 500
+		var defaultValue int32 = 300
 		r.size = &defaultValue
 	}
 	// to determine the Content-Type header

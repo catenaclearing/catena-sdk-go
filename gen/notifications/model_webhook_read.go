@@ -25,11 +25,11 @@ type WebhookRead struct {
 	Id  string      `json:"id"`
 	Url interface{} `json:"url"`
 	// The event name that triggers this webhook
-	EventName WebhookEventName       `json:"event_name"`
+	EventName WebhookEventNameEnum   `json:"event_name"`
 	Filters   NullableWebhookFilters `json:"filters,omitempty"`
 	Secret    interface{}            `json:"secret"`
-	// The current status of the webhook subscription (active, inactive, or stale)
-	Status StatusEnum `json:"status"`
+	// The current status of the webhook subscription (active, inactive, stale, or deleted)
+	Status WebhookStatusEnum `json:"status"`
 	// The timestamp when the webhook subscription was created
 	CreatedAt time.Time `json:"created_at"`
 	// The timestamp when the webhook subscription was last updated
@@ -43,7 +43,7 @@ type _WebhookRead WebhookRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookRead(id string, url interface{}, eventName WebhookEventName, secret interface{}, status StatusEnum, createdAt time.Time, updatedAt time.Time) *WebhookRead {
+func NewWebhookRead(id string, url interface{}, eventName WebhookEventNameEnum, secret interface{}, status WebhookStatusEnum, createdAt time.Time, updatedAt time.Time) *WebhookRead {
 	this := WebhookRead{}
 	this.Id = id
 	this.Url = url
@@ -114,9 +114,9 @@ func (o *WebhookRead) SetUrl(v interface{}) {
 }
 
 // GetEventName returns the EventName field value
-func (o *WebhookRead) GetEventName() WebhookEventName {
+func (o *WebhookRead) GetEventName() WebhookEventNameEnum {
 	if o == nil {
-		var ret WebhookEventName
+		var ret WebhookEventNameEnum
 		return ret
 	}
 
@@ -125,7 +125,7 @@ func (o *WebhookRead) GetEventName() WebhookEventName {
 
 // GetEventNameOk returns a tuple with the EventName field value
 // and a boolean to check if the value has been set.
-func (o *WebhookRead) GetEventNameOk() (*WebhookEventName, bool) {
+func (o *WebhookRead) GetEventNameOk() (*WebhookEventNameEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,7 +133,7 @@ func (o *WebhookRead) GetEventNameOk() (*WebhookEventName, bool) {
 }
 
 // SetEventName sets field value
-func (o *WebhookRead) SetEventName(v WebhookEventName) {
+func (o *WebhookRead) SetEventName(v WebhookEventNameEnum) {
 	o.EventName = v
 }
 
@@ -207,9 +207,9 @@ func (o *WebhookRead) SetSecret(v interface{}) {
 }
 
 // GetStatus returns the Status field value
-func (o *WebhookRead) GetStatus() StatusEnum {
+func (o *WebhookRead) GetStatus() WebhookStatusEnum {
 	if o == nil {
-		var ret StatusEnum
+		var ret WebhookStatusEnum
 		return ret
 	}
 
@@ -218,7 +218,7 @@ func (o *WebhookRead) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *WebhookRead) GetStatusOk() (*StatusEnum, bool) {
+func (o *WebhookRead) GetStatusOk() (*WebhookStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -226,7 +226,7 @@ func (o *WebhookRead) GetStatusOk() (*StatusEnum, bool) {
 }
 
 // SetStatus sets field value
-func (o *WebhookRead) SetStatus(v StatusEnum) {
+func (o *WebhookRead) SetStatus(v WebhookStatusEnum) {
 	o.Status = v
 }
 

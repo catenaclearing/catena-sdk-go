@@ -20,13 +20,13 @@ var _ MappedNullable = &ScheduleUpdate{}
 
 // ScheduleUpdate API Model for updating a schedule
 type ScheduleUpdate struct {
-	Status                    NullableStatusEnum `json:"status,omitempty"`
-	ExecutionIntervalSeconds  NullableInt32      `json:"execution_interval_seconds,omitempty"`
-	ConsecutiveErrorThreshold NullableInt32      `json:"consecutive_error_threshold,omitempty"`
-	ConsecutiveErrorCount     NullableInt32      `json:"consecutive_error_count,omitempty"`
-	MaxConcurrentExecutions   NullableInt32      `json:"max_concurrent_executions,omitempty"`
-	NextExecutionAt           NullableTime       `json:"next_execution_at,omitempty"`
-	Cursor                    NullableString     `json:"cursor,omitempty"`
+	Status                    NullableScheduleStatusEnum `json:"status,omitempty"`
+	ExecutionIntervalSeconds  NullableInt32              `json:"execution_interval_seconds,omitempty"`
+	ConsecutiveErrorThreshold NullableInt32              `json:"consecutive_error_threshold,omitempty"`
+	ConsecutiveErrorCount     NullableInt32              `json:"consecutive_error_count,omitempty"`
+	MaxConcurrentExecutions   NullableInt32              `json:"max_concurrent_executions,omitempty"`
+	NextExecutionAt           NullableTime               `json:"next_execution_at,omitempty"`
+	Cursor                    NullableString             `json:"cursor,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -50,9 +50,9 @@ func NewScheduleUpdateWithDefaults() *ScheduleUpdate {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ScheduleUpdate) GetStatus() StatusEnum {
+func (o *ScheduleUpdate) GetStatus() ScheduleStatusEnum {
 	if o == nil || IsNil(o.Status.Get()) {
-		var ret StatusEnum
+		var ret ScheduleStatusEnum
 		return ret
 	}
 	return *o.Status.Get()
@@ -61,7 +61,7 @@ func (o *ScheduleUpdate) GetStatus() StatusEnum {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ScheduleUpdate) GetStatusOk() (*StatusEnum, bool) {
+func (o *ScheduleUpdate) GetStatusOk() (*ScheduleStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,8 +77,8 @@ func (o *ScheduleUpdate) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given NullableStatusEnum and assigns it to the Status field.
-func (o *ScheduleUpdate) SetStatus(v StatusEnum) {
+// SetStatus gets a reference to the given NullableScheduleStatusEnum and assigns it to the Status field.
+func (o *ScheduleUpdate) SetStatus(v ScheduleStatusEnum) {
 	o.Status.Set(&v)
 }
 

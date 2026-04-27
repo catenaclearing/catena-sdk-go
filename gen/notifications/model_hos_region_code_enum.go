@@ -88,6 +88,7 @@ const (
 	HOSREGIONCODEENUM_CA_QC HosRegionCodeEnum = "CA-QC"
 	HOSREGIONCODEENUM_CA_SK HosRegionCodeEnum = "CA-SK"
 	HOSREGIONCODEENUM_CA_YT HosRegionCodeEnum = "CA-YT"
+	HOSREGIONCODEENUM_CA_NL HosRegionCodeEnum = "CA-NL"
 	HOSREGIONCODEENUM_MX_AG HosRegionCodeEnum = "MX-AG"
 	HOSREGIONCODEENUM_MX_BN HosRegionCodeEnum = "MX-BN"
 	HOSREGIONCODEENUM_MX_BS HosRegionCodeEnum = "MX-BS"
@@ -192,6 +193,7 @@ var AllowedHosRegionCodeEnumEnumValues = []HosRegionCodeEnum{
 	"CA-QC",
 	"CA-SK",
 	"CA-YT",
+	"CA-NL",
 	"MX-AG",
 	"MX-BN",
 	"MX-BS",

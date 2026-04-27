@@ -27,6 +27,8 @@ type Credentials1 struct {
 	CompanyAccessCredsOutput    *CompanyAccessCredsOutput
 	CompanyIdCredsOutput        *CompanyIdCredsOutput
 	DatabaseCredsOutput         *DatabaseCredsOutput
+	EZLynkAccessCredsOutput     *EZLynkAccessCredsOutput
+	EZLynkCreds                 *EZLynkCreds
 	EzlogzCreds                 *EzlogzCreds
 	FactorEldCredsOutput        *FactorEldCredsOutput
 	FleetupCredsOutput          *FleetupCredsOutput
@@ -49,6 +51,8 @@ type Credentials1 struct {
 	TokenCredsOutput            *TokenCredsOutput
 	TruckXCredsOutput           *TruckXCredsOutput
 	TruckXSLCOutput             *TruckXSLCOutput
+	VerizonConnectCredsOutput   *VerizonConnectCredsOutput
+	VerizonConnectSLCOutput     *VerizonConnectSLCOutput
 	ZubieCredsOutput            *ZubieCredsOutput
 }
 
@@ -183,6 +187,32 @@ func (dst *Credentials1) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.DatabaseCredsOutput = nil
+	}
+
+	// try to unmarshal JSON data into EZLynkAccessCredsOutput
+	err = json.Unmarshal(data, &dst.EZLynkAccessCredsOutput)
+	if err == nil {
+		jsonEZLynkAccessCredsOutput, _ := json.Marshal(dst.EZLynkAccessCredsOutput)
+		if string(jsonEZLynkAccessCredsOutput) == "{}" { // empty struct
+			dst.EZLynkAccessCredsOutput = nil
+		} else {
+			return nil // data stored in dst.EZLynkAccessCredsOutput, return on the first match
+		}
+	} else {
+		dst.EZLynkAccessCredsOutput = nil
+	}
+
+	// try to unmarshal JSON data into EZLynkCreds
+	err = json.Unmarshal(data, &dst.EZLynkCreds)
+	if err == nil {
+		jsonEZLynkCreds, _ := json.Marshal(dst.EZLynkCreds)
+		if string(jsonEZLynkCreds) == "{}" { // empty struct
+			dst.EZLynkCreds = nil
+		} else {
+			return nil // data stored in dst.EZLynkCreds, return on the first match
+		}
+	} else {
+		dst.EZLynkCreds = nil
 	}
 
 	// try to unmarshal JSON data into EzlogzCreds
@@ -471,6 +501,32 @@ func (dst *Credentials1) UnmarshalJSON(data []byte) error {
 		dst.TruckXSLCOutput = nil
 	}
 
+	// try to unmarshal JSON data into VerizonConnectCredsOutput
+	err = json.Unmarshal(data, &dst.VerizonConnectCredsOutput)
+	if err == nil {
+		jsonVerizonConnectCredsOutput, _ := json.Marshal(dst.VerizonConnectCredsOutput)
+		if string(jsonVerizonConnectCredsOutput) == "{}" { // empty struct
+			dst.VerizonConnectCredsOutput = nil
+		} else {
+			return nil // data stored in dst.VerizonConnectCredsOutput, return on the first match
+		}
+	} else {
+		dst.VerizonConnectCredsOutput = nil
+	}
+
+	// try to unmarshal JSON data into VerizonConnectSLCOutput
+	err = json.Unmarshal(data, &dst.VerizonConnectSLCOutput)
+	if err == nil {
+		jsonVerizonConnectSLCOutput, _ := json.Marshal(dst.VerizonConnectSLCOutput)
+		if string(jsonVerizonConnectSLCOutput) == "{}" { // empty struct
+			dst.VerizonConnectSLCOutput = nil
+		} else {
+			return nil // data stored in dst.VerizonConnectSLCOutput, return on the first match
+		}
+	} else {
+		dst.VerizonConnectSLCOutput = nil
+	}
+
 	// try to unmarshal JSON data into ZubieCredsOutput
 	err = json.Unmarshal(data, &dst.ZubieCredsOutput)
 	if err == nil {
@@ -527,6 +583,14 @@ func (src Credentials1) MarshalJSON() ([]byte, error) {
 
 	if src.DatabaseCredsOutput != nil {
 		return json.Marshal(&src.DatabaseCredsOutput)
+	}
+
+	if src.EZLynkAccessCredsOutput != nil {
+		return json.Marshal(&src.EZLynkAccessCredsOutput)
+	}
+
+	if src.EZLynkCreds != nil {
+		return json.Marshal(&src.EZLynkCreds)
 	}
 
 	if src.EzlogzCreds != nil {
@@ -615,6 +679,14 @@ func (src Credentials1) MarshalJSON() ([]byte, error) {
 
 	if src.TruckXSLCOutput != nil {
 		return json.Marshal(&src.TruckXSLCOutput)
+	}
+
+	if src.VerizonConnectCredsOutput != nil {
+		return json.Marshal(&src.VerizonConnectCredsOutput)
+	}
+
+	if src.VerizonConnectSLCOutput != nil {
+		return json.Marshal(&src.VerizonConnectSLCOutput)
 	}
 
 	if src.ZubieCredsOutput != nil {

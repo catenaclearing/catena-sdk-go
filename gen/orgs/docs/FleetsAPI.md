@@ -4,7 +4,6 @@ All URIs are relative to *https://api.catenatelematics.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFleet**](FleetsAPI.md#CreateFleet) | **Post** /v2/orgs/fleets | Create Fleet
 [**CreateFleetProperties**](FleetsAPI.md#CreateFleetProperties) | **Post** /v2/orgs/fleets/{fleet_id}/properties | Create Fleet Properties
 [**DeleteFleet**](FleetsAPI.md#DeleteFleet) | **Delete** /v2/orgs/fleets/{fleet_id} | Delete Fleet
 [**DeleteFleetProperty**](FleetsAPI.md#DeleteFleetProperty) | **Delete** /v2/orgs/fleets/{fleet_id}/properties/{property_id} | Delete Fleet Property
@@ -13,72 +12,6 @@ Method | HTTP request | Description
 [**ListFleets**](FleetsAPI.md#ListFleets) | **Get** /v2/orgs/fleets | List Fleets
 [**UpdateFleet**](FleetsAPI.md#UpdateFleet) | **Patch** /v2/orgs/fleets/{fleet_id} | Update Fleet
 
-
-
-## CreateFleet
-
-> FleetRead CreateFleet(ctx).FleetCreate(fleetCreate).Execute()
-
-Create Fleet
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
-)
-
-func main() {
-	fleetCreate := *openapiclient.NewFleetCreate("Name_example") // FleetCreate | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FleetsAPI.CreateFleet(context.Background()).FleetCreate(fleetCreate).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `FleetsAPI.CreateFleet``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateFleet`: FleetRead
-	fmt.Fprintf(os.Stdout, "Response from `FleetsAPI.CreateFleet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateFleetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **fleetCreate** | [**FleetCreate**](FleetCreate.md) |  | 
-
-### Return type
-
-[**FleetRead**](FleetRead.md)
-
-### Authorization
-
-[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## CreateFleetProperties
@@ -434,7 +367,7 @@ Name | Type | Description  | Notes
 
 ## ListFleets
 
-> CursorPageCustomizedFleetRead ListFleets(ctx).FleetRefs(fleetRefs).Cursor(cursor).Size(size).Execute()
+> CursorPageFleetRead ListFleets(ctx).FleetRefs(fleetRefs).Cursor(cursor).Size(size).Execute()
 
 List Fleets
 
@@ -453,9 +386,9 @@ import (
 )
 
 func main() {
-	fleetRefs := []string{"Inner_example"} // []string | Limit results to specific fleets using your organization's fleet reference identifiers (optional)
+	fleetRefs := []string{"Inner_example"} // []string | Limit results to specific fleets using your organization's fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., `?fleet_refs=ref1&fleet_refs=ref2`). (optional)
 	cursor := "cursor_example" // string | Cursor for the next page (optional)
-	size := int32(56) // int32 | Page size (optional) (default to 500)
+	size := int32(56) // int32 | Page size (optional) (default to 300)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -464,7 +397,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FleetsAPI.ListFleets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListFleets`: CursorPageCustomizedFleetRead
+	// response from `ListFleets`: CursorPageFleetRead
 	fmt.Fprintf(os.Stdout, "Response from `FleetsAPI.ListFleets`: %v\n", resp)
 }
 ```
@@ -480,13 +413,13 @@ Other parameters are passed through a pointer to a apiListFleetsRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **fleetRefs** | **[]string** | Limit results to specific fleets using your organization&#39;s fleet reference identifiers | 
+ **fleetRefs** | **[]string** | Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;). | 
  **cursor** | **string** | Cursor for the next page | 
- **size** | **int32** | Page size | [default to 500]
+ **size** | **int32** | Page size | [default to 300]
 
 ### Return type
 
-[**CursorPageCustomizedFleetRead**](CursorPageCustomizedFleetRead.md)
+[**CursorPageFleetRead**](CursorPageFleetRead.md)
 
 ### Authorization
 

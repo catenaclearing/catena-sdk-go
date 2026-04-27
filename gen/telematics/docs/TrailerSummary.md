@@ -13,14 +13,14 @@ Name | Type | Description | Notes
 **TspId** | **NullableString** |  | 
 **TspSlug** | **NullableString** |  | 
 **SourceName** | [**NullableTspEnum**](TspEnum.md) |  | 
-**Location** | [**NullableLocation4**](Location4.md) |  | 
+**Location** | [**NullableLocation6**](Location6.md) |  | 
 **H3Index11** | **NullableInt32** |  | 
 
 ## Methods
 
 ### NewTrailerSummary
 
-`func NewTrailerSummary(fleetId string, fleetRef NullableString, connectionId string, trailerId string, sourceId NullableString, trailerName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, location NullableLocation4, h3Index11 NullableInt32, ) *TrailerSummary`
+`func NewTrailerSummary(fleetId string, fleetRef NullableString, connectionId string, trailerId string, sourceId NullableString, trailerName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, location NullableLocation6, h3Index11 NullableInt32, ) *TrailerSummary`
 
 NewTrailerSummary instantiates a new TrailerSummary object
 This constructor will assign default values to properties that have it defined,
@@ -277,20 +277,20 @@ SetSourceName sets SourceName field to given value.
 UnsetSourceName ensures that no value is present for SourceName, not even an explicit nil
 ### GetLocation
 
-`func (o *TrailerSummary) GetLocation() Location4`
+`func (o *TrailerSummary) GetLocation() Location6`
 
 GetLocation returns the Location field if non-nil, zero value otherwise.
 
 ### GetLocationOk
 
-`func (o *TrailerSummary) GetLocationOk() (*Location4, bool)`
+`func (o *TrailerSummary) GetLocationOk() (*Location6, bool)`
 
 GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocation
 
-`func (o *TrailerSummary) SetLocation(v Location4)`
+`func (o *TrailerSummary) SetLocation(v Location6)`
 
 SetLocation sets Location field to given value.
 

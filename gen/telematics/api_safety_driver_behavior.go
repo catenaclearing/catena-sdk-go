@@ -45,6 +45,7 @@ type ApiListDriverSafetyEventsRequest struct {
 	ApiService        SafetyDriverBehaviorAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	fromDatetime      *time.Time
 	toDatetime        *time.Time
 	includeSourceData *bool
@@ -56,15 +57,21 @@ type ApiListDriverSafetyEventsRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListDriverSafetyEventsRequest) FleetIds(fleetIds []string) ApiListDriverSafetyEventsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListDriverSafetyEventsRequest) FleetRefs(fleetRefs []string) ApiListDriverSafetyEventsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListDriverSafetyEventsRequest) ConnectionId(connectionId string) ApiListDriverSafetyEventsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -86,13 +93,13 @@ func (r ApiListDriverSafetyEventsRequest) IncludeSourceData(includeSourceData bo
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListDriverSafetyEventsRequest) DriverIds(driverIds []string) ApiListDriverSafetyEventsRequest {
 	r.driverIds = &driverIds
 	return r
 }
 
-// Limit results to specific vehicles. **Maximum:** 100 IDs
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
 func (r ApiListDriverSafetyEventsRequest) VehicleIds(vehicleIds []string) ApiListDriverSafetyEventsRequest {
 	r.vehicleIds = &vehicleIds
 	return r
@@ -184,6 +191,9 @@ func (a *SafetyDriverBehaviorAPIService) ListDriverSafetyEventsExecute(r ApiList
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.fromDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
