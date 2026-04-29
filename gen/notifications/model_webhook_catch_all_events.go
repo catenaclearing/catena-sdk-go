@@ -20,26 +20,35 @@ type WebhookCatchAllEvents string
 
 // List of WebhookCatchAllEvents
 const (
-	WEBHOOKCATCHALLEVENTS_INVITATION         WebhookCatchAllEvents = "invitation.*"
-	WEBHOOKCATCHALLEVENTS_CONNECTION         WebhookCatchAllEvents = "connection.*"
-	WEBHOOKCATCHALLEVENTS_FLEET_CONNECTION   WebhookCatchAllEvents = "fleet_connection.*"
-	WEBHOOKCATCHALLEVENTS_SHARE_AGREEMENT    WebhookCatchAllEvents = "share_agreement.*"
-	WEBHOOKCATCHALLEVENTS_WEBHOOK            WebhookCatchAllEvents = "webhook.*"
-	WEBHOOKCATCHALLEVENTS_VEHICLE            WebhookCatchAllEvents = "vehicle.*"
-	WEBHOOKCATCHALLEVENTS_TRAILER            WebhookCatchAllEvents = "trailer.*"
-	WEBHOOKCATCHALLEVENTS_TRAILER_LOCATION   WebhookCatchAllEvents = "trailer_location.*"
-	WEBHOOKCATCHALLEVENTS_USER               WebhookCatchAllEvents = "user.*"
-	WEBHOOKCATCHALLEVENTS_VEHICLE_LOCATION   WebhookCatchAllEvents = "vehicle_location.*"
-	WEBHOOKCATCHALLEVENTS_IFTA_SUMMARY       WebhookCatchAllEvents = "ifta_summary.*"
-	WEBHOOKCATCHALLEVENTS_HOS_AVAILABILITY   WebhookCatchAllEvents = "hos_availability.*"
-	WEBHOOKCATCHALLEVENTS_HOS_DAILY_SNAPSHOT WebhookCatchAllEvents = "hos_daily_snapshot.*"
-	WEBHOOKCATCHALLEVENTS_HOS_EVENT          WebhookCatchAllEvents = "hos_event.*"
-	WEBHOOKCATCHALLEVENTS_HOS_VIOLATION      WebhookCatchAllEvents = "hos_violation.*"
-	WEBHOOKCATCHALLEVENTS_ENGINE_LOG         WebhookCatchAllEvents = "engine_log.*"
+	WEBHOOKCATCHALLEVENTS_DRIVER_VEHICLE_ASSOCIATION  WebhookCatchAllEvents = "driver_vehicle_association.*"
+	WEBHOOKCATCHALLEVENTS_TRAILER_VEHICLE_ASSOCIATION WebhookCatchAllEvents = "trailer_vehicle_association.*"
+	WEBHOOKCATCHALLEVENTS_INVITATION                  WebhookCatchAllEvents = "invitation.*"
+	WEBHOOKCATCHALLEVENTS_CONNECTION                  WebhookCatchAllEvents = "connection.*"
+	WEBHOOKCATCHALLEVENTS_FLEET_CONNECTION            WebhookCatchAllEvents = "fleet_connection.*"
+	WEBHOOKCATCHALLEVENTS_SHARE_AGREEMENT             WebhookCatchAllEvents = "share_agreement.*"
+	WEBHOOKCATCHALLEVENTS_WEBHOOK                     WebhookCatchAllEvents = "webhook.*"
+	WEBHOOKCATCHALLEVENTS_VEHICLE                     WebhookCatchAllEvents = "vehicle.*"
+	WEBHOOKCATCHALLEVENTS_TRAILER                     WebhookCatchAllEvents = "trailer.*"
+	WEBHOOKCATCHALLEVENTS_TRAILER_LOCATION            WebhookCatchAllEvents = "trailer_location.*"
+	WEBHOOKCATCHALLEVENTS_TRAILER_STATUS              WebhookCatchAllEvents = "trailer_status.*"
+	WEBHOOKCATCHALLEVENTS_USER                        WebhookCatchAllEvents = "user.*"
+	WEBHOOKCATCHALLEVENTS_VEHICLE_LOCATION            WebhookCatchAllEvents = "vehicle_location.*"
+	WEBHOOKCATCHALLEVENTS_IFTA_SUMMARY                WebhookCatchAllEvents = "ifta_summary.*"
+	WEBHOOKCATCHALLEVENTS_HOS_AVAILABILITY            WebhookCatchAllEvents = "hos_availability.*"
+	WEBHOOKCATCHALLEVENTS_HOS_DAILY_SNAPSHOT          WebhookCatchAllEvents = "hos_daily_snapshot.*"
+	WEBHOOKCATCHALLEVENTS_HOS_EVENT                   WebhookCatchAllEvents = "hos_event.*"
+	WEBHOOKCATCHALLEVENTS_HOS_VIOLATION               WebhookCatchAllEvents = "hos_violation.*"
+	WEBHOOKCATCHALLEVENTS_ENGINE_LOG                  WebhookCatchAllEvents = "engine_log.*"
+	WEBHOOKCATCHALLEVENTS_ENGINE_STATUS               WebhookCatchAllEvents = "engine_status.*"
+	WEBHOOKCATCHALLEVENTS_MESSAGE                     WebhookCatchAllEvents = "message.*"
+	WEBHOOKCATCHALLEVENTS_FUEL_TRANSACTION            WebhookCatchAllEvents = "fuel_transaction.*"
+	WEBHOOKCATCHALLEVENTS_RESOURCE_OPERATION          WebhookCatchAllEvents = "resource_operation.*"
 )
 
 // All allowed values of WebhookCatchAllEvents enum
 var AllowedWebhookCatchAllEventsEnumValues = []WebhookCatchAllEvents{
+	"driver_vehicle_association.*",
+	"trailer_vehicle_association.*",
 	"invitation.*",
 	"connection.*",
 	"fleet_connection.*",
@@ -48,6 +57,7 @@ var AllowedWebhookCatchAllEventsEnumValues = []WebhookCatchAllEvents{
 	"vehicle.*",
 	"trailer.*",
 	"trailer_location.*",
+	"trailer_status.*",
 	"user.*",
 	"vehicle_location.*",
 	"ifta_summary.*",
@@ -56,6 +66,10 @@ var AllowedWebhookCatchAllEventsEnumValues = []WebhookCatchAllEvents{
 	"hos_event.*",
 	"hos_violation.*",
 	"engine_log.*",
+	"engine_status.*",
+	"message.*",
+	"fuel_transaction.*",
+	"resource_operation.*",
 }
 
 func (v *WebhookCatchAllEvents) UnmarshalJSON(src []byte) error {

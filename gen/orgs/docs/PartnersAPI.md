@@ -434,7 +434,7 @@ Name | Type | Description  | Notes
 
 ## ListPartners
 
-> CursorPageCustomizedPartnerRead ListPartners(ctx).Cursor(cursor).Size(size).Execute()
+> CursorPagePartnerRead ListPartners(ctx).Cursor(cursor).Size(size).Execute()
 
 List Partners
 
@@ -454,7 +454,7 @@ import (
 
 func main() {
 	cursor := "cursor_example" // string | Cursor for the next page (optional)
-	size := int32(56) // int32 | Page size (optional) (default to 500)
+	size := int32(56) // int32 | Page size (optional) (default to 300)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -463,7 +463,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PartnersAPI.ListPartners``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListPartners`: CursorPageCustomizedPartnerRead
+	// response from `ListPartners`: CursorPagePartnerRead
 	fmt.Fprintf(os.Stdout, "Response from `PartnersAPI.ListPartners`: %v\n", resp)
 }
 ```
@@ -480,11 +480,11 @@ Other parameters are passed through a pointer to a apiListPartnersRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **string** | Cursor for the next page | 
- **size** | **int32** | Page size | [default to 500]
+ **size** | **int32** | Page size | [default to 300]
 
 ### Return type
 
-[**CursorPageCustomizedPartnerRead**](CursorPageCustomizedPartnerRead.md)
+[**CursorPagePartnerRead**](CursorPagePartnerRead.md)
 
 ### Authorization
 

@@ -45,7 +45,8 @@ Name | Type | Description | Notes
 **RecordStatus** | Pointer to **NullableString** |  | [optional] 
 **RegionCode** | Pointer to [**NullableHosRegionCodeEnum**](HosRegionCodeEnum.md) |  | [optional] 
 **LocationName** | Pointer to **NullableString** |  | [optional] 
-**Location** | Pointer to [**NullableLocation2**](Location2.md) |  | [optional] 
+**Location** | Pointer to [**NullableLocation4**](Location4.md) |  | [optional] 
+**InferredAddress** | Pointer to [**NullableInferredAddress**](InferredAddress.md) |  | [optional] 
 **H3Index11** | Pointer to **NullableInt32** |  | [optional] 
 **Odometer** | Pointer to **NullableFloat32** |  | [optional] 
 **EngineHours** | Pointer to **NullableFloat32** |  | [optional] 
@@ -1388,20 +1389,20 @@ HasLocationName returns a boolean if a field has been set.
 UnsetLocationName ensures that no value is present for LocationName, not even an explicit nil
 ### GetLocation
 
-`func (o *HosEventRead) GetLocation() Location2`
+`func (o *HosEventRead) GetLocation() Location4`
 
 GetLocation returns the Location field if non-nil, zero value otherwise.
 
 ### GetLocationOk
 
-`func (o *HosEventRead) GetLocationOk() (*Location2, bool)`
+`func (o *HosEventRead) GetLocationOk() (*Location4, bool)`
 
 GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocation
 
-`func (o *HosEventRead) SetLocation(v Location2)`
+`func (o *HosEventRead) SetLocation(v Location4)`
 
 SetLocation sets Location field to given value.
 
@@ -1421,6 +1422,41 @@ HasLocation returns a boolean if a field has been set.
 `func (o *HosEventRead) UnsetLocation()`
 
 UnsetLocation ensures that no value is present for Location, not even an explicit nil
+### GetInferredAddress
+
+`func (o *HosEventRead) GetInferredAddress() InferredAddress`
+
+GetInferredAddress returns the InferredAddress field if non-nil, zero value otherwise.
+
+### GetInferredAddressOk
+
+`func (o *HosEventRead) GetInferredAddressOk() (*InferredAddress, bool)`
+
+GetInferredAddressOk returns a tuple with the InferredAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInferredAddress
+
+`func (o *HosEventRead) SetInferredAddress(v InferredAddress)`
+
+SetInferredAddress sets InferredAddress field to given value.
+
+### HasInferredAddress
+
+`func (o *HosEventRead) HasInferredAddress() bool`
+
+HasInferredAddress returns a boolean if a field has been set.
+
+### SetInferredAddressNil
+
+`func (o *HosEventRead) SetInferredAddressNil(b bool)`
+
+ SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+
+### UnsetInferredAddress
+`func (o *HosEventRead) UnsetInferredAddress()`
+
+UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
 ### GetH3Index11
 
 `func (o *HosEventRead) GetH3Index11() int32`

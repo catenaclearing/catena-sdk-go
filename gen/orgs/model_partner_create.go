@@ -27,7 +27,8 @@ type PartnerCreate struct {
 	// A list of categories for the services offered by your organization
 	Categories []PartnerCategory `json:"categories,omitempty"`
 	// Indicates whether the account is a sandbox account for testing purposes.
-	IsSandbox *bool `json:"is_sandbox,omitempty"`
+	IsSandbox       *bool          `json:"is_sandbox,omitempty"`
+	ParentPartnerId NullableString `json:"parent_partner_id,omitempty"`
 	// Optional custom properties for the partner organization
 	Properties           []PartnerPropertyCreate `json:"properties,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -221,6 +222,49 @@ func (o *PartnerCreate) SetIsSandbox(v bool) {
 	o.IsSandbox = &v
 }
 
+// GetParentPartnerId returns the ParentPartnerId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PartnerCreate) GetParentPartnerId() string {
+	if o == nil || IsNil(o.ParentPartnerId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ParentPartnerId.Get()
+}
+
+// GetParentPartnerIdOk returns a tuple with the ParentPartnerId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PartnerCreate) GetParentPartnerIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ParentPartnerId.Get(), o.ParentPartnerId.IsSet()
+}
+
+// HasParentPartnerId returns a boolean if a field has been set.
+func (o *PartnerCreate) HasParentPartnerId() bool {
+	if o != nil && o.ParentPartnerId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetParentPartnerId gets a reference to the given NullableString and assigns it to the ParentPartnerId field.
+func (o *PartnerCreate) SetParentPartnerId(v string) {
+	o.ParentPartnerId.Set(&v)
+}
+
+// SetParentPartnerIdNil sets the value for ParentPartnerId to be an explicit nil
+func (o *PartnerCreate) SetParentPartnerIdNil() {
+	o.ParentPartnerId.Set(nil)
+}
+
+// UnsetParentPartnerId ensures that no value is present for ParentPartnerId, not even an explicit nil
+func (o *PartnerCreate) UnsetParentPartnerId() {
+	o.ParentPartnerId.Unset()
+}
+
 // GetProperties returns the Properties field value if set, zero value otherwise.
 func (o *PartnerCreate) GetProperties() []PartnerPropertyCreate {
 	if o == nil || IsNil(o.Properties) {
@@ -276,6 +320,9 @@ func (o PartnerCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsSandbox) {
 		toSerialize["is_sandbox"] = o.IsSandbox
 	}
+	if o.ParentPartnerId.IsSet() {
+		toSerialize["parent_partner_id"] = o.ParentPartnerId.Get()
+	}
 	if !IsNil(o.Properties) {
 		toSerialize["properties"] = o.Properties
 	}
@@ -327,6 +374,7 @@ func (o *PartnerCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "websites")
 		delete(additionalProperties, "categories")
 		delete(additionalProperties, "is_sandbox")
+		delete(additionalProperties, "parent_partner_id")
 		delete(additionalProperties, "properties")
 		o.AdditionalProperties = additionalProperties
 	}

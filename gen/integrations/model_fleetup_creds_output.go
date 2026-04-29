@@ -20,7 +20,7 @@ var _ MappedNullable = &FleetupCredsOutput{}
 
 // FleetupCredsOutput Fleetup Connection model
 type FleetupCredsOutput struct {
-	AccountId            string      `json:"account_id"`
+	AccountId            interface{} `json:"account_id"`
 	SecretKey            interface{} `json:"secret_key"`
 	ApiKey               interface{} `json:"api_key"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _FleetupCredsOutput FleetupCredsOutput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFleetupCredsOutput(accountId string, secretKey interface{}, apiKey interface{}) *FleetupCredsOutput {
+func NewFleetupCredsOutput(accountId interface{}, secretKey interface{}, apiKey interface{}) *FleetupCredsOutput {
 	this := FleetupCredsOutput{}
 	this.AccountId = accountId
 	this.SecretKey = secretKey
@@ -49,9 +49,10 @@ func NewFleetupCredsOutputWithDefaults() *FleetupCredsOutput {
 }
 
 // GetAccountId returns the AccountId field value
-func (o *FleetupCredsOutput) GetAccountId() string {
+// If the value is explicit nil, the zero value for interface{} will be returned
+func (o *FleetupCredsOutput) GetAccountId() interface{} {
 	if o == nil {
-		var ret string
+		var ret interface{}
 		return ret
 	}
 
@@ -60,15 +61,16 @@ func (o *FleetupCredsOutput) GetAccountId() string {
 
 // GetAccountIdOk returns a tuple with the AccountId field value
 // and a boolean to check if the value has been set.
-func (o *FleetupCredsOutput) GetAccountIdOk() (*string, bool) {
-	if o == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FleetupCredsOutput) GetAccountIdOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.AccountId) {
 		return nil, false
 	}
 	return &o.AccountId, true
 }
 
 // SetAccountId sets field value
-func (o *FleetupCredsOutput) SetAccountId(v string) {
+func (o *FleetupCredsOutput) SetAccountId(v interface{}) {
 	o.AccountId = v
 }
 
@@ -134,7 +136,9 @@ func (o FleetupCredsOutput) MarshalJSON() ([]byte, error) {
 
 func (o FleetupCredsOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["account_id"] = o.AccountId
+	if o.AccountId != nil {
+		toSerialize["account_id"] = o.AccountId
+	}
 	if o.SecretKey != nil {
 		toSerialize["secret_key"] = o.SecretKey
 	}

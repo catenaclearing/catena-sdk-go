@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**NullableStatusEnum**](StatusEnum.md) |  | [optional] 
+**Status** | Pointer to [**NullableScheduleStatusEnum**](ScheduleStatusEnum.md) |  | [optional] 
 **ExecutionIntervalSeconds** | Pointer to **NullableInt32** |  | [optional] 
 **ConsecutiveErrorThreshold** | Pointer to **NullableInt32** |  | [optional] 
 **ConsecutiveErrorCount** | Pointer to **NullableInt32** |  | [optional] 
@@ -33,20 +33,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetStatus
 
-`func (o *ScheduleUpdate) GetStatus() StatusEnum`
+`func (o *ScheduleUpdate) GetStatus() ScheduleStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ScheduleUpdate) GetStatusOk() (*StatusEnum, bool)`
+`func (o *ScheduleUpdate) GetStatusOk() (*ScheduleStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ScheduleUpdate) SetStatus(v StatusEnum)`
+`func (o *ScheduleUpdate) SetStatus(v ScheduleStatusEnum)`
 
 SetStatus sets Status field to given value.
 

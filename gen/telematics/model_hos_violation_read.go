@@ -57,8 +57,6 @@ type HosViolationRead struct {
 	EndTime              NullableTime                     `json:"end_time,omitempty"`
 	Duration             NullableInt32                    `json:"duration,omitempty"`
 	HoursLimit           NullableFloat32                  `json:"hours_limit,omitempty"`
-	HosLogId             NullableString                   `json:"hos_log_id,omitempty"`
-	SourceHosLogId       NullableString                   `json:"source_hos_log_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1122,92 +1120,6 @@ func (o *HosViolationRead) UnsetHoursLimit() {
 	o.HoursLimit.Unset()
 }
 
-// GetHosLogId returns the HosLogId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HosViolationRead) GetHosLogId() string {
-	if o == nil || IsNil(o.HosLogId.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.HosLogId.Get()
-}
-
-// GetHosLogIdOk returns a tuple with the HosLogId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HosViolationRead) GetHosLogIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.HosLogId.Get(), o.HosLogId.IsSet()
-}
-
-// HasHosLogId returns a boolean if a field has been set.
-func (o *HosViolationRead) HasHosLogId() bool {
-	if o != nil && o.HosLogId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetHosLogId gets a reference to the given NullableString and assigns it to the HosLogId field.
-func (o *HosViolationRead) SetHosLogId(v string) {
-	o.HosLogId.Set(&v)
-}
-
-// SetHosLogIdNil sets the value for HosLogId to be an explicit nil
-func (o *HosViolationRead) SetHosLogIdNil() {
-	o.HosLogId.Set(nil)
-}
-
-// UnsetHosLogId ensures that no value is present for HosLogId, not even an explicit nil
-func (o *HosViolationRead) UnsetHosLogId() {
-	o.HosLogId.Unset()
-}
-
-// GetSourceHosLogId returns the SourceHosLogId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HosViolationRead) GetSourceHosLogId() string {
-	if o == nil || IsNil(o.SourceHosLogId.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.SourceHosLogId.Get()
-}
-
-// GetSourceHosLogIdOk returns a tuple with the SourceHosLogId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HosViolationRead) GetSourceHosLogIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.SourceHosLogId.Get(), o.SourceHosLogId.IsSet()
-}
-
-// HasSourceHosLogId returns a boolean if a field has been set.
-func (o *HosViolationRead) HasSourceHosLogId() bool {
-	if o != nil && o.SourceHosLogId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceHosLogId gets a reference to the given NullableString and assigns it to the SourceHosLogId field.
-func (o *HosViolationRead) SetSourceHosLogId(v string) {
-	o.SourceHosLogId.Set(&v)
-}
-
-// SetSourceHosLogIdNil sets the value for SourceHosLogId to be an explicit nil
-func (o *HosViolationRead) SetSourceHosLogIdNil() {
-	o.SourceHosLogId.Set(nil)
-}
-
-// UnsetSourceHosLogId ensures that no value is present for SourceHosLogId, not even an explicit nil
-func (o *HosViolationRead) UnsetSourceHosLogId() {
-	o.SourceHosLogId.Unset()
-}
-
 func (o HosViolationRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1285,12 +1197,6 @@ func (o HosViolationRead) ToMap() (map[string]interface{}, error) {
 	}
 	if o.HoursLimit.IsSet() {
 		toSerialize["hours_limit"] = o.HoursLimit.Get()
-	}
-	if o.HosLogId.IsSet() {
-		toSerialize["hos_log_id"] = o.HosLogId.Get()
-	}
-	if o.SourceHosLogId.IsSet() {
-		toSerialize["source_hos_log_id"] = o.SourceHosLogId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -1370,8 +1276,6 @@ func (o *HosViolationRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "end_time")
 		delete(additionalProperties, "duration")
 		delete(additionalProperties, "hours_limit")
-		delete(additionalProperties, "hos_log_id")
-		delete(additionalProperties, "source_hos_log_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

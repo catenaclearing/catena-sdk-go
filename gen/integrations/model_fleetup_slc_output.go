@@ -20,7 +20,7 @@ var _ MappedNullable = &FleetupSLCOutput{}
 
 // FleetupSLCOutput Fleetup SLC Connection model
 type FleetupSLCOutput struct {
-	AccountId            string      `json:"account_id"`
+	AccountId            interface{} `json:"account_id"`
 	ApiKey               interface{} `json:"api_key"`
 	Token                interface{} `json:"token"`
 	AdditionalProperties map[string]interface{}
@@ -32,7 +32,7 @@ type _FleetupSLCOutput FleetupSLCOutput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFleetupSLCOutput(accountId string, apiKey interface{}, token interface{}) *FleetupSLCOutput {
+func NewFleetupSLCOutput(accountId interface{}, apiKey interface{}, token interface{}) *FleetupSLCOutput {
 	this := FleetupSLCOutput{}
 	this.AccountId = accountId
 	this.ApiKey = apiKey
@@ -49,9 +49,10 @@ func NewFleetupSLCOutputWithDefaults() *FleetupSLCOutput {
 }
 
 // GetAccountId returns the AccountId field value
-func (o *FleetupSLCOutput) GetAccountId() string {
+// If the value is explicit nil, the zero value for interface{} will be returned
+func (o *FleetupSLCOutput) GetAccountId() interface{} {
 	if o == nil {
-		var ret string
+		var ret interface{}
 		return ret
 	}
 
@@ -60,15 +61,16 @@ func (o *FleetupSLCOutput) GetAccountId() string {
 
 // GetAccountIdOk returns a tuple with the AccountId field value
 // and a boolean to check if the value has been set.
-func (o *FleetupSLCOutput) GetAccountIdOk() (*string, bool) {
-	if o == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *FleetupSLCOutput) GetAccountIdOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.AccountId) {
 		return nil, false
 	}
 	return &o.AccountId, true
 }
 
 // SetAccountId sets field value
-func (o *FleetupSLCOutput) SetAccountId(v string) {
+func (o *FleetupSLCOutput) SetAccountId(v interface{}) {
 	o.AccountId = v
 }
 
@@ -134,7 +136,9 @@ func (o FleetupSLCOutput) MarshalJSON() ([]byte, error) {
 
 func (o FleetupSLCOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["account_id"] = o.AccountId
+	if o.AccountId != nil {
+		toSerialize["account_id"] = o.AccountId
+	}
 	if o.ApiKey != nil {
 		toSerialize["api_key"] = o.ApiKey
 	}

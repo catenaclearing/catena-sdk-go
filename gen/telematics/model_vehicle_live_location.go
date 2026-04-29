@@ -39,7 +39,7 @@ type VehicleLiveLocation struct {
 	CoolantTemperature NullableFloat32 `json:"coolant_temperature"`
 	// Timestamp (UTC) when this telemetry data was recorded by the vehicle.
 	OccurredAt           time.Time         `json:"occurred_at"`
-	Location             NullableLocation4 `json:"location"`
+	Location             NullableLocation7 `json:"location"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,7 +49,7 @@ type _VehicleLiveLocation VehicleLiveLocation
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVehicleLiveLocation(vehicleId string, vin NullableString, vehicleName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, driverId NullableString, driverName NullableString, h3Index11 NullableInt32, speed NullableFloat32, odometer NullableFloat32, fuelLevel NullableFloat32, engineHours NullableFloat32, oilPressure NullableFloat32, coolantTemperature NullableFloat32, occurredAt time.Time, location NullableLocation4) *VehicleLiveLocation {
+func NewVehicleLiveLocation(vehicleId string, vin NullableString, vehicleName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, driverId NullableString, driverName NullableString, h3Index11 NullableInt32, speed NullableFloat32, odometer NullableFloat32, fuelLevel NullableFloat32, engineHours NullableFloat32, oilPressure NullableFloat32, coolantTemperature NullableFloat32, occurredAt time.Time, location NullableLocation7) *VehicleLiveLocation {
 	this := VehicleLiveLocation{}
 	this.VehicleId = vehicleId
 	this.Vin = vin
@@ -492,10 +492,10 @@ func (o *VehicleLiveLocation) SetOccurredAt(v time.Time) {
 }
 
 // GetLocation returns the Location field value
-// If the value is explicit nil, the zero value for Location4 will be returned
-func (o *VehicleLiveLocation) GetLocation() Location4 {
+// If the value is explicit nil, the zero value for Location7 will be returned
+func (o *VehicleLiveLocation) GetLocation() Location7 {
 	if o == nil || o.Location.Get() == nil {
-		var ret Location4
+		var ret Location7
 		return ret
 	}
 
@@ -505,7 +505,7 @@ func (o *VehicleLiveLocation) GetLocation() Location4 {
 // GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VehicleLiveLocation) GetLocationOk() (*Location4, bool) {
+func (o *VehicleLiveLocation) GetLocationOk() (*Location7, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -513,7 +513,7 @@ func (o *VehicleLiveLocation) GetLocationOk() (*Location4, bool) {
 }
 
 // SetLocation sets field value
-func (o *VehicleLiveLocation) SetLocation(v Location4) {
+func (o *VehicleLiveLocation) SetLocation(v Location7) {
 	o.Location.Set(&v)
 }
 

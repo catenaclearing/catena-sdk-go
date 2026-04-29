@@ -5,18 +5,19 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccessToken** | **string** |  | 
-**TokenType** | **string** |  | 
+**TokenType** | Pointer to **NullableString** |  | [optional] 
 **ExpiresIn** | Pointer to **NullableInt32** |  | [optional] 
 **RefreshToken** | Pointer to **NullableString** |  | [optional] 
 **Scope** | Pointer to **NullableString** |  | [optional] 
 **UserId** | Pointer to **NullableString** |  | [optional] 
+**AccountId** | Pointer to **NullableString** |  | [optional] 
 **Host** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
 ### NewAccessTokenCredsInput
 
-`func NewAccessTokenCredsInput(accessToken string, tokenType string, ) *AccessTokenCredsInput`
+`func NewAccessTokenCredsInput(accessToken string, ) *AccessTokenCredsInput`
 
 NewAccessTokenCredsInput instantiates a new AccessTokenCredsInput object
 This constructor will assign default values to properties that have it defined,
@@ -70,7 +71,22 @@ and a boolean to check if the value has been set.
 
 SetTokenType sets TokenType field to given value.
 
+### HasTokenType
 
+`func (o *AccessTokenCredsInput) HasTokenType() bool`
+
+HasTokenType returns a boolean if a field has been set.
+
+### SetTokenTypeNil
+
+`func (o *AccessTokenCredsInput) SetTokenTypeNil(b bool)`
+
+ SetTokenTypeNil sets the value for TokenType to be an explicit nil
+
+### UnsetTokenType
+`func (o *AccessTokenCredsInput) UnsetTokenType()`
+
+UnsetTokenType ensures that no value is present for TokenType, not even an explicit nil
 ### GetExpiresIn
 
 `func (o *AccessTokenCredsInput) GetExpiresIn() int32`
@@ -211,6 +227,41 @@ HasUserId returns a boolean if a field has been set.
 `func (o *AccessTokenCredsInput) UnsetUserId()`
 
 UnsetUserId ensures that no value is present for UserId, not even an explicit nil
+### GetAccountId
+
+`func (o *AccessTokenCredsInput) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *AccessTokenCredsInput) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *AccessTokenCredsInput) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
+
+### HasAccountId
+
+`func (o *AccessTokenCredsInput) HasAccountId() bool`
+
+HasAccountId returns a boolean if a field has been set.
+
+### SetAccountIdNil
+
+`func (o *AccessTokenCredsInput) SetAccountIdNil(b bool)`
+
+ SetAccountIdNil sets the value for AccountId to be an explicit nil
+
+### UnsetAccountId
+`func (o *AccessTokenCredsInput) UnsetAccountId()`
+
+UnsetAccountId ensures that no value is present for AccountId, not even an explicit nil
 ### GetHost
 
 `func (o *AccessTokenCredsInput) GetHost() string`

@@ -24,6 +24,18 @@ func Test_telematicsapi_FleetOperationsTrackingAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test FleetOperationsTrackingAPIService CreateVehicle", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.CreateVehicle(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FleetOperationsTrackingAPIService GetTrailer", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -52,13 +64,23 @@ func Test_telematicsapi_FleetOperationsTrackingAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test FleetOperationsTrackingAPIService GetVehicleSensorEvents", func(t *testing.T) {
+	t.Run("Test FleetOperationsTrackingAPIService ListDriverVehicleAssociations", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var vehicleId string
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.ListDriverVehicleAssociations(context.Background()).Execute()
 
-		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.GetVehicleSensorEvents(context.Background(), vehicleId).Execute()
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FleetOperationsTrackingAPIService ListEngineStatuses", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.ListEngineStatuses(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -71,6 +93,30 @@ func Test_telematicsapi_FleetOperationsTrackingAPIService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.ListTrailerLocations(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FleetOperationsTrackingAPIService ListTrailerStatuses", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.ListTrailerStatuses(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FleetOperationsTrackingAPIService ListTrailerVehicleAssociations", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.ListTrailerVehicleAssociations(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -102,11 +148,11 @@ func Test_telematicsapi_FleetOperationsTrackingAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test FleetOperationsTrackingAPIService ListVehicleSensorEvents", func(t *testing.T) {
+	t.Run("Test FleetOperationsTrackingAPIService ListVehicleRegionSegments", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.ListVehicleSensorEvents(context.Background()).Execute()
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.ListVehicleRegionSegments(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -119,6 +165,20 @@ func Test_telematicsapi_FleetOperationsTrackingAPIService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.ListVehicles(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FleetOperationsTrackingAPIService UpdateVehicle", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var sourceId string
+
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.UpdateVehicle(context.Background(), sourceId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

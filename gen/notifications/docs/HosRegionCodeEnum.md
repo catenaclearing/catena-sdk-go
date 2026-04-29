@@ -139,6 +139,8 @@
 
 * `CA_YT` (value: `"CA-YT"`)
 
+* `CA_NL` (value: `"CA-NL"`)
+
 * `MX_AG` (value: `"MX-AG"`)
 
 * `MX_BN` (value: `"MX-BN"`)

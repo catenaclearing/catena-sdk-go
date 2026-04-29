@@ -20,10 +20,8 @@ var _ MappedNullable = &ShareAgreementUpdate{}
 
 // ShareAgreementUpdate API model for updating a sharing agreement  Update agreement status or dates. Note: Fleets own their share agreements, so partners typically cannot modify these directly.
 type ShareAgreementUpdate struct {
-	Status               NullableStatusEnum `json:"status,omitempty"`
-	FleetRef             NullableString     `json:"fleet_ref,omitempty"`
-	EffectiveDate        NullableTime       `json:"effective_date,omitempty"`
-	ExpirationDate       NullableTime       `json:"expiration_date,omitempty"`
+	EffectiveDate        NullableTime `json:"effective_date,omitempty"`
+	ExpirationDate       NullableTime `json:"expiration_date,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,92 +42,6 @@ func NewShareAgreementUpdate() *ShareAgreementUpdate {
 func NewShareAgreementUpdateWithDefaults() *ShareAgreementUpdate {
 	this := ShareAgreementUpdate{}
 	return &this
-}
-
-// GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ShareAgreementUpdate) GetStatus() StatusEnum {
-	if o == nil || IsNil(o.Status.Get()) {
-		var ret StatusEnum
-		return ret
-	}
-	return *o.Status.Get()
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ShareAgreementUpdate) GetStatusOk() (*StatusEnum, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Status.Get(), o.Status.IsSet()
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *ShareAgreementUpdate) HasStatus() bool {
-	if o != nil && o.Status.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given NullableStatusEnum and assigns it to the Status field.
-func (o *ShareAgreementUpdate) SetStatus(v StatusEnum) {
-	o.Status.Set(&v)
-}
-
-// SetStatusNil sets the value for Status to be an explicit nil
-func (o *ShareAgreementUpdate) SetStatusNil() {
-	o.Status.Set(nil)
-}
-
-// UnsetStatus ensures that no value is present for Status, not even an explicit nil
-func (o *ShareAgreementUpdate) UnsetStatus() {
-	o.Status.Unset()
-}
-
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ShareAgreementUpdate) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.FleetRef.Get()
-}
-
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ShareAgreementUpdate) GetFleetRefOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FleetRef.Get(), o.FleetRef.IsSet()
-}
-
-// HasFleetRef returns a boolean if a field has been set.
-func (o *ShareAgreementUpdate) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
-func (o *ShareAgreementUpdate) SetFleetRef(v string) {
-	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *ShareAgreementUpdate) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *ShareAgreementUpdate) UnsetFleetRef() {
-	o.FleetRef.Unset()
 }
 
 // GetEffectiveDate returns the EffectiveDate field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -228,12 +140,6 @@ func (o ShareAgreementUpdate) MarshalJSON() ([]byte, error) {
 
 func (o ShareAgreementUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Status.IsSet() {
-		toSerialize["status"] = o.Status.Get()
-	}
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
 	if o.EffectiveDate.IsSet() {
 		toSerialize["effective_date"] = o.EffectiveDate.Get()
 	}
@@ -262,8 +168,6 @@ func (o *ShareAgreementUpdate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "fleet_ref")
 		delete(additionalProperties, "effective_date")
 		delete(additionalProperties, "expiration_date")
 		o.AdditionalProperties = additionalProperties

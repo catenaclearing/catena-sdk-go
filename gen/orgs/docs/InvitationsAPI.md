@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## AcceptInvitationV2OrgsInvitationsInvitationIdAcceptPost
 
-> InvitationRead AcceptInvitationV2OrgsInvitationsInvitationIdAcceptPost(ctx, invitationId).InvitationAccept(invitationAccept).Execute()
+> InvitationRead AcceptInvitationV2OrgsInvitationsInvitationIdAcceptPost(ctx, invitationId).Execute()
 
 Accept Invitation
 
@@ -35,11 +35,10 @@ import (
 
 func main() {
 	invitationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	invitationAccept := *openapiclient.NewInvitationAccept() // InvitationAccept | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.InvitationsAPI.AcceptInvitationV2OrgsInvitationsInvitationIdAcceptPost(context.Background(), invitationId).InvitationAccept(invitationAccept).Execute()
+	resp, r, err := apiClient.InvitationsAPI.AcceptInvitationV2OrgsInvitationsInvitationIdAcceptPost(context.Background(), invitationId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `InvitationsAPI.AcceptInvitationV2OrgsInvitationsInvitationIdAcceptPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,7 +64,6 @@ Other parameters are passed through a pointer to a apiAcceptInvitationV2OrgsInvi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **invitationAccept** | [**InvitationAccept**](InvitationAccept.md) |  | 
 
 ### Return type
 
@@ -73,11 +71,11 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -87,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## CreateInvitation
 
-> InvitationRead CreateInvitation(ctx).InvitationCreate(invitationCreate).Execute()
+> CreateInvitation(ctx).InvitationCreate(invitationCreate).Execute()
 
 Create Invitation
 
@@ -110,13 +108,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.InvitationsAPI.CreateInvitation(context.Background()).InvitationCreate(invitationCreate).Execute()
+	r, err := apiClient.InvitationsAPI.CreateInvitation(context.Background()).InvitationCreate(invitationCreate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `InvitationsAPI.CreateInvitation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateInvitation`: InvitationRead
-	fmt.Fprintf(os.Stdout, "Response from `InvitationsAPI.CreateInvitation`: %v\n", resp)
 }
 ```
 
@@ -135,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InvitationRead**](InvitationRead.md)
+ (empty response body)
 
 ### Authorization
 
@@ -211,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -363,7 +359,7 @@ No authorization required
 
 ## ListInvitations
 
-> CursorPageCustomizedInvitationRead ListInvitations(ctx).FleetRef(fleetRef).Cursor(cursor).Size(size).Execute()
+> CursorPageInvitationRead ListInvitations(ctx).FleetRef(fleetRef).Cursor(cursor).Size(size).Execute()
 
 List Invitations
 
@@ -384,7 +380,7 @@ import (
 func main() {
 	fleetRef := "fleetRef_example" // string | Limit results to specific fleet reference (optional)
 	cursor := "cursor_example" // string | Cursor for the next page (optional)
-	size := int32(56) // int32 | Page size (optional) (default to 500)
+	size := int32(56) // int32 | Page size (optional) (default to 300)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -393,7 +389,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `InvitationsAPI.ListInvitations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListInvitations`: CursorPageCustomizedInvitationRead
+	// response from `ListInvitations`: CursorPageInvitationRead
 	fmt.Fprintf(os.Stdout, "Response from `InvitationsAPI.ListInvitations`: %v\n", resp)
 }
 ```
@@ -411,11 +407,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fleetRef** | **string** | Limit results to specific fleet reference | 
  **cursor** | **string** | Cursor for the next page | 
- **size** | **int32** | Page size | [default to 500]
+ **size** | **int32** | Page size | [default to 300]
 
 ### Return type
 
-[**CursorPageCustomizedInvitationRead**](CursorPageCustomizedInvitationRead.md)
+[**CursorPageInvitationRead**](CursorPageInvitationRead.md)
 
 ### Authorization
 

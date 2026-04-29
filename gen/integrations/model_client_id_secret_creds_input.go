@@ -20,9 +20,10 @@ var _ MappedNullable = &ClientIdSecretCredsInput{}
 
 // ClientIdSecretCredsInput Client ID Secret Connection model
 type ClientIdSecretCredsInput struct {
-	ClientId             string `json:"client_id"`
-	ClientSecret         string `json:"client_secret"`
-	Url                  string `json:"url"`
+	ClientId             string         `json:"client_id"`
+	ClientSecret         string         `json:"client_secret"`
+	Url                  NullableString `json:"url,omitempty"`
+	AccountId            NullableString `json:"account_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,11 +33,10 @@ type _ClientIdSecretCredsInput ClientIdSecretCredsInput
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClientIdSecretCredsInput(clientId string, clientSecret string, url string) *ClientIdSecretCredsInput {
+func NewClientIdSecretCredsInput(clientId string, clientSecret string) *ClientIdSecretCredsInput {
 	this := ClientIdSecretCredsInput{}
 	this.ClientId = clientId
 	this.ClientSecret = clientSecret
-	this.Url = url
 	return &this
 }
 
@@ -96,28 +96,90 @@ func (o *ClientIdSecretCredsInput) SetClientSecret(v string) {
 	o.ClientSecret = v
 }
 
-// GetUrl returns the Url field value
+// GetUrl returns the Url field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ClientIdSecretCredsInput) GetUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.Url.Get()) {
 		var ret string
 		return ret
 	}
-
-	return o.Url
+	return *o.Url.Get()
 }
 
-// GetUrlOk returns a tuple with the Url field value
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClientIdSecretCredsInput) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Url, true
+	return o.Url.Get(), o.Url.IsSet()
 }
 
-// SetUrl sets field value
+// HasUrl returns a boolean if a field has been set.
+func (o *ClientIdSecretCredsInput) HasUrl() bool {
+	if o != nil && o.Url.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given NullableString and assigns it to the Url field.
 func (o *ClientIdSecretCredsInput) SetUrl(v string) {
-	o.Url = v
+	o.Url.Set(&v)
+}
+
+// SetUrlNil sets the value for Url to be an explicit nil
+func (o *ClientIdSecretCredsInput) SetUrlNil() {
+	o.Url.Set(nil)
+}
+
+// UnsetUrl ensures that no value is present for Url, not even an explicit nil
+func (o *ClientIdSecretCredsInput) UnsetUrl() {
+	o.Url.Unset()
+}
+
+// GetAccountId returns the AccountId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ClientIdSecretCredsInput) GetAccountId() string {
+	if o == nil || IsNil(o.AccountId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AccountId.Get()
+}
+
+// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ClientIdSecretCredsInput) GetAccountIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AccountId.Get(), o.AccountId.IsSet()
+}
+
+// HasAccountId returns a boolean if a field has been set.
+func (o *ClientIdSecretCredsInput) HasAccountId() bool {
+	if o != nil && o.AccountId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountId gets a reference to the given NullableString and assigns it to the AccountId field.
+func (o *ClientIdSecretCredsInput) SetAccountId(v string) {
+	o.AccountId.Set(&v)
+}
+
+// SetAccountIdNil sets the value for AccountId to be an explicit nil
+func (o *ClientIdSecretCredsInput) SetAccountIdNil() {
+	o.AccountId.Set(nil)
+}
+
+// UnsetAccountId ensures that no value is present for AccountId, not even an explicit nil
+func (o *ClientIdSecretCredsInput) UnsetAccountId() {
+	o.AccountId.Unset()
 }
 
 func (o ClientIdSecretCredsInput) MarshalJSON() ([]byte, error) {
@@ -132,7 +194,12 @@ func (o ClientIdSecretCredsInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["client_id"] = o.ClientId
 	toSerialize["client_secret"] = o.ClientSecret
-	toSerialize["url"] = o.Url
+	if o.Url.IsSet() {
+		toSerialize["url"] = o.Url.Get()
+	}
+	if o.AccountId.IsSet() {
+		toSerialize["account_id"] = o.AccountId.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -148,7 +215,6 @@ func (o *ClientIdSecretCredsInput) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"client_id",
 		"client_secret",
-		"url",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -181,6 +247,7 @@ func (o *ClientIdSecretCredsInput) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "client_id")
 		delete(additionalProperties, "client_secret")
 		delete(additionalProperties, "url")
+		delete(additionalProperties, "account_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

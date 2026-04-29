@@ -3,6 +3,10 @@
 ## Enum
 
 
+* `DRIVER_VEHICLE_ASSOCIATION` (value: `"driver_vehicle_association.*"`)
+
+* `TRAILER_VEHICLE_ASSOCIATION` (value: `"trailer_vehicle_association.*"`)
+
 * `INVITATION` (value: `"invitation.*"`)
 
 * `CONNECTION` (value: `"connection.*"`)
@@ -19,6 +23,8 @@
 
 * `TRAILER_LOCATION` (value: `"trailer_location.*"`)
 
+* `TRAILER_STATUS` (value: `"trailer_status.*"`)
+
 * `USER` (value: `"user.*"`)
 
 * `VEHICLE_LOCATION` (value: `"vehicle_location.*"`)
@@ -34,6 +40,14 @@
 * `HOS_VIOLATION` (value: `"hos_violation.*"`)
 
 * `ENGINE_LOG` (value: `"engine_log.*"`)
+
+* `ENGINE_STATUS` (value: `"engine_status.*"`)
+
+* `MESSAGE` (value: `"message.*"`)
+
+* `FUEL_TRANSACTION` (value: `"fuel_transaction.*"`)
+
+* `RESOURCE_OPERATION` (value: `"resource_operation.*"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

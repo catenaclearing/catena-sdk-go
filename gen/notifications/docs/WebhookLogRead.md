@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **CreatedAt** | **time.Time** | The date and time the log was created | 
 **WebhookId** | **string** | The ID of the webhook that the metrics are for | 
 **MessageId** | **string** | The ID of the message | 
-**EventName** | [**WebhookEventName**](WebhookEventName.md) | The name of the event | 
-**Status** | [**StatusEnum**](StatusEnum.md) | The status of the webhook message | 
+**EventName** | [**WebhookEventNameEnum**](WebhookEventNameEnum.md) | The name of the event | 
+**Status** | [**WebhookLogStatusEnum**](WebhookLogStatusEnum.md) | The status of the webhook message | 
 **StatusCode** | **int32** | The HTTP status code of the webhook delivery | 
 **ErrorMessage** | **NullableString** |  | 
 **ResponseTimeMs** | **NullableInt32** |  | 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewWebhookLogRead
 
-`func NewWebhookLogRead(createdAt time.Time, webhookId string, messageId string, eventName WebhookEventName, status StatusEnum, statusCode int32, errorMessage NullableString, responseTimeMs NullableInt32, ) *WebhookLogRead`
+`func NewWebhookLogRead(createdAt time.Time, webhookId string, messageId string, eventName WebhookEventNameEnum, status WebhookLogStatusEnum, statusCode int32, errorMessage NullableString, responseTimeMs NullableInt32, ) *WebhookLogRead`
 
 NewWebhookLogRead instantiates a new WebhookLogRead object
 This constructor will assign default values to properties that have it defined,
@@ -94,40 +94,40 @@ SetMessageId sets MessageId field to given value.
 
 ### GetEventName
 
-`func (o *WebhookLogRead) GetEventName() WebhookEventName`
+`func (o *WebhookLogRead) GetEventName() WebhookEventNameEnum`
 
 GetEventName returns the EventName field if non-nil, zero value otherwise.
 
 ### GetEventNameOk
 
-`func (o *WebhookLogRead) GetEventNameOk() (*WebhookEventName, bool)`
+`func (o *WebhookLogRead) GetEventNameOk() (*WebhookEventNameEnum, bool)`
 
 GetEventNameOk returns a tuple with the EventName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEventName
 
-`func (o *WebhookLogRead) SetEventName(v WebhookEventName)`
+`func (o *WebhookLogRead) SetEventName(v WebhookEventNameEnum)`
 
 SetEventName sets EventName field to given value.
 
 
 ### GetStatus
 
-`func (o *WebhookLogRead) GetStatus() StatusEnum`
+`func (o *WebhookLogRead) GetStatus() WebhookLogStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *WebhookLogRead) GetStatusOk() (*StatusEnum, bool)`
+`func (o *WebhookLogRead) GetStatusOk() (*WebhookLogStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *WebhookLogRead) SetStatus(v StatusEnum)`
+`func (o *WebhookLogRead) SetStatus(v WebhookLogStatusEnum)`
 
 SetStatus sets Status field to given value.
 

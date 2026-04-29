@@ -24,6 +24,34 @@ func Test_integrationsapi_ConnectionsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test ConnectionsAPIService ActivateSchedule", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var scheduleId string
+
+		resp, httpRes, err := apiClient.ConnectionsAPI.ActivateSchedule(context.Background(), scheduleId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ConnectionsAPIService ActivateSchedules", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var connectionId string
+
+		resp, httpRes, err := apiClient.ConnectionsAPI.ActivateSchedules(context.Background(), connectionId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ConnectionsAPIService BackfillSchedules", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -41,6 +69,18 @@ func Test_integrationsapi_ConnectionsAPIService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ConnectionsAPI.CreateConnection(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ConnectionsAPIService CreateConnectionPreAuth", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ConnectionsAPI.CreateConnectionPreAuth(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -96,6 +136,18 @@ func Test_integrationsapi_ConnectionsAPIService(t *testing.T) {
 		var connectionId string
 
 		resp, httpRes, err := apiClient.ConnectionsAPI.GetConnection(context.Background(), connectionId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ConnectionsAPIService GetDataFreshness", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ConnectionsAPI.GetDataFreshness(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

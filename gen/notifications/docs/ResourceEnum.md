@@ -5,6 +5,10 @@
 
 * `ASSET` (value: `"asset"`)
 
+* `DRIVER_ASSOCIATION` (value: `"driver_association"`)
+
+* `DRIVER_VEHICLE_ASSOCIATION` (value: `"driver_vehicle_association"`)
+
 * `DRIVER_EVENT_LOG` (value: `"driver_event_log"`)
 
 * `DRIVER_SAFETY_EVENT` (value: `"driver_safety_event"`)
@@ -14,6 +18,10 @@
 * `DVIR_LOG_DEFECT` (value: `"dvir_log_defect"`)
 
 * `ENGINE_LOG` (value: `"engine_log"`)
+
+* `ENGINE_STATUS` (value: `"engine_status"`)
+
+* `FUEL_TRANSACTION` (value: `"fuel_transaction"`)
 
 * `HOS_AVAILABILITY` (value: `"hos_availability"`)
 
@@ -31,7 +39,7 @@
 
 * `LOCATION_SEGMENT` (value: `"location_segment"`)
 
-* `REEFER_STATUS` (value: `"reefer_status"`)
+* `MESSAGE` (value: `"message"`)
 
 * `USER` (value: `"user"`)
 
@@ -41,9 +49,17 @@
 
 * `VEHICLE_SENSOR` (value: `"vehicle_sensor"`)
 
+* `VEHICLE_REGION_SEGMENT` (value: `"vehicle_region_segment"`)
+
 * `TRAILER` (value: `"trailer"`)
 
+* `TRAILER_ASSOCIATION` (value: `"trailer_association"`)
+
+* `TRAILER_VEHICLE_ASSOCIATION` (value: `"trailer_vehicle_association"`)
+
 * `TRAILER_LOCATION` (value: `"trailer_location"`)
+
+* `TRAILER_STATUS` (value: `"trailer_status"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

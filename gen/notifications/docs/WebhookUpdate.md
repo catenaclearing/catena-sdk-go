@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **Url** | Pointer to **NullableString** |  | [optional] 
 **Filters** | Pointer to [**NullableWebhookFilters**](WebhookFilters.md) |  | [optional] 
 **Secret** | Pointer to **NullableString** |  | [optional] 
-**Status** | Pointer to [**NullableStatusEnum**](StatusEnum.md) |  | [optional] 
 
 ## Methods
 
@@ -133,41 +132,6 @@ HasSecret returns a boolean if a field has been set.
 `func (o *WebhookUpdate) UnsetSecret()`
 
 UnsetSecret ensures that no value is present for Secret, not even an explicit nil
-### GetStatus
-
-`func (o *WebhookUpdate) GetStatus() StatusEnum`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *WebhookUpdate) GetStatusOk() (*StatusEnum, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *WebhookUpdate) SetStatus(v StatusEnum)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *WebhookUpdate) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
-
-### SetStatusNil
-
-`func (o *WebhookUpdate) SetStatusNil(b bool)`
-
- SetStatusNil sets the value for Status to be an explicit nil
-
-### UnsetStatus
-`func (o *WebhookUpdate) UnsetStatus()`
-
-UnsetStatus ensures that no value is present for Status, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

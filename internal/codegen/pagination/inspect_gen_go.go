@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"go/ast"
 	"go/parser"
+	"go/printer"
 	"go/token"
 	"path/filepath"
 	"strings"
@@ -331,6 +333,8 @@ func inspectGeneratedCode(rootDir string, ops []PaginatedOperation) ([]Paginated
 									op.OptionalParams[i].IsEnum = true
 									op.OptionalParams[i].IsEnumSlice = true
 									op.OptionalParams[i].EnumType = pkg.Name + "." + ident.Name
+								} else {
+									op.OptionalParams[i].Type = exprString(arrayType)
 								}
 							}
 						}
@@ -357,6 +361,8 @@ func inspectGeneratedCode(rootDir string, ops []PaginatedOperation) ([]Paginated
 									op.OptionalParams[i].IsEnum = true
 									op.OptionalParams[i].IsEnumSlice = true
 									op.OptionalParams[i].EnumType = pkg.Name + "." + ident.Name
+								} else {
+									op.OptionalParams[i].Type = exprString(arrayType)
 								}
 							}
 							break
@@ -376,6 +382,14 @@ func inspectGeneratedCode(rootDir string, ops []PaginatedOperation) ([]Paginated
 	}
 
 	return result, nil
+}
+
+func exprString(expr ast.Expr) string {
+	var buf bytes.Buffer
+	if err := printer.Fprint(&buf, token.NewFileSet(), expr); err != nil {
+		return ""
+	}
+	return buf.String()
 }
 
 func isBasicType(t string) bool {

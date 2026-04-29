@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **SourceTrailerId** | Pointer to **NullableString** |  | [optional] 
 **Location** | Pointer to [**NullablePoint**](Point.md) |  | [optional] 
 **H3Index11** | Pointer to **NullableInt32** |  | [optional] 
+**InferredAddress** | Pointer to [**NullableInferredAddress**](InferredAddress.md) |  | [optional] 
 
 ## Methods
 
@@ -583,6 +584,41 @@ HasH3Index11 returns a boolean if a field has been set.
 `func (o *BaseTrailerLocation) UnsetH3Index11()`
 
 UnsetH3Index11 ensures that no value is present for H3Index11, not even an explicit nil
+### GetInferredAddress
+
+`func (o *BaseTrailerLocation) GetInferredAddress() InferredAddress`
+
+GetInferredAddress returns the InferredAddress field if non-nil, zero value otherwise.
+
+### GetInferredAddressOk
+
+`func (o *BaseTrailerLocation) GetInferredAddressOk() (*InferredAddress, bool)`
+
+GetInferredAddressOk returns a tuple with the InferredAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInferredAddress
+
+`func (o *BaseTrailerLocation) SetInferredAddress(v InferredAddress)`
+
+SetInferredAddress sets InferredAddress field to given value.
+
+### HasInferredAddress
+
+`func (o *BaseTrailerLocation) HasInferredAddress() bool`
+
+HasInferredAddress returns a boolean if a field has been set.
+
+### SetInferredAddressNil
+
+`func (o *BaseTrailerLocation) SetInferredAddressNil(b bool)`
+
+ SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+
+### UnsetInferredAddress
+`func (o *BaseTrailerLocation) UnsetInferredAddress()`
+
+UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

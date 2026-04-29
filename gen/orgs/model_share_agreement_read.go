@@ -26,11 +26,10 @@ type ShareAgreementRead struct {
 	// The Catena fleet ID sharing their data with you
 	FleetId string `json:"fleet_id"`
 	// Your organization ID receiving access to fleet data
-	PartnerId    string         `json:"partner_id"`
-	FleetRef     NullableString `json:"fleet_ref"`
-	InvitationId NullableString `json:"invitation_id"`
+	PartnerId string         `json:"partner_id"`
+	FleetRef  NullableString `json:"fleet_ref"`
 	// Current state: ACTIVE (data access enabled), PAUSED (temporarily disabled), CANCELLED (permanently ended), EXPIRED (past expiration_date)
-	Status StatusEnum `json:"status"`
+	Status ShareAgreementStatusEnum `json:"status"`
 	// When data access begins. Check this before attempting to fetch fleet data.
 	EffectiveDate  time.Time    `json:"effective_date"`
 	ExpirationDate NullableTime `json:"expiration_date"`
@@ -45,13 +44,12 @@ type _ShareAgreementRead ShareAgreementRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewShareAgreementRead(id string, fleetId string, partnerId string, fleetRef NullableString, invitationId NullableString, status StatusEnum, effectiveDate time.Time, expirationDate NullableTime, scopes map[string]ShareLevelEnum) *ShareAgreementRead {
+func NewShareAgreementRead(id string, fleetId string, partnerId string, fleetRef NullableString, status ShareAgreementStatusEnum, effectiveDate time.Time, expirationDate NullableTime, scopes map[string]ShareLevelEnum) *ShareAgreementRead {
 	this := ShareAgreementRead{}
 	this.Id = id
 	this.FleetId = fleetId
 	this.PartnerId = partnerId
 	this.FleetRef = fleetRef
-	this.InvitationId = invitationId
 	this.Status = status
 	this.EffectiveDate = effectiveDate
 	this.ExpirationDate = expirationDate
@@ -165,36 +163,10 @@ func (o *ShareAgreementRead) SetFleetRef(v string) {
 	o.FleetRef.Set(&v)
 }
 
-// GetInvitationId returns the InvitationId field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *ShareAgreementRead) GetInvitationId() string {
-	if o == nil || o.InvitationId.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.InvitationId.Get()
-}
-
-// GetInvitationIdOk returns a tuple with the InvitationId field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ShareAgreementRead) GetInvitationIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.InvitationId.Get(), o.InvitationId.IsSet()
-}
-
-// SetInvitationId sets field value
-func (o *ShareAgreementRead) SetInvitationId(v string) {
-	o.InvitationId.Set(&v)
-}
-
 // GetStatus returns the Status field value
-func (o *ShareAgreementRead) GetStatus() StatusEnum {
+func (o *ShareAgreementRead) GetStatus() ShareAgreementStatusEnum {
 	if o == nil {
-		var ret StatusEnum
+		var ret ShareAgreementStatusEnum
 		return ret
 	}
 
@@ -203,7 +175,7 @@ func (o *ShareAgreementRead) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ShareAgreementRead) GetStatusOk() (*StatusEnum, bool) {
+func (o *ShareAgreementRead) GetStatusOk() (*ShareAgreementStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -211,7 +183,7 @@ func (o *ShareAgreementRead) GetStatusOk() (*StatusEnum, bool) {
 }
 
 // SetStatus sets field value
-func (o *ShareAgreementRead) SetStatus(v StatusEnum) {
+func (o *ShareAgreementRead) SetStatus(v ShareAgreementStatusEnum) {
 	o.Status = v
 }
 
@@ -303,7 +275,6 @@ func (o ShareAgreementRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["fleet_id"] = o.FleetId
 	toSerialize["partner_id"] = o.PartnerId
 	toSerialize["fleet_ref"] = o.FleetRef.Get()
-	toSerialize["invitation_id"] = o.InvitationId.Get()
 	toSerialize["status"] = o.Status
 	toSerialize["effective_date"] = o.EffectiveDate
 	toSerialize["expiration_date"] = o.ExpirationDate.Get()
@@ -325,7 +296,6 @@ func (o *ShareAgreementRead) UnmarshalJSON(data []byte) (err error) {
 		"fleet_id",
 		"partner_id",
 		"fleet_ref",
-		"invitation_id",
 		"status",
 		"effective_date",
 		"expiration_date",
@@ -363,7 +333,6 @@ func (o *ShareAgreementRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fleet_id")
 		delete(additionalProperties, "partner_id")
 		delete(additionalProperties, "fleet_ref")
-		delete(additionalProperties, "invitation_id")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "effective_date")
 		delete(additionalProperties, "expiration_date")

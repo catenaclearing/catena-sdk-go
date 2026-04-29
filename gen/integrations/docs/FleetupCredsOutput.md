@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountId** | **string** |  | 
+**AccountId** | **interface{}** |  | 
 **SecretKey** | **interface{}** |  | 
 **ApiKey** | **interface{}** |  | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewFleetupCredsOutput
 
-`func NewFleetupCredsOutput(accountId string, secretKey interface{}, apiKey interface{}, ) *FleetupCredsOutput`
+`func NewFleetupCredsOutput(accountId interface{}, secretKey interface{}, apiKey interface{}, ) *FleetupCredsOutput`
 
 NewFleetupCredsOutput instantiates a new FleetupCredsOutput object
 This constructor will assign default values to properties that have it defined,
@@ -29,24 +29,34 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAccountId
 
-`func (o *FleetupCredsOutput) GetAccountId() string`
+`func (o *FleetupCredsOutput) GetAccountId() interface{}`
 
 GetAccountId returns the AccountId field if non-nil, zero value otherwise.
 
 ### GetAccountIdOk
 
-`func (o *FleetupCredsOutput) GetAccountIdOk() (*string, bool)`
+`func (o *FleetupCredsOutput) GetAccountIdOk() (*interface{}, bool)`
 
 GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAccountId
 
-`func (o *FleetupCredsOutput) SetAccountId(v string)`
+`func (o *FleetupCredsOutput) SetAccountId(v interface{})`
 
 SetAccountId sets AccountId field to given value.
 
 
+### SetAccountIdNil
+
+`func (o *FleetupCredsOutput) SetAccountIdNil(b bool)`
+
+ SetAccountIdNil sets the value for AccountId to be an explicit nil
+
+### UnsetAccountId
+`func (o *FleetupCredsOutput) UnsetAccountId()`
+
+UnsetAccountId ensures that no value is present for AccountId, not even an explicit nil
 ### GetSecretKey
 
 `func (o *FleetupCredsOutput) GetSecretKey() interface{}`

@@ -7,7 +7,10 @@ Method | HTTP request | Description
 [**CreateTsp**](TSPsAPI.md#CreateTsp) | **Post** /v2/orgs/tsps | Create Tsp
 [**DeleteTsp**](TSPsAPI.md#DeleteTsp) | **Delete** /v2/orgs/tsps/{tsp_id} | Delete Tsp
 [**GetTsp**](TSPsAPI.md#GetTsp) | **Get** /v2/orgs/tsps/{tsp_id} | Get TSP
+[**ListExtTsps**](TSPsAPI.md#ListExtTsps) | **Get** /v2/orgs/external-tsps | List External TSPs
+[**ListPartnerIntegrationRequests**](TSPsAPI.md#ListPartnerIntegrationRequests) | **Get** /v2/orgs/external-tsps/integration-requests | List Partner Integration Requests
 [**ListTsps**](TSPsAPI.md#ListTsps) | **Get** /v2/orgs/tsps | List TSPs
+[**RequestExtTspIntegration**](TSPsAPI.md#RequestExtTspIntegration) | **Post** /v2/orgs/external-tsps/{ext_tsp_id}/request-integration | Request External TSP Integration
 [**UpdateTsp**](TSPsAPI.md#UpdateTsp) | **Patch** /v2/orgs/tsps/{tsp_id} | Update Tsp
 
 
@@ -216,6 +219,140 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## ListExtTsps
+
+> []ExtTspRead ListExtTsps(ctx).Q(q).Execute()
+
+List External TSPs
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
+)
+
+func main() {
+	q := "q_example" // string | Fuzzy search by name, website, or email domain (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TSPsAPI.ListExtTsps(context.Background()).Q(q).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TSPsAPI.ListExtTsps``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListExtTsps`: []ExtTspRead
+	fmt.Fprintf(os.Stdout, "Response from `TSPsAPI.ListExtTsps`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListExtTspsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **q** | **string** | Fuzzy search by name, website, or email domain | 
+
+### Return type
+
+[**[]ExtTspRead**](ExtTspRead.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListPartnerIntegrationRequests
+
+> []ExtTspIntegrationRequestRead ListPartnerIntegrationRequests(ctx).FleetId(fleetId).FleetRef(fleetRef).Execute()
+
+List Partner Integration Requests
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
+)
+
+func main() {
+	fleetId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Filter by fleet_id (optional)
+	fleetRef := "fleetRef_example" // string | Filter by fleet_ref (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TSPsAPI.ListPartnerIntegrationRequests(context.Background()).FleetId(fleetId).FleetRef(fleetRef).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TSPsAPI.ListPartnerIntegrationRequests``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListPartnerIntegrationRequests`: []ExtTspIntegrationRequestRead
+	fmt.Fprintf(os.Stdout, "Response from `TSPsAPI.ListPartnerIntegrationRequests`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListPartnerIntegrationRequestsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fleetId** | **string** | Filter by fleet_id | 
+ **fleetRef** | **string** | Filter by fleet_ref | 
+
+### Return type
+
+[**[]ExtTspIntegrationRequestRead**](ExtTspIntegrationRequestRead.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListTsps
 
 > []TspRead ListTsps(ctx).Slug(slug).SourceName(sourceName).Execute()
@@ -277,6 +414,78 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RequestExtTspIntegration
+
+> ExtTspIntegrationRequestRead RequestExtTspIntegration(ctx, extTspId).IntegrationRequestBody(integrationRequestBody).Execute()
+
+Request External TSP Integration
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/orgs"
+)
+
+func main() {
+	extTspId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The ID of the external TSP to request integration for
+	integrationRequestBody := *openapiclient.NewIntegrationRequestBody() // IntegrationRequestBody |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TSPsAPI.RequestExtTspIntegration(context.Background(), extTspId).IntegrationRequestBody(integrationRequestBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TSPsAPI.RequestExtTspIntegration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RequestExtTspIntegration`: ExtTspIntegrationRequestRead
+	fmt.Fprintf(os.Stdout, "Response from `TSPsAPI.RequestExtTspIntegration`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**extTspId** | **string** | The ID of the external TSP to request integration for | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRequestExtTspIntegrationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **integrationRequestBody** | [**IntegrationRequestBody**](IntegrationRequestBody.md) |  | 
+
+### Return type
+
+[**ExtTspIntegrationRequestRead**](ExtTspIntegrationRequestRead.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

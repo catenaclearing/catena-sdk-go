@@ -31,23 +31,40 @@ type InvitationRead struct {
 	ExpiresAt time.Time `json:"expires_at"`
 	// The number of hours the invitation is valid for.
 	ExpiresInHours int32 `json:"expires_in_hours"`
-	// The current status of the invitation (ACTIVE, ACCEPTED, DECLINED, or EXPIRED)
-	Status                      StatusEnum     `json:"status"`
-	PartnerProvidedFleetName    NullableString `json:"partner_provided_fleet_name,omitempty"`
-	AcceptedAt                  NullableTime   `json:"accepted_at,omitempty"`
-	PreRegistrationAccessToken  NullableString `json:"pre_registration_access_token,omitempty"`
-	PreRegistrationRefreshToken NullableString `json:"pre_registration_refresh_token,omitempty"`
-	CallbackUrl                 NullableString `json:"callback_url,omitempty"`
-	SuccessRedirectUrl          NullableString `json:"success_redirect_url,omitempty"`
-	FailureRedirectUrl          NullableString `json:"failure_redirect_url,omitempty"`
-	LimitTsps                   []string       `json:"limit_tsps,omitempty"`
-	FleetId                     NullableString `json:"fleet_id,omitempty"`
-	PartnerSlug                 NullableString `json:"partner_slug,omitempty"`
-	PartnerId                   NullableString `json:"partner_id,omitempty"`
-	DeclineReason               NullableString `json:"decline_reason,omitempty"`
-	DeclinedAt                  NullableTime   `json:"declined_at,omitempty"`
-	FleetRef                    NullableString `json:"fleet_ref,omitempty"`
-	AdditionalProperties        map[string]interface{}
+	// The current status of the invitation (active, accepted, declined, or expired)
+	Status                      InvitationStatusEnum `json:"status"`
+	FleetName                   NullableString       `json:"fleet_name"`
+	AcceptedAt                  NullableTime         `json:"accepted_at"`
+	PreRegistrationAccessToken  NullableString       `json:"pre_registration_access_token"`
+	PreRegistrationRefreshToken NullableString       `json:"pre_registration_refresh_token"`
+	CallbackUrl                 NullableString       `json:"callback_url"`
+	SuccessRedirectUrl          NullableString       `json:"success_redirect_url"`
+	FailureRedirectUrl          NullableString       `json:"failure_redirect_url"`
+	LimitTsps                   []string             `json:"limit_tsps"`
+	FleetId                     NullableString       `json:"fleet_id,omitempty"`
+	PartnerSlug                 NullableString       `json:"partner_slug"`
+	// Your organization ID requesting access to fleet data
+	PartnerId     string         `json:"partner_id"`
+	DeclineReason NullableString `json:"decline_reason"`
+	DeclinedAt    NullableTime   `json:"declined_at"`
+	// Your internal fleet identifier. Use this to map Catena fleets back to your system. This value will be returned in webhooks and redirect URLs.
+	FleetRef string `json:"fleet_ref"`
+	// Defines which resources (vehicle, locations, users, etc.) the fleet must grant access to and the permission level (read, write) for each.
+	Permissions                          map[string]ShareLevelEnum `json:"permissions"`
+	FleetEmail                           NullableString            `json:"fleet_email"`
+	FleetRegulatoryId                    NullableString            `json:"fleet_regulatory_id"`
+	FleetRegulatoryIdType                NullableString            `json:"fleet_regulatory_id_type"`
+	FleetPhone                           NullableString            `json:"fleet_phone"`
+	FleetWebsite                         NullableString            `json:"fleet_website"`
+	FleetCountryCode                     NullableString            `json:"fleet_country_code"`
+	PartnerProvidedFleetName             NullableString            `json:"partner_provided_fleet_name"`
+	PartnerProvidedFleetEmail            NullableString            `json:"partner_provided_fleet_email"`
+	PartnerProvidedFleetRegulatoryId     NullableString            `json:"partner_provided_fleet_regulatory_id"`
+	PartnerProvidedFleetRegulatoryIdType NullableString            `json:"partner_provided_fleet_regulatory_id_type"`
+	PartnerProvidedFleetPhone            NullableString            `json:"partner_provided_fleet_phone"`
+	PartnerProvidedFleetWebsite          NullableString            `json:"partner_provided_fleet_website"`
+	PartnerProvidedFleetCountryCode      NullableString            `json:"partner_provided_fleet_country_code"`
+	AdditionalProperties                 map[string]interface{}
 }
 
 type _InvitationRead InvitationRead
@@ -56,7 +73,7 @@ type _InvitationRead InvitationRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvitationRead(id string, createdAt time.Time, magicLink string, expiresAt time.Time, expiresInHours int32, status StatusEnum) *InvitationRead {
+func NewInvitationRead(id string, createdAt time.Time, magicLink string, expiresAt time.Time, expiresInHours int32, status InvitationStatusEnum, fleetName NullableString, acceptedAt NullableTime, preRegistrationAccessToken NullableString, preRegistrationRefreshToken NullableString, callbackUrl NullableString, successRedirectUrl NullableString, failureRedirectUrl NullableString, limitTsps []string, partnerSlug NullableString, partnerId string, declineReason NullableString, declinedAt NullableTime, fleetRef string, permissions map[string]ShareLevelEnum, fleetEmail NullableString, fleetRegulatoryId NullableString, fleetRegulatoryIdType NullableString, fleetPhone NullableString, fleetWebsite NullableString, fleetCountryCode NullableString, partnerProvidedFleetName NullableString, partnerProvidedFleetEmail NullableString, partnerProvidedFleetRegulatoryId NullableString, partnerProvidedFleetRegulatoryIdType NullableString, partnerProvidedFleetPhone NullableString, partnerProvidedFleetWebsite NullableString, partnerProvidedFleetCountryCode NullableString) *InvitationRead {
 	this := InvitationRead{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -64,6 +81,33 @@ func NewInvitationRead(id string, createdAt time.Time, magicLink string, expires
 	this.ExpiresAt = expiresAt
 	this.ExpiresInHours = expiresInHours
 	this.Status = status
+	this.FleetName = fleetName
+	this.AcceptedAt = acceptedAt
+	this.PreRegistrationAccessToken = preRegistrationAccessToken
+	this.PreRegistrationRefreshToken = preRegistrationRefreshToken
+	this.CallbackUrl = callbackUrl
+	this.SuccessRedirectUrl = successRedirectUrl
+	this.FailureRedirectUrl = failureRedirectUrl
+	this.LimitTsps = limitTsps
+	this.PartnerSlug = partnerSlug
+	this.PartnerId = partnerId
+	this.DeclineReason = declineReason
+	this.DeclinedAt = declinedAt
+	this.FleetRef = fleetRef
+	this.Permissions = permissions
+	this.FleetEmail = fleetEmail
+	this.FleetRegulatoryId = fleetRegulatoryId
+	this.FleetRegulatoryIdType = fleetRegulatoryIdType
+	this.FleetPhone = fleetPhone
+	this.FleetWebsite = fleetWebsite
+	this.FleetCountryCode = fleetCountryCode
+	this.PartnerProvidedFleetName = partnerProvidedFleetName
+	this.PartnerProvidedFleetEmail = partnerProvidedFleetEmail
+	this.PartnerProvidedFleetRegulatoryId = partnerProvidedFleetRegulatoryId
+	this.PartnerProvidedFleetRegulatoryIdType = partnerProvidedFleetRegulatoryIdType
+	this.PartnerProvidedFleetPhone = partnerProvidedFleetPhone
+	this.PartnerProvidedFleetWebsite = partnerProvidedFleetWebsite
+	this.PartnerProvidedFleetCountryCode = partnerProvidedFleetCountryCode
 	return &this
 }
 
@@ -196,9 +240,9 @@ func (o *InvitationRead) SetExpiresInHours(v int32) {
 }
 
 // GetStatus returns the Status field value
-func (o *InvitationRead) GetStatus() StatusEnum {
+func (o *InvitationRead) GetStatus() InvitationStatusEnum {
 	if o == nil {
-		var ret StatusEnum
+		var ret InvitationStatusEnum
 		return ret
 	}
 
@@ -207,7 +251,7 @@ func (o *InvitationRead) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *InvitationRead) GetStatusOk() (*StatusEnum, bool) {
+func (o *InvitationRead) GetStatusOk() (*InvitationStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -215,63 +259,48 @@ func (o *InvitationRead) GetStatusOk() (*StatusEnum, bool) {
 }
 
 // SetStatus sets field value
-func (o *InvitationRead) SetStatus(v StatusEnum) {
+func (o *InvitationRead) SetStatus(v InvitationStatusEnum) {
 	o.Status = v
 }
 
-// GetPartnerProvidedFleetName returns the PartnerProvidedFleetName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvitationRead) GetPartnerProvidedFleetName() string {
-	if o == nil || IsNil(o.PartnerProvidedFleetName.Get()) {
+// GetFleetName returns the FleetName field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetFleetName() string {
+	if o == nil || o.FleetName.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.PartnerProvidedFleetName.Get()
+
+	return *o.FleetName.Get()
 }
 
-// GetPartnerProvidedFleetNameOk returns a tuple with the PartnerProvidedFleetName field value if set, nil otherwise
+// GetFleetNameOk returns a tuple with the FleetName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvitationRead) GetPartnerProvidedFleetNameOk() (*string, bool) {
+func (o *InvitationRead) GetFleetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PartnerProvidedFleetName.Get(), o.PartnerProvidedFleetName.IsSet()
+	return o.FleetName.Get(), o.FleetName.IsSet()
 }
 
-// HasPartnerProvidedFleetName returns a boolean if a field has been set.
-func (o *InvitationRead) HasPartnerProvidedFleetName() bool {
-	if o != nil && o.PartnerProvidedFleetName.IsSet() {
-		return true
-	}
-
-	return false
+// SetFleetName sets field value
+func (o *InvitationRead) SetFleetName(v string) {
+	o.FleetName.Set(&v)
 }
 
-// SetPartnerProvidedFleetName gets a reference to the given NullableString and assigns it to the PartnerProvidedFleetName field.
-func (o *InvitationRead) SetPartnerProvidedFleetName(v string) {
-	o.PartnerProvidedFleetName.Set(&v)
-}
-
-// SetPartnerProvidedFleetNameNil sets the value for PartnerProvidedFleetName to be an explicit nil
-func (o *InvitationRead) SetPartnerProvidedFleetNameNil() {
-	o.PartnerProvidedFleetName.Set(nil)
-}
-
-// UnsetPartnerProvidedFleetName ensures that no value is present for PartnerProvidedFleetName, not even an explicit nil
-func (o *InvitationRead) UnsetPartnerProvidedFleetName() {
-	o.PartnerProvidedFleetName.Unset()
-}
-
-// GetAcceptedAt returns the AcceptedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetAcceptedAt returns the AcceptedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *InvitationRead) GetAcceptedAt() time.Time {
-	if o == nil || IsNil(o.AcceptedAt.Get()) {
+	if o == nil || o.AcceptedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.AcceptedAt.Get()
 }
 
-// GetAcceptedAtOk returns a tuple with the AcceptedAt field value if set, nil otherwise
+// GetAcceptedAtOk returns a tuple with the AcceptedAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetAcceptedAtOk() (*time.Time, bool) {
@@ -281,40 +310,23 @@ func (o *InvitationRead) GetAcceptedAtOk() (*time.Time, bool) {
 	return o.AcceptedAt.Get(), o.AcceptedAt.IsSet()
 }
 
-// HasAcceptedAt returns a boolean if a field has been set.
-func (o *InvitationRead) HasAcceptedAt() bool {
-	if o != nil && o.AcceptedAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAcceptedAt gets a reference to the given NullableTime and assigns it to the AcceptedAt field.
+// SetAcceptedAt sets field value
 func (o *InvitationRead) SetAcceptedAt(v time.Time) {
 	o.AcceptedAt.Set(&v)
 }
 
-// SetAcceptedAtNil sets the value for AcceptedAt to be an explicit nil
-func (o *InvitationRead) SetAcceptedAtNil() {
-	o.AcceptedAt.Set(nil)
-}
-
-// UnsetAcceptedAt ensures that no value is present for AcceptedAt, not even an explicit nil
-func (o *InvitationRead) UnsetAcceptedAt() {
-	o.AcceptedAt.Unset()
-}
-
-// GetPreRegistrationAccessToken returns the PreRegistrationAccessToken field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPreRegistrationAccessToken returns the PreRegistrationAccessToken field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *InvitationRead) GetPreRegistrationAccessToken() string {
-	if o == nil || IsNil(o.PreRegistrationAccessToken.Get()) {
+	if o == nil || o.PreRegistrationAccessToken.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.PreRegistrationAccessToken.Get()
 }
 
-// GetPreRegistrationAccessTokenOk returns a tuple with the PreRegistrationAccessToken field value if set, nil otherwise
+// GetPreRegistrationAccessTokenOk returns a tuple with the PreRegistrationAccessToken field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetPreRegistrationAccessTokenOk() (*string, bool) {
@@ -324,40 +336,23 @@ func (o *InvitationRead) GetPreRegistrationAccessTokenOk() (*string, bool) {
 	return o.PreRegistrationAccessToken.Get(), o.PreRegistrationAccessToken.IsSet()
 }
 
-// HasPreRegistrationAccessToken returns a boolean if a field has been set.
-func (o *InvitationRead) HasPreRegistrationAccessToken() bool {
-	if o != nil && o.PreRegistrationAccessToken.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPreRegistrationAccessToken gets a reference to the given NullableString and assigns it to the PreRegistrationAccessToken field.
+// SetPreRegistrationAccessToken sets field value
 func (o *InvitationRead) SetPreRegistrationAccessToken(v string) {
 	o.PreRegistrationAccessToken.Set(&v)
 }
 
-// SetPreRegistrationAccessTokenNil sets the value for PreRegistrationAccessToken to be an explicit nil
-func (o *InvitationRead) SetPreRegistrationAccessTokenNil() {
-	o.PreRegistrationAccessToken.Set(nil)
-}
-
-// UnsetPreRegistrationAccessToken ensures that no value is present for PreRegistrationAccessToken, not even an explicit nil
-func (o *InvitationRead) UnsetPreRegistrationAccessToken() {
-	o.PreRegistrationAccessToken.Unset()
-}
-
-// GetPreRegistrationRefreshToken returns the PreRegistrationRefreshToken field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPreRegistrationRefreshToken returns the PreRegistrationRefreshToken field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *InvitationRead) GetPreRegistrationRefreshToken() string {
-	if o == nil || IsNil(o.PreRegistrationRefreshToken.Get()) {
+	if o == nil || o.PreRegistrationRefreshToken.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.PreRegistrationRefreshToken.Get()
 }
 
-// GetPreRegistrationRefreshTokenOk returns a tuple with the PreRegistrationRefreshToken field value if set, nil otherwise
+// GetPreRegistrationRefreshTokenOk returns a tuple with the PreRegistrationRefreshToken field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetPreRegistrationRefreshTokenOk() (*string, bool) {
@@ -367,40 +362,23 @@ func (o *InvitationRead) GetPreRegistrationRefreshTokenOk() (*string, bool) {
 	return o.PreRegistrationRefreshToken.Get(), o.PreRegistrationRefreshToken.IsSet()
 }
 
-// HasPreRegistrationRefreshToken returns a boolean if a field has been set.
-func (o *InvitationRead) HasPreRegistrationRefreshToken() bool {
-	if o != nil && o.PreRegistrationRefreshToken.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPreRegistrationRefreshToken gets a reference to the given NullableString and assigns it to the PreRegistrationRefreshToken field.
+// SetPreRegistrationRefreshToken sets field value
 func (o *InvitationRead) SetPreRegistrationRefreshToken(v string) {
 	o.PreRegistrationRefreshToken.Set(&v)
 }
 
-// SetPreRegistrationRefreshTokenNil sets the value for PreRegistrationRefreshToken to be an explicit nil
-func (o *InvitationRead) SetPreRegistrationRefreshTokenNil() {
-	o.PreRegistrationRefreshToken.Set(nil)
-}
-
-// UnsetPreRegistrationRefreshToken ensures that no value is present for PreRegistrationRefreshToken, not even an explicit nil
-func (o *InvitationRead) UnsetPreRegistrationRefreshToken() {
-	o.PreRegistrationRefreshToken.Unset()
-}
-
-// GetCallbackUrl returns the CallbackUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCallbackUrl returns the CallbackUrl field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *InvitationRead) GetCallbackUrl() string {
-	if o == nil || IsNil(o.CallbackUrl.Get()) {
+	if o == nil || o.CallbackUrl.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.CallbackUrl.Get()
 }
 
-// GetCallbackUrlOk returns a tuple with the CallbackUrl field value if set, nil otherwise
+// GetCallbackUrlOk returns a tuple with the CallbackUrl field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetCallbackUrlOk() (*string, bool) {
@@ -410,40 +388,23 @@ func (o *InvitationRead) GetCallbackUrlOk() (*string, bool) {
 	return o.CallbackUrl.Get(), o.CallbackUrl.IsSet()
 }
 
-// HasCallbackUrl returns a boolean if a field has been set.
-func (o *InvitationRead) HasCallbackUrl() bool {
-	if o != nil && o.CallbackUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCallbackUrl gets a reference to the given NullableString and assigns it to the CallbackUrl field.
+// SetCallbackUrl sets field value
 func (o *InvitationRead) SetCallbackUrl(v string) {
 	o.CallbackUrl.Set(&v)
 }
 
-// SetCallbackUrlNil sets the value for CallbackUrl to be an explicit nil
-func (o *InvitationRead) SetCallbackUrlNil() {
-	o.CallbackUrl.Set(nil)
-}
-
-// UnsetCallbackUrl ensures that no value is present for CallbackUrl, not even an explicit nil
-func (o *InvitationRead) UnsetCallbackUrl() {
-	o.CallbackUrl.Unset()
-}
-
-// GetSuccessRedirectUrl returns the SuccessRedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSuccessRedirectUrl returns the SuccessRedirectUrl field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *InvitationRead) GetSuccessRedirectUrl() string {
-	if o == nil || IsNil(o.SuccessRedirectUrl.Get()) {
+	if o == nil || o.SuccessRedirectUrl.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.SuccessRedirectUrl.Get()
 }
 
-// GetSuccessRedirectUrlOk returns a tuple with the SuccessRedirectUrl field value if set, nil otherwise
+// GetSuccessRedirectUrlOk returns a tuple with the SuccessRedirectUrl field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetSuccessRedirectUrlOk() (*string, bool) {
@@ -453,40 +414,23 @@ func (o *InvitationRead) GetSuccessRedirectUrlOk() (*string, bool) {
 	return o.SuccessRedirectUrl.Get(), o.SuccessRedirectUrl.IsSet()
 }
 
-// HasSuccessRedirectUrl returns a boolean if a field has been set.
-func (o *InvitationRead) HasSuccessRedirectUrl() bool {
-	if o != nil && o.SuccessRedirectUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSuccessRedirectUrl gets a reference to the given NullableString and assigns it to the SuccessRedirectUrl field.
+// SetSuccessRedirectUrl sets field value
 func (o *InvitationRead) SetSuccessRedirectUrl(v string) {
 	o.SuccessRedirectUrl.Set(&v)
 }
 
-// SetSuccessRedirectUrlNil sets the value for SuccessRedirectUrl to be an explicit nil
-func (o *InvitationRead) SetSuccessRedirectUrlNil() {
-	o.SuccessRedirectUrl.Set(nil)
-}
-
-// UnsetSuccessRedirectUrl ensures that no value is present for SuccessRedirectUrl, not even an explicit nil
-func (o *InvitationRead) UnsetSuccessRedirectUrl() {
-	o.SuccessRedirectUrl.Unset()
-}
-
-// GetFailureRedirectUrl returns the FailureRedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFailureRedirectUrl returns the FailureRedirectUrl field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *InvitationRead) GetFailureRedirectUrl() string {
-	if o == nil || IsNil(o.FailureRedirectUrl.Get()) {
+	if o == nil || o.FailureRedirectUrl.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.FailureRedirectUrl.Get()
 }
 
-// GetFailureRedirectUrlOk returns a tuple with the FailureRedirectUrl field value if set, nil otherwise
+// GetFailureRedirectUrlOk returns a tuple with the FailureRedirectUrl field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetFailureRedirectUrlOk() (*string, bool) {
@@ -496,40 +440,23 @@ func (o *InvitationRead) GetFailureRedirectUrlOk() (*string, bool) {
 	return o.FailureRedirectUrl.Get(), o.FailureRedirectUrl.IsSet()
 }
 
-// HasFailureRedirectUrl returns a boolean if a field has been set.
-func (o *InvitationRead) HasFailureRedirectUrl() bool {
-	if o != nil && o.FailureRedirectUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFailureRedirectUrl gets a reference to the given NullableString and assigns it to the FailureRedirectUrl field.
+// SetFailureRedirectUrl sets field value
 func (o *InvitationRead) SetFailureRedirectUrl(v string) {
 	o.FailureRedirectUrl.Set(&v)
 }
 
-// SetFailureRedirectUrlNil sets the value for FailureRedirectUrl to be an explicit nil
-func (o *InvitationRead) SetFailureRedirectUrlNil() {
-	o.FailureRedirectUrl.Set(nil)
-}
-
-// UnsetFailureRedirectUrl ensures that no value is present for FailureRedirectUrl, not even an explicit nil
-func (o *InvitationRead) UnsetFailureRedirectUrl() {
-	o.FailureRedirectUrl.Unset()
-}
-
-// GetLimitTsps returns the LimitTsps field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLimitTsps returns the LimitTsps field value
+// If the value is explicit nil, the zero value for []string will be returned
 func (o *InvitationRead) GetLimitTsps() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.LimitTsps
 }
 
-// GetLimitTspsOk returns a tuple with the LimitTsps field value if set, nil otherwise
+// GetLimitTspsOk returns a tuple with the LimitTsps field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetLimitTspsOk() ([]string, bool) {
@@ -539,16 +466,7 @@ func (o *InvitationRead) GetLimitTspsOk() ([]string, bool) {
 	return o.LimitTsps, true
 }
 
-// HasLimitTsps returns a boolean if a field has been set.
-func (o *InvitationRead) HasLimitTsps() bool {
-	if o != nil && !IsNil(o.LimitTsps) {
-		return true
-	}
-
-	return false
-}
-
-// SetLimitTsps gets a reference to the given []string and assigns it to the LimitTsps field.
+// SetLimitTsps sets field value
 func (o *InvitationRead) SetLimitTsps(v []string) {
 	o.LimitTsps = v
 }
@@ -596,16 +514,18 @@ func (o *InvitationRead) UnsetFleetId() {
 	o.FleetId.Unset()
 }
 
-// GetPartnerSlug returns the PartnerSlug field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPartnerSlug returns the PartnerSlug field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *InvitationRead) GetPartnerSlug() string {
-	if o == nil || IsNil(o.PartnerSlug.Get()) {
+	if o == nil || o.PartnerSlug.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.PartnerSlug.Get()
 }
 
-// GetPartnerSlugOk returns a tuple with the PartnerSlug field value if set, nil otherwise
+// GetPartnerSlugOk returns a tuple with the PartnerSlug field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetPartnerSlugOk() (*string, bool) {
@@ -615,83 +535,47 @@ func (o *InvitationRead) GetPartnerSlugOk() (*string, bool) {
 	return o.PartnerSlug.Get(), o.PartnerSlug.IsSet()
 }
 
-// HasPartnerSlug returns a boolean if a field has been set.
-func (o *InvitationRead) HasPartnerSlug() bool {
-	if o != nil && o.PartnerSlug.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPartnerSlug gets a reference to the given NullableString and assigns it to the PartnerSlug field.
+// SetPartnerSlug sets field value
 func (o *InvitationRead) SetPartnerSlug(v string) {
 	o.PartnerSlug.Set(&v)
 }
 
-// SetPartnerSlugNil sets the value for PartnerSlug to be an explicit nil
-func (o *InvitationRead) SetPartnerSlugNil() {
-	o.PartnerSlug.Set(nil)
-}
-
-// UnsetPartnerSlug ensures that no value is present for PartnerSlug, not even an explicit nil
-func (o *InvitationRead) UnsetPartnerSlug() {
-	o.PartnerSlug.Unset()
-}
-
-// GetPartnerId returns the PartnerId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPartnerId returns the PartnerId field value
 func (o *InvitationRead) GetPartnerId() string {
-	if o == nil || IsNil(o.PartnerId.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PartnerId.Get()
+
+	return o.PartnerId
 }
 
-// GetPartnerIdOk returns a tuple with the PartnerId field value if set, nil otherwise
+// GetPartnerIdOk returns a tuple with the PartnerId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetPartnerIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PartnerId.Get(), o.PartnerId.IsSet()
+	return &o.PartnerId, true
 }
 
-// HasPartnerId returns a boolean if a field has been set.
-func (o *InvitationRead) HasPartnerId() bool {
-	if o != nil && o.PartnerId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPartnerId gets a reference to the given NullableString and assigns it to the PartnerId field.
+// SetPartnerId sets field value
 func (o *InvitationRead) SetPartnerId(v string) {
-	o.PartnerId.Set(&v)
+	o.PartnerId = v
 }
 
-// SetPartnerIdNil sets the value for PartnerId to be an explicit nil
-func (o *InvitationRead) SetPartnerIdNil() {
-	o.PartnerId.Set(nil)
-}
-
-// UnsetPartnerId ensures that no value is present for PartnerId, not even an explicit nil
-func (o *InvitationRead) UnsetPartnerId() {
-	o.PartnerId.Unset()
-}
-
-// GetDeclineReason returns the DeclineReason field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDeclineReason returns the DeclineReason field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *InvitationRead) GetDeclineReason() string {
-	if o == nil || IsNil(o.DeclineReason.Get()) {
+	if o == nil || o.DeclineReason.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.DeclineReason.Get()
 }
 
-// GetDeclineReasonOk returns a tuple with the DeclineReason field value if set, nil otherwise
+// GetDeclineReasonOk returns a tuple with the DeclineReason field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetDeclineReasonOk() (*string, bool) {
@@ -701,40 +585,23 @@ func (o *InvitationRead) GetDeclineReasonOk() (*string, bool) {
 	return o.DeclineReason.Get(), o.DeclineReason.IsSet()
 }
 
-// HasDeclineReason returns a boolean if a field has been set.
-func (o *InvitationRead) HasDeclineReason() bool {
-	if o != nil && o.DeclineReason.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDeclineReason gets a reference to the given NullableString and assigns it to the DeclineReason field.
+// SetDeclineReason sets field value
 func (o *InvitationRead) SetDeclineReason(v string) {
 	o.DeclineReason.Set(&v)
 }
 
-// SetDeclineReasonNil sets the value for DeclineReason to be an explicit nil
-func (o *InvitationRead) SetDeclineReasonNil() {
-	o.DeclineReason.Set(nil)
-}
-
-// UnsetDeclineReason ensures that no value is present for DeclineReason, not even an explicit nil
-func (o *InvitationRead) UnsetDeclineReason() {
-	o.DeclineReason.Unset()
-}
-
-// GetDeclinedAt returns the DeclinedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDeclinedAt returns the DeclinedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *InvitationRead) GetDeclinedAt() time.Time {
-	if o == nil || IsNil(o.DeclinedAt.Get()) {
+	if o == nil || o.DeclinedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.DeclinedAt.Get()
 }
 
-// GetDeclinedAtOk returns a tuple with the DeclinedAt field value if set, nil otherwise
+// GetDeclinedAtOk returns a tuple with the DeclinedAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetDeclinedAtOk() (*time.Time, bool) {
@@ -744,71 +611,395 @@ func (o *InvitationRead) GetDeclinedAtOk() (*time.Time, bool) {
 	return o.DeclinedAt.Get(), o.DeclinedAt.IsSet()
 }
 
-// HasDeclinedAt returns a boolean if a field has been set.
-func (o *InvitationRead) HasDeclinedAt() bool {
-	if o != nil && o.DeclinedAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDeclinedAt gets a reference to the given NullableTime and assigns it to the DeclinedAt field.
+// SetDeclinedAt sets field value
 func (o *InvitationRead) SetDeclinedAt(v time.Time) {
 	o.DeclinedAt.Set(&v)
 }
 
-// SetDeclinedAtNil sets the value for DeclinedAt to be an explicit nil
-func (o *InvitationRead) SetDeclinedAtNil() {
-	o.DeclinedAt.Set(nil)
-}
-
-// UnsetDeclinedAt ensures that no value is present for DeclinedAt, not even an explicit nil
-func (o *InvitationRead) UnsetDeclinedAt() {
-	o.DeclinedAt.Unset()
-}
-
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFleetRef returns the FleetRef field value
 func (o *InvitationRead) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FleetRef.Get()
+
+	return o.FleetRef
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetFleetRefOk returns a tuple with the FleetRef field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationRead) GetFleetRefOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.FleetRef.Get(), o.FleetRef.IsSet()
+	return &o.FleetRef, true
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *InvitationRead) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
+// SetFleetRef sets field value
+func (o *InvitationRead) SetFleetRef(v string) {
+	o.FleetRef = v
+}
+
+// GetPermissions returns the Permissions field value
+func (o *InvitationRead) GetPermissions() map[string]ShareLevelEnum {
+	if o == nil {
+		var ret map[string]ShareLevelEnum
+		return ret
 	}
 
-	return false
+	return o.Permissions
 }
 
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
-func (o *InvitationRead) SetFleetRef(v string) {
-	o.FleetRef.Set(&v)
+// GetPermissionsOk returns a tuple with the Permissions field value
+// and a boolean to check if the value has been set.
+func (o *InvitationRead) GetPermissionsOk() (map[string]ShareLevelEnum, bool) {
+	if o == nil {
+		return map[string]ShareLevelEnum{}, false
+	}
+	return o.Permissions, true
 }
 
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *InvitationRead) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
+// SetPermissions sets field value
+func (o *InvitationRead) SetPermissions(v map[string]ShareLevelEnum) {
+	o.Permissions = v
 }
 
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *InvitationRead) UnsetFleetRef() {
-	o.FleetRef.Unset()
+// GetFleetEmail returns the FleetEmail field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetFleetEmail() string {
+	if o == nil || o.FleetEmail.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetEmail.Get()
+}
+
+// GetFleetEmailOk returns a tuple with the FleetEmail field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetFleetEmailOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetEmail.Get(), o.FleetEmail.IsSet()
+}
+
+// SetFleetEmail sets field value
+func (o *InvitationRead) SetFleetEmail(v string) {
+	o.FleetEmail.Set(&v)
+}
+
+// GetFleetRegulatoryId returns the FleetRegulatoryId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetFleetRegulatoryId() string {
+	if o == nil || o.FleetRegulatoryId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetRegulatoryId.Get()
+}
+
+// GetFleetRegulatoryIdOk returns a tuple with the FleetRegulatoryId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetFleetRegulatoryIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRegulatoryId.Get(), o.FleetRegulatoryId.IsSet()
+}
+
+// SetFleetRegulatoryId sets field value
+func (o *InvitationRead) SetFleetRegulatoryId(v string) {
+	o.FleetRegulatoryId.Set(&v)
+}
+
+// GetFleetRegulatoryIdType returns the FleetRegulatoryIdType field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetFleetRegulatoryIdType() string {
+	if o == nil || o.FleetRegulatoryIdType.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetRegulatoryIdType.Get()
+}
+
+// GetFleetRegulatoryIdTypeOk returns a tuple with the FleetRegulatoryIdType field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetFleetRegulatoryIdTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRegulatoryIdType.Get(), o.FleetRegulatoryIdType.IsSet()
+}
+
+// SetFleetRegulatoryIdType sets field value
+func (o *InvitationRead) SetFleetRegulatoryIdType(v string) {
+	o.FleetRegulatoryIdType.Set(&v)
+}
+
+// GetFleetPhone returns the FleetPhone field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetFleetPhone() string {
+	if o == nil || o.FleetPhone.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetPhone.Get()
+}
+
+// GetFleetPhoneOk returns a tuple with the FleetPhone field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetFleetPhoneOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetPhone.Get(), o.FleetPhone.IsSet()
+}
+
+// SetFleetPhone sets field value
+func (o *InvitationRead) SetFleetPhone(v string) {
+	o.FleetPhone.Set(&v)
+}
+
+// GetFleetWebsite returns the FleetWebsite field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetFleetWebsite() string {
+	if o == nil || o.FleetWebsite.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetWebsite.Get()
+}
+
+// GetFleetWebsiteOk returns a tuple with the FleetWebsite field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetFleetWebsiteOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetWebsite.Get(), o.FleetWebsite.IsSet()
+}
+
+// SetFleetWebsite sets field value
+func (o *InvitationRead) SetFleetWebsite(v string) {
+	o.FleetWebsite.Set(&v)
+}
+
+// GetFleetCountryCode returns the FleetCountryCode field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetFleetCountryCode() string {
+	if o == nil || o.FleetCountryCode.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.FleetCountryCode.Get()
+}
+
+// GetFleetCountryCodeOk returns a tuple with the FleetCountryCode field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetFleetCountryCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetCountryCode.Get(), o.FleetCountryCode.IsSet()
+}
+
+// SetFleetCountryCode sets field value
+func (o *InvitationRead) SetFleetCountryCode(v string) {
+	o.FleetCountryCode.Set(&v)
+}
+
+// GetPartnerProvidedFleetName returns the PartnerProvidedFleetName field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetName() string {
+	if o == nil || o.PartnerProvidedFleetName.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PartnerProvidedFleetName.Get()
+}
+
+// GetPartnerProvidedFleetNameOk returns a tuple with the PartnerProvidedFleetName field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PartnerProvidedFleetName.Get(), o.PartnerProvidedFleetName.IsSet()
+}
+
+// SetPartnerProvidedFleetName sets field value
+func (o *InvitationRead) SetPartnerProvidedFleetName(v string) {
+	o.PartnerProvidedFleetName.Set(&v)
+}
+
+// GetPartnerProvidedFleetEmail returns the PartnerProvidedFleetEmail field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetEmail() string {
+	if o == nil || o.PartnerProvidedFleetEmail.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PartnerProvidedFleetEmail.Get()
+}
+
+// GetPartnerProvidedFleetEmailOk returns a tuple with the PartnerProvidedFleetEmail field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetEmailOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PartnerProvidedFleetEmail.Get(), o.PartnerProvidedFleetEmail.IsSet()
+}
+
+// SetPartnerProvidedFleetEmail sets field value
+func (o *InvitationRead) SetPartnerProvidedFleetEmail(v string) {
+	o.PartnerProvidedFleetEmail.Set(&v)
+}
+
+// GetPartnerProvidedFleetRegulatoryId returns the PartnerProvidedFleetRegulatoryId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetRegulatoryId() string {
+	if o == nil || o.PartnerProvidedFleetRegulatoryId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PartnerProvidedFleetRegulatoryId.Get()
+}
+
+// GetPartnerProvidedFleetRegulatoryIdOk returns a tuple with the PartnerProvidedFleetRegulatoryId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetRegulatoryIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PartnerProvidedFleetRegulatoryId.Get(), o.PartnerProvidedFleetRegulatoryId.IsSet()
+}
+
+// SetPartnerProvidedFleetRegulatoryId sets field value
+func (o *InvitationRead) SetPartnerProvidedFleetRegulatoryId(v string) {
+	o.PartnerProvidedFleetRegulatoryId.Set(&v)
+}
+
+// GetPartnerProvidedFleetRegulatoryIdType returns the PartnerProvidedFleetRegulatoryIdType field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetRegulatoryIdType() string {
+	if o == nil || o.PartnerProvidedFleetRegulatoryIdType.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PartnerProvidedFleetRegulatoryIdType.Get()
+}
+
+// GetPartnerProvidedFleetRegulatoryIdTypeOk returns a tuple with the PartnerProvidedFleetRegulatoryIdType field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetRegulatoryIdTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PartnerProvidedFleetRegulatoryIdType.Get(), o.PartnerProvidedFleetRegulatoryIdType.IsSet()
+}
+
+// SetPartnerProvidedFleetRegulatoryIdType sets field value
+func (o *InvitationRead) SetPartnerProvidedFleetRegulatoryIdType(v string) {
+	o.PartnerProvidedFleetRegulatoryIdType.Set(&v)
+}
+
+// GetPartnerProvidedFleetPhone returns the PartnerProvidedFleetPhone field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetPhone() string {
+	if o == nil || o.PartnerProvidedFleetPhone.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PartnerProvidedFleetPhone.Get()
+}
+
+// GetPartnerProvidedFleetPhoneOk returns a tuple with the PartnerProvidedFleetPhone field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetPhoneOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PartnerProvidedFleetPhone.Get(), o.PartnerProvidedFleetPhone.IsSet()
+}
+
+// SetPartnerProvidedFleetPhone sets field value
+func (o *InvitationRead) SetPartnerProvidedFleetPhone(v string) {
+	o.PartnerProvidedFleetPhone.Set(&v)
+}
+
+// GetPartnerProvidedFleetWebsite returns the PartnerProvidedFleetWebsite field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetWebsite() string {
+	if o == nil || o.PartnerProvidedFleetWebsite.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PartnerProvidedFleetWebsite.Get()
+}
+
+// GetPartnerProvidedFleetWebsiteOk returns a tuple with the PartnerProvidedFleetWebsite field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetWebsiteOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PartnerProvidedFleetWebsite.Get(), o.PartnerProvidedFleetWebsite.IsSet()
+}
+
+// SetPartnerProvidedFleetWebsite sets field value
+func (o *InvitationRead) SetPartnerProvidedFleetWebsite(v string) {
+	o.PartnerProvidedFleetWebsite.Set(&v)
+}
+
+// GetPartnerProvidedFleetCountryCode returns the PartnerProvidedFleetCountryCode field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetCountryCode() string {
+	if o == nil || o.PartnerProvidedFleetCountryCode.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PartnerProvidedFleetCountryCode.Get()
+}
+
+// GetPartnerProvidedFleetCountryCodeOk returns a tuple with the PartnerProvidedFleetCountryCode field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationRead) GetPartnerProvidedFleetCountryCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PartnerProvidedFleetCountryCode.Get(), o.PartnerProvidedFleetCountryCode.IsSet()
+}
+
+// SetPartnerProvidedFleetCountryCode sets field value
+func (o *InvitationRead) SetPartnerProvidedFleetCountryCode(v string) {
+	o.PartnerProvidedFleetCountryCode.Set(&v)
 }
 
 func (o InvitationRead) MarshalJSON() ([]byte, error) {
@@ -827,48 +1018,38 @@ func (o InvitationRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["expires_at"] = o.ExpiresAt
 	toSerialize["expires_in_hours"] = o.ExpiresInHours
 	toSerialize["status"] = o.Status
-	if o.PartnerProvidedFleetName.IsSet() {
-		toSerialize["partner_provided_fleet_name"] = o.PartnerProvidedFleetName.Get()
-	}
-	if o.AcceptedAt.IsSet() {
-		toSerialize["accepted_at"] = o.AcceptedAt.Get()
-	}
-	if o.PreRegistrationAccessToken.IsSet() {
-		toSerialize["pre_registration_access_token"] = o.PreRegistrationAccessToken.Get()
-	}
-	if o.PreRegistrationRefreshToken.IsSet() {
-		toSerialize["pre_registration_refresh_token"] = o.PreRegistrationRefreshToken.Get()
-	}
-	if o.CallbackUrl.IsSet() {
-		toSerialize["callback_url"] = o.CallbackUrl.Get()
-	}
-	if o.SuccessRedirectUrl.IsSet() {
-		toSerialize["success_redirect_url"] = o.SuccessRedirectUrl.Get()
-	}
-	if o.FailureRedirectUrl.IsSet() {
-		toSerialize["failure_redirect_url"] = o.FailureRedirectUrl.Get()
-	}
+	toSerialize["fleet_name"] = o.FleetName.Get()
+	toSerialize["accepted_at"] = o.AcceptedAt.Get()
+	toSerialize["pre_registration_access_token"] = o.PreRegistrationAccessToken.Get()
+	toSerialize["pre_registration_refresh_token"] = o.PreRegistrationRefreshToken.Get()
+	toSerialize["callback_url"] = o.CallbackUrl.Get()
+	toSerialize["success_redirect_url"] = o.SuccessRedirectUrl.Get()
+	toSerialize["failure_redirect_url"] = o.FailureRedirectUrl.Get()
 	if o.LimitTsps != nil {
 		toSerialize["limit_tsps"] = o.LimitTsps
 	}
 	if o.FleetId.IsSet() {
 		toSerialize["fleet_id"] = o.FleetId.Get()
 	}
-	if o.PartnerSlug.IsSet() {
-		toSerialize["partner_slug"] = o.PartnerSlug.Get()
-	}
-	if o.PartnerId.IsSet() {
-		toSerialize["partner_id"] = o.PartnerId.Get()
-	}
-	if o.DeclineReason.IsSet() {
-		toSerialize["decline_reason"] = o.DeclineReason.Get()
-	}
-	if o.DeclinedAt.IsSet() {
-		toSerialize["declined_at"] = o.DeclinedAt.Get()
-	}
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
+	toSerialize["partner_slug"] = o.PartnerSlug.Get()
+	toSerialize["partner_id"] = o.PartnerId
+	toSerialize["decline_reason"] = o.DeclineReason.Get()
+	toSerialize["declined_at"] = o.DeclinedAt.Get()
+	toSerialize["fleet_ref"] = o.FleetRef
+	toSerialize["permissions"] = o.Permissions
+	toSerialize["fleet_email"] = o.FleetEmail.Get()
+	toSerialize["fleet_regulatory_id"] = o.FleetRegulatoryId.Get()
+	toSerialize["fleet_regulatory_id_type"] = o.FleetRegulatoryIdType.Get()
+	toSerialize["fleet_phone"] = o.FleetPhone.Get()
+	toSerialize["fleet_website"] = o.FleetWebsite.Get()
+	toSerialize["fleet_country_code"] = o.FleetCountryCode.Get()
+	toSerialize["partner_provided_fleet_name"] = o.PartnerProvidedFleetName.Get()
+	toSerialize["partner_provided_fleet_email"] = o.PartnerProvidedFleetEmail.Get()
+	toSerialize["partner_provided_fleet_regulatory_id"] = o.PartnerProvidedFleetRegulatoryId.Get()
+	toSerialize["partner_provided_fleet_regulatory_id_type"] = o.PartnerProvidedFleetRegulatoryIdType.Get()
+	toSerialize["partner_provided_fleet_phone"] = o.PartnerProvidedFleetPhone.Get()
+	toSerialize["partner_provided_fleet_website"] = o.PartnerProvidedFleetWebsite.Get()
+	toSerialize["partner_provided_fleet_country_code"] = o.PartnerProvidedFleetCountryCode.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -888,6 +1069,33 @@ func (o *InvitationRead) UnmarshalJSON(data []byte) (err error) {
 		"expires_at",
 		"expires_in_hours",
 		"status",
+		"fleet_name",
+		"accepted_at",
+		"pre_registration_access_token",
+		"pre_registration_refresh_token",
+		"callback_url",
+		"success_redirect_url",
+		"failure_redirect_url",
+		"limit_tsps",
+		"partner_slug",
+		"partner_id",
+		"decline_reason",
+		"declined_at",
+		"fleet_ref",
+		"permissions",
+		"fleet_email",
+		"fleet_regulatory_id",
+		"fleet_regulatory_id_type",
+		"fleet_phone",
+		"fleet_website",
+		"fleet_country_code",
+		"partner_provided_fleet_name",
+		"partner_provided_fleet_email",
+		"partner_provided_fleet_regulatory_id",
+		"partner_provided_fleet_regulatory_id_type",
+		"partner_provided_fleet_phone",
+		"partner_provided_fleet_website",
+		"partner_provided_fleet_country_code",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -923,7 +1131,7 @@ func (o *InvitationRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "expires_at")
 		delete(additionalProperties, "expires_in_hours")
 		delete(additionalProperties, "status")
-		delete(additionalProperties, "partner_provided_fleet_name")
+		delete(additionalProperties, "fleet_name")
 		delete(additionalProperties, "accepted_at")
 		delete(additionalProperties, "pre_registration_access_token")
 		delete(additionalProperties, "pre_registration_refresh_token")
@@ -937,6 +1145,20 @@ func (o *InvitationRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "decline_reason")
 		delete(additionalProperties, "declined_at")
 		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "fleet_email")
+		delete(additionalProperties, "fleet_regulatory_id")
+		delete(additionalProperties, "fleet_regulatory_id_type")
+		delete(additionalProperties, "fleet_phone")
+		delete(additionalProperties, "fleet_website")
+		delete(additionalProperties, "fleet_country_code")
+		delete(additionalProperties, "partner_provided_fleet_name")
+		delete(additionalProperties, "partner_provided_fleet_email")
+		delete(additionalProperties, "partner_provided_fleet_regulatory_id")
+		delete(additionalProperties, "partner_provided_fleet_regulatory_id_type")
+		delete(additionalProperties, "partner_provided_fleet_phone")
+		delete(additionalProperties, "partner_provided_fleet_website")
+		delete(additionalProperties, "partner_provided_fleet_country_code")
 		o.AdditionalProperties = additionalProperties
 	}
 

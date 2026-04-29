@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **SourceVehicleId** | Pointer to **NullableString** |  | [optional] 
 **Event** | [**DriverSafetyEventEnum**](DriverSafetyEventEnum.md) | Normalized safety event type. | 
 **Location** | Pointer to [**NullableLocation**](Location.md) |  | [optional] 
+**InferredAddress** | Pointer to [**NullableInferredAddress**](InferredAddress.md) |  | [optional] 
 **H3Index11** | Pointer to **NullableInt32** |  | [optional] 
 **DurationSeconds** | Pointer to **NullableInt32** |  | [optional] 
 **EventMetadata** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -720,6 +721,41 @@ HasLocation returns a boolean if a field has been set.
 `func (o *DriverSafetyEventRead) UnsetLocation()`
 
 UnsetLocation ensures that no value is present for Location, not even an explicit nil
+### GetInferredAddress
+
+`func (o *DriverSafetyEventRead) GetInferredAddress() InferredAddress`
+
+GetInferredAddress returns the InferredAddress field if non-nil, zero value otherwise.
+
+### GetInferredAddressOk
+
+`func (o *DriverSafetyEventRead) GetInferredAddressOk() (*InferredAddress, bool)`
+
+GetInferredAddressOk returns a tuple with the InferredAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInferredAddress
+
+`func (o *DriverSafetyEventRead) SetInferredAddress(v InferredAddress)`
+
+SetInferredAddress sets InferredAddress field to given value.
+
+### HasInferredAddress
+
+`func (o *DriverSafetyEventRead) HasInferredAddress() bool`
+
+HasInferredAddress returns a boolean if a field has been set.
+
+### SetInferredAddressNil
+
+`func (o *DriverSafetyEventRead) SetInferredAddressNil(b bool)`
+
+ SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+
+### UnsetInferredAddress
+`func (o *DriverSafetyEventRead) UnsetInferredAddress()`
+
+UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
 ### GetH3Index11
 
 `func (o *DriverSafetyEventRead) GetH3Index11() int32`

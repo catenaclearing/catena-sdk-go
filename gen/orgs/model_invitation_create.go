@@ -20,8 +20,22 @@ var _ MappedNullable = &InvitationCreate{}
 
 // InvitationCreate API model for creating a fleet invitation
 type InvitationCreate struct {
-	// Your internal fleet identifier. Use this to map Catena fleets back to your system. This value will be returned in webhooks and redirect URLs. Only letters, numbers, spaces, dashes, and underscores are allowed.
-	FleetRef                             string         `json:"fleet_ref"`
+	// Your internal fleet identifier. Use this to map Catena fleets back to your system. This value will be returned in webhooks and redirect URLs.
+	FleetRef              string                    `json:"fleet_ref"`
+	FleetName             NullableString            `json:"fleet_name,omitempty"`
+	FleetEmail            NullableString            `json:"fleet_email,omitempty"`
+	FleetRegulatoryId     NullableString            `json:"fleet_regulatory_id,omitempty"`
+	FleetRegulatoryIdType NullableString            `json:"fleet_regulatory_id_type,omitempty"`
+	FleetPhone            NullableString            `json:"fleet_phone,omitempty"`
+	FleetWebsite          NullableString            `json:"fleet_website,omitempty"`
+	FleetCountryCode      NullableString            `json:"fleet_country_code,omitempty" validate:"regexp=^\\\\w{3}$"`
+	SuccessRedirectUrl    NullableString            `json:"success_redirect_url,omitempty"`
+	FailureRedirectUrl    NullableString            `json:"failure_redirect_url,omitempty"`
+	CallbackUrl           NullableString            `json:"callback_url,omitempty"`
+	LimitTsps             []string                  `json:"limit_tsps,omitempty"`
+	Permissions           map[string]ShareLevelEnum `json:"permissions,omitempty"`
+	// How long the invitation link remains valid (1-672 hours). Default is 24 hours. *Consider longer durations for email campaigns.*
+	ExpiresInHours                       *int32         `json:"expires_in_hours,omitempty"`
 	PartnerProvidedFleetName             NullableString `json:"partner_provided_fleet_name,omitempty"`
 	PartnerProvidedFleetEmail            NullableString `json:"partner_provided_fleet_email,omitempty"`
 	PartnerProvidedFleetRegulatoryId     NullableString `json:"partner_provided_fleet_regulatory_id,omitempty"`
@@ -29,13 +43,7 @@ type InvitationCreate struct {
 	PartnerProvidedFleetPhone            NullableString `json:"partner_provided_fleet_phone,omitempty"`
 	PartnerProvidedFleetWebsite          NullableString `json:"partner_provided_fleet_website,omitempty"`
 	PartnerProvidedFleetCountryCode      NullableString `json:"partner_provided_fleet_country_code,omitempty" validate:"regexp=^\\\\w{3}$"`
-	SuccessRedirectUrl                   NullableString `json:"success_redirect_url,omitempty"`
-	FailureRedirectUrl                   NullableString `json:"failure_redirect_url,omitempty"`
-	CallbackUrl                          NullableString `json:"callback_url,omitempty"`
-	LimitTsps                            []string       `json:"limit_tsps,omitempty"`
-	// How long the invitation link remains valid (1-672 hours). Default is 24 hours. *Consider longer durations for email campaigns.*
-	ExpiresInHours       *int32 `json:"expires_in_hours,omitempty"`
-	AdditionalProperties map[string]interface{}
+	AdditionalProperties                 map[string]interface{}
 }
 
 type _InvitationCreate InvitationCreate
@@ -84,6 +92,534 @@ func (o *InvitationCreate) GetFleetRefOk() (*string, bool) {
 // SetFleetRef sets field value
 func (o *InvitationCreate) SetFleetRef(v string) {
 	o.FleetRef = v
+}
+
+// GetFleetName returns the FleetName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetFleetName() string {
+	if o == nil || IsNil(o.FleetName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetName.Get()
+}
+
+// GetFleetNameOk returns a tuple with the FleetName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetFleetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetName.Get(), o.FleetName.IsSet()
+}
+
+// HasFleetName returns a boolean if a field has been set.
+func (o *InvitationCreate) HasFleetName() bool {
+	if o != nil && o.FleetName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetName gets a reference to the given NullableString and assigns it to the FleetName field.
+func (o *InvitationCreate) SetFleetName(v string) {
+	o.FleetName.Set(&v)
+}
+
+// SetFleetNameNil sets the value for FleetName to be an explicit nil
+func (o *InvitationCreate) SetFleetNameNil() {
+	o.FleetName.Set(nil)
+}
+
+// UnsetFleetName ensures that no value is present for FleetName, not even an explicit nil
+func (o *InvitationCreate) UnsetFleetName() {
+	o.FleetName.Unset()
+}
+
+// GetFleetEmail returns the FleetEmail field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetFleetEmail() string {
+	if o == nil || IsNil(o.FleetEmail.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetEmail.Get()
+}
+
+// GetFleetEmailOk returns a tuple with the FleetEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetFleetEmailOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetEmail.Get(), o.FleetEmail.IsSet()
+}
+
+// HasFleetEmail returns a boolean if a field has been set.
+func (o *InvitationCreate) HasFleetEmail() bool {
+	if o != nil && o.FleetEmail.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetEmail gets a reference to the given NullableString and assigns it to the FleetEmail field.
+func (o *InvitationCreate) SetFleetEmail(v string) {
+	o.FleetEmail.Set(&v)
+}
+
+// SetFleetEmailNil sets the value for FleetEmail to be an explicit nil
+func (o *InvitationCreate) SetFleetEmailNil() {
+	o.FleetEmail.Set(nil)
+}
+
+// UnsetFleetEmail ensures that no value is present for FleetEmail, not even an explicit nil
+func (o *InvitationCreate) UnsetFleetEmail() {
+	o.FleetEmail.Unset()
+}
+
+// GetFleetRegulatoryId returns the FleetRegulatoryId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetFleetRegulatoryId() string {
+	if o == nil || IsNil(o.FleetRegulatoryId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetRegulatoryId.Get()
+}
+
+// GetFleetRegulatoryIdOk returns a tuple with the FleetRegulatoryId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetFleetRegulatoryIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRegulatoryId.Get(), o.FleetRegulatoryId.IsSet()
+}
+
+// HasFleetRegulatoryId returns a boolean if a field has been set.
+func (o *InvitationCreate) HasFleetRegulatoryId() bool {
+	if o != nil && o.FleetRegulatoryId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetRegulatoryId gets a reference to the given NullableString and assigns it to the FleetRegulatoryId field.
+func (o *InvitationCreate) SetFleetRegulatoryId(v string) {
+	o.FleetRegulatoryId.Set(&v)
+}
+
+// SetFleetRegulatoryIdNil sets the value for FleetRegulatoryId to be an explicit nil
+func (o *InvitationCreate) SetFleetRegulatoryIdNil() {
+	o.FleetRegulatoryId.Set(nil)
+}
+
+// UnsetFleetRegulatoryId ensures that no value is present for FleetRegulatoryId, not even an explicit nil
+func (o *InvitationCreate) UnsetFleetRegulatoryId() {
+	o.FleetRegulatoryId.Unset()
+}
+
+// GetFleetRegulatoryIdType returns the FleetRegulatoryIdType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetFleetRegulatoryIdType() string {
+	if o == nil || IsNil(o.FleetRegulatoryIdType.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetRegulatoryIdType.Get()
+}
+
+// GetFleetRegulatoryIdTypeOk returns a tuple with the FleetRegulatoryIdType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetFleetRegulatoryIdTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetRegulatoryIdType.Get(), o.FleetRegulatoryIdType.IsSet()
+}
+
+// HasFleetRegulatoryIdType returns a boolean if a field has been set.
+func (o *InvitationCreate) HasFleetRegulatoryIdType() bool {
+	if o != nil && o.FleetRegulatoryIdType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetRegulatoryIdType gets a reference to the given NullableString and assigns it to the FleetRegulatoryIdType field.
+func (o *InvitationCreate) SetFleetRegulatoryIdType(v string) {
+	o.FleetRegulatoryIdType.Set(&v)
+}
+
+// SetFleetRegulatoryIdTypeNil sets the value for FleetRegulatoryIdType to be an explicit nil
+func (o *InvitationCreate) SetFleetRegulatoryIdTypeNil() {
+	o.FleetRegulatoryIdType.Set(nil)
+}
+
+// UnsetFleetRegulatoryIdType ensures that no value is present for FleetRegulatoryIdType, not even an explicit nil
+func (o *InvitationCreate) UnsetFleetRegulatoryIdType() {
+	o.FleetRegulatoryIdType.Unset()
+}
+
+// GetFleetPhone returns the FleetPhone field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetFleetPhone() string {
+	if o == nil || IsNil(o.FleetPhone.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetPhone.Get()
+}
+
+// GetFleetPhoneOk returns a tuple with the FleetPhone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetFleetPhoneOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetPhone.Get(), o.FleetPhone.IsSet()
+}
+
+// HasFleetPhone returns a boolean if a field has been set.
+func (o *InvitationCreate) HasFleetPhone() bool {
+	if o != nil && o.FleetPhone.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetPhone gets a reference to the given NullableString and assigns it to the FleetPhone field.
+func (o *InvitationCreate) SetFleetPhone(v string) {
+	o.FleetPhone.Set(&v)
+}
+
+// SetFleetPhoneNil sets the value for FleetPhone to be an explicit nil
+func (o *InvitationCreate) SetFleetPhoneNil() {
+	o.FleetPhone.Set(nil)
+}
+
+// UnsetFleetPhone ensures that no value is present for FleetPhone, not even an explicit nil
+func (o *InvitationCreate) UnsetFleetPhone() {
+	o.FleetPhone.Unset()
+}
+
+// GetFleetWebsite returns the FleetWebsite field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetFleetWebsite() string {
+	if o == nil || IsNil(o.FleetWebsite.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetWebsite.Get()
+}
+
+// GetFleetWebsiteOk returns a tuple with the FleetWebsite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetFleetWebsiteOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetWebsite.Get(), o.FleetWebsite.IsSet()
+}
+
+// HasFleetWebsite returns a boolean if a field has been set.
+func (o *InvitationCreate) HasFleetWebsite() bool {
+	if o != nil && o.FleetWebsite.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetWebsite gets a reference to the given NullableString and assigns it to the FleetWebsite field.
+func (o *InvitationCreate) SetFleetWebsite(v string) {
+	o.FleetWebsite.Set(&v)
+}
+
+// SetFleetWebsiteNil sets the value for FleetWebsite to be an explicit nil
+func (o *InvitationCreate) SetFleetWebsiteNil() {
+	o.FleetWebsite.Set(nil)
+}
+
+// UnsetFleetWebsite ensures that no value is present for FleetWebsite, not even an explicit nil
+func (o *InvitationCreate) UnsetFleetWebsite() {
+	o.FleetWebsite.Unset()
+}
+
+// GetFleetCountryCode returns the FleetCountryCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetFleetCountryCode() string {
+	if o == nil || IsNil(o.FleetCountryCode.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FleetCountryCode.Get()
+}
+
+// GetFleetCountryCodeOk returns a tuple with the FleetCountryCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetFleetCountryCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FleetCountryCode.Get(), o.FleetCountryCode.IsSet()
+}
+
+// HasFleetCountryCode returns a boolean if a field has been set.
+func (o *InvitationCreate) HasFleetCountryCode() bool {
+	if o != nil && o.FleetCountryCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFleetCountryCode gets a reference to the given NullableString and assigns it to the FleetCountryCode field.
+func (o *InvitationCreate) SetFleetCountryCode(v string) {
+	o.FleetCountryCode.Set(&v)
+}
+
+// SetFleetCountryCodeNil sets the value for FleetCountryCode to be an explicit nil
+func (o *InvitationCreate) SetFleetCountryCodeNil() {
+	o.FleetCountryCode.Set(nil)
+}
+
+// UnsetFleetCountryCode ensures that no value is present for FleetCountryCode, not even an explicit nil
+func (o *InvitationCreate) UnsetFleetCountryCode() {
+	o.FleetCountryCode.Unset()
+}
+
+// GetSuccessRedirectUrl returns the SuccessRedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetSuccessRedirectUrl() string {
+	if o == nil || IsNil(o.SuccessRedirectUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SuccessRedirectUrl.Get()
+}
+
+// GetSuccessRedirectUrlOk returns a tuple with the SuccessRedirectUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetSuccessRedirectUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SuccessRedirectUrl.Get(), o.SuccessRedirectUrl.IsSet()
+}
+
+// HasSuccessRedirectUrl returns a boolean if a field has been set.
+func (o *InvitationCreate) HasSuccessRedirectUrl() bool {
+	if o != nil && o.SuccessRedirectUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSuccessRedirectUrl gets a reference to the given NullableString and assigns it to the SuccessRedirectUrl field.
+func (o *InvitationCreate) SetSuccessRedirectUrl(v string) {
+	o.SuccessRedirectUrl.Set(&v)
+}
+
+// SetSuccessRedirectUrlNil sets the value for SuccessRedirectUrl to be an explicit nil
+func (o *InvitationCreate) SetSuccessRedirectUrlNil() {
+	o.SuccessRedirectUrl.Set(nil)
+}
+
+// UnsetSuccessRedirectUrl ensures that no value is present for SuccessRedirectUrl, not even an explicit nil
+func (o *InvitationCreate) UnsetSuccessRedirectUrl() {
+	o.SuccessRedirectUrl.Unset()
+}
+
+// GetFailureRedirectUrl returns the FailureRedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetFailureRedirectUrl() string {
+	if o == nil || IsNil(o.FailureRedirectUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FailureRedirectUrl.Get()
+}
+
+// GetFailureRedirectUrlOk returns a tuple with the FailureRedirectUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetFailureRedirectUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FailureRedirectUrl.Get(), o.FailureRedirectUrl.IsSet()
+}
+
+// HasFailureRedirectUrl returns a boolean if a field has been set.
+func (o *InvitationCreate) HasFailureRedirectUrl() bool {
+	if o != nil && o.FailureRedirectUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFailureRedirectUrl gets a reference to the given NullableString and assigns it to the FailureRedirectUrl field.
+func (o *InvitationCreate) SetFailureRedirectUrl(v string) {
+	o.FailureRedirectUrl.Set(&v)
+}
+
+// SetFailureRedirectUrlNil sets the value for FailureRedirectUrl to be an explicit nil
+func (o *InvitationCreate) SetFailureRedirectUrlNil() {
+	o.FailureRedirectUrl.Set(nil)
+}
+
+// UnsetFailureRedirectUrl ensures that no value is present for FailureRedirectUrl, not even an explicit nil
+func (o *InvitationCreate) UnsetFailureRedirectUrl() {
+	o.FailureRedirectUrl.Unset()
+}
+
+// GetCallbackUrl returns the CallbackUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetCallbackUrl() string {
+	if o == nil || IsNil(o.CallbackUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.CallbackUrl.Get()
+}
+
+// GetCallbackUrlOk returns a tuple with the CallbackUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetCallbackUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CallbackUrl.Get(), o.CallbackUrl.IsSet()
+}
+
+// HasCallbackUrl returns a boolean if a field has been set.
+func (o *InvitationCreate) HasCallbackUrl() bool {
+	if o != nil && o.CallbackUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCallbackUrl gets a reference to the given NullableString and assigns it to the CallbackUrl field.
+func (o *InvitationCreate) SetCallbackUrl(v string) {
+	o.CallbackUrl.Set(&v)
+}
+
+// SetCallbackUrlNil sets the value for CallbackUrl to be an explicit nil
+func (o *InvitationCreate) SetCallbackUrlNil() {
+	o.CallbackUrl.Set(nil)
+}
+
+// UnsetCallbackUrl ensures that no value is present for CallbackUrl, not even an explicit nil
+func (o *InvitationCreate) UnsetCallbackUrl() {
+	o.CallbackUrl.Unset()
+}
+
+// GetLimitTsps returns the LimitTsps field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetLimitTsps() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.LimitTsps
+}
+
+// GetLimitTspsOk returns a tuple with the LimitTsps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetLimitTspsOk() ([]string, bool) {
+	if o == nil || IsNil(o.LimitTsps) {
+		return nil, false
+	}
+	return o.LimitTsps, true
+}
+
+// HasLimitTsps returns a boolean if a field has been set.
+func (o *InvitationCreate) HasLimitTsps() bool {
+	if o != nil && !IsNil(o.LimitTsps) {
+		return true
+	}
+
+	return false
+}
+
+// SetLimitTsps gets a reference to the given []string and assigns it to the LimitTsps field.
+func (o *InvitationCreate) SetLimitTsps(v []string) {
+	o.LimitTsps = v
+}
+
+// GetPermissions returns the Permissions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvitationCreate) GetPermissions() map[string]ShareLevelEnum {
+	if o == nil {
+		var ret map[string]ShareLevelEnum
+		return ret
+	}
+	return o.Permissions
+}
+
+// GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvitationCreate) GetPermissionsOk() (map[string]ShareLevelEnum, bool) {
+	if o == nil || IsNil(o.Permissions) {
+		return map[string]ShareLevelEnum{}, false
+	}
+	return o.Permissions, true
+}
+
+// HasPermissions returns a boolean if a field has been set.
+func (o *InvitationCreate) HasPermissions() bool {
+	if o != nil && !IsNil(o.Permissions) {
+		return true
+	}
+
+	return false
+}
+
+// SetPermissions gets a reference to the given map[string]ShareLevelEnum and assigns it to the Permissions field.
+func (o *InvitationCreate) SetPermissions(v map[string]ShareLevelEnum) {
+	o.Permissions = v
+}
+
+// GetExpiresInHours returns the ExpiresInHours field value if set, zero value otherwise.
+func (o *InvitationCreate) GetExpiresInHours() int32 {
+	if o == nil || IsNil(o.ExpiresInHours) {
+		var ret int32
+		return ret
+	}
+	return *o.ExpiresInHours
+}
+
+// GetExpiresInHoursOk returns a tuple with the ExpiresInHours field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InvitationCreate) GetExpiresInHoursOk() (*int32, bool) {
+	if o == nil || IsNil(o.ExpiresInHours) {
+		return nil, false
+	}
+	return o.ExpiresInHours, true
+}
+
+// HasExpiresInHours returns a boolean if a field has been set.
+func (o *InvitationCreate) HasExpiresInHours() bool {
+	if o != nil && !IsNil(o.ExpiresInHours) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiresInHours gets a reference to the given int32 and assigns it to the ExpiresInHours field.
+func (o *InvitationCreate) SetExpiresInHours(v int32) {
+	o.ExpiresInHours = &v
 }
 
 // GetPartnerProvidedFleetName returns the PartnerProvidedFleetName field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -387,200 +923,6 @@ func (o *InvitationCreate) UnsetPartnerProvidedFleetCountryCode() {
 	o.PartnerProvidedFleetCountryCode.Unset()
 }
 
-// GetSuccessRedirectUrl returns the SuccessRedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvitationCreate) GetSuccessRedirectUrl() string {
-	if o == nil || IsNil(o.SuccessRedirectUrl.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.SuccessRedirectUrl.Get()
-}
-
-// GetSuccessRedirectUrlOk returns a tuple with the SuccessRedirectUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvitationCreate) GetSuccessRedirectUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.SuccessRedirectUrl.Get(), o.SuccessRedirectUrl.IsSet()
-}
-
-// HasSuccessRedirectUrl returns a boolean if a field has been set.
-func (o *InvitationCreate) HasSuccessRedirectUrl() bool {
-	if o != nil && o.SuccessRedirectUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSuccessRedirectUrl gets a reference to the given NullableString and assigns it to the SuccessRedirectUrl field.
-func (o *InvitationCreate) SetSuccessRedirectUrl(v string) {
-	o.SuccessRedirectUrl.Set(&v)
-}
-
-// SetSuccessRedirectUrlNil sets the value for SuccessRedirectUrl to be an explicit nil
-func (o *InvitationCreate) SetSuccessRedirectUrlNil() {
-	o.SuccessRedirectUrl.Set(nil)
-}
-
-// UnsetSuccessRedirectUrl ensures that no value is present for SuccessRedirectUrl, not even an explicit nil
-func (o *InvitationCreate) UnsetSuccessRedirectUrl() {
-	o.SuccessRedirectUrl.Unset()
-}
-
-// GetFailureRedirectUrl returns the FailureRedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvitationCreate) GetFailureRedirectUrl() string {
-	if o == nil || IsNil(o.FailureRedirectUrl.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.FailureRedirectUrl.Get()
-}
-
-// GetFailureRedirectUrlOk returns a tuple with the FailureRedirectUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvitationCreate) GetFailureRedirectUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FailureRedirectUrl.Get(), o.FailureRedirectUrl.IsSet()
-}
-
-// HasFailureRedirectUrl returns a boolean if a field has been set.
-func (o *InvitationCreate) HasFailureRedirectUrl() bool {
-	if o != nil && o.FailureRedirectUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFailureRedirectUrl gets a reference to the given NullableString and assigns it to the FailureRedirectUrl field.
-func (o *InvitationCreate) SetFailureRedirectUrl(v string) {
-	o.FailureRedirectUrl.Set(&v)
-}
-
-// SetFailureRedirectUrlNil sets the value for FailureRedirectUrl to be an explicit nil
-func (o *InvitationCreate) SetFailureRedirectUrlNil() {
-	o.FailureRedirectUrl.Set(nil)
-}
-
-// UnsetFailureRedirectUrl ensures that no value is present for FailureRedirectUrl, not even an explicit nil
-func (o *InvitationCreate) UnsetFailureRedirectUrl() {
-	o.FailureRedirectUrl.Unset()
-}
-
-// GetCallbackUrl returns the CallbackUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvitationCreate) GetCallbackUrl() string {
-	if o == nil || IsNil(o.CallbackUrl.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.CallbackUrl.Get()
-}
-
-// GetCallbackUrlOk returns a tuple with the CallbackUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvitationCreate) GetCallbackUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.CallbackUrl.Get(), o.CallbackUrl.IsSet()
-}
-
-// HasCallbackUrl returns a boolean if a field has been set.
-func (o *InvitationCreate) HasCallbackUrl() bool {
-	if o != nil && o.CallbackUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCallbackUrl gets a reference to the given NullableString and assigns it to the CallbackUrl field.
-func (o *InvitationCreate) SetCallbackUrl(v string) {
-	o.CallbackUrl.Set(&v)
-}
-
-// SetCallbackUrlNil sets the value for CallbackUrl to be an explicit nil
-func (o *InvitationCreate) SetCallbackUrlNil() {
-	o.CallbackUrl.Set(nil)
-}
-
-// UnsetCallbackUrl ensures that no value is present for CallbackUrl, not even an explicit nil
-func (o *InvitationCreate) UnsetCallbackUrl() {
-	o.CallbackUrl.Unset()
-}
-
-// GetLimitTsps returns the LimitTsps field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvitationCreate) GetLimitTsps() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-	return o.LimitTsps
-}
-
-// GetLimitTspsOk returns a tuple with the LimitTsps field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvitationCreate) GetLimitTspsOk() ([]string, bool) {
-	if o == nil || IsNil(o.LimitTsps) {
-		return nil, false
-	}
-	return o.LimitTsps, true
-}
-
-// HasLimitTsps returns a boolean if a field has been set.
-func (o *InvitationCreate) HasLimitTsps() bool {
-	if o != nil && !IsNil(o.LimitTsps) {
-		return true
-	}
-
-	return false
-}
-
-// SetLimitTsps gets a reference to the given []string and assigns it to the LimitTsps field.
-func (o *InvitationCreate) SetLimitTsps(v []string) {
-	o.LimitTsps = v
-}
-
-// GetExpiresInHours returns the ExpiresInHours field value if set, zero value otherwise.
-func (o *InvitationCreate) GetExpiresInHours() int32 {
-	if o == nil || IsNil(o.ExpiresInHours) {
-		var ret int32
-		return ret
-	}
-	return *o.ExpiresInHours
-}
-
-// GetExpiresInHoursOk returns a tuple with the ExpiresInHours field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *InvitationCreate) GetExpiresInHoursOk() (*int32, bool) {
-	if o == nil || IsNil(o.ExpiresInHours) {
-		return nil, false
-	}
-	return o.ExpiresInHours, true
-}
-
-// HasExpiresInHours returns a boolean if a field has been set.
-func (o *InvitationCreate) HasExpiresInHours() bool {
-	if o != nil && !IsNil(o.ExpiresInHours) {
-		return true
-	}
-
-	return false
-}
-
-// SetExpiresInHours gets a reference to the given int32 and assigns it to the ExpiresInHours field.
-func (o *InvitationCreate) SetExpiresInHours(v int32) {
-	o.ExpiresInHours = &v
-}
-
 func (o InvitationCreate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -592,6 +934,45 @@ func (o InvitationCreate) MarshalJSON() ([]byte, error) {
 func (o InvitationCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["fleet_ref"] = o.FleetRef
+	if o.FleetName.IsSet() {
+		toSerialize["fleet_name"] = o.FleetName.Get()
+	}
+	if o.FleetEmail.IsSet() {
+		toSerialize["fleet_email"] = o.FleetEmail.Get()
+	}
+	if o.FleetRegulatoryId.IsSet() {
+		toSerialize["fleet_regulatory_id"] = o.FleetRegulatoryId.Get()
+	}
+	if o.FleetRegulatoryIdType.IsSet() {
+		toSerialize["fleet_regulatory_id_type"] = o.FleetRegulatoryIdType.Get()
+	}
+	if o.FleetPhone.IsSet() {
+		toSerialize["fleet_phone"] = o.FleetPhone.Get()
+	}
+	if o.FleetWebsite.IsSet() {
+		toSerialize["fleet_website"] = o.FleetWebsite.Get()
+	}
+	if o.FleetCountryCode.IsSet() {
+		toSerialize["fleet_country_code"] = o.FleetCountryCode.Get()
+	}
+	if o.SuccessRedirectUrl.IsSet() {
+		toSerialize["success_redirect_url"] = o.SuccessRedirectUrl.Get()
+	}
+	if o.FailureRedirectUrl.IsSet() {
+		toSerialize["failure_redirect_url"] = o.FailureRedirectUrl.Get()
+	}
+	if o.CallbackUrl.IsSet() {
+		toSerialize["callback_url"] = o.CallbackUrl.Get()
+	}
+	if o.LimitTsps != nil {
+		toSerialize["limit_tsps"] = o.LimitTsps
+	}
+	if o.Permissions != nil {
+		toSerialize["permissions"] = o.Permissions
+	}
+	if !IsNil(o.ExpiresInHours) {
+		toSerialize["expires_in_hours"] = o.ExpiresInHours
+	}
 	if o.PartnerProvidedFleetName.IsSet() {
 		toSerialize["partner_provided_fleet_name"] = o.PartnerProvidedFleetName.Get()
 	}
@@ -612,21 +993,6 @@ func (o InvitationCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if o.PartnerProvidedFleetCountryCode.IsSet() {
 		toSerialize["partner_provided_fleet_country_code"] = o.PartnerProvidedFleetCountryCode.Get()
-	}
-	if o.SuccessRedirectUrl.IsSet() {
-		toSerialize["success_redirect_url"] = o.SuccessRedirectUrl.Get()
-	}
-	if o.FailureRedirectUrl.IsSet() {
-		toSerialize["failure_redirect_url"] = o.FailureRedirectUrl.Get()
-	}
-	if o.CallbackUrl.IsSet() {
-		toSerialize["callback_url"] = o.CallbackUrl.Get()
-	}
-	if o.LimitTsps != nil {
-		toSerialize["limit_tsps"] = o.LimitTsps
-	}
-	if !IsNil(o.ExpiresInHours) {
-		toSerialize["expires_in_hours"] = o.ExpiresInHours
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -672,6 +1038,19 @@ func (o *InvitationCreate) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "fleet_ref")
+		delete(additionalProperties, "fleet_name")
+		delete(additionalProperties, "fleet_email")
+		delete(additionalProperties, "fleet_regulatory_id")
+		delete(additionalProperties, "fleet_regulatory_id_type")
+		delete(additionalProperties, "fleet_phone")
+		delete(additionalProperties, "fleet_website")
+		delete(additionalProperties, "fleet_country_code")
+		delete(additionalProperties, "success_redirect_url")
+		delete(additionalProperties, "failure_redirect_url")
+		delete(additionalProperties, "callback_url")
+		delete(additionalProperties, "limit_tsps")
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "expires_in_hours")
 		delete(additionalProperties, "partner_provided_fleet_name")
 		delete(additionalProperties, "partner_provided_fleet_email")
 		delete(additionalProperties, "partner_provided_fleet_regulatory_id")
@@ -679,11 +1058,6 @@ func (o *InvitationCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "partner_provided_fleet_phone")
 		delete(additionalProperties, "partner_provided_fleet_website")
 		delete(additionalProperties, "partner_provided_fleet_country_code")
-		delete(additionalProperties, "success_redirect_url")
-		delete(additionalProperties, "failure_redirect_url")
-		delete(additionalProperties, "callback_url")
-		delete(additionalProperties, "limit_tsps")
-		delete(additionalProperties, "expires_in_hours")
 		o.AdditionalProperties = additionalProperties
 	}
 

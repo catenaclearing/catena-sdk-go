@@ -23,7 +23,7 @@ type ScheduleBackfillRequest struct {
 	// The type of resource to backfill schedules for (e.g., VEHICLE, DRIVER, HOS, IFTA).
 	Resource             ResourceEnum   `json:"resource"`
 	TspId                NullableString `json:"tsp_id,omitempty"`
-	FleetIds             []string       `json:"fleet_ids,omitempty"`
+	ConnectionIds        []string       `json:"connection_ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,37 +114,37 @@ func (o *ScheduleBackfillRequest) UnsetTspId() {
 	o.TspId.Unset()
 }
 
-// GetFleetIds returns the FleetIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ScheduleBackfillRequest) GetFleetIds() []string {
+// GetConnectionIds returns the ConnectionIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ScheduleBackfillRequest) GetConnectionIds() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
-	return o.FleetIds
+	return o.ConnectionIds
 }
 
-// GetFleetIdsOk returns a tuple with the FleetIds field value if set, nil otherwise
+// GetConnectionIdsOk returns a tuple with the ConnectionIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ScheduleBackfillRequest) GetFleetIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.FleetIds) {
+func (o *ScheduleBackfillRequest) GetConnectionIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ConnectionIds) {
 		return nil, false
 	}
-	return o.FleetIds, true
+	return o.ConnectionIds, true
 }
 
-// HasFleetIds returns a boolean if a field has been set.
-func (o *ScheduleBackfillRequest) HasFleetIds() bool {
-	if o != nil && !IsNil(o.FleetIds) {
+// HasConnectionIds returns a boolean if a field has been set.
+func (o *ScheduleBackfillRequest) HasConnectionIds() bool {
+	if o != nil && !IsNil(o.ConnectionIds) {
 		return true
 	}
 
 	return false
 }
 
-// SetFleetIds gets a reference to the given []string and assigns it to the FleetIds field.
-func (o *ScheduleBackfillRequest) SetFleetIds(v []string) {
-	o.FleetIds = v
+// SetConnectionIds gets a reference to the given []string and assigns it to the ConnectionIds field.
+func (o *ScheduleBackfillRequest) SetConnectionIds(v []string) {
+	o.ConnectionIds = v
 }
 
 func (o ScheduleBackfillRequest) MarshalJSON() ([]byte, error) {
@@ -161,8 +161,8 @@ func (o ScheduleBackfillRequest) ToMap() (map[string]interface{}, error) {
 	if o.TspId.IsSet() {
 		toSerialize["tsp_id"] = o.TspId.Get()
 	}
-	if o.FleetIds != nil {
-		toSerialize["fleet_ids"] = o.FleetIds
+	if o.ConnectionIds != nil {
+		toSerialize["connection_ids"] = o.ConnectionIds
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -209,7 +209,7 @@ func (o *ScheduleBackfillRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "resource")
 		delete(additionalProperties, "tsp_id")
-		delete(additionalProperties, "fleet_ids")
+		delete(additionalProperties, "connection_ids")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -28,8 +28,6 @@ type BaseShareAgreementEvent struct {
 	// The Catena ID of the partner.
 	PartnerId string         `json:"partner_id"`
 	FleetRef  NullableString `json:"fleet_ref,omitempty"`
-	// The ID of the invitation that created the share agreement
-	InvitationId string `json:"invitation_id"`
 	// The status of the share agreement
 	Status         StatusEnum   `json:"status"`
 	EffectiveDate  NullableTime `json:"effective_date,omitempty"`
@@ -45,12 +43,11 @@ type _BaseShareAgreementEvent BaseShareAgreementEvent
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseShareAgreementEvent(id string, fleetId string, partnerId string, invitationId string, status StatusEnum, scopes map[string]string) *BaseShareAgreementEvent {
+func NewBaseShareAgreementEvent(id string, fleetId string, partnerId string, status StatusEnum, scopes map[string]string) *BaseShareAgreementEvent {
 	this := BaseShareAgreementEvent{}
 	this.Id = id
 	this.FleetId = fleetId
 	this.PartnerId = partnerId
-	this.InvitationId = invitationId
 	this.Status = status
 	this.Scopes = scopes
 	return &this
@@ -177,30 +174,6 @@ func (o *BaseShareAgreementEvent) SetFleetRefNil() {
 // UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 func (o *BaseShareAgreementEvent) UnsetFleetRef() {
 	o.FleetRef.Unset()
-}
-
-// GetInvitationId returns the InvitationId field value
-func (o *BaseShareAgreementEvent) GetInvitationId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.InvitationId
-}
-
-// GetInvitationIdOk returns a tuple with the InvitationId field value
-// and a boolean to check if the value has been set.
-func (o *BaseShareAgreementEvent) GetInvitationIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.InvitationId, true
-}
-
-// SetInvitationId sets field value
-func (o *BaseShareAgreementEvent) SetInvitationId(v string) {
-	o.InvitationId = v
 }
 
 // GetStatus returns the Status field value
@@ -353,7 +326,6 @@ func (o BaseShareAgreementEvent) ToMap() (map[string]interface{}, error) {
 	if o.FleetRef.IsSet() {
 		toSerialize["fleet_ref"] = o.FleetRef.Get()
 	}
-	toSerialize["invitation_id"] = o.InvitationId
 	toSerialize["status"] = o.Status
 	if o.EffectiveDate.IsSet() {
 		toSerialize["effective_date"] = o.EffectiveDate.Get()
@@ -378,7 +350,6 @@ func (o *BaseShareAgreementEvent) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"fleet_id",
 		"partner_id",
-		"invitation_id",
 		"status",
 		"scopes",
 	}
@@ -414,7 +385,6 @@ func (o *BaseShareAgreementEvent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fleet_id")
 		delete(additionalProperties, "partner_id")
 		delete(additionalProperties, "fleet_ref")
-		delete(additionalProperties, "invitation_id")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "effective_date")
 		delete(additionalProperties, "expiration_date")

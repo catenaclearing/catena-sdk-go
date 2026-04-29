@@ -27,15 +27,16 @@ Name | Type | Description | Notes
 **SourceDriverId** | Pointer to **NullableString** |  | [optional] 
 **SourceVehicleId** | Pointer to **NullableString** |  | [optional] 
 **SourceCoDriverId** | Pointer to **NullableString** |  | [optional] 
-**Location** | Pointer to [**NullableLocation3**](Location3.md) |  | [optional] 
+**Location** | Pointer to [**NullableLocation5**](Location5.md) |  | [optional] 
 **H3Index11** | Pointer to **NullableInt32** |  | [optional] 
-**Speed** | Pointer to **NullableInt32** |  | [optional] 
+**Speed** | Pointer to **NullableFloat32** |  | [optional] 
 **Odometer** | Pointer to **NullableFloat32** |  | [optional] 
 **FuelLevel** | Pointer to **NullableFloat32** |  | [optional] 
 **FuelValue** | Pointer to **NullableFloat32** |  | [optional] 
 **EngineHours** | Pointer to **NullableFloat32** |  | [optional] 
 **OilPressure** | Pointer to **NullableFloat32** |  | [optional] 
 **CoolantTemperature** | Pointer to **NullableFloat32** |  | [optional] 
+**InferredAddress** | Pointer to [**NullableInferredAddress**](InferredAddress.md) |  | [optional] 
 
 ## Methods
 
@@ -743,20 +744,20 @@ HasSourceCoDriverId returns a boolean if a field has been set.
 UnsetSourceCoDriverId ensures that no value is present for SourceCoDriverId, not even an explicit nil
 ### GetLocation
 
-`func (o *VehicleLocationRead) GetLocation() Location3`
+`func (o *VehicleLocationRead) GetLocation() Location5`
 
 GetLocation returns the Location field if non-nil, zero value otherwise.
 
 ### GetLocationOk
 
-`func (o *VehicleLocationRead) GetLocationOk() (*Location3, bool)`
+`func (o *VehicleLocationRead) GetLocationOk() (*Location5, bool)`
 
 GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocation
 
-`func (o *VehicleLocationRead) SetLocation(v Location3)`
+`func (o *VehicleLocationRead) SetLocation(v Location5)`
 
 SetLocation sets Location field to given value.
 
@@ -813,20 +814,20 @@ HasH3Index11 returns a boolean if a field has been set.
 UnsetH3Index11 ensures that no value is present for H3Index11, not even an explicit nil
 ### GetSpeed
 
-`func (o *VehicleLocationRead) GetSpeed() int32`
+`func (o *VehicleLocationRead) GetSpeed() float32`
 
 GetSpeed returns the Speed field if non-nil, zero value otherwise.
 
 ### GetSpeedOk
 
-`func (o *VehicleLocationRead) GetSpeedOk() (*int32, bool)`
+`func (o *VehicleLocationRead) GetSpeedOk() (*float32, bool)`
 
 GetSpeedOk returns a tuple with the Speed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpeed
 
-`func (o *VehicleLocationRead) SetSpeed(v int32)`
+`func (o *VehicleLocationRead) SetSpeed(v float32)`
 
 SetSpeed sets Speed field to given value.
 
@@ -1056,6 +1057,41 @@ HasCoolantTemperature returns a boolean if a field has been set.
 `func (o *VehicleLocationRead) UnsetCoolantTemperature()`
 
 UnsetCoolantTemperature ensures that no value is present for CoolantTemperature, not even an explicit nil
+### GetInferredAddress
+
+`func (o *VehicleLocationRead) GetInferredAddress() InferredAddress`
+
+GetInferredAddress returns the InferredAddress field if non-nil, zero value otherwise.
+
+### GetInferredAddressOk
+
+`func (o *VehicleLocationRead) GetInferredAddressOk() (*InferredAddress, bool)`
+
+GetInferredAddressOk returns a tuple with the InferredAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInferredAddress
+
+`func (o *VehicleLocationRead) SetInferredAddress(v InferredAddress)`
+
+SetInferredAddress sets InferredAddress field to given value.
+
+### HasInferredAddress
+
+`func (o *VehicleLocationRead) HasInferredAddress() bool`
+
+HasInferredAddress returns a boolean if a field has been set.
+
+### SetInferredAddressNil
+
+`func (o *VehicleLocationRead) SetInferredAddressNil(b bool)`
+
+ SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+
+### UnsetInferredAddress
+`func (o *VehicleLocationRead) UnsetInferredAddress()`
+
+UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

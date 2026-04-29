@@ -24,11 +24,39 @@ func Test_orgsapi_ShareAgreementsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ShareAgreementsAPIService CreateShareAgreement", func(t *testing.T) {
+	t.Run("Test ShareAgreementsAPIService ActivateShareAgreement", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.ShareAgreementsAPI.CreateShareAgreement(context.Background()).Execute()
+		var shareAgreementId string
+
+		resp, httpRes, err := apiClient.ShareAgreementsAPI.ActivateShareAgreement(context.Background(), shareAgreementId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ShareAgreementsAPIService BackfillShareAgreements", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ShareAgreementsAPI.BackfillShareAgreements(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ShareAgreementsAPIService CancelShareAgreement", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var shareAgreementId string
+
+		resp, httpRes, err := apiClient.ShareAgreementsAPI.CancelShareAgreement(context.Background(), shareAgreementId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -68,6 +96,20 @@ func Test_orgsapi_ShareAgreementsAPIService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ShareAgreementsAPI.ListShareAgreements(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ShareAgreementsAPIService PauseShareAgreement", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var shareAgreementId string
+
+		resp, httpRes, err := apiClient.ShareAgreementsAPI.PauseShareAgreement(context.Background(), shareAgreementId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

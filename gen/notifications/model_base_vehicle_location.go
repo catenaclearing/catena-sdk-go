@@ -40,24 +40,26 @@ type BaseVehicleLocation struct {
 	UpdatedAt time.Time    `json:"updated_at"`
 	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	// When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available.
-	OccurredAt           time.Time              `json:"occurred_at"`
-	ExecutionId          NullableString         `json:"execution_id,omitempty"`
-	ScheduleId           NullableString         `json:"schedule_id,omitempty"`
-	Extras               map[string]interface{} `json:"extras,omitempty"`
-	VehicleId            NullableString         `json:"vehicle_id,omitempty"`
-	DriverId             NullableString         `json:"driver_id,omitempty"`
-	CoDriverId           NullableString         `json:"co_driver_id,omitempty"`
-	SourceDriverId       NullableString         `json:"source_driver_id,omitempty"`
-	SourceVehicleId      NullableString         `json:"source_vehicle_id,omitempty"`
-	SourceCoDriverId     NullableString         `json:"source_co_driver_id,omitempty"`
-	Location             NullablePoint          `json:"location,omitempty"`
-	H3Index11            NullableInt32          `json:"h3_index_11,omitempty"`
-	Speed                NullableInt32          `json:"speed,omitempty"`
-	Odometer             NullableFloat32        `json:"odometer,omitempty"`
-	FuelLevel            NullableFloat32        `json:"fuel_level,omitempty"`
-	EngineHours          NullableFloat32        `json:"engine_hours,omitempty"`
-	OilPressure          NullableFloat32        `json:"oil_pressure,omitempty"`
-	CoolantTemperature   NullableFloat32        `json:"coolant_temperature,omitempty"`
+	OccurredAt           time.Time               `json:"occurred_at"`
+	ExecutionId          NullableString          `json:"execution_id,omitempty"`
+	ScheduleId           NullableString          `json:"schedule_id,omitempty"`
+	Extras               map[string]interface{}  `json:"extras,omitempty"`
+	VehicleId            NullableString          `json:"vehicle_id,omitempty"`
+	DriverId             NullableString          `json:"driver_id,omitempty"`
+	CoDriverId           NullableString          `json:"co_driver_id,omitempty"`
+	SourceDriverId       NullableString          `json:"source_driver_id,omitempty"`
+	SourceVehicleId      NullableString          `json:"source_vehicle_id,omitempty"`
+	SourceCoDriverId     NullableString          `json:"source_co_driver_id,omitempty"`
+	Location             NullablePoint           `json:"location,omitempty"`
+	H3Index11            NullableInt32           `json:"h3_index_11,omitempty"`
+	Speed                NullableFloat32         `json:"speed,omitempty"`
+	Odometer             NullableFloat32         `json:"odometer,omitempty"`
+	FuelLevel            NullableFloat32         `json:"fuel_level,omitempty"`
+	FuelValue            NullableFloat32         `json:"fuel_value,omitempty"`
+	EngineHours          NullableFloat32         `json:"engine_hours,omitempty"`
+	OilPressure          NullableFloat32         `json:"oil_pressure,omitempty"`
+	CoolantTemperature   NullableFloat32         `json:"coolant_temperature,omitempty"`
+	InferredAddress      NullableInferredAddress `json:"inferred_address,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -900,9 +902,9 @@ func (o *BaseVehicleLocation) UnsetH3Index11() {
 }
 
 // GetSpeed returns the Speed field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BaseVehicleLocation) GetSpeed() int32 {
+func (o *BaseVehicleLocation) GetSpeed() float32 {
 	if o == nil || IsNil(o.Speed.Get()) {
-		var ret int32
+		var ret float32
 		return ret
 	}
 	return *o.Speed.Get()
@@ -911,7 +913,7 @@ func (o *BaseVehicleLocation) GetSpeed() int32 {
 // GetSpeedOk returns a tuple with the Speed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BaseVehicleLocation) GetSpeedOk() (*int32, bool) {
+func (o *BaseVehicleLocation) GetSpeedOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -927,8 +929,8 @@ func (o *BaseVehicleLocation) HasSpeed() bool {
 	return false
 }
 
-// SetSpeed gets a reference to the given NullableInt32 and assigns it to the Speed field.
-func (o *BaseVehicleLocation) SetSpeed(v int32) {
+// SetSpeed gets a reference to the given NullableFloat32 and assigns it to the Speed field.
+func (o *BaseVehicleLocation) SetSpeed(v float32) {
 	o.Speed.Set(&v)
 }
 
@@ -1026,6 +1028,49 @@ func (o *BaseVehicleLocation) SetFuelLevelNil() {
 // UnsetFuelLevel ensures that no value is present for FuelLevel, not even an explicit nil
 func (o *BaseVehicleLocation) UnsetFuelLevel() {
 	o.FuelLevel.Unset()
+}
+
+// GetFuelValue returns the FuelValue field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseVehicleLocation) GetFuelValue() float32 {
+	if o == nil || IsNil(o.FuelValue.Get()) {
+		var ret float32
+		return ret
+	}
+	return *o.FuelValue.Get()
+}
+
+// GetFuelValueOk returns a tuple with the FuelValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseVehicleLocation) GetFuelValueOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FuelValue.Get(), o.FuelValue.IsSet()
+}
+
+// HasFuelValue returns a boolean if a field has been set.
+func (o *BaseVehicleLocation) HasFuelValue() bool {
+	if o != nil && o.FuelValue.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFuelValue gets a reference to the given NullableFloat32 and assigns it to the FuelValue field.
+func (o *BaseVehicleLocation) SetFuelValue(v float32) {
+	o.FuelValue.Set(&v)
+}
+
+// SetFuelValueNil sets the value for FuelValue to be an explicit nil
+func (o *BaseVehicleLocation) SetFuelValueNil() {
+	o.FuelValue.Set(nil)
+}
+
+// UnsetFuelValue ensures that no value is present for FuelValue, not even an explicit nil
+func (o *BaseVehicleLocation) UnsetFuelValue() {
+	o.FuelValue.Unset()
 }
 
 // GetEngineHours returns the EngineHours field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1157,6 +1202,49 @@ func (o *BaseVehicleLocation) UnsetCoolantTemperature() {
 	o.CoolantTemperature.Unset()
 }
 
+// GetInferredAddress returns the InferredAddress field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseVehicleLocation) GetInferredAddress() InferredAddress {
+	if o == nil || IsNil(o.InferredAddress.Get()) {
+		var ret InferredAddress
+		return ret
+	}
+	return *o.InferredAddress.Get()
+}
+
+// GetInferredAddressOk returns a tuple with the InferredAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseVehicleLocation) GetInferredAddressOk() (*InferredAddress, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InferredAddress.Get(), o.InferredAddress.IsSet()
+}
+
+// HasInferredAddress returns a boolean if a field has been set.
+func (o *BaseVehicleLocation) HasInferredAddress() bool {
+	if o != nil && o.InferredAddress.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInferredAddress gets a reference to the given NullableInferredAddress and assigns it to the InferredAddress field.
+func (o *BaseVehicleLocation) SetInferredAddress(v InferredAddress) {
+	o.InferredAddress.Set(&v)
+}
+
+// SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+func (o *BaseVehicleLocation) SetInferredAddressNil() {
+	o.InferredAddress.Set(nil)
+}
+
+// UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
+func (o *BaseVehicleLocation) UnsetInferredAddress() {
+	o.InferredAddress.Unset()
+}
+
 func (o BaseVehicleLocation) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1227,6 +1315,9 @@ func (o BaseVehicleLocation) ToMap() (map[string]interface{}, error) {
 	if o.FuelLevel.IsSet() {
 		toSerialize["fuel_level"] = o.FuelLevel.Get()
 	}
+	if o.FuelValue.IsSet() {
+		toSerialize["fuel_value"] = o.FuelValue.Get()
+	}
 	if o.EngineHours.IsSet() {
 		toSerialize["engine_hours"] = o.EngineHours.Get()
 	}
@@ -1235,6 +1326,9 @@ func (o BaseVehicleLocation) ToMap() (map[string]interface{}, error) {
 	}
 	if o.CoolantTemperature.IsSet() {
 		toSerialize["coolant_temperature"] = o.CoolantTemperature.Get()
+	}
+	if o.InferredAddress.IsSet() {
+		toSerialize["inferred_address"] = o.InferredAddress.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -1313,9 +1407,11 @@ func (o *BaseVehicleLocation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "speed")
 		delete(additionalProperties, "odometer")
 		delete(additionalProperties, "fuel_level")
+		delete(additionalProperties, "fuel_value")
 		delete(additionalProperties, "engine_hours")
 		delete(additionalProperties, "oil_pressure")
 		delete(additionalProperties, "coolant_temperature")
+		delete(additionalProperties, "inferred_address")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -27,6 +27,10 @@
 
 * `DEFENSIVE_DRIVING` (value: `"defensive_driving"`)
 
+* `UNSAFE_PARKING` (value: `"unsafe_parking"`)
+
+* `RAILROAD_CROSSING_VIOLATION` (value: `"railroad_crossing_violation"`)
+
 * `NO_SEATBELT` (value: `"no_seatbelt"`)
 
 * `MOBILE_USAGE` (value: `"mobile_usage"`)

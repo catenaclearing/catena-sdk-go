@@ -9,6 +9,8 @@
 
 * `OBD2` (value: `"OBD2"`)
 
+* `VENDOR` (value: `"VENDOR"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -28,9 +28,9 @@ type WebhookLogRead struct {
 	// The ID of the message
 	MessageId string `json:"message_id"`
 	// The name of the event
-	EventName WebhookEventName `json:"event_name"`
+	EventName WebhookEventNameEnum `json:"event_name"`
 	// The status of the webhook message
-	Status StatusEnum `json:"status"`
+	Status WebhookLogStatusEnum `json:"status"`
 	// The HTTP status code of the webhook delivery
 	StatusCode           int32          `json:"status_code"`
 	ErrorMessage         NullableString `json:"error_message"`
@@ -44,7 +44,7 @@ type _WebhookLogRead WebhookLogRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookLogRead(createdAt time.Time, webhookId string, messageId string, eventName WebhookEventName, status StatusEnum, statusCode int32, errorMessage NullableString, responseTimeMs NullableInt32) *WebhookLogRead {
+func NewWebhookLogRead(createdAt time.Time, webhookId string, messageId string, eventName WebhookEventNameEnum, status WebhookLogStatusEnum, statusCode int32, errorMessage NullableString, responseTimeMs NullableInt32) *WebhookLogRead {
 	this := WebhookLogRead{}
 	this.CreatedAt = createdAt
 	this.WebhookId = webhookId
@@ -138,9 +138,9 @@ func (o *WebhookLogRead) SetMessageId(v string) {
 }
 
 // GetEventName returns the EventName field value
-func (o *WebhookLogRead) GetEventName() WebhookEventName {
+func (o *WebhookLogRead) GetEventName() WebhookEventNameEnum {
 	if o == nil {
-		var ret WebhookEventName
+		var ret WebhookEventNameEnum
 		return ret
 	}
 
@@ -149,7 +149,7 @@ func (o *WebhookLogRead) GetEventName() WebhookEventName {
 
 // GetEventNameOk returns a tuple with the EventName field value
 // and a boolean to check if the value has been set.
-func (o *WebhookLogRead) GetEventNameOk() (*WebhookEventName, bool) {
+func (o *WebhookLogRead) GetEventNameOk() (*WebhookEventNameEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,14 +157,14 @@ func (o *WebhookLogRead) GetEventNameOk() (*WebhookEventName, bool) {
 }
 
 // SetEventName sets field value
-func (o *WebhookLogRead) SetEventName(v WebhookEventName) {
+func (o *WebhookLogRead) SetEventName(v WebhookEventNameEnum) {
 	o.EventName = v
 }
 
 // GetStatus returns the Status field value
-func (o *WebhookLogRead) GetStatus() StatusEnum {
+func (o *WebhookLogRead) GetStatus() WebhookLogStatusEnum {
 	if o == nil {
-		var ret StatusEnum
+		var ret WebhookLogStatusEnum
 		return ret
 	}
 
@@ -173,7 +173,7 @@ func (o *WebhookLogRead) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *WebhookLogRead) GetStatusOk() (*StatusEnum, bool) {
+func (o *WebhookLogRead) GetStatusOk() (*WebhookLogStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -181,7 +181,7 @@ func (o *WebhookLogRead) GetStatusOk() (*StatusEnum, bool) {
 }
 
 // SetStatus sets field value
-func (o *WebhookLogRead) SetStatus(v StatusEnum) {
+func (o *WebhookLogRead) SetStatus(v WebhookLogStatusEnum) {
 	o.Status = v
 }
 

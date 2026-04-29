@@ -79,18 +79,24 @@ All URIs are relative to *https://api.catenatelematics.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*ConnectionsAPI* | [**ActivateSchedule**](docs/ConnectionsAPI.md#activateschedule) | **Post** /v2/integrations/connections/{connection_id}/schedules/{schedule_id}/activate | Activate Schedule
+*ConnectionsAPI* | [**ActivateSchedules**](docs/ConnectionsAPI.md#activateschedules) | **Post** /v2/integrations/connections/{connection_id}/schedules/activate-schedules | Activate Schedules
 *ConnectionsAPI* | [**BackfillSchedules**](docs/ConnectionsAPI.md#backfillschedules) | **Post** /v2/integrations/connections/schedules/backfill | Backfill Schedules
 *ConnectionsAPI* | [**CreateConnection**](docs/ConnectionsAPI.md#createconnection) | **Post** /v2/integrations/connections | Create Connection
+*ConnectionsAPI* | [**CreateConnectionPreAuth**](docs/ConnectionsAPI.md#createconnectionpreauth) | **Post** /v2/integrations/connection-pre-auths | Create Connection Pre Auth
 *ConnectionsAPI* | [**CreateSchedule**](docs/ConnectionsAPI.md#createschedule) | **Post** /v2/integrations/connections/{connection_id}/schedules | Create Schedule
 *ConnectionsAPI* | [**DeleteConnection**](docs/ConnectionsAPI.md#deleteconnection) | **Delete** /v2/integrations/connections/{connection_id} | Delete Connection
 *ConnectionsAPI* | [**DeleteSchedule**](docs/ConnectionsAPI.md#deleteschedule) | **Delete** /v2/integrations/connections/{connection_id}/schedules/{schedule_id} | Delete Schedule
 *ConnectionsAPI* | [**GetConnection**](docs/ConnectionsAPI.md#getconnection) | **Get** /v2/integrations/connections/{connection_id} | Get Connection
+*ConnectionsAPI* | [**GetDataFreshness**](docs/ConnectionsAPI.md#getdatafreshness) | **Get** /v2/integrations/connections/data-freshness | Get Data Freshness
 *ConnectionsAPI* | [**GetSchedule**](docs/ConnectionsAPI.md#getschedule) | **Get** /v2/integrations/connections/{connection_id}/schedules/{schedule_id} | Get Schedule
 *ConnectionsAPI* | [**ListConnections**](docs/ConnectionsAPI.md#listconnections) | **Get** /v2/integrations/connections | List Connections
 *ConnectionsAPI* | [**ListExecutions**](docs/ConnectionsAPI.md#listexecutions) | **Get** /v2/integrations/connections/{connection_id}/schedules/{schedule_id}/executions | List Executions
 *ConnectionsAPI* | [**ListSchedules**](docs/ConnectionsAPI.md#listschedules) | **Get** /v2/integrations/connections/{connection_id}/schedules | List Schedules
 *ConnectionsAPI* | [**UpdateConnection**](docs/ConnectionsAPI.md#updateconnection) | **Patch** /v2/integrations/connections/{connection_id} | Update Connection
 *ConnectionsAPI* | [**UpdateSchedule**](docs/ConnectionsAPI.md#updateschedule) | **Patch** /v2/integrations/connections/{connection_id}/schedules/{schedule_id} | Update Schedule
+*ResourceOperationsAPI* | [**GetResourceOperation**](docs/ResourceOperationsAPI.md#getresourceoperation) | **Get** /v2/integrations/connections/{connection_id}/resource-operations/{resource_operation_id} | Get Resource Operation
+*ResourceOperationsAPI* | [**ListResourceOperations**](docs/ResourceOperationsAPI.md#listresourceoperations) | **Get** /v2/integrations/connections/resource-operations | List Resource Operations
 *TSPIntegrationsAPI* | [**GetIntegrationsPerTsp**](docs/TSPIntegrationsAPI.md#getintegrationspertsp) | **Get** /v2/integrations/tsps/{tsp_id} | Get Integrations Per Tsp
 *TSPIntegrationsAPI* | [**ListIntegrationsPerTsp**](docs/TSPIntegrationsAPI.md#listintegrationspertsp) | **Get** /v2/integrations/tsps | List Integrations Per Tsp
 
@@ -118,19 +124,27 @@ Class | Method | HTTP request | Description
  - [CompanyIdCredsOutput](docs/CompanyIdCredsOutput.md)
  - [Conflict](docs/Conflict.md)
  - [ConnectionCreate](docs/ConnectionCreate.md)
+ - [ConnectionPreAuthCreate](docs/ConnectionPreAuthCreate.md)
  - [ConnectionRead](docs/ConnectionRead.md)
+ - [ConnectionStatusEnum](docs/ConnectionStatusEnum.md)
  - [ConnectionUpdate](docs/ConnectionUpdate.md)
  - [Credentials](docs/Credentials.md)
  - [Credentials1](docs/Credentials1.md)
  - [Credentials2](docs/Credentials2.md)
  - [CursorPageTypeVarCustomizedConnectionRead](docs/CursorPageTypeVarCustomizedConnectionRead.md)
  - [CursorPageTypeVarCustomizedExecutionRead](docs/CursorPageTypeVarCustomizedExecutionRead.md)
+ - [CursorPageTypeVarCustomizedResourceOperationRead](docs/CursorPageTypeVarCustomizedResourceOperationRead.md)
  - [CursorPageTypeVarCustomizedScheduleRead](docs/CursorPageTypeVarCustomizedScheduleRead.md)
  - [CursorPageTypeVarCustomizedTspIntegrationsRead](docs/CursorPageTypeVarCustomizedTspIntegrationsRead.md)
+ - [DataFreshness](docs/DataFreshness.md)
  - [DatabaseCredsInput](docs/DatabaseCredsInput.md)
  - [DatabaseCredsOutput](docs/DatabaseCredsOutput.md)
  - [DatabaseDriverEnum](docs/DatabaseDriverEnum.md)
+ - [EZLynkAccessCredsInput](docs/EZLynkAccessCredsInput.md)
+ - [EZLynkAccessCredsOutput](docs/EZLynkAccessCredsOutput.md)
+ - [EZLynkCreds](docs/EZLynkCreds.md)
  - [ExecutionRead](docs/ExecutionRead.md)
+ - [ExecutionStatusEnum](docs/ExecutionStatusEnum.md)
  - [EzlogzCreds](docs/EzlogzCreds.md)
  - [FactorEldCredsInput](docs/FactorEldCredsInput.md)
  - [FactorEldCredsOutput](docs/FactorEldCredsOutput.md)
@@ -163,6 +177,12 @@ Class | Method | HTTP request | Description
  - [PrivateKeyCredsInput](docs/PrivateKeyCredsInput.md)
  - [PrivateKeyCredsOutput](docs/PrivateKeyCredsOutput.md)
  - [ResourceEnum](docs/ResourceEnum.md)
+ - [ResourceOperationErrorTypeEnum](docs/ResourceOperationErrorTypeEnum.md)
+ - [ResourceOperationLogRead](docs/ResourceOperationLogRead.md)
+ - [ResourceOperationLogStatusEnum](docs/ResourceOperationLogStatusEnum.md)
+ - [ResourceOperationRead](docs/ResourceOperationRead.md)
+ - [ResourceOperationStatusEnum](docs/ResourceOperationStatusEnum.md)
+ - [ResourceOperationTypeEnum](docs/ResourceOperationTypeEnum.md)
  - [RetryAfterDetail](docs/RetryAfterDetail.md)
  - [S3CredsInput](docs/S3CredsInput.md)
  - [S3CredsOutput](docs/S3CredsOutput.md)
@@ -172,12 +192,13 @@ Class | Method | HTTP request | Description
  - [ScheduleBackfillResponse](docs/ScheduleBackfillResponse.md)
  - [ScheduleCreate](docs/ScheduleCreate.md)
  - [ScheduleRead](docs/ScheduleRead.md)
+ - [ScheduleStatusEnum](docs/ScheduleStatusEnum.md)
  - [ScheduleUpdate](docs/ScheduleUpdate.md)
  - [SftpCredsInput](docs/SftpCredsInput.md)
  - [SftpCredsOutput](docs/SftpCredsOutput.md)
+ - [ShareLevelEnum](docs/ShareLevelEnum.md)
  - [SpireonSLCInput](docs/SpireonSLCInput.md)
  - [SpireonSLCOutput](docs/SpireonSLCOutput.md)
- - [StatusEnum](docs/StatusEnum.md)
  - [SwitchBoardCredsInput](docs/SwitchBoardCredsInput.md)
  - [SwitchBoardCredsOutput](docs/SwitchBoardCredsOutput.md)
  - [TTCredsInput](docs/TTCredsInput.md)
@@ -194,6 +215,10 @@ Class | Method | HTTP request | Description
  - [Unauthorized](docs/Unauthorized.md)
  - [UnprocessableEntity](docs/UnprocessableEntity.md)
  - [ValidationErrorDetail](docs/ValidationErrorDetail.md)
+ - [VerizonConnectCredsInput](docs/VerizonConnectCredsInput.md)
+ - [VerizonConnectCredsOutput](docs/VerizonConnectCredsOutput.md)
+ - [VerizonConnectSLCInput](docs/VerizonConnectSLCInput.md)
+ - [VerizonConnectSLCOutput](docs/VerizonConnectSLCOutput.md)
  - [ZubieCredsInput](docs/ZubieCredsInput.md)
  - [ZubieCredsOutput](docs/ZubieCredsOutput.md)
 

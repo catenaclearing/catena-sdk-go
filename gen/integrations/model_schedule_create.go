@@ -29,8 +29,8 @@ type ScheduleCreate struct {
 	// The maximum number of concurrent executions allowed for this schedule. Defaults to 1.
 	MaxConcurrentExecutions *int32 `json:"max_concurrent_executions,omitempty"`
 	// The initial status of the schedule. Defaults to ACTIVE.
-	Status               *StatusEnum    `json:"status,omitempty"`
-	Cursor               NullableString `json:"cursor,omitempty"`
+	Status               *ScheduleStatusEnum `json:"status,omitempty"`
+	Cursor               NullableString      `json:"cursor,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -187,9 +187,9 @@ func (o *ScheduleCreate) SetMaxConcurrentExecutions(v int32) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *ScheduleCreate) GetStatus() StatusEnum {
+func (o *ScheduleCreate) GetStatus() ScheduleStatusEnum {
 	if o == nil || IsNil(o.Status) {
-		var ret StatusEnum
+		var ret ScheduleStatusEnum
 		return ret
 	}
 	return *o.Status
@@ -197,7 +197,7 @@ func (o *ScheduleCreate) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ScheduleCreate) GetStatusOk() (*StatusEnum, bool) {
+func (o *ScheduleCreate) GetStatusOk() (*ScheduleStatusEnum, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -213,8 +213,8 @@ func (o *ScheduleCreate) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given StatusEnum and assigns it to the Status field.
-func (o *ScheduleCreate) SetStatus(v StatusEnum) {
+// SetStatus gets a reference to the given ScheduleStatusEnum and assigns it to the Status field.
+func (o *ScheduleCreate) SetStatus(v ScheduleStatusEnum) {
 	o.Status = &v
 }
 

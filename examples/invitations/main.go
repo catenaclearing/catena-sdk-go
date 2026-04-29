@@ -43,7 +43,7 @@ func main() {
 		PartnerProvidedFleetEmail: *orgsapi.NewNullableString(stringPtr("fleet@acme.com")),
 	}
 
-	invitation, resp, err := c.Orgs().InvitationsAPI.
+	resp, err := c.Orgs().InvitationsAPI.
 		CreateInvitation(context.Background()).
 		InvitationCreate(newInvitation).
 		Execute()
@@ -53,8 +53,11 @@ func main() {
 		return
 	}
 
-	fmt.Printf("Created Invitation ID: %s\n", invitation.GetId())
-	fmt.Printf("Magic Link: %s\n", invitation.GetMagicLink())
+	if resp != nil {
+		fmt.Printf("Created invitation; status: %s\n", resp.Status)
+	} else {
+		fmt.Println("Created invitation")
+	}
 
 	// 3. List Invitations
 	fmt.Println("\n--- Listing Invitations ---")

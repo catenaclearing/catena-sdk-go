@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **Province** | Pointer to **NullableString** |  | [optional] 
 **PostalCode** | Pointer to **NullableString** |  | [optional] 
 **CountryCode** | Pointer to **NullableString** |  | [optional] 
+**FleetRef** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -636,6 +637,41 @@ HasCountryCode returns a boolean if a field has been set.
 `func (o *FleetUpdate) UnsetCountryCode()`
 
 UnsetCountryCode ensures that no value is present for CountryCode, not even an explicit nil
+### GetFleetRef
+
+`func (o *FleetUpdate) GetFleetRef() string`
+
+GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
+
+### GetFleetRefOk
+
+`func (o *FleetUpdate) GetFleetRefOk() (*string, bool)`
+
+GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFleetRef
+
+`func (o *FleetUpdate) SetFleetRef(v string)`
+
+SetFleetRef sets FleetRef field to given value.
+
+### HasFleetRef
+
+`func (o *FleetUpdate) HasFleetRef() bool`
+
+HasFleetRef returns a boolean if a field has been set.
+
+### SetFleetRefNil
+
+`func (o *FleetUpdate) SetFleetRefNil(b bool)`
+
+ SetFleetRefNil sets the value for FleetRef to be an explicit nil
+
+### UnsetFleetRef
+`func (o *FleetUpdate) UnsetFleetRef()`
+
+UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

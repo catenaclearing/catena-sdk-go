@@ -4,54 +4,59 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Drivername** | [**DatabaseDriverEnum**](DatabaseDriverEnum.md) |  | 
+**AccessToken** | **string** |  | 
+**TokenType** | Pointer to **string** |  | [optional] 
+**ExpiresIn** | Pointer to **int32** |  | [optional] 
+**RefreshToken** | Pointer to **string** |  | [optional] 
+**Scope** | Pointer to **string** |  | [optional] 
+**UserId** | Pointer to **string** |  | [optional] 
+**AccountId** | **string** |  | 
 **Host** | **string** |  | 
-**Port** | **int32** |  | 
 **Username** | **string** |  | 
 **Password** | **string** |  | 
-**Database** | **string** |  | 
 **ApiKey** | **string** |  | 
 **Url** | **string** |  | 
-**UserId** | Pointer to **string** |  | [optional] 
 **AuthCode** | **string** |  | 
 **Token** | **string** |  | 
 **RedirectUri** | **string** |  | 
 **ClientId** | **string** |  | 
 **ClientSecret** | **string** |  | 
 **CompanyId** | **string** |  | 
+**Drivername** | [**DatabaseDriverEnum**](DatabaseDriverEnum.md) |  | 
+**Port** | **int32** |  | 
+**Database** | **string** |  | 
+**CarrierIdentifier** | **string** |  | 
+**CarrierIdentifierType** | **string** |  | 
+**AppId** | **string** |  | 
+**AppKey** | **string** |  | 
+**ClientKey** | **string** |  | 
+**SecretKey** | **string** |  | 
+**SessionId** | Pointer to **string** |  | [optional] 
 **ResourceOwnerId** | **string** |  | 
 **ResourceOwnerSecret** | **string** |  | 
 **SignatureMethod** | **string** |  | 
 **Realm** | **string** |  | 
-**Scope** | Pointer to **string** |  | [optional] 
-**RefreshToken** | Pointer to **string** |  | [optional] 
 **TokenUrl** | **string** |  | 
-**PrivateKey** | **string** |  | 
-**ConsumerKey** | **string** |  | 
-**AccessKey** | **string** |  | 
-**SecretKey** | **string** |  | 
-**BucketName** | **string** |  | 
-**Region** | **string** |  | 
-**AccessToken** | **string** |  | 
-**TokenType** | **string** |  | 
-**ExpiresIn** | Pointer to **int32** |  | [optional] 
-**SessionId** | Pointer to **string** |  | [optional] 
 **Code** | **string** |  | 
 **GrantType** | Pointer to **string** |  | [optional] 
-**AppId** | **string** |  | 
-**AppKey** | **string** |  | 
-**ClientKey** | **string** |  | 
-**AccountId** | **string** |  | 
+**PrivateKey** | **string** |  | 
 **ProviderToken** | **string** |  | 
 **DotNumber** | **string** |  | 
+**ConsumerKey** | **string** |  | 
+**AccessKey** | **string** |  | 
+**BucketName** | **string** |  | 
+**Region** | **string** |  | 
 **ApiId** | **string** |  | 
 **CarrierId** | **string** |  | 
+**RestUsername** | **string** |  | 
+**RestPassword** | **string** |  | 
+**TkAuth** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewCredentials2
 
-`func NewCredentials2(drivername DatabaseDriverEnum, host string, port int32, username string, password string, database string, apiKey string, url string, authCode string, token string, redirectUri string, clientId string, clientSecret string, companyId string, resourceOwnerId string, resourceOwnerSecret string, signatureMethod string, realm string, tokenUrl string, privateKey string, consumerKey string, accessKey string, secretKey string, bucketName string, region string, accessToken string, tokenType string, code string, appId string, appKey string, clientKey string, accountId string, providerToken string, dotNumber string, apiId string, carrierId string, ) *Credentials2`
+`func NewCredentials2(accessToken string, accountId string, host string, username string, password string, apiKey string, url string, authCode string, token string, redirectUri string, clientId string, clientSecret string, companyId string, drivername DatabaseDriverEnum, port int32, database string, carrierIdentifier string, carrierIdentifierType string, appId string, appKey string, clientKey string, secretKey string, resourceOwnerId string, resourceOwnerSecret string, signatureMethod string, realm string, tokenUrl string, code string, privateKey string, providerToken string, dotNumber string, consumerKey string, accessKey string, bucketName string, region string, apiId string, carrierId string, restUsername string, restPassword string, ) *Credentials2`
 
 NewCredentials2 instantiates a new Credentials2 object
 This constructor will assign default values to properties that have it defined,
@@ -66,24 +71,169 @@ NewCredentials2WithDefaults instantiates a new Credentials2 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetDrivername
+### GetAccessToken
 
-`func (o *Credentials2) GetDrivername() DatabaseDriverEnum`
+`func (o *Credentials2) GetAccessToken() string`
 
-GetDrivername returns the Drivername field if non-nil, zero value otherwise.
+GetAccessToken returns the AccessToken field if non-nil, zero value otherwise.
 
-### GetDrivernameOk
+### GetAccessTokenOk
 
-`func (o *Credentials2) GetDrivernameOk() (*DatabaseDriverEnum, bool)`
+`func (o *Credentials2) GetAccessTokenOk() (*string, bool)`
 
-GetDrivernameOk returns a tuple with the Drivername field if it's non-nil, zero value otherwise
+GetAccessTokenOk returns a tuple with the AccessToken field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDrivername
+### SetAccessToken
 
-`func (o *Credentials2) SetDrivername(v DatabaseDriverEnum)`
+`func (o *Credentials2) SetAccessToken(v string)`
 
-SetDrivername sets Drivername field to given value.
+SetAccessToken sets AccessToken field to given value.
+
+
+### GetTokenType
+
+`func (o *Credentials2) GetTokenType() string`
+
+GetTokenType returns the TokenType field if non-nil, zero value otherwise.
+
+### GetTokenTypeOk
+
+`func (o *Credentials2) GetTokenTypeOk() (*string, bool)`
+
+GetTokenTypeOk returns a tuple with the TokenType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTokenType
+
+`func (o *Credentials2) SetTokenType(v string)`
+
+SetTokenType sets TokenType field to given value.
+
+### HasTokenType
+
+`func (o *Credentials2) HasTokenType() bool`
+
+HasTokenType returns a boolean if a field has been set.
+
+### GetExpiresIn
+
+`func (o *Credentials2) GetExpiresIn() int32`
+
+GetExpiresIn returns the ExpiresIn field if non-nil, zero value otherwise.
+
+### GetExpiresInOk
+
+`func (o *Credentials2) GetExpiresInOk() (*int32, bool)`
+
+GetExpiresInOk returns a tuple with the ExpiresIn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiresIn
+
+`func (o *Credentials2) SetExpiresIn(v int32)`
+
+SetExpiresIn sets ExpiresIn field to given value.
+
+### HasExpiresIn
+
+`func (o *Credentials2) HasExpiresIn() bool`
+
+HasExpiresIn returns a boolean if a field has been set.
+
+### GetRefreshToken
+
+`func (o *Credentials2) GetRefreshToken() string`
+
+GetRefreshToken returns the RefreshToken field if non-nil, zero value otherwise.
+
+### GetRefreshTokenOk
+
+`func (o *Credentials2) GetRefreshTokenOk() (*string, bool)`
+
+GetRefreshTokenOk returns a tuple with the RefreshToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRefreshToken
+
+`func (o *Credentials2) SetRefreshToken(v string)`
+
+SetRefreshToken sets RefreshToken field to given value.
+
+### HasRefreshToken
+
+`func (o *Credentials2) HasRefreshToken() bool`
+
+HasRefreshToken returns a boolean if a field has been set.
+
+### GetScope
+
+`func (o *Credentials2) GetScope() string`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *Credentials2) GetScopeOk() (*string, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *Credentials2) SetScope(v string)`
+
+SetScope sets Scope field to given value.
+
+### HasScope
+
+`func (o *Credentials2) HasScope() bool`
+
+HasScope returns a boolean if a field has been set.
+
+### GetUserId
+
+`func (o *Credentials2) GetUserId() string`
+
+GetUserId returns the UserId field if non-nil, zero value otherwise.
+
+### GetUserIdOk
+
+`func (o *Credentials2) GetUserIdOk() (*string, bool)`
+
+GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserId
+
+`func (o *Credentials2) SetUserId(v string)`
+
+SetUserId sets UserId field to given value.
+
+### HasUserId
+
+`func (o *Credentials2) HasUserId() bool`
+
+HasUserId returns a boolean if a field has been set.
+
+### GetAccountId
+
+`func (o *Credentials2) GetAccountId() string`
+
+GetAccountId returns the AccountId field if non-nil, zero value otherwise.
+
+### GetAccountIdOk
+
+`func (o *Credentials2) GetAccountIdOk() (*string, bool)`
+
+GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountId
+
+`func (o *Credentials2) SetAccountId(v string)`
+
+SetAccountId sets AccountId field to given value.
 
 
 ### GetHost
@@ -104,26 +254,6 @@ and a boolean to check if the value has been set.
 `func (o *Credentials2) SetHost(v string)`
 
 SetHost sets Host field to given value.
-
-
-### GetPort
-
-`func (o *Credentials2) GetPort() int32`
-
-GetPort returns the Port field if non-nil, zero value otherwise.
-
-### GetPortOk
-
-`func (o *Credentials2) GetPortOk() (*int32, bool)`
-
-GetPortOk returns a tuple with the Port field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPort
-
-`func (o *Credentials2) SetPort(v int32)`
-
-SetPort sets Port field to given value.
 
 
 ### GetUsername
@@ -166,26 +296,6 @@ and a boolean to check if the value has been set.
 SetPassword sets Password field to given value.
 
 
-### GetDatabase
-
-`func (o *Credentials2) GetDatabase() string`
-
-GetDatabase returns the Database field if non-nil, zero value otherwise.
-
-### GetDatabaseOk
-
-`func (o *Credentials2) GetDatabaseOk() (*string, bool)`
-
-GetDatabaseOk returns a tuple with the Database field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDatabase
-
-`func (o *Credentials2) SetDatabase(v string)`
-
-SetDatabase sets Database field to given value.
-
-
 ### GetApiKey
 
 `func (o *Credentials2) GetApiKey() string`
@@ -225,31 +335,6 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
-
-### GetUserId
-
-`func (o *Credentials2) GetUserId() string`
-
-GetUserId returns the UserId field if non-nil, zero value otherwise.
-
-### GetUserIdOk
-
-`func (o *Credentials2) GetUserIdOk() (*string, bool)`
-
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserId
-
-`func (o *Credentials2) SetUserId(v string)`
-
-SetUserId sets UserId field to given value.
-
-### HasUserId
-
-`func (o *Credentials2) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### GetAuthCode
 
@@ -371,6 +456,211 @@ and a boolean to check if the value has been set.
 SetCompanyId sets CompanyId field to given value.
 
 
+### GetDrivername
+
+`func (o *Credentials2) GetDrivername() DatabaseDriverEnum`
+
+GetDrivername returns the Drivername field if non-nil, zero value otherwise.
+
+### GetDrivernameOk
+
+`func (o *Credentials2) GetDrivernameOk() (*DatabaseDriverEnum, bool)`
+
+GetDrivernameOk returns a tuple with the Drivername field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDrivername
+
+`func (o *Credentials2) SetDrivername(v DatabaseDriverEnum)`
+
+SetDrivername sets Drivername field to given value.
+
+
+### GetPort
+
+`func (o *Credentials2) GetPort() int32`
+
+GetPort returns the Port field if non-nil, zero value otherwise.
+
+### GetPortOk
+
+`func (o *Credentials2) GetPortOk() (*int32, bool)`
+
+GetPortOk returns a tuple with the Port field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPort
+
+`func (o *Credentials2) SetPort(v int32)`
+
+SetPort sets Port field to given value.
+
+
+### GetDatabase
+
+`func (o *Credentials2) GetDatabase() string`
+
+GetDatabase returns the Database field if non-nil, zero value otherwise.
+
+### GetDatabaseOk
+
+`func (o *Credentials2) GetDatabaseOk() (*string, bool)`
+
+GetDatabaseOk returns a tuple with the Database field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDatabase
+
+`func (o *Credentials2) SetDatabase(v string)`
+
+SetDatabase sets Database field to given value.
+
+
+### GetCarrierIdentifier
+
+`func (o *Credentials2) GetCarrierIdentifier() string`
+
+GetCarrierIdentifier returns the CarrierIdentifier field if non-nil, zero value otherwise.
+
+### GetCarrierIdentifierOk
+
+`func (o *Credentials2) GetCarrierIdentifierOk() (*string, bool)`
+
+GetCarrierIdentifierOk returns a tuple with the CarrierIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCarrierIdentifier
+
+`func (o *Credentials2) SetCarrierIdentifier(v string)`
+
+SetCarrierIdentifier sets CarrierIdentifier field to given value.
+
+
+### GetCarrierIdentifierType
+
+`func (o *Credentials2) GetCarrierIdentifierType() string`
+
+GetCarrierIdentifierType returns the CarrierIdentifierType field if non-nil, zero value otherwise.
+
+### GetCarrierIdentifierTypeOk
+
+`func (o *Credentials2) GetCarrierIdentifierTypeOk() (*string, bool)`
+
+GetCarrierIdentifierTypeOk returns a tuple with the CarrierIdentifierType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCarrierIdentifierType
+
+`func (o *Credentials2) SetCarrierIdentifierType(v string)`
+
+SetCarrierIdentifierType sets CarrierIdentifierType field to given value.
+
+
+### GetAppId
+
+`func (o *Credentials2) GetAppId() string`
+
+GetAppId returns the AppId field if non-nil, zero value otherwise.
+
+### GetAppIdOk
+
+`func (o *Credentials2) GetAppIdOk() (*string, bool)`
+
+GetAppIdOk returns a tuple with the AppId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppId
+
+`func (o *Credentials2) SetAppId(v string)`
+
+SetAppId sets AppId field to given value.
+
+
+### GetAppKey
+
+`func (o *Credentials2) GetAppKey() string`
+
+GetAppKey returns the AppKey field if non-nil, zero value otherwise.
+
+### GetAppKeyOk
+
+`func (o *Credentials2) GetAppKeyOk() (*string, bool)`
+
+GetAppKeyOk returns a tuple with the AppKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAppKey
+
+`func (o *Credentials2) SetAppKey(v string)`
+
+SetAppKey sets AppKey field to given value.
+
+
+### GetClientKey
+
+`func (o *Credentials2) GetClientKey() string`
+
+GetClientKey returns the ClientKey field if non-nil, zero value otherwise.
+
+### GetClientKeyOk
+
+`func (o *Credentials2) GetClientKeyOk() (*string, bool)`
+
+GetClientKeyOk returns a tuple with the ClientKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientKey
+
+`func (o *Credentials2) SetClientKey(v string)`
+
+SetClientKey sets ClientKey field to given value.
+
+
+### GetSecretKey
+
+`func (o *Credentials2) GetSecretKey() string`
+
+GetSecretKey returns the SecretKey field if non-nil, zero value otherwise.
+
+### GetSecretKeyOk
+
+`func (o *Credentials2) GetSecretKeyOk() (*string, bool)`
+
+GetSecretKeyOk returns a tuple with the SecretKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecretKey
+
+`func (o *Credentials2) SetSecretKey(v string)`
+
+SetSecretKey sets SecretKey field to given value.
+
+
+### GetSessionId
+
+`func (o *Credentials2) GetSessionId() string`
+
+GetSessionId returns the SessionId field if non-nil, zero value otherwise.
+
+### GetSessionIdOk
+
+`func (o *Credentials2) GetSessionIdOk() (*string, bool)`
+
+GetSessionIdOk returns a tuple with the SessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSessionId
+
+`func (o *Credentials2) SetSessionId(v string)`
+
+SetSessionId sets SessionId field to given value.
+
+### HasSessionId
+
+`func (o *Credentials2) HasSessionId() bool`
+
+HasSessionId returns a boolean if a field has been set.
+
 ### GetResourceOwnerId
 
 `func (o *Credentials2) GetResourceOwnerId() string`
@@ -451,56 +741,6 @@ and a boolean to check if the value has been set.
 SetRealm sets Realm field to given value.
 
 
-### GetScope
-
-`func (o *Credentials2) GetScope() string`
-
-GetScope returns the Scope field if non-nil, zero value otherwise.
-
-### GetScopeOk
-
-`func (o *Credentials2) GetScopeOk() (*string, bool)`
-
-GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetScope
-
-`func (o *Credentials2) SetScope(v string)`
-
-SetScope sets Scope field to given value.
-
-### HasScope
-
-`func (o *Credentials2) HasScope() bool`
-
-HasScope returns a boolean if a field has been set.
-
-### GetRefreshToken
-
-`func (o *Credentials2) GetRefreshToken() string`
-
-GetRefreshToken returns the RefreshToken field if non-nil, zero value otherwise.
-
-### GetRefreshTokenOk
-
-`func (o *Credentials2) GetRefreshTokenOk() (*string, bool)`
-
-GetRefreshTokenOk returns a tuple with the RefreshToken field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRefreshToken
-
-`func (o *Credentials2) SetRefreshToken(v string)`
-
-SetRefreshToken sets RefreshToken field to given value.
-
-### HasRefreshToken
-
-`func (o *Credentials2) HasRefreshToken() bool`
-
-HasRefreshToken returns a boolean if a field has been set.
-
 ### GetTokenUrl
 
 `func (o *Credentials2) GetTokenUrl() string`
@@ -520,216 +760,6 @@ and a boolean to check if the value has been set.
 
 SetTokenUrl sets TokenUrl field to given value.
 
-
-### GetPrivateKey
-
-`func (o *Credentials2) GetPrivateKey() string`
-
-GetPrivateKey returns the PrivateKey field if non-nil, zero value otherwise.
-
-### GetPrivateKeyOk
-
-`func (o *Credentials2) GetPrivateKeyOk() (*string, bool)`
-
-GetPrivateKeyOk returns a tuple with the PrivateKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPrivateKey
-
-`func (o *Credentials2) SetPrivateKey(v string)`
-
-SetPrivateKey sets PrivateKey field to given value.
-
-
-### GetConsumerKey
-
-`func (o *Credentials2) GetConsumerKey() string`
-
-GetConsumerKey returns the ConsumerKey field if non-nil, zero value otherwise.
-
-### GetConsumerKeyOk
-
-`func (o *Credentials2) GetConsumerKeyOk() (*string, bool)`
-
-GetConsumerKeyOk returns a tuple with the ConsumerKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConsumerKey
-
-`func (o *Credentials2) SetConsumerKey(v string)`
-
-SetConsumerKey sets ConsumerKey field to given value.
-
-
-### GetAccessKey
-
-`func (o *Credentials2) GetAccessKey() string`
-
-GetAccessKey returns the AccessKey field if non-nil, zero value otherwise.
-
-### GetAccessKeyOk
-
-`func (o *Credentials2) GetAccessKeyOk() (*string, bool)`
-
-GetAccessKeyOk returns a tuple with the AccessKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccessKey
-
-`func (o *Credentials2) SetAccessKey(v string)`
-
-SetAccessKey sets AccessKey field to given value.
-
-
-### GetSecretKey
-
-`func (o *Credentials2) GetSecretKey() string`
-
-GetSecretKey returns the SecretKey field if non-nil, zero value otherwise.
-
-### GetSecretKeyOk
-
-`func (o *Credentials2) GetSecretKeyOk() (*string, bool)`
-
-GetSecretKeyOk returns a tuple with the SecretKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSecretKey
-
-`func (o *Credentials2) SetSecretKey(v string)`
-
-SetSecretKey sets SecretKey field to given value.
-
-
-### GetBucketName
-
-`func (o *Credentials2) GetBucketName() string`
-
-GetBucketName returns the BucketName field if non-nil, zero value otherwise.
-
-### GetBucketNameOk
-
-`func (o *Credentials2) GetBucketNameOk() (*string, bool)`
-
-GetBucketNameOk returns a tuple with the BucketName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBucketName
-
-`func (o *Credentials2) SetBucketName(v string)`
-
-SetBucketName sets BucketName field to given value.
-
-
-### GetRegion
-
-`func (o *Credentials2) GetRegion() string`
-
-GetRegion returns the Region field if non-nil, zero value otherwise.
-
-### GetRegionOk
-
-`func (o *Credentials2) GetRegionOk() (*string, bool)`
-
-GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRegion
-
-`func (o *Credentials2) SetRegion(v string)`
-
-SetRegion sets Region field to given value.
-
-
-### GetAccessToken
-
-`func (o *Credentials2) GetAccessToken() string`
-
-GetAccessToken returns the AccessToken field if non-nil, zero value otherwise.
-
-### GetAccessTokenOk
-
-`func (o *Credentials2) GetAccessTokenOk() (*string, bool)`
-
-GetAccessTokenOk returns a tuple with the AccessToken field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccessToken
-
-`func (o *Credentials2) SetAccessToken(v string)`
-
-SetAccessToken sets AccessToken field to given value.
-
-
-### GetTokenType
-
-`func (o *Credentials2) GetTokenType() string`
-
-GetTokenType returns the TokenType field if non-nil, zero value otherwise.
-
-### GetTokenTypeOk
-
-`func (o *Credentials2) GetTokenTypeOk() (*string, bool)`
-
-GetTokenTypeOk returns a tuple with the TokenType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTokenType
-
-`func (o *Credentials2) SetTokenType(v string)`
-
-SetTokenType sets TokenType field to given value.
-
-
-### GetExpiresIn
-
-`func (o *Credentials2) GetExpiresIn() int32`
-
-GetExpiresIn returns the ExpiresIn field if non-nil, zero value otherwise.
-
-### GetExpiresInOk
-
-`func (o *Credentials2) GetExpiresInOk() (*int32, bool)`
-
-GetExpiresInOk returns a tuple with the ExpiresIn field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExpiresIn
-
-`func (o *Credentials2) SetExpiresIn(v int32)`
-
-SetExpiresIn sets ExpiresIn field to given value.
-
-### HasExpiresIn
-
-`func (o *Credentials2) HasExpiresIn() bool`
-
-HasExpiresIn returns a boolean if a field has been set.
-
-### GetSessionId
-
-`func (o *Credentials2) GetSessionId() string`
-
-GetSessionId returns the SessionId field if non-nil, zero value otherwise.
-
-### GetSessionIdOk
-
-`func (o *Credentials2) GetSessionIdOk() (*string, bool)`
-
-GetSessionIdOk returns a tuple with the SessionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSessionId
-
-`func (o *Credentials2) SetSessionId(v string)`
-
-SetSessionId sets SessionId field to given value.
-
-### HasSessionId
-
-`func (o *Credentials2) HasSessionId() bool`
-
-HasSessionId returns a boolean if a field has been set.
 
 ### GetCode
 
@@ -776,84 +806,24 @@ SetGrantType sets GrantType field to given value.
 
 HasGrantType returns a boolean if a field has been set.
 
-### GetAppId
+### GetPrivateKey
 
-`func (o *Credentials2) GetAppId() string`
+`func (o *Credentials2) GetPrivateKey() string`
 
-GetAppId returns the AppId field if non-nil, zero value otherwise.
+GetPrivateKey returns the PrivateKey field if non-nil, zero value otherwise.
 
-### GetAppIdOk
+### GetPrivateKeyOk
 
-`func (o *Credentials2) GetAppIdOk() (*string, bool)`
+`func (o *Credentials2) GetPrivateKeyOk() (*string, bool)`
 
-GetAppIdOk returns a tuple with the AppId field if it's non-nil, zero value otherwise
+GetPrivateKeyOk returns a tuple with the PrivateKey field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAppId
+### SetPrivateKey
 
-`func (o *Credentials2) SetAppId(v string)`
+`func (o *Credentials2) SetPrivateKey(v string)`
 
-SetAppId sets AppId field to given value.
-
-
-### GetAppKey
-
-`func (o *Credentials2) GetAppKey() string`
-
-GetAppKey returns the AppKey field if non-nil, zero value otherwise.
-
-### GetAppKeyOk
-
-`func (o *Credentials2) GetAppKeyOk() (*string, bool)`
-
-GetAppKeyOk returns a tuple with the AppKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAppKey
-
-`func (o *Credentials2) SetAppKey(v string)`
-
-SetAppKey sets AppKey field to given value.
-
-
-### GetClientKey
-
-`func (o *Credentials2) GetClientKey() string`
-
-GetClientKey returns the ClientKey field if non-nil, zero value otherwise.
-
-### GetClientKeyOk
-
-`func (o *Credentials2) GetClientKeyOk() (*string, bool)`
-
-GetClientKeyOk returns a tuple with the ClientKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetClientKey
-
-`func (o *Credentials2) SetClientKey(v string)`
-
-SetClientKey sets ClientKey field to given value.
-
-
-### GetAccountId
-
-`func (o *Credentials2) GetAccountId() string`
-
-GetAccountId returns the AccountId field if non-nil, zero value otherwise.
-
-### GetAccountIdOk
-
-`func (o *Credentials2) GetAccountIdOk() (*string, bool)`
-
-GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccountId
-
-`func (o *Credentials2) SetAccountId(v string)`
-
-SetAccountId sets AccountId field to given value.
+SetPrivateKey sets PrivateKey field to given value.
 
 
 ### GetProviderToken
@@ -896,6 +866,86 @@ and a boolean to check if the value has been set.
 SetDotNumber sets DotNumber field to given value.
 
 
+### GetConsumerKey
+
+`func (o *Credentials2) GetConsumerKey() string`
+
+GetConsumerKey returns the ConsumerKey field if non-nil, zero value otherwise.
+
+### GetConsumerKeyOk
+
+`func (o *Credentials2) GetConsumerKeyOk() (*string, bool)`
+
+GetConsumerKeyOk returns a tuple with the ConsumerKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConsumerKey
+
+`func (o *Credentials2) SetConsumerKey(v string)`
+
+SetConsumerKey sets ConsumerKey field to given value.
+
+
+### GetAccessKey
+
+`func (o *Credentials2) GetAccessKey() string`
+
+GetAccessKey returns the AccessKey field if non-nil, zero value otherwise.
+
+### GetAccessKeyOk
+
+`func (o *Credentials2) GetAccessKeyOk() (*string, bool)`
+
+GetAccessKeyOk returns a tuple with the AccessKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessKey
+
+`func (o *Credentials2) SetAccessKey(v string)`
+
+SetAccessKey sets AccessKey field to given value.
+
+
+### GetBucketName
+
+`func (o *Credentials2) GetBucketName() string`
+
+GetBucketName returns the BucketName field if non-nil, zero value otherwise.
+
+### GetBucketNameOk
+
+`func (o *Credentials2) GetBucketNameOk() (*string, bool)`
+
+GetBucketNameOk returns a tuple with the BucketName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBucketName
+
+`func (o *Credentials2) SetBucketName(v string)`
+
+SetBucketName sets BucketName field to given value.
+
+
+### GetRegion
+
+`func (o *Credentials2) GetRegion() string`
+
+GetRegion returns the Region field if non-nil, zero value otherwise.
+
+### GetRegionOk
+
+`func (o *Credentials2) GetRegionOk() (*string, bool)`
+
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegion
+
+`func (o *Credentials2) SetRegion(v string)`
+
+SetRegion sets Region field to given value.
+
+
 ### GetApiId
 
 `func (o *Credentials2) GetApiId() string`
@@ -935,6 +985,71 @@ and a boolean to check if the value has been set.
 
 SetCarrierId sets CarrierId field to given value.
 
+
+### GetRestUsername
+
+`func (o *Credentials2) GetRestUsername() string`
+
+GetRestUsername returns the RestUsername field if non-nil, zero value otherwise.
+
+### GetRestUsernameOk
+
+`func (o *Credentials2) GetRestUsernameOk() (*string, bool)`
+
+GetRestUsernameOk returns a tuple with the RestUsername field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestUsername
+
+`func (o *Credentials2) SetRestUsername(v string)`
+
+SetRestUsername sets RestUsername field to given value.
+
+
+### GetRestPassword
+
+`func (o *Credentials2) GetRestPassword() string`
+
+GetRestPassword returns the RestPassword field if non-nil, zero value otherwise.
+
+### GetRestPasswordOk
+
+`func (o *Credentials2) GetRestPasswordOk() (*string, bool)`
+
+GetRestPasswordOk returns a tuple with the RestPassword field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestPassword
+
+`func (o *Credentials2) SetRestPassword(v string)`
+
+SetRestPassword sets RestPassword field to given value.
+
+
+### GetTkAuth
+
+`func (o *Credentials2) GetTkAuth() string`
+
+GetTkAuth returns the TkAuth field if non-nil, zero value otherwise.
+
+### GetTkAuthOk
+
+`func (o *Credentials2) GetTkAuthOk() (*string, bool)`
+
+GetTkAuthOk returns a tuple with the TkAuth field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTkAuth
+
+`func (o *Credentials2) SetTkAuth(v string)`
+
+SetTkAuth sets TkAuth field to given value.
+
+### HasTkAuth
+
+`func (o *Credentials2) HasTkAuth() bool`
+
+HasTkAuth returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

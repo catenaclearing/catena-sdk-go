@@ -70,7 +70,8 @@ type HosEventRead struct {
 	RecordStatus         NullableString                  `json:"record_status,omitempty"`
 	RegionCode           NullableHosRegionCodeEnum       `json:"region_code,omitempty"`
 	LocationName         NullableString                  `json:"location_name,omitempty"`
-	Location             NullableLocation2               `json:"location,omitempty"`
+	Location             NullableLocation4               `json:"location,omitempty"`
+	InferredAddress      NullableInferredAddress         `json:"inferred_address,omitempty"`
 	H3Index11            NullableInt32                   `json:"h3_index_11,omitempty"`
 	Odometer             NullableFloat32                 `json:"odometer,omitempty"`
 	EngineHours          NullableFloat32                 `json:"engine_hours,omitempty"`
@@ -1689,9 +1690,9 @@ func (o *HosEventRead) UnsetLocationName() {
 }
 
 // GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HosEventRead) GetLocation() Location2 {
+func (o *HosEventRead) GetLocation() Location4 {
 	if o == nil || IsNil(o.Location.Get()) {
-		var ret Location2
+		var ret Location4
 		return ret
 	}
 	return *o.Location.Get()
@@ -1700,7 +1701,7 @@ func (o *HosEventRead) GetLocation() Location2 {
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HosEventRead) GetLocationOk() (*Location2, bool) {
+func (o *HosEventRead) GetLocationOk() (*Location4, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1716,8 +1717,8 @@ func (o *HosEventRead) HasLocation() bool {
 	return false
 }
 
-// SetLocation gets a reference to the given NullableLocation2 and assigns it to the Location field.
-func (o *HosEventRead) SetLocation(v Location2) {
+// SetLocation gets a reference to the given NullableLocation4 and assigns it to the Location field.
+func (o *HosEventRead) SetLocation(v Location4) {
 	o.Location.Set(&v)
 }
 
@@ -1729,6 +1730,49 @@ func (o *HosEventRead) SetLocationNil() {
 // UnsetLocation ensures that no value is present for Location, not even an explicit nil
 func (o *HosEventRead) UnsetLocation() {
 	o.Location.Unset()
+}
+
+// GetInferredAddress returns the InferredAddress field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HosEventRead) GetInferredAddress() InferredAddress {
+	if o == nil || IsNil(o.InferredAddress.Get()) {
+		var ret InferredAddress
+		return ret
+	}
+	return *o.InferredAddress.Get()
+}
+
+// GetInferredAddressOk returns a tuple with the InferredAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HosEventRead) GetInferredAddressOk() (*InferredAddress, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InferredAddress.Get(), o.InferredAddress.IsSet()
+}
+
+// HasInferredAddress returns a boolean if a field has been set.
+func (o *HosEventRead) HasInferredAddress() bool {
+	if o != nil && o.InferredAddress.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInferredAddress gets a reference to the given NullableInferredAddress and assigns it to the InferredAddress field.
+func (o *HosEventRead) SetInferredAddress(v InferredAddress) {
+	o.InferredAddress.Set(&v)
+}
+
+// SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+func (o *HosEventRead) SetInferredAddressNil() {
+	o.InferredAddress.Set(nil)
+}
+
+// UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
+func (o *HosEventRead) UnsetInferredAddress() {
+	o.InferredAddress.Unset()
 }
 
 // GetH3Index11 returns the H3Index11 field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2066,6 +2110,9 @@ func (o HosEventRead) ToMap() (map[string]interface{}, error) {
 	if o.Location.IsSet() {
 		toSerialize["location"] = o.Location.Get()
 	}
+	if o.InferredAddress.IsSet() {
+		toSerialize["inferred_address"] = o.InferredAddress.Get()
+	}
 	if o.H3Index11.IsSet() {
 		toSerialize["h3_index_11"] = o.H3Index11.Get()
 	}
@@ -2173,6 +2220,7 @@ func (o *HosEventRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "region_code")
 		delete(additionalProperties, "location_name")
 		delete(additionalProperties, "location")
+		delete(additionalProperties, "inferred_address")
 		delete(additionalProperties, "h3_index_11")
 		delete(additionalProperties, "odometer")
 		delete(additionalProperties, "engine_hours")

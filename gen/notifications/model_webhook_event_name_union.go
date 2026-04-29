@@ -18,7 +18,7 @@ import (
 // WebhookEventNameUnion The event name that triggers the webhook
 type WebhookEventNameUnion struct {
 	WebhookCatchAllEvents *WebhookCatchAllEvents
-	WebhookEventName      *WebhookEventName
+	WebhookEventNameEnum  *WebhookEventNameEnum
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -37,17 +37,17 @@ func (dst *WebhookEventNameUnion) UnmarshalJSON(data []byte) error {
 		dst.WebhookCatchAllEvents = nil
 	}
 
-	// try to unmarshal JSON data into WebhookEventName
-	err = json.Unmarshal(data, &dst.WebhookEventName)
+	// try to unmarshal JSON data into WebhookEventNameEnum
+	err = json.Unmarshal(data, &dst.WebhookEventNameEnum)
 	if err == nil {
-		jsonWebhookEventName, _ := json.Marshal(dst.WebhookEventName)
-		if string(jsonWebhookEventName) == "{}" { // empty struct
-			dst.WebhookEventName = nil
+		jsonWebhookEventNameEnum, _ := json.Marshal(dst.WebhookEventNameEnum)
+		if string(jsonWebhookEventNameEnum) == "{}" { // empty struct
+			dst.WebhookEventNameEnum = nil
 		} else {
-			return nil // data stored in dst.WebhookEventName, return on the first match
+			return nil // data stored in dst.WebhookEventNameEnum, return on the first match
 		}
 	} else {
-		dst.WebhookEventName = nil
+		dst.WebhookEventNameEnum = nil
 	}
 
 	return fmt.Errorf("data failed to match schemas in anyOf(WebhookEventNameUnion)")
@@ -59,8 +59,8 @@ func (src WebhookEventNameUnion) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.WebhookCatchAllEvents)
 	}
 
-	if src.WebhookEventName != nil {
-		return json.Marshal(&src.WebhookEventName)
+	if src.WebhookEventNameEnum != nil {
+		return json.Marshal(&src.WebhookEventNameEnum)
 	}
 
 	return nil, nil // no data in anyOf schemas

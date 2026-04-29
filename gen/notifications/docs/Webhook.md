@@ -12,14 +12,14 @@ Name | Type | Description | Notes
 **DeletedAt** | Pointer to **NullableTime** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **PartnerId** | **string** | The ID of the partner that owns the webhook | 
-**Status** | Pointer to [**StatusEnum**](StatusEnum.md) | The current status of the webhook | [optional] 
-**EventName** | [**WebhookEventName**](WebhookEventName.md) | The event name that triggers the webhook | 
+**Status** | Pointer to [**WebhookStatusEnum**](WebhookStatusEnum.md) | The current status of the webhook | [optional] 
+**EventName** | [**WebhookEventNameEnum**](WebhookEventNameEnum.md) | The event name that triggers the webhook | 
 
 ## Methods
 
 ### NewWebhook
 
-`func NewWebhook(url string, partnerId string, eventName WebhookEventName, ) *Webhook`
+`func NewWebhook(url string, partnerId string, eventName WebhookEventNameEnum, ) *Webhook`
 
 NewWebhook instantiates a new Webhook object
 This constructor will assign default values to properties that have it defined,
@@ -276,20 +276,20 @@ SetPartnerId sets PartnerId field to given value.
 
 ### GetStatus
 
-`func (o *Webhook) GetStatus() StatusEnum`
+`func (o *Webhook) GetStatus() WebhookStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *Webhook) GetStatusOk() (*StatusEnum, bool)`
+`func (o *Webhook) GetStatusOk() (*WebhookStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *Webhook) SetStatus(v StatusEnum)`
+`func (o *Webhook) SetStatus(v WebhookStatusEnum)`
 
 SetStatus sets Status field to given value.
 
@@ -301,20 +301,20 @@ HasStatus returns a boolean if a field has been set.
 
 ### GetEventName
 
-`func (o *Webhook) GetEventName() WebhookEventName`
+`func (o *Webhook) GetEventName() WebhookEventNameEnum`
 
 GetEventName returns the EventName field if non-nil, zero value otherwise.
 
 ### GetEventNameOk
 
-`func (o *Webhook) GetEventNameOk() (*WebhookEventName, bool)`
+`func (o *Webhook) GetEventNameOk() (*WebhookEventNameEnum, bool)`
 
 GetEventNameOk returns a tuple with the EventName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEventName
 
-`func (o *Webhook) SetEventName(v WebhookEventName)`
+`func (o *Webhook) SetEventName(v WebhookEventNameEnum)`
 
 SetEventName sets EventName field to given value.
 

@@ -29,7 +29,7 @@ type ScheduleRead struct {
 	// The interval between scheduled executions in seconds.
 	ExecutionIntervalSeconds int32 `json:"execution_interval_seconds"`
 	// The current status of the schedule (ACTIVE, INACTIVE).
-	Status StatusEnum `json:"status"`
+	Status ScheduleStatusEnum `json:"status"`
 	// The number of consecutive errors that have occurred for this schedule.
 	ConsecutiveErrorCount int32 `json:"consecutive_error_count"`
 	// The number of consecutive errors allowed before the schedule is automatically set to INACTIVE.
@@ -46,7 +46,7 @@ type _ScheduleRead ScheduleRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScheduleRead(id string, connectionId string, resource ResourceEnum, executionIntervalSeconds int32, status StatusEnum, consecutiveErrorCount int32, consecutiveErrorThreshold int32, maxConcurrentExecutions int32) *ScheduleRead {
+func NewScheduleRead(id string, connectionId string, resource ResourceEnum, executionIntervalSeconds int32, status ScheduleStatusEnum, consecutiveErrorCount int32, consecutiveErrorThreshold int32, maxConcurrentExecutions int32) *ScheduleRead {
 	this := ScheduleRead{}
 	this.Id = id
 	this.ConnectionId = connectionId
@@ -164,9 +164,9 @@ func (o *ScheduleRead) SetExecutionIntervalSeconds(v int32) {
 }
 
 // GetStatus returns the Status field value
-func (o *ScheduleRead) GetStatus() StatusEnum {
+func (o *ScheduleRead) GetStatus() ScheduleStatusEnum {
 	if o == nil {
-		var ret StatusEnum
+		var ret ScheduleStatusEnum
 		return ret
 	}
 
@@ -175,7 +175,7 @@ func (o *ScheduleRead) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ScheduleRead) GetStatusOk() (*StatusEnum, bool) {
+func (o *ScheduleRead) GetStatusOk() (*ScheduleStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -183,7 +183,7 @@ func (o *ScheduleRead) GetStatusOk() (*StatusEnum, bool) {
 }
 
 // SetStatus sets field value
-func (o *ScheduleRead) SetStatus(v StatusEnum) {
+func (o *ScheduleRead) SetStatus(v ScheduleStatusEnum) {
 	o.Status = v
 }
 

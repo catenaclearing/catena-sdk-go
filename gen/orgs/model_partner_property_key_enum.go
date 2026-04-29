@@ -24,6 +24,13 @@ const (
 	PARTNERPROPERTYKEYENUM_DEFAULT_SUCCESS_REDIRECT_URL        PartnerPropertyKeyEnum = "default_success_redirect_url"
 	PARTNERPROPERTYKEYENUM_DEFAULT_CALLBACK_URL                PartnerPropertyKeyEnum = "default_callback_url"
 	PARTNERPROPERTYKEYENUM_DEFAULT_INVITATION_EXPIRES_IN_HOURS PartnerPropertyKeyEnum = "default_invitation_expires_in_hours"
+	PARTNERPROPERTYKEYENUM_CONTRACT_SIGNED                     PartnerPropertyKeyEnum = "contract_signed"
+	PARTNERPROPERTYKEYENUM_CONTRACT_URL                        PartnerPropertyKeyEnum = "contract_url"
+	PARTNERPROPERTYKEYENUM_CONTRACT_STARTED_AT                 PartnerPropertyKeyEnum = "contract_started_at"
+	PARTNERPROPERTYKEYENUM_BILLING_MODEL                       PartnerPropertyKeyEnum = "billing_model"
+	PARTNERPROPERTYKEYENUM_BILLING_DAY_OF_MONTH                PartnerPropertyKeyEnum = "billing_day_of_month"
+	PARTNERPROPERTYKEYENUM_ACCOUNT_STATUS                      PartnerPropertyKeyEnum = "account_status"
+	PARTNERPROPERTYKEYENUM_NOTES                               PartnerPropertyKeyEnum = "notes"
 )
 
 // All allowed values of PartnerPropertyKeyEnum enum
@@ -32,6 +39,13 @@ var AllowedPartnerPropertyKeyEnumEnumValues = []PartnerPropertyKeyEnum{
 	"default_success_redirect_url",
 	"default_callback_url",
 	"default_invitation_expires_in_hours",
+	"contract_signed",
+	"contract_url",
+	"contract_started_at",
+	"billing_model",
+	"billing_day_of_month",
+	"account_status",
+	"notes",
 }
 
 func (v *PartnerPropertyKeyEnum) UnmarshalJSON(src []byte) error {

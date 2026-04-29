@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **FleetId** | **string** | The Catena ID of the fleet. | 
 **PartnerId** | **string** | The Catena ID of the partner. | 
 **FleetRef** | Pointer to **NullableString** |  | [optional] 
-**InvitationId** | **string** | The ID of the invitation that created the share agreement | 
 **Status** | [**StatusEnum**](StatusEnum.md) | The status of the share agreement | 
 **EffectiveDate** | Pointer to **NullableTime** |  | [optional] 
 **ExpirationDate** | Pointer to **NullableTime** |  | [optional] 
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewBaseShareAgreementEvent
 
-`func NewBaseShareAgreementEvent(id string, fleetId string, partnerId string, invitationId string, status StatusEnum, scopes map[string]string, ) *BaseShareAgreementEvent`
+`func NewBaseShareAgreementEvent(id string, fleetId string, partnerId string, status StatusEnum, scopes map[string]string, ) *BaseShareAgreementEvent`
 
 NewBaseShareAgreementEvent instantiates a new BaseShareAgreementEvent object
 This constructor will assign default values to properties that have it defined,
@@ -128,26 +127,6 @@ HasFleetRef returns a boolean if a field has been set.
 `func (o *BaseShareAgreementEvent) UnsetFleetRef()`
 
 UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-### GetInvitationId
-
-`func (o *BaseShareAgreementEvent) GetInvitationId() string`
-
-GetInvitationId returns the InvitationId field if non-nil, zero value otherwise.
-
-### GetInvitationIdOk
-
-`func (o *BaseShareAgreementEvent) GetInvitationIdOk() (*string, bool)`
-
-GetInvitationIdOk returns a tuple with the InvitationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInvitationId
-
-`func (o *BaseShareAgreementEvent) SetInvitationId(v string)`
-
-SetInvitationId sets InvitationId field to given value.
-
-
 ### GetStatus
 
 `func (o *BaseShareAgreementEvent) GetStatus() StatusEnum`

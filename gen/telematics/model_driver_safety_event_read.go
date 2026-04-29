@@ -51,11 +51,12 @@ type DriverSafetyEventRead struct {
 	SourceDriverId  NullableString         `json:"source_driver_id,omitempty"`
 	SourceVehicleId NullableString         `json:"source_vehicle_id,omitempty"`
 	// Normalized safety event type.
-	Event                DriverSafetyEventEnum  `json:"event"`
-	Location             NullableLocation       `json:"location,omitempty"`
-	H3Index11            NullableInt32          `json:"h3_index_11,omitempty"`
-	DurationSeconds      NullableInt32          `json:"duration_seconds,omitempty"`
-	EventMetadata        map[string]interface{} `json:"event_metadata,omitempty"`
+	Event                DriverSafetyEventEnum   `json:"event"`
+	Location             NullableLocation        `json:"location,omitempty"`
+	InferredAddress      NullableInferredAddress `json:"inferred_address,omitempty"`
+	H3Index11            NullableInt32           `json:"h3_index_11,omitempty"`
+	DurationSeconds      NullableInt32           `json:"duration_seconds,omitempty"`
+	EventMetadata        map[string]interface{}  `json:"event_metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -886,6 +887,49 @@ func (o *DriverSafetyEventRead) UnsetLocation() {
 	o.Location.Unset()
 }
 
+// GetInferredAddress returns the InferredAddress field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DriverSafetyEventRead) GetInferredAddress() InferredAddress {
+	if o == nil || IsNil(o.InferredAddress.Get()) {
+		var ret InferredAddress
+		return ret
+	}
+	return *o.InferredAddress.Get()
+}
+
+// GetInferredAddressOk returns a tuple with the InferredAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DriverSafetyEventRead) GetInferredAddressOk() (*InferredAddress, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.InferredAddress.Get(), o.InferredAddress.IsSet()
+}
+
+// HasInferredAddress returns a boolean if a field has been set.
+func (o *DriverSafetyEventRead) HasInferredAddress() bool {
+	if o != nil && o.InferredAddress.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInferredAddress gets a reference to the given NullableInferredAddress and assigns it to the InferredAddress field.
+func (o *DriverSafetyEventRead) SetInferredAddress(v InferredAddress) {
+	o.InferredAddress.Set(&v)
+}
+
+// SetInferredAddressNil sets the value for InferredAddress to be an explicit nil
+func (o *DriverSafetyEventRead) SetInferredAddressNil() {
+	o.InferredAddress.Set(nil)
+}
+
+// UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
+func (o *DriverSafetyEventRead) UnsetInferredAddress() {
+	o.InferredAddress.Unset()
+}
+
 // GetH3Index11 returns the H3Index11 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DriverSafetyEventRead) GetH3Index11() int32 {
 	if o == nil || IsNil(o.H3Index11.Get()) {
@@ -1066,6 +1110,9 @@ func (o DriverSafetyEventRead) ToMap() (map[string]interface{}, error) {
 	if o.Location.IsSet() {
 		toSerialize["location"] = o.Location.Get()
 	}
+	if o.InferredAddress.IsSet() {
+		toSerialize["inferred_address"] = o.InferredAddress.Get()
+	}
 	if o.H3Index11.IsSet() {
 		toSerialize["h3_index_11"] = o.H3Index11.Get()
 	}
@@ -1149,6 +1196,7 @@ func (o *DriverSafetyEventRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "source_vehicle_id")
 		delete(additionalProperties, "event")
 		delete(additionalProperties, "location")
+		delete(additionalProperties, "inferred_address")
 		delete(additionalProperties, "h3_index_11")
 		delete(additionalProperties, "duration_seconds")
 		delete(additionalProperties, "event_metadata")

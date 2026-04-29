@@ -22,18 +22,52 @@ import (
 type ShareAgreementsAPI interface {
 
 	/*
-		CreateShareAgreement Create Share Agreement
+		ActivateShareAgreement Activate Share Agreement
 
-		Create a new Share Agreement.
+		Activate a Share Agreement.
 
 		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiCreateShareAgreementRequest
+		@param shareAgreementId
+		@return ApiActivateShareAgreementRequest
 	*/
-	CreateShareAgreement(ctx context.Context) ApiCreateShareAgreementRequest
+	ActivateShareAgreement(ctx context.Context, shareAgreementId string) ApiActivateShareAgreementRequest
 
-	// CreateShareAgreementExecute executes the request
+	// ActivateShareAgreementExecute executes the request
 	//  @return ShareAgreementRead
-	CreateShareAgreementExecute(r ApiCreateShareAgreementRequest) (*ShareAgreementRead, *http.Response, error)
+	ActivateShareAgreementExecute(r ApiActivateShareAgreementRequest) (*ShareAgreementRead, *http.Response, error)
+
+	/*
+			BackfillShareAgreements Backfill Share Agreements
+
+			Add a new resource to all existing share agreements that don't already have it.
+
+		Useful when a new resource is introduced and existing agreements need to be updated
+		without running manual database queries. Share agreements that already include the
+		resource are skipped. Optionally restrict the update to specific fleets.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiBackfillShareAgreementsRequest
+	*/
+	BackfillShareAgreements(ctx context.Context) ApiBackfillShareAgreementsRequest
+
+	// BackfillShareAgreementsExecute executes the request
+	//  @return ShareAgreementBackfillResult
+	BackfillShareAgreementsExecute(r ApiBackfillShareAgreementsRequest) (*ShareAgreementBackfillResult, *http.Response, error)
+
+	/*
+		CancelShareAgreement Cancel Share Agreement
+
+		Cancel a Share Agreement.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param shareAgreementId
+		@return ApiCancelShareAgreementRequest
+	*/
+	CancelShareAgreement(ctx context.Context, shareAgreementId string) ApiCancelShareAgreementRequest
+
+	// CancelShareAgreementExecute executes the request
+	//  @return ShareAgreementRead
+	CancelShareAgreementExecute(r ApiCancelShareAgreementRequest) (*ShareAgreementRead, *http.Response, error)
 
 	/*
 		DeleteShareAgreement Delete Share Agreement
@@ -75,8 +109,23 @@ type ShareAgreementsAPI interface {
 	ListShareAgreements(ctx context.Context) ApiListShareAgreementsRequest
 
 	// ListShareAgreementsExecute executes the request
-	//  @return CursorPageCustomizedShareAgreementRead
-	ListShareAgreementsExecute(r ApiListShareAgreementsRequest) (*CursorPageCustomizedShareAgreementRead, *http.Response, error)
+	//  @return CursorPageShareAgreementRead
+	ListShareAgreementsExecute(r ApiListShareAgreementsRequest) (*CursorPageShareAgreementRead, *http.Response, error)
+
+	/*
+		PauseShareAgreement Pause Share Agreement
+
+		Pause a Share Agreement.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param shareAgreementId
+		@return ApiPauseShareAgreementRequest
+	*/
+	PauseShareAgreement(ctx context.Context, shareAgreementId string) ApiPauseShareAgreementRequest
+
+	// PauseShareAgreementExecute executes the request
+	//  @return ShareAgreementRead
+	PauseShareAgreementExecute(r ApiPauseShareAgreementRequest) (*ShareAgreementRead, *http.Response, error)
 
 	/*
 		UpdateShareAgreement Update Share Agreement
@@ -97,40 +146,37 @@ type ShareAgreementsAPI interface {
 // ShareAgreementsAPIService ShareAgreementsAPI service
 type ShareAgreementsAPIService service
 
-type ApiCreateShareAgreementRequest struct {
-	ctx                  context.Context
-	ApiService           ShareAgreementsAPI
-	shareAgreementCreate *ShareAgreementCreate
+type ApiActivateShareAgreementRequest struct {
+	ctx              context.Context
+	ApiService       ShareAgreementsAPI
+	shareAgreementId string
 }
 
-func (r ApiCreateShareAgreementRequest) ShareAgreementCreate(shareAgreementCreate ShareAgreementCreate) ApiCreateShareAgreementRequest {
-	r.shareAgreementCreate = &shareAgreementCreate
-	return r
-}
-
-func (r ApiCreateShareAgreementRequest) Execute() (*ShareAgreementRead, *http.Response, error) {
-	return r.ApiService.CreateShareAgreementExecute(r)
+func (r ApiActivateShareAgreementRequest) Execute() (*ShareAgreementRead, *http.Response, error) {
+	return r.ApiService.ActivateShareAgreementExecute(r)
 }
 
 /*
-CreateShareAgreement Create Share Agreement
+ActivateShareAgreement Activate Share Agreement
 
-Create a new Share Agreement.
+Activate a Share Agreement.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateShareAgreementRequest
+	@param shareAgreementId
+	@return ApiActivateShareAgreementRequest
 */
-func (a *ShareAgreementsAPIService) CreateShareAgreement(ctx context.Context) ApiCreateShareAgreementRequest {
-	return ApiCreateShareAgreementRequest{
-		ApiService: a,
-		ctx:        ctx,
+func (a *ShareAgreementsAPIService) ActivateShareAgreement(ctx context.Context, shareAgreementId string) ApiActivateShareAgreementRequest {
+	return ApiActivateShareAgreementRequest{
+		ApiService:       a,
+		ctx:              ctx,
+		shareAgreementId: shareAgreementId,
 	}
 }
 
 // Execute executes the request
 //
 //	@return ShareAgreementRead
-func (a *ShareAgreementsAPIService) CreateShareAgreementExecute(r ApiCreateShareAgreementRequest) (*ShareAgreementRead, *http.Response, error) {
+func (a *ShareAgreementsAPIService) ActivateShareAgreementExecute(r ApiActivateShareAgreementRequest) (*ShareAgreementRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -138,18 +184,227 @@ func (a *ShareAgreementsAPIService) CreateShareAgreementExecute(r ApiCreateShare
 		localVarReturnValue *ShareAgreementRead
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ShareAgreementsAPIService.CreateShareAgreement")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ShareAgreementsAPIService.ActivateShareAgreement")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/orgs/share_agreements"
+	localVarPath := localBasePath + "/v2/orgs/share-agreements/{share_agreement_id}/activate"
+	localVarPath = strings.Replace(localVarPath, "{"+"share_agreement_id"+"}", url.PathEscape(parameterValueToString(r.shareAgreementId, "shareAgreementId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.shareAgreementCreate == nil {
-		return localVarReturnValue, nil, reportError("shareAgreementCreate is required and must be specified")
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiBackfillShareAgreementsRequest struct {
+	ctx                    context.Context
+	ApiService             ShareAgreementsAPI
+	shareAgreementBackfill *ShareAgreementBackfill
+}
+
+func (r ApiBackfillShareAgreementsRequest) ShareAgreementBackfill(shareAgreementBackfill ShareAgreementBackfill) ApiBackfillShareAgreementsRequest {
+	r.shareAgreementBackfill = &shareAgreementBackfill
+	return r
+}
+
+func (r ApiBackfillShareAgreementsRequest) Execute() (*ShareAgreementBackfillResult, *http.Response, error) {
+	return r.ApiService.BackfillShareAgreementsExecute(r)
+}
+
+/*
+BackfillShareAgreements Backfill Share Agreements
+
+Add a new resource to all existing share agreements that don't already have it.
+
+Useful when a new resource is introduced and existing agreements need to be updated
+without running manual database queries. Share agreements that already include the
+resource are skipped. Optionally restrict the update to specific fleets.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiBackfillShareAgreementsRequest
+*/
+func (a *ShareAgreementsAPIService) BackfillShareAgreements(ctx context.Context) ApiBackfillShareAgreementsRequest {
+	return ApiBackfillShareAgreementsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ShareAgreementBackfillResult
+func (a *ShareAgreementsAPIService) BackfillShareAgreementsExecute(r ApiBackfillShareAgreementsRequest) (*ShareAgreementBackfillResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ShareAgreementBackfillResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ShareAgreementsAPIService.BackfillShareAgreements")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/orgs/share-agreements/backfill"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.shareAgreementBackfill == nil {
+		return localVarReturnValue, nil, reportError("shareAgreementBackfill is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -170,7 +425,209 @@ func (a *ShareAgreementsAPIService) CreateShareAgreementExecute(r ApiCreateShare
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.shareAgreementCreate
+	localVarPostBody = r.shareAgreementBackfill
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCancelShareAgreementRequest struct {
+	ctx              context.Context
+	ApiService       ShareAgreementsAPI
+	shareAgreementId string
+}
+
+func (r ApiCancelShareAgreementRequest) Execute() (*ShareAgreementRead, *http.Response, error) {
+	return r.ApiService.CancelShareAgreementExecute(r)
+}
+
+/*
+CancelShareAgreement Cancel Share Agreement
+
+Cancel a Share Agreement.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param shareAgreementId
+	@return ApiCancelShareAgreementRequest
+*/
+func (a *ShareAgreementsAPIService) CancelShareAgreement(ctx context.Context, shareAgreementId string) ApiCancelShareAgreementRequest {
+	return ApiCancelShareAgreementRequest{
+		ApiService:       a,
+		ctx:              ctx,
+		shareAgreementId: shareAgreementId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ShareAgreementRead
+func (a *ShareAgreementsAPIService) CancelShareAgreementExecute(r ApiCancelShareAgreementRequest) (*ShareAgreementRead, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ShareAgreementRead
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ShareAgreementsAPIService.CancelShareAgreement")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/orgs/share-agreements/{share_agreement_id}/cancel"
+	localVarPath = strings.Replace(localVarPath, "{"+"share_agreement_id"+"}", url.PathEscape(parameterValueToString(r.shareAgreementId, "shareAgreementId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -346,7 +803,7 @@ func (a *ShareAgreementsAPIService) DeleteShareAgreementExecute(r ApiDeleteShare
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/orgs/share_agreements/{share_agreement_id}"
+	localVarPath := localBasePath + "/v2/orgs/share-agreements/{share_agreement_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"share_agreement_id"+"}", url.PathEscape(parameterValueToString(r.shareAgreementId, "shareAgreementId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -539,7 +996,7 @@ func (a *ShareAgreementsAPIService) GetShareAgreementExecute(r ApiGetShareAgreem
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/orgs/share_agreements/{share_agreement_id}"
+	localVarPath := localBasePath + "/v2/orgs/share-agreements/{share_agreement_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"share_agreement_id"+"}", url.PathEscape(parameterValueToString(r.shareAgreementId, "shareAgreementId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -702,8 +1159,8 @@ type ApiListShareAgreementsRequest struct {
 	ctx                  context.Context
 	ApiService           ShareAgreementsAPI
 	fleetId              *string
-	invitationId         *string
-	shareAgreementStatus *StatusEnum
+	fleetRef             *string
+	shareAgreementStatus *ShareAgreementStatusEnum
 	cursor               *string
 	size                 *int32
 }
@@ -714,14 +1171,14 @@ func (r ApiListShareAgreementsRequest) FleetId(fleetId string) ApiListShareAgree
 	return r
 }
 
-// Limit results to specific invitation
-func (r ApiListShareAgreementsRequest) InvitationId(invitationId string) ApiListShareAgreementsRequest {
-	r.invitationId = &invitationId
+// Limit results to specific fleet reference
+func (r ApiListShareAgreementsRequest) FleetRef(fleetRef string) ApiListShareAgreementsRequest {
+	r.fleetRef = &fleetRef
 	return r
 }
 
 // Limit results to specific Share Agreement status
-func (r ApiListShareAgreementsRequest) ShareAgreementStatus(shareAgreementStatus StatusEnum) ApiListShareAgreementsRequest {
+func (r ApiListShareAgreementsRequest) ShareAgreementStatus(shareAgreementStatus ShareAgreementStatusEnum) ApiListShareAgreementsRequest {
 	r.shareAgreementStatus = &shareAgreementStatus
 	return r
 }
@@ -738,7 +1195,7 @@ func (r ApiListShareAgreementsRequest) Size(size int32) ApiListShareAgreementsRe
 	return r
 }
 
-func (r ApiListShareAgreementsRequest) Execute() (*CursorPageCustomizedShareAgreementRead, *http.Response, error) {
+func (r ApiListShareAgreementsRequest) Execute() (*CursorPageShareAgreementRead, *http.Response, error) {
 	return r.ApiService.ListShareAgreementsExecute(r)
 }
 
@@ -759,13 +1216,13 @@ func (a *ShareAgreementsAPIService) ListShareAgreements(ctx context.Context) Api
 
 // Execute executes the request
 //
-//	@return CursorPageCustomizedShareAgreementRead
-func (a *ShareAgreementsAPIService) ListShareAgreementsExecute(r ApiListShareAgreementsRequest) (*CursorPageCustomizedShareAgreementRead, *http.Response, error) {
+//	@return CursorPageShareAgreementRead
+func (a *ShareAgreementsAPIService) ListShareAgreementsExecute(r ApiListShareAgreementsRequest) (*CursorPageShareAgreementRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageCustomizedShareAgreementRead
+		localVarReturnValue *CursorPageShareAgreementRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ShareAgreementsAPIService.ListShareAgreements")
@@ -773,7 +1230,7 @@ func (a *ShareAgreementsAPIService) ListShareAgreementsExecute(r ApiListShareAgr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/orgs/share_agreements"
+	localVarPath := localBasePath + "/v2/orgs/share-agreements"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -782,8 +1239,8 @@ func (a *ShareAgreementsAPIService) ListShareAgreementsExecute(r ApiListShareAgr
 	if r.fleetId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_id", r.fleetId, "form", "")
 	}
-	if r.invitationId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "invitation_id", r.invitationId, "form", "")
+	if r.fleetRef != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_ref", r.fleetRef, "form", "")
 	}
 	if r.shareAgreementStatus != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "share_agreement_status", r.shareAgreementStatus, "form", "")
@@ -794,9 +1251,211 @@ func (a *ShareAgreementsAPIService) ListShareAgreementsExecute(r ApiListShareAgr
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-		var defaultValue int32 = 500
+		var defaultValue int32 = 300
 		r.size = &defaultValue
 	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPauseShareAgreementRequest struct {
+	ctx              context.Context
+	ApiService       ShareAgreementsAPI
+	shareAgreementId string
+}
+
+func (r ApiPauseShareAgreementRequest) Execute() (*ShareAgreementRead, *http.Response, error) {
+	return r.ApiService.PauseShareAgreementExecute(r)
+}
+
+/*
+PauseShareAgreement Pause Share Agreement
+
+Pause a Share Agreement.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param shareAgreementId
+	@return ApiPauseShareAgreementRequest
+*/
+func (a *ShareAgreementsAPIService) PauseShareAgreement(ctx context.Context, shareAgreementId string) ApiPauseShareAgreementRequest {
+	return ApiPauseShareAgreementRequest{
+		ApiService:       a,
+		ctx:              ctx,
+		shareAgreementId: shareAgreementId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ShareAgreementRead
+func (a *ShareAgreementsAPIService) PauseShareAgreementExecute(r ApiPauseShareAgreementRequest) (*ShareAgreementRead, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ShareAgreementRead
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ShareAgreementsAPIService.PauseShareAgreement")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/orgs/share-agreements/{share_agreement_id}/pause"
+	localVarPath = strings.Replace(localVarPath, "{"+"share_agreement_id"+"}", url.PathEscape(parameterValueToString(r.shareAgreementId, "shareAgreementId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -998,7 +1657,7 @@ func (a *ShareAgreementsAPIService) UpdateShareAgreementExecute(r ApiUpdateShare
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/orgs/share_agreements/{share_agreement_id}"
+	localVarPath := localBasePath + "/v2/orgs/share-agreements/{share_agreement_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"share_agreement_id"+"}", url.PathEscape(parameterValueToString(r.shareAgreementId, "shareAgreementId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

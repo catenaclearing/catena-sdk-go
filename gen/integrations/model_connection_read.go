@@ -35,8 +35,8 @@ type ConnectionRead struct {
 	SourceName  TspEnum      `json:"source_name"`
 	Credentials Credentials1 `json:"credentials"`
 	// The current status of the connection.
-	Status               StatusEnum     `json:"status"`
-	Description          NullableString `json:"description"`
+	Status               ConnectionStatusEnum `json:"status"`
+	Description          NullableString       `json:"description"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,7 +46,7 @@ type _ConnectionRead ConnectionRead
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConnectionRead(id string, createdAt time.Time, updatedAt time.Time, fleetId NullableString, tspId string, sourceName TspEnum, credentials Credentials1, status StatusEnum, description NullableString) *ConnectionRead {
+func NewConnectionRead(id string, createdAt time.Time, updatedAt time.Time, fleetId NullableString, tspId string, sourceName TspEnum, credentials Credentials1, status ConnectionStatusEnum, description NullableString) *ConnectionRead {
 	this := ConnectionRead{}
 	this.Id = id
 	this.CreatedAt = createdAt
@@ -282,9 +282,9 @@ func (o *ConnectionRead) SetCredentials(v Credentials1) {
 }
 
 // GetStatus returns the Status field value
-func (o *ConnectionRead) GetStatus() StatusEnum {
+func (o *ConnectionRead) GetStatus() ConnectionStatusEnum {
 	if o == nil {
-		var ret StatusEnum
+		var ret ConnectionStatusEnum
 		return ret
 	}
 
@@ -293,7 +293,7 @@ func (o *ConnectionRead) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ConnectionRead) GetStatusOk() (*StatusEnum, bool) {
+func (o *ConnectionRead) GetStatusOk() (*ConnectionStatusEnum, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -301,7 +301,7 @@ func (o *ConnectionRead) GetStatusOk() (*StatusEnum, bool) {
 }
 
 // SetStatus sets field value
-func (o *ConnectionRead) SetStatus(v StatusEnum) {
+func (o *ConnectionRead) SetStatus(v ConnectionStatusEnum) {
 	o.Status = v
 }
 

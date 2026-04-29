@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ExecutionIntervalSeconds** | Pointer to **int32** | The interval between scheduled executions in seconds. Defaults to 10 minutes (600 seconds). | [optional] [default to 600]
 **ConsecutiveErrorThreshold** | Pointer to **int32** | The number of consecutive errors allowed before the schedule is automatically set to INACTIVE. Defaults to 15. | [optional] [default to 15]
 **MaxConcurrentExecutions** | Pointer to **int32** | The maximum number of concurrent executions allowed for this schedule. Defaults to 1. | [optional] [default to 1]
-**Status** | Pointer to [**StatusEnum**](StatusEnum.md) | The initial status of the schedule. Defaults to ACTIVE. | [optional] 
+**Status** | Pointer to [**ScheduleStatusEnum**](ScheduleStatusEnum.md) | The initial status of the schedule. Defaults to ACTIVE. | [optional] 
 **Cursor** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -127,20 +127,20 @@ HasMaxConcurrentExecutions returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *ScheduleCreate) GetStatus() StatusEnum`
+`func (o *ScheduleCreate) GetStatus() ScheduleStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ScheduleCreate) GetStatusOk() (*StatusEnum, bool)`
+`func (o *ScheduleCreate) GetStatusOk() (*ScheduleStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ScheduleCreate) SetStatus(v StatusEnum)`
+`func (o *ScheduleCreate) SetStatus(v ScheduleStatusEnum)`
 
 SetStatus sets Status field to given value.
 

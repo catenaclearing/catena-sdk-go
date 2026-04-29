@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Resource** | [**ResourceEnum**](ResourceEnum.md) | The type of resource to backfill schedules for (e.g., VEHICLE, DRIVER, HOS, IFTA). | 
 **TspId** | Pointer to **NullableString** |  | [optional] 
-**FleetIds** | Pointer to **[]string** |  | [optional] 
+**ConnectionIds** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -82,41 +82,41 @@ HasTspId returns a boolean if a field has been set.
 `func (o *ScheduleBackfillRequest) UnsetTspId()`
 
 UnsetTspId ensures that no value is present for TspId, not even an explicit nil
-### GetFleetIds
+### GetConnectionIds
 
-`func (o *ScheduleBackfillRequest) GetFleetIds() []string`
+`func (o *ScheduleBackfillRequest) GetConnectionIds() []string`
 
-GetFleetIds returns the FleetIds field if non-nil, zero value otherwise.
+GetConnectionIds returns the ConnectionIds field if non-nil, zero value otherwise.
 
-### GetFleetIdsOk
+### GetConnectionIdsOk
 
-`func (o *ScheduleBackfillRequest) GetFleetIdsOk() (*[]string, bool)`
+`func (o *ScheduleBackfillRequest) GetConnectionIdsOk() (*[]string, bool)`
 
-GetFleetIdsOk returns a tuple with the FleetIds field if it's non-nil, zero value otherwise
+GetConnectionIdsOk returns a tuple with the ConnectionIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFleetIds
+### SetConnectionIds
 
-`func (o *ScheduleBackfillRequest) SetFleetIds(v []string)`
+`func (o *ScheduleBackfillRequest) SetConnectionIds(v []string)`
 
-SetFleetIds sets FleetIds field to given value.
+SetConnectionIds sets ConnectionIds field to given value.
 
-### HasFleetIds
+### HasConnectionIds
 
-`func (o *ScheduleBackfillRequest) HasFleetIds() bool`
+`func (o *ScheduleBackfillRequest) HasConnectionIds() bool`
 
-HasFleetIds returns a boolean if a field has been set.
+HasConnectionIds returns a boolean if a field has been set.
 
-### SetFleetIdsNil
+### SetConnectionIdsNil
 
-`func (o *ScheduleBackfillRequest) SetFleetIdsNil(b bool)`
+`func (o *ScheduleBackfillRequest) SetConnectionIdsNil(b bool)`
 
- SetFleetIdsNil sets the value for FleetIds to be an explicit nil
+ SetConnectionIdsNil sets the value for ConnectionIds to be an explicit nil
 
-### UnsetFleetIds
-`func (o *ScheduleBackfillRequest) UnsetFleetIds()`
+### UnsetConnectionIds
+`func (o *ScheduleBackfillRequest) UnsetConnectionIds()`
 
-UnsetFleetIds ensures that no value is present for FleetIds, not even an explicit nil
+UnsetConnectionIds ensures that no value is present for ConnectionIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

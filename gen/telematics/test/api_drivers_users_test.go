@@ -24,6 +24,30 @@ func Test_telematicsapi_DriversUsersAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test DriversUsersAPIService CreateMessage", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.DriversUsersAPI.CreateMessage(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DriversUsersAPIService CreateUser", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.DriversUsersAPI.CreateUser(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DriversUsersAPIService GetUser", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -38,11 +62,37 @@ func Test_telematicsapi_DriversUsersAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DriversUsersAPIService ListMessages", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.DriversUsersAPI.ListMessages(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DriversUsersAPIService ListUsers", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DriversUsersAPI.ListUsers(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DriversUsersAPIService UpdateUser", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var sourceId string
+
+		resp, httpRes, err := apiClient.DriversUsersAPI.UpdateUser(context.Background(), sourceId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

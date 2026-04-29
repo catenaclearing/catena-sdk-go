@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountId** | **string** |  | 
+**AccountId** | **interface{}** |  | 
 **ApiKey** | **interface{}** |  | 
 **Token** | **interface{}** |  | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewFleetupSLCOutput
 
-`func NewFleetupSLCOutput(accountId string, apiKey interface{}, token interface{}, ) *FleetupSLCOutput`
+`func NewFleetupSLCOutput(accountId interface{}, apiKey interface{}, token interface{}, ) *FleetupSLCOutput`
 
 NewFleetupSLCOutput instantiates a new FleetupSLCOutput object
 This constructor will assign default values to properties that have it defined,
@@ -29,24 +29,34 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAccountId
 
-`func (o *FleetupSLCOutput) GetAccountId() string`
+`func (o *FleetupSLCOutput) GetAccountId() interface{}`
 
 GetAccountId returns the AccountId field if non-nil, zero value otherwise.
 
 ### GetAccountIdOk
 
-`func (o *FleetupSLCOutput) GetAccountIdOk() (*string, bool)`
+`func (o *FleetupSLCOutput) GetAccountIdOk() (*interface{}, bool)`
 
 GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAccountId
 
-`func (o *FleetupSLCOutput) SetAccountId(v string)`
+`func (o *FleetupSLCOutput) SetAccountId(v interface{})`
 
 SetAccountId sets AccountId field to given value.
 
 
+### SetAccountIdNil
+
+`func (o *FleetupSLCOutput) SetAccountIdNil(b bool)`
+
+ SetAccountIdNil sets the value for AccountId to be an explicit nil
+
+### UnsetAccountId
+`func (o *FleetupSLCOutput) UnsetAccountId()`
+
+UnsetAccountId ensures that no value is present for AccountId, not even an explicit nil
 ### GetApiKey
 
 `func (o *FleetupSLCOutput) GetApiKey() interface{}`

@@ -90,26 +90,39 @@ Class | Method | HTTP request | Description
 *AnalyticsAPI* | [**ListTrailerSummaries**](docs/AnalyticsAPI.md#listtrailersummaries) | **Get** /v2/telematics/analytics/trailers | List trailer summaries
 *AnalyticsAPI* | [**ListVehicleLiveLocations**](docs/AnalyticsAPI.md#listvehiclelivelocations) | **Get** /v2/telematics/analytics/vehicles/live-locations | List vehicle live locations
 *AnalyticsAPI* | [**ListVehicleSummaries**](docs/AnalyticsAPI.md#listvehiclesummaries) | **Get** /v2/telematics/analytics/vehicles | List vehicle summaries
+*ComplianceRegulationAPI* | [**CreateDvirLog**](docs/ComplianceRegulationAPI.md#createdvirlog) | **Post** /v2/telematics/dvir-logs | Create Dvir Log
 *ComplianceRegulationAPI* | [**GetDvirLogDefects**](docs/ComplianceRegulationAPI.md#getdvirlogdefects) | **Get** /v2/telematics/dvir-logs/{dvir_log_id}/defects | Get Dvir Log Defects
 *ComplianceRegulationAPI* | [**GetHosEventAttachments**](docs/ComplianceRegulationAPI.md#gethoseventattachments) | **Get** /v2/telematics/hos-events/{hos_event_id}/attachments | Get Hos Event Attachments
-*ComplianceRegulationAPI* | [**ListDvirLogDefects**](docs/ComplianceRegulationAPI.md#listdvirlogdefects) | **Get** /v2/telematics/dvir-defects | List Dvir Log Defects
+*ComplianceRegulationAPI* | [**ListDvirLogDefects**](docs/ComplianceRegulationAPI.md#listdvirlogdefects) | **Get** /v2/telematics/dvir-logs/defects | List Dvir Log Defects
 *ComplianceRegulationAPI* | [**ListDvirLogs**](docs/ComplianceRegulationAPI.md#listdvirlogs) | **Get** /v2/telematics/dvir-logs | List Dvir Logs
 *ComplianceRegulationAPI* | [**ListHosAvailabilities**](docs/ComplianceRegulationAPI.md#listhosavailabilities) | **Get** /v2/telematics/hos-availabilities | List HOS Availabilities
 *ComplianceRegulationAPI* | [**ListHosDailySnapshots**](docs/ComplianceRegulationAPI.md#listhosdailysnapshots) | **Get** /v2/telematics/hos-daily-snapshots | List Hos Daily Snapshots
 *ComplianceRegulationAPI* | [**ListHosEvents**](docs/ComplianceRegulationAPI.md#listhosevents) | **Get** /v2/telematics/hos-events | List HOS Events
 *ComplianceRegulationAPI* | [**ListHosViolations**](docs/ComplianceRegulationAPI.md#listhosviolations) | **Get** /v2/telematics/hos-violations | List HOS Violations
 *ComplianceRegulationAPI* | [**ListIftaSummaries**](docs/ComplianceRegulationAPI.md#listiftasummaries) | **Get** /v2/telematics/ifta-summaries | List Ifta Summaries
+*DriversUsersAPI* | [**CreateMessage**](docs/DriversUsersAPI.md#createmessage) | **Post** /v2/telematics/messages | Create Message
+*DriversUsersAPI* | [**CreateUser**](docs/DriversUsersAPI.md#createuser) | **Post** /v2/telematics/users | Create User
 *DriversUsersAPI* | [**GetUser**](docs/DriversUsersAPI.md#getuser) | **Get** /v2/telematics/users/{user_id} | Get User
+*DriversUsersAPI* | [**ListMessages**](docs/DriversUsersAPI.md#listmessages) | **Get** /v2/telematics/messages | List Messages
 *DriversUsersAPI* | [**ListUsers**](docs/DriversUsersAPI.md#listusers) | **Get** /v2/telematics/users | List Users
+*DriversUsersAPI* | [**UpdateUser**](docs/DriversUsersAPI.md#updateuser) | **Patch** /v2/telematics/users/{source_id} | Update User
+*FleetOperationsTrackingAPI* | [**CreateVehicle**](docs/FleetOperationsTrackingAPI.md#createvehicle) | **Post** /v2/telematics/vehicles | Create Vehicle
 *FleetOperationsTrackingAPI* | [**GetTrailer**](docs/FleetOperationsTrackingAPI.md#gettrailer) | **Get** /v2/telematics/trailers/{trailer_id} | Get Trailer
 *FleetOperationsTrackingAPI* | [**GetVehicle**](docs/FleetOperationsTrackingAPI.md#getvehicle) | **Get** /v2/telematics/vehicles/{vehicle_id} | Get Vehicle
-*FleetOperationsTrackingAPI* | [**GetVehicleSensorEvents**](docs/FleetOperationsTrackingAPI.md#getvehiclesensorevents) | **Get** /v2/telematics/vehicles/{vehicle_id}/sensor-events | Get Vehicle Sensor Events
+*FleetOperationsTrackingAPI* | [**ListDriverVehicleAssociations**](docs/FleetOperationsTrackingAPI.md#listdrivervehicleassociations) | **Get** /v2/telematics/driver-vehicle-associations | List Driver Vehicle Associations
+*FleetOperationsTrackingAPI* | [**ListEngineStatuses**](docs/FleetOperationsTrackingAPI.md#listenginestatuses) | **Get** /v2/telematics/engine-statuses | List Engine Statuses
 *FleetOperationsTrackingAPI* | [**ListTrailerLocations**](docs/FleetOperationsTrackingAPI.md#listtrailerlocations) | **Get** /v2/telematics/trailer-locations | List Trailer Locations
+*FleetOperationsTrackingAPI* | [**ListTrailerStatuses**](docs/FleetOperationsTrackingAPI.md#listtrailerstatuses) | **Get** /v2/telematics/trailer-statuses | List Trailer Statuses
+*FleetOperationsTrackingAPI* | [**ListTrailerVehicleAssociations**](docs/FleetOperationsTrackingAPI.md#listtrailervehicleassociations) | **Get** /v2/telematics/trailer-vehicle-associations | List Trailer Vehicle Associations
 *FleetOperationsTrackingAPI* | [**ListTrailers**](docs/FleetOperationsTrackingAPI.md#listtrailers) | **Get** /v2/telematics/trailers | List Trailers
 *FleetOperationsTrackingAPI* | [**ListVehicleLocations**](docs/FleetOperationsTrackingAPI.md#listvehiclelocations) | **Get** /v2/telematics/vehicle-locations | List Vehicle Locations
-*FleetOperationsTrackingAPI* | [**ListVehicleSensorEvents**](docs/FleetOperationsTrackingAPI.md#listvehiclesensorevents) | **Get** /v2/telematics/vehicle-sensor-events | List Vehicle Sensor Events
+*FleetOperationsTrackingAPI* | [**ListVehicleRegionSegments**](docs/FleetOperationsTrackingAPI.md#listvehicleregionsegments) | **Get** /v2/telematics/vehicle-region-segments | List Vehicle Region Segments
 *FleetOperationsTrackingAPI* | [**ListVehicles**](docs/FleetOperationsTrackingAPI.md#listvehicles) | **Get** /v2/telematics/vehicles | List Vehicles
+*FleetOperationsTrackingAPI* | [**UpdateVehicle**](docs/FleetOperationsTrackingAPI.md#updatevehicle) | **Patch** /v2/telematics/vehicles/{source_id} | Update Vehicle
+*MaintenanceVehicleHealthAPI* | [**CreateFuelTransaction**](docs/MaintenanceVehicleHealthAPI.md#createfueltransaction) | **Post** /v2/telematics/fuel-transactions | Create Fuel Transaction
 *MaintenanceVehicleHealthAPI* | [**ListEngineLogs**](docs/MaintenanceVehicleHealthAPI.md#listenginelogs) | **Get** /v2/telematics/engine-logs | List Engine Logs
+*MaintenanceVehicleHealthAPI* | [**ListFuelTransactions**](docs/MaintenanceVehicleHealthAPI.md#listfueltransactions) | **Get** /v2/telematics/fuel-transactions | List Fuel Transactions
+*MaintenanceVehicleHealthAPI* | [**ListVehicleSensorEvents**](docs/MaintenanceVehicleHealthAPI.md#listvehiclesensorevents) | **Get** /v2/telematics/vehicle-sensor-events | List Vehicle Sensor Events
 *ReferenceDataSupportingTablesAPI* | [**ListHosEventCodesReference**](docs/ReferenceDataSupportingTablesAPI.md#listhoseventcodesreference) | **Get** /v2/telematics/ref-hos-event-codes | List HOS Event Codes
 *ReferenceDataSupportingTablesAPI* | [**ListHosMalfunctionCodesReference**](docs/ReferenceDataSupportingTablesAPI.md#listhosmalfunctioncodesreference) | **Get** /v2/telematics/ref-hos-malfunction-codes | List HOS Malfunction Codes
 *ReferenceDataSupportingTablesAPI* | [**ListHosRecordOriginsReference**](docs/ReferenceDataSupportingTablesAPI.md#listhosrecordoriginsreference) | **Get** /v2/telematics/ref-hos-record-origins | List HOS Record Origins
@@ -130,15 +143,19 @@ Class | Method | HTTP request | Description
  - [Coordinates](docs/Coordinates.md)
  - [CursorPageDriverSafetyEventRead](docs/CursorPageDriverSafetyEventRead.md)
  - [CursorPageDriverSummary](docs/CursorPageDriverSummary.md)
+ - [CursorPageDriverVehicleAssociationRead](docs/CursorPageDriverVehicleAssociationRead.md)
  - [CursorPageDvirLogDefectRead](docs/CursorPageDvirLogDefectRead.md)
  - [CursorPageDvirLogRead](docs/CursorPageDvirLogRead.md)
  - [CursorPageEngineLogRead](docs/CursorPageEngineLogRead.md)
+ - [CursorPageEngineStatusRead](docs/CursorPageEngineStatusRead.md)
  - [CursorPageFleetSummary](docs/CursorPageFleetSummary.md)
+ - [CursorPageFuelTransactionRead](docs/CursorPageFuelTransactionRead.md)
  - [CursorPageHosAvailabilityRead](docs/CursorPageHosAvailabilityRead.md)
  - [CursorPageHosDailySnapshotRead](docs/CursorPageHosDailySnapshotRead.md)
  - [CursorPageHosEventAttachmentRead](docs/CursorPageHosEventAttachmentRead.md)
  - [CursorPageHosViolationRead](docs/CursorPageHosViolationRead.md)
  - [CursorPageIftaSummaryRead](docs/CursorPageIftaSummaryRead.md)
+ - [CursorPageMessageRead](docs/CursorPageMessageRead.md)
  - [CursorPageRefHosEventCode](docs/CursorPageRefHosEventCode.md)
  - [CursorPageRefHosMalfunctionCode](docs/CursorPageRefHosMalfunctionCode.md)
  - [CursorPageRefHosRecordOrigin](docs/CursorPageRefHosRecordOrigin.md)
@@ -150,25 +167,39 @@ Class | Method | HTTP request | Description
  - [CursorPageTrailerLiveLocation](docs/CursorPageTrailerLiveLocation.md)
  - [CursorPageTrailerLocationRead](docs/CursorPageTrailerLocationRead.md)
  - [CursorPageTrailerRead](docs/CursorPageTrailerRead.md)
+ - [CursorPageTrailerStatusRead](docs/CursorPageTrailerStatusRead.md)
  - [CursorPageTrailerSummary](docs/CursorPageTrailerSummary.md)
+ - [CursorPageTrailerVehicleAssociationRead](docs/CursorPageTrailerVehicleAssociationRead.md)
  - [CursorPageUserRead](docs/CursorPageUserRead.md)
  - [CursorPageVehicleLiveLocation](docs/CursorPageVehicleLiveLocation.md)
  - [CursorPageVehicleLocationRead](docs/CursorPageVehicleLocationRead.md)
  - [CursorPageVehicleRead](docs/CursorPageVehicleRead.md)
+ - [CursorPageVehicleRegionSegmentRead](docs/CursorPageVehicleRegionSegmentRead.md)
  - [CursorPageVehicleSensorRead](docs/CursorPageVehicleSensorRead.md)
  - [CursorPageVehicleSummary](docs/CursorPageVehicleSummary.md)
+ - [DistanceUnitEnum](docs/DistanceUnitEnum.md)
  - [DriverSafetyEventEnum](docs/DriverSafetyEventEnum.md)
  - [DriverSafetyEventRead](docs/DriverSafetyEventRead.md)
  - [DriverSummary](docs/DriverSummary.md)
+ - [DriverVehicleAssociationRead](docs/DriverVehicleAssociationRead.md)
  - [DutyStatusCodeEnum](docs/DutyStatusCodeEnum.md)
  - [DvirDefectEnum](docs/DvirDefectEnum.md)
+ - [DvirLogCreate](docs/DvirLogCreate.md)
  - [DvirLogDefectRead](docs/DvirLogDefectRead.md)
  - [DvirLogRead](docs/DvirLogRead.md)
+ - [DvirLogTypeEnum](docs/DvirLogTypeEnum.md)
  - [EngineLogRead](docs/EngineLogRead.md)
+ - [EngineStatusEnum](docs/EngineStatusEnum.md)
+ - [EngineStatusRead](docs/EngineStatusRead.md)
+ - [EngineType](docs/EngineType.md)
  - [FaultCodeSourceEnum](docs/FaultCodeSourceEnum.md)
  - [FleetSummary](docs/FleetSummary.md)
  - [Forbidden](docs/Forbidden.md)
+ - [FuelTransactionCreate](docs/FuelTransactionCreate.md)
+ - [FuelTransactionRead](docs/FuelTransactionRead.md)
+ - [FuelVolumeUnitEnum](docs/FuelVolumeUnitEnum.md)
  - [HosAvailabilityRead](docs/HosAvailabilityRead.md)
+ - [HosComplianceTypeEnum](docs/HosComplianceTypeEnum.md)
  - [HosDailySnapshotRead](docs/HosDailySnapshotRead.md)
  - [HosEventAnnotation](docs/HosEventAnnotation.md)
  - [HosEventAttachmentRead](docs/HosEventAttachmentRead.md)
@@ -180,10 +211,12 @@ Class | Method | HTTP request | Description
  - [HosRecordStatusCodeEnum](docs/HosRecordStatusCodeEnum.md)
  - [HosRegionCodeEnum](docs/HosRegionCodeEnum.md)
  - [HosRulesetCodeEnum](docs/HosRulesetCodeEnum.md)
+ - [HosTrackingMethodEnum](docs/HosTrackingMethodEnum.md)
  - [HosViolationCategoryEnum](docs/HosViolationCategoryEnum.md)
  - [HosViolationCodeEnum](docs/HosViolationCodeEnum.md)
  - [HosViolationRead](docs/HosViolationRead.md)
  - [IftaSummaryRead](docs/IftaSummaryRead.md)
+ - [InferredAddress](docs/InferredAddress.md)
  - [InternalServerError](docs/InternalServerError.md)
  - [LargeObjectCursorPageHosEventRead](docs/LargeObjectCursorPageHosEventRead.md)
  - [LastLocation](docs/LastLocation.md)
@@ -192,10 +225,27 @@ Class | Method | HTTP request | Description
  - [Location2](docs/Location2.md)
  - [Location3](docs/Location3.md)
  - [Location4](docs/Location4.md)
+ - [Location5](docs/Location5.md)
+ - [Location6](docs/Location6.md)
+ - [Location7](docs/Location7.md)
+ - [MessageCreate](docs/MessageCreate.md)
+ - [MessageModeEnum](docs/MessageModeEnum.md)
+ - [MessagePriorityEnum](docs/MessagePriorityEnum.md)
+ - [MessageRead](docs/MessageRead.md)
+ - [MessageReceiverGroupEnum](docs/MessageReceiverGroupEnum.md)
+ - [MessageSenderGroupEnum](docs/MessageSenderGroupEnum.md)
+ - [MessageStatusEnum](docs/MessageStatusEnum.md)
  - [MethodNotAllowed](docs/MethodNotAllowed.md)
  - [NotFound](docs/NotFound.md)
  - [NotImplementedResponse](docs/NotImplementedResponse.md)
  - [Point](docs/Point.md)
+ - [ReeferAlarmCodeEnum](docs/ReeferAlarmCodeEnum.md)
+ - [ReeferBatteryStatusEnum](docs/ReeferBatteryStatusEnum.md)
+ - [ReeferCargoStatusEnum](docs/ReeferCargoStatusEnum.md)
+ - [ReeferControlModeEnum](docs/ReeferControlModeEnum.md)
+ - [ReeferOperationModeEnum](docs/ReeferOperationModeEnum.md)
+ - [ReeferOperationalStatusEnum](docs/ReeferOperationalStatusEnum.md)
+ - [ReeferPowerSourceEnum](docs/ReeferPowerSourceEnum.md)
  - [RefHosEventCode](docs/RefHosEventCode.md)
  - [RefHosMalfunctionCode](docs/RefHosMalfunctionCode.md)
  - [RefHosRecordOrigin](docs/RefHosRecordOrigin.md)
@@ -204,28 +254,43 @@ Class | Method | HTTP request | Description
  - [RefHosRuleset](docs/RefHosRuleset.md)
  - [RefHosViolationCode](docs/RefHosViolationCode.md)
  - [RefTimezoneCode](docs/RefTimezoneCode.md)
+ - [RemoteProbeStatus](docs/RemoteProbeStatus.md)
  - [ResourceCount](docs/ResourceCount.md)
+ - [ResourceOperationAccept](docs/ResourceOperationAccept.md)
  - [RetryAfterDetail](docs/RetryAfterDetail.md)
  - [StatusEnum](docs/StatusEnum.md)
  - [TimeSeriesDataPoint](docs/TimeSeriesDataPoint.md)
  - [TimezoneCodeEnum](docs/TimezoneCodeEnum.md)
  - [TooManyRequests](docs/TooManyRequests.md)
+ - [TotalCost](docs/TotalCost.md)
+ - [TrailerAlarm](docs/TrailerAlarm.md)
  - [TrailerLiveLocation](docs/TrailerLiveLocation.md)
  - [TrailerLocation](docs/TrailerLocation.md)
  - [TrailerLocationRead](docs/TrailerLocationRead.md)
+ - [TrailerPretripStatus](docs/TrailerPretripStatus.md)
  - [TrailerRead](docs/TrailerRead.md)
+ - [TrailerStatusRead](docs/TrailerStatusRead.md)
  - [TrailerSummary](docs/TrailerSummary.md)
+ - [TrailerVehicleAssociationRead](docs/TrailerVehicleAssociationRead.md)
+ - [TrailerZoneStatus](docs/TrailerZoneStatus.md)
  - [TspEnum](docs/TspEnum.md)
  - [Unauthorized](docs/Unauthorized.md)
  - [UnprocessableEntity](docs/UnprocessableEntity.md)
+ - [UserCreate](docs/UserCreate.md)
  - [UserRead](docs/UserRead.md)
+ - [UserStatusEnum](docs/UserStatusEnum.md)
+ - [UserUpdate](docs/UserUpdate.md)
  - [ValidationErrorDetail](docs/ValidationErrorDetail.md)
+ - [VehicleCreate](docs/VehicleCreate.md)
  - [VehicleLiveLocation](docs/VehicleLiveLocation.md)
  - [VehicleLocation](docs/VehicleLocation.md)
  - [VehicleLocationRead](docs/VehicleLocationRead.md)
  - [VehicleRead](docs/VehicleRead.md)
+ - [VehicleRegionSegmentRead](docs/VehicleRegionSegmentRead.md)
  - [VehicleSensorRead](docs/VehicleSensorRead.md)
+ - [VehicleStatusEnum](docs/VehicleStatusEnum.md)
  - [VehicleSummary](docs/VehicleSummary.md)
+ - [VehicleUpdate](docs/VehicleUpdate.md)
 
 
 ## Documentation For Authorization

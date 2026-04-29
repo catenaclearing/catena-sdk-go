@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// Location3 Location encoded as GeoJSON Point
+// Location3 Geographic location where the fuel transaction occurred (latitude/longitude)
 type Location3 struct {
 	Point             *Point
 	MapmapOfStringAny *map[string]interface{}

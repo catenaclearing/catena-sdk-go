@@ -8,8 +8,7 @@ Name | Type | Description | Notes
 **FleetId** | **string** | The Catena fleet ID sharing their data with you | 
 **PartnerId** | **string** | Your organization ID receiving access to fleet data | 
 **FleetRef** | **NullableString** |  | 
-**InvitationId** | **NullableString** |  | 
-**Status** | [**StatusEnum**](StatusEnum.md) | Current state: ACTIVE (data access enabled), PAUSED (temporarily disabled), CANCELLED (permanently ended), EXPIRED (past expiration_date) | 
+**Status** | [**ShareAgreementStatusEnum**](ShareAgreementStatusEnum.md) | Current state: ACTIVE (data access enabled), PAUSED (temporarily disabled), CANCELLED (permanently ended), EXPIRED (past expiration_date) | 
 **EffectiveDate** | **time.Time** | When data access begins. Check this before attempting to fetch fleet data. | 
 **ExpirationDate** | **NullableTime** |  | 
 **Scopes** | [**map[string]ShareLevelEnum**](ShareLevelEnum.md) | Defines which resources (vehicle, locations, users, etc.) you can access and the permission level (read, write) for each. | 
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewShareAgreementRead
 
-`func NewShareAgreementRead(id string, fleetId string, partnerId string, fleetRef NullableString, invitationId NullableString, status StatusEnum, effectiveDate time.Time, expirationDate NullableTime, scopes map[string]ShareLevelEnum, ) *ShareAgreementRead`
+`func NewShareAgreementRead(id string, fleetId string, partnerId string, fleetRef NullableString, status ShareAgreementStatusEnum, effectiveDate time.Time, expirationDate NullableTime, scopes map[string]ShareLevelEnum, ) *ShareAgreementRead`
 
 NewShareAgreementRead instantiates a new ShareAgreementRead object
 This constructor will assign default values to properties that have it defined,
@@ -123,52 +122,22 @@ SetFleetRef sets FleetRef field to given value.
 `func (o *ShareAgreementRead) UnsetFleetRef()`
 
 UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-### GetInvitationId
-
-`func (o *ShareAgreementRead) GetInvitationId() string`
-
-GetInvitationId returns the InvitationId field if non-nil, zero value otherwise.
-
-### GetInvitationIdOk
-
-`func (o *ShareAgreementRead) GetInvitationIdOk() (*string, bool)`
-
-GetInvitationIdOk returns a tuple with the InvitationId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInvitationId
-
-`func (o *ShareAgreementRead) SetInvitationId(v string)`
-
-SetInvitationId sets InvitationId field to given value.
-
-
-### SetInvitationIdNil
-
-`func (o *ShareAgreementRead) SetInvitationIdNil(b bool)`
-
- SetInvitationIdNil sets the value for InvitationId to be an explicit nil
-
-### UnsetInvitationId
-`func (o *ShareAgreementRead) UnsetInvitationId()`
-
-UnsetInvitationId ensures that no value is present for InvitationId, not even an explicit nil
 ### GetStatus
 
-`func (o *ShareAgreementRead) GetStatus() StatusEnum`
+`func (o *ShareAgreementRead) GetStatus() ShareAgreementStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *ShareAgreementRead) GetStatusOk() (*StatusEnum, bool)`
+`func (o *ShareAgreementRead) GetStatusOk() (*ShareAgreementStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *ShareAgreementRead) SetStatus(v StatusEnum)`
+`func (o *ShareAgreementRead) SetStatus(v ShareAgreementStatusEnum)`
 
 SetStatus sets Status field to given value.
 

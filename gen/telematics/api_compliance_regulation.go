@@ -24,6 +24,20 @@ import (
 type ComplianceRegulationAPI interface {
 
 	/*
+		CreateDvirLog Create Dvir Log
+
+		Create a new DVIR log asynchronously.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiCreateDvirLogRequest
+	*/
+	CreateDvirLog(ctx context.Context) ApiCreateDvirLogRequest
+
+	// CreateDvirLogExecute executes the request
+	//  @return ResourceOperationAccept
+	CreateDvirLogExecute(r ApiCreateDvirLogRequest) (*ResourceOperationAccept, *http.Response, error)
+
+	/*
 		GetDvirLogDefects Get Dvir Log Defects
 
 		Get a paginated list of Driver Vehicle Inspection Report (DVIR) log defects for a specific DVIR log.
@@ -157,12 +171,233 @@ type ComplianceRegulationAPI interface {
 // ComplianceRegulationAPIService ComplianceRegulationAPI service
 type ComplianceRegulationAPIService service
 
+type ApiCreateDvirLogRequest struct {
+	ctx           context.Context
+	ApiService    ComplianceRegulationAPI
+	dvirLogCreate *DvirLogCreate
+}
+
+func (r ApiCreateDvirLogRequest) DvirLogCreate(dvirLogCreate DvirLogCreate) ApiCreateDvirLogRequest {
+	r.dvirLogCreate = &dvirLogCreate
+	return r
+}
+
+func (r ApiCreateDvirLogRequest) Execute() (*ResourceOperationAccept, *http.Response, error) {
+	return r.ApiService.CreateDvirLogExecute(r)
+}
+
+/*
+CreateDvirLog Create Dvir Log
+
+Create a new DVIR log asynchronously.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateDvirLogRequest
+*/
+func (a *ComplianceRegulationAPIService) CreateDvirLog(ctx context.Context) ApiCreateDvirLogRequest {
+	return ApiCreateDvirLogRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ResourceOperationAccept
+func (a *ComplianceRegulationAPIService) CreateDvirLogExecute(r ApiCreateDvirLogRequest) (*ResourceOperationAccept, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceOperationAccept
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.CreateDvirLog")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/telematics/dvir-logs"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.dvirLogCreate == nil {
+		return localVarReturnValue, nil, reportError("dvirLogCreate is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.dvirLogCreate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetDvirLogDefectsRequest struct {
 	ctx               context.Context
 	ApiService        ComplianceRegulationAPI
 	dvirLogId         string
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	includeSourceData *bool
 	sortBy            *string
 	sortOrder         *string
@@ -170,15 +405,21 @@ type ApiGetDvirLogDefectsRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiGetDvirLogDefectsRequest) FleetIds(fleetIds []string) ApiGetDvirLogDefectsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiGetDvirLogDefectsRequest) FleetRefs(fleetRefs []string) ApiGetDvirLogDefectsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiGetDvirLogDefectsRequest) ConnectionId(connectionId string) ApiGetDvirLogDefectsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -277,6 +518,9 @@ func (a *ComplianceRegulationAPIService) GetDvirLogDefectsExecute(r ApiGetDvirLo
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.includeSourceData != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_source_data", r.includeSourceData, "form", "")
@@ -471,20 +715,27 @@ type ApiGetHosEventAttachmentsRequest struct {
 	hosEventId        string
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	includeSourceData *bool
 	cursor            *string
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiGetHosEventAttachmentsRequest) FleetIds(fleetIds []string) ApiGetHosEventAttachmentsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiGetHosEventAttachmentsRequest) FleetRefs(fleetRefs []string) ApiGetHosEventAttachmentsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiGetHosEventAttachmentsRequest) ConnectionId(connectionId string) ApiGetHosEventAttachmentsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -571,6 +822,9 @@ func (a *ComplianceRegulationAPIService) GetHosEventAttachmentsExecute(r ApiGetH
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.includeSourceData != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_source_data", r.includeSourceData, "form", "")
@@ -755,6 +1009,7 @@ type ApiListDvirLogDefectsRequest struct {
 	ApiService        ComplianceRegulationAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	fromDatetime      *time.Time
 	toDatetime        *time.Time
 	dvirLogIds        *[]string
@@ -765,15 +1020,21 @@ type ApiListDvirLogDefectsRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListDvirLogDefectsRequest) FleetIds(fleetIds []string) ApiListDvirLogDefectsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListDvirLogDefectsRequest) FleetRefs(fleetRefs []string) ApiListDvirLogDefectsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListDvirLogDefectsRequest) ConnectionId(connectionId string) ApiListDvirLogDefectsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -789,7 +1050,7 @@ func (r ApiListDvirLogDefectsRequest) ToDatetime(toDatetime time.Time) ApiListDv
 	return r
 }
 
-// Limit results to specific DVIR logs. **Maximum:** 100 IDs
+// Limit results to specific DVIR logs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?dvir_log_ids&#x3D;id1&amp;dvir_log_ids&#x3D;id2&#x60;).
 func (r ApiListDvirLogDefectsRequest) DvirLogIds(dvirLogIds []string) ApiListDvirLogDefectsRequest {
 	r.dvirLogIds = &dvirLogIds
 	return r
@@ -860,7 +1121,7 @@ func (a *ComplianceRegulationAPIService) ListDvirLogDefectsExecute(r ApiListDvir
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/telematics/dvir-defects"
+	localVarPath := localBasePath + "/v2/telematics/dvir-logs/defects"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -887,6 +1148,9 @@ func (a *ComplianceRegulationAPIService) ListDvirLogDefectsExecute(r ApiListDvir
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.fromDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
@@ -1097,6 +1361,7 @@ type ApiListDvirLogsRequest struct {
 	ApiService        ComplianceRegulationAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	fromDatetime      *time.Time
 	toDatetime        *time.Time
 	includeSourceData *bool
@@ -1108,15 +1373,21 @@ type ApiListDvirLogsRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListDvirLogsRequest) FleetIds(fleetIds []string) ApiListDvirLogsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListDvirLogsRequest) FleetRefs(fleetRefs []string) ApiListDvirLogsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListDvirLogsRequest) ConnectionId(connectionId string) ApiListDvirLogsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -1138,13 +1409,13 @@ func (r ApiListDvirLogsRequest) IncludeSourceData(includeSourceData bool) ApiLis
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListDvirLogsRequest) DriverIds(driverIds []string) ApiListDvirLogsRequest {
 	r.driverIds = &driverIds
 	return r
 }
 
-// Limit results to specific vehicles. **Maximum:** 100 IDs
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
 func (r ApiListDvirLogsRequest) VehicleIds(vehicleIds []string) ApiListDvirLogsRequest {
 	r.vehicleIds = &vehicleIds
 	return r
@@ -1236,6 +1507,9 @@ func (a *ComplianceRegulationAPIService) ListDvirLogsExecute(r ApiListDvirLogsRe
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.fromDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
@@ -1457,6 +1731,7 @@ type ApiListHosAvailabilitiesRequest struct {
 	ApiService        ComplianceRegulationAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	includeSourceData *bool
 	driverIds         *[]string
 	vehicleIds        *[]string
@@ -1466,15 +1741,21 @@ type ApiListHosAvailabilitiesRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListHosAvailabilitiesRequest) FleetIds(fleetIds []string) ApiListHosAvailabilitiesRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListHosAvailabilitiesRequest) FleetRefs(fleetRefs []string) ApiListHosAvailabilitiesRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListHosAvailabilitiesRequest) ConnectionId(connectionId string) ApiListHosAvailabilitiesRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -1484,13 +1765,13 @@ func (r ApiListHosAvailabilitiesRequest) IncludeSourceData(includeSourceData boo
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListHosAvailabilitiesRequest) DriverIds(driverIds []string) ApiListHosAvailabilitiesRequest {
 	r.driverIds = &driverIds
 	return r
 }
 
-// Limit results to specific vehicles. **Maximum:** 100 IDs
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
 func (r ApiListHosAvailabilitiesRequest) VehicleIds(vehicleIds []string) ApiListHosAvailabilitiesRequest {
 	r.vehicleIds = &vehicleIds
 	return r
@@ -1582,6 +1863,9 @@ func (a *ComplianceRegulationAPIService) ListHosAvailabilitiesExecute(r ApiListH
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.includeSourceData != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_source_data", r.includeSourceData, "form", "")
@@ -1797,6 +2081,7 @@ type ApiListHosDailySnapshotsRequest struct {
 	ApiService        ComplianceRegulationAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	fromDatetime      *time.Time
 	toDatetime        *time.Time
 	includeSourceData *bool
@@ -1807,15 +2092,21 @@ type ApiListHosDailySnapshotsRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListHosDailySnapshotsRequest) FleetIds(fleetIds []string) ApiListHosDailySnapshotsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListHosDailySnapshotsRequest) FleetRefs(fleetRefs []string) ApiListHosDailySnapshotsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListHosDailySnapshotsRequest) ConnectionId(connectionId string) ApiListHosDailySnapshotsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -1837,7 +2128,7 @@ func (r ApiListHosDailySnapshotsRequest) IncludeSourceData(includeSourceData boo
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListHosDailySnapshotsRequest) DriverIds(driverIds []string) ApiListHosDailySnapshotsRequest {
 	r.driverIds = &driverIds
 	return r
@@ -1929,6 +2220,9 @@ func (a *ComplianceRegulationAPIService) ListHosDailySnapshotsExecute(r ApiListH
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.fromDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
@@ -2139,6 +2433,7 @@ type ApiListHosEventsRequest struct {
 	ApiService         ComplianceRegulationAPI
 	fleetIds           *[]string
 	fleetRefs          *[]string
+	connectionId       *string
 	fromDatetime       *time.Time
 	toDatetime         *time.Time
 	activeFromDatetime *time.Time
@@ -2151,15 +2446,21 @@ type ApiListHosEventsRequest struct {
 	size               *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListHosEventsRequest) FleetIds(fleetIds []string) ApiListHosEventsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListHosEventsRequest) FleetRefs(fleetRefs []string) ApiListHosEventsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListHosEventsRequest) ConnectionId(connectionId string) ApiListHosEventsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -2193,19 +2494,19 @@ func (r ApiListHosEventsRequest) IncludeSourceData(includeSourceData bool) ApiLi
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListHosEventsRequest) DriverIds(driverIds []string) ApiListHosEventsRequest {
 	r.driverIds = &driverIds
 	return r
 }
 
-// Limit results to specific vehicles. **Maximum:** 100 IDs
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
 func (r ApiListHosEventsRequest) VehicleIds(vehicleIds []string) ApiListHosEventsRequest {
 	r.vehicleIds = &vehicleIds
 	return r
 }
 
-// Limit results to specific HOS event type codes. **Maximum:** 5 codes
+// Limit results to specific HOS event type codes. **Maximum:** 5 codes To specify multiple values, repeat the parameter for each value (e.g., &#x60;?event_type_codes&#x3D;code1&amp;event_type_codes&#x3D;code2&#x60;).
 func (r ApiListHosEventsRequest) EventTypeCodes(eventTypeCodes []HosEventTypeCodeEnum) ApiListHosEventsRequest {
 	r.eventTypeCodes = &eventTypeCodes
 	return r
@@ -2287,6 +2588,9 @@ func (a *ComplianceRegulationAPIService) ListHosEventsExecute(r ApiListHosEvents
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.fromDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
@@ -2516,6 +2820,7 @@ type ApiListHosViolationsRequest struct {
 	ApiService        ComplianceRegulationAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	fromDatetime      *time.Time
 	toDatetime        *time.Time
 	includeSourceData *bool
@@ -2526,15 +2831,21 @@ type ApiListHosViolationsRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListHosViolationsRequest) FleetIds(fleetIds []string) ApiListHosViolationsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListHosViolationsRequest) FleetRefs(fleetRefs []string) ApiListHosViolationsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListHosViolationsRequest) ConnectionId(connectionId string) ApiListHosViolationsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -2556,7 +2867,7 @@ func (r ApiListHosViolationsRequest) IncludeSourceData(includeSourceData bool) A
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListHosViolationsRequest) DriverIds(driverIds []string) ApiListHosViolationsRequest {
 	r.driverIds = &driverIds
 	return r
@@ -2648,6 +2959,9 @@ func (a *ComplianceRegulationAPIService) ListHosViolationsExecute(r ApiListHosVi
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.fromDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
@@ -2858,6 +3172,7 @@ type ApiListIftaSummariesRequest struct {
 	ApiService        ComplianceRegulationAPI
 	fleetIds          *[]string
 	fleetRefs         *[]string
+	connectionId      *string
 	fromDatetime      *time.Time
 	toDatetime        *time.Time
 	includeSourceData *bool
@@ -2868,15 +3183,21 @@ type ApiListIftaSummariesRequest struct {
 	size              *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListIftaSummariesRequest) FleetIds(fleetIds []string) ApiListIftaSummariesRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListIftaSummariesRequest) FleetRefs(fleetRefs []string) ApiListIftaSummariesRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListIftaSummariesRequest) ConnectionId(connectionId string) ApiListIftaSummariesRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -2898,7 +3219,7 @@ func (r ApiListIftaSummariesRequest) IncludeSourceData(includeSourceData bool) A
 	return r
 }
 
-// Limit results to specific vehicles. **Maximum:** 100 IDs
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
 func (r ApiListIftaSummariesRequest) VehicleIds(vehicleIds []string) ApiListIftaSummariesRequest {
 	r.vehicleIds = &vehicleIds
 	return r
@@ -2990,6 +3311,9 @@ func (a *ComplianceRegulationAPIService) ListIftaSummariesExecute(r ApiListIftaS
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.fromDatetime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")

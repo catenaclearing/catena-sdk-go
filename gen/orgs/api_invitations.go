@@ -45,14 +45,17 @@ type InvitationsAPI interface {
 		Share this link with the fleet to begin the onboarding process.
 		Once accepted, a share agreement is automatically created to enable data sharing.
 
+		**Note:** If an active, accepted, or declined invitation already exists for the same `fleet_ref`,
+		the invitation is refreshed (expiration extended, tokens regenerated if accepted,
+		reactivated if declined) and returned with status code 200 instead of 201.
+
 			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 			@return ApiCreateInvitationRequest
 	*/
 	CreateInvitation(ctx context.Context) ApiCreateInvitationRequest
 
 	// CreateInvitationExecute executes the request
-	//  @return InvitationRead
-	CreateInvitationExecute(r ApiCreateInvitationRequest) (*InvitationRead, *http.Response, error)
+	CreateInvitationExecute(r ApiCreateInvitationRequest) (*http.Response, error)
 
 	/*
 		DeclineInvitationV2OrgsInvitationsInvitationIdDeclinePost Decline Invitation
@@ -109,23 +112,17 @@ type InvitationsAPI interface {
 	ListInvitations(ctx context.Context) ApiListInvitationsRequest
 
 	// ListInvitationsExecute executes the request
-	//  @return CursorPageCustomizedInvitationRead
-	ListInvitationsExecute(r ApiListInvitationsRequest) (*CursorPageCustomizedInvitationRead, *http.Response, error)
+	//  @return CursorPageInvitationRead
+	ListInvitationsExecute(r ApiListInvitationsRequest) (*CursorPageInvitationRead, *http.Response, error)
 }
 
 // InvitationsAPIService InvitationsAPI service
 type InvitationsAPIService service
 
 type ApiAcceptInvitationV2OrgsInvitationsInvitationIdAcceptPostRequest struct {
-	ctx              context.Context
-	ApiService       InvitationsAPI
-	invitationId     string
-	invitationAccept *InvitationAccept
-}
-
-func (r ApiAcceptInvitationV2OrgsInvitationsInvitationIdAcceptPostRequest) InvitationAccept(invitationAccept InvitationAccept) ApiAcceptInvitationV2OrgsInvitationsInvitationIdAcceptPostRequest {
-	r.invitationAccept = &invitationAccept
-	return r
+	ctx          context.Context
+	ApiService   InvitationsAPI
+	invitationId string
 }
 
 func (r ApiAcceptInvitationV2OrgsInvitationsInvitationIdAcceptPostRequest) Execute() (*InvitationRead, *http.Response, error) {
@@ -171,12 +168,9 @@ func (a *InvitationsAPIService) AcceptInvitationV2OrgsInvitationsInvitationIdAcc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.invitationAccept == nil {
-		return localVarReturnValue, nil, reportError("invitationAccept is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -192,8 +186,6 @@ func (a *InvitationsAPIService) AcceptInvitationV2OrgsInvitationsInvitationIdAcc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.invitationAccept
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -340,7 +332,7 @@ func (r ApiCreateInvitationRequest) InvitationCreate(invitationCreate Invitation
 	return r
 }
 
-func (r ApiCreateInvitationRequest) Execute() (*InvitationRead, *http.Response, error) {
+func (r ApiCreateInvitationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.CreateInvitationExecute(r)
 }
 
@@ -353,6 +345,10 @@ Returns an invitation object with a unique ID that serves as the magic link toke
 Share this link with the fleet to begin the onboarding process.
 Once accepted, a share agreement is automatically created to enable data sharing.
 
+**Note:** If an active, accepted, or declined invitation already exists for the same `fleet_ref`,
+the invitation is refreshed (expiration extended, tokens regenerated if accepted,
+reactivated if declined) and returned with status code 200 instead of 201.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateInvitationRequest
 */
@@ -364,19 +360,16 @@ func (a *InvitationsAPIService) CreateInvitation(ctx context.Context) ApiCreateI
 }
 
 // Execute executes the request
-//
-//	@return InvitationRead
-func (a *InvitationsAPIService) CreateInvitationExecute(r ApiCreateInvitationRequest) (*InvitationRead, *http.Response, error) {
+func (a *InvitationsAPIService) CreateInvitationExecute(r ApiCreateInvitationRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *InvitationRead
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InvitationsAPIService.CreateInvitation")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v2/orgs/invitations"
@@ -385,7 +378,7 @@ func (a *InvitationsAPIService) CreateInvitationExecute(r ApiCreateInvitationReq
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.invitationCreate == nil {
-		return localVarReturnValue, nil, reportError("invitationCreate is required and must be specified")
+		return nil, reportError("invitationCreate is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -409,19 +402,19 @@ func (a *InvitationsAPIService) CreateInvitationExecute(r ApiCreateInvitationReq
 	localVarPostBody = r.invitationCreate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -434,112 +427,104 @@ func (a *InvitationsAPIService) CreateInvitationExecute(r ApiCreateInvitationReq
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Unauthorized
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Forbidden
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 405 {
 			var v MethodNotAllowed
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
 			var v Conflict
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v UnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 429 {
 			var v TooManyRequests
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v InternalServerError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarHTTPResponse, newErr
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeclineInvitationV2OrgsInvitationsInvitationIdDeclinePostRequest struct {
@@ -1173,7 +1158,7 @@ func (r ApiListInvitationsRequest) Size(size int32) ApiListInvitationsRequest {
 	return r
 }
 
-func (r ApiListInvitationsRequest) Execute() (*CursorPageCustomizedInvitationRead, *http.Response, error) {
+func (r ApiListInvitationsRequest) Execute() (*CursorPageInvitationRead, *http.Response, error) {
 	return r.ApiService.ListInvitationsExecute(r)
 }
 
@@ -1194,13 +1179,13 @@ func (a *InvitationsAPIService) ListInvitations(ctx context.Context) ApiListInvi
 
 // Execute executes the request
 //
-//	@return CursorPageCustomizedInvitationRead
-func (a *InvitationsAPIService) ListInvitationsExecute(r ApiListInvitationsRequest) (*CursorPageCustomizedInvitationRead, *http.Response, error) {
+//	@return CursorPageInvitationRead
+func (a *InvitationsAPIService) ListInvitationsExecute(r ApiListInvitationsRequest) (*CursorPageInvitationRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageCustomizedInvitationRead
+		localVarReturnValue *CursorPageInvitationRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InvitationsAPIService.ListInvitations")
@@ -1223,7 +1208,7 @@ func (a *InvitationsAPIService) ListInvitationsExecute(r ApiListInvitationsReque
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-		var defaultValue int32 = 500
+		var defaultValue int32 = 300
 		r.size = &defaultValue
 	}
 	// to determine the Content-Type header

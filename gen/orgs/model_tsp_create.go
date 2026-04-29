@@ -27,7 +27,7 @@ type TspCreate struct {
 	// Unique TSP identifier enum value
 	SourceName TspEnum `json:"source_name"`
 	// The status of the TSP
-	Status *StatusEnum `json:"status,omitempty"`
+	Status *TspStatusEnum `json:"status,omitempty"`
 	// Authentication method (OAuth, API Key, etc.)
 	ConnType ConnectionTypeEnum `json:"conn_type"`
 	// Indicates whether the TSP is a sandbox integrations for testing purposes.
@@ -188,9 +188,9 @@ func (o *TspCreate) SetSourceName(v TspEnum) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *TspCreate) GetStatus() StatusEnum {
+func (o *TspCreate) GetStatus() TspStatusEnum {
 	if o == nil || IsNil(o.Status) {
-		var ret StatusEnum
+		var ret TspStatusEnum
 		return ret
 	}
 	return *o.Status
@@ -198,7 +198,7 @@ func (o *TspCreate) GetStatus() StatusEnum {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TspCreate) GetStatusOk() (*StatusEnum, bool) {
+func (o *TspCreate) GetStatusOk() (*TspStatusEnum, bool) {
 	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
@@ -214,8 +214,8 @@ func (o *TspCreate) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given StatusEnum and assigns it to the Status field.
-func (o *TspCreate) SetStatus(v StatusEnum) {
+// SetStatus gets a reference to the given TspStatusEnum and assigns it to the Status field.
+func (o *TspCreate) SetStatus(v TspStatusEnum) {
 	o.Status = &v
 }
 

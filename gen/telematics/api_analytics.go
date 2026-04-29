@@ -180,21 +180,28 @@ type AnalyticsAPI interface {
 type AnalyticsAPIService service
 
 type ApiGetAnalyticsOverviewRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiGetAnalyticsOverviewRequest) FleetIds(fleetIds []string) ApiGetAnalyticsOverviewRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiGetAnalyticsOverviewRequest) FleetRefs(fleetRefs []string) ApiGetAnalyticsOverviewRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiGetAnalyticsOverviewRequest) ConnectionId(connectionId string) ApiGetAnalyticsOverviewRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -260,6 +267,9 @@ func (a *AnalyticsAPIService) GetAnalyticsOverviewExecute(r ApiGetAnalyticsOverv
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -425,22 +435,29 @@ func (a *AnalyticsAPIService) GetAnalyticsOverviewExecute(r ApiGetAnalyticsOverv
 }
 
 type ApiGetDriverGrowthMetricsRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	periodDays *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	periodDays   *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiGetDriverGrowthMetricsRequest) FleetIds(fleetIds []string) ApiGetDriverGrowthMetricsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiGetDriverGrowthMetricsRequest) FleetRefs(fleetRefs []string) ApiGetDriverGrowthMetricsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiGetDriverGrowthMetricsRequest) ConnectionId(connectionId string) ApiGetDriverGrowthMetricsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -512,6 +529,9 @@ func (a *AnalyticsAPIService) GetDriverGrowthMetricsExecute(r ApiGetDriverGrowth
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.periodDays != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "period_days", r.periodDays, "form", "")
@@ -683,22 +703,29 @@ func (a *AnalyticsAPIService) GetDriverGrowthMetricsExecute(r ApiGetDriverGrowth
 }
 
 type ApiGetFleetGrowthMetricsRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	periodDays *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	periodDays   *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiGetFleetGrowthMetricsRequest) FleetIds(fleetIds []string) ApiGetFleetGrowthMetricsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiGetFleetGrowthMetricsRequest) FleetRefs(fleetRefs []string) ApiGetFleetGrowthMetricsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiGetFleetGrowthMetricsRequest) ConnectionId(connectionId string) ApiGetFleetGrowthMetricsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -770,6 +797,9 @@ func (a *AnalyticsAPIService) GetFleetGrowthMetricsExecute(r ApiGetFleetGrowthMe
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.periodDays != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "period_days", r.periodDays, "form", "")
@@ -941,22 +971,29 @@ func (a *AnalyticsAPIService) GetFleetGrowthMetricsExecute(r ApiGetFleetGrowthMe
 }
 
 type ApiGetTrailerGrowthMetricsRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	periodDays *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	periodDays   *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiGetTrailerGrowthMetricsRequest) FleetIds(fleetIds []string) ApiGetTrailerGrowthMetricsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiGetTrailerGrowthMetricsRequest) FleetRefs(fleetRefs []string) ApiGetTrailerGrowthMetricsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiGetTrailerGrowthMetricsRequest) ConnectionId(connectionId string) ApiGetTrailerGrowthMetricsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -1028,6 +1065,9 @@ func (a *AnalyticsAPIService) GetTrailerGrowthMetricsExecute(r ApiGetTrailerGrow
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.periodDays != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "period_days", r.periodDays, "form", "")
@@ -1199,22 +1239,29 @@ func (a *AnalyticsAPIService) GetTrailerGrowthMetricsExecute(r ApiGetTrailerGrow
 }
 
 type ApiGetVehicleGrowthMetricsRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	periodDays *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	periodDays   *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiGetVehicleGrowthMetricsRequest) FleetIds(fleetIds []string) ApiGetVehicleGrowthMetricsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiGetVehicleGrowthMetricsRequest) FleetRefs(fleetRefs []string) ApiGetVehicleGrowthMetricsRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiGetVehicleGrowthMetricsRequest) ConnectionId(connectionId string) ApiGetVehicleGrowthMetricsRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -1286,6 +1333,9 @@ func (a *AnalyticsAPIService) GetVehicleGrowthMetricsExecute(r ApiGetVehicleGrow
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.periodDays != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "period_days", r.periodDays, "form", "")
@@ -1457,37 +1507,44 @@ func (a *AnalyticsAPIService) GetVehicleGrowthMetricsExecute(r ApiGetVehicleGrow
 }
 
 type ApiListDriverSummariesRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	driverIds  *[]string
-	sourceIds  *[]string
-	sortBy     *string
-	sortOrder  *string
-	cursor     *string
-	size       *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	driverIds    *[]string
+	sourceIds    *[]string
+	sortBy       *string
+	sortOrder    *string
+	cursor       *string
+	size         *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListDriverSummariesRequest) FleetIds(fleetIds []string) ApiListDriverSummariesRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListDriverSummariesRequest) FleetRefs(fleetRefs []string) ApiListDriverSummariesRequest {
 	r.fleetRefs = &fleetRefs
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListDriverSummariesRequest) ConnectionId(connectionId string) ApiListDriverSummariesRequest {
+	r.connectionId = &connectionId
+	return r
+}
+
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListDriverSummariesRequest) DriverIds(driverIds []string) ApiListDriverSummariesRequest {
 	r.driverIds = &driverIds
 	return r
 }
 
-// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs
+// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?source_ids&#x3D;id1&amp;source_ids&#x3D;id2&#x60;).
 func (r ApiListDriverSummariesRequest) SourceIds(sourceIds []string) ApiListDriverSummariesRequest {
 	r.sourceIds = &sourceIds
 	return r
@@ -1579,6 +1636,9 @@ func (a *AnalyticsAPIService) ListDriverSummariesExecute(r ApiListDriverSummarie
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.driverIds != nil {
 		t := *r.driverIds
@@ -1784,25 +1844,32 @@ func (a *AnalyticsAPIService) ListDriverSummariesExecute(r ApiListDriverSummarie
 }
 
 type ApiListFleetSummariesRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	sortBy     *string
-	sortOrder  *string
-	cursor     *string
-	size       *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	sortBy       *string
+	sortOrder    *string
+	cursor       *string
+	size         *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListFleetSummariesRequest) FleetIds(fleetIds []string) ApiListFleetSummariesRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListFleetSummariesRequest) FleetRefs(fleetRefs []string) ApiListFleetSummariesRequest {
 	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListFleetSummariesRequest) ConnectionId(connectionId string) ApiListFleetSummariesRequest {
+	r.connectionId = &connectionId
 	return r
 }
 
@@ -1892,6 +1959,9 @@ func (a *AnalyticsAPIService) ListFleetSummariesExecute(r ApiListFleetSummariesR
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.sortBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
@@ -2075,37 +2145,44 @@ func (a *AnalyticsAPIService) ListFleetSummariesExecute(r ApiListFleetSummariesR
 }
 
 type ApiListTrailerLiveLocationsRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	trailerIds *[]string
-	sourceIds  *[]string
-	sortBy     *string
-	sortOrder  *string
-	cursor     *string
-	size       *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	trailerIds   *[]string
+	sourceIds    *[]string
+	sortBy       *string
+	sortOrder    *string
+	cursor       *string
+	size         *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListTrailerLiveLocationsRequest) FleetIds(fleetIds []string) ApiListTrailerLiveLocationsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListTrailerLiveLocationsRequest) FleetRefs(fleetRefs []string) ApiListTrailerLiveLocationsRequest {
 	r.fleetRefs = &fleetRefs
 	return r
 }
 
-// Limit results to specific trailers. **Maximum:** 100 IDs
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListTrailerLiveLocationsRequest) ConnectionId(connectionId string) ApiListTrailerLiveLocationsRequest {
+	r.connectionId = &connectionId
+	return r
+}
+
+// Limit results to specific trailers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?trailer_ids&#x3D;id1&amp;trailer_ids&#x3D;id2&#x60;).
 func (r ApiListTrailerLiveLocationsRequest) TrailerIds(trailerIds []string) ApiListTrailerLiveLocationsRequest {
 	r.trailerIds = &trailerIds
 	return r
 }
 
-// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs
+// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?source_ids&#x3D;id1&amp;source_ids&#x3D;id2&#x60;).
 func (r ApiListTrailerLiveLocationsRequest) SourceIds(sourceIds []string) ApiListTrailerLiveLocationsRequest {
 	r.sourceIds = &sourceIds
 	return r
@@ -2197,6 +2274,9 @@ func (a *AnalyticsAPIService) ListTrailerLiveLocationsExecute(r ApiListTrailerLi
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.trailerIds != nil {
 		t := *r.trailerIds
@@ -2402,37 +2482,44 @@ func (a *AnalyticsAPIService) ListTrailerLiveLocationsExecute(r ApiListTrailerLi
 }
 
 type ApiListTrailerSummariesRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	trailerIds *[]string
-	sourceIds  *[]string
-	sortBy     *string
-	sortOrder  *string
-	cursor     *string
-	size       *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	trailerIds   *[]string
+	sourceIds    *[]string
+	sortBy       *string
+	sortOrder    *string
+	cursor       *string
+	size         *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListTrailerSummariesRequest) FleetIds(fleetIds []string) ApiListTrailerSummariesRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListTrailerSummariesRequest) FleetRefs(fleetRefs []string) ApiListTrailerSummariesRequest {
 	r.fleetRefs = &fleetRefs
 	return r
 }
 
-// Limit results to specific trailers. **Maximum:** 100 IDs
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListTrailerSummariesRequest) ConnectionId(connectionId string) ApiListTrailerSummariesRequest {
+	r.connectionId = &connectionId
+	return r
+}
+
+// Limit results to specific trailers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?trailer_ids&#x3D;id1&amp;trailer_ids&#x3D;id2&#x60;).
 func (r ApiListTrailerSummariesRequest) TrailerIds(trailerIds []string) ApiListTrailerSummariesRequest {
 	r.trailerIds = &trailerIds
 	return r
 }
 
-// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs
+// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?source_ids&#x3D;id1&amp;source_ids&#x3D;id2&#x60;).
 func (r ApiListTrailerSummariesRequest) SourceIds(sourceIds []string) ApiListTrailerSummariesRequest {
 	r.sourceIds = &sourceIds
 	return r
@@ -2524,6 +2611,9 @@ func (a *AnalyticsAPIService) ListTrailerSummariesExecute(r ApiListTrailerSummar
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.trailerIds != nil {
 		t := *r.trailerIds
@@ -2729,44 +2819,51 @@ func (a *AnalyticsAPIService) ListTrailerSummariesExecute(r ApiListTrailerSummar
 }
 
 type ApiListVehicleLiveLocationsRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	driverIds  *[]string
-	vehicleIds *[]string
-	sourceIds  *[]string
-	sortBy     *string
-	sortOrder  *string
-	cursor     *string
-	size       *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	driverIds    *[]string
+	vehicleIds   *[]string
+	sourceIds    *[]string
+	sortBy       *string
+	sortOrder    *string
+	cursor       *string
+	size         *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListVehicleLiveLocationsRequest) FleetIds(fleetIds []string) ApiListVehicleLiveLocationsRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListVehicleLiveLocationsRequest) FleetRefs(fleetRefs []string) ApiListVehicleLiveLocationsRequest {
 	r.fleetRefs = &fleetRefs
 	return r
 }
 
-// Limit results to specific drivers. **Maximum:** 100 IDs
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListVehicleLiveLocationsRequest) ConnectionId(connectionId string) ApiListVehicleLiveLocationsRequest {
+	r.connectionId = &connectionId
+	return r
+}
+
+// Limit results to specific drivers. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?driver_ids&#x3D;id1&amp;driver_ids&#x3D;id2&#x60;).
 func (r ApiListVehicleLiveLocationsRequest) DriverIds(driverIds []string) ApiListVehicleLiveLocationsRequest {
 	r.driverIds = &driverIds
 	return r
 }
 
-// Limit results to specific vehicles. **Maximum:** 100 IDs
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
 func (r ApiListVehicleLiveLocationsRequest) VehicleIds(vehicleIds []string) ApiListVehicleLiveLocationsRequest {
 	r.vehicleIds = &vehicleIds
 	return r
 }
 
-// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs
+// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?source_ids&#x3D;id1&amp;source_ids&#x3D;id2&#x60;).
 func (r ApiListVehicleLiveLocationsRequest) SourceIds(sourceIds []string) ApiListVehicleLiveLocationsRequest {
 	r.sourceIds = &sourceIds
 	return r
@@ -2858,6 +2955,9 @@ func (a *AnalyticsAPIService) ListVehicleLiveLocationsExecute(r ApiListVehicleLi
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.driverIds != nil {
 		t := *r.driverIds
@@ -3074,37 +3174,44 @@ func (a *AnalyticsAPIService) ListVehicleLiveLocationsExecute(r ApiListVehicleLi
 }
 
 type ApiListVehicleSummariesRequest struct {
-	ctx        context.Context
-	ApiService AnalyticsAPI
-	fleetIds   *[]string
-	fleetRefs  *[]string
-	vehicleIds *[]string
-	sourceIds  *[]string
-	sortBy     *string
-	sortOrder  *string
-	cursor     *string
-	size       *int32
+	ctx          context.Context
+	ApiService   AnalyticsAPI
+	fleetIds     *[]string
+	fleetRefs    *[]string
+	connectionId *string
+	vehicleIds   *[]string
+	sourceIds    *[]string
+	sortBy       *string
+	sortOrder    *string
+	cursor       *string
+	size         *int32
 }
 
-// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead*
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
 func (r ApiListVehicleSummariesRequest) FleetIds(fleetIds []string) ApiListVehicleSummariesRequest {
 	r.fleetIds = &fleetIds
 	return r
 }
 
-// Limit results to specific fleets using your organization&#39;s fleet reference identifiers
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
 func (r ApiListVehicleSummariesRequest) FleetRefs(fleetRefs []string) ApiListVehicleSummariesRequest {
 	r.fleetRefs = &fleetRefs
 	return r
 }
 
-// Limit results to specific vehicles. **Maximum:** 100 IDs
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListVehicleSummariesRequest) ConnectionId(connectionId string) ApiListVehicleSummariesRequest {
+	r.connectionId = &connectionId
+	return r
+}
+
+// Limit results to specific vehicles. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?vehicle_ids&#x3D;id1&amp;vehicle_ids&#x3D;id2&#x60;).
 func (r ApiListVehicleSummariesRequest) VehicleIds(vehicleIds []string) ApiListVehicleSummariesRequest {
 	r.vehicleIds = &vehicleIds
 	return r
 }
 
-// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs
+// Limit results to specific resources using the identifier provided by the TSP. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?source_ids&#x3D;id1&amp;source_ids&#x3D;id2&#x60;).
 func (r ApiListVehicleSummariesRequest) SourceIds(sourceIds []string) ApiListVehicleSummariesRequest {
 	r.sourceIds = &sourceIds
 	return r
@@ -3196,6 +3303,9 @@ func (a *AnalyticsAPIService) ListVehicleSummariesExecute(r ApiListVehicleSummar
 		} else {
 			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
 		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
 	}
 	if r.vehicleIds != nil {
 		t := *r.vehicleIds

@@ -20,9 +20,10 @@ type FaultCodeSourceEnum string
 
 // List of FaultCodeSourceEnum
 const (
-	FAULTCODESOURCEENUM_J1708 FaultCodeSourceEnum = "J1708"
-	FAULTCODESOURCEENUM_J1939 FaultCodeSourceEnum = "J1939"
-	FAULTCODESOURCEENUM_OBD2  FaultCodeSourceEnum = "OBD2"
+	FAULTCODESOURCEENUM_J1708  FaultCodeSourceEnum = "J1708"
+	FAULTCODESOURCEENUM_J1939  FaultCodeSourceEnum = "J1939"
+	FAULTCODESOURCEENUM_OBD2   FaultCodeSourceEnum = "OBD2"
+	FAULTCODESOURCEENUM_VENDOR FaultCodeSourceEnum = "VENDOR"
 )
 
 // All allowed values of FaultCodeSourceEnum enum
@@ -30,6 +31,7 @@ var AllowedFaultCodeSourceEnumEnumValues = []FaultCodeSourceEnum{
 	"J1708",
 	"J1939",
 	"OBD2",
+	"VENDOR",
 }
 
 func (v *FaultCodeSourceEnum) UnmarshalJSON(src []byte) error {

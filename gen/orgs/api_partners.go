@@ -120,8 +120,8 @@ type PartnersAPI interface {
 	ListPartners(ctx context.Context) ApiListPartnersRequest
 
 	// ListPartnersExecute executes the request
-	//  @return CursorPageCustomizedPartnerRead
-	ListPartnersExecute(r ApiListPartnersRequest) (*CursorPageCustomizedPartnerRead, *http.Response, error)
+	//  @return CursorPagePartnerRead
+	ListPartnersExecute(r ApiListPartnersRequest) (*CursorPagePartnerRead, *http.Response, error)
 
 	/*
 		UpdatePartner Update Partner
@@ -1371,7 +1371,7 @@ func (r ApiListPartnersRequest) Size(size int32) ApiListPartnersRequest {
 	return r
 }
 
-func (r ApiListPartnersRequest) Execute() (*CursorPageCustomizedPartnerRead, *http.Response, error) {
+func (r ApiListPartnersRequest) Execute() (*CursorPagePartnerRead, *http.Response, error) {
 	return r.ApiService.ListPartnersExecute(r)
 }
 
@@ -1392,13 +1392,13 @@ func (a *PartnersAPIService) ListPartners(ctx context.Context) ApiListPartnersRe
 
 // Execute executes the request
 //
-//	@return CursorPageCustomizedPartnerRead
-func (a *PartnersAPIService) ListPartnersExecute(r ApiListPartnersRequest) (*CursorPageCustomizedPartnerRead, *http.Response, error) {
+//	@return CursorPagePartnerRead
+func (a *PartnersAPIService) ListPartnersExecute(r ApiListPartnersRequest) (*CursorPagePartnerRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CursorPageCustomizedPartnerRead
+		localVarReturnValue *CursorPagePartnerRead
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PartnersAPIService.ListPartners")
@@ -1418,7 +1418,7 @@ func (a *PartnersAPIService) ListPartnersExecute(r ApiListPartnersRequest) (*Cur
 	if r.size != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
 	} else {
-		var defaultValue int32 = 500
+		var defaultValue int32 = 300
 		r.size = &defaultValue
 	}
 	// to determine the Content-Type header

@@ -20,13 +20,13 @@ Name | Type | Description | Notes
 **OilPressure** | **NullableFloat32** |  | 
 **CoolantTemperature** | **NullableFloat32** |  | 
 **OccurredAt** | **time.Time** | Timestamp (UTC) when this telemetry data was recorded by the vehicle. | 
-**Location** | [**NullableLocation4**](Location4.md) |  | 
+**Location** | [**NullableLocation7**](Location7.md) |  | 
 
 ## Methods
 
 ### NewVehicleLiveLocation
 
-`func NewVehicleLiveLocation(vehicleId string, vin NullableString, vehicleName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, driverId NullableString, driverName NullableString, h3Index11 NullableInt32, speed NullableFloat32, odometer NullableFloat32, fuelLevel NullableFloat32, engineHours NullableFloat32, oilPressure NullableFloat32, coolantTemperature NullableFloat32, occurredAt time.Time, location NullableLocation4, ) *VehicleLiveLocation`
+`func NewVehicleLiveLocation(vehicleId string, vin NullableString, vehicleName NullableString, tspId NullableString, tspSlug NullableString, sourceName NullableTspEnum, driverId NullableString, driverName NullableString, h3Index11 NullableInt32, speed NullableFloat32, odometer NullableFloat32, fuelLevel NullableFloat32, engineHours NullableFloat32, oilPressure NullableFloat32, coolantTemperature NullableFloat32, occurredAt time.Time, location NullableLocation7, ) *VehicleLiveLocation`
 
 NewVehicleLiveLocation instantiates a new VehicleLiveLocation object
 This constructor will assign default values to properties that have it defined,
@@ -503,20 +503,20 @@ SetOccurredAt sets OccurredAt field to given value.
 
 ### GetLocation
 
-`func (o *VehicleLiveLocation) GetLocation() Location4`
+`func (o *VehicleLiveLocation) GetLocation() Location7`
 
 GetLocation returns the Location field if non-nil, zero value otherwise.
 
 ### GetLocationOk
 
-`func (o *VehicleLiveLocation) GetLocationOk() (*Location4, bool)`
+`func (o *VehicleLiveLocation) GetLocationOk() (*Location7, bool)`
 
 GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocation
 
-`func (o *VehicleLiveLocation) SetLocation(v Location4)`
+`func (o *VehicleLiveLocation) SetLocation(v Location7)`
 
 SetLocation sets Location field to given value.
 

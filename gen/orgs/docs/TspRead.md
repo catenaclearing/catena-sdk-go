@@ -8,15 +8,18 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] 
 **Websites** | Pointer to **[]string** |  | [optional] 
 **SourceName** | [**TspEnum**](TspEnum.md) | TSP enum identifier for API references | 
-**Status** | Pointer to [**StatusEnum**](StatusEnum.md) | The status of the TSP | [optional] 
+**Status** | Pointer to [**TspStatusEnum**](TspStatusEnum.md) | The status of the TSP | [optional] 
 **ConnType** | [**ConnectionTypeEnum**](ConnectionTypeEnum.md) | The type of connection usedt to authenticate with the TSP | 
 **IsSandbox** | Pointer to **bool** | Indicates whether the TSP is a sandbox integrations for testing purposes. | [optional] [default to false]
 **LogoUrl** | Pointer to **NullableString** |  | [optional] 
 **LogoDarkUrl** | Pointer to **NullableString** |  | [optional] 
 **Id** | **string** | Unique Catena TSP identifier | 
 **Slug** | **string** | URL-friendly TSP identifier | 
+**ExtTspId** | Pointer to **NullableString** |  | [optional] 
 **CreatedAt** | **time.Time** | When the TSP was added to Catena | 
 **UpdatedAt** | **time.Time** | Last modification timestamp | 
+**Registry** | Pointer to **NullableString** |  | [optional] 
+**ComplianceStatus** | Pointer to [**TspComplianceStatusEnum**](TspComplianceStatusEnum.md) | ELD compliance status. &#39;compliant&#39; means at least one device is registered. &#39;non_compliant&#39; means ALL devices have been revoked. &#39;unknown&#39; means the TSP is not linked to a regulatory registry or has no registered devices. | [optional] 
 
 ## Methods
 
@@ -149,20 +152,20 @@ SetSourceName sets SourceName field to given value.
 
 ### GetStatus
 
-`func (o *TspRead) GetStatus() StatusEnum`
+`func (o *TspRead) GetStatus() TspStatusEnum`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *TspRead) GetStatusOk() (*StatusEnum, bool)`
+`func (o *TspRead) GetStatusOk() (*TspStatusEnum, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *TspRead) SetStatus(v StatusEnum)`
+`func (o *TspRead) SetStatus(v TspStatusEnum)`
 
 SetStatus sets Status field to given value.
 
@@ -327,6 +330,41 @@ and a boolean to check if the value has been set.
 SetSlug sets Slug field to given value.
 
 
+### GetExtTspId
+
+`func (o *TspRead) GetExtTspId() string`
+
+GetExtTspId returns the ExtTspId field if non-nil, zero value otherwise.
+
+### GetExtTspIdOk
+
+`func (o *TspRead) GetExtTspIdOk() (*string, bool)`
+
+GetExtTspIdOk returns a tuple with the ExtTspId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtTspId
+
+`func (o *TspRead) SetExtTspId(v string)`
+
+SetExtTspId sets ExtTspId field to given value.
+
+### HasExtTspId
+
+`func (o *TspRead) HasExtTspId() bool`
+
+HasExtTspId returns a boolean if a field has been set.
+
+### SetExtTspIdNil
+
+`func (o *TspRead) SetExtTspIdNil(b bool)`
+
+ SetExtTspIdNil sets the value for ExtTspId to be an explicit nil
+
+### UnsetExtTspId
+`func (o *TspRead) UnsetExtTspId()`
+
+UnsetExtTspId ensures that no value is present for ExtTspId, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *TspRead) GetCreatedAt() time.Time`
@@ -366,6 +404,66 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
+
+### GetRegistry
+
+`func (o *TspRead) GetRegistry() string`
+
+GetRegistry returns the Registry field if non-nil, zero value otherwise.
+
+### GetRegistryOk
+
+`func (o *TspRead) GetRegistryOk() (*string, bool)`
+
+GetRegistryOk returns a tuple with the Registry field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegistry
+
+`func (o *TspRead) SetRegistry(v string)`
+
+SetRegistry sets Registry field to given value.
+
+### HasRegistry
+
+`func (o *TspRead) HasRegistry() bool`
+
+HasRegistry returns a boolean if a field has been set.
+
+### SetRegistryNil
+
+`func (o *TspRead) SetRegistryNil(b bool)`
+
+ SetRegistryNil sets the value for Registry to be an explicit nil
+
+### UnsetRegistry
+`func (o *TspRead) UnsetRegistry()`
+
+UnsetRegistry ensures that no value is present for Registry, not even an explicit nil
+### GetComplianceStatus
+
+`func (o *TspRead) GetComplianceStatus() TspComplianceStatusEnum`
+
+GetComplianceStatus returns the ComplianceStatus field if non-nil, zero value otherwise.
+
+### GetComplianceStatusOk
+
+`func (o *TspRead) GetComplianceStatusOk() (*TspComplianceStatusEnum, bool)`
+
+GetComplianceStatusOk returns a tuple with the ComplianceStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComplianceStatus
+
+`func (o *TspRead) SetComplianceStatus(v TspComplianceStatusEnum)`
+
+SetComplianceStatus sets ComplianceStatus field to given value.
+
+### HasComplianceStatus
+
+`func (o *TspRead) HasComplianceStatus() bool`
+
+HasComplianceStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
