@@ -53,11 +53,12 @@ func main() {
 		return
 	}
 
-	if invitation != nil {
+	switch {
+	case invitation != nil:
 		fmt.Printf("Created invitation %s; status: %s\n", invitation.GetId(), invitation.GetStatus())
-	} else if resp != nil {
+	case resp != nil:
 		fmt.Printf("Created invitation; HTTP status: %s\n", resp.Status)
-	} else {
+	default:
 		fmt.Println("Created invitation")
 	}
 
