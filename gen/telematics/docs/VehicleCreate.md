@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ConnectionId** | **string** | Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing. | 
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
 **VehicleName** | Pointer to **NullableString** |  | [optional] 
 **Oem** | Pointer to **NullableString** |  | [optional] 
 **ModelType** | Pointer to **NullableString** |  | [optional] 
@@ -69,41 +68,6 @@ and a boolean to check if the value has been set.
 SetConnectionId sets ConnectionId field to given value.
 
 
-### GetFleetRef
-
-`func (o *VehicleCreate) GetFleetRef() string`
-
-GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
-
-### GetFleetRefOk
-
-`func (o *VehicleCreate) GetFleetRefOk() (*string, bool)`
-
-GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFleetRef
-
-`func (o *VehicleCreate) SetFleetRef(v string)`
-
-SetFleetRef sets FleetRef field to given value.
-
-### HasFleetRef
-
-`func (o *VehicleCreate) HasFleetRef() bool`
-
-HasFleetRef returns a boolean if a field has been set.
-
-### SetFleetRefNil
-
-`func (o *VehicleCreate) SetFleetRefNil(b bool)`
-
- SetFleetRefNil sets the value for FleetRef to be an explicit nil
-
-### UnsetFleetRef
-`func (o *VehicleCreate) UnsetFleetRef()`
-
-UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
 ### GetVehicleName
 
 `func (o *VehicleCreate) GetVehicleName() string`

@@ -22,12 +22,14 @@ var _ MappedNullable = &FuelTransactionCreate{}
 // FuelTransactionCreate Fuel transaction model for creating new records
 type FuelTransactionCreate struct {
 	// Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing.
-	ConnectionId            string                   `json:"connection_id"`
-	FleetRef                NullableString           `json:"fleet_ref,omitempty"`
-	SourceDriverId          NullableString           `json:"source_driver_id,omitempty"`
-	SourceVehicleId         NullableString           `json:"source_vehicle_id,omitempty"`
-	SourceCoDriverId        NullableString           `json:"source_co_driver_id,omitempty"`
-	Location                NullablePoint            `json:"location,omitempty"`
+	ConnectionId string `json:"connection_id"`
+	// Identifier for the driver (from the source system)
+	DriverId string `json:"driver_id"`
+	// Identifier for the vehicle (from the source system)
+	VehicleId               string                   `json:"vehicle_id"`
+	CoDriverId              NullableString           `json:"co_driver_id,omitempty"`
+	Latitude                NullableFloat32          `json:"latitude,omitempty"`
+	Longitude               NullableFloat32          `json:"longitude,omitempty"`
 	LocationString          NullableString           `json:"location_string,omitempty"`
 	Odometer                NullableFloat32          `json:"odometer,omitempty"`
 	OdometerUnit            NullableDistanceUnitEnum `json:"odometer_unit,omitempty"`
@@ -50,9 +52,11 @@ type _FuelTransactionCreate FuelTransactionCreate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFuelTransactionCreate(connectionId string, fuelVolume float32, fuelVolumeUnit FuelVolumeUnitEnum) *FuelTransactionCreate {
+func NewFuelTransactionCreate(connectionId string, driverId string, vehicleId string, fuelVolume float32, fuelVolumeUnit FuelVolumeUnitEnum) *FuelTransactionCreate {
 	this := FuelTransactionCreate{}
 	this.ConnectionId = connectionId
+	this.DriverId = driverId
+	this.VehicleId = vehicleId
 	this.FuelVolume = fuelVolume
 	this.FuelVolumeUnit = fuelVolumeUnit
 	return &this
@@ -90,219 +94,181 @@ func (o *FuelTransactionCreate) SetConnectionId(v string) {
 	o.ConnectionId = v
 }
 
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FuelTransactionCreate) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+// GetDriverId returns the DriverId field value
+func (o *FuelTransactionCreate) GetDriverId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FleetRef.Get()
+
+	return o.DriverId
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetDriverIdOk returns a tuple with the DriverId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FuelTransactionCreate) GetFleetRefOk() (*string, bool) {
+func (o *FuelTransactionCreate) GetDriverIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.FleetRef.Get(), o.FleetRef.IsSet()
+	return &o.DriverId, true
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *FuelTransactionCreate) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
+// SetDriverId sets field value
+func (o *FuelTransactionCreate) SetDriverId(v string) {
+	o.DriverId = v
 }
 
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
-func (o *FuelTransactionCreate) SetFleetRef(v string) {
-	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *FuelTransactionCreate) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *FuelTransactionCreate) UnsetFleetRef() {
-	o.FleetRef.Unset()
-}
-
-// GetSourceDriverId returns the SourceDriverId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FuelTransactionCreate) GetSourceDriverId() string {
-	if o == nil || IsNil(o.SourceDriverId.Get()) {
+// GetVehicleId returns the VehicleId field value
+func (o *FuelTransactionCreate) GetVehicleId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SourceDriverId.Get()
+
+	return o.VehicleId
 }
 
-// GetSourceDriverIdOk returns a tuple with the SourceDriverId field value if set, nil otherwise
+// GetVehicleIdOk returns a tuple with the VehicleId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FuelTransactionCreate) GetSourceDriverIdOk() (*string, bool) {
+func (o *FuelTransactionCreate) GetVehicleIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SourceDriverId.Get(), o.SourceDriverId.IsSet()
+	return &o.VehicleId, true
 }
 
-// HasSourceDriverId returns a boolean if a field has been set.
-func (o *FuelTransactionCreate) HasSourceDriverId() bool {
-	if o != nil && o.SourceDriverId.IsSet() {
-		return true
-	}
-
-	return false
+// SetVehicleId sets field value
+func (o *FuelTransactionCreate) SetVehicleId(v string) {
+	o.VehicleId = v
 }
 
-// SetSourceDriverId gets a reference to the given NullableString and assigns it to the SourceDriverId field.
-func (o *FuelTransactionCreate) SetSourceDriverId(v string) {
-	o.SourceDriverId.Set(&v)
-}
-
-// SetSourceDriverIdNil sets the value for SourceDriverId to be an explicit nil
-func (o *FuelTransactionCreate) SetSourceDriverIdNil() {
-	o.SourceDriverId.Set(nil)
-}
-
-// UnsetSourceDriverId ensures that no value is present for SourceDriverId, not even an explicit nil
-func (o *FuelTransactionCreate) UnsetSourceDriverId() {
-	o.SourceDriverId.Unset()
-}
-
-// GetSourceVehicleId returns the SourceVehicleId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FuelTransactionCreate) GetSourceVehicleId() string {
-	if o == nil || IsNil(o.SourceVehicleId.Get()) {
+// GetCoDriverId returns the CoDriverId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FuelTransactionCreate) GetCoDriverId() string {
+	if o == nil || IsNil(o.CoDriverId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.SourceVehicleId.Get()
+	return *o.CoDriverId.Get()
 }
 
-// GetSourceVehicleIdOk returns a tuple with the SourceVehicleId field value if set, nil otherwise
+// GetCoDriverIdOk returns a tuple with the CoDriverId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FuelTransactionCreate) GetSourceVehicleIdOk() (*string, bool) {
+func (o *FuelTransactionCreate) GetCoDriverIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SourceVehicleId.Get(), o.SourceVehicleId.IsSet()
+	return o.CoDriverId.Get(), o.CoDriverId.IsSet()
 }
 
-// HasSourceVehicleId returns a boolean if a field has been set.
-func (o *FuelTransactionCreate) HasSourceVehicleId() bool {
-	if o != nil && o.SourceVehicleId.IsSet() {
+// HasCoDriverId returns a boolean if a field has been set.
+func (o *FuelTransactionCreate) HasCoDriverId() bool {
+	if o != nil && o.CoDriverId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceVehicleId gets a reference to the given NullableString and assigns it to the SourceVehicleId field.
-func (o *FuelTransactionCreate) SetSourceVehicleId(v string) {
-	o.SourceVehicleId.Set(&v)
+// SetCoDriverId gets a reference to the given NullableString and assigns it to the CoDriverId field.
+func (o *FuelTransactionCreate) SetCoDriverId(v string) {
+	o.CoDriverId.Set(&v)
 }
 
-// SetSourceVehicleIdNil sets the value for SourceVehicleId to be an explicit nil
-func (o *FuelTransactionCreate) SetSourceVehicleIdNil() {
-	o.SourceVehicleId.Set(nil)
+// SetCoDriverIdNil sets the value for CoDriverId to be an explicit nil
+func (o *FuelTransactionCreate) SetCoDriverIdNil() {
+	o.CoDriverId.Set(nil)
 }
 
-// UnsetSourceVehicleId ensures that no value is present for SourceVehicleId, not even an explicit nil
-func (o *FuelTransactionCreate) UnsetSourceVehicleId() {
-	o.SourceVehicleId.Unset()
+// UnsetCoDriverId ensures that no value is present for CoDriverId, not even an explicit nil
+func (o *FuelTransactionCreate) UnsetCoDriverId() {
+	o.CoDriverId.Unset()
 }
 
-// GetSourceCoDriverId returns the SourceCoDriverId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FuelTransactionCreate) GetSourceCoDriverId() string {
-	if o == nil || IsNil(o.SourceCoDriverId.Get()) {
-		var ret string
+// GetLatitude returns the Latitude field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FuelTransactionCreate) GetLatitude() float32 {
+	if o == nil || IsNil(o.Latitude.Get()) {
+		var ret float32
 		return ret
 	}
-	return *o.SourceCoDriverId.Get()
+	return *o.Latitude.Get()
 }
 
-// GetSourceCoDriverIdOk returns a tuple with the SourceCoDriverId field value if set, nil otherwise
+// GetLatitudeOk returns a tuple with the Latitude field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FuelTransactionCreate) GetSourceCoDriverIdOk() (*string, bool) {
+func (o *FuelTransactionCreate) GetLatitudeOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SourceCoDriverId.Get(), o.SourceCoDriverId.IsSet()
+	return o.Latitude.Get(), o.Latitude.IsSet()
 }
 
-// HasSourceCoDriverId returns a boolean if a field has been set.
-func (o *FuelTransactionCreate) HasSourceCoDriverId() bool {
-	if o != nil && o.SourceCoDriverId.IsSet() {
+// HasLatitude returns a boolean if a field has been set.
+func (o *FuelTransactionCreate) HasLatitude() bool {
+	if o != nil && o.Latitude.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceCoDriverId gets a reference to the given NullableString and assigns it to the SourceCoDriverId field.
-func (o *FuelTransactionCreate) SetSourceCoDriverId(v string) {
-	o.SourceCoDriverId.Set(&v)
+// SetLatitude gets a reference to the given NullableFloat32 and assigns it to the Latitude field.
+func (o *FuelTransactionCreate) SetLatitude(v float32) {
+	o.Latitude.Set(&v)
 }
 
-// SetSourceCoDriverIdNil sets the value for SourceCoDriverId to be an explicit nil
-func (o *FuelTransactionCreate) SetSourceCoDriverIdNil() {
-	o.SourceCoDriverId.Set(nil)
+// SetLatitudeNil sets the value for Latitude to be an explicit nil
+func (o *FuelTransactionCreate) SetLatitudeNil() {
+	o.Latitude.Set(nil)
 }
 
-// UnsetSourceCoDriverId ensures that no value is present for SourceCoDriverId, not even an explicit nil
-func (o *FuelTransactionCreate) UnsetSourceCoDriverId() {
-	o.SourceCoDriverId.Unset()
+// UnsetLatitude ensures that no value is present for Latitude, not even an explicit nil
+func (o *FuelTransactionCreate) UnsetLatitude() {
+	o.Latitude.Unset()
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FuelTransactionCreate) GetLocation() Point {
-	if o == nil || IsNil(o.Location.Get()) {
-		var ret Point
+// GetLongitude returns the Longitude field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FuelTransactionCreate) GetLongitude() float32 {
+	if o == nil || IsNil(o.Longitude.Get()) {
+		var ret float32
 		return ret
 	}
-	return *o.Location.Get()
+	return *o.Longitude.Get()
 }
 
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// GetLongitudeOk returns a tuple with the Longitude field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FuelTransactionCreate) GetLocationOk() (*Point, bool) {
+func (o *FuelTransactionCreate) GetLongitudeOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Location.Get(), o.Location.IsSet()
+	return o.Longitude.Get(), o.Longitude.IsSet()
 }
 
-// HasLocation returns a boolean if a field has been set.
-func (o *FuelTransactionCreate) HasLocation() bool {
-	if o != nil && o.Location.IsSet() {
+// HasLongitude returns a boolean if a field has been set.
+func (o *FuelTransactionCreate) HasLongitude() bool {
+	if o != nil && o.Longitude.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocation gets a reference to the given NullablePoint and assigns it to the Location field.
-func (o *FuelTransactionCreate) SetLocation(v Point) {
-	o.Location.Set(&v)
+// SetLongitude gets a reference to the given NullableFloat32 and assigns it to the Longitude field.
+func (o *FuelTransactionCreate) SetLongitude(v float32) {
+	o.Longitude.Set(&v)
 }
 
-// SetLocationNil sets the value for Location to be an explicit nil
-func (o *FuelTransactionCreate) SetLocationNil() {
-	o.Location.Set(nil)
+// SetLongitudeNil sets the value for Longitude to be an explicit nil
+func (o *FuelTransactionCreate) SetLongitudeNil() {
+	o.Longitude.Set(nil)
 }
 
-// UnsetLocation ensures that no value is present for Location, not even an explicit nil
-func (o *FuelTransactionCreate) UnsetLocation() {
-	o.Location.Unset()
+// UnsetLongitude ensures that no value is present for Longitude, not even an explicit nil
+func (o *FuelTransactionCreate) UnsetLongitude() {
+	o.Longitude.Unset()
 }
 
 // GetLocationString returns the LocationString field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -751,20 +717,16 @@ func (o FuelTransactionCreate) MarshalJSON() ([]byte, error) {
 func (o FuelTransactionCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["connection_id"] = o.ConnectionId
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
+	toSerialize["driver_id"] = o.DriverId
+	toSerialize["vehicle_id"] = o.VehicleId
+	if o.CoDriverId.IsSet() {
+		toSerialize["co_driver_id"] = o.CoDriverId.Get()
 	}
-	if o.SourceDriverId.IsSet() {
-		toSerialize["source_driver_id"] = o.SourceDriverId.Get()
+	if o.Latitude.IsSet() {
+		toSerialize["latitude"] = o.Latitude.Get()
 	}
-	if o.SourceVehicleId.IsSet() {
-		toSerialize["source_vehicle_id"] = o.SourceVehicleId.Get()
-	}
-	if o.SourceCoDriverId.IsSet() {
-		toSerialize["source_co_driver_id"] = o.SourceCoDriverId.Get()
-	}
-	if o.Location.IsSet() {
-		toSerialize["location"] = o.Location.Get()
+	if o.Longitude.IsSet() {
+		toSerialize["longitude"] = o.Longitude.Get()
 	}
 	if o.LocationString.IsSet() {
 		toSerialize["location_string"] = o.LocationString.Get()
@@ -809,6 +771,8 @@ func (o *FuelTransactionCreate) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"connection_id",
+		"driver_id",
+		"vehicle_id",
 		"fuel_volume",
 		"fuel_volume_unit",
 	}
@@ -841,11 +805,11 @@ func (o *FuelTransactionCreate) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "connection_id")
-		delete(additionalProperties, "fleet_ref")
-		delete(additionalProperties, "source_driver_id")
-		delete(additionalProperties, "source_vehicle_id")
-		delete(additionalProperties, "source_co_driver_id")
-		delete(additionalProperties, "location")
+		delete(additionalProperties, "driver_id")
+		delete(additionalProperties, "vehicle_id")
+		delete(additionalProperties, "co_driver_id")
+		delete(additionalProperties, "latitude")
+		delete(additionalProperties, "longitude")
 		delete(additionalProperties, "location_string")
 		delete(additionalProperties, "odometer")
 		delete(additionalProperties, "odometer_unit")

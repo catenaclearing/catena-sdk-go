@@ -61,6 +61,8 @@
 
 * `TRAILER_STATUS` (value: `"trailer_status"`)
 
+* `WORKFLOW` (value: `"workflow"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

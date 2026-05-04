@@ -24,6 +24,18 @@ func Test_telematicsapi_DriversUsersAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test DriversUsersAPIService CreateGroupMessage", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.DriversUsersAPI.CreateGroupMessage(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DriversUsersAPIService CreateMessage", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -62,6 +74,18 @@ func Test_telematicsapi_DriversUsersAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DriversUsersAPIService ListGroupMessages", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.DriversUsersAPI.ListGroupMessages(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DriversUsersAPIService ListMessages", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -90,9 +114,9 @@ func Test_telematicsapi_DriversUsersAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var sourceId string
+		var id string
 
-		resp, httpRes, err := apiClient.DriversUsersAPI.UpdateUser(context.Background(), sourceId).Execute()
+		resp, httpRes, err := apiClient.DriversUsersAPI.UpdateUser(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

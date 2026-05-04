@@ -84,6 +84,48 @@ type WebhookEventsAPI interface {
 	DriverVehicleAssociationModifieddriverVehicleAssociationModifiedPostExecute(r ApiDriverVehicleAssociationModifieddriverVehicleAssociationModifiedPostRequest) (interface{}, *http.Response, error)
 
 	/*
+		DvirLogAddeddvirLogAddedPost Dvir Log Added
+
+		Emitted when a new DVIR log is added to our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiDvirLogAddeddvirLogAddedPostRequest
+	*/
+	DvirLogAddeddvirLogAddedPost(ctx context.Context) ApiDvirLogAddeddvirLogAddedPostRequest
+
+	// DvirLogAddeddvirLogAddedPostExecute executes the request
+	//  @return interface{}
+	DvirLogAddeddvirLogAddedPostExecute(r ApiDvirLogAddeddvirLogAddedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		DvirLogModifieddvirLogModifiedPost Dvir Log Modified
+
+		Emitted when a DVIR log is modified in our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiDvirLogModifieddvirLogModifiedPostRequest
+	*/
+	DvirLogModifieddvirLogModifiedPost(ctx context.Context) ApiDvirLogModifieddvirLogModifiedPostRequest
+
+	// DvirLogModifieddvirLogModifiedPostExecute executes the request
+	//  @return interface{}
+	DvirLogModifieddvirLogModifiedPostExecute(r ApiDvirLogModifieddvirLogModifiedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		DvirLogRemoveddvirLogRemovedPost Dvir Log Removed
+
+		Emitted when a DVIR log is removed from our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiDvirLogRemoveddvirLogRemovedPostRequest
+	*/
+	DvirLogRemoveddvirLogRemovedPost(ctx context.Context) ApiDvirLogRemoveddvirLogRemovedPostRequest
+
+	// DvirLogRemoveddvirLogRemovedPostExecute executes the request
+	//  @return interface{}
+	DvirLogRemoveddvirLogRemovedPostExecute(r ApiDvirLogRemoveddvirLogRemovedPostRequest) (interface{}, *http.Response, error)
+
+	/*
 			EngineLogAddedengineLogAddedPost Engine Log Added
 
 			Emitted when a new engine log is added to our database.
@@ -220,6 +262,38 @@ type WebhookEventsAPI interface {
 	// FuelTransactionModifiedfuelTransactionModifiedPostExecute executes the request
 	//  @return interface{}
 	FuelTransactionModifiedfuelTransactionModifiedPostExecute(r ApiFuelTransactionModifiedfuelTransactionModifiedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+			GroupMessageAddedgroupMessageAddedPost Group Message Added
+
+			Emitted when a new group message is added to our database.
+
+		e.g. The record fetched from the TSP is new and generated a new record in our database.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiGroupMessageAddedgroupMessageAddedPostRequest
+	*/
+	GroupMessageAddedgroupMessageAddedPost(ctx context.Context) ApiGroupMessageAddedgroupMessageAddedPostRequest
+
+	// GroupMessageAddedgroupMessageAddedPostExecute executes the request
+	//  @return interface{}
+	GroupMessageAddedgroupMessageAddedPostExecute(r ApiGroupMessageAddedgroupMessageAddedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+			GroupMessageModifiedgroupMessageModifiedPost Group Message Modified
+
+			Emitted when a group message is modified in our database.
+
+		e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiGroupMessageModifiedgroupMessageModifiedPostRequest
+	*/
+	GroupMessageModifiedgroupMessageModifiedPost(ctx context.Context) ApiGroupMessageModifiedgroupMessageModifiedPostRequest
+
+	// GroupMessageModifiedgroupMessageModifiedPostExecute executes the request
+	//  @return interface{}
+	GroupMessageModifiedgroupMessageModifiedPostExecute(r ApiGroupMessageModifiedgroupMessageModifiedPostRequest) (interface{}, *http.Response, error)
 
 	/*
 			HosAvailabilityAddedhosAvailabilityAddedPost Hos Availability Added
@@ -1040,6 +1114,48 @@ type WebhookEventsAPI interface {
 	// WebhookUpdatedwebhookUpdatedPostExecute executes the request
 	//  @return interface{}
 	WebhookUpdatedwebhookUpdatedPostExecute(r ApiWebhookUpdatedwebhookUpdatedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		WorkflowAddedworkflowAddedPost Workflow Added
+
+		Emitted when a workflow is added to our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiWorkflowAddedworkflowAddedPostRequest
+	*/
+	WorkflowAddedworkflowAddedPost(ctx context.Context) ApiWorkflowAddedworkflowAddedPostRequest
+
+	// WorkflowAddedworkflowAddedPostExecute executes the request
+	//  @return interface{}
+	WorkflowAddedworkflowAddedPostExecute(r ApiWorkflowAddedworkflowAddedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		WorkflowModifiedworkflowModifiedPost Workflow Modified
+
+		Emitted when a workflow is modified in our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiWorkflowModifiedworkflowModifiedPostRequest
+	*/
+	WorkflowModifiedworkflowModifiedPost(ctx context.Context) ApiWorkflowModifiedworkflowModifiedPostRequest
+
+	// WorkflowModifiedworkflowModifiedPostExecute executes the request
+	//  @return interface{}
+	WorkflowModifiedworkflowModifiedPostExecute(r ApiWorkflowModifiedworkflowModifiedPostRequest) (interface{}, *http.Response, error)
+
+	/*
+		WorkflowRemovedworkflowRemovedPost Workflow Removed
+
+		Emitted when a workflow is removed from our database.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiWorkflowRemovedworkflowRemovedPostRequest
+	*/
+	WorkflowRemovedworkflowRemovedPost(ctx context.Context) ApiWorkflowRemovedworkflowRemovedPostRequest
+
+	// WorkflowRemovedworkflowRemovedPostExecute executes the request
+	//  @return interface{}
+	WorkflowRemovedworkflowRemovedPostExecute(r ApiWorkflowRemovedworkflowRemovedPostRequest) (interface{}, *http.Response, error)
 }
 
 // WebhookEventsAPIService WebhookEventsAPI service
@@ -1489,6 +1605,369 @@ func (a *WebhookEventsAPIService) DriverVehicleAssociationModifieddriverVehicleA
 	}
 	// body params
 	localVarPostBody = r.driverVehicleAssociationModified
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDvirLogAddeddvirLogAddedPostRequest struct {
+	ctx          context.Context
+	ApiService   WebhookEventsAPI
+	dvirLogAdded *DvirLogAdded
+}
+
+func (r ApiDvirLogAddeddvirLogAddedPostRequest) DvirLogAdded(dvirLogAdded DvirLogAdded) ApiDvirLogAddeddvirLogAddedPostRequest {
+	r.dvirLogAdded = &dvirLogAdded
+	return r
+}
+
+func (r ApiDvirLogAddeddvirLogAddedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.DvirLogAddeddvirLogAddedPostExecute(r)
+}
+
+/*
+DvirLogAddeddvirLogAddedPost Dvir Log Added
+
+Emitted when a new DVIR log is added to our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDvirLogAddeddvirLogAddedPostRequest
+*/
+func (a *WebhookEventsAPIService) DvirLogAddeddvirLogAddedPost(ctx context.Context) ApiDvirLogAddeddvirLogAddedPostRequest {
+	return ApiDvirLogAddeddvirLogAddedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) DvirLogAddeddvirLogAddedPostExecute(r ApiDvirLogAddeddvirLogAddedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.DvirLogAddeddvirLogAddedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/dvir_log.added"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.dvirLogAdded == nil {
+		return localVarReturnValue, nil, reportError("dvirLogAdded is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.dvirLogAdded
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDvirLogModifieddvirLogModifiedPostRequest struct {
+	ctx             context.Context
+	ApiService      WebhookEventsAPI
+	dvirLogModified *DvirLogModified
+}
+
+func (r ApiDvirLogModifieddvirLogModifiedPostRequest) DvirLogModified(dvirLogModified DvirLogModified) ApiDvirLogModifieddvirLogModifiedPostRequest {
+	r.dvirLogModified = &dvirLogModified
+	return r
+}
+
+func (r ApiDvirLogModifieddvirLogModifiedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.DvirLogModifieddvirLogModifiedPostExecute(r)
+}
+
+/*
+DvirLogModifieddvirLogModifiedPost Dvir Log Modified
+
+Emitted when a DVIR log is modified in our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDvirLogModifieddvirLogModifiedPostRequest
+*/
+func (a *WebhookEventsAPIService) DvirLogModifieddvirLogModifiedPost(ctx context.Context) ApiDvirLogModifieddvirLogModifiedPostRequest {
+	return ApiDvirLogModifieddvirLogModifiedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) DvirLogModifieddvirLogModifiedPostExecute(r ApiDvirLogModifieddvirLogModifiedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.DvirLogModifieddvirLogModifiedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/dvir_log.modified"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.dvirLogModified == nil {
+		return localVarReturnValue, nil, reportError("dvirLogModified is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.dvirLogModified
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDvirLogRemoveddvirLogRemovedPostRequest struct {
+	ctx            context.Context
+	ApiService     WebhookEventsAPI
+	dvirLogRemoved *DvirLogRemoved
+}
+
+func (r ApiDvirLogRemoveddvirLogRemovedPostRequest) DvirLogRemoved(dvirLogRemoved DvirLogRemoved) ApiDvirLogRemoveddvirLogRemovedPostRequest {
+	r.dvirLogRemoved = &dvirLogRemoved
+	return r
+}
+
+func (r ApiDvirLogRemoveddvirLogRemovedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.DvirLogRemoveddvirLogRemovedPostExecute(r)
+}
+
+/*
+DvirLogRemoveddvirLogRemovedPost Dvir Log Removed
+
+Emitted when a DVIR log is removed from our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDvirLogRemoveddvirLogRemovedPostRequest
+*/
+func (a *WebhookEventsAPIService) DvirLogRemoveddvirLogRemovedPost(ctx context.Context) ApiDvirLogRemoveddvirLogRemovedPostRequest {
+	return ApiDvirLogRemoveddvirLogRemovedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) DvirLogRemoveddvirLogRemovedPostExecute(r ApiDvirLogRemoveddvirLogRemovedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.DvirLogRemoveddvirLogRemovedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/dvir_log.removed"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.dvirLogRemoved == nil {
+		return localVarReturnValue, nil, reportError("dvirLogRemoved is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.dvirLogRemoved
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2590,6 +3069,252 @@ func (a *WebhookEventsAPIService) FuelTransactionModifiedfuelTransactionModified
 	}
 	// body params
 	localVarPostBody = r.fuelTransactionModified
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGroupMessageAddedgroupMessageAddedPostRequest struct {
+	ctx               context.Context
+	ApiService        WebhookEventsAPI
+	groupMessageAdded *GroupMessageAdded
+}
+
+func (r ApiGroupMessageAddedgroupMessageAddedPostRequest) GroupMessageAdded(groupMessageAdded GroupMessageAdded) ApiGroupMessageAddedgroupMessageAddedPostRequest {
+	r.groupMessageAdded = &groupMessageAdded
+	return r
+}
+
+func (r ApiGroupMessageAddedgroupMessageAddedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.GroupMessageAddedgroupMessageAddedPostExecute(r)
+}
+
+/*
+GroupMessageAddedgroupMessageAddedPost Group Message Added
+
+Emitted when a new group message is added to our database.
+
+e.g. The record fetched from the TSP is new and generated a new record in our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGroupMessageAddedgroupMessageAddedPostRequest
+*/
+func (a *WebhookEventsAPIService) GroupMessageAddedgroupMessageAddedPost(ctx context.Context) ApiGroupMessageAddedgroupMessageAddedPostRequest {
+	return ApiGroupMessageAddedgroupMessageAddedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) GroupMessageAddedgroupMessageAddedPostExecute(r ApiGroupMessageAddedgroupMessageAddedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.GroupMessageAddedgroupMessageAddedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/group_message.added"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.groupMessageAdded == nil {
+		return localVarReturnValue, nil, reportError("groupMessageAdded is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.groupMessageAdded
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGroupMessageModifiedgroupMessageModifiedPostRequest struct {
+	ctx                  context.Context
+	ApiService           WebhookEventsAPI
+	groupMessageModified *GroupMessageModified
+}
+
+func (r ApiGroupMessageModifiedgroupMessageModifiedPostRequest) GroupMessageModified(groupMessageModified GroupMessageModified) ApiGroupMessageModifiedgroupMessageModifiedPostRequest {
+	r.groupMessageModified = &groupMessageModified
+	return r
+}
+
+func (r ApiGroupMessageModifiedgroupMessageModifiedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.GroupMessageModifiedgroupMessageModifiedPostExecute(r)
+}
+
+/*
+GroupMessageModifiedgroupMessageModifiedPost Group Message Modified
+
+Emitted when a group message is modified in our database.
+
+e.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGroupMessageModifiedgroupMessageModifiedPostRequest
+*/
+func (a *WebhookEventsAPIService) GroupMessageModifiedgroupMessageModifiedPost(ctx context.Context) ApiGroupMessageModifiedgroupMessageModifiedPostRequest {
+	return ApiGroupMessageModifiedgroupMessageModifiedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) GroupMessageModifiedgroupMessageModifiedPostExecute(r ApiGroupMessageModifiedgroupMessageModifiedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.GroupMessageModifiedgroupMessageModifiedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/group_message.modified"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.groupMessageModified == nil {
+		return localVarReturnValue, nil, reportError("groupMessageModified is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.groupMessageModified
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -9087,6 +9812,369 @@ func (a *WebhookEventsAPIService) WebhookUpdatedwebhookUpdatedPostExecute(r ApiW
 	}
 	// body params
 	localVarPostBody = r.webhookUpdated
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiWorkflowAddedworkflowAddedPostRequest struct {
+	ctx           context.Context
+	ApiService    WebhookEventsAPI
+	workflowAdded *WorkflowAdded
+}
+
+func (r ApiWorkflowAddedworkflowAddedPostRequest) WorkflowAdded(workflowAdded WorkflowAdded) ApiWorkflowAddedworkflowAddedPostRequest {
+	r.workflowAdded = &workflowAdded
+	return r
+}
+
+func (r ApiWorkflowAddedworkflowAddedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.WorkflowAddedworkflowAddedPostExecute(r)
+}
+
+/*
+WorkflowAddedworkflowAddedPost Workflow Added
+
+Emitted when a workflow is added to our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiWorkflowAddedworkflowAddedPostRequest
+*/
+func (a *WebhookEventsAPIService) WorkflowAddedworkflowAddedPost(ctx context.Context) ApiWorkflowAddedworkflowAddedPostRequest {
+	return ApiWorkflowAddedworkflowAddedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) WorkflowAddedworkflowAddedPostExecute(r ApiWorkflowAddedworkflowAddedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.WorkflowAddedworkflowAddedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/workflow.added"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.workflowAdded == nil {
+		return localVarReturnValue, nil, reportError("workflowAdded is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.workflowAdded
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiWorkflowModifiedworkflowModifiedPostRequest struct {
+	ctx              context.Context
+	ApiService       WebhookEventsAPI
+	workflowModified *WorkflowModified
+}
+
+func (r ApiWorkflowModifiedworkflowModifiedPostRequest) WorkflowModified(workflowModified WorkflowModified) ApiWorkflowModifiedworkflowModifiedPostRequest {
+	r.workflowModified = &workflowModified
+	return r
+}
+
+func (r ApiWorkflowModifiedworkflowModifiedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.WorkflowModifiedworkflowModifiedPostExecute(r)
+}
+
+/*
+WorkflowModifiedworkflowModifiedPost Workflow Modified
+
+Emitted when a workflow is modified in our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiWorkflowModifiedworkflowModifiedPostRequest
+*/
+func (a *WebhookEventsAPIService) WorkflowModifiedworkflowModifiedPost(ctx context.Context) ApiWorkflowModifiedworkflowModifiedPostRequest {
+	return ApiWorkflowModifiedworkflowModifiedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) WorkflowModifiedworkflowModifiedPostExecute(r ApiWorkflowModifiedworkflowModifiedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.WorkflowModifiedworkflowModifiedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/workflow.modified"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.workflowModified == nil {
+		return localVarReturnValue, nil, reportError("workflowModified is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.workflowModified
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HTTPValidationError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiWorkflowRemovedworkflowRemovedPostRequest struct {
+	ctx             context.Context
+	ApiService      WebhookEventsAPI
+	workflowRemoved *WorkflowRemoved
+}
+
+func (r ApiWorkflowRemovedworkflowRemovedPostRequest) WorkflowRemoved(workflowRemoved WorkflowRemoved) ApiWorkflowRemovedworkflowRemovedPostRequest {
+	r.workflowRemoved = &workflowRemoved
+	return r
+}
+
+func (r ApiWorkflowRemovedworkflowRemovedPostRequest) Execute() (interface{}, *http.Response, error) {
+	return r.ApiService.WorkflowRemovedworkflowRemovedPostExecute(r)
+}
+
+/*
+WorkflowRemovedworkflowRemovedPost Workflow Removed
+
+Emitted when a workflow is removed from our database.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiWorkflowRemovedworkflowRemovedPostRequest
+*/
+func (a *WebhookEventsAPIService) WorkflowRemovedworkflowRemovedPost(ctx context.Context) ApiWorkflowRemovedworkflowRemovedPostRequest {
+	return ApiWorkflowRemovedworkflowRemovedPostRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return interface{}
+func (a *WebhookEventsAPIService) WorkflowRemovedworkflowRemovedPostExecute(r ApiWorkflowRemovedworkflowRemovedPostRequest) (interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhookEventsAPIService.WorkflowRemovedworkflowRemovedPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/workflow.removed"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.workflowRemoved == nil {
+		return localVarReturnValue, nil, reportError("workflowRemoved is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.workflowRemoved
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -35,14 +35,17 @@ type BaseResourceOperationEvent struct {
 	// The source name of the operation.
 	SourceName TspEnum `json:"source_name"`
 	// The type of resource to operate on (e.g., vehicle, driver, hos_event).
-	Resource ResourceEnum   `json:"resource"`
-	SourceId NullableString `json:"source_id,omitempty"`
+	Resource   ResourceEnum   `json:"resource"`
+	ResourceId NullableString `json:"resource_id,omitempty"`
+	SourceId   NullableString `json:"source_id,omitempty"`
 	// The type of operation to perform (e.g., create, update).
 	OperationType ResourceOperationTypeEnum `json:"operation_type"`
 	// The current status of the operation.
 	Status ResourceOperationStatusEnum `json:"status"`
 	// The payload of the operation, containing the resource attributes to be created or updated.
-	Payload              map[string]interface{} `json:"payload"`
+	Payload map[string]interface{} `json:"payload"`
+	// Log entries for each attempt to execute this operation.
+	Logs                 []ResourceOperationLogRead `json:"logs,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -286,6 +289,49 @@ func (o *BaseResourceOperationEvent) SetResource(v ResourceEnum) {
 	o.Resource = v
 }
 
+// GetResourceId returns the ResourceId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BaseResourceOperationEvent) GetResourceId() string {
+	if o == nil || IsNil(o.ResourceId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceId.Get()
+}
+
+// GetResourceIdOk returns a tuple with the ResourceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BaseResourceOperationEvent) GetResourceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResourceId.Get(), o.ResourceId.IsSet()
+}
+
+// HasResourceId returns a boolean if a field has been set.
+func (o *BaseResourceOperationEvent) HasResourceId() bool {
+	if o != nil && o.ResourceId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceId gets a reference to the given NullableString and assigns it to the ResourceId field.
+func (o *BaseResourceOperationEvent) SetResourceId(v string) {
+	o.ResourceId.Set(&v)
+}
+
+// SetResourceIdNil sets the value for ResourceId to be an explicit nil
+func (o *BaseResourceOperationEvent) SetResourceIdNil() {
+	o.ResourceId.Set(nil)
+}
+
+// UnsetResourceId ensures that no value is present for ResourceId, not even an explicit nil
+func (o *BaseResourceOperationEvent) UnsetResourceId() {
+	o.ResourceId.Unset()
+}
+
 // GetSourceId returns the SourceId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BaseResourceOperationEvent) GetSourceId() string {
 	if o == nil || IsNil(o.SourceId.Get()) {
@@ -401,6 +447,38 @@ func (o *BaseResourceOperationEvent) SetPayload(v map[string]interface{}) {
 	o.Payload = v
 }
 
+// GetLogs returns the Logs field value if set, zero value otherwise.
+func (o *BaseResourceOperationEvent) GetLogs() []ResourceOperationLogRead {
+	if o == nil || IsNil(o.Logs) {
+		var ret []ResourceOperationLogRead
+		return ret
+	}
+	return o.Logs
+}
+
+// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BaseResourceOperationEvent) GetLogsOk() ([]ResourceOperationLogRead, bool) {
+	if o == nil || IsNil(o.Logs) {
+		return nil, false
+	}
+	return o.Logs, true
+}
+
+// HasLogs returns a boolean if a field has been set.
+func (o *BaseResourceOperationEvent) HasLogs() bool {
+	if o != nil && !IsNil(o.Logs) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogs gets a reference to the given []ResourceOperationLogRead and assigns it to the Logs field.
+func (o *BaseResourceOperationEvent) SetLogs(v []ResourceOperationLogRead) {
+	o.Logs = v
+}
+
 func (o BaseResourceOperationEvent) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -421,12 +499,18 @@ func (o BaseResourceOperationEvent) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["source_name"] = o.SourceName
 	toSerialize["resource"] = o.Resource
+	if o.ResourceId.IsSet() {
+		toSerialize["resource_id"] = o.ResourceId.Get()
+	}
 	if o.SourceId.IsSet() {
 		toSerialize["source_id"] = o.SourceId.Get()
 	}
 	toSerialize["operation_type"] = o.OperationType
 	toSerialize["status"] = o.Status
 	toSerialize["payload"] = o.Payload
+	if !IsNil(o.Logs) {
+		toSerialize["logs"] = o.Logs
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -487,10 +571,12 @@ func (o *BaseResourceOperationEvent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fleet_ref")
 		delete(additionalProperties, "source_name")
 		delete(additionalProperties, "resource")
+		delete(additionalProperties, "resource_id")
 		delete(additionalProperties, "source_id")
 		delete(additionalProperties, "operation_type")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "payload")
+		delete(additionalProperties, "logs")
 		o.AdditionalProperties = additionalProperties
 	}
 

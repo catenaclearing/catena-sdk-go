@@ -607,6 +607,30 @@ paths:
       description: "Create a new user. The user will be created asynchronously, and\
         \ you can check the status of the operation using the returned operation ID."
       operationId: create_user
+      parameters:
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -614,13 +638,12 @@ paths:
               $ref: '#/components/schemas/UserCreate'
         required: true
       responses:
-        "202":
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceOperationAccept'
-          description: The request to create the user has been accepted and is being
-            processed.
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The user was created successfully.
         "400":
           content:
             application/json:
@@ -681,6 +704,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotImplementedResponse'
           description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the user has been accepted and is being
+            processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the user could not be processed at this
+            time. Please see the response for more details.
       security:
       - Bearer:
         - telematics:write
@@ -696,23 +733,47 @@ paths:
           \ fields — may change before it becomes generally available. Backward compatibility\
           \ is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\"\
           >API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
-  /v2/telematics/users/{source_id}:
+  /v2/telematics/users/{id}:
     patch:
       description: "Update an existing user. The user will be updated asynchronously,\
         \ and you can check the status of the operation using the returned operation\
         \ ID."
       operationId: update_user
       parameters:
-      - description: The unique identifier of the user in the TSP.
+      - description: The unique identifier of the user
         explode: false
         in: path
-        name: source_id
+        name: id
         required: true
         schema:
-          description: The unique identifier of the user in the TSP.
-          title: Source Id
+          description: The unique identifier of the user
+          format: uuid
+          title: Id
           type: string
         style: simple
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -720,13 +781,12 @@ paths:
               $ref: '#/components/schemas/UserUpdate'
         required: true
       responses:
-        "202":
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceOperationAccept'
-          description: The request to update the user has been accepted and is being
-            processed.
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The user was updated successfully.
         "400":
           content:
             application/json:
@@ -787,6 +847,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotImplementedResponse'
           description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to update the user has been accepted and is being
+            processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to update the user could not be processed at this
+            time. Please see the response for more details.
       security:
       - Bearer:
         - telematics:write
@@ -1113,10 +1187,34 @@ paths:
       tags:
       - Fleet Operations & Tracking
     post:
-      description: "Create a new vehicle. The vehicle will be created asynchronously,\
-        \ and you can check the status of the operation using the returned operation\
-        \ ID."
+      description: "Create a new vehicle. By default, the vehicle will be created\
+        \ asynchronously, and you can check the status of the operation using the\
+        \ returned operation ID."
       operationId: create_vehicle
+      parameters:
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -1124,13 +1222,12 @@ paths:
               $ref: '#/components/schemas/VehicleCreate'
         required: true
       responses:
-        "202":
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceOperationAccept'
-          description: The request to create the vehicle has been accepted and is
-            being processed.
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The vehicle was created successfully.
         "400":
           content:
             application/json:
@@ -1191,6 +1288,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotImplementedResponse'
           description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the vehicle has been accepted and is
+            being processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the vehicle could not be processed at
+            this time. Please see the response for more details.
       security:
       - Bearer:
         - telematics:write
@@ -1206,23 +1317,47 @@ paths:
           \ fields — may change before it becomes generally available. Backward compatibility\
           \ is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\"\
           >API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
-  /v2/telematics/vehicles/{source_id}:
+  /v2/telematics/vehicles/{id}:
     patch:
-      description: "Update an existing vehicle. The vehicle will be updated asynchronously,\
-        \ and you can check the status of the operation using the returned operation\
-        \ ID."
+      description: "Update an existing vehicle. By default, the vehicle will be updated\
+        \ asynchronously, and you can check the status of the operation using the\
+        \ returned operation ID."
       operationId: update_vehicle
       parameters:
-      - description: The unique identifier of the vehicle in the TSP.
+      - description: The unique identifier of the vehicle
         explode: false
         in: path
-        name: source_id
+        name: id
         required: true
         schema:
-          description: The unique identifier of the vehicle in the TSP.
-          title: Source Id
+          description: The unique identifier of the vehicle
+          format: uuid
+          title: Id
           type: string
         style: simple
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -1230,13 +1365,12 @@ paths:
               $ref: '#/components/schemas/VehicleUpdate'
         required: true
       responses:
-        "202":
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceOperationAccept'
-          description: The request to update the vehicle has been accepted and is
-            being processed.
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The vehicle was updated successfully.
         "400":
           content:
             application/json:
@@ -1297,6 +1431,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotImplementedResponse'
           description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to update the vehicle has been accepted and is
+            being processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to update the vehicle could not be processed at
+            this time. Please see the response for more details.
       security:
       - Bearer:
         - telematics:write
@@ -1622,6 +1770,280 @@ paths:
       summary: List Trailers
       tags:
       - Fleet Operations & Tracking
+    post:
+      description: "Create a new trailer. By default, the trailer will be created\
+        \ asynchronously, and you can check the status of the operation using the\
+        \ returned operation ID."
+      operationId: create_trailer
+      parameters:
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrailerCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The trailer was created successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotImplementedResponse'
+          description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the trailer has been accepted and is
+            being processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the trailer could not be processed at
+            this time. Please see the response for more details.
+      security:
+      - Bearer:
+        - telematics:write
+      summary: Create Trailer
+      tags:
+      - Fleet Operations & Tracking
+      x-mint:
+        metadata:
+          title: 🧪 Create Trailer
+        content: "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional\
+          \ endpoint</strong><br/>This endpoint is available for early access. The\
+          \ core schema is stable, but minor details — such as field names or added\
+          \ fields — may change before it becomes generally available. Backward compatibility\
+          \ is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\"\
+          >API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
+  /v2/telematics/trailers/{id}:
+    patch:
+      description: "Update an existing trailer. By default, the trailer will be updated\
+        \ asynchronously, and you can check the status of the operation using the\
+        \ returned operation ID."
+      operationId: update_trailer
+      parameters:
+      - description: The unique identifier of the trailer
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          description: The unique identifier of the trailer
+          format: uuid
+          title: Id
+          type: string
+        style: simple
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrailerUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The trailer was updated successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotImplementedResponse'
+          description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to update the trailer has been accepted and is
+            being processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to update the trailer could not be processed at
+            this time. Please see the response for more details.
+      security:
+      - Bearer:
+        - telematics:write
+      summary: Update Trailer
+      tags:
+      - Fleet Operations & Tracking
+      x-mint:
+        metadata:
+          title: 🧪 Update Trailer
+        content: "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional\
+          \ endpoint</strong><br/>This endpoint is available for early access. The\
+          \ core schema is stable, but minor details — such as field names or added\
+          \ fields — may change before it becomes generally available. Backward compatibility\
+          \ is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\"\
+          >API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
   /v2/telematics/ifta-summaries:
     get:
       description: Get a paginated list of International Fuel Tax Agreement (IFTA)
@@ -2532,6 +2954,30 @@ paths:
     post:
       description: Create a new DVIR log asynchronously.
       operationId: create_dvir_log
+      parameters:
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -2539,13 +2985,12 @@ paths:
               $ref: '#/components/schemas/DvirLogCreate'
         required: true
       responses:
-        "202":
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceOperationAccept'
-          description: The request to create the DVIR log has been accepted and is
-            being processed.
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The DVIR log was created successfully.
         "400":
           content:
             application/json:
@@ -2606,6 +3051,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotImplementedResponse'
           description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the DVIR log has been accepted and is
+            being processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the DVIR log could not be processed at
+            this time. Please see the response for more details.
       security:
       - Bearer:
         - telematics:write
@@ -3577,6 +4036,30 @@ paths:
         \ asynchronously, and you can check the status of the operation using the\
         \ returned operation ID."
       operationId: create_fuel_transaction
+      parameters:
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -3584,13 +4067,12 @@ paths:
               $ref: '#/components/schemas/FuelTransactionCreate'
         required: true
       responses:
-        "202":
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceOperationAccept'
-          description: The request to create the fuel transaction has been accepted
-            and is being processed.
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The fuel transaction was created successfully.
         "400":
           content:
             application/json:
@@ -3651,6 +4133,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotImplementedResponse'
           description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the fuel transaction has been accepted
+            and is being processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the fuel transaction could not be processed
+            at this time. Please see the response for more details.
       security:
       - Bearer:
         - telematics:write
@@ -3949,6 +4445,30 @@ paths:
         \ and you can check the status of the operation using the returned operation\
         \ ID."
       operationId: create_message
+      parameters:
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -3956,13 +4476,304 @@ paths:
               $ref: '#/components/schemas/MessageCreate'
         required: true
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The message was created successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotImplementedResponse'
+          description: Not Implemented
         "202":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceOperationAccept'
+                $ref: '#/components/schemas/ResourceOperation'
           description: The request to create the message has been accepted and is
             being processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the message could not be processed at
+            this time. Please see the response for more details.
+      security:
+      - Bearer:
+        - telematics:write
+      summary: Create Message
+      tags:
+      - Drivers & Users
+      x-mint:
+        metadata:
+          title: 🧪 Create Message
+        content: "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional\
+          \ endpoint</strong><br/>This endpoint is available for early access. The\
+          \ core schema is stable, but minor details — such as field names or added\
+          \ fields — may change before it becomes generally available. Backward compatibility\
+          \ is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\"\
+          >API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
+  /v2/telematics/group-messages:
+    get:
+      description: List all group messages.
+      operationId: list_group_messages
+      parameters:
+      - description: "Limit results to specific fleets using Catena's fleet IDs. *For\
+          \ your own fleet identifiers, use `fleet_refs` instead* To specify multiple\
+          \ values, repeat the parameter for each value (e.g., `?fleet_ids=id1&fleet_ids=id2`)."
+        explode: true
+        in: query
+        name: fleet_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: "Limit results to specific fleets using your organization's fleet\
+          \ reference identifiers. To specify multiple values, repeat the parameter\
+          \ for each value (e.g., `?fleet_refs=ref1&fleet_refs=ref2`)."
+        explode: true
+        in: query
+        name: fleet_refs
+        required: false
+        schema:
+          items:
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: Limit results to a specific provider connection. This is the
+          UUID assigned by Catena when your fleet connects to a TSP.
+        explode: true
+        in: query
+        name: connection_id
+        required: false
+        schema:
+          format: uuid
+          nullable: true
+          type: string
+        style: form
+      - description: Return only records that occurred on or after this date and time.
+          **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
+          **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
+          cannot exceed 45 days
+        explode: true
+        in: query
+        name: from_datetime
+        required: false
+        schema:
+          description: Return only records that occurred on or after this date and
+            time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime`
+            **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime`
+            cannot exceed 45 days
+          format: date-time
+          title: From Datetime
+          type: string
+        style: form
+      - description: Return only records that occurred before this date and time.
+          **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
+          **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
+          cannot exceed 45 days
+        explode: true
+        in: query
+        name: to_datetime
+        required: false
+        schema:
+          description: Return only records that occurred before this date and time.
+            **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime`
+            **Default value:** `now()` **Restriction:** `to_datetime - from_datetime`
+            cannot exceed 45 days
+          format: date-time
+          title: To Datetime
+          type: string
+        style: form
+      - description: Include the raw data from the telematics provider. *Useful for
+          auditing or accessing fields not normalized by Catena*
+        explode: true
+        in: query
+        name: include_source_data
+        required: false
+        schema:
+          default: false
+          description: Include the raw data from the telematics provider. *Useful
+            for auditing or accessing fields not normalized by Catena*
+          title: Include Source Data
+          type: boolean
+        style: form
+      - description: "Limit results to specific senders. **Maximum:** 100 IDs To specify\
+          \ multiple values, repeat the parameter for each value (e.g., `?sender_ids=id1&sender_ids=id2`)."
+        explode: true
+        in: query
+        name: sender_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: "Limit results to specific group IDs. **Maximum:** 100 IDs To\
+          \ specify multiple values, repeat the parameter for each value (e.g., `?group_ids=id1&group_ids=id2`)."
+        explode: true
+        in: query
+        name: group_ids
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: "Limit results to specific source sender IDs. **Maximum:** 100\
+          \ IDs To specify multiple values, repeat the parameter for each value (e.g.,\
+          \ `?source_sender_ids=id1&source_sender_ids=id2`)."
+        explode: true
+        in: query
+        name: source_sender_ids
+        required: false
+        schema:
+          items:
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: "Limit results to specific source group IDs. **Maximum:** 100\
+          \ IDs To specify multiple values, repeat the parameter for each value (e.g.,\
+          \ `?source_group_ids=id1&source_group_ids=id2`)."
+        explode: true
+        in: query
+        name: source_group_ids
+        required: false
+        schema:
+          items:
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        style: form
+      - description: "The name of the field to sort results by. If not provided, results\
+          \ will be ordered by `occurred_at`. "
+        explode: true
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: "The order of sorting, either `asc` for ascending or `desc` for\
+          \ descending. Defaults to `asc` if `sort_by` is provided without `sort_order`."
+        explode: true
+        in: query
+        name: sort_order
+        required: false
+        schema:
+          default: asc
+          description: "The order of sorting, either `asc` for ascending or `desc`\
+            \ for descending. Defaults to `asc` if `sort_by` is provided without `sort_order`."
+          enum:
+          - asc
+          - desc
+          title: Sort Order
+          type: string
+        style: form
+      - description: Cursor for the next page
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 300
+          description: Page size
+          maximum: 1000
+          minimum: 1
+          title: Size
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_CursorPage_GroupMessageRead_'
+          description: Successful Response
         "400":
           content:
             application/json:
@@ -4025,13 +4836,144 @@ paths:
           description: Not Implemented
       security:
       - Bearer:
-        - telematics:write
-      summary: Create Message
+        - telematics:read
+      summary: List Group Messages
       tags:
       - Drivers & Users
       x-mint:
         metadata:
-          title: 🧪 Create Message
+          title: 🧪 List Group Messages
+        content: "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional\
+          \ endpoint</strong><br/>This endpoint is available for early access. The\
+          \ core schema is stable, but minor details — such as field names or added\
+          \ fields — may change before it becomes generally available. Backward compatibility\
+          \ is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\"\
+          >API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
+    post:
+      description: "Create a new group message. The message will be created asynchronously,\
+        \ and you can check the status of the operation using the returned operation\
+        \ ID."
+      operationId: create_group_message
+      parameters:
+      - description: "Whether to process the request synchronously. If `true`, Catena\
+          \ will attempt to create or update the resource immediately with the TSP\
+          \ and return the result in the response. When performing synchronous operations,\
+          \ you are responsible for handling any necessary retries in case of transient\
+          \ failures.If `false` (default), Catena will create an asynchronous operation,\
+          \ and you can check the status of the operation using the returned operation\
+          \ ID."
+        explode: true
+        in: query
+        name: is_sync
+        required: false
+        schema:
+          default: false
+          description: "Whether to process the request synchronously. If `true`, Catena\
+            \ will attempt to create or update the resource immediately with the TSP\
+            \ and return the result in the response. When performing synchronous operations,\
+            \ you are responsible for handling any necessary retries in case of transient\
+            \ failures.If `false` (default), Catena will create an asynchronous operation,\
+            \ and you can check the status of the operation using the returned operation\
+            \ ID."
+          title: Is Sync
+          type: boolean
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMessageCreate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The group message was created successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowed'
+          description: Method Not Allowed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotImplementedResponse'
+          description: Not Implemented
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the group message has been accepted and
+            is being processed.
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceOperation'
+          description: The request to create the group message could not be processed
+            at this time. Please see the response for more details.
+      security:
+      - Bearer:
+        - telematics:write
+      summary: Create Group Message
+      tags:
+      - Drivers & Users
+      x-mint:
+        metadata:
+          title: 🧪 Create Group Message
         content: "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional\
           \ endpoint</strong><br/>This endpoint is available for early access. The\
           \ core schema is stable, but minor details — such as field names or added\
@@ -9250,6 +10192,12 @@ components:
           nullable: true
           type: string
       title: Conflict
+    DistanceUnit:
+      description: SI and common units for distance and odometer fields.
+      enum:
+      - m
+      title: DistanceUnit
+      type: string
     DistanceUnitEnum:
       description: Universal distance units.
       enum:
@@ -9759,6 +10707,7 @@ components:
       - fifth_wheel
       - landing_gear
       - suspension
+      - alignment
       - rims
       - tires
       - tire_chains
@@ -9768,6 +10717,7 @@ components:
       - wheels
       - wheels_rims
       - suspension_under
+      - scratches
       - air_compressor
       - air_lines
       - brake_connections
@@ -9789,23 +10739,22 @@ components:
     DvirLogCreate:
       description: DvirLog model for creating new records.
       example:
-        source_trailer_id: source_trailer_id
-        fleet_ref: fleet_ref
+        driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         driver_comment: driver_comment
         odometer: 6.027456183070403
         certify_comment: certify_comment
         defect_count: 0
         odometer_unit: miles
-        source_driver_id: source_driver_id
         occurred_at: 2000-01-23T04:56:07.000+00:00
         log_type: pre_trip
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         is_safety_critical: true
+        trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         defects:
         - fluid_levels
         - fluid_levels
         inspected_by: inspected_by
-        source_vehicle_id: source_vehicle_id
+        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         connection_id:
           description: Unique identifier of the connection at Catena Telematics which
@@ -9814,16 +10763,17 @@ components:
           format: uuid
           title: Connection Id
           type: string
-        fleet_ref:
+        driver_id:
+          description: Identifier for the driver
+          format: uuid
+          title: Driver Id
+          type: string
+        vehicle_id:
+          format: uuid
           nullable: true
           type: string
-        source_driver_id:
-          nullable: true
-          type: string
-        source_vehicle_id:
-          nullable: true
-          type: string
-        source_trailer_id:
+        trailer_id:
+          format: uuid
           nullable: true
           type: string
         occurred_at:
@@ -9859,6 +10809,7 @@ components:
           $ref: '#/components/schemas/DistanceUnitEnum'
       required:
       - connection_id
+      - driver_id
       title: DvirLogCreate
     DvirLogDefectRead:
       description: DvirLogDefect model for API responses
@@ -10020,8 +10971,8 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         extras:
           key: ""
-        engine_hours: 1.4658129805029452
-        defect_count: 5
+        engine_hours: 5.962133916683182
+        defect_count: 2
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         log_type: log_type
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -10037,6 +10988,7 @@ components:
         source_data:
           key: ""
         driver_comment: driver_comment
+        odometer: 1.4658129805029452
         certify_comment: certify_comment
         deleted_at: 2000-01-23T04:56:07.000+00:00
         version: version
@@ -10176,6 +11128,9 @@ components:
           nullable: true
           type: number
         odometer_km:
+          nullable: true
+          type: number
+        odometer:
           nullable: true
           type: number
         engine_hours:
@@ -10658,32 +11613,23 @@ components:
     FuelTransactionCreate:
       description: Fuel transaction model for creating new records
       example:
-        fleet_ref: fleet_ref
-        odometer: 0.8008281904610115
-        total_cost: 1.4658129805029452
-        source_co_driver_id: source_co_driver_id
-        fuel_volume: 6.027456183070403
+        driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        odometer: 1.4658129805029452
+        total_cost: 5.637376656633329
+        latitude: -75.5850925717018
+        fuel_volume: 5.962133916683182
         fuel_vendor: fuel_vendor
         odometer_unit: miles
-        source_driver_id: source_driver_id
+        co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         location_string: location_string
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         fuel_volume_unit: CUBIC_METER
         transaction_time: 2000-01-23T04:56:07.000+00:00
-        location:
-          bbox:
-          - ""
-          - ""
-          - ""
-          - ""
-          coordinates:
-          - ""
-          - ""
-          type: Point
         currency: currency
         fuel_type: GASOLINE
+        vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         transaction_jurisdiction: transaction_jurisdiction
-        source_vehicle_id: source_vehicle_id
+        longitude: 36.988422590534526
       properties:
         connection_id:
           description: Unique identifier of the connection at Catena Telematics which
@@ -10692,20 +11638,30 @@ components:
           format: uuid
           title: Connection Id
           type: string
-        fleet_ref:
+        driver_id:
+          description: Identifier for the driver (from the source system)
+          format: uuid
+          title: Driver Id
+          type: string
+        vehicle_id:
+          description: Identifier for the vehicle (from the source system)
+          format: uuid
+          title: Vehicle Id
+          type: string
+        co_driver_id:
+          format: uuid
           nullable: true
           type: string
-        source_driver_id:
+        latitude:
+          maximum: 90.0
+          minimum: -90.0
           nullable: true
-          type: string
-        source_vehicle_id:
+          type: number
+        longitude:
+          maximum: 180.0
+          minimum: -180.0
           nullable: true
-          type: string
-        source_co_driver_id:
-          nullable: true
-          type: string
-        location:
-          $ref: '#/components/schemas/Point'
+          type: number
         location_string:
           nullable: true
           type: string
@@ -10739,8 +11695,10 @@ components:
           type: string
       required:
       - connection_id
+      - driver_id
       - fuel_volume
       - fuel_volume_unit
+      - vehicle_id
       title: FuelTransactionCreate
     FuelTransactionRead:
       description: FuelTransaction model for API responses
@@ -10755,6 +11713,7 @@ components:
           key: ""
         fuel_volume: 1.4658129805029452
         fuel_vendor: fuel_vendor
+        odometer_unit: m
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -10914,6 +11873,8 @@ components:
         currency:
           nullable: true
           type: string
+        odometer_unit:
+          $ref: '#/components/schemas/DistanceUnit'
       required:
       - connection_id
       - created_at
@@ -10933,6 +11894,222 @@ components:
       - IMPERIAL_GALLON
       title: FuelVolumeUnitEnum
       type: string
+    GroupMessageCreate:
+      description: Group Message model for creating new records
+      example:
+        message_text: message_text
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        recipient_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        priority: low
+        sender_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        connection_id:
+          description: Unique identifier of the connection at Catena Telematics which
+            will be used to create this resource. A connection represents a Fleet/TSP
+            pairing.
+          format: uuid
+          title: Connection Id
+          type: string
+        sender_id:
+          description: Identifier for the sender
+          format: uuid
+          title: Sender Id
+          type: string
+        recipient_ids:
+          description: Identifiers for the recipients
+          items:
+            format: uuid
+            type: string
+          type: array
+        message_text:
+          nullable: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/MessagePriorityEnum'
+      required:
+      - connection_id
+      - recipient_ids
+      - sender_id
+      title: GroupMessageCreate
+    GroupMessageRead:
+      description: Group Message model for API responses
+      example:
+        source_group_id: source_group_id
+        created_at: 2000-01-23T04:56:07.000+00:00
+        extras:
+          key: ""
+        sender_name: sender_name
+        sender_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        thread_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        message_hash: message_hash
+        fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tsp_slug: tsp_slug
+        delivered_at: 2000-01-23T04:56:07.000+00:00
+        source_name: ada
+        sent_by_driver: true
+        fleet_ref: fleet_ref
+        source_data:
+          key: ""
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        occurred_at: 2000-01-23T04:56:07.000+00:00
+        tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        message_text: message_text
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        group_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        recipient_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_sender_id: source_sender_id
+        source_id: source_id
+        source_thread_id: source_thread_id
+        schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_data_hash: source_data_hash
+        source_recipient_ids:
+        - source_recipient_ids
+        - source_recipient_ids
+        status: read
+      properties:
+        fleet_id:
+          format: uuid
+          nullable: true
+          type: string
+        fleet_ref:
+          nullable: true
+          type: string
+        id:
+          description: Unique identifier of the record at Catena Telematics.
+          format: uuid
+          title: Id
+          type: string
+        created_at:
+          description: "Immutable: The datetime the record was ingested into Catena\
+            \ Telematics."
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: The dateime the record was last modified in Catena Telematics.
+          format: date-time
+          title: Updated At
+          type: string
+        deleted_at:
+          format: date-time
+          nullable: true
+          type: string
+        connection_id:
+          description: Unique identifier of the connection at Catena Telematics through
+            which this record was ingested. A connection represents a Fleet/TSP pairing.
+          format: uuid
+          title: Connection Id
+          type: string
+        tsp_id:
+          format: uuid
+          nullable: true
+          type: string
+        tsp_slug:
+          nullable: true
+          type: string
+        source_name:
+          $ref: '#/components/schemas/TspEnum'
+        source_data:
+          additionalProperties: true
+          description: "Raw source payload as ingested from the TSP. **Note: use it\
+            \ for audit/debugging.**"
+          title: Source Data
+          type: object
+        source_id:
+          description: "Unique identifier of the record in the TSP. **Note: we generate\
+            \ a unique composite key based on available fields if the TSP does not\
+            \ provide an unique ID.**"
+          title: Source Id
+          type: string
+        source_data_hash:
+          description: "SHA-256 hash of the source data payload. **Note: we use it\
+            \ internally for idempotence and deduplication.**"
+          maxLength: 64
+          title: Source Data Hash
+          type: string
+        occurred_at:
+          format: date-time
+          nullable: true
+          type: string
+        execution_id:
+          format: uuid
+          nullable: true
+          type: string
+        schedule_id:
+          format: uuid
+          nullable: true
+          type: string
+        extras:
+          additionalProperties: true
+          nullable: true
+          type: object
+        source_sender_id:
+          nullable: true
+          type: string
+        source_recipient_ids:
+          items:
+            type: string
+          nullable: true
+          type: array
+        sender_id:
+          format: uuid
+          nullable: true
+          type: string
+        recipient_ids:
+          items:
+            format: uuid
+            type: string
+          nullable: true
+          type: array
+        message_text:
+          nullable: true
+          type: string
+        message_hash:
+          nullable: true
+          type: string
+        status:
+          $ref: '#/components/schemas/MessageStatusEnum'
+        delivered_at:
+          format: date-time
+          nullable: true
+          type: string
+        sent_by_driver:
+          nullable: true
+          type: boolean
+        sender_name:
+          nullable: true
+          type: string
+        thread_id:
+          format: uuid
+          nullable: true
+          type: string
+        source_thread_id:
+          nullable: true
+          type: string
+        group_id:
+          format: uuid
+          nullable: true
+          type: string
+        source_group_id:
+          nullable: true
+          type: string
+      required:
+      - connection_id
+      - created_at
+      - fleet_id
+      - id
+      - source_data_hash
+      - source_id
+      - source_name
+      - updated_at
+      title: GroupMessageRead
     HosAvailabilityRead:
       description: HosAvailability model for API responses
       example:
@@ -12479,19 +13656,12 @@ components:
     MessageCreate:
       description: Message model for creating new records
       example:
-        mode: group
         message_text: message_text
-        fleet_ref: fleet_ref
-        recipient_group: admin
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        source_sender_id: source_sender_id
-        sender_group: admin
-        source_reply_to_message_id: source_reply_to_message_id
+        reply_to_message_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         priority: low
-        source_thread_id: source_thread_id
-        source_recipient_ids:
-        - source_recipient_ids
-        - source_recipient_ids
+        sender_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        recipient_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         connection_id:
           description: Unique identifier of the connection at Catena Telematics which
@@ -12500,45 +13670,30 @@ components:
           format: uuid
           title: Connection Id
           type: string
-        fleet_ref:
-          nullable: true
+        sender_id:
+          description: Identifier for the sender
+          format: uuid
+          title: Sender Id
           type: string
-        source_sender_id:
-          nullable: true
+        recipient_id:
+          description: Identifier for the recipient
+          format: uuid
+          title: Recipient Id
           type: string
-        source_recipient_ids:
-          items:
-            type: string
-          nullable: true
-          type: array
-        recipient_group:
-          $ref: '#/components/schemas/MessageReceiverGroupEnum'
-        sender_group:
-          $ref: '#/components/schemas/MessageSenderGroupEnum'
         message_text:
           nullable: true
           type: string
-        mode:
-          $ref: '#/components/schemas/MessageModeEnum'
         priority:
           $ref: '#/components/schemas/MessagePriorityEnum'
-        source_thread_id:
-          nullable: true
-          type: string
-        source_reply_to_message_id:
+        reply_to_message_id:
+          format: uuid
           nullable: true
           type: string
       required:
       - connection_id
+      - recipient_id
+      - sender_id
       title: MessageCreate
-    MessageModeEnum:
-      description: "Enum for message mode (\"group\", \"bulk\", \"direct\")"
-      enum:
-      - group
-      - bulk
-      - direct
-      title: MessageModeEnum
-      type: string
     MessagePriorityEnum:
       description: "Enum for message priority (\"low\", \"medium\", \"high\")"
       enum:
@@ -12554,8 +13709,10 @@ components:
         extras:
           key: ""
         sender_name: sender_name
+        reply_to_message_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         sender_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        thread_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
         message_hash: message_hash
         read_at: 2000-01-23T04:56:07.000+00:00
@@ -12699,7 +13856,15 @@ components:
         recipient_name:
           nullable: true
           type: string
+        thread_id:
+          format: uuid
+          nullable: true
+          type: string
         source_thread_id:
+          nullable: true
+          type: string
+        reply_to_message_id:
+          format: uuid
           nullable: true
           type: string
         source_reply_to_message_id:
@@ -12715,24 +13880,6 @@ components:
       - source_name
       - updated_at
       title: MessageRead
-    MessageReceiverGroupEnum:
-      description: "Enum for message receiver group (\"admin\", \"driver\", \"dispatcher\"\
-        )"
-      enum:
-      - admin
-      - driver
-      - dispatcher
-      title: MessageReceiverGroupEnum
-      type: string
-    MessageSenderGroupEnum:
-      description: "Enum for message sender group (\"admin\", \"driver\", \"dispatcher\"\
-        )"
-      enum:
-      - admin
-      - driver
-      - dispatcher
-      title: MessageSenderGroupEnum
-      type: string
     MessageStatusEnum:
       description: Enum for message statuses
       enum:
@@ -12832,6 +13979,12 @@ components:
       maxItems: 3
       minItems: 3
       type: array
+    PressureUnit:
+      description: SI and common units for pressure fields.
+      enum:
+      - Pa
+      title: PressureUnit
+      type: string
     ReeferAlarmCodeEnum:
       description: Enum for standardized reefer alarm codes.
       enum:
@@ -13349,19 +14502,226 @@ components:
       - trailers
       - vehicles
       title: ResourceCount
-    ResourceOperationAccept:
-      description: Resource operation model for API responses
+    ResourceEnum:
+      description: Enum for resources
+      enum:
+      - asset
+      - driver_association
+      - driver_vehicle_association
+      - driver_event_log
+      - driver_safety_event
+      - dvir_log
+      - dvir_log_defect
+      - engine_log
+      - engine_status
+      - fuel_transaction
+      - hos_availability
+      - hos_daily_snapshot
+      - hos_event
+      - hos_event_annotation
+      - hos_event_attachment
+      - hos_violation
+      - ifta_summary
+      - location_segment
+      - message
+      - group_message
+      - user
+      - vehicle
+      - vehicle_location
+      - vehicle_sensor
+      - vehicle_region_segment
+      - trailer
+      - trailer_association
+      - trailer_vehicle_association
+      - trailer_location
+      - trailer_status
+      - workflow
+      title: ResourceEnum
+      type: string
+    ResourceOperation:
+      description: Resource operation model
       example:
+        operation_type: create
+        resource: asset
+        created_at: 2000-01-23T04:56:07.000+00:00
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        partner_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        payload:
+          key: ""
+        resource_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        source_id: source_id
+        logs:
+        - response_headers:
+            key: response_headers
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          error_details: error_details
+          error_type: auth
+          resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: success
+          response_status_code: 0
+        - response_headers:
+            key: response_headers
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          error_details: error_details
+          error_type: auth
+          resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          status: success
+          response_status_code: 0
+        status: pending
       properties:
         id:
           description: Unique identifier for the resource operation.
           format: uuid
           title: Operation ID
           type: string
+        created_at:
+          description: "Immutable: The datetime the record was created in Catena Telematics."
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: The datetime the record was last modified in Catena Telematics.
+          format: date-time
+          title: Updated At
+          type: string
+        deleted_at:
+          format: date-time
+          nullable: true
+          type: string
+        partner_id:
+          description: The ID of the partner that created the operation.
+          format: uuid
+          title: Partner ID
+          type: string
+        connection_id:
+          description: The ID of the connection
+          format: uuid
+          title: Connection ID
+          type: string
+        resource:
+          $ref: '#/components/schemas/ResourceEnum'
+        resource_id:
+          format: uuid
+          nullable: true
+          type: string
+        source_id:
+          nullable: true
+          type: string
+        operation_type:
+          $ref: '#/components/schemas/ResourceOperationTypeEnum'
+        payload:
+          additionalProperties: true
+          description: "The payload of the operation, containing the resource attributes\
+            \ to be created or updated."
+          title: Operation Payload
+          type: object
+        status:
+          $ref: '#/components/schemas/ResourceOperationStatusEnum'
+        logs:
+          description: Log entries for each attempt to execute this operation.
+          items:
+            $ref: '#/components/schemas/ResourceOperationLog'
+          type: array
       required:
+      - connection_id
+      - operation_type
+      - partner_id
+      - payload
+      - resource
+      title: ResourceOperation
+    ResourceOperationErrorTypeEnum:
+      description: Enum for the type of error that occurred during a resource operation.
+      enum:
+      - auth
+      - validation
+      - network
+      - tsp
+      title: ResourceOperationErrorTypeEnum
+      type: string
+    ResourceOperationLog:
+      description: API response model for a resource operation log entry.
+      example:
+        response_headers:
+          key: response_headers
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        error_details: error_details
+        error_type: auth
+        resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status: success
+        response_status_code: 0
+      properties:
+        id:
+          description: Unique identifier for the log entry.
+          format: uuid
+          title: Log ID
+          type: string
+        created_at:
+          description: Timestamp when the log entry was created.
+          format: date-time
+          title: Created At
+          type: string
+        updated_at:
+          description: Timestamp when the log entry was last updated.
+          format: date-time
+          title: Updated At
+          type: string
+        resource_operation_id:
+          description: The ID of the resource operation this log entry belongs to.
+          format: uuid
+          title: Resource Operation ID
+          type: string
+        status:
+          $ref: '#/components/schemas/ResourceOperationLogStatusEnum'
+        error_type:
+          $ref: '#/components/schemas/ResourceOperationErrorTypeEnum'
+        error_details:
+          nullable: true
+          type: string
+        response_status_code:
+          nullable: true
+          type: integer
+        response_headers:
+          additionalProperties:
+            type: string
+          nullable: true
+      required:
+      - created_at
       - id
-      title: ResourceOperationAccept
+      - resource_operation_id
+      - status
+      - updated_at
+      title: ResourceOperationLog
+    ResourceOperationLogStatusEnum:
+      description: Enum for the status of a resource operation log entry.
+      enum:
+      - success
+      - failed
+      title: ResourceOperationLogStatusEnum
+      type: string
+    ResourceOperationStatusEnum:
+      description: Enum for the status of a resource operation.
+      enum:
+      - pending
+      - success
+      - failed
+      title: ResourceOperationStatusEnum
+      type: string
+    ResourceOperationTypeEnum:
+      description: Enum for the type of operation to perform on a resource.
+      enum:
+      - create
+      - update
+      title: ResourceOperationTypeEnum
+      type: string
     RetryAfterDetail:
       example:
         retry_after_seconds: 7
@@ -13377,6 +14737,12 @@ components:
       - message
       - retry_after_seconds
       title: RetryAfterDetail
+    SpeedUnit:
+      description: SI and common units for speed fields.
+      enum:
+      - m/s
+      title: SpeedUnit
+      type: string
     StatusEnum:
       description: Enum for statuses
       enum:
@@ -13394,6 +14760,12 @@ components:
       - accepted
       - declined
       title: StatusEnum
+      type: string
+    TemperatureUnit:
+      description: SI and common units for temperature fields.
+      enum:
+      - K
+      title: TemperatureUnit
       type: string
     TimeSeriesDataPoint:
       description: A single data point for time-series growth charts.
@@ -13629,6 +15001,97 @@ components:
           nullable: true
           type: string
       title: TrailerAlarm
+    TrailerCreate:
+      description: Trailer model for creating new records
+      example:
+        eld_serial_number: eld_serial_number
+        is_active: true
+        notes: notes
+        trailer_length: 1.4658129805029452
+        eld_id: eld_id
+        eld_device_type: eld_device_type
+        model_type: model_type
+        model_year: 0
+        eld_product_id: eld_product_id
+        external_id: external_id
+        license_plate_number: license_plate_number
+        trailer_type: trailer_type
+        trailer_name: trailer_name
+        total_axles: 6
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        license_plate_region: license_plate_region
+        oem: oem
+        license_plate_country: license_plate_country
+        vin: vin
+        status: status
+      properties:
+        connection_id:
+          description: Unique identifier of the connection at Catena Telematics which
+            will be used to create this resource. A connection represents a Fleet/TSP
+            pairing.
+          format: uuid
+          title: Connection Id
+          type: string
+        trailer_name:
+          nullable: true
+          type: string
+        oem:
+          nullable: true
+          type: string
+        model_type:
+          nullable: true
+          type: string
+        model_year:
+          nullable: true
+          type: integer
+        vin:
+          nullable: true
+          type: string
+        license_plate_region:
+          nullable: true
+          type: string
+        license_plate_country:
+          nullable: true
+          type: string
+        license_plate_number:
+          nullable: true
+          type: string
+        is_active:
+          nullable: true
+          type: boolean
+        status:
+          nullable: true
+          type: string
+        notes:
+          nullable: true
+          type: string
+        eld_id:
+          nullable: true
+          type: string
+        eld_serial_number:
+          nullable: true
+          type: string
+        eld_device_type:
+          nullable: true
+          type: string
+        eld_product_id:
+          nullable: true
+          type: string
+        total_axles:
+          nullable: true
+          type: integer
+        external_id:
+          nullable: true
+          type: string
+        trailer_length:
+          nullable: true
+          type: number
+        trailer_type:
+          nullable: true
+          type: string
+      required:
+      - connection_id
+      title: TrailerCreate
     TrailerLiveLocation:
       description: |-
         Real-time operational status for a trailer, including latest telemetry.
@@ -14156,6 +15619,7 @@ components:
         door_open: true
         updated_at: 2000-01-23T04:56:07.000+00:00
         battery_percent: 6.027456183070403
+        remote_probe_statuses_temperature_unit: null
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tsp_slug: tsp_slug
@@ -14165,9 +15629,11 @@ components:
         fleet_ref: fleet_ref
         source_data:
           key: ""
+        battery_voltage_unit: V
         humidity_percent: 1.0246457001441578
         reefer_operational_status: "ON"
         operation_mode: CONTINUOUS
+        zones_temperature_unit: null
         zones:
         - cargo_status: cargo_status
           door_open: true
@@ -14192,6 +15658,7 @@ components:
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         power_on: true
         trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ambient_temperature_unit: K
         pre_trip_status:
           result: result
           completed_at: 2000-01-23T04:56:07.000+00:00
@@ -14357,6 +15824,14 @@ components:
         h3_index_11:
           nullable: true
           type: integer
+        battery_voltage_unit:
+          $ref: '#/components/schemas/VoltageUnit'
+        ambient_temperature_unit:
+          $ref: '#/components/schemas/TemperatureUnit'
+        zones_temperature_unit:
+          $ref: '#/components/schemas/TemperatureUnit'
+        remote_probe_statuses_temperature_unit:
+          $ref: '#/components/schemas/TemperatureUnit'
       required:
       - connection_id
       - created_at
@@ -14446,6 +15921,97 @@ components:
       - tsp_id
       - tsp_slug
       title: TrailerSummary
+    TrailerUpdate:
+      description: Trailer model for updating existing records
+      example:
+        eld_serial_number: eld_serial_number
+        is_active: true
+        notes: notes
+        trailer_length: 1.4658129805029452
+        eld_id: eld_id
+        eld_device_type: eld_device_type
+        model_type: model_type
+        model_year: 0
+        eld_product_id: eld_product_id
+        external_id: external_id
+        license_plate_number: license_plate_number
+        trailer_type: trailer_type
+        trailer_name: trailer_name
+        total_axles: 6
+        connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        license_plate_region: license_plate_region
+        oem: oem
+        license_plate_country: license_plate_country
+        vin: vin
+        status: status
+      properties:
+        connection_id:
+          description: Unique identifier of the connection at Catena Telematics which
+            will be used to create this resource. A connection represents a Fleet/TSP
+            pairing.
+          format: uuid
+          title: Connection Id
+          type: string
+        trailer_name:
+          nullable: true
+          type: string
+        oem:
+          nullable: true
+          type: string
+        model_type:
+          nullable: true
+          type: string
+        model_year:
+          nullable: true
+          type: integer
+        vin:
+          nullable: true
+          type: string
+        license_plate_region:
+          nullable: true
+          type: string
+        license_plate_country:
+          nullable: true
+          type: string
+        license_plate_number:
+          nullable: true
+          type: string
+        is_active:
+          nullable: true
+          type: boolean
+        status:
+          nullable: true
+          type: string
+        notes:
+          nullable: true
+          type: string
+        eld_id:
+          nullable: true
+          type: string
+        eld_serial_number:
+          nullable: true
+          type: string
+        eld_device_type:
+          nullable: true
+          type: string
+        eld_product_id:
+          nullable: true
+          type: string
+        total_axles:
+          nullable: true
+          type: integer
+        external_id:
+          nullable: true
+          type: string
+        trailer_length:
+          nullable: true
+          type: number
+        trailer_type:
+          nullable: true
+          type: string
+      required:
+      - connection_id
+      title: TrailerUpdate
     TrailerVehicleAssociationRead:
       description: Trailer vehicle association API model with fleet fields.
       example:
@@ -14846,7 +16412,6 @@ components:
         first_name: first_name
         user_email: user_email
         hos_ruleset_code: US_INT_PROP_60_7
-        fleet_ref: fleet_ref
         is_active: true
         default_time_zone: UTC
         license_region: license_region
@@ -14870,9 +16435,6 @@ components:
             pairing.
           format: uuid
           title: Connection Id
-          type: string
-        fleet_ref:
-          nullable: true
           type: string
         username:
           nullable: true
@@ -15217,7 +16779,6 @@ components:
         first_name: first_name
         user_email: user_email
         hos_ruleset_code: US_INT_PROP_60_7
-        fleet_ref: fleet_ref
         is_active: true
         default_time_zone: UTC
         license_region: license_region
@@ -15241,9 +16802,6 @@ components:
             pairing.
           format: uuid
           title: Connection Id
-          type: string
-        fleet_ref:
-          nullable: true
           type: string
         username:
           nullable: true
@@ -15346,29 +16904,28 @@ components:
     VehicleCreate:
       description: Vehicle model for creating new records
       example:
+        eld_serial_number: eld_serial_number
+        is_active: true
         notes: notes
         engine_vin: engine_vin
         eld_id: eld_id
-        eld_product_id: eld_product_id
-        external_id: external_id
-        speed_unit: speed_unit
-        odometer_unit: odometer_unit
-        license_plate_number: license_plate_number
-        total_axles: 6
-        oem: oem
-        fuel_capacity: fuel_capacity
-        vin: vin
-        eld_serial_number: eld_serial_number
-        fleet_ref: fleet_ref
-        is_active: true
         eld_device_type: eld_device_type
         model_type: model_type
         model_year: 0
+        eld_product_id: eld_product_id
+        external_id: external_id
+        speed_unit: speed_unit
         fuel_unit: fuel_unit
+        odometer_unit: odometer_unit
+        license_plate_number: license_plate_number
+        total_axles: 6
         engine_type: GASOLINE
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         license_plate_region: license_plate_region
+        oem: oem
+        fuel_capacity: fuel_capacity
         license_plate_country: license_plate_country
+        vin: vin
         vehicle_name: vehicle_name
         status: IN_SERVICE
       properties:
@@ -15378,9 +16935,6 @@ components:
             pairing.
           format: uuid
           title: Connection Id
-          type: string
-        fleet_ref:
-          nullable: true
           type: string
         vehicle_name:
           nullable: true
@@ -15464,9 +17018,13 @@ components:
         odometer: 1.4658129805029452
         fuel_level: 5.962133916683182
         h3_index_11: 0
+        coolant_temperature_unit: K
+        oil_pressure_unit: Pa
         engine_hours: 5.637376656633329
+        speed_unit: m/s
         speed: 6.027456183070403
         coolant_temperature: 7.061401241503109
+        odometer_unit: m
         driver_name: driver_name
         occurred_at: 2000-01-23T04:56:07.000+00:00
         oil_pressure: 2.3021358869347655
@@ -15543,6 +17101,14 @@ components:
           type: string
         location:
           $ref: '#/components/schemas/Location_7'
+        speed_unit:
+          $ref: '#/components/schemas/SpeedUnit'
+        odometer_unit:
+          $ref: '#/components/schemas/DistanceUnit'
+        oil_pressure_unit:
+          $ref: '#/components/schemas/PressureUnit'
+        coolant_temperature_unit:
+          $ref: '#/components/schemas/TemperatureUnit'
       required:
       - coolant_temperature
       - driver_id
@@ -15576,8 +17142,10 @@ components:
         extras:
           key: ""
         engine_hours: 2.3021358869347655
+        speed_unit: m/s
         speed: 6.027456183070403
         coolant_temperature: 9.301444243932576
+        odometer_unit: m
         execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -15591,8 +17159,11 @@ components:
         source_data:
           key: ""
         odometer: 1.4658129805029452
+        coolant_temperature_unit: K
+        oil_pressure_unit: Pa
         source_co_driver_id: source_co_driver_id
         deleted_at: 2000-01-23T04:56:07.000+00:00
+        fuel_value_unit: m3
         occurred_at: 2000-01-23T04:56:07.000+00:00
         source_driver_id: source_driver_id
         oil_pressure: 7.061401241503109
@@ -15738,6 +17309,16 @@ components:
           type: number
         inferred_address:
           $ref: '#/components/schemas/InferredAddress'
+        speed_unit:
+          $ref: '#/components/schemas/SpeedUnit'
+        odometer_unit:
+          $ref: '#/components/schemas/DistanceUnit'
+        fuel_value_unit:
+          $ref: '#/components/schemas/VolumeUnit'
+        oil_pressure_unit:
+          $ref: '#/components/schemas/PressureUnit'
+        coolant_temperature_unit:
+          $ref: '#/components/schemas/TemperatureUnit'
       required:
       - connection_id
       - created_at
@@ -15975,8 +17556,10 @@ components:
         segment_end_time: 2000-01-23T04:56:07.000+00:00
         distance: 1.4658129805029452
         odometer_end: 6.027456183070403
+        odometer_start_unit: m
         created_at: 2000-01-23T04:56:07.000+00:00
         processing_date: 2000-01-23
+        odometer_end_unit: null
         deleted_at: 2000-01-23T04:56:07.000+00:00
         odometer_start: 0.8008281904610115
         country_code: country_code
@@ -15986,6 +17569,7 @@ components:
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         region: region
+        distance_unit: null
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         fleet_id:
@@ -16065,6 +17649,12 @@ components:
           description: Number of location samples that belong to the segment.
           title: Location Count
           type: integer
+        odometer_start_unit:
+          $ref: '#/components/schemas/DistanceUnit'
+        odometer_end_unit:
+          $ref: '#/components/schemas/DistanceUnit'
+        distance_unit:
+          $ref: '#/components/schemas/DistanceUnit'
       required:
       - connection_id
       - created_at
@@ -16240,9 +17830,11 @@ components:
         last_fuel_level: 1.4658129805029452
         vin: vin
         fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        last_odometer_reading_unit: m
         vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tsp_slug: tsp_slug
         source_name: ada
+        last_speed_reading_unit: m/s
         fleet_ref: fleet_ref
         last_engine_hours: 5.637376656633329
         model_type: model_type
@@ -16348,6 +17940,10 @@ components:
         last_speed_reading:
           nullable: true
           type: number
+        last_speed_reading_unit:
+          $ref: '#/components/schemas/SpeedUnit'
+        last_odometer_reading_unit:
+          $ref: '#/components/schemas/DistanceUnit'
       required:
       - connection_id
       - engine_vin
@@ -16378,29 +17974,28 @@ components:
     VehicleUpdate:
       description: Vehicle model for updating existing records
       example:
+        eld_serial_number: eld_serial_number
+        is_active: true
         notes: notes
         engine_vin: engine_vin
         eld_id: eld_id
-        eld_product_id: eld_product_id
-        external_id: external_id
-        speed_unit: speed_unit
-        odometer_unit: odometer_unit
-        license_plate_number: license_plate_number
-        total_axles: 6
-        oem: oem
-        fuel_capacity: fuel_capacity
-        vin: vin
-        eld_serial_number: eld_serial_number
-        fleet_ref: fleet_ref
-        is_active: true
         eld_device_type: eld_device_type
         model_type: model_type
         model_year: 0
+        eld_product_id: eld_product_id
+        external_id: external_id
+        speed_unit: speed_unit
         fuel_unit: fuel_unit
+        odometer_unit: odometer_unit
+        license_plate_number: license_plate_number
+        total_axles: 6
         engine_type: GASOLINE
         connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         license_plate_region: license_plate_region
+        oem: oem
+        fuel_capacity: fuel_capacity
         license_plate_country: license_plate_country
+        vin: vin
         vehicle_name: vehicle_name
         status: IN_SERVICE
       properties:
@@ -16410,9 +18005,6 @@ components:
             pairing.
           format: uuid
           title: Connection Id
-          type: string
-        fleet_ref:
-          nullable: true
           type: string
         vehicle_name:
           nullable: true
@@ -16485,6 +18077,18 @@ components:
       required:
       - connection_id
       title: VehicleUpdate
+    VoltageUnit:
+      description: SI and common units for electrical voltage fields.
+      enum:
+      - V
+      title: VoltageUnit
+      type: string
+    VolumeUnit:
+      description: SI and common units for volume fields such as fuel quantity.
+      enum:
+      - m3
+      title: VolumeUnit
+      type: string
     _CursorPage_DriverSafetyEventRead_:
       example:
         next_page: next_page
@@ -16862,8 +18466,8 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           extras:
             key: ""
-          engine_hours: 1.4658129805029452
-          defect_count: 5
+          engine_hours: 5.962133916683182
+          defect_count: 2
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           log_type: log_type
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -16879,6 +18483,7 @@ components:
           source_data:
             key: ""
           driver_comment: driver_comment
+          odometer: 1.4658129805029452
           certify_comment: certify_comment
           deleted_at: 2000-01-23T04:56:07.000+00:00
           version: version
@@ -16913,8 +18518,8 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           extras:
             key: ""
-          engine_hours: 1.4658129805029452
-          defect_count: 5
+          engine_hours: 5.962133916683182
+          defect_count: 2
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           log_type: log_type
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -16930,6 +18535,7 @@ components:
           source_data:
             key: ""
           driver_comment: driver_comment
+          odometer: 1.4658129805029452
           certify_comment: certify_comment
           deleted_at: 2000-01-23T04:56:07.000+00:00
           version: version
@@ -17264,6 +18870,7 @@ components:
             key: ""
           fuel_volume: 1.4658129805029452
           fuel_vendor: fuel_vendor
+          odometer_unit: m
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -17308,6 +18915,7 @@ components:
             key: ""
           fuel_volume: 1.4658129805029452
           fuel_vendor: fuel_vendor
+          odometer_unit: m
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -17368,6 +18976,113 @@ components:
       - items
       - total
       title: "_CursorPage[FuelTransactionRead]"
+    _CursorPage_GroupMessageRead_:
+      example:
+        next_page: next_page
+        total: 0
+        current_page_backwards: current_page_backwards
+        previous_page: previous_page
+        items:
+        - source_group_id: source_group_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras:
+            key: ""
+          sender_name: sender_name
+          sender_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          thread_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          message_hash: message_hash
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          delivered_at: 2000-01-23T04:56:07.000+00:00
+          source_name: ada
+          sent_by_driver: true
+          fleet_ref: fleet_ref
+          source_data:
+            key: ""
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          message_text: message_text
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          group_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          recipient_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_sender_id: source_sender_id
+          source_id: source_id
+          source_thread_id: source_thread_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_data_hash: source_data_hash
+          source_recipient_ids:
+          - source_recipient_ids
+          - source_recipient_ids
+          status: read
+        - source_group_id: source_group_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          extras:
+            key: ""
+          sender_name: sender_name
+          sender_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          thread_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          message_hash: message_hash
+          fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tsp_slug: tsp_slug
+          delivered_at: 2000-01-23T04:56:07.000+00:00
+          source_name: ada
+          sent_by_driver: true
+          fleet_ref: fleet_ref
+          source_data:
+            key: ""
+          deleted_at: 2000-01-23T04:56:07.000+00:00
+          occurred_at: 2000-01-23T04:56:07.000+00:00
+          tsp_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          message_text: message_text
+          connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          group_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          recipient_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_sender_id: source_sender_id
+          source_id: source_id
+          source_thread_id: source_thread_id
+          schedule_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          source_data_hash: source_data_hash
+          source_recipient_ids:
+          - source_recipient_ids
+          - source_recipient_ids
+          status: read
+        current_page: current_page
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/GroupMessageRead'
+          type: array
+        total:
+          minimum: 0.0
+          title: Total
+          type: integer
+        current_page:
+          nullable: true
+          type: string
+        current_page_backwards:
+          nullable: true
+          type: string
+        previous_page:
+          nullable: true
+          type: string
+        next_page:
+          nullable: true
+          type: string
+      required:
+      - items
+      - total
+      title: "_CursorPage[GroupMessageRead]"
     _CursorPage_HosAvailabilityRead_:
       example:
         next_page: next_page
@@ -17884,8 +19599,10 @@ components:
           extras:
             key: ""
           sender_name: sender_name
+          reply_to_message_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sender_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          thread_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           message_hash: message_hash
           read_at: 2000-01-23T04:56:07.000+00:00
@@ -17917,8 +19634,10 @@ components:
           extras:
             key: ""
           sender_name: sender_name
+          reply_to_message_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sender_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          thread_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
           message_hash: message_hash
           read_at: 2000-01-23T04:56:07.000+00:00
@@ -18732,6 +20451,7 @@ components:
           door_open: true
           updated_at: 2000-01-23T04:56:07.000+00:00
           battery_percent: 6.027456183070403
+          remote_probe_statuses_temperature_unit: null
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tsp_slug: tsp_slug
@@ -18741,9 +20461,11 @@ components:
           fleet_ref: fleet_ref
           source_data:
             key: ""
+          battery_voltage_unit: V
           humidity_percent: 1.0246457001441578
           reefer_operational_status: "ON"
           operation_mode: CONTINUOUS
+          zones_temperature_unit: null
           zones:
           - cargo_status: cargo_status
             door_open: true
@@ -18768,6 +20490,7 @@ components:
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           power_on: true
           trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ambient_temperature_unit: K
           pre_trip_status:
             result: result
             completed_at: 2000-01-23T04:56:07.000+00:00
@@ -18815,6 +20538,7 @@ components:
           door_open: true
           updated_at: 2000-01-23T04:56:07.000+00:00
           battery_percent: 6.027456183070403
+          remote_probe_statuses_temperature_unit: null
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tsp_slug: tsp_slug
@@ -18824,9 +20548,11 @@ components:
           fleet_ref: fleet_ref
           source_data:
             key: ""
+          battery_voltage_unit: V
           humidity_percent: 1.0246457001441578
           reefer_operational_status: "ON"
           operation_mode: CONTINUOUS
+          zones_temperature_unit: null
           zones:
           - cargo_status: cargo_status
             door_open: true
@@ -18851,6 +20577,7 @@ components:
           connection_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           power_on: true
           trailer_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ambient_temperature_unit: K
           pre_trip_status:
             result: result
             completed_at: 2000-01-23T04:56:07.000+00:00
@@ -19204,9 +20931,13 @@ components:
           odometer: 1.4658129805029452
           fuel_level: 5.962133916683182
           h3_index_11: 0
+          coolant_temperature_unit: K
+          oil_pressure_unit: Pa
           engine_hours: 5.637376656633329
+          speed_unit: m/s
           speed: 6.027456183070403
           coolant_temperature: 7.061401241503109
+          odometer_unit: m
           driver_name: driver_name
           occurred_at: 2000-01-23T04:56:07.000+00:00
           oil_pressure: 2.3021358869347655
@@ -19230,9 +20961,13 @@ components:
           odometer: 1.4658129805029452
           fuel_level: 5.962133916683182
           h3_index_11: 0
+          coolant_temperature_unit: K
+          oil_pressure_unit: Pa
           engine_hours: 5.637376656633329
+          speed_unit: m/s
           speed: 6.027456183070403
           coolant_temperature: 7.061401241503109
+          odometer_unit: m
           driver_name: driver_name
           occurred_at: 2000-01-23T04:56:07.000+00:00
           oil_pressure: 2.3021358869347655
@@ -19296,8 +21031,10 @@ components:
           extras:
             key: ""
           engine_hours: 2.3021358869347655
+          speed_unit: m/s
           speed: 6.027456183070403
           coolant_temperature: 9.301444243932576
+          odometer_unit: m
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -19311,8 +21048,11 @@ components:
           source_data:
             key: ""
           odometer: 1.4658129805029452
+          coolant_temperature_unit: K
+          oil_pressure_unit: Pa
           source_co_driver_id: source_co_driver_id
           deleted_at: 2000-01-23T04:56:07.000+00:00
+          fuel_value_unit: m3
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
           oil_pressure: 7.061401241503109
@@ -19343,8 +21083,10 @@ components:
           extras:
             key: ""
           engine_hours: 2.3021358869347655
+          speed_unit: m/s
           speed: 6.027456183070403
           coolant_temperature: 9.301444243932576
+          odometer_unit: m
           execution_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           co_driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -19358,8 +21100,11 @@ components:
           source_data:
             key: ""
           odometer: 1.4658129805029452
+          coolant_temperature_unit: K
+          oil_pressure_unit: Pa
           source_co_driver_id: source_co_driver_id
           deleted_at: 2000-01-23T04:56:07.000+00:00
+          fuel_value_unit: m3
           occurred_at: 2000-01-23T04:56:07.000+00:00
           source_driver_id: source_driver_id
           oil_pressure: 7.061401241503109
@@ -19543,8 +21288,10 @@ components:
           segment_end_time: 2000-01-23T04:56:07.000+00:00
           distance: 1.4658129805029452
           odometer_end: 6.027456183070403
+          odometer_start_unit: m
           created_at: 2000-01-23T04:56:07.000+00:00
           processing_date: 2000-01-23
+          odometer_end_unit: null
           deleted_at: 2000-01-23T04:56:07.000+00:00
           odometer_start: 0.8008281904610115
           country_code: country_code
@@ -19554,6 +21301,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           region: region
+          distance_unit: null
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - driver_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           location_count: 5
@@ -19561,8 +21309,10 @@ components:
           segment_end_time: 2000-01-23T04:56:07.000+00:00
           distance: 1.4658129805029452
           odometer_end: 6.027456183070403
+          odometer_start_unit: m
           created_at: 2000-01-23T04:56:07.000+00:00
           processing_date: 2000-01-23
+          odometer_end_unit: null
           deleted_at: 2000-01-23T04:56:07.000+00:00
           odometer_start: 0.8008281904610115
           country_code: country_code
@@ -19572,6 +21322,7 @@ components:
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           region: region
+          distance_unit: null
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         current_page: current_page
       properties:
@@ -19698,9 +21449,11 @@ components:
           last_fuel_level: 1.4658129805029452
           vin: vin
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          last_odometer_reading_unit: m
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tsp_slug: tsp_slug
           source_name: ada
+          last_speed_reading_unit: m/s
           fleet_ref: fleet_ref
           last_engine_hours: 5.637376656633329
           model_type: model_type
@@ -19732,9 +21485,11 @@ components:
           last_fuel_level: 1.4658129805029452
           vin: vin
           fleet_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          last_odometer_reading_unit: m
           vehicle_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           tsp_slug: tsp_slug
           source_name: ada
+          last_speed_reading_unit: m/s
           fleet_ref: fleet_ref
           last_engine_hours: 5.637376656633329
           model_type: model_type

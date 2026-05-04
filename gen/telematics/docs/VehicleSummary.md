@@ -29,6 +29,8 @@ Name | Type | Description | Notes
 **LastOdometerReading** | **NullableFloat32** |  | 
 **LastEngineHours** | **NullableFloat32** |  | 
 **LastSpeedReading** | **NullableFloat32** |  | 
+**LastSpeedReadingUnit** | Pointer to [**SpeedUnit**](SpeedUnit.md) | Unit for last_speed_reading. | [optional] 
+**LastOdometerReadingUnit** | Pointer to [**DistanceUnit**](DistanceUnit.md) | Unit for last_odometer_reading. | [optional] 
 
 ## Methods
 
@@ -769,6 +771,56 @@ SetLastSpeedReading sets LastSpeedReading field to given value.
 `func (o *VehicleSummary) UnsetLastSpeedReading()`
 
 UnsetLastSpeedReading ensures that no value is present for LastSpeedReading, not even an explicit nil
+### GetLastSpeedReadingUnit
+
+`func (o *VehicleSummary) GetLastSpeedReadingUnit() SpeedUnit`
+
+GetLastSpeedReadingUnit returns the LastSpeedReadingUnit field if non-nil, zero value otherwise.
+
+### GetLastSpeedReadingUnitOk
+
+`func (o *VehicleSummary) GetLastSpeedReadingUnitOk() (*SpeedUnit, bool)`
+
+GetLastSpeedReadingUnitOk returns a tuple with the LastSpeedReadingUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastSpeedReadingUnit
+
+`func (o *VehicleSummary) SetLastSpeedReadingUnit(v SpeedUnit)`
+
+SetLastSpeedReadingUnit sets LastSpeedReadingUnit field to given value.
+
+### HasLastSpeedReadingUnit
+
+`func (o *VehicleSummary) HasLastSpeedReadingUnit() bool`
+
+HasLastSpeedReadingUnit returns a boolean if a field has been set.
+
+### GetLastOdometerReadingUnit
+
+`func (o *VehicleSummary) GetLastOdometerReadingUnit() DistanceUnit`
+
+GetLastOdometerReadingUnit returns the LastOdometerReadingUnit field if non-nil, zero value otherwise.
+
+### GetLastOdometerReadingUnitOk
+
+`func (o *VehicleSummary) GetLastOdometerReadingUnitOk() (*DistanceUnit, bool)`
+
+GetLastOdometerReadingUnitOk returns a tuple with the LastOdometerReadingUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastOdometerReadingUnit
+
+`func (o *VehicleSummary) SetLastOdometerReadingUnit(v DistanceUnit)`
+
+SetLastOdometerReadingUnit sets LastOdometerReadingUnit field to given value.
+
+### HasLastOdometerReadingUnit
+
+`func (o *VehicleSummary) HasLastOdometerReadingUnit() bool`
+
+HasLastOdometerReadingUnit returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -85,7 +85,7 @@ No authorization required
 
 ## CreateInvitation
 
-> CreateInvitation(ctx).InvitationCreate(invitationCreate).Execute()
+> InvitationRead CreateInvitation(ctx).InvitationCreate(invitationCreate).Execute()
 
 Create Invitation
 
@@ -108,11 +108,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.InvitationsAPI.CreateInvitation(context.Background()).InvitationCreate(invitationCreate).Execute()
+	resp, r, err := apiClient.InvitationsAPI.CreateInvitation(context.Background()).InvitationCreate(invitationCreate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `InvitationsAPI.CreateInvitation``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `CreateInvitation`: InvitationRead
+	fmt.Fprintf(os.Stdout, "Response from `InvitationsAPI.CreateInvitation`: %v\n", resp)
 }
 ```
 
@@ -131,7 +133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**InvitationRead**](InvitationRead.md)
 
 ### Authorization
 

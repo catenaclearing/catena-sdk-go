@@ -1,13 +1,15 @@
-# MessageReceiverGroupEnum
+# ResourceOperationErrorTypeEnum
 
 ## Enum
 
 
-* `ADMIN` (value: `"admin"`)
+* `AUTH` (value: `"auth"`)
 
-* `DRIVER` (value: `"driver"`)
+* `VALIDATION` (value: `"validation"`)
 
-* `DISPATCHER` (value: `"dispatcher"`)
+* `NETWORK` (value: `"network"`)
+
+* `TSP` (value: `"tsp"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

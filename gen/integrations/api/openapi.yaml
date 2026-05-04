@@ -2314,7 +2314,7 @@ components:
       title: AzugaSLC
     BadRequest:
       example:
-        code: 0
+        code: 6
         detail: detail
         message: Bad Request
       properties:
@@ -2444,7 +2444,7 @@ components:
       title: CompanyIdCreds
     Conflict:
       example:
-        code: 2
+        code: 7
         detail: detail
         message: Conflict
       properties:
@@ -2856,6 +2856,10 @@ components:
           additionalProperties: true
           nullable: true
           type: object
+        last_data_at:
+          format: date-time
+          nullable: true
+          type: string
       required:
       - connection_id
       - created_at
@@ -2979,7 +2983,7 @@ components:
       title: FleetupSLC
     Forbidden:
       example:
-        code: 1
+        code: 5
         detail: detail
         message: Forbidden
       properties:
@@ -2997,7 +3001,7 @@ components:
       title: Forbidden
     GatewayTimeout:
       example:
-        code: 2
+        code: 4
         detail: detail
         message: Gateway Timeout
       properties:
@@ -3102,7 +3106,7 @@ components:
       title: IsaacCreds
     MethodNotAllowed:
       example:
-        code: 5
+        code: 2
         detail: detail
         message: Method Not Allowed
       properties:
@@ -3458,6 +3462,7 @@ components:
       - ifta_summary
       - location_segment
       - message
+      - group_message
       - user
       - vehicle
       - vehicle_location
@@ -3468,6 +3473,7 @@ components:
       - trailer_vehicle_association
       - trailer_location
       - trailer_status
+      - workflow
       title: ResourceEnum
       type: string
     ResourceOperationErrorTypeEnum:
@@ -3482,6 +3488,8 @@ components:
     ResourceOperationLogRead:
       description: API response model for a resource operation log entry.
       example:
+        response_headers:
+          key: response_headers
         updated_at: 2000-01-23T04:56:07.000+00:00
         error_details: error_details
         error_type: auth
@@ -3489,6 +3497,7 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         status: success
+        response_status_code: 0
       properties:
         id:
           description: Unique identifier for the log entry.
@@ -3517,6 +3526,13 @@ components:
         error_details:
           nullable: true
           type: string
+        response_status_code:
+          nullable: true
+          type: integer
+        response_headers:
+          additionalProperties:
+            type: string
+          nullable: true
       required:
       - created_at
       - id
@@ -3547,20 +3563,26 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         source_id: source_id
         logs:
-        - updated_at: 2000-01-23T04:56:07.000+00:00
+        - response_headers:
+            key: response_headers
+          updated_at: 2000-01-23T04:56:07.000+00:00
           error_details: error_details
           error_type: auth
           resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: success
-        - updated_at: 2000-01-23T04:56:07.000+00:00
+          response_status_code: 0
+        - response_headers:
+            key: response_headers
+          updated_at: 2000-01-23T04:56:07.000+00:00
           error_details: error_details
           error_type: auth
           resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           created_at: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: success
+          response_status_code: 0
         source_name: ada
         status: pending
       properties:
@@ -3647,7 +3669,7 @@ components:
       type: string
     RetryAfterDetail:
       example:
-        retry_after_seconds: 3
+        retry_after_seconds: 2
         message: message
       properties:
         retry_after_seconds:
@@ -3774,6 +3796,7 @@ components:
       description: API Model for creating a schedule
       example:
         cursor: cursor
+        last_data_at: 2000-01-23T04:56:07.000+00:00
         max_concurrent_executions: 1
         resource: asset
         execution_interval_seconds: 0
@@ -3803,6 +3826,10 @@ components:
         status:
           $ref: '#/components/schemas/ScheduleStatusEnum'
         cursor:
+          nullable: true
+          type: string
+        last_data_at:
+          format: date-time
           nullable: true
           type: string
       required:
@@ -3854,6 +3881,10 @@ components:
         cursor:
           nullable: true
           type: string
+        last_data_at:
+          format: date-time
+          nullable: true
+          type: string
       required:
       - connection_id
       - consecutive_error_count
@@ -3880,6 +3911,7 @@ components:
       description: API Model for updating a schedule
       example:
         cursor: cursor
+        last_data_at: 2000-01-23T04:56:07.000+00:00
         consecutive_error_count: 1
         max_concurrent_executions: 5
         next_execution_at: 2000-01-23T04:56:07.000+00:00
@@ -3906,6 +3938,10 @@ components:
           nullable: true
           type: string
         cursor:
+          nullable: true
+          type: string
+        last_data_at:
+          format: date-time
           nullable: true
           type: string
       title: ScheduleUpdate
@@ -4050,9 +4086,9 @@ components:
       title: TokenCreds
     TooManyRequests:
       example:
-        code: 9
+        code: 3
         detail:
-          retry_after_seconds: 3
+          retry_after_seconds: 2
           message: message
         message: Too Many Requests
       properties:
@@ -4340,7 +4376,7 @@ components:
       title: TspIntegrationsRead
     Unauthorized:
       example:
-        code: 6
+        code: 1
         detail: detail
         message: Unauthorized
       properties:
@@ -4358,7 +4394,7 @@ components:
       title: Unauthorized
     UnprocessableEntity:
       example:
-        code: 7
+        code: 9
         detail:
         - path: path
           input: input
@@ -4608,20 +4644,26 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
           logs:
-          - updated_at: 2000-01-23T04:56:07.000+00:00
+          - response_headers:
+              key: response_headers
+            updated_at: 2000-01-23T04:56:07.000+00:00
             error_details: error_details
             error_type: auth
             resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             created_at: 2000-01-23T04:56:07.000+00:00
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             status: success
-          - updated_at: 2000-01-23T04:56:07.000+00:00
+            response_status_code: 0
+          - response_headers:
+              key: response_headers
+            updated_at: 2000-01-23T04:56:07.000+00:00
             error_details: error_details
             error_type: auth
             resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             created_at: 2000-01-23T04:56:07.000+00:00
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             status: success
+            response_status_code: 0
           source_name: ada
           status: pending
         - fleet_ref: fleet_ref
@@ -4637,20 +4679,26 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           source_id: source_id
           logs:
-          - updated_at: 2000-01-23T04:56:07.000+00:00
+          - response_headers:
+              key: response_headers
+            updated_at: 2000-01-23T04:56:07.000+00:00
             error_details: error_details
             error_type: auth
             resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             created_at: 2000-01-23T04:56:07.000+00:00
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             status: success
-          - updated_at: 2000-01-23T04:56:07.000+00:00
+            response_status_code: 0
+          - response_headers:
+              key: response_headers
+            updated_at: 2000-01-23T04:56:07.000+00:00
             error_details: error_details
             error_type: auth
             resource_operation_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             created_at: 2000-01-23T04:56:07.000+00:00
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             status: success
+            response_status_code: 0
           source_name: ada
           status: pending
         current_page: current_page

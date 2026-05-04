@@ -34,8 +34,8 @@ type ComplianceRegulationAPI interface {
 	CreateDvirLog(ctx context.Context) ApiCreateDvirLogRequest
 
 	// CreateDvirLogExecute executes the request
-	//  @return ResourceOperationAccept
-	CreateDvirLogExecute(r ApiCreateDvirLogRequest) (*ResourceOperationAccept, *http.Response, error)
+	//  @return ResourceOperation
+	CreateDvirLogExecute(r ApiCreateDvirLogRequest) (*ResourceOperation, *http.Response, error)
 
 	/*
 		GetDvirLogDefects Get Dvir Log Defects
@@ -175,6 +175,7 @@ type ApiCreateDvirLogRequest struct {
 	ctx           context.Context
 	ApiService    ComplianceRegulationAPI
 	dvirLogCreate *DvirLogCreate
+	isSync        *bool
 }
 
 func (r ApiCreateDvirLogRequest) DvirLogCreate(dvirLogCreate DvirLogCreate) ApiCreateDvirLogRequest {
@@ -182,7 +183,13 @@ func (r ApiCreateDvirLogRequest) DvirLogCreate(dvirLogCreate DvirLogCreate) ApiC
 	return r
 }
 
-func (r ApiCreateDvirLogRequest) Execute() (*ResourceOperationAccept, *http.Response, error) {
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiCreateDvirLogRequest) IsSync(isSync bool) ApiCreateDvirLogRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiCreateDvirLogRequest) Execute() (*ResourceOperation, *http.Response, error) {
 	return r.ApiService.CreateDvirLogExecute(r)
 }
 
@@ -203,13 +210,13 @@ func (a *ComplianceRegulationAPIService) CreateDvirLog(ctx context.Context) ApiC
 
 // Execute executes the request
 //
-//	@return ResourceOperationAccept
-func (a *ComplianceRegulationAPIService) CreateDvirLogExecute(r ApiCreateDvirLogRequest) (*ResourceOperationAccept, *http.Response, error) {
+//	@return ResourceOperation
+func (a *ComplianceRegulationAPIService) CreateDvirLogExecute(r ApiCreateDvirLogRequest) (*ResourceOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ResourceOperationAccept
+		localVarReturnValue *ResourceOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComplianceRegulationAPIService.CreateDvirLog")
@@ -226,6 +233,12 @@ func (a *ComplianceRegulationAPIService) CreateDvirLogExecute(r ApiCreateDvirLog
 		return localVarReturnValue, nil, reportError("dvirLogCreate is required and must be specified")
 	}
 
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -368,6 +381,17 @@ func (a *ComplianceRegulationAPIService) CreateDvirLogExecute(r ApiCreateDvirLog
 		}
 		if localVarHTTPResponse.StatusCode == 501 {
 			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

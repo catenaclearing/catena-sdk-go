@@ -22,7 +22,6 @@ var _ MappedNullable = &UserCreate{}
 type UserCreate struct {
 	// Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing.
 	ConnectionId            string                        `json:"connection_id"`
-	FleetRef                NullableString                `json:"fleet_ref,omitempty"`
 	Username                NullableString                `json:"username,omitempty"`
 	IsActive                NullableBool                  `json:"is_active,omitempty"`
 	Status                  NullableUserStatusEnum        `json:"status,omitempty"`
@@ -92,49 +91,6 @@ func (o *UserCreate) GetConnectionIdOk() (*string, bool) {
 // SetConnectionId sets field value
 func (o *UserCreate) SetConnectionId(v string) {
 	o.ConnectionId = v
-}
-
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UserCreate) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.FleetRef.Get()
-}
-
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UserCreate) GetFleetRefOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.FleetRef.Get(), o.FleetRef.IsSet()
-}
-
-// HasFleetRef returns a boolean if a field has been set.
-func (o *UserCreate) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
-func (o *UserCreate) SetFleetRef(v string) {
-	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *UserCreate) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *UserCreate) UnsetFleetRef() {
-	o.FleetRef.Unset()
 }
 
 // GetUsername returns the Username field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1180,9 +1136,6 @@ func (o UserCreate) MarshalJSON() ([]byte, error) {
 func (o UserCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["connection_id"] = o.ConnectionId
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
 	if o.Username.IsSet() {
 		toSerialize["username"] = o.Username.Get()
 	}
@@ -1299,7 +1252,6 @@ func (o *UserCreate) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "connection_id")
-		delete(additionalProperties, "fleet_ref")
 		delete(additionalProperties, "username")
 		delete(additionalProperties, "is_active")
 		delete(additionalProperties, "status")

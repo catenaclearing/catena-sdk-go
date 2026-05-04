@@ -463,7 +463,7 @@ import (
 )
 
 func main() {
-	eventName := openapiclient.WebhookEventNameEnum("driver_vehicle_association.added") // WebhookEventNameEnum |  (optional)
+	eventName := openapiclient.WebhookEventNameEnum("dvir_log.added") // WebhookEventNameEnum |  (optional)
 	status := openapiclient.WebhookStatusEnum("active") // WebhookStatusEnum |  (optional)
 	cursor := "cursor_example" // string | Cursor for the next page (optional)
 	size := int32(56) // int32 | Page size (optional) (default to 300)

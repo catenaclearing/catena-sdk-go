@@ -47,7 +47,13 @@ type VehicleRegionSegmentRead struct {
 	OdometerEnd    NullableFloat32 `json:"odometer_end,omitempty"`
 	Distance       NullableFloat32 `json:"distance,omitempty"`
 	// Number of location samples that belong to the segment.
-	LocationCount        int32 `json:"location_count"`
+	LocationCount int32 `json:"location_count"`
+	// Unit for odometer_start.
+	OdometerStartUnit *DistanceUnit `json:"odometer_start_unit,omitempty"`
+	// Unit for odometer_end.
+	OdometerEndUnit *DistanceUnit `json:"odometer_end_unit,omitempty"`
+	// Unit for distance.
+	DistanceUnit         *DistanceUnit `json:"distance_unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -666,6 +672,102 @@ func (o *VehicleRegionSegmentRead) SetLocationCount(v int32) {
 	o.LocationCount = v
 }
 
+// GetOdometerStartUnit returns the OdometerStartUnit field value if set, zero value otherwise.
+func (o *VehicleRegionSegmentRead) GetOdometerStartUnit() DistanceUnit {
+	if o == nil || IsNil(o.OdometerStartUnit) {
+		var ret DistanceUnit
+		return ret
+	}
+	return *o.OdometerStartUnit
+}
+
+// GetOdometerStartUnitOk returns a tuple with the OdometerStartUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleRegionSegmentRead) GetOdometerStartUnitOk() (*DistanceUnit, bool) {
+	if o == nil || IsNil(o.OdometerStartUnit) {
+		return nil, false
+	}
+	return o.OdometerStartUnit, true
+}
+
+// HasOdometerStartUnit returns a boolean if a field has been set.
+func (o *VehicleRegionSegmentRead) HasOdometerStartUnit() bool {
+	if o != nil && !IsNil(o.OdometerStartUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetOdometerStartUnit gets a reference to the given DistanceUnit and assigns it to the OdometerStartUnit field.
+func (o *VehicleRegionSegmentRead) SetOdometerStartUnit(v DistanceUnit) {
+	o.OdometerStartUnit = &v
+}
+
+// GetOdometerEndUnit returns the OdometerEndUnit field value if set, zero value otherwise.
+func (o *VehicleRegionSegmentRead) GetOdometerEndUnit() DistanceUnit {
+	if o == nil || IsNil(o.OdometerEndUnit) {
+		var ret DistanceUnit
+		return ret
+	}
+	return *o.OdometerEndUnit
+}
+
+// GetOdometerEndUnitOk returns a tuple with the OdometerEndUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleRegionSegmentRead) GetOdometerEndUnitOk() (*DistanceUnit, bool) {
+	if o == nil || IsNil(o.OdometerEndUnit) {
+		return nil, false
+	}
+	return o.OdometerEndUnit, true
+}
+
+// HasOdometerEndUnit returns a boolean if a field has been set.
+func (o *VehicleRegionSegmentRead) HasOdometerEndUnit() bool {
+	if o != nil && !IsNil(o.OdometerEndUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetOdometerEndUnit gets a reference to the given DistanceUnit and assigns it to the OdometerEndUnit field.
+func (o *VehicleRegionSegmentRead) SetOdometerEndUnit(v DistanceUnit) {
+	o.OdometerEndUnit = &v
+}
+
+// GetDistanceUnit returns the DistanceUnit field value if set, zero value otherwise.
+func (o *VehicleRegionSegmentRead) GetDistanceUnit() DistanceUnit {
+	if o == nil || IsNil(o.DistanceUnit) {
+		var ret DistanceUnit
+		return ret
+	}
+	return *o.DistanceUnit
+}
+
+// GetDistanceUnitOk returns a tuple with the DistanceUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleRegionSegmentRead) GetDistanceUnitOk() (*DistanceUnit, bool) {
+	if o == nil || IsNil(o.DistanceUnit) {
+		return nil, false
+	}
+	return o.DistanceUnit, true
+}
+
+// HasDistanceUnit returns a boolean if a field has been set.
+func (o *VehicleRegionSegmentRead) HasDistanceUnit() bool {
+	if o != nil && !IsNil(o.DistanceUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetDistanceUnit gets a reference to the given DistanceUnit and assigns it to the DistanceUnit field.
+func (o *VehicleRegionSegmentRead) SetDistanceUnit(v DistanceUnit) {
+	o.DistanceUnit = &v
+}
+
 func (o VehicleRegionSegmentRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -710,6 +812,15 @@ func (o VehicleRegionSegmentRead) ToMap() (map[string]interface{}, error) {
 		toSerialize["distance"] = o.Distance.Get()
 	}
 	toSerialize["location_count"] = o.LocationCount
+	if !IsNil(o.OdometerStartUnit) {
+		toSerialize["odometer_start_unit"] = o.OdometerStartUnit
+	}
+	if !IsNil(o.OdometerEndUnit) {
+		toSerialize["odometer_end_unit"] = o.OdometerEndUnit
+	}
+	if !IsNil(o.DistanceUnit) {
+		toSerialize["distance_unit"] = o.DistanceUnit
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -780,6 +891,9 @@ func (o *VehicleRegionSegmentRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "odometer_end")
 		delete(additionalProperties, "distance")
 		delete(additionalProperties, "location_count")
+		delete(additionalProperties, "odometer_start_unit")
+		delete(additionalProperties, "odometer_end_unit")
+		delete(additionalProperties, "distance_unit")
 		o.AdditionalProperties = additionalProperties
 	}
 

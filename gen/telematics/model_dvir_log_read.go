@@ -57,6 +57,7 @@ type DvirLogRead struct {
 	AuthorityAddress     NullableString         `json:"authority_address,omitempty"`
 	DurationSeconds      NullableFloat32        `json:"duration_seconds,omitempty"`
 	OdometerKm           NullableFloat32        `json:"odometer_km,omitempty"`
+	Odometer             NullableFloat32        `json:"odometer,omitempty"`
 	EngineHours          NullableFloat32        `json:"engine_hours,omitempty"`
 	Location             NullableLocation1      `json:"location,omitempty"`
 	H3Index11            NullableInt32          `json:"h3_index_11,omitempty"`
@@ -1130,6 +1131,49 @@ func (o *DvirLogRead) UnsetOdometerKm() {
 	o.OdometerKm.Unset()
 }
 
+// GetOdometer returns the Odometer field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DvirLogRead) GetOdometer() float32 {
+	if o == nil || IsNil(o.Odometer.Get()) {
+		var ret float32
+		return ret
+	}
+	return *o.Odometer.Get()
+}
+
+// GetOdometerOk returns a tuple with the Odometer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DvirLogRead) GetOdometerOk() (*float32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Odometer.Get(), o.Odometer.IsSet()
+}
+
+// HasOdometer returns a boolean if a field has been set.
+func (o *DvirLogRead) HasOdometer() bool {
+	if o != nil && o.Odometer.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOdometer gets a reference to the given NullableFloat32 and assigns it to the Odometer field.
+func (o *DvirLogRead) SetOdometer(v float32) {
+	o.Odometer.Set(&v)
+}
+
+// SetOdometerNil sets the value for Odometer to be an explicit nil
+func (o *DvirLogRead) SetOdometerNil() {
+	o.Odometer.Set(nil)
+}
+
+// UnsetOdometer ensures that no value is present for Odometer, not even an explicit nil
+func (o *DvirLogRead) UnsetOdometer() {
+	o.Odometer.Unset()
+}
+
 // GetEngineHours returns the EngineHours field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DvirLogRead) GetEngineHours() float32 {
 	if o == nil || IsNil(o.EngineHours.Get()) {
@@ -1628,6 +1672,9 @@ func (o DvirLogRead) ToMap() (map[string]interface{}, error) {
 	if o.OdometerKm.IsSet() {
 		toSerialize["odometer_km"] = o.OdometerKm.Get()
 	}
+	if o.Odometer.IsSet() {
+		toSerialize["odometer"] = o.Odometer.Get()
+	}
 	if o.EngineHours.IsSet() {
 		toSerialize["engine_hours"] = o.EngineHours.Get()
 	}
@@ -1736,6 +1783,7 @@ func (o *DvirLogRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "authority_address")
 		delete(additionalProperties, "duration_seconds")
 		delete(additionalProperties, "odometer_km")
+		delete(additionalProperties, "odometer")
 		delete(additionalProperties, "engine_hours")
 		delete(additionalProperties, "location")
 		delete(additionalProperties, "h3_index_11")

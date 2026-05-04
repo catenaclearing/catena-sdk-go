@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **FuelVendor** | Pointer to **NullableString** |  | [optional] 
 **TotalCost** | Pointer to **NullableString** |  | [optional] 
 **Currency** | Pointer to **NullableString** |  | [optional] 
+**OdometerUnit** | Pointer to [**DistanceUnit**](DistanceUnit.md) | Unit for odometer. | [optional] 
 
 ## Methods
 
@@ -1056,6 +1057,31 @@ HasCurrency returns a boolean if a field has been set.
 `func (o *FuelTransactionRead) UnsetCurrency()`
 
 UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
+### GetOdometerUnit
+
+`func (o *FuelTransactionRead) GetOdometerUnit() DistanceUnit`
+
+GetOdometerUnit returns the OdometerUnit field if non-nil, zero value otherwise.
+
+### GetOdometerUnitOk
+
+`func (o *FuelTransactionRead) GetOdometerUnitOk() (*DistanceUnit, bool)`
+
+GetOdometerUnitOk returns a tuple with the OdometerUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdometerUnit
+
+`func (o *FuelTransactionRead) SetOdometerUnit(v DistanceUnit)`
+
+SetOdometerUnit sets OdometerUnit field to given value.
+
+### HasOdometerUnit
+
+`func (o *FuelTransactionRead) HasOdometerUnit() bool`
+
+HasOdometerUnit returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

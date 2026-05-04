@@ -21,18 +21,15 @@ var _ MappedNullable = &MessageCreate{}
 // MessageCreate Message model for creating new records
 type MessageCreate struct {
 	// Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing.
-	ConnectionId           string                           `json:"connection_id"`
-	FleetRef               NullableString                   `json:"fleet_ref,omitempty"`
-	SourceSenderId         NullableString                   `json:"source_sender_id,omitempty"`
-	SourceRecipientIds     []string                         `json:"source_recipient_ids,omitempty"`
-	RecipientGroup         NullableMessageReceiverGroupEnum `json:"recipient_group,omitempty"`
-	SenderGroup            NullableMessageSenderGroupEnum   `json:"sender_group,omitempty"`
-	MessageText            NullableString                   `json:"message_text,omitempty"`
-	Mode                   NullableMessageModeEnum          `json:"mode,omitempty"`
-	Priority               NullableMessagePriorityEnum      `json:"priority,omitempty"`
-	SourceThreadId         NullableString                   `json:"source_thread_id,omitempty"`
-	SourceReplyToMessageId NullableString                   `json:"source_reply_to_message_id,omitempty"`
-	AdditionalProperties   map[string]interface{}
+	ConnectionId string `json:"connection_id"`
+	// Identifier for the sender
+	SenderId string `json:"sender_id"`
+	// Identifier for the recipient
+	RecipientId          string                      `json:"recipient_id"`
+	MessageText          NullableString              `json:"message_text,omitempty"`
+	Priority             NullableMessagePriorityEnum `json:"priority,omitempty"`
+	ReplyToMessageId     NullableString              `json:"reply_to_message_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MessageCreate MessageCreate
@@ -41,9 +38,11 @@ type _MessageCreate MessageCreate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMessageCreate(connectionId string) *MessageCreate {
+func NewMessageCreate(connectionId string, senderId string, recipientId string) *MessageCreate {
 	this := MessageCreate{}
 	this.ConnectionId = connectionId
+	this.SenderId = senderId
+	this.RecipientId = recipientId
 	return &this
 }
 
@@ -79,209 +78,52 @@ func (o *MessageCreate) SetConnectionId(v string) {
 	o.ConnectionId = v
 }
 
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MessageCreate) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+// GetSenderId returns the SenderId field value
+func (o *MessageCreate) GetSenderId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FleetRef.Get()
+
+	return o.SenderId
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetSenderIdOk returns a tuple with the SenderId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MessageCreate) GetFleetRefOk() (*string, bool) {
+func (o *MessageCreate) GetSenderIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.FleetRef.Get(), o.FleetRef.IsSet()
+	return &o.SenderId, true
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *MessageCreate) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
-		return true
-	}
-
-	return false
+// SetSenderId sets field value
+func (o *MessageCreate) SetSenderId(v string) {
+	o.SenderId = v
 }
 
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
-func (o *MessageCreate) SetFleetRef(v string) {
-	o.FleetRef.Set(&v)
-}
-
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *MessageCreate) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
-}
-
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *MessageCreate) UnsetFleetRef() {
-	o.FleetRef.Unset()
-}
-
-// GetSourceSenderId returns the SourceSenderId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MessageCreate) GetSourceSenderId() string {
-	if o == nil || IsNil(o.SourceSenderId.Get()) {
+// GetRecipientId returns the RecipientId field value
+func (o *MessageCreate) GetRecipientId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SourceSenderId.Get()
+
+	return o.RecipientId
 }
 
-// GetSourceSenderIdOk returns a tuple with the SourceSenderId field value if set, nil otherwise
+// GetRecipientIdOk returns a tuple with the RecipientId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MessageCreate) GetSourceSenderIdOk() (*string, bool) {
+func (o *MessageCreate) GetRecipientIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SourceSenderId.Get(), o.SourceSenderId.IsSet()
+	return &o.RecipientId, true
 }
 
-// HasSourceSenderId returns a boolean if a field has been set.
-func (o *MessageCreate) HasSourceSenderId() bool {
-	if o != nil && o.SourceSenderId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceSenderId gets a reference to the given NullableString and assigns it to the SourceSenderId field.
-func (o *MessageCreate) SetSourceSenderId(v string) {
-	o.SourceSenderId.Set(&v)
-}
-
-// SetSourceSenderIdNil sets the value for SourceSenderId to be an explicit nil
-func (o *MessageCreate) SetSourceSenderIdNil() {
-	o.SourceSenderId.Set(nil)
-}
-
-// UnsetSourceSenderId ensures that no value is present for SourceSenderId, not even an explicit nil
-func (o *MessageCreate) UnsetSourceSenderId() {
-	o.SourceSenderId.Unset()
-}
-
-// GetSourceRecipientIds returns the SourceRecipientIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MessageCreate) GetSourceRecipientIds() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-	return o.SourceRecipientIds
-}
-
-// GetSourceRecipientIdsOk returns a tuple with the SourceRecipientIds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MessageCreate) GetSourceRecipientIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.SourceRecipientIds) {
-		return nil, false
-	}
-	return o.SourceRecipientIds, true
-}
-
-// HasSourceRecipientIds returns a boolean if a field has been set.
-func (o *MessageCreate) HasSourceRecipientIds() bool {
-	if o != nil && !IsNil(o.SourceRecipientIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceRecipientIds gets a reference to the given []string and assigns it to the SourceRecipientIds field.
-func (o *MessageCreate) SetSourceRecipientIds(v []string) {
-	o.SourceRecipientIds = v
-}
-
-// GetRecipientGroup returns the RecipientGroup field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MessageCreate) GetRecipientGroup() MessageReceiverGroupEnum {
-	if o == nil || IsNil(o.RecipientGroup.Get()) {
-		var ret MessageReceiverGroupEnum
-		return ret
-	}
-	return *o.RecipientGroup.Get()
-}
-
-// GetRecipientGroupOk returns a tuple with the RecipientGroup field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MessageCreate) GetRecipientGroupOk() (*MessageReceiverGroupEnum, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.RecipientGroup.Get(), o.RecipientGroup.IsSet()
-}
-
-// HasRecipientGroup returns a boolean if a field has been set.
-func (o *MessageCreate) HasRecipientGroup() bool {
-	if o != nil && o.RecipientGroup.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetRecipientGroup gets a reference to the given NullableMessageReceiverGroupEnum and assigns it to the RecipientGroup field.
-func (o *MessageCreate) SetRecipientGroup(v MessageReceiverGroupEnum) {
-	o.RecipientGroup.Set(&v)
-}
-
-// SetRecipientGroupNil sets the value for RecipientGroup to be an explicit nil
-func (o *MessageCreate) SetRecipientGroupNil() {
-	o.RecipientGroup.Set(nil)
-}
-
-// UnsetRecipientGroup ensures that no value is present for RecipientGroup, not even an explicit nil
-func (o *MessageCreate) UnsetRecipientGroup() {
-	o.RecipientGroup.Unset()
-}
-
-// GetSenderGroup returns the SenderGroup field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MessageCreate) GetSenderGroup() MessageSenderGroupEnum {
-	if o == nil || IsNil(o.SenderGroup.Get()) {
-		var ret MessageSenderGroupEnum
-		return ret
-	}
-	return *o.SenderGroup.Get()
-}
-
-// GetSenderGroupOk returns a tuple with the SenderGroup field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MessageCreate) GetSenderGroupOk() (*MessageSenderGroupEnum, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.SenderGroup.Get(), o.SenderGroup.IsSet()
-}
-
-// HasSenderGroup returns a boolean if a field has been set.
-func (o *MessageCreate) HasSenderGroup() bool {
-	if o != nil && o.SenderGroup.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSenderGroup gets a reference to the given NullableMessageSenderGroupEnum and assigns it to the SenderGroup field.
-func (o *MessageCreate) SetSenderGroup(v MessageSenderGroupEnum) {
-	o.SenderGroup.Set(&v)
-}
-
-// SetSenderGroupNil sets the value for SenderGroup to be an explicit nil
-func (o *MessageCreate) SetSenderGroupNil() {
-	o.SenderGroup.Set(nil)
-}
-
-// UnsetSenderGroup ensures that no value is present for SenderGroup, not even an explicit nil
-func (o *MessageCreate) UnsetSenderGroup() {
-	o.SenderGroup.Unset()
+// SetRecipientId sets field value
+func (o *MessageCreate) SetRecipientId(v string) {
+	o.RecipientId = v
 }
 
 // GetMessageText returns the MessageText field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -327,49 +169,6 @@ func (o *MessageCreate) UnsetMessageText() {
 	o.MessageText.Unset()
 }
 
-// GetMode returns the Mode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MessageCreate) GetMode() MessageModeEnum {
-	if o == nil || IsNil(o.Mode.Get()) {
-		var ret MessageModeEnum
-		return ret
-	}
-	return *o.Mode.Get()
-}
-
-// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MessageCreate) GetModeOk() (*MessageModeEnum, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Mode.Get(), o.Mode.IsSet()
-}
-
-// HasMode returns a boolean if a field has been set.
-func (o *MessageCreate) HasMode() bool {
-	if o != nil && o.Mode.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetMode gets a reference to the given NullableMessageModeEnum and assigns it to the Mode field.
-func (o *MessageCreate) SetMode(v MessageModeEnum) {
-	o.Mode.Set(&v)
-}
-
-// SetModeNil sets the value for Mode to be an explicit nil
-func (o *MessageCreate) SetModeNil() {
-	o.Mode.Set(nil)
-}
-
-// UnsetMode ensures that no value is present for Mode, not even an explicit nil
-func (o *MessageCreate) UnsetMode() {
-	o.Mode.Unset()
-}
-
 // GetPriority returns the Priority field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MessageCreate) GetPriority() MessagePriorityEnum {
 	if o == nil || IsNil(o.Priority.Get()) {
@@ -413,90 +212,47 @@ func (o *MessageCreate) UnsetPriority() {
 	o.Priority.Unset()
 }
 
-// GetSourceThreadId returns the SourceThreadId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MessageCreate) GetSourceThreadId() string {
-	if o == nil || IsNil(o.SourceThreadId.Get()) {
+// GetReplyToMessageId returns the ReplyToMessageId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MessageCreate) GetReplyToMessageId() string {
+	if o == nil || IsNil(o.ReplyToMessageId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.SourceThreadId.Get()
+	return *o.ReplyToMessageId.Get()
 }
 
-// GetSourceThreadIdOk returns a tuple with the SourceThreadId field value if set, nil otherwise
+// GetReplyToMessageIdOk returns a tuple with the ReplyToMessageId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MessageCreate) GetSourceThreadIdOk() (*string, bool) {
+func (o *MessageCreate) GetReplyToMessageIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SourceThreadId.Get(), o.SourceThreadId.IsSet()
+	return o.ReplyToMessageId.Get(), o.ReplyToMessageId.IsSet()
 }
 
-// HasSourceThreadId returns a boolean if a field has been set.
-func (o *MessageCreate) HasSourceThreadId() bool {
-	if o != nil && o.SourceThreadId.IsSet() {
+// HasReplyToMessageId returns a boolean if a field has been set.
+func (o *MessageCreate) HasReplyToMessageId() bool {
+	if o != nil && o.ReplyToMessageId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceThreadId gets a reference to the given NullableString and assigns it to the SourceThreadId field.
-func (o *MessageCreate) SetSourceThreadId(v string) {
-	o.SourceThreadId.Set(&v)
+// SetReplyToMessageId gets a reference to the given NullableString and assigns it to the ReplyToMessageId field.
+func (o *MessageCreate) SetReplyToMessageId(v string) {
+	o.ReplyToMessageId.Set(&v)
 }
 
-// SetSourceThreadIdNil sets the value for SourceThreadId to be an explicit nil
-func (o *MessageCreate) SetSourceThreadIdNil() {
-	o.SourceThreadId.Set(nil)
+// SetReplyToMessageIdNil sets the value for ReplyToMessageId to be an explicit nil
+func (o *MessageCreate) SetReplyToMessageIdNil() {
+	o.ReplyToMessageId.Set(nil)
 }
 
-// UnsetSourceThreadId ensures that no value is present for SourceThreadId, not even an explicit nil
-func (o *MessageCreate) UnsetSourceThreadId() {
-	o.SourceThreadId.Unset()
-}
-
-// GetSourceReplyToMessageId returns the SourceReplyToMessageId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MessageCreate) GetSourceReplyToMessageId() string {
-	if o == nil || IsNil(o.SourceReplyToMessageId.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.SourceReplyToMessageId.Get()
-}
-
-// GetSourceReplyToMessageIdOk returns a tuple with the SourceReplyToMessageId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MessageCreate) GetSourceReplyToMessageIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.SourceReplyToMessageId.Get(), o.SourceReplyToMessageId.IsSet()
-}
-
-// HasSourceReplyToMessageId returns a boolean if a field has been set.
-func (o *MessageCreate) HasSourceReplyToMessageId() bool {
-	if o != nil && o.SourceReplyToMessageId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceReplyToMessageId gets a reference to the given NullableString and assigns it to the SourceReplyToMessageId field.
-func (o *MessageCreate) SetSourceReplyToMessageId(v string) {
-	o.SourceReplyToMessageId.Set(&v)
-}
-
-// SetSourceReplyToMessageIdNil sets the value for SourceReplyToMessageId to be an explicit nil
-func (o *MessageCreate) SetSourceReplyToMessageIdNil() {
-	o.SourceReplyToMessageId.Set(nil)
-}
-
-// UnsetSourceReplyToMessageId ensures that no value is present for SourceReplyToMessageId, not even an explicit nil
-func (o *MessageCreate) UnsetSourceReplyToMessageId() {
-	o.SourceReplyToMessageId.Unset()
+// UnsetReplyToMessageId ensures that no value is present for ReplyToMessageId, not even an explicit nil
+func (o *MessageCreate) UnsetReplyToMessageId() {
+	o.ReplyToMessageId.Unset()
 }
 
 func (o MessageCreate) MarshalJSON() ([]byte, error) {
@@ -510,35 +266,16 @@ func (o MessageCreate) MarshalJSON() ([]byte, error) {
 func (o MessageCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["connection_id"] = o.ConnectionId
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
-	}
-	if o.SourceSenderId.IsSet() {
-		toSerialize["source_sender_id"] = o.SourceSenderId.Get()
-	}
-	if o.SourceRecipientIds != nil {
-		toSerialize["source_recipient_ids"] = o.SourceRecipientIds
-	}
-	if o.RecipientGroup.IsSet() {
-		toSerialize["recipient_group"] = o.RecipientGroup.Get()
-	}
-	if o.SenderGroup.IsSet() {
-		toSerialize["sender_group"] = o.SenderGroup.Get()
-	}
+	toSerialize["sender_id"] = o.SenderId
+	toSerialize["recipient_id"] = o.RecipientId
 	if o.MessageText.IsSet() {
 		toSerialize["message_text"] = o.MessageText.Get()
-	}
-	if o.Mode.IsSet() {
-		toSerialize["mode"] = o.Mode.Get()
 	}
 	if o.Priority.IsSet() {
 		toSerialize["priority"] = o.Priority.Get()
 	}
-	if o.SourceThreadId.IsSet() {
-		toSerialize["source_thread_id"] = o.SourceThreadId.Get()
-	}
-	if o.SourceReplyToMessageId.IsSet() {
-		toSerialize["source_reply_to_message_id"] = o.SourceReplyToMessageId.Get()
+	if o.ReplyToMessageId.IsSet() {
+		toSerialize["reply_to_message_id"] = o.ReplyToMessageId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -554,6 +291,8 @@ func (o *MessageCreate) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"connection_id",
+		"sender_id",
+		"recipient_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -584,16 +323,11 @@ func (o *MessageCreate) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "connection_id")
-		delete(additionalProperties, "fleet_ref")
-		delete(additionalProperties, "source_sender_id")
-		delete(additionalProperties, "source_recipient_ids")
-		delete(additionalProperties, "recipient_group")
-		delete(additionalProperties, "sender_group")
+		delete(additionalProperties, "sender_id")
+		delete(additionalProperties, "recipient_id")
 		delete(additionalProperties, "message_text")
-		delete(additionalProperties, "mode")
 		delete(additionalProperties, "priority")
-		delete(additionalProperties, "source_thread_id")
-		delete(additionalProperties, "source_reply_to_message_id")
+		delete(additionalProperties, "reply_to_message_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

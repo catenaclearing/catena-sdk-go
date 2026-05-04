@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **ConsecutiveErrorThreshold** | **int32** | The number of consecutive errors allowed before the schedule is automatically set to INACTIVE. | 
 **MaxConcurrentExecutions** | **int32** | The maximum number of concurrent executions allowed for this schedule. | 
 **Cursor** | Pointer to **NullableString** |  | [optional] 
+**LastDataAt** | Pointer to **NullableTime** |  | [optional] 
 
 ## Methods
 
@@ -228,6 +229,41 @@ HasCursor returns a boolean if a field has been set.
 `func (o *ScheduleRead) UnsetCursor()`
 
 UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
+### GetLastDataAt
+
+`func (o *ScheduleRead) GetLastDataAt() time.Time`
+
+GetLastDataAt returns the LastDataAt field if non-nil, zero value otherwise.
+
+### GetLastDataAtOk
+
+`func (o *ScheduleRead) GetLastDataAtOk() (*time.Time, bool)`
+
+GetLastDataAtOk returns a tuple with the LastDataAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastDataAt
+
+`func (o *ScheduleRead) SetLastDataAt(v time.Time)`
+
+SetLastDataAt sets LastDataAt field to given value.
+
+### HasLastDataAt
+
+`func (o *ScheduleRead) HasLastDataAt() bool`
+
+HasLastDataAt returns a boolean if a field has been set.
+
+### SetLastDataAtNil
+
+`func (o *ScheduleRead) SetLastDataAtNil(b bool)`
+
+ SetLastDataAtNil sets the value for LastDataAt to be an explicit nil
+
+### UnsetLastDataAt
+`func (o *ScheduleRead) UnsetLastDataAt()`
+
+UnsetLastDataAt ensures that no value is present for LastDataAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -41,28 +41,38 @@ type VehicleLocationRead struct {
 	// Unique identifier of the record in the TSP. **Note: we generate a unique composite key based on available fields if the TSP does not provide an unique ID.**
 	SourceId string `json:"source_id"`
 	// SHA-256 hash of the source data payload. **Note: we use it internally for idempotence and deduplication.**
-	SourceDataHash       string                  `json:"source_data_hash"`
-	OccurredAt           NullableTime            `json:"occurred_at,omitempty"`
-	ExecutionId          NullableString          `json:"execution_id,omitempty"`
-	ScheduleId           NullableString          `json:"schedule_id,omitempty"`
-	Extras               map[string]interface{}  `json:"extras,omitempty"`
-	VehicleId            NullableString          `json:"vehicle_id,omitempty"`
-	DriverId             NullableString          `json:"driver_id,omitempty"`
-	CoDriverId           NullableString          `json:"co_driver_id,omitempty"`
-	SourceDriverId       NullableString          `json:"source_driver_id,omitempty"`
-	SourceVehicleId      NullableString          `json:"source_vehicle_id,omitempty"`
-	SourceCoDriverId     NullableString          `json:"source_co_driver_id,omitempty"`
-	Location             NullableLocation5       `json:"location,omitempty"`
-	H3Index11            NullableInt32           `json:"h3_index_11,omitempty"`
-	Speed                NullableFloat32         `json:"speed,omitempty"`
-	Odometer             NullableFloat32         `json:"odometer,omitempty"`
-	FuelLevel            NullableFloat32         `json:"fuel_level,omitempty"`
-	FuelValue            NullableFloat32         `json:"fuel_value,omitempty"`
-	EngineHours          NullableFloat32         `json:"engine_hours,omitempty"`
-	OilPressure          NullableFloat32         `json:"oil_pressure,omitempty"`
-	CoolantTemperature   NullableFloat32         `json:"coolant_temperature,omitempty"`
-	InferredAddress      NullableInferredAddress `json:"inferred_address,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SourceDataHash     string                  `json:"source_data_hash"`
+	OccurredAt         NullableTime            `json:"occurred_at,omitempty"`
+	ExecutionId        NullableString          `json:"execution_id,omitempty"`
+	ScheduleId         NullableString          `json:"schedule_id,omitempty"`
+	Extras             map[string]interface{}  `json:"extras,omitempty"`
+	VehicleId          NullableString          `json:"vehicle_id,omitempty"`
+	DriverId           NullableString          `json:"driver_id,omitempty"`
+	CoDriverId         NullableString          `json:"co_driver_id,omitempty"`
+	SourceDriverId     NullableString          `json:"source_driver_id,omitempty"`
+	SourceVehicleId    NullableString          `json:"source_vehicle_id,omitempty"`
+	SourceCoDriverId   NullableString          `json:"source_co_driver_id,omitempty"`
+	Location           NullableLocation5       `json:"location,omitempty"`
+	H3Index11          NullableInt32           `json:"h3_index_11,omitempty"`
+	Speed              NullableFloat32         `json:"speed,omitempty"`
+	Odometer           NullableFloat32         `json:"odometer,omitempty"`
+	FuelLevel          NullableFloat32         `json:"fuel_level,omitempty"`
+	FuelValue          NullableFloat32         `json:"fuel_value,omitempty"`
+	EngineHours        NullableFloat32         `json:"engine_hours,omitempty"`
+	OilPressure        NullableFloat32         `json:"oil_pressure,omitempty"`
+	CoolantTemperature NullableFloat32         `json:"coolant_temperature,omitempty"`
+	InferredAddress    NullableInferredAddress `json:"inferred_address,omitempty"`
+	// Unit for speed.
+	SpeedUnit *SpeedUnit `json:"speed_unit,omitempty"`
+	// Unit for odometer.
+	OdometerUnit *DistanceUnit `json:"odometer_unit,omitempty"`
+	// Unit for fuel_value.
+	FuelValueUnit *VolumeUnit `json:"fuel_value_unit,omitempty"`
+	// Unit for oil_pressure.
+	OilPressureUnit *PressureUnit `json:"oil_pressure_unit,omitempty"`
+	// Unit for coolant_temperature.
+	CoolantTemperatureUnit *TemperatureUnit `json:"coolant_temperature_unit,omitempty"`
+	AdditionalProperties   map[string]interface{}
 }
 
 type _VehicleLocationRead VehicleLocationRead
@@ -1340,6 +1350,166 @@ func (o *VehicleLocationRead) UnsetInferredAddress() {
 	o.InferredAddress.Unset()
 }
 
+// GetSpeedUnit returns the SpeedUnit field value if set, zero value otherwise.
+func (o *VehicleLocationRead) GetSpeedUnit() SpeedUnit {
+	if o == nil || IsNil(o.SpeedUnit) {
+		var ret SpeedUnit
+		return ret
+	}
+	return *o.SpeedUnit
+}
+
+// GetSpeedUnitOk returns a tuple with the SpeedUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLocationRead) GetSpeedUnitOk() (*SpeedUnit, bool) {
+	if o == nil || IsNil(o.SpeedUnit) {
+		return nil, false
+	}
+	return o.SpeedUnit, true
+}
+
+// HasSpeedUnit returns a boolean if a field has been set.
+func (o *VehicleLocationRead) HasSpeedUnit() bool {
+	if o != nil && !IsNil(o.SpeedUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpeedUnit gets a reference to the given SpeedUnit and assigns it to the SpeedUnit field.
+func (o *VehicleLocationRead) SetSpeedUnit(v SpeedUnit) {
+	o.SpeedUnit = &v
+}
+
+// GetOdometerUnit returns the OdometerUnit field value if set, zero value otherwise.
+func (o *VehicleLocationRead) GetOdometerUnit() DistanceUnit {
+	if o == nil || IsNil(o.OdometerUnit) {
+		var ret DistanceUnit
+		return ret
+	}
+	return *o.OdometerUnit
+}
+
+// GetOdometerUnitOk returns a tuple with the OdometerUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLocationRead) GetOdometerUnitOk() (*DistanceUnit, bool) {
+	if o == nil || IsNil(o.OdometerUnit) {
+		return nil, false
+	}
+	return o.OdometerUnit, true
+}
+
+// HasOdometerUnit returns a boolean if a field has been set.
+func (o *VehicleLocationRead) HasOdometerUnit() bool {
+	if o != nil && !IsNil(o.OdometerUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetOdometerUnit gets a reference to the given DistanceUnit and assigns it to the OdometerUnit field.
+func (o *VehicleLocationRead) SetOdometerUnit(v DistanceUnit) {
+	o.OdometerUnit = &v
+}
+
+// GetFuelValueUnit returns the FuelValueUnit field value if set, zero value otherwise.
+func (o *VehicleLocationRead) GetFuelValueUnit() VolumeUnit {
+	if o == nil || IsNil(o.FuelValueUnit) {
+		var ret VolumeUnit
+		return ret
+	}
+	return *o.FuelValueUnit
+}
+
+// GetFuelValueUnitOk returns a tuple with the FuelValueUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLocationRead) GetFuelValueUnitOk() (*VolumeUnit, bool) {
+	if o == nil || IsNil(o.FuelValueUnit) {
+		return nil, false
+	}
+	return o.FuelValueUnit, true
+}
+
+// HasFuelValueUnit returns a boolean if a field has been set.
+func (o *VehicleLocationRead) HasFuelValueUnit() bool {
+	if o != nil && !IsNil(o.FuelValueUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetFuelValueUnit gets a reference to the given VolumeUnit and assigns it to the FuelValueUnit field.
+func (o *VehicleLocationRead) SetFuelValueUnit(v VolumeUnit) {
+	o.FuelValueUnit = &v
+}
+
+// GetOilPressureUnit returns the OilPressureUnit field value if set, zero value otherwise.
+func (o *VehicleLocationRead) GetOilPressureUnit() PressureUnit {
+	if o == nil || IsNil(o.OilPressureUnit) {
+		var ret PressureUnit
+		return ret
+	}
+	return *o.OilPressureUnit
+}
+
+// GetOilPressureUnitOk returns a tuple with the OilPressureUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLocationRead) GetOilPressureUnitOk() (*PressureUnit, bool) {
+	if o == nil || IsNil(o.OilPressureUnit) {
+		return nil, false
+	}
+	return o.OilPressureUnit, true
+}
+
+// HasOilPressureUnit returns a boolean if a field has been set.
+func (o *VehicleLocationRead) HasOilPressureUnit() bool {
+	if o != nil && !IsNil(o.OilPressureUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetOilPressureUnit gets a reference to the given PressureUnit and assigns it to the OilPressureUnit field.
+func (o *VehicleLocationRead) SetOilPressureUnit(v PressureUnit) {
+	o.OilPressureUnit = &v
+}
+
+// GetCoolantTemperatureUnit returns the CoolantTemperatureUnit field value if set, zero value otherwise.
+func (o *VehicleLocationRead) GetCoolantTemperatureUnit() TemperatureUnit {
+	if o == nil || IsNil(o.CoolantTemperatureUnit) {
+		var ret TemperatureUnit
+		return ret
+	}
+	return *o.CoolantTemperatureUnit
+}
+
+// GetCoolantTemperatureUnitOk returns a tuple with the CoolantTemperatureUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLocationRead) GetCoolantTemperatureUnitOk() (*TemperatureUnit, bool) {
+	if o == nil || IsNil(o.CoolantTemperatureUnit) {
+		return nil, false
+	}
+	return o.CoolantTemperatureUnit, true
+}
+
+// HasCoolantTemperatureUnit returns a boolean if a field has been set.
+func (o *VehicleLocationRead) HasCoolantTemperatureUnit() bool {
+	if o != nil && !IsNil(o.CoolantTemperatureUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoolantTemperatureUnit gets a reference to the given TemperatureUnit and assigns it to the CoolantTemperatureUnit field.
+func (o *VehicleLocationRead) SetCoolantTemperatureUnit(v TemperatureUnit) {
+	o.CoolantTemperatureUnit = &v
+}
+
 func (o VehicleLocationRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1433,6 +1603,21 @@ func (o VehicleLocationRead) ToMap() (map[string]interface{}, error) {
 	if o.InferredAddress.IsSet() {
 		toSerialize["inferred_address"] = o.InferredAddress.Get()
 	}
+	if !IsNil(o.SpeedUnit) {
+		toSerialize["speed_unit"] = o.SpeedUnit
+	}
+	if !IsNil(o.OdometerUnit) {
+		toSerialize["odometer_unit"] = o.OdometerUnit
+	}
+	if !IsNil(o.FuelValueUnit) {
+		toSerialize["fuel_value_unit"] = o.FuelValueUnit
+	}
+	if !IsNil(o.OilPressureUnit) {
+		toSerialize["oil_pressure_unit"] = o.OilPressureUnit
+	}
+	if !IsNil(o.CoolantTemperatureUnit) {
+		toSerialize["coolant_temperature_unit"] = o.CoolantTemperatureUnit
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1516,6 +1701,11 @@ func (o *VehicleLocationRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "oil_pressure")
 		delete(additionalProperties, "coolant_temperature")
 		delete(additionalProperties, "inferred_address")
+		delete(additionalProperties, "speed_unit")
+		delete(additionalProperties, "odometer_unit")
+		delete(additionalProperties, "fuel_value_unit")
+		delete(additionalProperties, "oil_pressure_unit")
+		delete(additionalProperties, "coolant_temperature_unit")
 		o.AdditionalProperties = additionalProperties
 	}
 

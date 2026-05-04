@@ -5,10 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ConnectionId** | **string** | Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing. | 
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
-**SourceDriverId** | Pointer to **NullableString** |  | [optional] 
-**SourceVehicleId** | Pointer to **NullableString** |  | [optional] 
-**SourceTrailerId** | Pointer to **NullableString** |  | [optional] 
+**DriverId** | **string** | Identifier for the driver | 
+**VehicleId** | Pointer to **NullableString** |  | [optional] 
+**TrailerId** | Pointer to **NullableString** |  | [optional] 
 **OccurredAt** | Pointer to **NullableTime** |  | [optional] 
 **LogType** | Pointer to [**DvirLogTypeEnum**](DvirLogTypeEnum.md) | Type of DVIR log. Defaults to &#x60;unknown&#x60; when omitted. | [optional] 
 **InspectedBy** | Pointer to **NullableString** |  | [optional] 
@@ -24,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewDvirLogCreate
 
-`func NewDvirLogCreate(connectionId string, ) *DvirLogCreate`
+`func NewDvirLogCreate(connectionId string, driverId string, ) *DvirLogCreate`
 
 NewDvirLogCreate instantiates a new DvirLogCreate object
 This constructor will assign default values to properties that have it defined,
@@ -59,146 +58,96 @@ and a boolean to check if the value has been set.
 SetConnectionId sets ConnectionId field to given value.
 
 
-### GetFleetRef
+### GetDriverId
 
-`func (o *DvirLogCreate) GetFleetRef() string`
+`func (o *DvirLogCreate) GetDriverId() string`
 
-GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
+GetDriverId returns the DriverId field if non-nil, zero value otherwise.
 
-### GetFleetRefOk
+### GetDriverIdOk
 
-`func (o *DvirLogCreate) GetFleetRefOk() (*string, bool)`
+`func (o *DvirLogCreate) GetDriverIdOk() (*string, bool)`
 
-GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
+GetDriverIdOk returns a tuple with the DriverId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFleetRef
+### SetDriverId
 
-`func (o *DvirLogCreate) SetFleetRef(v string)`
+`func (o *DvirLogCreate) SetDriverId(v string)`
 
-SetFleetRef sets FleetRef field to given value.
+SetDriverId sets DriverId field to given value.
 
-### HasFleetRef
 
-`func (o *DvirLogCreate) HasFleetRef() bool`
+### GetVehicleId
 
-HasFleetRef returns a boolean if a field has been set.
+`func (o *DvirLogCreate) GetVehicleId() string`
 
-### SetFleetRefNil
+GetVehicleId returns the VehicleId field if non-nil, zero value otherwise.
 
-`func (o *DvirLogCreate) SetFleetRefNil(b bool)`
+### GetVehicleIdOk
 
- SetFleetRefNil sets the value for FleetRef to be an explicit nil
+`func (o *DvirLogCreate) GetVehicleIdOk() (*string, bool)`
 
-### UnsetFleetRef
-`func (o *DvirLogCreate) UnsetFleetRef()`
-
-UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-### GetSourceDriverId
-
-`func (o *DvirLogCreate) GetSourceDriverId() string`
-
-GetSourceDriverId returns the SourceDriverId field if non-nil, zero value otherwise.
-
-### GetSourceDriverIdOk
-
-`func (o *DvirLogCreate) GetSourceDriverIdOk() (*string, bool)`
-
-GetSourceDriverIdOk returns a tuple with the SourceDriverId field if it's non-nil, zero value otherwise
+GetVehicleIdOk returns a tuple with the VehicleId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceDriverId
+### SetVehicleId
 
-`func (o *DvirLogCreate) SetSourceDriverId(v string)`
+`func (o *DvirLogCreate) SetVehicleId(v string)`
 
-SetSourceDriverId sets SourceDriverId field to given value.
+SetVehicleId sets VehicleId field to given value.
 
-### HasSourceDriverId
+### HasVehicleId
 
-`func (o *DvirLogCreate) HasSourceDriverId() bool`
+`func (o *DvirLogCreate) HasVehicleId() bool`
 
-HasSourceDriverId returns a boolean if a field has been set.
+HasVehicleId returns a boolean if a field has been set.
 
-### SetSourceDriverIdNil
+### SetVehicleIdNil
 
-`func (o *DvirLogCreate) SetSourceDriverIdNil(b bool)`
+`func (o *DvirLogCreate) SetVehicleIdNil(b bool)`
 
- SetSourceDriverIdNil sets the value for SourceDriverId to be an explicit nil
+ SetVehicleIdNil sets the value for VehicleId to be an explicit nil
 
-### UnsetSourceDriverId
-`func (o *DvirLogCreate) UnsetSourceDriverId()`
+### UnsetVehicleId
+`func (o *DvirLogCreate) UnsetVehicleId()`
 
-UnsetSourceDriverId ensures that no value is present for SourceDriverId, not even an explicit nil
-### GetSourceVehicleId
+UnsetVehicleId ensures that no value is present for VehicleId, not even an explicit nil
+### GetTrailerId
 
-`func (o *DvirLogCreate) GetSourceVehicleId() string`
+`func (o *DvirLogCreate) GetTrailerId() string`
 
-GetSourceVehicleId returns the SourceVehicleId field if non-nil, zero value otherwise.
+GetTrailerId returns the TrailerId field if non-nil, zero value otherwise.
 
-### GetSourceVehicleIdOk
+### GetTrailerIdOk
 
-`func (o *DvirLogCreate) GetSourceVehicleIdOk() (*string, bool)`
+`func (o *DvirLogCreate) GetTrailerIdOk() (*string, bool)`
 
-GetSourceVehicleIdOk returns a tuple with the SourceVehicleId field if it's non-nil, zero value otherwise
+GetTrailerIdOk returns a tuple with the TrailerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceVehicleId
+### SetTrailerId
 
-`func (o *DvirLogCreate) SetSourceVehicleId(v string)`
+`func (o *DvirLogCreate) SetTrailerId(v string)`
 
-SetSourceVehicleId sets SourceVehicleId field to given value.
+SetTrailerId sets TrailerId field to given value.
 
-### HasSourceVehicleId
+### HasTrailerId
 
-`func (o *DvirLogCreate) HasSourceVehicleId() bool`
+`func (o *DvirLogCreate) HasTrailerId() bool`
 
-HasSourceVehicleId returns a boolean if a field has been set.
+HasTrailerId returns a boolean if a field has been set.
 
-### SetSourceVehicleIdNil
+### SetTrailerIdNil
 
-`func (o *DvirLogCreate) SetSourceVehicleIdNil(b bool)`
+`func (o *DvirLogCreate) SetTrailerIdNil(b bool)`
 
- SetSourceVehicleIdNil sets the value for SourceVehicleId to be an explicit nil
+ SetTrailerIdNil sets the value for TrailerId to be an explicit nil
 
-### UnsetSourceVehicleId
-`func (o *DvirLogCreate) UnsetSourceVehicleId()`
+### UnsetTrailerId
+`func (o *DvirLogCreate) UnsetTrailerId()`
 
-UnsetSourceVehicleId ensures that no value is present for SourceVehicleId, not even an explicit nil
-### GetSourceTrailerId
-
-`func (o *DvirLogCreate) GetSourceTrailerId() string`
-
-GetSourceTrailerId returns the SourceTrailerId field if non-nil, zero value otherwise.
-
-### GetSourceTrailerIdOk
-
-`func (o *DvirLogCreate) GetSourceTrailerIdOk() (*string, bool)`
-
-GetSourceTrailerIdOk returns a tuple with the SourceTrailerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSourceTrailerId
-
-`func (o *DvirLogCreate) SetSourceTrailerId(v string)`
-
-SetSourceTrailerId sets SourceTrailerId field to given value.
-
-### HasSourceTrailerId
-
-`func (o *DvirLogCreate) HasSourceTrailerId() bool`
-
-HasSourceTrailerId returns a boolean if a field has been set.
-
-### SetSourceTrailerIdNil
-
-`func (o *DvirLogCreate) SetSourceTrailerIdNil(b bool)`
-
- SetSourceTrailerIdNil sets the value for SourceTrailerId to be an explicit nil
-
-### UnsetSourceTrailerId
-`func (o *DvirLogCreate) UnsetSourceTrailerId()`
-
-UnsetSourceTrailerId ensures that no value is present for SourceTrailerId, not even an explicit nil
+UnsetTrailerId ensures that no value is present for TrailerId, not even an explicit nil
 ### GetOccurredAt
 
 `func (o *DvirLogCreate) GetOccurredAt() time.Time`

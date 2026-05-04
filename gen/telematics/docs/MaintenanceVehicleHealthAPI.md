@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateFuelTransaction
 
-> ResourceOperationAccept CreateFuelTransaction(ctx).FuelTransactionCreate(fuelTransactionCreate).Execute()
+> ResourceOperation CreateFuelTransaction(ctx).FuelTransactionCreate(fuelTransactionCreate).IsSync(isSync).Execute()
 
 Create Fuel Transaction
 
@@ -32,16 +32,17 @@ import (
 )
 
 func main() {
-	fuelTransactionCreate := *openapiclient.NewFuelTransactionCreate("ConnectionId_example", float32(123), openapiclient.FuelVolumeUnitEnum("CUBIC_METER")) // FuelTransactionCreate | 
+	fuelTransactionCreate := *openapiclient.NewFuelTransactionCreate("ConnectionId_example", "DriverId_example", "VehicleId_example", float32(123), openapiclient.FuelVolumeUnitEnum("CUBIC_METER")) // FuelTransactionCreate | 
+	isSync := true // bool | Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MaintenanceVehicleHealthAPI.CreateFuelTransaction(context.Background()).FuelTransactionCreate(fuelTransactionCreate).Execute()
+	resp, r, err := apiClient.MaintenanceVehicleHealthAPI.CreateFuelTransaction(context.Background()).FuelTransactionCreate(fuelTransactionCreate).IsSync(isSync).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceVehicleHealthAPI.CreateFuelTransaction``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateFuelTransaction`: ResourceOperationAccept
+	// response from `CreateFuelTransaction`: ResourceOperation
 	fmt.Fprintf(os.Stdout, "Response from `MaintenanceVehicleHealthAPI.CreateFuelTransaction`: %v\n", resp)
 }
 ```
@@ -58,10 +59,11 @@ Other parameters are passed through a pointer to a apiCreateFuelTransactionReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **fuelTransactionCreate** | [**FuelTransactionCreate**](FuelTransactionCreate.md) |  | 
+ **isSync** | **bool** | Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. | [default to false]
 
 ### Return type
 
-[**ResourceOperationAccept**](ResourceOperationAccept.md)
+[**ResourceOperation**](ResourceOperation.md)
 
 ### Authorization
 

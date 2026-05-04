@@ -22,12 +22,12 @@ var _ MappedNullable = &DvirLogCreate{}
 // DvirLogCreate DvirLog model for creating new records.
 type DvirLogCreate struct {
 	// Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing.
-	ConnectionId    string         `json:"connection_id"`
-	FleetRef        NullableString `json:"fleet_ref,omitempty"`
-	SourceDriverId  NullableString `json:"source_driver_id,omitempty"`
-	SourceVehicleId NullableString `json:"source_vehicle_id,omitempty"`
-	SourceTrailerId NullableString `json:"source_trailer_id,omitempty"`
-	OccurredAt      NullableTime   `json:"occurred_at,omitempty"`
+	ConnectionId string `json:"connection_id"`
+	// Identifier for the driver
+	DriverId   string         `json:"driver_id"`
+	VehicleId  NullableString `json:"vehicle_id,omitempty"`
+	TrailerId  NullableString `json:"trailer_id,omitempty"`
+	OccurredAt NullableTime   `json:"occurred_at,omitempty"`
 	// Type of DVIR log. Defaults to `unknown` when omitted.
 	LogType              *DvirLogTypeEnum         `json:"log_type,omitempty"`
 	InspectedBy          NullableString           `json:"inspected_by,omitempty"`
@@ -47,9 +47,10 @@ type _DvirLogCreate DvirLogCreate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDvirLogCreate(connectionId string) *DvirLogCreate {
+func NewDvirLogCreate(connectionId string, driverId string) *DvirLogCreate {
 	this := DvirLogCreate{}
 	this.ConnectionId = connectionId
+	this.DriverId = driverId
 	return &this
 }
 
@@ -85,176 +86,114 @@ func (o *DvirLogCreate) SetConnectionId(v string) {
 	o.ConnectionId = v
 }
 
-// GetFleetRef returns the FleetRef field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DvirLogCreate) GetFleetRef() string {
-	if o == nil || IsNil(o.FleetRef.Get()) {
+// GetDriverId returns the DriverId field value
+func (o *DvirLogCreate) GetDriverId() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FleetRef.Get()
+
+	return o.DriverId
 }
 
-// GetFleetRefOk returns a tuple with the FleetRef field value if set, nil otherwise
+// GetDriverIdOk returns a tuple with the DriverId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DvirLogCreate) GetFleetRefOk() (*string, bool) {
+func (o *DvirLogCreate) GetDriverIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.FleetRef.Get(), o.FleetRef.IsSet()
+	return &o.DriverId, true
 }
 
-// HasFleetRef returns a boolean if a field has been set.
-func (o *DvirLogCreate) HasFleetRef() bool {
-	if o != nil && o.FleetRef.IsSet() {
+// SetDriverId sets field value
+func (o *DvirLogCreate) SetDriverId(v string) {
+	o.DriverId = v
+}
+
+// GetVehicleId returns the VehicleId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DvirLogCreate) GetVehicleId() string {
+	if o == nil || IsNil(o.VehicleId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.VehicleId.Get()
+}
+
+// GetVehicleIdOk returns a tuple with the VehicleId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DvirLogCreate) GetVehicleIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VehicleId.Get(), o.VehicleId.IsSet()
+}
+
+// HasVehicleId returns a boolean if a field has been set.
+func (o *DvirLogCreate) HasVehicleId() bool {
+	if o != nil && o.VehicleId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFleetRef gets a reference to the given NullableString and assigns it to the FleetRef field.
-func (o *DvirLogCreate) SetFleetRef(v string) {
-	o.FleetRef.Set(&v)
+// SetVehicleId gets a reference to the given NullableString and assigns it to the VehicleId field.
+func (o *DvirLogCreate) SetVehicleId(v string) {
+	o.VehicleId.Set(&v)
 }
 
-// SetFleetRefNil sets the value for FleetRef to be an explicit nil
-func (o *DvirLogCreate) SetFleetRefNil() {
-	o.FleetRef.Set(nil)
+// SetVehicleIdNil sets the value for VehicleId to be an explicit nil
+func (o *DvirLogCreate) SetVehicleIdNil() {
+	o.VehicleId.Set(nil)
 }
 
-// UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-func (o *DvirLogCreate) UnsetFleetRef() {
-	o.FleetRef.Unset()
+// UnsetVehicleId ensures that no value is present for VehicleId, not even an explicit nil
+func (o *DvirLogCreate) UnsetVehicleId() {
+	o.VehicleId.Unset()
 }
 
-// GetSourceDriverId returns the SourceDriverId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DvirLogCreate) GetSourceDriverId() string {
-	if o == nil || IsNil(o.SourceDriverId.Get()) {
+// GetTrailerId returns the TrailerId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DvirLogCreate) GetTrailerId() string {
+	if o == nil || IsNil(o.TrailerId.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.SourceDriverId.Get()
+	return *o.TrailerId.Get()
 }
 
-// GetSourceDriverIdOk returns a tuple with the SourceDriverId field value if set, nil otherwise
+// GetTrailerIdOk returns a tuple with the TrailerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DvirLogCreate) GetSourceDriverIdOk() (*string, bool) {
+func (o *DvirLogCreate) GetTrailerIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SourceDriverId.Get(), o.SourceDriverId.IsSet()
+	return o.TrailerId.Get(), o.TrailerId.IsSet()
 }
 
-// HasSourceDriverId returns a boolean if a field has been set.
-func (o *DvirLogCreate) HasSourceDriverId() bool {
-	if o != nil && o.SourceDriverId.IsSet() {
+// HasTrailerId returns a boolean if a field has been set.
+func (o *DvirLogCreate) HasTrailerId() bool {
+	if o != nil && o.TrailerId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSourceDriverId gets a reference to the given NullableString and assigns it to the SourceDriverId field.
-func (o *DvirLogCreate) SetSourceDriverId(v string) {
-	o.SourceDriverId.Set(&v)
+// SetTrailerId gets a reference to the given NullableString and assigns it to the TrailerId field.
+func (o *DvirLogCreate) SetTrailerId(v string) {
+	o.TrailerId.Set(&v)
 }
 
-// SetSourceDriverIdNil sets the value for SourceDriverId to be an explicit nil
-func (o *DvirLogCreate) SetSourceDriverIdNil() {
-	o.SourceDriverId.Set(nil)
+// SetTrailerIdNil sets the value for TrailerId to be an explicit nil
+func (o *DvirLogCreate) SetTrailerIdNil() {
+	o.TrailerId.Set(nil)
 }
 
-// UnsetSourceDriverId ensures that no value is present for SourceDriverId, not even an explicit nil
-func (o *DvirLogCreate) UnsetSourceDriverId() {
-	o.SourceDriverId.Unset()
-}
-
-// GetSourceVehicleId returns the SourceVehicleId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DvirLogCreate) GetSourceVehicleId() string {
-	if o == nil || IsNil(o.SourceVehicleId.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.SourceVehicleId.Get()
-}
-
-// GetSourceVehicleIdOk returns a tuple with the SourceVehicleId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DvirLogCreate) GetSourceVehicleIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.SourceVehicleId.Get(), o.SourceVehicleId.IsSet()
-}
-
-// HasSourceVehicleId returns a boolean if a field has been set.
-func (o *DvirLogCreate) HasSourceVehicleId() bool {
-	if o != nil && o.SourceVehicleId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceVehicleId gets a reference to the given NullableString and assigns it to the SourceVehicleId field.
-func (o *DvirLogCreate) SetSourceVehicleId(v string) {
-	o.SourceVehicleId.Set(&v)
-}
-
-// SetSourceVehicleIdNil sets the value for SourceVehicleId to be an explicit nil
-func (o *DvirLogCreate) SetSourceVehicleIdNil() {
-	o.SourceVehicleId.Set(nil)
-}
-
-// UnsetSourceVehicleId ensures that no value is present for SourceVehicleId, not even an explicit nil
-func (o *DvirLogCreate) UnsetSourceVehicleId() {
-	o.SourceVehicleId.Unset()
-}
-
-// GetSourceTrailerId returns the SourceTrailerId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DvirLogCreate) GetSourceTrailerId() string {
-	if o == nil || IsNil(o.SourceTrailerId.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.SourceTrailerId.Get()
-}
-
-// GetSourceTrailerIdOk returns a tuple with the SourceTrailerId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DvirLogCreate) GetSourceTrailerIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.SourceTrailerId.Get(), o.SourceTrailerId.IsSet()
-}
-
-// HasSourceTrailerId returns a boolean if a field has been set.
-func (o *DvirLogCreate) HasSourceTrailerId() bool {
-	if o != nil && o.SourceTrailerId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceTrailerId gets a reference to the given NullableString and assigns it to the SourceTrailerId field.
-func (o *DvirLogCreate) SetSourceTrailerId(v string) {
-	o.SourceTrailerId.Set(&v)
-}
-
-// SetSourceTrailerIdNil sets the value for SourceTrailerId to be an explicit nil
-func (o *DvirLogCreate) SetSourceTrailerIdNil() {
-	o.SourceTrailerId.Set(nil)
-}
-
-// UnsetSourceTrailerId ensures that no value is present for SourceTrailerId, not even an explicit nil
-func (o *DvirLogCreate) UnsetSourceTrailerId() {
-	o.SourceTrailerId.Unset()
+// UnsetTrailerId ensures that no value is present for TrailerId, not even an explicit nil
+func (o *DvirLogCreate) UnsetTrailerId() {
+	o.TrailerId.Unset()
 }
 
 // GetOccurredAt returns the OccurredAt field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -677,17 +616,12 @@ func (o DvirLogCreate) MarshalJSON() ([]byte, error) {
 func (o DvirLogCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["connection_id"] = o.ConnectionId
-	if o.FleetRef.IsSet() {
-		toSerialize["fleet_ref"] = o.FleetRef.Get()
+	toSerialize["driver_id"] = o.DriverId
+	if o.VehicleId.IsSet() {
+		toSerialize["vehicle_id"] = o.VehicleId.Get()
 	}
-	if o.SourceDriverId.IsSet() {
-		toSerialize["source_driver_id"] = o.SourceDriverId.Get()
-	}
-	if o.SourceVehicleId.IsSet() {
-		toSerialize["source_vehicle_id"] = o.SourceVehicleId.Get()
-	}
-	if o.SourceTrailerId.IsSet() {
-		toSerialize["source_trailer_id"] = o.SourceTrailerId.Get()
+	if o.TrailerId.IsSet() {
+		toSerialize["trailer_id"] = o.TrailerId.Get()
 	}
 	if o.OccurredAt.IsSet() {
 		toSerialize["occurred_at"] = o.OccurredAt.Get()
@@ -733,6 +667,7 @@ func (o *DvirLogCreate) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"connection_id",
+		"driver_id",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -763,10 +698,9 @@ func (o *DvirLogCreate) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "connection_id")
-		delete(additionalProperties, "fleet_ref")
-		delete(additionalProperties, "source_driver_id")
-		delete(additionalProperties, "source_vehicle_id")
-		delete(additionalProperties, "source_trailer_id")
+		delete(additionalProperties, "driver_id")
+		delete(additionalProperties, "vehicle_id")
+		delete(additionalProperties, "trailer_id")
 		delete(additionalProperties, "occurred_at")
 		delete(additionalProperties, "log_type")
 		delete(additionalProperties, "inspected_by")

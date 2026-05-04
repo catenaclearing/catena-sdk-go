@@ -4,6 +4,7 @@ All URIs are relative to *https://api.catenatelematics.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateTrailer**](FleetOperationsTrackingAPI.md#CreateTrailer) | **Post** /v2/telematics/trailers | Create Trailer
 [**CreateVehicle**](FleetOperationsTrackingAPI.md#CreateVehicle) | **Post** /v2/telematics/vehicles | Create Vehicle
 [**GetTrailer**](FleetOperationsTrackingAPI.md#GetTrailer) | **Get** /v2/telematics/trailers/{trailer_id} | Get Trailer
 [**GetVehicle**](FleetOperationsTrackingAPI.md#GetVehicle) | **Get** /v2/telematics/vehicles/{vehicle_id} | Get Vehicle
@@ -16,13 +17,82 @@ Method | HTTP request | Description
 [**ListVehicleLocations**](FleetOperationsTrackingAPI.md#ListVehicleLocations) | **Get** /v2/telematics/vehicle-locations | List Vehicle Locations
 [**ListVehicleRegionSegments**](FleetOperationsTrackingAPI.md#ListVehicleRegionSegments) | **Get** /v2/telematics/vehicle-region-segments | List Vehicle Region Segments
 [**ListVehicles**](FleetOperationsTrackingAPI.md#ListVehicles) | **Get** /v2/telematics/vehicles | List Vehicles
-[**UpdateVehicle**](FleetOperationsTrackingAPI.md#UpdateVehicle) | **Patch** /v2/telematics/vehicles/{source_id} | Update Vehicle
+[**UpdateTrailer**](FleetOperationsTrackingAPI.md#UpdateTrailer) | **Patch** /v2/telematics/trailers/{id} | Update Trailer
+[**UpdateVehicle**](FleetOperationsTrackingAPI.md#UpdateVehicle) | **Patch** /v2/telematics/vehicles/{id} | Update Vehicle
 
+
+
+## CreateTrailer
+
+> ResourceOperation CreateTrailer(ctx).TrailerCreate(trailerCreate).IsSync(isSync).Execute()
+
+Create Trailer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
+)
+
+func main() {
+	trailerCreate := *openapiclient.NewTrailerCreate("ConnectionId_example") // TrailerCreate | 
+	isSync := true // bool | Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. (optional) (default to false)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FleetOperationsTrackingAPI.CreateTrailer(context.Background()).TrailerCreate(trailerCreate).IsSync(isSync).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FleetOperationsTrackingAPI.CreateTrailer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateTrailer`: ResourceOperation
+	fmt.Fprintf(os.Stdout, "Response from `FleetOperationsTrackingAPI.CreateTrailer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateTrailerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **trailerCreate** | [**TrailerCreate**](TrailerCreate.md) |  | 
+ **isSync** | **bool** | Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. | [default to false]
+
+### Return type
+
+[**ResourceOperation**](ResourceOperation.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateVehicle
 
-> ResourceOperationAccept CreateVehicle(ctx).VehicleCreate(vehicleCreate).Execute()
+> ResourceOperation CreateVehicle(ctx).VehicleCreate(vehicleCreate).IsSync(isSync).Execute()
 
 Create Vehicle
 
@@ -42,15 +112,16 @@ import (
 
 func main() {
 	vehicleCreate := *openapiclient.NewVehicleCreate("ConnectionId_example") // VehicleCreate | 
+	isSync := true // bool | Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FleetOperationsTrackingAPI.CreateVehicle(context.Background()).VehicleCreate(vehicleCreate).Execute()
+	resp, r, err := apiClient.FleetOperationsTrackingAPI.CreateVehicle(context.Background()).VehicleCreate(vehicleCreate).IsSync(isSync).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FleetOperationsTrackingAPI.CreateVehicle``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateVehicle`: ResourceOperationAccept
+	// response from `CreateVehicle`: ResourceOperation
 	fmt.Fprintf(os.Stdout, "Response from `FleetOperationsTrackingAPI.CreateVehicle`: %v\n", resp)
 }
 ```
@@ -67,10 +138,11 @@ Other parameters are passed through a pointer to a apiCreateVehicleRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **vehicleCreate** | [**VehicleCreate**](VehicleCreate.md) |  | 
+ **isSync** | **bool** | Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. | [default to false]
 
 ### Return type
 
-[**ResourceOperationAccept**](ResourceOperationAccept.md)
+[**ResourceOperation**](ResourceOperation.md)
 
 ### Authorization
 
@@ -999,9 +1071,83 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateTrailer
+
+> ResourceOperation UpdateTrailer(ctx, id).TrailerUpdate(trailerUpdate).IsSync(isSync).Execute()
+
+Update Trailer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/catenaclearing/catena-sdk-go/gen/telematics"
+)
+
+func main() {
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique identifier of the trailer
+	trailerUpdate := *openapiclient.NewTrailerUpdate("ConnectionId_example") // TrailerUpdate | 
+	isSync := true // bool | Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. (optional) (default to false)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FleetOperationsTrackingAPI.UpdateTrailer(context.Background(), id).TrailerUpdate(trailerUpdate).IsSync(isSync).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FleetOperationsTrackingAPI.UpdateTrailer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateTrailer`: ResourceOperation
+	fmt.Fprintf(os.Stdout, "Response from `FleetOperationsTrackingAPI.UpdateTrailer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | The unique identifier of the trailer | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateTrailerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **trailerUpdate** | [**TrailerUpdate**](TrailerUpdate.md) |  | 
+ **isSync** | **bool** | Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. | [default to false]
+
+### Return type
+
+[**ResourceOperation**](ResourceOperation.md)
+
+### Authorization
+
+[Bearer](../README.md#Bearer), [Bearer](../README.md#Bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateVehicle
 
-> ResourceOperationAccept UpdateVehicle(ctx, sourceId).VehicleUpdate(vehicleUpdate).Execute()
+> ResourceOperation UpdateVehicle(ctx, id).VehicleUpdate(vehicleUpdate).IsSync(isSync).Execute()
 
 Update Vehicle
 
@@ -1020,17 +1166,18 @@ import (
 )
 
 func main() {
-	sourceId := "sourceId_example" // string | The unique identifier of the vehicle in the TSP.
+	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique identifier of the vehicle
 	vehicleUpdate := *openapiclient.NewVehicleUpdate("ConnectionId_example") // VehicleUpdate | 
+	isSync := true // bool | Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FleetOperationsTrackingAPI.UpdateVehicle(context.Background(), sourceId).VehicleUpdate(vehicleUpdate).Execute()
+	resp, r, err := apiClient.FleetOperationsTrackingAPI.UpdateVehicle(context.Background(), id).VehicleUpdate(vehicleUpdate).IsSync(isSync).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FleetOperationsTrackingAPI.UpdateVehicle``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateVehicle`: ResourceOperationAccept
+	// response from `UpdateVehicle`: ResourceOperation
 	fmt.Fprintf(os.Stdout, "Response from `FleetOperationsTrackingAPI.UpdateVehicle`: %v\n", resp)
 }
 ```
@@ -1041,7 +1188,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceId** | **string** | The unique identifier of the vehicle in the TSP. | 
+**id** | **string** | The unique identifier of the vehicle | 
 
 ### Other Parameters
 
@@ -1052,10 +1199,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **vehicleUpdate** | [**VehicleUpdate**](VehicleUpdate.md) |  | 
+ **isSync** | **bool** | Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. | [default to false]
 
 ### Return type
 
-[**ResourceOperationAccept**](ResourceOperationAccept.md)
+[**ResourceOperation**](ResourceOperation.md)
 
 ### Authorization
 

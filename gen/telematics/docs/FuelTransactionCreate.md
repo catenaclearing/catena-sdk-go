@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ConnectionId** | **string** | Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing. | 
-**FleetRef** | Pointer to **NullableString** |  | [optional] 
-**SourceDriverId** | Pointer to **NullableString** |  | [optional] 
-**SourceVehicleId** | Pointer to **NullableString** |  | [optional] 
-**SourceCoDriverId** | Pointer to **NullableString** |  | [optional] 
-**Location** | Pointer to [**NullablePoint**](Point.md) |  | [optional] 
+**DriverId** | **string** | Identifier for the driver (from the source system) | 
+**VehicleId** | **string** | Identifier for the vehicle (from the source system) | 
+**CoDriverId** | Pointer to **NullableString** |  | [optional] 
+**Latitude** | Pointer to **NullableFloat32** |  | [optional] 
+**Longitude** | Pointer to **NullableFloat32** |  | [optional] 
 **LocationString** | Pointer to **NullableString** |  | [optional] 
 **Odometer** | Pointer to **NullableFloat32** |  | [optional] 
 **OdometerUnit** | Pointer to [**NullableDistanceUnitEnum**](DistanceUnitEnum.md) |  | [optional] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewFuelTransactionCreate
 
-`func NewFuelTransactionCreate(connectionId string, fuelVolume float32, fuelVolumeUnit FuelVolumeUnitEnum, ) *FuelTransactionCreate`
+`func NewFuelTransactionCreate(connectionId string, driverId string, vehicleId string, fuelVolume float32, fuelVolumeUnit FuelVolumeUnitEnum, ) *FuelTransactionCreate`
 
 NewFuelTransactionCreate instantiates a new FuelTransactionCreate object
 This constructor will assign default values to properties that have it defined,
@@ -61,181 +61,151 @@ and a boolean to check if the value has been set.
 SetConnectionId sets ConnectionId field to given value.
 
 
-### GetFleetRef
+### GetDriverId
 
-`func (o *FuelTransactionCreate) GetFleetRef() string`
+`func (o *FuelTransactionCreate) GetDriverId() string`
 
-GetFleetRef returns the FleetRef field if non-nil, zero value otherwise.
+GetDriverId returns the DriverId field if non-nil, zero value otherwise.
 
-### GetFleetRefOk
+### GetDriverIdOk
 
-`func (o *FuelTransactionCreate) GetFleetRefOk() (*string, bool)`
+`func (o *FuelTransactionCreate) GetDriverIdOk() (*string, bool)`
 
-GetFleetRefOk returns a tuple with the FleetRef field if it's non-nil, zero value otherwise
+GetDriverIdOk returns a tuple with the DriverId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFleetRef
+### SetDriverId
 
-`func (o *FuelTransactionCreate) SetFleetRef(v string)`
+`func (o *FuelTransactionCreate) SetDriverId(v string)`
 
-SetFleetRef sets FleetRef field to given value.
+SetDriverId sets DriverId field to given value.
 
-### HasFleetRef
 
-`func (o *FuelTransactionCreate) HasFleetRef() bool`
+### GetVehicleId
 
-HasFleetRef returns a boolean if a field has been set.
+`func (o *FuelTransactionCreate) GetVehicleId() string`
 
-### SetFleetRefNil
+GetVehicleId returns the VehicleId field if non-nil, zero value otherwise.
 
-`func (o *FuelTransactionCreate) SetFleetRefNil(b bool)`
+### GetVehicleIdOk
 
- SetFleetRefNil sets the value for FleetRef to be an explicit nil
+`func (o *FuelTransactionCreate) GetVehicleIdOk() (*string, bool)`
 
-### UnsetFleetRef
-`func (o *FuelTransactionCreate) UnsetFleetRef()`
-
-UnsetFleetRef ensures that no value is present for FleetRef, not even an explicit nil
-### GetSourceDriverId
-
-`func (o *FuelTransactionCreate) GetSourceDriverId() string`
-
-GetSourceDriverId returns the SourceDriverId field if non-nil, zero value otherwise.
-
-### GetSourceDriverIdOk
-
-`func (o *FuelTransactionCreate) GetSourceDriverIdOk() (*string, bool)`
-
-GetSourceDriverIdOk returns a tuple with the SourceDriverId field if it's non-nil, zero value otherwise
+GetVehicleIdOk returns a tuple with the VehicleId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceDriverId
+### SetVehicleId
 
-`func (o *FuelTransactionCreate) SetSourceDriverId(v string)`
+`func (o *FuelTransactionCreate) SetVehicleId(v string)`
 
-SetSourceDriverId sets SourceDriverId field to given value.
+SetVehicleId sets VehicleId field to given value.
 
-### HasSourceDriverId
 
-`func (o *FuelTransactionCreate) HasSourceDriverId() bool`
+### GetCoDriverId
 
-HasSourceDriverId returns a boolean if a field has been set.
+`func (o *FuelTransactionCreate) GetCoDriverId() string`
 
-### SetSourceDriverIdNil
+GetCoDriverId returns the CoDriverId field if non-nil, zero value otherwise.
 
-`func (o *FuelTransactionCreate) SetSourceDriverIdNil(b bool)`
+### GetCoDriverIdOk
 
- SetSourceDriverIdNil sets the value for SourceDriverId to be an explicit nil
+`func (o *FuelTransactionCreate) GetCoDriverIdOk() (*string, bool)`
 
-### UnsetSourceDriverId
-`func (o *FuelTransactionCreate) UnsetSourceDriverId()`
-
-UnsetSourceDriverId ensures that no value is present for SourceDriverId, not even an explicit nil
-### GetSourceVehicleId
-
-`func (o *FuelTransactionCreate) GetSourceVehicleId() string`
-
-GetSourceVehicleId returns the SourceVehicleId field if non-nil, zero value otherwise.
-
-### GetSourceVehicleIdOk
-
-`func (o *FuelTransactionCreate) GetSourceVehicleIdOk() (*string, bool)`
-
-GetSourceVehicleIdOk returns a tuple with the SourceVehicleId field if it's non-nil, zero value otherwise
+GetCoDriverIdOk returns a tuple with the CoDriverId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceVehicleId
+### SetCoDriverId
 
-`func (o *FuelTransactionCreate) SetSourceVehicleId(v string)`
+`func (o *FuelTransactionCreate) SetCoDriverId(v string)`
 
-SetSourceVehicleId sets SourceVehicleId field to given value.
+SetCoDriverId sets CoDriverId field to given value.
 
-### HasSourceVehicleId
+### HasCoDriverId
 
-`func (o *FuelTransactionCreate) HasSourceVehicleId() bool`
+`func (o *FuelTransactionCreate) HasCoDriverId() bool`
 
-HasSourceVehicleId returns a boolean if a field has been set.
+HasCoDriverId returns a boolean if a field has been set.
 
-### SetSourceVehicleIdNil
+### SetCoDriverIdNil
 
-`func (o *FuelTransactionCreate) SetSourceVehicleIdNil(b bool)`
+`func (o *FuelTransactionCreate) SetCoDriverIdNil(b bool)`
 
- SetSourceVehicleIdNil sets the value for SourceVehicleId to be an explicit nil
+ SetCoDriverIdNil sets the value for CoDriverId to be an explicit nil
 
-### UnsetSourceVehicleId
-`func (o *FuelTransactionCreate) UnsetSourceVehicleId()`
+### UnsetCoDriverId
+`func (o *FuelTransactionCreate) UnsetCoDriverId()`
 
-UnsetSourceVehicleId ensures that no value is present for SourceVehicleId, not even an explicit nil
-### GetSourceCoDriverId
+UnsetCoDriverId ensures that no value is present for CoDriverId, not even an explicit nil
+### GetLatitude
 
-`func (o *FuelTransactionCreate) GetSourceCoDriverId() string`
+`func (o *FuelTransactionCreate) GetLatitude() float32`
 
-GetSourceCoDriverId returns the SourceCoDriverId field if non-nil, zero value otherwise.
+GetLatitude returns the Latitude field if non-nil, zero value otherwise.
 
-### GetSourceCoDriverIdOk
+### GetLatitudeOk
 
-`func (o *FuelTransactionCreate) GetSourceCoDriverIdOk() (*string, bool)`
+`func (o *FuelTransactionCreate) GetLatitudeOk() (*float32, bool)`
 
-GetSourceCoDriverIdOk returns a tuple with the SourceCoDriverId field if it's non-nil, zero value otherwise
+GetLatitudeOk returns a tuple with the Latitude field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSourceCoDriverId
+### SetLatitude
 
-`func (o *FuelTransactionCreate) SetSourceCoDriverId(v string)`
+`func (o *FuelTransactionCreate) SetLatitude(v float32)`
 
-SetSourceCoDriverId sets SourceCoDriverId field to given value.
+SetLatitude sets Latitude field to given value.
 
-### HasSourceCoDriverId
+### HasLatitude
 
-`func (o *FuelTransactionCreate) HasSourceCoDriverId() bool`
+`func (o *FuelTransactionCreate) HasLatitude() bool`
 
-HasSourceCoDriverId returns a boolean if a field has been set.
+HasLatitude returns a boolean if a field has been set.
 
-### SetSourceCoDriverIdNil
+### SetLatitudeNil
 
-`func (o *FuelTransactionCreate) SetSourceCoDriverIdNil(b bool)`
+`func (o *FuelTransactionCreate) SetLatitudeNil(b bool)`
 
- SetSourceCoDriverIdNil sets the value for SourceCoDriverId to be an explicit nil
+ SetLatitudeNil sets the value for Latitude to be an explicit nil
 
-### UnsetSourceCoDriverId
-`func (o *FuelTransactionCreate) UnsetSourceCoDriverId()`
+### UnsetLatitude
+`func (o *FuelTransactionCreate) UnsetLatitude()`
 
-UnsetSourceCoDriverId ensures that no value is present for SourceCoDriverId, not even an explicit nil
-### GetLocation
+UnsetLatitude ensures that no value is present for Latitude, not even an explicit nil
+### GetLongitude
 
-`func (o *FuelTransactionCreate) GetLocation() Point`
+`func (o *FuelTransactionCreate) GetLongitude() float32`
 
-GetLocation returns the Location field if non-nil, zero value otherwise.
+GetLongitude returns the Longitude field if non-nil, zero value otherwise.
 
-### GetLocationOk
+### GetLongitudeOk
 
-`func (o *FuelTransactionCreate) GetLocationOk() (*Point, bool)`
+`func (o *FuelTransactionCreate) GetLongitudeOk() (*float32, bool)`
 
-GetLocationOk returns a tuple with the Location field if it's non-nil, zero value otherwise
+GetLongitudeOk returns a tuple with the Longitude field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLocation
+### SetLongitude
 
-`func (o *FuelTransactionCreate) SetLocation(v Point)`
+`func (o *FuelTransactionCreate) SetLongitude(v float32)`
 
-SetLocation sets Location field to given value.
+SetLongitude sets Longitude field to given value.
 
-### HasLocation
+### HasLongitude
 
-`func (o *FuelTransactionCreate) HasLocation() bool`
+`func (o *FuelTransactionCreate) HasLongitude() bool`
 
-HasLocation returns a boolean if a field has been set.
+HasLongitude returns a boolean if a field has been set.
 
-### SetLocationNil
+### SetLongitudeNil
 
-`func (o *FuelTransactionCreate) SetLocationNil(b bool)`
+`func (o *FuelTransactionCreate) SetLongitudeNil(b bool)`
 
- SetLocationNil sets the value for Location to be an explicit nil
+ SetLongitudeNil sets the value for Longitude to be an explicit nil
 
-### UnsetLocation
-`func (o *FuelTransactionCreate) UnsetLocation()`
+### UnsetLongitude
+`func (o *FuelTransactionCreate) UnsetLongitude()`
 
-UnsetLocation ensures that no value is present for Location, not even an explicit nil
+UnsetLongitude ensures that no value is present for Longitude, not even an explicit nil
 ### GetLocationString
 
 `func (o *FuelTransactionCreate) GetLocationString() string`

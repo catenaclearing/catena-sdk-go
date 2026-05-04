@@ -24,9 +24,23 @@ import (
 type FleetOperationsTrackingAPI interface {
 
 	/*
+		CreateTrailer Create Trailer
+
+		Create a new trailer. By default, the trailer will be created asynchronously, and you can check the status of the operation using the returned operation ID.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiCreateTrailerRequest
+	*/
+	CreateTrailer(ctx context.Context) ApiCreateTrailerRequest
+
+	// CreateTrailerExecute executes the request
+	//  @return ResourceOperation
+	CreateTrailerExecute(r ApiCreateTrailerRequest) (*ResourceOperation, *http.Response, error)
+
+	/*
 		CreateVehicle Create Vehicle
 
-		Create a new vehicle. The vehicle will be created asynchronously, and you can check the status of the operation using the returned operation ID.
+		Create a new vehicle. By default, the vehicle will be created asynchronously, and you can check the status of the operation using the returned operation ID.
 
 		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 		@return ApiCreateVehicleRequest
@@ -34,8 +48,8 @@ type FleetOperationsTrackingAPI interface {
 	CreateVehicle(ctx context.Context) ApiCreateVehicleRequest
 
 	// CreateVehicleExecute executes the request
-	//  @return ResourceOperationAccept
-	CreateVehicleExecute(r ApiCreateVehicleRequest) (*ResourceOperationAccept, *http.Response, error)
+	//  @return ResourceOperation
+	CreateVehicleExecute(r ApiCreateVehicleRequest) (*ResourceOperation, *http.Response, error)
 
 	/*
 		GetTrailer Get Trailer
@@ -194,28 +208,288 @@ type FleetOperationsTrackingAPI interface {
 	ListVehiclesExecute(r ApiListVehiclesRequest) (*CursorPageVehicleRead, *http.Response, error)
 
 	/*
-		UpdateVehicle Update Vehicle
+		UpdateTrailer Update Trailer
 
-		Update an existing vehicle. The vehicle will be updated asynchronously, and you can check the status of the operation using the returned operation ID.
+		Update an existing trailer. By default, the trailer will be updated asynchronously, and you can check the status of the operation using the returned operation ID.
 
 		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param sourceId The unique identifier of the vehicle in the TSP.
+		@param id The unique identifier of the trailer
+		@return ApiUpdateTrailerRequest
+	*/
+	UpdateTrailer(ctx context.Context, id string) ApiUpdateTrailerRequest
+
+	// UpdateTrailerExecute executes the request
+	//  @return ResourceOperation
+	UpdateTrailerExecute(r ApiUpdateTrailerRequest) (*ResourceOperation, *http.Response, error)
+
+	/*
+		UpdateVehicle Update Vehicle
+
+		Update an existing vehicle. By default, the vehicle will be updated asynchronously, and you can check the status of the operation using the returned operation ID.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param id The unique identifier of the vehicle
 		@return ApiUpdateVehicleRequest
 	*/
-	UpdateVehicle(ctx context.Context, sourceId string) ApiUpdateVehicleRequest
+	UpdateVehicle(ctx context.Context, id string) ApiUpdateVehicleRequest
 
 	// UpdateVehicleExecute executes the request
-	//  @return ResourceOperationAccept
-	UpdateVehicleExecute(r ApiUpdateVehicleRequest) (*ResourceOperationAccept, *http.Response, error)
+	//  @return ResourceOperation
+	UpdateVehicleExecute(r ApiUpdateVehicleRequest) (*ResourceOperation, *http.Response, error)
 }
 
 // FleetOperationsTrackingAPIService FleetOperationsTrackingAPI service
 type FleetOperationsTrackingAPIService service
 
+type ApiCreateTrailerRequest struct {
+	ctx           context.Context
+	ApiService    FleetOperationsTrackingAPI
+	trailerCreate *TrailerCreate
+	isSync        *bool
+}
+
+func (r ApiCreateTrailerRequest) TrailerCreate(trailerCreate TrailerCreate) ApiCreateTrailerRequest {
+	r.trailerCreate = &trailerCreate
+	return r
+}
+
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiCreateTrailerRequest) IsSync(isSync bool) ApiCreateTrailerRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiCreateTrailerRequest) Execute() (*ResourceOperation, *http.Response, error) {
+	return r.ApiService.CreateTrailerExecute(r)
+}
+
+/*
+CreateTrailer Create Trailer
+
+Create a new trailer. By default, the trailer will be created asynchronously, and you can check the status of the operation using the returned operation ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTrailerRequest
+*/
+func (a *FleetOperationsTrackingAPIService) CreateTrailer(ctx context.Context) ApiCreateTrailerRequest {
+	return ApiCreateTrailerRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ResourceOperation
+func (a *FleetOperationsTrackingAPIService) CreateTrailerExecute(r ApiCreateTrailerRequest) (*ResourceOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetOperationsTrackingAPIService.CreateTrailer")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/telematics/trailers"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.trailerCreate == nil {
+		return localVarReturnValue, nil, reportError("trailerCreate is required and must be specified")
+	}
+
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.trailerCreate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateVehicleRequest struct {
 	ctx           context.Context
 	ApiService    FleetOperationsTrackingAPI
 	vehicleCreate *VehicleCreate
+	isSync        *bool
 }
 
 func (r ApiCreateVehicleRequest) VehicleCreate(vehicleCreate VehicleCreate) ApiCreateVehicleRequest {
@@ -223,14 +497,20 @@ func (r ApiCreateVehicleRequest) VehicleCreate(vehicleCreate VehicleCreate) ApiC
 	return r
 }
 
-func (r ApiCreateVehicleRequest) Execute() (*ResourceOperationAccept, *http.Response, error) {
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiCreateVehicleRequest) IsSync(isSync bool) ApiCreateVehicleRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiCreateVehicleRequest) Execute() (*ResourceOperation, *http.Response, error) {
 	return r.ApiService.CreateVehicleExecute(r)
 }
 
 /*
 CreateVehicle Create Vehicle
 
-Create a new vehicle. The vehicle will be created asynchronously, and you can check the status of the operation using the returned operation ID.
+Create a new vehicle. By default, the vehicle will be created asynchronously, and you can check the status of the operation using the returned operation ID.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateVehicleRequest
@@ -244,13 +524,13 @@ func (a *FleetOperationsTrackingAPIService) CreateVehicle(ctx context.Context) A
 
 // Execute executes the request
 //
-//	@return ResourceOperationAccept
-func (a *FleetOperationsTrackingAPIService) CreateVehicleExecute(r ApiCreateVehicleRequest) (*ResourceOperationAccept, *http.Response, error) {
+//	@return ResourceOperation
+func (a *FleetOperationsTrackingAPIService) CreateVehicleExecute(r ApiCreateVehicleRequest) (*ResourceOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ResourceOperationAccept
+		localVarReturnValue *ResourceOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetOperationsTrackingAPIService.CreateVehicle")
@@ -267,6 +547,12 @@ func (a *FleetOperationsTrackingAPIService) CreateVehicleExecute(r ApiCreateVehi
 		return localVarReturnValue, nil, reportError("vehicleCreate is required and must be specified")
 	}
 
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -409,6 +695,17 @@ func (a *FleetOperationsTrackingAPIService) CreateVehicleExecute(r ApiCreateVehi
 		}
 		if localVarHTTPResponse.StatusCode == 501 {
 			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4043,11 +4340,260 @@ func (a *FleetOperationsTrackingAPIService) ListVehiclesExecute(r ApiListVehicle
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateTrailerRequest struct {
+	ctx           context.Context
+	ApiService    FleetOperationsTrackingAPI
+	id            string
+	trailerUpdate *TrailerUpdate
+	isSync        *bool
+}
+
+func (r ApiUpdateTrailerRequest) TrailerUpdate(trailerUpdate TrailerUpdate) ApiUpdateTrailerRequest {
+	r.trailerUpdate = &trailerUpdate
+	return r
+}
+
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiUpdateTrailerRequest) IsSync(isSync bool) ApiUpdateTrailerRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiUpdateTrailerRequest) Execute() (*ResourceOperation, *http.Response, error) {
+	return r.ApiService.UpdateTrailerExecute(r)
+}
+
+/*
+UpdateTrailer Update Trailer
+
+Update an existing trailer. By default, the trailer will be updated asynchronously, and you can check the status of the operation using the returned operation ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id The unique identifier of the trailer
+	@return ApiUpdateTrailerRequest
+*/
+func (a *FleetOperationsTrackingAPIService) UpdateTrailer(ctx context.Context, id string) ApiUpdateTrailerRequest {
+	return ApiUpdateTrailerRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ResourceOperation
+func (a *FleetOperationsTrackingAPIService) UpdateTrailerExecute(r ApiUpdateTrailerRequest) (*ResourceOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetOperationsTrackingAPIService.UpdateTrailer")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/telematics/trailers/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.trailerUpdate == nil {
+		return localVarReturnValue, nil, reportError("trailerUpdate is required and must be specified")
+	}
+
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.trailerUpdate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateVehicleRequest struct {
 	ctx           context.Context
 	ApiService    FleetOperationsTrackingAPI
-	sourceId      string
+	id            string
 	vehicleUpdate *VehicleUpdate
+	isSync        *bool
 }
 
 func (r ApiUpdateVehicleRequest) VehicleUpdate(vehicleUpdate VehicleUpdate) ApiUpdateVehicleRequest {
@@ -4055,36 +4601,42 @@ func (r ApiUpdateVehicleRequest) VehicleUpdate(vehicleUpdate VehicleUpdate) ApiU
 	return r
 }
 
-func (r ApiUpdateVehicleRequest) Execute() (*ResourceOperationAccept, *http.Response, error) {
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiUpdateVehicleRequest) IsSync(isSync bool) ApiUpdateVehicleRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiUpdateVehicleRequest) Execute() (*ResourceOperation, *http.Response, error) {
 	return r.ApiService.UpdateVehicleExecute(r)
 }
 
 /*
 UpdateVehicle Update Vehicle
 
-Update an existing vehicle. The vehicle will be updated asynchronously, and you can check the status of the operation using the returned operation ID.
+Update an existing vehicle. By default, the vehicle will be updated asynchronously, and you can check the status of the operation using the returned operation ID.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param sourceId The unique identifier of the vehicle in the TSP.
+	@param id The unique identifier of the vehicle
 	@return ApiUpdateVehicleRequest
 */
-func (a *FleetOperationsTrackingAPIService) UpdateVehicle(ctx context.Context, sourceId string) ApiUpdateVehicleRequest {
+func (a *FleetOperationsTrackingAPIService) UpdateVehicle(ctx context.Context, id string) ApiUpdateVehicleRequest {
 	return ApiUpdateVehicleRequest{
 		ApiService: a,
 		ctx:        ctx,
-		sourceId:   sourceId,
+		id:         id,
 	}
 }
 
 // Execute executes the request
 //
-//	@return ResourceOperationAccept
-func (a *FleetOperationsTrackingAPIService) UpdateVehicleExecute(r ApiUpdateVehicleRequest) (*ResourceOperationAccept, *http.Response, error) {
+//	@return ResourceOperation
+func (a *FleetOperationsTrackingAPIService) UpdateVehicleExecute(r ApiUpdateVehicleRequest) (*ResourceOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ResourceOperationAccept
+		localVarReturnValue *ResourceOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetOperationsTrackingAPIService.UpdateVehicle")
@@ -4092,8 +4644,8 @@ func (a *FleetOperationsTrackingAPIService) UpdateVehicleExecute(r ApiUpdateVehi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/telematics/vehicles/{source_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"source_id"+"}", url.PathEscape(parameterValueToString(r.sourceId, "sourceId")), -1)
+	localVarPath := localBasePath + "/v2/telematics/vehicles/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -4102,6 +4654,12 @@ func (a *FleetOperationsTrackingAPIService) UpdateVehicleExecute(r ApiUpdateVehi
 		return localVarReturnValue, nil, reportError("vehicleUpdate is required and must be specified")
 	}
 
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -4244,6 +4802,17 @@ func (a *FleetOperationsTrackingAPIService) UpdateVehicleExecute(r ApiUpdateVehi
 		}
 		if localVarHTTPResponse.StatusCode == 501 {
 			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

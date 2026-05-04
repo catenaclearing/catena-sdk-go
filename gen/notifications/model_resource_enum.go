@@ -39,6 +39,7 @@ const (
 	RESOURCEENUM_IFTA_SUMMARY                ResourceEnum = "ifta_summary"
 	RESOURCEENUM_LOCATION_SEGMENT            ResourceEnum = "location_segment"
 	RESOURCEENUM_MESSAGE                     ResourceEnum = "message"
+	RESOURCEENUM_GROUP_MESSAGE               ResourceEnum = "group_message"
 	RESOURCEENUM_USER                        ResourceEnum = "user"
 	RESOURCEENUM_VEHICLE                     ResourceEnum = "vehicle"
 	RESOURCEENUM_VEHICLE_LOCATION            ResourceEnum = "vehicle_location"
@@ -49,6 +50,7 @@ const (
 	RESOURCEENUM_TRAILER_VEHICLE_ASSOCIATION ResourceEnum = "trailer_vehicle_association"
 	RESOURCEENUM_TRAILER_LOCATION            ResourceEnum = "trailer_location"
 	RESOURCEENUM_TRAILER_STATUS              ResourceEnum = "trailer_status"
+	RESOURCEENUM_WORKFLOW                    ResourceEnum = "workflow"
 )
 
 // All allowed values of ResourceEnum enum
@@ -72,6 +74,7 @@ var AllowedResourceEnumEnumValues = []ResourceEnum{
 	"ifta_summary",
 	"location_segment",
 	"message",
+	"group_message",
 	"user",
 	"vehicle",
 	"vehicle_location",
@@ -82,6 +85,7 @@ var AllowedResourceEnumEnumValues = []ResourceEnum{
 	"trailer_vehicle_association",
 	"trailer_location",
 	"trailer_status",
+	"workflow",
 }
 
 func (v *ResourceEnum) UnmarshalJSON(src []byte) error {

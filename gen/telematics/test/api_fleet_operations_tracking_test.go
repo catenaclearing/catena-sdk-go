@@ -24,6 +24,18 @@ func Test_telematicsapi_FleetOperationsTrackingAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test FleetOperationsTrackingAPIService CreateTrailer", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.CreateTrailer(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FleetOperationsTrackingAPIService CreateVehicle", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
@@ -172,13 +184,27 @@ func Test_telematicsapi_FleetOperationsTrackingAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test FleetOperationsTrackingAPIService UpdateTrailer", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.UpdateTrailer(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test FleetOperationsTrackingAPIService UpdateVehicle", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var sourceId string
+		var id string
 
-		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.UpdateVehicle(context.Background(), sourceId).Execute()
+		resp, httpRes, err := apiClient.FleetOperationsTrackingAPI.UpdateVehicle(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

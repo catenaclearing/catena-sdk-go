@@ -13,6 +13,9 @@ var NotificationsDecoders = map[string]func(json.RawMessage) (any, error){
 	"connection.staled":                    decodeBaseConnectionEvent,
 	"driver_vehicle_association.added":     decodeBaseDriverVehicleAssociation,
 	"driver_vehicle_association.modified":  decodeBaseDriverVehicleAssociation,
+	"dvir_log.added":                       decodeBaseDvirLog,
+	"dvir_log.modified":                    decodeBaseDvirLog,
+	"dvir_log.removed":                     decodeBaseTelematicsEvent,
 	"engine_log.added":                     decodeBaseEngineLog,
 	"engine_log.modified":                  decodeBaseEngineLog,
 	"engine_status.added":                  decodeBaseEngineStatus,
@@ -22,6 +25,8 @@ var NotificationsDecoders = map[string]func(json.RawMessage) (any, error){
 	"fleet_connection.created":             decodeBaseFleetConnectionEvent,
 	"fuel_transaction.added":               decodeBaseFuelTransaction,
 	"fuel_transaction.modified":            decodeBaseFuelTransaction,
+	"group_message.added":                  decodeBaseGroupMessage,
+	"group_message.modified":               decodeBaseGroupMessage,
 	"hos_availability.added":               decodeBaseHosAvailability,
 	"hos_availability.modified":            decodeBaseHosAvailability,
 	"hos_availability.removed":             decodeBaseTelematicsEvent,
@@ -75,6 +80,9 @@ var NotificationsDecoders = map[string]func(json.RawMessage) (any, error){
 	"webhook.deleted":                      decodeBaseWebhookEvent,
 	"webhook.staled":                       decodeBaseWebhookEvent,
 	"webhook.updated":                      decodeBaseWebhookEvent,
+	"workflow.added":                       decodeBaseWorkflow,
+	"workflow.modified":                    decodeBaseWorkflow,
+	"workflow.removed":                     decodeBaseTelematicsEvent,
 }
 
 func decodeBaseConnectionEvent(data json.RawMessage) (any, error) {
@@ -87,6 +95,14 @@ func decodeBaseConnectionEvent(data json.RawMessage) (any, error) {
 
 func decodeBaseDriverVehicleAssociation(data json.RawMessage) (any, error) {
 	var out []notificationsapi.BaseDriverVehicleAssociation
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseDvirLog(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseDvirLog
 	if err := json.Unmarshal(data, &out); err != nil {
 		return nil, err
 	}
@@ -127,6 +143,14 @@ func decodeBaseFleetConnectionEvent(data json.RawMessage) (any, error) {
 
 func decodeBaseFuelTransaction(data json.RawMessage) (any, error) {
 	var out []notificationsapi.BaseFuelTransaction
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseGroupMessage(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseGroupMessage
 	if err := json.Unmarshal(data, &out); err != nil {
 		return nil, err
 	}
@@ -287,6 +311,14 @@ func decodeBaseVehicleLocation(data json.RawMessage) (any, error) {
 
 func decodeBaseWebhookEvent(data json.RawMessage) (any, error) {
 	var out []notificationsapi.BaseWebhookEvent
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func decodeBaseWorkflow(data json.RawMessage) (any, error) {
+	var out []notificationsapi.BaseWorkflow
 	if err := json.Unmarshal(data, &out); err != nil {
 		return nil, err
 	}

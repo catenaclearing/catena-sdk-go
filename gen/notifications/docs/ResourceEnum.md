@@ -41,6 +41,8 @@
 
 * `MESSAGE` (value: `"message"`)
 
+* `GROUP_MESSAGE` (value: `"group_message"`)
+
 * `USER` (value: `"user"`)
 
 * `VEHICLE` (value: `"vehicle"`)
@@ -60,6 +62,8 @@
 * `TRAILER_LOCATION` (value: `"trailer_location"`)
 
 * `TRAILER_STATUS` (value: `"trailer_status"`)
+
+* `WORKFLOW` (value: `"workflow"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

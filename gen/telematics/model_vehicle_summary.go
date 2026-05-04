@@ -49,7 +49,11 @@ type VehicleSummary struct {
 	LastOdometerReading   NullableFloat32      `json:"last_odometer_reading"`
 	LastEngineHours       NullableFloat32      `json:"last_engine_hours"`
 	LastSpeedReading      NullableFloat32      `json:"last_speed_reading"`
-	AdditionalProperties  map[string]interface{}
+	// Unit for last_speed_reading.
+	LastSpeedReadingUnit *SpeedUnit `json:"last_speed_reading_unit,omitempty"`
+	// Unit for last_odometer_reading.
+	LastOdometerReadingUnit *DistanceUnit `json:"last_odometer_reading_unit,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _VehicleSummary VehicleSummary
@@ -740,6 +744,70 @@ func (o *VehicleSummary) SetLastSpeedReading(v float32) {
 	o.LastSpeedReading.Set(&v)
 }
 
+// GetLastSpeedReadingUnit returns the LastSpeedReadingUnit field value if set, zero value otherwise.
+func (o *VehicleSummary) GetLastSpeedReadingUnit() SpeedUnit {
+	if o == nil || IsNil(o.LastSpeedReadingUnit) {
+		var ret SpeedUnit
+		return ret
+	}
+	return *o.LastSpeedReadingUnit
+}
+
+// GetLastSpeedReadingUnitOk returns a tuple with the LastSpeedReadingUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleSummary) GetLastSpeedReadingUnitOk() (*SpeedUnit, bool) {
+	if o == nil || IsNil(o.LastSpeedReadingUnit) {
+		return nil, false
+	}
+	return o.LastSpeedReadingUnit, true
+}
+
+// HasLastSpeedReadingUnit returns a boolean if a field has been set.
+func (o *VehicleSummary) HasLastSpeedReadingUnit() bool {
+	if o != nil && !IsNil(o.LastSpeedReadingUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastSpeedReadingUnit gets a reference to the given SpeedUnit and assigns it to the LastSpeedReadingUnit field.
+func (o *VehicleSummary) SetLastSpeedReadingUnit(v SpeedUnit) {
+	o.LastSpeedReadingUnit = &v
+}
+
+// GetLastOdometerReadingUnit returns the LastOdometerReadingUnit field value if set, zero value otherwise.
+func (o *VehicleSummary) GetLastOdometerReadingUnit() DistanceUnit {
+	if o == nil || IsNil(o.LastOdometerReadingUnit) {
+		var ret DistanceUnit
+		return ret
+	}
+	return *o.LastOdometerReadingUnit
+}
+
+// GetLastOdometerReadingUnitOk returns a tuple with the LastOdometerReadingUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleSummary) GetLastOdometerReadingUnitOk() (*DistanceUnit, bool) {
+	if o == nil || IsNil(o.LastOdometerReadingUnit) {
+		return nil, false
+	}
+	return o.LastOdometerReadingUnit, true
+}
+
+// HasLastOdometerReadingUnit returns a boolean if a field has been set.
+func (o *VehicleSummary) HasLastOdometerReadingUnit() bool {
+	if o != nil && !IsNil(o.LastOdometerReadingUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastOdometerReadingUnit gets a reference to the given DistanceUnit and assigns it to the LastOdometerReadingUnit field.
+func (o *VehicleSummary) SetLastOdometerReadingUnit(v DistanceUnit) {
+	o.LastOdometerReadingUnit = &v
+}
+
 func (o VehicleSummary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -775,6 +843,12 @@ func (o VehicleSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["last_odometer_reading"] = o.LastOdometerReading.Get()
 	toSerialize["last_engine_hours"] = o.LastEngineHours.Get()
 	toSerialize["last_speed_reading"] = o.LastSpeedReading.Get()
+	if !IsNil(o.LastSpeedReadingUnit) {
+		toSerialize["last_speed_reading_unit"] = o.LastSpeedReadingUnit
+	}
+	if !IsNil(o.LastOdometerReadingUnit) {
+		toSerialize["last_odometer_reading_unit"] = o.LastOdometerReadingUnit
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -867,6 +941,8 @@ func (o *VehicleSummary) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "last_odometer_reading")
 		delete(additionalProperties, "last_engine_hours")
 		delete(additionalProperties, "last_speed_reading")
+		delete(additionalProperties, "last_speed_reading_unit")
+		delete(additionalProperties, "last_odometer_reading_unit")
 		o.AdditionalProperties = additionalProperties
 	}
 

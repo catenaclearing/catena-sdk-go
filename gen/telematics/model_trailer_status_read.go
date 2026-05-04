@@ -70,7 +70,15 @@ type TrailerStatusRead struct {
 	ActiveAlarms            []TrailerAlarm                      `json:"active_alarms,omitempty"`
 	Location                NullableLocation5                   `json:"location,omitempty"`
 	H3Index11               NullableInt32                       `json:"h3_index_11,omitempty"`
-	AdditionalProperties    map[string]interface{}
+	// Unit for battery_voltage.
+	BatteryVoltageUnit *VoltageUnit `json:"battery_voltage_unit,omitempty"`
+	// Unit for ambient_temperature.
+	AmbientTemperatureUnit *TemperatureUnit `json:"ambient_temperature_unit,omitempty"`
+	// Unit for temperatures under zones.
+	ZonesTemperatureUnit *TemperatureUnit `json:"zones_temperature_unit,omitempty"`
+	// Unit for temperatures under remote_probe_statuses.
+	RemoteProbeStatusesTemperatureUnit *TemperatureUnit `json:"remote_probe_statuses_temperature_unit,omitempty"`
+	AdditionalProperties               map[string]interface{}
 }
 
 type _TrailerStatusRead TrailerStatusRead
@@ -1662,6 +1670,134 @@ func (o *TrailerStatusRead) UnsetH3Index11() {
 	o.H3Index11.Unset()
 }
 
+// GetBatteryVoltageUnit returns the BatteryVoltageUnit field value if set, zero value otherwise.
+func (o *TrailerStatusRead) GetBatteryVoltageUnit() VoltageUnit {
+	if o == nil || IsNil(o.BatteryVoltageUnit) {
+		var ret VoltageUnit
+		return ret
+	}
+	return *o.BatteryVoltageUnit
+}
+
+// GetBatteryVoltageUnitOk returns a tuple with the BatteryVoltageUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TrailerStatusRead) GetBatteryVoltageUnitOk() (*VoltageUnit, bool) {
+	if o == nil || IsNil(o.BatteryVoltageUnit) {
+		return nil, false
+	}
+	return o.BatteryVoltageUnit, true
+}
+
+// HasBatteryVoltageUnit returns a boolean if a field has been set.
+func (o *TrailerStatusRead) HasBatteryVoltageUnit() bool {
+	if o != nil && !IsNil(o.BatteryVoltageUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetBatteryVoltageUnit gets a reference to the given VoltageUnit and assigns it to the BatteryVoltageUnit field.
+func (o *TrailerStatusRead) SetBatteryVoltageUnit(v VoltageUnit) {
+	o.BatteryVoltageUnit = &v
+}
+
+// GetAmbientTemperatureUnit returns the AmbientTemperatureUnit field value if set, zero value otherwise.
+func (o *TrailerStatusRead) GetAmbientTemperatureUnit() TemperatureUnit {
+	if o == nil || IsNil(o.AmbientTemperatureUnit) {
+		var ret TemperatureUnit
+		return ret
+	}
+	return *o.AmbientTemperatureUnit
+}
+
+// GetAmbientTemperatureUnitOk returns a tuple with the AmbientTemperatureUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TrailerStatusRead) GetAmbientTemperatureUnitOk() (*TemperatureUnit, bool) {
+	if o == nil || IsNil(o.AmbientTemperatureUnit) {
+		return nil, false
+	}
+	return o.AmbientTemperatureUnit, true
+}
+
+// HasAmbientTemperatureUnit returns a boolean if a field has been set.
+func (o *TrailerStatusRead) HasAmbientTemperatureUnit() bool {
+	if o != nil && !IsNil(o.AmbientTemperatureUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetAmbientTemperatureUnit gets a reference to the given TemperatureUnit and assigns it to the AmbientTemperatureUnit field.
+func (o *TrailerStatusRead) SetAmbientTemperatureUnit(v TemperatureUnit) {
+	o.AmbientTemperatureUnit = &v
+}
+
+// GetZonesTemperatureUnit returns the ZonesTemperatureUnit field value if set, zero value otherwise.
+func (o *TrailerStatusRead) GetZonesTemperatureUnit() TemperatureUnit {
+	if o == nil || IsNil(o.ZonesTemperatureUnit) {
+		var ret TemperatureUnit
+		return ret
+	}
+	return *o.ZonesTemperatureUnit
+}
+
+// GetZonesTemperatureUnitOk returns a tuple with the ZonesTemperatureUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TrailerStatusRead) GetZonesTemperatureUnitOk() (*TemperatureUnit, bool) {
+	if o == nil || IsNil(o.ZonesTemperatureUnit) {
+		return nil, false
+	}
+	return o.ZonesTemperatureUnit, true
+}
+
+// HasZonesTemperatureUnit returns a boolean if a field has been set.
+func (o *TrailerStatusRead) HasZonesTemperatureUnit() bool {
+	if o != nil && !IsNil(o.ZonesTemperatureUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetZonesTemperatureUnit gets a reference to the given TemperatureUnit and assigns it to the ZonesTemperatureUnit field.
+func (o *TrailerStatusRead) SetZonesTemperatureUnit(v TemperatureUnit) {
+	o.ZonesTemperatureUnit = &v
+}
+
+// GetRemoteProbeStatusesTemperatureUnit returns the RemoteProbeStatusesTemperatureUnit field value if set, zero value otherwise.
+func (o *TrailerStatusRead) GetRemoteProbeStatusesTemperatureUnit() TemperatureUnit {
+	if o == nil || IsNil(o.RemoteProbeStatusesTemperatureUnit) {
+		var ret TemperatureUnit
+		return ret
+	}
+	return *o.RemoteProbeStatusesTemperatureUnit
+}
+
+// GetRemoteProbeStatusesTemperatureUnitOk returns a tuple with the RemoteProbeStatusesTemperatureUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TrailerStatusRead) GetRemoteProbeStatusesTemperatureUnitOk() (*TemperatureUnit, bool) {
+	if o == nil || IsNil(o.RemoteProbeStatusesTemperatureUnit) {
+		return nil, false
+	}
+	return o.RemoteProbeStatusesTemperatureUnit, true
+}
+
+// HasRemoteProbeStatusesTemperatureUnit returns a boolean if a field has been set.
+func (o *TrailerStatusRead) HasRemoteProbeStatusesTemperatureUnit() bool {
+	if o != nil && !IsNil(o.RemoteProbeStatusesTemperatureUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteProbeStatusesTemperatureUnit gets a reference to the given TemperatureUnit and assigns it to the RemoteProbeStatusesTemperatureUnit field.
+func (o *TrailerStatusRead) SetRemoteProbeStatusesTemperatureUnit(v TemperatureUnit) {
+	o.RemoteProbeStatusesTemperatureUnit = &v
+}
+
 func (o TrailerStatusRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1779,6 +1915,18 @@ func (o TrailerStatusRead) ToMap() (map[string]interface{}, error) {
 	if o.H3Index11.IsSet() {
 		toSerialize["h3_index_11"] = o.H3Index11.Get()
 	}
+	if !IsNil(o.BatteryVoltageUnit) {
+		toSerialize["battery_voltage_unit"] = o.BatteryVoltageUnit
+	}
+	if !IsNil(o.AmbientTemperatureUnit) {
+		toSerialize["ambient_temperature_unit"] = o.AmbientTemperatureUnit
+	}
+	if !IsNil(o.ZonesTemperatureUnit) {
+		toSerialize["zones_temperature_unit"] = o.ZonesTemperatureUnit
+	}
+	if !IsNil(o.RemoteProbeStatusesTemperatureUnit) {
+		toSerialize["remote_probe_statuses_temperature_unit"] = o.RemoteProbeStatusesTemperatureUnit
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1870,6 +2018,10 @@ func (o *TrailerStatusRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "active_alarms")
 		delete(additionalProperties, "location")
 		delete(additionalProperties, "h3_index_11")
+		delete(additionalProperties, "battery_voltage_unit")
+		delete(additionalProperties, "ambient_temperature_unit")
+		delete(additionalProperties, "zones_temperature_unit")
+		delete(additionalProperties, "remote_probe_statuses_temperature_unit")
 		o.AdditionalProperties = additionalProperties
 	}
 

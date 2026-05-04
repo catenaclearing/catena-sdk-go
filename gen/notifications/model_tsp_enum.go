@@ -131,6 +131,7 @@ const (
 	TSPENUM_QUALITYLOGS_ELD         TspEnum = "qualitylogs_eld"
 	TSPENUM_RANDMCNALLY             TspEnum = "randmcnally"
 	TSPENUM_RASTRAC                 TspEnum = "rastrac"
+	TSPENUM_RAVEN                   TspEnum = "raven"
 	TSPENUM_REDFOX                  TspEnum = "redfox"
 	TSPENUM_REGULOG_ELD             TspEnum = "regulog_eld"
 	TSPENUM_RIDEHUB                 TspEnum = "ridehub"
@@ -300,6 +301,7 @@ var AllowedTspEnumEnumValues = []TspEnum{
 	"qualitylogs_eld",
 	"randmcnally",
 	"rastrac",
+	"raven",
 	"redfox",
 	"regulog_eld",
 	"ridehub",

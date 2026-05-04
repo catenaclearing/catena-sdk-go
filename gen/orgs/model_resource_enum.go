@@ -49,6 +49,7 @@ const (
 	RESOURCEENUM_TRAILER_VEHICLE_ASSOCIATION ResourceEnum = "trailer_vehicle_association"
 	RESOURCEENUM_TRAILER_LOCATION            ResourceEnum = "trailer_location"
 	RESOURCEENUM_TRAILER_STATUS              ResourceEnum = "trailer_status"
+	RESOURCEENUM_WORKFLOW                    ResourceEnum = "workflow"
 )
 
 // All allowed values of ResourceEnum enum
@@ -82,6 +83,7 @@ var AllowedResourceEnumEnumValues = []ResourceEnum{
 	"trailer_vehicle_association",
 	"trailer_location",
 	"trailer_status",
+	"workflow",
 }
 
 func (v *ResourceEnum) UnmarshalJSON(src []byte) error {
