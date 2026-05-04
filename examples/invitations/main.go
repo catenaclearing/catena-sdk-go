@@ -43,7 +43,7 @@ func main() {
 		PartnerProvidedFleetEmail: *orgsapi.NewNullableString(stringPtr("fleet@acme.com")),
 	}
 
-	resp, err := c.Orgs().InvitationsAPI.
+	invitation, resp, err := c.Orgs().InvitationsAPI.
 		CreateInvitation(context.Background()).
 		InvitationCreate(newInvitation).
 		Execute()
@@ -53,8 +53,10 @@ func main() {
 		return
 	}
 
-	if resp != nil {
-		fmt.Printf("Created invitation; status: %s\n", resp.Status)
+	if invitation != nil {
+		fmt.Printf("Created invitation %s; status: %s\n", invitation.GetId(), invitation.GetStatus())
+	} else if resp != nil {
+		fmt.Printf("Created invitation; HTTP status: %s\n", resp.Status)
 	} else {
 		fmt.Println("Created invitation")
 	}

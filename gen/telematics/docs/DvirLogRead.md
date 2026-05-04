@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **AuthorityAddress** | Pointer to **NullableString** |  | [optional] 
 **DurationSeconds** | Pointer to **NullableFloat32** |  | [optional] 
 **OdometerKm** | Pointer to **NullableFloat32** |  | [optional] 
+**Odometer** | Pointer to **NullableFloat32** |  | [optional] 
 **EngineHours** | Pointer to **NullableFloat32** |  | [optional] 
 **Location** | Pointer to [**NullableLocation1**](Location1.md) |  | [optional] 
 **H3Index11** | Pointer to **NullableInt32** |  | [optional] 
@@ -922,6 +923,41 @@ HasOdometerKm returns a boolean if a field has been set.
 `func (o *DvirLogRead) UnsetOdometerKm()`
 
 UnsetOdometerKm ensures that no value is present for OdometerKm, not even an explicit nil
+### GetOdometer
+
+`func (o *DvirLogRead) GetOdometer() float32`
+
+GetOdometer returns the Odometer field if non-nil, zero value otherwise.
+
+### GetOdometerOk
+
+`func (o *DvirLogRead) GetOdometerOk() (*float32, bool)`
+
+GetOdometerOk returns a tuple with the Odometer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdometer
+
+`func (o *DvirLogRead) SetOdometer(v float32)`
+
+SetOdometer sets Odometer field to given value.
+
+### HasOdometer
+
+`func (o *DvirLogRead) HasOdometer() bool`
+
+HasOdometer returns a boolean if a field has been set.
+
+### SetOdometerNil
+
+`func (o *DvirLogRead) SetOdometerNil(b bool)`
+
+ SetOdometerNil sets the value for Odometer to be an explicit nil
+
+### UnsetOdometer
+`func (o *DvirLogRead) UnsetOdometer()`
+
+UnsetOdometer ensures that no value is present for Odometer, not even an explicit nil
 ### GetEngineHours
 
 `func (o *DvirLogRead) GetEngineHours() float32`

@@ -100,12 +100,15 @@ Class | Method | HTTP request | Description
 *ComplianceRegulationAPI* | [**ListHosEvents**](docs/ComplianceRegulationAPI.md#listhosevents) | **Get** /v2/telematics/hos-events | List HOS Events
 *ComplianceRegulationAPI* | [**ListHosViolations**](docs/ComplianceRegulationAPI.md#listhosviolations) | **Get** /v2/telematics/hos-violations | List HOS Violations
 *ComplianceRegulationAPI* | [**ListIftaSummaries**](docs/ComplianceRegulationAPI.md#listiftasummaries) | **Get** /v2/telematics/ifta-summaries | List Ifta Summaries
+*DriversUsersAPI* | [**CreateGroupMessage**](docs/DriversUsersAPI.md#creategroupmessage) | **Post** /v2/telematics/group-messages | Create Group Message
 *DriversUsersAPI* | [**CreateMessage**](docs/DriversUsersAPI.md#createmessage) | **Post** /v2/telematics/messages | Create Message
 *DriversUsersAPI* | [**CreateUser**](docs/DriversUsersAPI.md#createuser) | **Post** /v2/telematics/users | Create User
 *DriversUsersAPI* | [**GetUser**](docs/DriversUsersAPI.md#getuser) | **Get** /v2/telematics/users/{user_id} | Get User
+*DriversUsersAPI* | [**ListGroupMessages**](docs/DriversUsersAPI.md#listgroupmessages) | **Get** /v2/telematics/group-messages | List Group Messages
 *DriversUsersAPI* | [**ListMessages**](docs/DriversUsersAPI.md#listmessages) | **Get** /v2/telematics/messages | List Messages
 *DriversUsersAPI* | [**ListUsers**](docs/DriversUsersAPI.md#listusers) | **Get** /v2/telematics/users | List Users
-*DriversUsersAPI* | [**UpdateUser**](docs/DriversUsersAPI.md#updateuser) | **Patch** /v2/telematics/users/{source_id} | Update User
+*DriversUsersAPI* | [**UpdateUser**](docs/DriversUsersAPI.md#updateuser) | **Patch** /v2/telematics/users/{id} | Update User
+*FleetOperationsTrackingAPI* | [**CreateTrailer**](docs/FleetOperationsTrackingAPI.md#createtrailer) | **Post** /v2/telematics/trailers | Create Trailer
 *FleetOperationsTrackingAPI* | [**CreateVehicle**](docs/FleetOperationsTrackingAPI.md#createvehicle) | **Post** /v2/telematics/vehicles | Create Vehicle
 *FleetOperationsTrackingAPI* | [**GetTrailer**](docs/FleetOperationsTrackingAPI.md#gettrailer) | **Get** /v2/telematics/trailers/{trailer_id} | Get Trailer
 *FleetOperationsTrackingAPI* | [**GetVehicle**](docs/FleetOperationsTrackingAPI.md#getvehicle) | **Get** /v2/telematics/vehicles/{vehicle_id} | Get Vehicle
@@ -118,7 +121,8 @@ Class | Method | HTTP request | Description
 *FleetOperationsTrackingAPI* | [**ListVehicleLocations**](docs/FleetOperationsTrackingAPI.md#listvehiclelocations) | **Get** /v2/telematics/vehicle-locations | List Vehicle Locations
 *FleetOperationsTrackingAPI* | [**ListVehicleRegionSegments**](docs/FleetOperationsTrackingAPI.md#listvehicleregionsegments) | **Get** /v2/telematics/vehicle-region-segments | List Vehicle Region Segments
 *FleetOperationsTrackingAPI* | [**ListVehicles**](docs/FleetOperationsTrackingAPI.md#listvehicles) | **Get** /v2/telematics/vehicles | List Vehicles
-*FleetOperationsTrackingAPI* | [**UpdateVehicle**](docs/FleetOperationsTrackingAPI.md#updatevehicle) | **Patch** /v2/telematics/vehicles/{source_id} | Update Vehicle
+*FleetOperationsTrackingAPI* | [**UpdateTrailer**](docs/FleetOperationsTrackingAPI.md#updatetrailer) | **Patch** /v2/telematics/trailers/{id} | Update Trailer
+*FleetOperationsTrackingAPI* | [**UpdateVehicle**](docs/FleetOperationsTrackingAPI.md#updatevehicle) | **Patch** /v2/telematics/vehicles/{id} | Update Vehicle
 *MaintenanceVehicleHealthAPI* | [**CreateFuelTransaction**](docs/MaintenanceVehicleHealthAPI.md#createfueltransaction) | **Post** /v2/telematics/fuel-transactions | Create Fuel Transaction
 *MaintenanceVehicleHealthAPI* | [**ListEngineLogs**](docs/MaintenanceVehicleHealthAPI.md#listenginelogs) | **Get** /v2/telematics/engine-logs | List Engine Logs
 *MaintenanceVehicleHealthAPI* | [**ListFuelTransactions**](docs/MaintenanceVehicleHealthAPI.md#listfueltransactions) | **Get** /v2/telematics/fuel-transactions | List Fuel Transactions
@@ -150,6 +154,7 @@ Class | Method | HTTP request | Description
  - [CursorPageEngineStatusRead](docs/CursorPageEngineStatusRead.md)
  - [CursorPageFleetSummary](docs/CursorPageFleetSummary.md)
  - [CursorPageFuelTransactionRead](docs/CursorPageFuelTransactionRead.md)
+ - [CursorPageGroupMessageRead](docs/CursorPageGroupMessageRead.md)
  - [CursorPageHosAvailabilityRead](docs/CursorPageHosAvailabilityRead.md)
  - [CursorPageHosDailySnapshotRead](docs/CursorPageHosDailySnapshotRead.md)
  - [CursorPageHosEventAttachmentRead](docs/CursorPageHosEventAttachmentRead.md)
@@ -177,6 +182,7 @@ Class | Method | HTTP request | Description
  - [CursorPageVehicleRegionSegmentRead](docs/CursorPageVehicleRegionSegmentRead.md)
  - [CursorPageVehicleSensorRead](docs/CursorPageVehicleSensorRead.md)
  - [CursorPageVehicleSummary](docs/CursorPageVehicleSummary.md)
+ - [DistanceUnit](docs/DistanceUnit.md)
  - [DistanceUnitEnum](docs/DistanceUnitEnum.md)
  - [DriverSafetyEventEnum](docs/DriverSafetyEventEnum.md)
  - [DriverSafetyEventRead](docs/DriverSafetyEventRead.md)
@@ -198,6 +204,8 @@ Class | Method | HTTP request | Description
  - [FuelTransactionCreate](docs/FuelTransactionCreate.md)
  - [FuelTransactionRead](docs/FuelTransactionRead.md)
  - [FuelVolumeUnitEnum](docs/FuelVolumeUnitEnum.md)
+ - [GroupMessageCreate](docs/GroupMessageCreate.md)
+ - [GroupMessageRead](docs/GroupMessageRead.md)
  - [HosAvailabilityRead](docs/HosAvailabilityRead.md)
  - [HosComplianceTypeEnum](docs/HosComplianceTypeEnum.md)
  - [HosDailySnapshotRead](docs/HosDailySnapshotRead.md)
@@ -229,16 +237,14 @@ Class | Method | HTTP request | Description
  - [Location6](docs/Location6.md)
  - [Location7](docs/Location7.md)
  - [MessageCreate](docs/MessageCreate.md)
- - [MessageModeEnum](docs/MessageModeEnum.md)
  - [MessagePriorityEnum](docs/MessagePriorityEnum.md)
  - [MessageRead](docs/MessageRead.md)
- - [MessageReceiverGroupEnum](docs/MessageReceiverGroupEnum.md)
- - [MessageSenderGroupEnum](docs/MessageSenderGroupEnum.md)
  - [MessageStatusEnum](docs/MessageStatusEnum.md)
  - [MethodNotAllowed](docs/MethodNotAllowed.md)
  - [NotFound](docs/NotFound.md)
  - [NotImplementedResponse](docs/NotImplementedResponse.md)
  - [Point](docs/Point.md)
+ - [PressureUnit](docs/PressureUnit.md)
  - [ReeferAlarmCodeEnum](docs/ReeferAlarmCodeEnum.md)
  - [ReeferBatteryStatusEnum](docs/ReeferBatteryStatusEnum.md)
  - [ReeferCargoStatusEnum](docs/ReeferCargoStatusEnum.md)
@@ -256,14 +262,23 @@ Class | Method | HTTP request | Description
  - [RefTimezoneCode](docs/RefTimezoneCode.md)
  - [RemoteProbeStatus](docs/RemoteProbeStatus.md)
  - [ResourceCount](docs/ResourceCount.md)
- - [ResourceOperationAccept](docs/ResourceOperationAccept.md)
+ - [ResourceEnum](docs/ResourceEnum.md)
+ - [ResourceOperation](docs/ResourceOperation.md)
+ - [ResourceOperationErrorTypeEnum](docs/ResourceOperationErrorTypeEnum.md)
+ - [ResourceOperationLog](docs/ResourceOperationLog.md)
+ - [ResourceOperationLogStatusEnum](docs/ResourceOperationLogStatusEnum.md)
+ - [ResourceOperationStatusEnum](docs/ResourceOperationStatusEnum.md)
+ - [ResourceOperationTypeEnum](docs/ResourceOperationTypeEnum.md)
  - [RetryAfterDetail](docs/RetryAfterDetail.md)
+ - [SpeedUnit](docs/SpeedUnit.md)
  - [StatusEnum](docs/StatusEnum.md)
+ - [TemperatureUnit](docs/TemperatureUnit.md)
  - [TimeSeriesDataPoint](docs/TimeSeriesDataPoint.md)
  - [TimezoneCodeEnum](docs/TimezoneCodeEnum.md)
  - [TooManyRequests](docs/TooManyRequests.md)
  - [TotalCost](docs/TotalCost.md)
  - [TrailerAlarm](docs/TrailerAlarm.md)
+ - [TrailerCreate](docs/TrailerCreate.md)
  - [TrailerLiveLocation](docs/TrailerLiveLocation.md)
  - [TrailerLocation](docs/TrailerLocation.md)
  - [TrailerLocationRead](docs/TrailerLocationRead.md)
@@ -271,6 +286,7 @@ Class | Method | HTTP request | Description
  - [TrailerRead](docs/TrailerRead.md)
  - [TrailerStatusRead](docs/TrailerStatusRead.md)
  - [TrailerSummary](docs/TrailerSummary.md)
+ - [TrailerUpdate](docs/TrailerUpdate.md)
  - [TrailerVehicleAssociationRead](docs/TrailerVehicleAssociationRead.md)
  - [TrailerZoneStatus](docs/TrailerZoneStatus.md)
  - [TspEnum](docs/TspEnum.md)
@@ -291,6 +307,8 @@ Class | Method | HTTP request | Description
  - [VehicleStatusEnum](docs/VehicleStatusEnum.md)
  - [VehicleSummary](docs/VehicleSummary.md)
  - [VehicleUpdate](docs/VehicleUpdate.md)
+ - [VoltageUnit](docs/VoltageUnit.md)
+ - [VolumeUnit](docs/VolumeUnit.md)
 
 
 ## Documentation For Authorization

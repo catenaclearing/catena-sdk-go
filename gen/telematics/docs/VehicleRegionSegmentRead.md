@@ -22,6 +22,9 @@ Name | Type | Description | Notes
 **OdometerEnd** | Pointer to **NullableFloat32** |  | [optional] 
 **Distance** | Pointer to **NullableFloat32** |  | [optional] 
 **LocationCount** | **int32** | Number of location samples that belong to the segment. | 
+**OdometerStartUnit** | Pointer to [**DistanceUnit**](DistanceUnit.md) | Unit for odometer_start. | [optional] 
+**OdometerEndUnit** | Pointer to [**DistanceUnit**](DistanceUnit.md) | Unit for odometer_end. | [optional] 
+**DistanceUnit** | Pointer to [**DistanceUnit**](DistanceUnit.md) | Unit for distance. | [optional] 
 
 ## Methods
 
@@ -531,6 +534,81 @@ and a boolean to check if the value has been set.
 
 SetLocationCount sets LocationCount field to given value.
 
+
+### GetOdometerStartUnit
+
+`func (o *VehicleRegionSegmentRead) GetOdometerStartUnit() DistanceUnit`
+
+GetOdometerStartUnit returns the OdometerStartUnit field if non-nil, zero value otherwise.
+
+### GetOdometerStartUnitOk
+
+`func (o *VehicleRegionSegmentRead) GetOdometerStartUnitOk() (*DistanceUnit, bool)`
+
+GetOdometerStartUnitOk returns a tuple with the OdometerStartUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdometerStartUnit
+
+`func (o *VehicleRegionSegmentRead) SetOdometerStartUnit(v DistanceUnit)`
+
+SetOdometerStartUnit sets OdometerStartUnit field to given value.
+
+### HasOdometerStartUnit
+
+`func (o *VehicleRegionSegmentRead) HasOdometerStartUnit() bool`
+
+HasOdometerStartUnit returns a boolean if a field has been set.
+
+### GetOdometerEndUnit
+
+`func (o *VehicleRegionSegmentRead) GetOdometerEndUnit() DistanceUnit`
+
+GetOdometerEndUnit returns the OdometerEndUnit field if non-nil, zero value otherwise.
+
+### GetOdometerEndUnitOk
+
+`func (o *VehicleRegionSegmentRead) GetOdometerEndUnitOk() (*DistanceUnit, bool)`
+
+GetOdometerEndUnitOk returns a tuple with the OdometerEndUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdometerEndUnit
+
+`func (o *VehicleRegionSegmentRead) SetOdometerEndUnit(v DistanceUnit)`
+
+SetOdometerEndUnit sets OdometerEndUnit field to given value.
+
+### HasOdometerEndUnit
+
+`func (o *VehicleRegionSegmentRead) HasOdometerEndUnit() bool`
+
+HasOdometerEndUnit returns a boolean if a field has been set.
+
+### GetDistanceUnit
+
+`func (o *VehicleRegionSegmentRead) GetDistanceUnit() DistanceUnit`
+
+GetDistanceUnit returns the DistanceUnit field if non-nil, zero value otherwise.
+
+### GetDistanceUnitOk
+
+`func (o *VehicleRegionSegmentRead) GetDistanceUnitOk() (*DistanceUnit, bool)`
+
+GetDistanceUnitOk returns a tuple with the DistanceUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDistanceUnit
+
+`func (o *VehicleRegionSegmentRead) SetDistanceUnit(v DistanceUnit)`
+
+SetDistanceUnit sets DistanceUnit field to given value.
+
+### HasDistanceUnit
+
+`func (o *VehicleRegionSegmentRead) HasDistanceUnit() bool`
+
+HasDistanceUnit returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

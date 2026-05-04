@@ -37,6 +37,11 @@ Name | Type | Description | Notes
 **OilPressure** | Pointer to **NullableFloat32** |  | [optional] 
 **CoolantTemperature** | Pointer to **NullableFloat32** |  | [optional] 
 **InferredAddress** | Pointer to [**NullableInferredAddress**](InferredAddress.md) |  | [optional] 
+**SpeedUnit** | Pointer to [**SpeedUnit**](SpeedUnit.md) | Unit for speed. | [optional] 
+**OdometerUnit** | Pointer to [**DistanceUnit**](DistanceUnit.md) | Unit for odometer. | [optional] 
+**FuelValueUnit** | Pointer to [**VolumeUnit**](VolumeUnit.md) | Unit for fuel_value. | [optional] 
+**OilPressureUnit** | Pointer to [**PressureUnit**](PressureUnit.md) | Unit for oil_pressure. | [optional] 
+**CoolantTemperatureUnit** | Pointer to [**TemperatureUnit**](TemperatureUnit.md) | Unit for coolant_temperature. | [optional] 
 
 ## Methods
 
@@ -1092,6 +1097,131 @@ HasInferredAddress returns a boolean if a field has been set.
 `func (o *VehicleLocationRead) UnsetInferredAddress()`
 
 UnsetInferredAddress ensures that no value is present for InferredAddress, not even an explicit nil
+### GetSpeedUnit
+
+`func (o *VehicleLocationRead) GetSpeedUnit() SpeedUnit`
+
+GetSpeedUnit returns the SpeedUnit field if non-nil, zero value otherwise.
+
+### GetSpeedUnitOk
+
+`func (o *VehicleLocationRead) GetSpeedUnitOk() (*SpeedUnit, bool)`
+
+GetSpeedUnitOk returns a tuple with the SpeedUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpeedUnit
+
+`func (o *VehicleLocationRead) SetSpeedUnit(v SpeedUnit)`
+
+SetSpeedUnit sets SpeedUnit field to given value.
+
+### HasSpeedUnit
+
+`func (o *VehicleLocationRead) HasSpeedUnit() bool`
+
+HasSpeedUnit returns a boolean if a field has been set.
+
+### GetOdometerUnit
+
+`func (o *VehicleLocationRead) GetOdometerUnit() DistanceUnit`
+
+GetOdometerUnit returns the OdometerUnit field if non-nil, zero value otherwise.
+
+### GetOdometerUnitOk
+
+`func (o *VehicleLocationRead) GetOdometerUnitOk() (*DistanceUnit, bool)`
+
+GetOdometerUnitOk returns a tuple with the OdometerUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdometerUnit
+
+`func (o *VehicleLocationRead) SetOdometerUnit(v DistanceUnit)`
+
+SetOdometerUnit sets OdometerUnit field to given value.
+
+### HasOdometerUnit
+
+`func (o *VehicleLocationRead) HasOdometerUnit() bool`
+
+HasOdometerUnit returns a boolean if a field has been set.
+
+### GetFuelValueUnit
+
+`func (o *VehicleLocationRead) GetFuelValueUnit() VolumeUnit`
+
+GetFuelValueUnit returns the FuelValueUnit field if non-nil, zero value otherwise.
+
+### GetFuelValueUnitOk
+
+`func (o *VehicleLocationRead) GetFuelValueUnitOk() (*VolumeUnit, bool)`
+
+GetFuelValueUnitOk returns a tuple with the FuelValueUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFuelValueUnit
+
+`func (o *VehicleLocationRead) SetFuelValueUnit(v VolumeUnit)`
+
+SetFuelValueUnit sets FuelValueUnit field to given value.
+
+### HasFuelValueUnit
+
+`func (o *VehicleLocationRead) HasFuelValueUnit() bool`
+
+HasFuelValueUnit returns a boolean if a field has been set.
+
+### GetOilPressureUnit
+
+`func (o *VehicleLocationRead) GetOilPressureUnit() PressureUnit`
+
+GetOilPressureUnit returns the OilPressureUnit field if non-nil, zero value otherwise.
+
+### GetOilPressureUnitOk
+
+`func (o *VehicleLocationRead) GetOilPressureUnitOk() (*PressureUnit, bool)`
+
+GetOilPressureUnitOk returns a tuple with the OilPressureUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOilPressureUnit
+
+`func (o *VehicleLocationRead) SetOilPressureUnit(v PressureUnit)`
+
+SetOilPressureUnit sets OilPressureUnit field to given value.
+
+### HasOilPressureUnit
+
+`func (o *VehicleLocationRead) HasOilPressureUnit() bool`
+
+HasOilPressureUnit returns a boolean if a field has been set.
+
+### GetCoolantTemperatureUnit
+
+`func (o *VehicleLocationRead) GetCoolantTemperatureUnit() TemperatureUnit`
+
+GetCoolantTemperatureUnit returns the CoolantTemperatureUnit field if non-nil, zero value otherwise.
+
+### GetCoolantTemperatureUnitOk
+
+`func (o *VehicleLocationRead) GetCoolantTemperatureUnitOk() (*TemperatureUnit, bool)`
+
+GetCoolantTemperatureUnitOk returns a tuple with the CoolantTemperatureUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCoolantTemperatureUnit
+
+`func (o *VehicleLocationRead) SetCoolantTemperatureUnit(v TemperatureUnit)`
+
+SetCoolantTemperatureUnit sets CoolantTemperatureUnit field to given value.
+
+### HasCoolantTemperatureUnit
+
+`func (o *VehicleLocationRead) HasCoolantTemperatureUnit() bool`
+
+HasCoolantTemperatureUnit returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

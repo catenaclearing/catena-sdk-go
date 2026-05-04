@@ -24,6 +24,20 @@ import (
 type DriversUsersAPI interface {
 
 	/*
+		CreateGroupMessage Create Group Message
+
+		Create a new group message. The message will be created asynchronously, and you can check the status of the operation using the returned operation ID.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiCreateGroupMessageRequest
+	*/
+	CreateGroupMessage(ctx context.Context) ApiCreateGroupMessageRequest
+
+	// CreateGroupMessageExecute executes the request
+	//  @return ResourceOperation
+	CreateGroupMessageExecute(r ApiCreateGroupMessageRequest) (*ResourceOperation, *http.Response, error)
+
+	/*
 		CreateMessage Create Message
 
 		Create a new message. The message will be created asynchronously, and you can check the status of the operation using the returned operation ID.
@@ -34,8 +48,8 @@ type DriversUsersAPI interface {
 	CreateMessage(ctx context.Context) ApiCreateMessageRequest
 
 	// CreateMessageExecute executes the request
-	//  @return ResourceOperationAccept
-	CreateMessageExecute(r ApiCreateMessageRequest) (*ResourceOperationAccept, *http.Response, error)
+	//  @return ResourceOperation
+	CreateMessageExecute(r ApiCreateMessageRequest) (*ResourceOperation, *http.Response, error)
 
 	/*
 		CreateUser Create User
@@ -48,8 +62,8 @@ type DriversUsersAPI interface {
 	CreateUser(ctx context.Context) ApiCreateUserRequest
 
 	// CreateUserExecute executes the request
-	//  @return ResourceOperationAccept
-	CreateUserExecute(r ApiCreateUserRequest) (*ResourceOperationAccept, *http.Response, error)
+	//  @return ResourceOperation
+	CreateUserExecute(r ApiCreateUserRequest) (*ResourceOperation, *http.Response, error)
 
 	/*
 		GetUser Get User
@@ -65,6 +79,20 @@ type DriversUsersAPI interface {
 	// GetUserExecute executes the request
 	//  @return UserRead
 	GetUserExecute(r ApiGetUserRequest) (*UserRead, *http.Response, error)
+
+	/*
+		ListGroupMessages List Group Messages
+
+		List all group messages.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiListGroupMessagesRequest
+	*/
+	ListGroupMessages(ctx context.Context) ApiListGroupMessagesRequest
+
+	// ListGroupMessagesExecute executes the request
+	//  @return CursorPageGroupMessageRead
+	ListGroupMessagesExecute(r ApiListGroupMessagesRequest) (*CursorPageGroupMessageRead, *http.Response, error)
 
 	/*
 		ListMessages List Messages
@@ -100,23 +128,268 @@ type DriversUsersAPI interface {
 		Update an existing user. The user will be updated asynchronously, and you can check the status of the operation using the returned operation ID.
 
 		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param sourceId The unique identifier of the user in the TSP.
+		@param id The unique identifier of the user
 		@return ApiUpdateUserRequest
 	*/
-	UpdateUser(ctx context.Context, sourceId string) ApiUpdateUserRequest
+	UpdateUser(ctx context.Context, id string) ApiUpdateUserRequest
 
 	// UpdateUserExecute executes the request
-	//  @return ResourceOperationAccept
-	UpdateUserExecute(r ApiUpdateUserRequest) (*ResourceOperationAccept, *http.Response, error)
+	//  @return ResourceOperation
+	UpdateUserExecute(r ApiUpdateUserRequest) (*ResourceOperation, *http.Response, error)
 }
 
 // DriversUsersAPIService DriversUsersAPI service
 type DriversUsersAPIService service
 
+type ApiCreateGroupMessageRequest struct {
+	ctx                context.Context
+	ApiService         DriversUsersAPI
+	groupMessageCreate *GroupMessageCreate
+	isSync             *bool
+}
+
+func (r ApiCreateGroupMessageRequest) GroupMessageCreate(groupMessageCreate GroupMessageCreate) ApiCreateGroupMessageRequest {
+	r.groupMessageCreate = &groupMessageCreate
+	return r
+}
+
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiCreateGroupMessageRequest) IsSync(isSync bool) ApiCreateGroupMessageRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiCreateGroupMessageRequest) Execute() (*ResourceOperation, *http.Response, error) {
+	return r.ApiService.CreateGroupMessageExecute(r)
+}
+
+/*
+CreateGroupMessage Create Group Message
+
+Create a new group message. The message will be created asynchronously, and you can check the status of the operation using the returned operation ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateGroupMessageRequest
+*/
+func (a *DriversUsersAPIService) CreateGroupMessage(ctx context.Context) ApiCreateGroupMessageRequest {
+	return ApiCreateGroupMessageRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ResourceOperation
+func (a *DriversUsersAPIService) CreateGroupMessageExecute(r ApiCreateGroupMessageRequest) (*ResourceOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResourceOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DriversUsersAPIService.CreateGroupMessage")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/telematics/group-messages"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.groupMessageCreate == nil {
+		return localVarReturnValue, nil, reportError("groupMessageCreate is required and must be specified")
+	}
+
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.groupMessageCreate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateMessageRequest struct {
 	ctx           context.Context
 	ApiService    DriversUsersAPI
 	messageCreate *MessageCreate
+	isSync        *bool
 }
 
 func (r ApiCreateMessageRequest) MessageCreate(messageCreate MessageCreate) ApiCreateMessageRequest {
@@ -124,7 +397,13 @@ func (r ApiCreateMessageRequest) MessageCreate(messageCreate MessageCreate) ApiC
 	return r
 }
 
-func (r ApiCreateMessageRequest) Execute() (*ResourceOperationAccept, *http.Response, error) {
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiCreateMessageRequest) IsSync(isSync bool) ApiCreateMessageRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiCreateMessageRequest) Execute() (*ResourceOperation, *http.Response, error) {
 	return r.ApiService.CreateMessageExecute(r)
 }
 
@@ -145,13 +424,13 @@ func (a *DriversUsersAPIService) CreateMessage(ctx context.Context) ApiCreateMes
 
 // Execute executes the request
 //
-//	@return ResourceOperationAccept
-func (a *DriversUsersAPIService) CreateMessageExecute(r ApiCreateMessageRequest) (*ResourceOperationAccept, *http.Response, error) {
+//	@return ResourceOperation
+func (a *DriversUsersAPIService) CreateMessageExecute(r ApiCreateMessageRequest) (*ResourceOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ResourceOperationAccept
+		localVarReturnValue *ResourceOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DriversUsersAPIService.CreateMessage")
@@ -168,6 +447,12 @@ func (a *DriversUsersAPIService) CreateMessageExecute(r ApiCreateMessageRequest)
 		return localVarReturnValue, nil, reportError("messageCreate is required and must be specified")
 	}
 
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -317,6 +602,17 @@ func (a *DriversUsersAPIService) CreateMessageExecute(r ApiCreateMessageRequest)
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -337,6 +633,7 @@ type ApiCreateUserRequest struct {
 	ctx        context.Context
 	ApiService DriversUsersAPI
 	userCreate *UserCreate
+	isSync     *bool
 }
 
 func (r ApiCreateUserRequest) UserCreate(userCreate UserCreate) ApiCreateUserRequest {
@@ -344,7 +641,13 @@ func (r ApiCreateUserRequest) UserCreate(userCreate UserCreate) ApiCreateUserReq
 	return r
 }
 
-func (r ApiCreateUserRequest) Execute() (*ResourceOperationAccept, *http.Response, error) {
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiCreateUserRequest) IsSync(isSync bool) ApiCreateUserRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiCreateUserRequest) Execute() (*ResourceOperation, *http.Response, error) {
 	return r.ApiService.CreateUserExecute(r)
 }
 
@@ -365,13 +668,13 @@ func (a *DriversUsersAPIService) CreateUser(ctx context.Context) ApiCreateUserRe
 
 // Execute executes the request
 //
-//	@return ResourceOperationAccept
-func (a *DriversUsersAPIService) CreateUserExecute(r ApiCreateUserRequest) (*ResourceOperationAccept, *http.Response, error) {
+//	@return ResourceOperation
+func (a *DriversUsersAPIService) CreateUserExecute(r ApiCreateUserRequest) (*ResourceOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ResourceOperationAccept
+		localVarReturnValue *ResourceOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DriversUsersAPIService.CreateUser")
@@ -388,6 +691,12 @@ func (a *DriversUsersAPIService) CreateUserExecute(r ApiCreateUserRequest) (*Res
 		return localVarReturnValue, nil, reportError("userCreate is required and must be specified")
 	}
 
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -537,6 +846,17 @@ func (a *DriversUsersAPIService) CreateUserExecute(r ApiCreateUserRequest) (*Res
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -615,6 +935,412 @@ func (a *DriversUsersAPIService) GetUserExecute(r ApiGetUserRequest) (*UserRead,
 	} else {
 		var defaultValue bool = false
 		r.includeSourceData = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Forbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 405 {
+			var v MethodNotAllowed
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Conflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v UnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v InternalServerError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 501 {
+			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListGroupMessagesRequest struct {
+	ctx               context.Context
+	ApiService        DriversUsersAPI
+	fleetIds          *[]string
+	fleetRefs         *[]string
+	connectionId      *string
+	fromDatetime      *time.Time
+	toDatetime        *time.Time
+	includeSourceData *bool
+	senderIds         *[]string
+	groupIds          *[]string
+	sourceSenderIds   *[]string
+	sourceGroupIds    *[]string
+	sortBy            *string
+	sortOrder         *string
+	cursor            *string
+	size              *int32
+}
+
+// Limit results to specific fleets using Catena&#39;s fleet IDs. *For your own fleet identifiers, use &#x60;fleet_refs&#x60; instead* To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_ids&#x3D;id1&amp;fleet_ids&#x3D;id2&#x60;).
+func (r ApiListGroupMessagesRequest) FleetIds(fleetIds []string) ApiListGroupMessagesRequest {
+	r.fleetIds = &fleetIds
+	return r
+}
+
+// Limit results to specific fleets using your organization&#39;s fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., &#x60;?fleet_refs&#x3D;ref1&amp;fleet_refs&#x3D;ref2&#x60;).
+func (r ApiListGroupMessagesRequest) FleetRefs(fleetRefs []string) ApiListGroupMessagesRequest {
+	r.fleetRefs = &fleetRefs
+	return r
+}
+
+// Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.
+func (r ApiListGroupMessagesRequest) ConnectionId(connectionId string) ApiListGroupMessagesRequest {
+	r.connectionId = &connectionId
+	return r
+}
+
+// Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &gt;&#x3D; from_datetime&#x60; **Default value:** &#x60;now() - 1 day&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
+func (r ApiListGroupMessagesRequest) FromDatetime(fromDatetime time.Time) ApiListGroupMessagesRequest {
+	r.fromDatetime = &fromDatetime
+	return r
+}
+
+// Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** &#x60;occurred_at &lt; to_datetime&#x60; **Default value:** &#x60;now()&#x60; **Restriction:** &#x60;to_datetime - from_datetime&#x60; cannot exceed 45 days
+func (r ApiListGroupMessagesRequest) ToDatetime(toDatetime time.Time) ApiListGroupMessagesRequest {
+	r.toDatetime = &toDatetime
+	return r
+}
+
+// Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena*
+func (r ApiListGroupMessagesRequest) IncludeSourceData(includeSourceData bool) ApiListGroupMessagesRequest {
+	r.includeSourceData = &includeSourceData
+	return r
+}
+
+// Limit results to specific senders. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?sender_ids&#x3D;id1&amp;sender_ids&#x3D;id2&#x60;).
+func (r ApiListGroupMessagesRequest) SenderIds(senderIds []string) ApiListGroupMessagesRequest {
+	r.senderIds = &senderIds
+	return r
+}
+
+// Limit results to specific group IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?group_ids&#x3D;id1&amp;group_ids&#x3D;id2&#x60;).
+func (r ApiListGroupMessagesRequest) GroupIds(groupIds []string) ApiListGroupMessagesRequest {
+	r.groupIds = &groupIds
+	return r
+}
+
+// Limit results to specific source sender IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?source_sender_ids&#x3D;id1&amp;source_sender_ids&#x3D;id2&#x60;).
+func (r ApiListGroupMessagesRequest) SourceSenderIds(sourceSenderIds []string) ApiListGroupMessagesRequest {
+	r.sourceSenderIds = &sourceSenderIds
+	return r
+}
+
+// Limit results to specific source group IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., &#x60;?source_group_ids&#x3D;id1&amp;source_group_ids&#x3D;id2&#x60;).
+func (r ApiListGroupMessagesRequest) SourceGroupIds(sourceGroupIds []string) ApiListGroupMessagesRequest {
+	r.sourceGroupIds = &sourceGroupIds
+	return r
+}
+
+// The name of the field to sort results by. If not provided, results will be ordered by &#x60;occurred_at&#x60;.
+func (r ApiListGroupMessagesRequest) SortBy(sortBy string) ApiListGroupMessagesRequest {
+	r.sortBy = &sortBy
+	return r
+}
+
+// The order of sorting, either &#x60;asc&#x60; for ascending or &#x60;desc&#x60; for descending. Defaults to &#x60;asc&#x60; if &#x60;sort_by&#x60; is provided without &#x60;sort_order&#x60;.
+func (r ApiListGroupMessagesRequest) SortOrder(sortOrder string) ApiListGroupMessagesRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+
+// Cursor for the next page
+func (r ApiListGroupMessagesRequest) Cursor(cursor string) ApiListGroupMessagesRequest {
+	r.cursor = &cursor
+	return r
+}
+
+// Page size
+func (r ApiListGroupMessagesRequest) Size(size int32) ApiListGroupMessagesRequest {
+	r.size = &size
+	return r
+}
+
+func (r ApiListGroupMessagesRequest) Execute() (*CursorPageGroupMessageRead, *http.Response, error) {
+	return r.ApiService.ListGroupMessagesExecute(r)
+}
+
+/*
+ListGroupMessages List Group Messages
+
+List all group messages.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListGroupMessagesRequest
+*/
+func (a *DriversUsersAPIService) ListGroupMessages(ctx context.Context) ApiListGroupMessagesRequest {
+	return ApiListGroupMessagesRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CursorPageGroupMessageRead
+func (a *DriversUsersAPIService) ListGroupMessagesExecute(r ApiListGroupMessagesRequest) (*CursorPageGroupMessageRead, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CursorPageGroupMessageRead
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DriversUsersAPIService.ListGroupMessages")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/telematics/group-messages"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.fleetIds != nil {
+		t := *r.fleetIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_ids", t, "form", "multi")
+		}
+	}
+	if r.fleetRefs != nil {
+		t := *r.fleetRefs
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "fleet_refs", t, "form", "multi")
+		}
+	}
+	if r.connectionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "connection_id", r.connectionId, "form", "")
+	}
+	if r.fromDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from_datetime", r.fromDatetime, "form", "")
+	}
+	if r.toDatetime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to_datetime", r.toDatetime, "form", "")
+	}
+	if r.includeSourceData != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_source_data", r.includeSourceData, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.includeSourceData = &defaultValue
+	}
+	if r.senderIds != nil {
+		t := *r.senderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "sender_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "sender_ids", t, "form", "multi")
+		}
+	}
+	if r.groupIds != nil {
+		t := *r.groupIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "group_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "group_ids", t, "form", "multi")
+		}
+	}
+	if r.sourceSenderIds != nil {
+		t := *r.sourceSenderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "source_sender_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "source_sender_ids", t, "form", "multi")
+		}
+	}
+	if r.sourceGroupIds != nil {
+		t := *r.sourceGroupIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "source_group_ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "source_group_ids", t, "form", "multi")
+		}
+	}
+	if r.sortBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_by", r.sortBy, "form", "")
+	}
+	if r.sortOrder != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort_order", r.sortOrder, "form", "")
+	} else {
+		var defaultValue string = "asc"
+		r.sortOrder = &defaultValue
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "form", "")
+	}
+	if r.size != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "size", r.size, "form", "")
+	} else {
+		var defaultValue int32 = 300
+		r.size = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1548,8 +2274,9 @@ func (a *DriversUsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*Curso
 type ApiUpdateUserRequest struct {
 	ctx        context.Context
 	ApiService DriversUsersAPI
-	sourceId   string
+	id         string
 	userUpdate *UserUpdate
+	isSync     *bool
 }
 
 func (r ApiUpdateUserRequest) UserUpdate(userUpdate UserUpdate) ApiUpdateUserRequest {
@@ -1557,7 +2284,13 @@ func (r ApiUpdateUserRequest) UserUpdate(userUpdate UserUpdate) ApiUpdateUserReq
 	return r
 }
 
-func (r ApiUpdateUserRequest) Execute() (*ResourceOperationAccept, *http.Response, error) {
+// Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.
+func (r ApiUpdateUserRequest) IsSync(isSync bool) ApiUpdateUserRequest {
+	r.isSync = &isSync
+	return r
+}
+
+func (r ApiUpdateUserRequest) Execute() (*ResourceOperation, *http.Response, error) {
 	return r.ApiService.UpdateUserExecute(r)
 }
 
@@ -1567,26 +2300,26 @@ UpdateUser Update User
 Update an existing user. The user will be updated asynchronously, and you can check the status of the operation using the returned operation ID.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param sourceId The unique identifier of the user in the TSP.
+	@param id The unique identifier of the user
 	@return ApiUpdateUserRequest
 */
-func (a *DriversUsersAPIService) UpdateUser(ctx context.Context, sourceId string) ApiUpdateUserRequest {
+func (a *DriversUsersAPIService) UpdateUser(ctx context.Context, id string) ApiUpdateUserRequest {
 	return ApiUpdateUserRequest{
 		ApiService: a,
 		ctx:        ctx,
-		sourceId:   sourceId,
+		id:         id,
 	}
 }
 
 // Execute executes the request
 //
-//	@return ResourceOperationAccept
-func (a *DriversUsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*ResourceOperationAccept, *http.Response, error) {
+//	@return ResourceOperation
+func (a *DriversUsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*ResourceOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ResourceOperationAccept
+		localVarReturnValue *ResourceOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DriversUsersAPIService.UpdateUser")
@@ -1594,8 +2327,8 @@ func (a *DriversUsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*Res
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v2/telematics/users/{source_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"source_id"+"}", url.PathEscape(parameterValueToString(r.sourceId, "sourceId")), -1)
+	localVarPath := localBasePath + "/v2/telematics/users/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1604,6 +2337,12 @@ func (a *DriversUsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*Res
 		return localVarReturnValue, nil, reportError("userUpdate is required and must be specified")
 	}
 
+	if r.isSync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_sync", r.isSync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.isSync = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1746,6 +2485,17 @@ func (a *DriversUsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*Res
 		}
 		if localVarHTTPResponse.StatusCode == 501 {
 			var v NotImplementedResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v ResourceOperation
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

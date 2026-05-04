@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **Resource** | [**ResourceEnum**](ResourceEnum.md) | The type of resource being fetched (e.g., VEHICLE, DRIVER, HOS, IFTA). | 
 **Cursor** | Pointer to **NullableString** |  | [optional] 
 **Response** | Pointer to **map[string]interface{}** |  | [optional] 
+**LastDataAt** | Pointer to **NullableTime** |  | [optional] 
 
 ## Methods
 
@@ -285,6 +286,41 @@ HasResponse returns a boolean if a field has been set.
 `func (o *ExecutionRead) UnsetResponse()`
 
 UnsetResponse ensures that no value is present for Response, not even an explicit nil
+### GetLastDataAt
+
+`func (o *ExecutionRead) GetLastDataAt() time.Time`
+
+GetLastDataAt returns the LastDataAt field if non-nil, zero value otherwise.
+
+### GetLastDataAtOk
+
+`func (o *ExecutionRead) GetLastDataAtOk() (*time.Time, bool)`
+
+GetLastDataAtOk returns a tuple with the LastDataAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastDataAt
+
+`func (o *ExecutionRead) SetLastDataAt(v time.Time)`
+
+SetLastDataAt sets LastDataAt field to given value.
+
+### HasLastDataAt
+
+`func (o *ExecutionRead) HasLastDataAt() bool`
+
+HasLastDataAt returns a boolean if a field has been set.
+
+### SetLastDataAtNil
+
+`func (o *ExecutionRead) SetLastDataAtNil(b bool)`
+
+ SetLastDataAtNil sets the value for LastDataAt to be an explicit nil
+
+### UnsetLastDataAt
+`func (o *ExecutionRead) UnsetLastDataAt()`
+
+UnsetLastDataAt ensures that no value is present for LastDataAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

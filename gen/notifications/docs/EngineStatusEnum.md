@@ -9,6 +9,8 @@
 
 * `IDLE` (value: `"IDLE"`)
 
+* `TOWING` (value: `"TOWING"`)
+
 * `UNKNOWN` (value: `"UNKNOWN"`)
 
 

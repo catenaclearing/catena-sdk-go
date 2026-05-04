@@ -2740,6 +2740,246 @@
         }
       }
     },
+    "workflow.added": {
+      "post": {
+        "tags": [
+          "Webhook Events"
+        ],
+        "summary": "Workflow Added",
+        "description": "Emitted when a workflow is added to our database.",
+        "operationId": "workflow_addedworkflow_added_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowAdded"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "workflow.modified": {
+      "post": {
+        "tags": [
+          "Webhook Events"
+        ],
+        "summary": "Workflow Modified",
+        "description": "Emitted when a workflow is modified in our database.",
+        "operationId": "workflow_modifiedworkflow_modified_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowModified"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "workflow.removed": {
+      "post": {
+        "tags": [
+          "Webhook Events"
+        ],
+        "summary": "Workflow Removed",
+        "description": "Emitted when a workflow is removed from our database.",
+        "operationId": "workflow_removedworkflow_removed_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRemoved"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dvir_log.added": {
+      "post": {
+        "tags": [
+          "Webhook Events"
+        ],
+        "summary": "Dvir Log Added",
+        "description": "Emitted when a new DVIR log is added to our database.",
+        "operationId": "dvir_log_addeddvir_log_added_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DvirLogAdded"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dvir_log.modified": {
+      "post": {
+        "tags": [
+          "Webhook Events"
+        ],
+        "summary": "Dvir Log Modified",
+        "description": "Emitted when a DVIR log is modified in our database.",
+        "operationId": "dvir_log_modifieddvir_log_modified_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DvirLogModified"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dvir_log.removed": {
+      "post": {
+        "tags": [
+          "Webhook Events"
+        ],
+        "summary": "Dvir Log Removed",
+        "description": "Emitted when a DVIR log is removed from our database.",
+        "operationId": "dvir_log_removeddvir_log_removed_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DvirLogRemoved"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "user.added": {
       "post": {
         "tags": [
@@ -2913,6 +3153,86 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/MessageModified"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "group_message.added": {
+      "post": {
+        "tags": [
+          "Webhook Events"
+        ],
+        "summary": "Group Message Added",
+        "description": "Emitted when a new group message is added to our database.\n\ne.g. The record fetched from the TSP is new and generated a new record in our database.",
+        "operationId": "group_message_addedgroup_message_added_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupMessageAdded"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "group_message.modified": {
+      "post": {
+        "tags": [
+          "Webhook Events"
+        ],
+        "summary": "Group Message Modified",
+        "description": "Emitted when a group message is modified in our database.\n\ne.g. The record fetched from the TSP is different from what we had stored in our database and it prompted us to update the existing record.",
+        "operationId": "group_message_modifiedgroup_message_modified_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupMessageModified"
               }
             }
           },
@@ -4672,6 +4992,416 @@
         "title": "BaseDriverVehicleAssociation",
         "description": "Base driver-vehicle association event."
       },
+      "BaseDvirLog": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "ID",
+            "description": "Internal unique identifier for the telematics event record (Catena PK)."
+          },
+          "fleet_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Fleet ID",
+            "description": "The Catena fleet this record belongs to (multi-tenant scope)."
+          },
+          "fleet_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fleet Ref",
+            "description": "The reference of the fleet in the partner system"
+          },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "$ref": "#/components/schemas/TspEnum",
+            "title": "Source Name",
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection ID",
+            "description": "The specific fleet\u2194TSP connection through which this record was sourced."
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source ID",
+            "description": "The ID of the record in the TSP or a deterministic ID/Hash generated from a composite unique key"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Immutable: first time this record was ingested into our system."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Last time we modified this record in our system."
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "Logical delete marker: when the TSP stopped reporting this record."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At",
+            "description": "When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available."
+          },
+          "execution_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Execution Id",
+            "description": "Identifier for the ingestion execution that processed this record (for tracing)."
+          },
+          "schedule_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schedule Id",
+            "description": "Identifier for the ingestion schedule that triggered this record's processing (for tracing)."
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
+          },
+          "vehicle_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle Id",
+            "description": "Internal vehicle identifier."
+          },
+          "driver_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Driver Id",
+            "description": "Internal driver identifier."
+          },
+          "trailer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trailer Id",
+            "description": "Internal trailer identifier."
+          },
+          "source_driver_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Driver Id",
+            "description": "Source system driver identifier."
+          },
+          "source_vehicle_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Vehicle Id",
+            "description": "Source system vehicle identifier."
+          },
+          "source_trailer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Trailer Id",
+            "description": "Source system trailer identifier."
+          },
+          "log_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DvirLogTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Type of DVIR log."
+          },
+          "authority_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authority Name"
+          },
+          "authority_address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authority Address"
+          },
+          "duration_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Seconds"
+          },
+          "odometer_km": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Odometer Km",
+            "description": "Vehicle odometer reading in kilometers at the time of the DVIR (to be deprecated)."
+          },
+          "odometer": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Odometer",
+            "description": "Vehicle odometer reading in meters at the time of the DVIR."
+          },
+          "engine_hours": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Engine Hours"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Point"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Location encoded as GeoJSON Point."
+          },
+          "h3_index_11": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "format": "int64",
+            "title": "H3 Index 11"
+          },
+          "inspected_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inspected By"
+          },
+          "certify_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Certify Comment"
+          },
+          "driver_comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Driver Comment"
+          },
+          "defect_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Defect Count"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "defects": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DvirDefectEnum"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Defects"
+          },
+          "is_safety_critical": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Safety Critical"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "fleet_id",
+          "fleet_ref",
+          "source_name",
+          "connection_id",
+          "source_id",
+          "created_at",
+          "updated_at",
+          "occurred_at"
+        ],
+        "title": "BaseDvirLog",
+        "description": "Base class for DVIR logs."
+      },
       "BaseEngineLog": {
         "properties": {
           "id": {
@@ -5692,6 +6422,337 @@
         ],
         "title": "BaseFuelTransaction",
         "description": "Base class for Fuel transactions."
+      },
+      "BaseGroupMessage": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "ID",
+            "description": "Internal unique identifier for the telematics event record (Catena PK)."
+          },
+          "fleet_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Fleet ID",
+            "description": "The Catena fleet this record belongs to (multi-tenant scope)."
+          },
+          "fleet_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fleet Ref",
+            "description": "The reference of the fleet in the partner system"
+          },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "$ref": "#/components/schemas/TspEnum",
+            "title": "Source Name",
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection ID",
+            "description": "The specific fleet\u2194TSP connection through which this record was sourced."
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source ID",
+            "description": "The ID of the record in the TSP or a deterministic ID/Hash generated from a composite unique key"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Immutable: first time this record was ingested into our system."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Last time we modified this record in our system."
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "Logical delete marker: when the TSP stopped reporting this record."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At",
+            "description": "When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available."
+          },
+          "execution_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Execution Id",
+            "description": "Identifier for the ingestion execution that processed this record (for tracing)."
+          },
+          "schedule_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schedule Id",
+            "description": "Identifier for the ingestion schedule that triggered this record's processing (for tracing)."
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
+          },
+          "source_sender_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Sender Id",
+            "description": "External system identifier for the sender"
+          },
+          "source_recipient_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Recipient Ids",
+            "description": "External system identifier for the recipient"
+          },
+          "sender_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sender Id",
+            "description": "Unique identifier for the sender"
+          },
+          "recipient_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recipient Ids",
+            "description": "Unique identifier for the recipient"
+          },
+          "message_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Text",
+            "description": "The content of the message"
+          },
+          "message_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Hash",
+            "description": "Unique hash generated from sender, message text and occurred_at"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MessageStatusEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status of the message delivery (e.g. delivered, read)"
+          },
+          "delivered_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delivered At",
+            "description": "Timestamp indicating when the message was delivered"
+          },
+          "sent_by_driver": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sent By Driver",
+            "description": "Whether the message was sent by a driver"
+          },
+          "sender_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sender Name",
+            "description": "The name of the sender at the moment when the message was created"
+          },
+          "thread_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thread Id",
+            "description": "Thread/conversation identifier. Represents a shared conversation across multiple messages."
+          },
+          "source_thread_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Thread Id",
+            "description": "External system thread/conversation identifier. Represents a shared conversation across multiple messages."
+          },
+          "group_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Id",
+            "description": "Identifier for the message group. Messages with the same group_id are considered part of the same group message."
+          },
+          "source_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Group Id",
+            "description": "External system identifier for the message group. Messages with the same source_group_id are considered part of the same group message."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "fleet_id",
+          "fleet_ref",
+          "source_name",
+          "connection_id",
+          "source_id",
+          "created_at",
+          "updated_at",
+          "occurred_at"
+        ],
+        "title": "BaseGroupMessage",
+        "description": "Base class for group messages."
       },
       "BaseHosAvailability": {
         "properties": {
@@ -8180,6 +9241,19 @@
             "title": "Resource Type",
             "description": "The type of resource to operate on (e.g., vehicle, driver, hos_event)."
           },
+          "resource_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource ID",
+            "description": "Unique identifier of the resource in Catena Telematics."
+          },
           "source_id": {
             "anyOf": [
               {
@@ -8207,6 +9281,14 @@
             "type": "object",
             "title": "Operation Payload",
             "description": "The payload of the operation, containing the resource attributes to be created or updated."
+          },
+          "logs": {
+            "items": {
+              "$ref": "#/components/schemas/ResourceOperationLogRead"
+            },
+            "type": "array",
+            "title": "Logs",
+            "description": "Log entries for each attempt to execute this operation."
           }
         },
         "type": "object",
@@ -11236,6 +12318,269 @@
         "title": "BaseWebhookEvent",
         "description": "Base webhook event."
       },
+      "BaseWorkflow": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "ID",
+            "description": "Internal unique identifier for the telematics event record (Catena PK)."
+          },
+          "fleet_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Fleet ID",
+            "description": "The Catena fleet this record belongs to (multi-tenant scope)."
+          },
+          "fleet_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fleet Ref",
+            "description": "The reference of the fleet in the partner system"
+          },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "$ref": "#/components/schemas/TspEnum",
+            "title": "Source Name",
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection ID",
+            "description": "The specific fleet\u2194TSP connection through which this record was sourced."
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source ID",
+            "description": "The ID of the record in the TSP or a deterministic ID/Hash generated from a composite unique key"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Immutable: first time this record was ingested into our system."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Last time we modified this record in our system."
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "Logical delete marker: when the TSP stopped reporting this record."
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Occurred At",
+            "description": "When the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available."
+          },
+          "execution_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Execution Id",
+            "description": "Identifier for the ingestion execution that processed this record (for tracing)."
+          },
+          "schedule_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schedule Id",
+            "description": "Identifier for the ingestion schedule that triggered this record's processing (for tracing)."
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
+          },
+          "vehicle_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle Id"
+          },
+          "driver_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Driver Id"
+          },
+          "source_vehicle_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Vehicle Id"
+          },
+          "source_driver_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Driver Id"
+          },
+          "workflow_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WorkflowStatusEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ended At"
+          },
+          "total_distance": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Distance",
+            "description": "Total distance in meters."
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instructions"
+          },
+          "stops": {
+            "items": {
+              "$ref": "#/components/schemas/WorkflowStop"
+            },
+            "type": "array",
+            "title": "Stops"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "fleet_id",
+          "fleet_ref",
+          "source_name",
+          "connection_id",
+          "source_id",
+          "created_at",
+          "updated_at",
+          "occurred_at"
+        ],
+        "title": "BaseWorkflow",
+        "description": "Workflow model for planned jobs/routes/dispatches with nested stops."
+      },
       "CanonicalFaultCodeEnum": {
         "type": "string",
         "enum": [
@@ -11660,6 +13005,306 @@
         "title": "DutyStatusCodeEnum",
         "description": "Enum for duty status codes"
       },
+      "DvirDefectEnum": {
+        "type": "string",
+        "enum": [
+          "fluid_levels",
+          "battery",
+          "belts_hoses",
+          "radiator",
+          "frame_assembly",
+          "front_axle",
+          "starter",
+          "transmission",
+          "oil_pressure",
+          "defroster_heater",
+          "lights_front",
+          "windshield_clean",
+          "windshield_wiper_fluid",
+          "windshield_wipers",
+          "brakes",
+          "brake_check",
+          "clutch",
+          "mirrors",
+          "horn",
+          "safety_equipment",
+          "trip_recorder",
+          "air_conditioner",
+          "doors",
+          "stop_arm_control",
+          "steering_wheel",
+          "emergency_door_buzzer",
+          "entrance_steps",
+          "interior_floor",
+          "windows",
+          "exhaust",
+          "fifth_wheel",
+          "landing_gear",
+          "suspension",
+          "alignment",
+          "rims",
+          "tires",
+          "tire_chains",
+          "stop_arm",
+          "muffler",
+          "roof",
+          "wheels",
+          "wheels_rims",
+          "suspension_under",
+          "scratches",
+          "air_compressor",
+          "air_lines",
+          "brake_connections",
+          "coupling_devices",
+          "reflectors",
+          "lights_rear",
+          "rear_end",
+          "tire_chains_rear",
+          "brake_accessories",
+          "drive_line",
+          "engine",
+          "fuel_tanks",
+          "lights_general",
+          "other",
+          "unset",
+          "first_aid_kit"
+        ],
+        "title": "DvirDefectEnum",
+        "description": "Enum for DVIR (Driver Vehicle Inspection Report) defects"
+      },
+      "DvirLogAdded": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+$",
+            "title": "Schema Version",
+            "description": "Version of the schema used for this event",
+            "examples": [
+              "1.0",
+              "1.1",
+              "2.0"
+            ]
+          },
+          "event_name": {
+            "type": "string",
+            "title": "Event Name",
+            "default": "dvir_log.added"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BaseDvirLog"
+            },
+            "type": "array",
+            "title": "Data / Payload",
+            "description": "The event payload, with one or more records of the specified type"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Webhook ID",
+            "description": "Unique identifier for the webhook subscription that triggered this delivery"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Timestamp",
+            "description": "ISO 8601 timestamp when the event occurred"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event ID",
+            "description": "Unique identifier for this specific event instance (UUID v7 for time-ordered sorting)"
+          },
+          "delivery_attempt": {
+            "type": "integer",
+            "title": "Delivery Attempt",
+            "description": "The number of times the event has been attempted to be delivered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "data",
+          "webhook_id"
+        ],
+        "title": "DvirLogAdded",
+        "description": "DVIR log added event."
+      },
+      "DvirLogModified": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+$",
+            "title": "Schema Version",
+            "description": "Version of the schema used for this event",
+            "examples": [
+              "1.0",
+              "1.1",
+              "2.0"
+            ]
+          },
+          "event_name": {
+            "type": "string",
+            "title": "Event Name",
+            "default": "dvir_log.modified"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BaseDvirLog"
+            },
+            "type": "array",
+            "title": "Data / Payload",
+            "description": "The event payload, with one or more records of the specified type"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Webhook ID",
+            "description": "Unique identifier for the webhook subscription that triggered this delivery"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Timestamp",
+            "description": "ISO 8601 timestamp when the event occurred"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event ID",
+            "description": "Unique identifier for this specific event instance (UUID v7 for time-ordered sorting)"
+          },
+          "delivery_attempt": {
+            "type": "integer",
+            "title": "Delivery Attempt",
+            "description": "The number of times the event has been attempted to be delivered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "data",
+          "webhook_id"
+        ],
+        "title": "DvirLogModified",
+        "description": "DVIR log modified event."
+      },
+      "DvirLogRemoved": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+$",
+            "title": "Schema Version",
+            "description": "Version of the schema used for this event",
+            "examples": [
+              "1.0",
+              "1.1",
+              "2.0"
+            ]
+          },
+          "event_name": {
+            "type": "string",
+            "title": "Event Name",
+            "default": "dvir_log.removed"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BaseTelematicsEvent"
+            },
+            "type": "array",
+            "title": "Data / Payload",
+            "description": "The event payload, with one or more records of the specified type"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Webhook ID",
+            "description": "Unique identifier for the webhook subscription that triggered this delivery"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Timestamp",
+            "description": "ISO 8601 timestamp when the event occurred"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event ID",
+            "description": "Unique identifier for this specific event instance (UUID v7 for time-ordered sorting)"
+          },
+          "delivery_attempt": {
+            "type": "integer",
+            "title": "Delivery Attempt",
+            "description": "The number of times the event has been attempted to be delivered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "data",
+          "webhook_id"
+        ],
+        "title": "DvirLogRemoved",
+        "description": "DVIR log removed event."
+      },
+      "DvirLogTypeEnum": {
+        "type": "string",
+        "enum": [
+          "pre_trip",
+          "post_trip",
+          "mechanic",
+          "unknown"
+        ],
+        "title": "DvirLogTypeEnum",
+        "description": "Enum for DVR log types"
+      },
       "EngineLogAdded": {
         "properties": {
           "version": {
@@ -11888,6 +13533,7 @@
           "OFF",
           "ON",
           "IDLE",
+          "TOWING",
           "UNKNOWN"
         ],
         "title": "EngineStatusEnum",
@@ -12440,6 +14086,154 @@
         ],
         "title": "FuelTransactionModified",
         "description": "Fuel transaction modified event."
+      },
+      "GroupMessageAdded": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+$",
+            "title": "Schema Version",
+            "description": "Version of the schema used for this event",
+            "examples": [
+              "1.0",
+              "1.1",
+              "2.0"
+            ]
+          },
+          "event_name": {
+            "type": "string",
+            "title": "Event Name",
+            "default": "group_message.added"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BaseGroupMessage"
+            },
+            "type": "array",
+            "title": "Data / Payload",
+            "description": "The event payload, with one or more records of the specified type"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Webhook ID",
+            "description": "Unique identifier for the webhook subscription that triggered this delivery"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Timestamp",
+            "description": "ISO 8601 timestamp when the event occurred"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event ID",
+            "description": "Unique identifier for this specific event instance (UUID v7 for time-ordered sorting)"
+          },
+          "delivery_attempt": {
+            "type": "integer",
+            "title": "Delivery Attempt",
+            "description": "The number of times the event has been attempted to be delivered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "data",
+          "webhook_id"
+        ],
+        "title": "GroupMessageAdded",
+        "description": "Group message added event."
+      },
+      "GroupMessageModified": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+$",
+            "title": "Schema Version",
+            "description": "Version of the schema used for this event",
+            "examples": [
+              "1.0",
+              "1.1",
+              "2.0"
+            ]
+          },
+          "event_name": {
+            "type": "string",
+            "title": "Event Name",
+            "default": "group_message.modified"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BaseGroupMessage"
+            },
+            "type": "array",
+            "title": "Data / Payload",
+            "description": "The event payload, with one or more records of the specified type"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Webhook ID",
+            "description": "Unique identifier for the webhook subscription that triggered this delivery"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Timestamp",
+            "description": "ISO 8601 timestamp when the event occurred"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event ID",
+            "description": "Unique identifier for this specific event instance (UUID v7 for time-ordered sorting)"
+          },
+          "delivery_attempt": {
+            "type": "integer",
+            "title": "Delivery Attempt",
+            "description": "The number of times the event has been attempted to be delivered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "data",
+          "webhook_id"
+        ],
+        "title": "GroupMessageModified",
+        "description": "Group message modified event."
       },
       "HTTPValidationError": {
         "properties": {
@@ -13389,12 +15183,16 @@
           "US_MD_INTRA_SH_80_8",
           "US_NE_INTRA_PROP_70_7",
           "US_NE_INTRA_PROP_80_8",
+          "US_NC_INTRA_PROP_70_7",
+          "US_NC_INTRA_PROP_80_8",
           "US_ND_INTRA_PROP_70_7",
           "US_ND_INTRA_SH_70_7",
           "US_SC_INTRA_PROP_70_7",
           "US_SC_INTRA_PROP_80_8",
           "US_WA_INTRA_PROP_70_7",
           "US_WA_INTRA_PROP_80_8",
+          "US_WI_INTRA_PROP_70_7",
+          "US_WI_INTRA_PROP_80_8",
           "CA_FED_C1_70_7",
           "CA_FED_C2_120_14",
           "CA_FED_C1_TEAM",
@@ -15094,6 +16892,7 @@
           "ifta_summary",
           "location_segment",
           "message",
+          "group_message",
           "user",
           "vehicle",
           "vehicle_location",
@@ -15103,7 +16902,8 @@
           "trailer_association",
           "trailer_vehicle_association",
           "trailer_location",
-          "trailer_status"
+          "trailer_status",
+          "workflow"
         ],
         "title": "ResourceEnum",
         "description": "Enum for resources"
@@ -15182,6 +16982,17 @@
         "title": "ResourceOperationCreated",
         "description": "Resource operation created event."
       },
+      "ResourceOperationErrorTypeEnum": {
+        "type": "string",
+        "enum": [
+          "auth",
+          "validation",
+          "network",
+          "tsp"
+        ],
+        "title": "ResourceOperationErrorTypeEnum",
+        "description": "Enum for the type of error that occurred during a resource operation."
+      },
       "ResourceOperationFailed": {
         "properties": {
           "version": {
@@ -15255,6 +17066,109 @@
         ],
         "title": "ResourceOperationFailed",
         "description": "Resource operation failed event."
+      },
+      "ResourceOperationLogRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Log ID",
+            "description": "Unique identifier for the log entry."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Timestamp when the log entry was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Timestamp when the log entry was last updated."
+          },
+          "resource_operation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Resource Operation ID",
+            "description": "The ID of the resource operation this log entry belongs to."
+          },
+          "status": {
+            "$ref": "#/components/schemas/ResourceOperationLogStatusEnum",
+            "title": "Status",
+            "description": "The status of the operation attempt."
+          },
+          "error_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResourceOperationErrorTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Type",
+            "description": "The type of error that occurred, if any."
+          },
+          "error_details": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Details",
+            "description": "Detailed information about the error, if any."
+          },
+          "response_status_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "TSP Response Status Code",
+            "description": "HTTP status code returned by the TSP, if available."
+          },
+          "response_headers": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "TSP Response Headers",
+            "description": "HTTP response headers from the TSP (e.g. rate limit state)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "updated_at",
+          "resource_operation_id",
+          "status"
+        ],
+        "title": "ResourceOperationLogRead",
+        "description": "API response model for a resource operation log entry."
+      },
+      "ResourceOperationLogStatusEnum": {
+        "type": "string",
+        "enum": [
+          "success",
+          "failed"
+        ],
+        "title": "ResourceOperationLogStatusEnum",
+        "description": "Enum for the status of a resource operation log entry."
       },
       "ResourceOperationStatusEnum": {
         "type": "string",
@@ -15682,6 +17596,54 @@
         ],
         "title": "StatusEnum",
         "description": "Enum for statuses"
+      },
+      "StopActivityEnum": {
+        "type": "string",
+        "enum": [
+          "START_TRIP",
+          "END_TRIP",
+          "ARRIVE",
+          "DEPART",
+          "PICKUP",
+          "DELIVERY",
+          "DRIVING",
+          "ON_DUTY",
+          "OFF_DUTY",
+          "SLEEPER",
+          "LOADING",
+          "UNLOADING",
+          "HOOK_DROP",
+          "YARD_MOVE",
+          "PERSONAL_CONVEYANCE",
+          "WAITING",
+          "BREAKDOWN",
+          "ACCIDENT",
+          "INSPECTION",
+          "DVIR",
+          "FUEL",
+          "OFFICE_WORK",
+          "OTHER"
+        ],
+        "title": "StopActivityEnum",
+        "description": "Activities/events that can occur during a stop or trip."
+      },
+      "StopTypeEnum": {
+        "type": "string",
+        "enum": [
+          "PICKUP",
+          "DELIVERY",
+          "TRANSFER",
+          "YARD",
+          "FUEL",
+          "REST",
+          "INSPECTION",
+          "MAINTENANCE",
+          "WAITING",
+          "OFFICE",
+          "OTHER"
+        ],
+        "title": "StopTypeEnum",
+        "description": "High-level classification of a stop within a workflow/trip."
       },
       "TimePeriodMetric": {
         "properties": {
@@ -16991,6 +18953,7 @@
           "qualitylogs_eld",
           "randmcnally",
           "rastrac",
+          "raven",
           "redfox",
           "regulog_eld",
           "ridehub",
@@ -17797,6 +19760,7 @@
       "WebhookCatchAllEvents": {
         "type": "string",
         "enum": [
+          "dvir_log.*",
           "driver_vehicle_association.*",
           "trailer_vehicle_association.*",
           "invitation.*",
@@ -17817,9 +19781,11 @@
           "hos_violation.*",
           "engine_log.*",
           "engine_status.*",
+          "group_message.*",
           "message.*",
           "fuel_transaction.*",
-          "resource_operation.*"
+          "resource_operation.*",
+          "workflow.*"
         ],
         "title": "WebhookCatchAllEvents",
         "description": "Enum for webhook events with catch all options used for create and update operations"
@@ -18034,6 +20000,9 @@
       "WebhookEventNameEnum": {
         "type": "string",
         "enum": [
+          "dvir_log.added",
+          "dvir_log.modified",
+          "dvir_log.removed",
           "driver_vehicle_association.added",
           "driver_vehicle_association.modified",
           "trailer_vehicle_association.added",
@@ -18063,6 +20032,10 @@
           "webhook.activated",
           "webhook.paused",
           "webhook.*",
+          "workflow.added",
+          "workflow.modified",
+          "workflow.removed",
+          "workflow.*",
           "tsp.created",
           "tsp.requested",
           "vehicle.added",
@@ -18116,6 +20089,8 @@
           "engine_log.*",
           "engine_status.added",
           "engine_status.modified",
+          "group_message.added",
+          "group_message.modified",
           "message.added",
           "message.modified",
           "fuel_transaction.added",
@@ -18648,6 +20623,394 @@
         ],
         "title": "WebhookUpdated",
         "description": "Webhook updated event."
+      },
+      "WorkflowAdded": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+$",
+            "title": "Schema Version",
+            "description": "Version of the schema used for this event",
+            "examples": [
+              "1.0",
+              "1.1",
+              "2.0"
+            ]
+          },
+          "event_name": {
+            "type": "string",
+            "title": "Event Name",
+            "default": "workflow.added"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BaseWorkflow"
+            },
+            "type": "array",
+            "title": "Data / Payload",
+            "description": "The event payload, with one or more records of the specified type"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Webhook ID",
+            "description": "Unique identifier for the webhook subscription that triggered this delivery"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Timestamp",
+            "description": "ISO 8601 timestamp when the event occurred"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event ID",
+            "description": "Unique identifier for this specific event instance (UUID v7 for time-ordered sorting)"
+          },
+          "delivery_attempt": {
+            "type": "integer",
+            "title": "Delivery Attempt",
+            "description": "The number of times the event has been attempted to be delivered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "data",
+          "webhook_id"
+        ],
+        "title": "WorkflowAdded",
+        "description": "Workflow added event."
+      },
+      "WorkflowModified": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+$",
+            "title": "Schema Version",
+            "description": "Version of the schema used for this event",
+            "examples": [
+              "1.0",
+              "1.1",
+              "2.0"
+            ]
+          },
+          "event_name": {
+            "type": "string",
+            "title": "Event Name",
+            "default": "workflow.modified"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BaseWorkflow"
+            },
+            "type": "array",
+            "title": "Data / Payload",
+            "description": "The event payload, with one or more records of the specified type"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Webhook ID",
+            "description": "Unique identifier for the webhook subscription that triggered this delivery"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Timestamp",
+            "description": "ISO 8601 timestamp when the event occurred"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event ID",
+            "description": "Unique identifier for this specific event instance (UUID v7 for time-ordered sorting)"
+          },
+          "delivery_attempt": {
+            "type": "integer",
+            "title": "Delivery Attempt",
+            "description": "The number of times the event has been attempted to be delivered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "data",
+          "webhook_id"
+        ],
+        "title": "WorkflowModified",
+        "description": "Workflow modified event."
+      },
+      "WorkflowRemoved": {
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+$",
+            "title": "Schema Version",
+            "description": "Version of the schema used for this event",
+            "examples": [
+              "1.0",
+              "1.1",
+              "2.0"
+            ]
+          },
+          "event_name": {
+            "type": "string",
+            "title": "Event Name",
+            "default": "workflow.removed"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BaseTelematicsEvent"
+            },
+            "type": "array",
+            "title": "Data / Payload",
+            "description": "The event payload, with one or more records of the specified type"
+          },
+          "webhook_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Webhook ID",
+            "description": "Unique identifier for the webhook subscription that triggered this delivery"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event Timestamp",
+            "description": "ISO 8601 timestamp when the event occurred"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Event ID",
+            "description": "Unique identifier for this specific event instance (UUID v7 for time-ordered sorting)"
+          },
+          "delivery_attempt": {
+            "type": "integer",
+            "title": "Delivery Attempt",
+            "description": "The number of times the event has been attempted to be delivered",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "version",
+          "data",
+          "webhook_id"
+        ],
+        "title": "WorkflowRemoved",
+        "description": "Workflow removed event."
+      },
+      "WorkflowStatusEnum": {
+        "type": "string",
+        "enum": [
+          "PLANNED",
+          "ACTIVE",
+          "COMPLETED",
+          "CANCELLED"
+        ],
+        "title": "WorkflowStatusEnum",
+        "description": "Lifecycle status of a workflow."
+      },
+      "WorkflowStop": {
+        "properties": {
+          "source_stop_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Stop Id"
+          },
+          "sequence_number": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sequence Number"
+          },
+          "stop_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StopTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "location_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Name"
+          },
+          "activities": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/StopActivityEnum"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Activities"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Point"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "h3_index_11": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "format": "int64",
+            "title": "H3 Index 11"
+          },
+          "inferred_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InferredAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instructions"
+          },
+          "scheduled_arrival": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheduled Arrival"
+          },
+          "scheduled_departure": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheduled Departure"
+          },
+          "actual_arrival": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Arrival"
+          },
+          "actual_departure": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Departure"
+          }
+        },
+        "type": "object",
+        "title": "WorkflowStop",
+        "description": "Stop/location within a workflow."
       },
       "_CursorPage_TypeVar_Customized_WebhookLogRead_": {
         "properties": {

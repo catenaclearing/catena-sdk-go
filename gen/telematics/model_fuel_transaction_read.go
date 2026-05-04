@@ -41,26 +41,28 @@ type FuelTransactionRead struct {
 	// Unique identifier of the record in the TSP. **Note: we generate a unique composite key based on available fields if the TSP does not provide an unique ID.**
 	SourceId string `json:"source_id"`
 	// SHA-256 hash of the source data payload. **Note: we use it internally for idempotence and deduplication.**
-	SourceDataHash       string                 `json:"source_data_hash"`
-	OccurredAt           NullableTime           `json:"occurred_at,omitempty"`
-	ExecutionId          NullableString         `json:"execution_id,omitempty"`
-	ScheduleId           NullableString         `json:"schedule_id,omitempty"`
-	Extras               map[string]interface{} `json:"extras,omitempty"`
-	VehicleId            NullableString         `json:"vehicle_id,omitempty"`
-	DriverId             NullableString         `json:"driver_id,omitempty"`
-	CoDriverId           NullableString         `json:"co_driver_id,omitempty"`
-	SourceDriverId       NullableString         `json:"source_driver_id,omitempty"`
-	SourceVehicleId      NullableString         `json:"source_vehicle_id,omitempty"`
-	SourceCoDriverId     NullableString         `json:"source_co_driver_id,omitempty"`
-	Location             NullableLocation3      `json:"location,omitempty"`
-	H3Index11            NullableInt32          `json:"h3_index_11,omitempty"`
-	InferredAddress      map[string]interface{} `json:"inferred_address,omitempty"`
-	Odometer             NullableFloat32        `json:"odometer,omitempty"`
-	FuelType             NullableEngineType     `json:"fuel_type,omitempty"`
-	FuelVolume           NullableFloat32        `json:"fuel_volume,omitempty"`
-	FuelVendor           NullableString         `json:"fuel_vendor,omitempty"`
-	TotalCost            NullableString         `json:"total_cost,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*\\\\d*\\\\.?\\\\d*$"`
-	Currency             NullableString         `json:"currency,omitempty"`
+	SourceDataHash   string                 `json:"source_data_hash"`
+	OccurredAt       NullableTime           `json:"occurred_at,omitempty"`
+	ExecutionId      NullableString         `json:"execution_id,omitempty"`
+	ScheduleId       NullableString         `json:"schedule_id,omitempty"`
+	Extras           map[string]interface{} `json:"extras,omitempty"`
+	VehicleId        NullableString         `json:"vehicle_id,omitempty"`
+	DriverId         NullableString         `json:"driver_id,omitempty"`
+	CoDriverId       NullableString         `json:"co_driver_id,omitempty"`
+	SourceDriverId   NullableString         `json:"source_driver_id,omitempty"`
+	SourceVehicleId  NullableString         `json:"source_vehicle_id,omitempty"`
+	SourceCoDriverId NullableString         `json:"source_co_driver_id,omitempty"`
+	Location         NullableLocation3      `json:"location,omitempty"`
+	H3Index11        NullableInt32          `json:"h3_index_11,omitempty"`
+	InferredAddress  map[string]interface{} `json:"inferred_address,omitempty"`
+	Odometer         NullableFloat32        `json:"odometer,omitempty"`
+	FuelType         NullableEngineType     `json:"fuel_type,omitempty"`
+	FuelVolume       NullableFloat32        `json:"fuel_volume,omitempty"`
+	FuelVendor       NullableString         `json:"fuel_vendor,omitempty"`
+	TotalCost        NullableString         `json:"total_cost,omitempty" validate:"regexp=^(?!^[-+.]*$)[+-]?0*\\\\d*\\\\.?\\\\d*$"`
+	Currency         NullableString         `json:"currency,omitempty"`
+	// Unit for odometer.
+	OdometerUnit         *DistanceUnit `json:"odometer_unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1286,6 +1288,38 @@ func (o *FuelTransactionRead) UnsetCurrency() {
 	o.Currency.Unset()
 }
 
+// GetOdometerUnit returns the OdometerUnit field value if set, zero value otherwise.
+func (o *FuelTransactionRead) GetOdometerUnit() DistanceUnit {
+	if o == nil || IsNil(o.OdometerUnit) {
+		var ret DistanceUnit
+		return ret
+	}
+	return *o.OdometerUnit
+}
+
+// GetOdometerUnitOk returns a tuple with the OdometerUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FuelTransactionRead) GetOdometerUnitOk() (*DistanceUnit, bool) {
+	if o == nil || IsNil(o.OdometerUnit) {
+		return nil, false
+	}
+	return o.OdometerUnit, true
+}
+
+// HasOdometerUnit returns a boolean if a field has been set.
+func (o *FuelTransactionRead) HasOdometerUnit() bool {
+	if o != nil && !IsNil(o.OdometerUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetOdometerUnit gets a reference to the given DistanceUnit and assigns it to the OdometerUnit field.
+func (o *FuelTransactionRead) SetOdometerUnit(v DistanceUnit) {
+	o.OdometerUnit = &v
+}
+
 func (o FuelTransactionRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1376,6 +1410,9 @@ func (o FuelTransactionRead) ToMap() (map[string]interface{}, error) {
 	if o.Currency.IsSet() {
 		toSerialize["currency"] = o.Currency.Get()
 	}
+	if !IsNil(o.OdometerUnit) {
+		toSerialize["odometer_unit"] = o.OdometerUnit
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1458,6 +1495,7 @@ func (o *FuelTransactionRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fuel_vendor")
 		delete(additionalProperties, "total_cost")
 		delete(additionalProperties, "currency")
+		delete(additionalProperties, "odometer_unit")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -23,6 +23,7 @@ const (
 	ENGINESTATUSENUM_OFF     EngineStatusEnum = "OFF"
 	ENGINESTATUSENUM_ON      EngineStatusEnum = "ON"
 	ENGINESTATUSENUM_IDLE    EngineStatusEnum = "IDLE"
+	ENGINESTATUSENUM_TOWING  EngineStatusEnum = "TOWING"
 	ENGINESTATUSENUM_UNKNOWN EngineStatusEnum = "UNKNOWN"
 )
 
@@ -31,6 +32,7 @@ var AllowedEngineStatusEnumEnumValues = []EngineStatusEnum{
 	"OFF",
 	"ON",
 	"IDLE",
+	"TOWING",
 	"UNKNOWN",
 }
 

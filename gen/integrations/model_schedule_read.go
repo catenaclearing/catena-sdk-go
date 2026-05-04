@@ -13,6 +13,7 @@ package integrationsapi
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the ScheduleRead type satisfies the MappedNullable interface at compile time
@@ -37,6 +38,7 @@ type ScheduleRead struct {
 	// The maximum number of concurrent executions allowed for this schedule.
 	MaxConcurrentExecutions int32          `json:"max_concurrent_executions"`
 	Cursor                  NullableString `json:"cursor,omitempty"`
+	LastDataAt              NullableTime   `json:"last_data_at,omitempty"`
 	AdditionalProperties    map[string]interface{}
 }
 
@@ -302,6 +304,49 @@ func (o *ScheduleRead) UnsetCursor() {
 	o.Cursor.Unset()
 }
 
+// GetLastDataAt returns the LastDataAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ScheduleRead) GetLastDataAt() time.Time {
+	if o == nil || IsNil(o.LastDataAt.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastDataAt.Get()
+}
+
+// GetLastDataAtOk returns a tuple with the LastDataAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ScheduleRead) GetLastDataAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LastDataAt.Get(), o.LastDataAt.IsSet()
+}
+
+// HasLastDataAt returns a boolean if a field has been set.
+func (o *ScheduleRead) HasLastDataAt() bool {
+	if o != nil && o.LastDataAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLastDataAt gets a reference to the given NullableTime and assigns it to the LastDataAt field.
+func (o *ScheduleRead) SetLastDataAt(v time.Time) {
+	o.LastDataAt.Set(&v)
+}
+
+// SetLastDataAtNil sets the value for LastDataAt to be an explicit nil
+func (o *ScheduleRead) SetLastDataAtNil() {
+	o.LastDataAt.Set(nil)
+}
+
+// UnsetLastDataAt ensures that no value is present for LastDataAt, not even an explicit nil
+func (o *ScheduleRead) UnsetLastDataAt() {
+	o.LastDataAt.Unset()
+}
+
 func (o ScheduleRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -322,6 +367,9 @@ func (o ScheduleRead) ToMap() (map[string]interface{}, error) {
 	toSerialize["max_concurrent_executions"] = o.MaxConcurrentExecutions
 	if o.Cursor.IsSet() {
 		toSerialize["cursor"] = o.Cursor.Get()
+	}
+	if o.LastDataAt.IsSet() {
+		toSerialize["last_data_at"] = o.LastDataAt.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -382,6 +430,7 @@ func (o *ScheduleRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "consecutive_error_threshold")
 		delete(additionalProperties, "max_concurrent_executions")
 		delete(additionalProperties, "cursor")
+		delete(additionalProperties, "last_data_at")
 		o.AdditionalProperties = additionalProperties
 	}
 

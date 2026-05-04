@@ -27,6 +27,7 @@ type ScheduleUpdate struct {
 	MaxConcurrentExecutions   NullableInt32              `json:"max_concurrent_executions,omitempty"`
 	NextExecutionAt           NullableTime               `json:"next_execution_at,omitempty"`
 	Cursor                    NullableString             `json:"cursor,omitempty"`
+	LastDataAt                NullableTime               `json:"last_data_at,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
 
@@ -350,6 +351,49 @@ func (o *ScheduleUpdate) UnsetCursor() {
 	o.Cursor.Unset()
 }
 
+// GetLastDataAt returns the LastDataAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ScheduleUpdate) GetLastDataAt() time.Time {
+	if o == nil || IsNil(o.LastDataAt.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastDataAt.Get()
+}
+
+// GetLastDataAtOk returns a tuple with the LastDataAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ScheduleUpdate) GetLastDataAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LastDataAt.Get(), o.LastDataAt.IsSet()
+}
+
+// HasLastDataAt returns a boolean if a field has been set.
+func (o *ScheduleUpdate) HasLastDataAt() bool {
+	if o != nil && o.LastDataAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLastDataAt gets a reference to the given NullableTime and assigns it to the LastDataAt field.
+func (o *ScheduleUpdate) SetLastDataAt(v time.Time) {
+	o.LastDataAt.Set(&v)
+}
+
+// SetLastDataAtNil sets the value for LastDataAt to be an explicit nil
+func (o *ScheduleUpdate) SetLastDataAtNil() {
+	o.LastDataAt.Set(nil)
+}
+
+// UnsetLastDataAt ensures that no value is present for LastDataAt, not even an explicit nil
+func (o *ScheduleUpdate) UnsetLastDataAt() {
+	o.LastDataAt.Unset()
+}
+
 func (o ScheduleUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -381,6 +425,9 @@ func (o ScheduleUpdate) ToMap() (map[string]interface{}, error) {
 	if o.Cursor.IsSet() {
 		toSerialize["cursor"] = o.Cursor.Get()
 	}
+	if o.LastDataAt.IsSet() {
+		toSerialize["last_data_at"] = o.LastDataAt.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -410,6 +457,7 @@ func (o *ScheduleUpdate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "max_concurrent_executions")
 		delete(additionalProperties, "next_execution_at")
 		delete(additionalProperties, "cursor")
+		delete(additionalProperties, "last_data_at")
 		o.AdditionalProperties = additionalProperties
 	}
 

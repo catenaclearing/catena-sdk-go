@@ -225,6 +225,8 @@
 
 * `RASTRAC` (value: `"rastrac"`)
 
+* `RAVEN` (value: `"raven"`)
+
 * `REDFOX` (value: `"redfox"`)
 
 * `REGULOG_ELD` (value: `"regulog_eld"`)

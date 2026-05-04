@@ -12,10 +12,12 @@ Name | Type | Description | Notes
 **FleetRef** | Pointer to **NullableString** |  | [optional] 
 **SourceName** | [**TspEnum**](TspEnum.md) | The source name of the operation. | 
 **Resource** | [**ResourceEnum**](ResourceEnum.md) | The type of resource to operate on (e.g., vehicle, driver, hos_event). | 
+**ResourceId** | Pointer to **NullableString** |  | [optional] 
 **SourceId** | Pointer to **NullableString** |  | [optional] 
 **OperationType** | [**ResourceOperationTypeEnum**](ResourceOperationTypeEnum.md) | The type of operation to perform (e.g., create, update). | 
 **Status** | [**ResourceOperationStatusEnum**](ResourceOperationStatusEnum.md) | The current status of the operation. | 
 **Payload** | **map[string]interface{}** | The payload of the operation, containing the resource attributes to be created or updated. | 
+**Logs** | Pointer to [**[]ResourceOperationLogRead**](ResourceOperationLogRead.md) | Log entries for each attempt to execute this operation. | [optional] 
 
 ## Methods
 
@@ -211,6 +213,41 @@ and a boolean to check if the value has been set.
 SetResource sets Resource field to given value.
 
 
+### GetResourceId
+
+`func (o *BaseResourceOperationEvent) GetResourceId() string`
+
+GetResourceId returns the ResourceId field if non-nil, zero value otherwise.
+
+### GetResourceIdOk
+
+`func (o *BaseResourceOperationEvent) GetResourceIdOk() (*string, bool)`
+
+GetResourceIdOk returns a tuple with the ResourceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceId
+
+`func (o *BaseResourceOperationEvent) SetResourceId(v string)`
+
+SetResourceId sets ResourceId field to given value.
+
+### HasResourceId
+
+`func (o *BaseResourceOperationEvent) HasResourceId() bool`
+
+HasResourceId returns a boolean if a field has been set.
+
+### SetResourceIdNil
+
+`func (o *BaseResourceOperationEvent) SetResourceIdNil(b bool)`
+
+ SetResourceIdNil sets the value for ResourceId to be an explicit nil
+
+### UnsetResourceId
+`func (o *BaseResourceOperationEvent) UnsetResourceId()`
+
+UnsetResourceId ensures that no value is present for ResourceId, not even an explicit nil
 ### GetSourceId
 
 `func (o *BaseResourceOperationEvent) GetSourceId() string`
@@ -305,6 +342,31 @@ and a boolean to check if the value has been set.
 
 SetPayload sets Payload field to given value.
 
+
+### GetLogs
+
+`func (o *BaseResourceOperationEvent) GetLogs() []ResourceOperationLogRead`
+
+GetLogs returns the Logs field if non-nil, zero value otherwise.
+
+### GetLogsOk
+
+`func (o *BaseResourceOperationEvent) GetLogsOk() (*[]ResourceOperationLogRead, bool)`
+
+GetLogsOk returns a tuple with the Logs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogs
+
+`func (o *BaseResourceOperationEvent) SetLogs(v []ResourceOperationLogRead)`
+
+SetLogs sets Logs field to given value.
+
+### HasLogs
+
+`func (o *BaseResourceOperationEvent) HasLogs() bool`
+
+HasLogs returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -33,7 +33,9 @@ Name | Type | Description | Notes
 **SentByDriver** | Pointer to **NullableBool** |  | [optional] 
 **SenderName** | Pointer to **NullableString** |  | [optional] 
 **RecipientName** | Pointer to **NullableString** |  | [optional] 
+**ThreadId** | Pointer to **NullableString** |  | [optional] 
 **SourceThreadId** | Pointer to **NullableString** |  | [optional] 
+**ReplyToMessageId** | Pointer to **NullableString** |  | [optional] 
 **SourceReplyToMessageId** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -950,6 +952,41 @@ HasRecipientName returns a boolean if a field has been set.
 `func (o *MessageRead) UnsetRecipientName()`
 
 UnsetRecipientName ensures that no value is present for RecipientName, not even an explicit nil
+### GetThreadId
+
+`func (o *MessageRead) GetThreadId() string`
+
+GetThreadId returns the ThreadId field if non-nil, zero value otherwise.
+
+### GetThreadIdOk
+
+`func (o *MessageRead) GetThreadIdOk() (*string, bool)`
+
+GetThreadIdOk returns a tuple with the ThreadId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThreadId
+
+`func (o *MessageRead) SetThreadId(v string)`
+
+SetThreadId sets ThreadId field to given value.
+
+### HasThreadId
+
+`func (o *MessageRead) HasThreadId() bool`
+
+HasThreadId returns a boolean if a field has been set.
+
+### SetThreadIdNil
+
+`func (o *MessageRead) SetThreadIdNil(b bool)`
+
+ SetThreadIdNil sets the value for ThreadId to be an explicit nil
+
+### UnsetThreadId
+`func (o *MessageRead) UnsetThreadId()`
+
+UnsetThreadId ensures that no value is present for ThreadId, not even an explicit nil
 ### GetSourceThreadId
 
 `func (o *MessageRead) GetSourceThreadId() string`
@@ -985,6 +1022,41 @@ HasSourceThreadId returns a boolean if a field has been set.
 `func (o *MessageRead) UnsetSourceThreadId()`
 
 UnsetSourceThreadId ensures that no value is present for SourceThreadId, not even an explicit nil
+### GetReplyToMessageId
+
+`func (o *MessageRead) GetReplyToMessageId() string`
+
+GetReplyToMessageId returns the ReplyToMessageId field if non-nil, zero value otherwise.
+
+### GetReplyToMessageIdOk
+
+`func (o *MessageRead) GetReplyToMessageIdOk() (*string, bool)`
+
+GetReplyToMessageIdOk returns a tuple with the ReplyToMessageId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReplyToMessageId
+
+`func (o *MessageRead) SetReplyToMessageId(v string)`
+
+SetReplyToMessageId sets ReplyToMessageId field to given value.
+
+### HasReplyToMessageId
+
+`func (o *MessageRead) HasReplyToMessageId() bool`
+
+HasReplyToMessageId returns a boolean if a field has been set.
+
+### SetReplyToMessageIdNil
+
+`func (o *MessageRead) SetReplyToMessageIdNil(b bool)`
+
+ SetReplyToMessageIdNil sets the value for ReplyToMessageId to be an explicit nil
+
+### UnsetReplyToMessageId
+`func (o *MessageRead) UnsetReplyToMessageId()`
+
+UnsetReplyToMessageId ensures that no value is present for ReplyToMessageId, not even an explicit nil
 ### GetSourceReplyToMessageId
 
 `func (o *MessageRead) GetSourceReplyToMessageId() string`

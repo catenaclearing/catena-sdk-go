@@ -3,6 +3,8 @@
 ## Enum
 
 
+* `DVIR_LOG` (value: `"dvir_log.*"`)
+
 * `DRIVER_VEHICLE_ASSOCIATION` (value: `"driver_vehicle_association.*"`)
 
 * `TRAILER_VEHICLE_ASSOCIATION` (value: `"trailer_vehicle_association.*"`)
@@ -43,11 +45,15 @@
 
 * `ENGINE_STATUS` (value: `"engine_status.*"`)
 
+* `GROUP_MESSAGE` (value: `"group_message.*"`)
+
 * `MESSAGE` (value: `"message.*"`)
 
 * `FUEL_TRANSACTION` (value: `"fuel_transaction.*"`)
 
 * `RESOURCE_OPERATION` (value: `"resource_operation.*"`)
+
+* `WORKFLOW` (value: `"workflow.*"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

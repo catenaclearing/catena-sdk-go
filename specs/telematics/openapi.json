@@ -101,7 +101,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -116,7 +116,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -871,6 +871,20 @@
             ]
           }
         ],
+        "parameters": [
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -882,12 +896,12 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "The request to create the user has been accepted and is being processed.",
+          "200": {
+            "description": "The user was created successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceOperationAccept"
+                  "$ref": "#/components/schemas/ResourceOperation"
                 }
               }
             }
@@ -991,6 +1005,26 @@
               }
             },
             "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to create the user has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to create the user could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
           }
         },
         "x-mint": {
@@ -1001,7 +1035,7 @@
         }
       }
     },
-    "/v2/telematics/users/{source_id}": {
+    "/v2/telematics/users/{id}": {
       "patch": {
         "tags": [
           "Drivers & Users"
@@ -1018,15 +1052,28 @@
         ],
         "parameters": [
           {
-            "name": "source_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique identifier of the user in the TSP.",
-              "title": "Source Id"
+              "format": "uuid",
+              "description": "The unique identifier of the user",
+              "title": "Id"
             },
-            "description": "The unique identifier of the user in the TSP."
+            "description": "The unique identifier of the user"
+          },
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
           }
         ],
         "requestBody": {
@@ -1040,12 +1087,12 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "The request to update the user has been accepted and is being processed.",
+          "200": {
+            "description": "The user was updated successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceOperationAccept"
+                  "$ref": "#/components/schemas/ResourceOperation"
                 }
               }
             }
@@ -1149,6 +1196,26 @@
               }
             },
             "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to update the user has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to update the user could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
           }
         },
         "x-mint": {
@@ -1636,13 +1703,27 @@
           "Fleet Operations & Tracking"
         ],
         "summary": "Create Vehicle",
-        "description": "Create a new vehicle. The vehicle will be created asynchronously, and you can check the status of the operation using the returned operation ID.",
+        "description": "Create a new vehicle. By default, the vehicle will be created asynchronously, and you can check the status of the operation using the returned operation ID.",
         "operationId": "create_vehicle",
         "security": [
           {
             "Bearer": [
               "telematics:write"
             ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
           }
         ],
         "requestBody": {
@@ -1656,12 +1737,12 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "The request to create the vehicle has been accepted and is being processed.",
+          "200": {
+            "description": "The vehicle was created successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceOperationAccept"
+                  "$ref": "#/components/schemas/ResourceOperation"
                 }
               }
             }
@@ -1765,6 +1846,26 @@
               }
             },
             "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to create the vehicle has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to create the vehicle could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
           }
         },
         "x-mint": {
@@ -1775,13 +1876,13 @@
         }
       }
     },
-    "/v2/telematics/vehicles/{source_id}": {
+    "/v2/telematics/vehicles/{id}": {
       "patch": {
         "tags": [
           "Fleet Operations & Tracking"
         ],
         "summary": "Update Vehicle",
-        "description": "Update an existing vehicle. The vehicle will be updated asynchronously, and you can check the status of the operation using the returned operation ID.",
+        "description": "Update an existing vehicle. By default, the vehicle will be updated asynchronously, and you can check the status of the operation using the returned operation ID.",
         "operationId": "update_vehicle",
         "security": [
           {
@@ -1792,15 +1893,28 @@
         ],
         "parameters": [
           {
-            "name": "source_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique identifier of the vehicle in the TSP.",
-              "title": "Source Id"
+              "format": "uuid",
+              "description": "The unique identifier of the vehicle",
+              "title": "Id"
             },
-            "description": "The unique identifier of the vehicle in the TSP."
+            "description": "The unique identifier of the vehicle"
+          },
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
           }
         ],
         "requestBody": {
@@ -1814,12 +1928,12 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "The request to update the vehicle has been accepted and is being processed.",
+          "200": {
+            "description": "The vehicle was updated successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceOperationAccept"
+                  "$ref": "#/components/schemas/ResourceOperation"
                 }
               }
             }
@@ -1923,6 +2037,26 @@
               }
             },
             "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to update the vehicle has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to update the vehicle could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
           }
         },
         "x-mint": {
@@ -2404,6 +2538,374 @@
             "description": "Not Implemented"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Fleet Operations & Tracking"
+        ],
+        "summary": "Create Trailer",
+        "description": "Create a new trailer. By default, the trailer will be created asynchronously, and you can check the status of the operation using the returned operation ID.",
+        "operationId": "create_trailer",
+        "security": [
+          {
+            "Bearer": [
+              "telematics:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrailerCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The trailer was created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MethodNotAllowed"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntity"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotImplementedResponse"
+                }
+              }
+            },
+            "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to create the trailer has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to create the trailer could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "title": "\ud83e\uddea Create Trailer"
+          },
+          "content": "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional endpoint</strong><br/>This endpoint is available for early access. The core schema is stable, but minor details \u2014 such as field names or added fields \u2014 may change before it becomes generally available. Backward compatibility is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\">API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
+        }
+      }
+    },
+    "/v2/telematics/trailers/{id}": {
+      "patch": {
+        "tags": [
+          "Fleet Operations & Tracking"
+        ],
+        "summary": "Update Trailer",
+        "description": "Update an existing trailer. By default, the trailer will be updated asynchronously, and you can check the status of the operation using the returned operation ID.",
+        "operationId": "update_trailer",
+        "security": [
+          {
+            "Bearer": [
+              "telematics:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The unique identifier of the trailer",
+              "title": "Id"
+            },
+            "description": "The unique identifier of the trailer"
+          },
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrailerUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The trailer was updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MethodNotAllowed"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntity"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotImplementedResponse"
+                }
+              }
+            },
+            "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to update the trailer has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to update the trailer could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "title": "\ud83e\uddea Update Trailer"
+          },
+          "content": "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional endpoint</strong><br/>This endpoint is available for early access. The core schema is stable, but minor details \u2014 such as field names or added fields \u2014 may change before it becomes generally available. Backward compatibility is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\">API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
+        }
       }
     },
     "/v2/telematics/ifta-summaries": {
@@ -2495,7 +2997,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -2510,7 +3012,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -2827,7 +3329,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -2842,7 +3344,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -2864,7 +3366,7 @@
               ],
               "description": "Return only records that were still active at or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `ended_at >= active_from_datetime`",
               "examples": [
-                "2026-04-26T16:51:33.693485Z"
+                "2026-05-03T18:30:02.474930Z"
               ],
               "title": "Active From Datetime"
             },
@@ -2886,7 +3388,7 @@
               ],
               "description": "Return only records that started before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `started_at < active_to_datetime`",
               "examples": [
-                "2026-04-27T16:51:33.693566Z"
+                "2026-05-04T18:30:02.474997Z"
               ],
               "title": "Active To Datetime"
             },
@@ -3466,7 +3968,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -3481,7 +3983,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -3739,6 +4241,20 @@
             ]
           }
         ],
+        "parameters": [
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -3750,12 +4266,12 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "The request to create the DVIR log has been accepted and is being processed.",
+          "200": {
+            "description": "The DVIR log was created successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceOperationAccept"
+                  "$ref": "#/components/schemas/ResourceOperation"
                 }
               }
             }
@@ -3859,6 +4375,26 @@
               }
             },
             "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to create the DVIR log has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to create the DVIR log could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
           }
         },
         "x-mint": {
@@ -4249,7 +4785,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -4264,7 +4800,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -4581,7 +5117,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -4596,7 +5132,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -4936,7 +5472,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -4951,7 +5487,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -5237,6 +5773,20 @@
             ]
           }
         ],
+        "parameters": [
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -5248,12 +5798,12 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "The request to create the fuel transaction has been accepted and is being processed.",
+          "200": {
+            "description": "The fuel transaction was created successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceOperationAccept"
+                  "$ref": "#/components/schemas/ResourceOperation"
                 }
               }
             }
@@ -5357,6 +5907,26 @@
               }
             },
             "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to create the fuel transaction has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to create the fuel transaction could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
           }
         },
         "x-mint": {
@@ -5456,7 +6026,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -5471,7 +6041,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -5779,6 +6349,20 @@
             ]
           }
         ],
+        "parameters": [
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -5790,12 +6374,431 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "The message was created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MethodNotAllowed"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntity"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotImplementedResponse"
+                }
+              }
+            },
+            "description": "Not Implemented"
+          },
           "202": {
             "description": "The request to create the message has been accepted and is being processed.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResourceOperationAccept"
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to create the message could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "title": "\ud83e\uddea Create Message"
+          },
+          "content": "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional endpoint</strong><br/>This endpoint is available for early access. The core schema is stable, but minor details \u2014 such as field names or added fields \u2014 may change before it becomes generally available. Backward compatibility is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\">API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
+        }
+      }
+    },
+    "/v2/telematics/group-messages": {
+      "get": {
+        "tags": [
+          "Drivers & Users"
+        ],
+        "summary": "List Group Messages",
+        "description": "List all group messages.",
+        "operationId": "list_group_messages",
+        "security": [
+          {
+            "Bearer": [
+              "telematics:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "fleet_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific fleets using Catena's fleet IDs. *For your own fleet identifiers, use `fleet_refs` instead* To specify multiple values, repeat the parameter for each value (e.g., `?fleet_ids=id1&fleet_ids=id2`).",
+              "title": "Fleet Ids"
+            },
+            "description": "Limit results to specific fleets using Catena's fleet IDs. *For your own fleet identifiers, use `fleet_refs` instead* To specify multiple values, repeat the parameter for each value (e.g., `?fleet_ids=id1&fleet_ids=id2`)."
+          },
+          {
+            "name": "fleet_refs",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific fleets using your organization's fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., `?fleet_refs=ref1&fleet_refs=ref2`).",
+              "title": "Fleet Refs"
+            },
+            "description": "Limit results to specific fleets using your organization's fleet reference identifiers. To specify multiple values, repeat the parameter for each value (e.g., `?fleet_refs=ref1&fleet_refs=ref2`)."
+          },
+          {
+            "name": "connection_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP.",
+              "title": "Connection Id"
+            },
+            "description": "Limit results to a specific provider connection. This is the UUID assigned by Catena when your fleet connects to a TSP."
+          },
+          {
+            "name": "from_datetime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
+              "examples": [
+                "2026-05-03T18:30:02.474703Z"
+              ],
+              "title": "From Datetime"
+            },
+            "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days"
+          },
+          {
+            "name": "to_datetime",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
+              "examples": [
+                "2026-05-04T18:30:02.474853Z"
+              ],
+              "title": "To Datetime"
+            },
+            "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days"
+          },
+          {
+            "name": "include_source_data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena*",
+              "default": false,
+              "title": "Include Source Data"
+            },
+            "description": "Include the raw data from the telematics provider. *Useful for auditing or accessing fields not normalized by Catena*"
+          },
+          {
+            "name": "sender_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific senders. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., `?sender_ids=id1&sender_ids=id2`).",
+              "title": "Sender Ids"
+            },
+            "description": "Limit results to specific senders. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., `?sender_ids=id1&sender_ids=id2`)."
+          },
+          {
+            "name": "group_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific group IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., `?group_ids=id1&group_ids=id2`).",
+              "title": "Group Ids"
+            },
+            "description": "Limit results to specific group IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., `?group_ids=id1&group_ids=id2`)."
+          },
+          {
+            "name": "source_sender_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific source sender IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., `?source_sender_ids=id1&source_sender_ids=id2`).",
+              "title": "Source Sender Ids"
+            },
+            "description": "Limit results to specific source sender IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., `?source_sender_ids=id1&source_sender_ids=id2`)."
+          },
+          {
+            "name": "source_group_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Limit results to specific source group IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., `?source_group_ids=id1&source_group_ids=id2`).",
+              "title": "Source Group Ids"
+            },
+            "description": "Limit results to specific source group IDs. **Maximum:** 100 IDs To specify multiple values, repeat the parameter for each value (e.g., `?source_group_ids=id1&source_group_ids=id2`)."
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The name of the field to sort results by. If not provided, results will be ordered by `occurred_at`. ",
+              "title": "Sort By"
+            },
+            "description": "The name of the field to sort results by. If not provided, results will be ordered by `occurred_at`. "
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "The order of sorting, either `asc` for ascending or `desc` for descending. Defaults to `asc` if `sort_by` is provided without `sort_order`.",
+              "default": "asc",
+              "title": "Sort Order"
+            },
+            "description": "The order of sorting, either `asc` for ascending or `desc` for descending. Defaults to `asc` if `sort_by` is provided without `sort_order`."
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Cursor for the next page",
+              "title": "Cursor"
+            },
+            "description": "Cursor for the next page"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "description": "Page size",
+              "default": 300,
+              "title": "Size"
+            },
+            "description": "Page size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/_CursorPage_GroupMessageRead_"
                 }
               }
             }
@@ -5903,7 +6906,184 @@
         },
         "x-mint": {
           "metadata": {
-            "title": "\ud83e\uddea Create Message"
+            "title": "\ud83e\uddea List Group Messages"
+          },
+          "content": "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional endpoint</strong><br/>This endpoint is available for early access. The core schema is stable, but minor details \u2014 such as field names or added fields \u2014 may change before it becomes generally available. Backward compatibility is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\">API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
+        }
+      },
+      "post": {
+        "tags": [
+          "Drivers & Users"
+        ],
+        "summary": "Create Group Message",
+        "description": "Create a new group message. The message will be created asynchronously, and you can check the status of the operation using the returned operation ID.",
+        "operationId": "create_group_message",
+        "security": [
+          {
+            "Bearer": [
+              "telematics:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "is_sync",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID.",
+              "default": false,
+              "title": "Is Sync"
+            },
+            "description": "Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupMessageCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The group message was created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MethodNotAllowed"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnprocessableEntity"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "501": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotImplementedResponse"
+                }
+              }
+            },
+            "description": "Not Implemented"
+          },
+          "202": {
+            "description": "The request to create the group message has been accepted and is being processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The request to create the group message could not be processed at this time. Please see the response for more details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceOperation"
+                }
+              }
+            }
+          }
+        },
+        "x-mint": {
+          "metadata": {
+            "title": "\ud83e\uddea Create Group Message"
           },
           "content": "<Callout icon=\"vial\" color=\"#FFC107\" iconType=\"solid\"><strong>Provisional endpoint</strong><br/>This endpoint is available for early access. The core schema is stable, but minor details \u2014 such as field names or added fields \u2014 may change before it becomes generally available. Backward compatibility is not guaranteed.<br/><br/><em>See <a href=\"/api-reference/stability-versioning\">API Stability &amp; Versioning</a> for details on provisional endpoints.</em></Callout>"
         }
@@ -6010,7 +7190,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -6025,7 +7205,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -6627,7 +7807,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -6642,7 +7822,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -7264,7 +8444,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -7279,7 +8459,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -8894,7 +10074,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -8909,7 +10089,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -9227,7 +10407,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -9242,7 +10422,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -12426,7 +13606,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -12441,7 +13621,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -12736,7 +13916,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -12751,7 +13931,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -13066,7 +14246,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -13081,7 +14261,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -13399,7 +14579,7 @@
               "format": "date-time",
               "description": "Return only records that occurred on or after this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at >= from_datetime` **Default value:** `now() - 1 day` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-26T16:51:33.693174Z"
+                "2026-05-03T18:30:02.474703Z"
               ],
               "title": "From Datetime"
             },
@@ -13414,7 +14594,7 @@
               "format": "date-time",
               "description": "Return only records that occurred before this date and time. **Format:** ISO 8601 (UTC) **Applies filter:** `occurred_at < to_datetime` **Default value:** `now()` **Restriction:** `to_datetime - from_datetime` cannot exceed 45 days",
               "examples": [
-                "2026-04-27T16:51:33.693404Z"
+                "2026-05-04T18:30:02.474853Z"
               ],
               "title": "To Datetime"
             },
@@ -13773,6 +14953,14 @@
         },
         "type": "object",
         "title": "Conflict"
+      },
+      "DistanceUnit": {
+        "type": "string",
+        "enum": [
+          "m"
+        ],
+        "title": "DistanceUnit",
+        "description": "SI and common units for distance and odometer fields."
       },
       "DistanceUnitEnum": {
         "type": "string",
@@ -14657,6 +15845,7 @@
           "fifth_wheel",
           "landing_gear",
           "suspension",
+          "alignment",
           "rims",
           "tires",
           "tire_chains",
@@ -14666,6 +15855,7 @@
           "wheels",
           "wheels_rims",
           "suspension_under",
+          "scratches",
           "air_compressor",
           "air_lines",
           "brake_connections",
@@ -14694,53 +15884,37 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
           },
-          "fleet_ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fleet Ref",
-            "description": "External fleet reference in the partner system."
+          "driver_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Driver Id",
+            "description": "Identifier for the driver"
           },
-          "source_driver_id": {
+          "vehicle_id": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Source Driver Id",
-            "description": "External system identifier for the driver"
+            "title": "Vehicle Id",
+            "description": "Identifier for the vehicle"
           },
-          "source_vehicle_id": {
+          "trailer_id": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Source Vehicle Id",
-            "description": "External system identifier for the vehicle"
-          },
-          "source_trailer_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Source Trailer Id",
-            "description": "External system identifier for the trailer"
+            "title": "Trailer Id",
+            "description": "Identifier for the trailer"
           },
           "occurred_at": {
             "anyOf": [
@@ -14861,7 +16035,8 @@
         },
         "type": "object",
         "required": [
-          "connection_id"
+          "connection_id",
+          "driver_id"
         ],
         "title": "DvirLogCreate",
         "description": "DvirLog model for creating new records."
@@ -15460,7 +16635,19 @@
               }
             ],
             "title": "Odometer Km",
-            "description": "Vehicle odometer reading in kilometers at the time of the DVIR"
+            "description": "Vehicle odometer reading in kilometers at the time of the DVIR (To be deprecated in favor of odometer)"
+          },
+          "odometer": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Odometer",
+            "description": "Vehicle odometer reading in meters at the time of the DVIR"
           },
           "engine_hours": {
             "anyOf": [
@@ -16384,64 +17571,58 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
           },
-          "fleet_ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fleet Ref",
-            "description": "External fleet reference in the partner system."
+          "driver_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Driver Id",
+            "description": "Identifier for the driver (from the source system)"
           },
-          "source_driver_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Source Driver Id",
-            "description": "External system identifier for the driver (from the source system)"
+          "vehicle_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Vehicle Id",
+            "description": "Identifier for the vehicle (from the source system)"
           },
-          "source_vehicle_id": {
+          "co_driver_id": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Source Vehicle Id",
-            "description": "External system identifier for the vehicle (from the source system)"
+            "title": "Co Driver Id",
+            "description": "Identifier for the co-driver (from the source system)"
           },
-          "source_co_driver_id": {
+          "latitude": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "number",
+                "maximum": 90.0,
+                "minimum": -90.0
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Source Co Driver Id",
-            "description": "External system identifier for the co-driver (from the source system)"
+            "title": "Latitude",
+            "description": "Latitude of the location where the fuel transaction occurred in decimal degrees."
           },
-          "location": {
+          "longitude": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Point"
+                "type": "number",
+                "maximum": 180.0,
+                "minimum": -180.0
               },
               {
                 "type": "null"
               }
             ],
-            "description": "Geographic location where the fuel transaction occurred (latitude/longitude)"
+            "title": "Longitude",
+            "description": "Longitude of the location where the fuel transaction occurred in decimal degrees."
           },
           "location_string": {
             "anyOf": [
@@ -16567,6 +17748,8 @@
         "type": "object",
         "required": [
           "connection_id",
+          "driver_id",
+          "vehicle_id",
           "fuel_volume",
           "fuel_volume_unit"
         ],
@@ -16923,6 +18106,11 @@
             ],
             "title": "Currency",
             "description": "Currency of the total cost (e.g., USD)"
+          },
+          "odometer_unit": {
+            "$ref": "#/components/schemas/DistanceUnit",
+            "description": "Unit for odometer.",
+            "default": "m"
           }
         },
         "type": "object",
@@ -16949,6 +18137,417 @@
         ],
         "title": "FuelVolumeUnitEnum",
         "description": "Fuel volume units for fuel transaction payloads."
+      },
+      "GroupMessageCreate": {
+        "properties": {
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection Id",
+            "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
+          },
+          "sender_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sender Id",
+            "description": "Identifier for the sender"
+          },
+          "recipient_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Recipient Ids",
+            "description": "Identifiers for the recipients"
+          },
+          "message_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Text",
+            "description": "The content of the message"
+          },
+          "priority": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MessagePriorityEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional priority for the message: low, medium, or high"
+          }
+        },
+        "type": "object",
+        "required": [
+          "connection_id",
+          "sender_id",
+          "recipient_ids"
+        ],
+        "title": "GroupMessageCreate",
+        "description": "Group Message model for creating new records"
+      },
+      "GroupMessageRead": {
+        "properties": {
+          "fleet_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fleet Id",
+            "description": "Internal fleet identifier."
+          },
+          "fleet_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fleet Ref",
+            "description": "External fleet reference in the partner system."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "Unique identifier of the record at Catena Telematics."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Immutable: The datetime the record was ingested into Catena Telematics."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The dateime the record was last modified in Catena Telematics."
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "The datetime the record was logically deleted from Catena Telematics."
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection Id",
+            "description": "Unique identifier of the connection at Catena Telematics through which this record was ingested. A connection represents a Fleet/TSP pairing."
+          },
+          "tsp_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Id",
+            "description": "Unique identifier of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "tsp_slug": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tsp Slug",
+            "description": "Human readable slug of the TSP at Catena Telematics from which this record was ingested."
+          },
+          "source_name": {
+            "$ref": "#/components/schemas/TspEnum",
+            "description": "The underlying telematics platform that provided this data (e.g., `samsara`, `motive`, `hos247`). Note: Some platforms like `hos247` offer white-labeling, so multiple TSPs may share the same source_name \u2014 use `tsp_id` or `tsp_slug` to identify the specific ELD provider."
+          },
+          "source_data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Source Data",
+            "description": "Raw source payload as ingested from the TSP. **Note: use it for audit/debugging.**"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id",
+            "description": "Unique identifier of the record in the TSP. **Note: we generate a unique composite key based on available fields if the TSP does not provide an unique ID.**"
+          },
+          "source_data_hash": {
+            "type": "string",
+            "maxLength": 64,
+            "title": "Source Data Hash",
+            "description": "SHA-256 hash of the source data payload. **Note: we use it internally for idempotence and deduplication.**"
+          },
+          "occurred_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Occurred At",
+            "description": "Datetime of when the underlying event/observation occurred, as reported by the TSP, or the moment it was ingested by us if not available in the source data."
+          },
+          "execution_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Execution Id",
+            "description": "Unique identifier for the execution that ingested this record into Catena Telematics. **Note: useful for tracing.**"
+          },
+          "schedule_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Schedule Id",
+            "description": "Unique identifier for schedule that triggered this record's execution. **Note: useful for tracing.**"
+          },
+          "extras": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extras",
+            "description": "Additional data available in the TSP (e.g., we may have `external_id`, `provider_resource_id`, etc. \u2014 this field captures all those extra attributes in a flexible way)."
+          },
+          "source_sender_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Sender Id",
+            "description": "External system identifier for the sender"
+          },
+          "source_recipient_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Recipient Ids",
+            "description": "External system identifier for the recipient"
+          },
+          "sender_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sender Id",
+            "description": "Unique identifier for the sender"
+          },
+          "recipient_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recipient Ids",
+            "description": "Unique identifier for the recipient"
+          },
+          "message_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Text",
+            "description": "The content of the message"
+          },
+          "message_hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Hash",
+            "description": "Unique hash generated from sender, message text and occurred_at"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MessageStatusEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Status of the message delivery (e.g. delivered, read)"
+          },
+          "delivered_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delivered At",
+            "description": "Timestamp indicating when the message was delivered"
+          },
+          "sent_by_driver": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sent By Driver",
+            "description": "Whether the message was sent by a driver"
+          },
+          "sender_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sender Name",
+            "description": "The name of the sender at the moment when the message was created"
+          },
+          "thread_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thread Id",
+            "description": "Thread/conversation identifier. Represents a shared conversation across multiple messages."
+          },
+          "source_thread_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Thread Id",
+            "description": "External system thread/conversation identifier. Represents a shared conversation across multiple messages."
+          },
+          "group_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Id",
+            "description": "Identifier for the message group. Messages with the same group_id are considered part of the same group message."
+          },
+          "source_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Group Id",
+            "description": "External system identifier for the message group. Messages with the same source_group_id are considered part of the same group message."
+          }
+        },
+        "type": "object",
+        "required": [
+          "fleet_id",
+          "id",
+          "created_at",
+          "updated_at",
+          "connection_id",
+          "source_name",
+          "source_id",
+          "source_data_hash"
+        ],
+        "title": "GroupMessageRead",
+        "description": "Group Message model for API responses"
       },
       "HosAvailabilityRead": {
         "properties": {
@@ -18758,7 +20357,7 @@
               }
             ],
             "title": "Odometer",
-            "description": "Odometer reading at the event (kilometers)."
+            "description": "Odometer reading at the event (meters)."
           },
           "engine_hours": {
             "anyOf": [
@@ -19784,66 +21383,17 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
           },
-          "fleet_ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fleet Ref",
-            "description": "External fleet reference in the partner system."
+          "sender_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Sender Id",
+            "description": "Identifier for the sender"
           },
-          "source_sender_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Source Sender Id",
-            "description": "External system identifier for the sender"
-          },
-          "source_recipient_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Source Recipient Ids",
-            "description": "External system identifiers for the recipients"
-          },
-          "recipient_group": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/MessageReceiverGroupEnum"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Recipient group for the message"
-          },
-          "sender_group": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/MessageSenderGroupEnum"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Sender group for the message"
+          "recipient_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Recipient Id",
+            "description": "Identifier for the recipient"
           },
           "message_text": {
             "anyOf": [
@@ -19857,17 +21407,6 @@
             "title": "Message Text",
             "description": "The content of the message"
           },
-          "mode": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/MessageModeEnum"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Whether the message is a group message, bulk message, or direct message"
-          },
           "priority": {
             "anyOf": [
               {
@@ -19879,47 +21418,28 @@
             ],
             "description": "Optional priority for the message: low, medium, or high"
           },
-          "source_thread_id": {
+          "reply_to_message_id": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Source Thread Id",
-            "description": "Thread/conversation identifier. Represents a shared conversation across multiple messages."
-          },
-          "source_reply_to_message_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Source Reply To Message Id",
-            "description": "Message reference, for which this message is a reply to"
+            "title": "Reply To Message Id",
+            "description": "Message identifier, for which this message is a reply to"
           }
         },
         "type": "object",
         "required": [
-          "connection_id"
+          "connection_id",
+          "sender_id",
+          "recipient_id"
         ],
         "title": "MessageCreate",
         "description": "Message model for creating new records"
-      },
-      "MessageModeEnum": {
-        "type": "string",
-        "enum": [
-          "group",
-          "bulk",
-          "direct"
-        ],
-        "title": "MessageModeEnum",
-        "description": "Enum for message mode (\"group\", \"bulk\", \"direct\")"
       },
       "MessagePriorityEnum": {
         "type": "string",
@@ -20240,6 +21760,19 @@
             "title": "Recipient Name",
             "description": "The name of the recipient at the moment when the message was created"
           },
+          "thread_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thread Id",
+            "description": "Thread/conversation identifier. Represents a shared conversation across multiple messages."
+          },
           "source_thread_id": {
             "anyOf": [
               {
@@ -20250,7 +21783,20 @@
               }
             ],
             "title": "Source Thread Id",
-            "description": "Thread/conversation identifier. Represents a shared conversation across multiple messages."
+            "description": "External system thread/conversation identifier. Represents a shared conversation across multiple messages."
+          },
+          "reply_to_message_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Message Id",
+            "description": "Message reference, for which this message is a reply to"
           },
           "source_reply_to_message_id": {
             "anyOf": [
@@ -20262,7 +21808,7 @@
               }
             ],
             "title": "Source Reply To Message Id",
-            "description": "Message reference, for which this message is a reply to"
+            "description": "External system message reference, for which this message is a reply to"
           }
         },
         "type": "object",
@@ -20278,26 +21824,6 @@
         ],
         "title": "MessageRead",
         "description": "Message model for API responses"
-      },
-      "MessageReceiverGroupEnum": {
-        "type": "string",
-        "enum": [
-          "admin",
-          "driver",
-          "dispatcher"
-        ],
-        "title": "MessageReceiverGroupEnum",
-        "description": "Enum for message receiver group (\"admin\", \"driver\", \"dispatcher\")"
-      },
-      "MessageSenderGroupEnum": {
-        "type": "string",
-        "enum": [
-          "admin",
-          "driver",
-          "dispatcher"
-        ],
-        "title": "MessageSenderGroupEnum",
-        "description": "Enum for message sender group (\"admin\", \"driver\", \"dispatcher\")"
       },
       "MessageStatusEnum": {
         "type": "string",
@@ -20503,6 +22029,14 @@
         "type": "array",
         "maxItems": 3,
         "minItems": 3
+      },
+      "PressureUnit": {
+        "type": "string",
+        "enum": [
+          "Pa"
+        ],
+        "title": "PressureUnit",
+        "description": "SI and common units for pressure fields."
       },
       "ReeferAlarmCodeEnum": {
         "type": "string",
@@ -21281,21 +22815,288 @@
         "title": "ResourceCount",
         "description": "Metrics for fleets, vehicles, drivers, and trailers."
       },
-      "ResourceOperationAccept": {
+      "ResourceEnum": {
+        "type": "string",
+        "enum": [
+          "asset",
+          "driver_association",
+          "driver_vehicle_association",
+          "driver_event_log",
+          "driver_safety_event",
+          "dvir_log",
+          "dvir_log_defect",
+          "engine_log",
+          "engine_status",
+          "fuel_transaction",
+          "hos_availability",
+          "hos_daily_snapshot",
+          "hos_event",
+          "hos_event_annotation",
+          "hos_event_attachment",
+          "hos_violation",
+          "ifta_summary",
+          "location_segment",
+          "message",
+          "group_message",
+          "user",
+          "vehicle",
+          "vehicle_location",
+          "vehicle_sensor",
+          "vehicle_region_segment",
+          "trailer",
+          "trailer_association",
+          "trailer_vehicle_association",
+          "trailer_location",
+          "trailer_status",
+          "workflow"
+        ],
+        "title": "ResourceEnum",
+        "description": "Enum for resources"
+      },
+      "ResourceOperation": {
         "properties": {
           "id": {
             "type": "string",
             "format": "uuid",
             "title": "Operation ID",
             "description": "Unique identifier for the resource operation."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Immutable: The datetime the record was created in Catena Telematics."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The datetime the record was last modified in Catena Telematics."
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At",
+            "description": "The datetime the record was logically deleted from Catena Telematics."
+          },
+          "partner_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Partner ID",
+            "description": "The ID of the partner that created the operation."
+          },
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection ID",
+            "description": "The ID of the connection"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/ResourceEnum",
+            "title": "Resource Type",
+            "description": "The type of resource to operate on (e.g., vehicle, driver)."
+          },
+          "resource_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource ID",
+            "description": "Unique identifier of the record. Can be `null` for create operations where the source does not exist yet."
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source ID",
+            "description": "The unique identifier of the resource in the source system. Required for update operations."
+          },
+          "operation_type": {
+            "$ref": "#/components/schemas/ResourceOperationTypeEnum",
+            "title": "Operation Type",
+            "description": "The type of operation to perform (e.g., create, update)."
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Operation Payload",
+            "description": "The payload of the operation, containing the resource attributes to be created or updated."
+          },
+          "status": {
+            "$ref": "#/components/schemas/ResourceOperationStatusEnum",
+            "title": "Operation Status",
+            "description": "The status of the operation",
+            "default": "pending"
+          },
+          "logs": {
+            "items": {
+              "$ref": "#/components/schemas/ResourceOperationLog"
+            },
+            "type": "array",
+            "title": "Logs",
+            "description": "Log entries for each attempt to execute this operation."
           }
         },
         "type": "object",
         "required": [
-          "id"
+          "partner_id",
+          "connection_id",
+          "resource",
+          "operation_type",
+          "payload"
         ],
-        "title": "ResourceOperationAccept",
-        "description": "Resource operation model for API responses"
+        "title": "ResourceOperation",
+        "description": "Resource operation model"
+      },
+      "ResourceOperationErrorTypeEnum": {
+        "type": "string",
+        "enum": [
+          "auth",
+          "validation",
+          "network",
+          "tsp"
+        ],
+        "title": "ResourceOperationErrorTypeEnum",
+        "description": "Enum for the type of error that occurred during a resource operation."
+      },
+      "ResourceOperationLog": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Log ID",
+            "description": "Unique identifier for the log entry."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Timestamp when the log entry was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Timestamp when the log entry was last updated."
+          },
+          "resource_operation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Resource Operation ID",
+            "description": "The ID of the resource operation this log entry belongs to."
+          },
+          "status": {
+            "$ref": "#/components/schemas/ResourceOperationLogStatusEnum",
+            "title": "Status",
+            "description": "The status of the operation attempt."
+          },
+          "error_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResourceOperationErrorTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Type",
+            "description": "The type of error that occurred, if any."
+          },
+          "error_details": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Details",
+            "description": "Detailed information about the error, if any."
+          },
+          "response_status_code": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "TSP Response Status Code",
+            "description": "HTTP status code returned by the TSP, if available."
+          },
+          "response_headers": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "TSP Response Headers",
+            "description": "HTTP response headers from the TSP (e.g. rate limit state)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "updated_at",
+          "resource_operation_id",
+          "status"
+        ],
+        "title": "ResourceOperationLog",
+        "description": "API response model for a resource operation log entry."
+      },
+      "ResourceOperationLogStatusEnum": {
+        "type": "string",
+        "enum": [
+          "success",
+          "failed"
+        ],
+        "title": "ResourceOperationLogStatusEnum",
+        "description": "Enum for the status of a resource operation log entry."
+      },
+      "ResourceOperationStatusEnum": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "success",
+          "failed"
+        ],
+        "title": "ResourceOperationStatusEnum",
+        "description": "Enum for the status of a resource operation."
+      },
+      "ResourceOperationTypeEnum": {
+        "type": "string",
+        "enum": [
+          "create",
+          "update"
+        ],
+        "title": "ResourceOperationTypeEnum",
+        "description": "Enum for the type of operation to perform on a resource."
       },
       "RetryAfterDetail": {
         "properties": {
@@ -21314,6 +23115,14 @@
           "message"
         ],
         "title": "RetryAfterDetail"
+      },
+      "SpeedUnit": {
+        "type": "string",
+        "enum": [
+          "m/s"
+        ],
+        "title": "SpeedUnit",
+        "description": "SI and common units for speed fields."
       },
       "StatusEnum": {
         "type": "string",
@@ -21334,6 +23143,14 @@
         ],
         "title": "StatusEnum",
         "description": "Enum for statuses"
+      },
+      "TemperatureUnit": {
+        "type": "string",
+        "enum": [
+          "K"
+        ],
+        "title": "TemperatureUnit",
+        "description": "SI and common units for temperature fields."
       },
       "TimeSeriesDataPoint": {
         "properties": {
@@ -21603,6 +23420,250 @@
         "type": "object",
         "title": "TrailerAlarm",
         "description": "Active alarm condition on the reefer unit."
+      },
+      "TrailerCreate": {
+        "properties": {
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection Id",
+            "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
+          },
+          "trailer_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trailer Name",
+            "description": "Display name or unit number for the trailer."
+          },
+          "oem": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oem",
+            "description": "Manufacturer (OEM) of the trailer."
+          },
+          "model_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Type",
+            "description": "Manufacturer model or type designation (e.g., '53ft Dry Van', 'Reefer')."
+          },
+          "model_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Year",
+            "description": "Model year (four-digit, e.g., 2022)."
+          },
+          "vin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vin",
+            "description": "Vehicle Identification Number (VIN), typically 17 characters; if available."
+          },
+          "license_plate_region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Plate Region",
+            "description": "Plate region/subdivision (state/province code, e.g., 'CA', 'ON')."
+          },
+          "license_plate_country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Plate Country",
+            "description": "Plate country code (ISO-3166-1 alpha-2, e.g., 'US', 'CA')."
+          },
+          "license_plate_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Plate Number",
+            "description": "License plate number (e.g., 'HMT-3570')."
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active",
+            "description": "Indicates whether this trailer is currently active/in service."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status",
+            "description": "Operational status label (e.g., 'IN_SERVICE', 'OUT_OF_SERVICE', 'MAINTENANCE')."
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes",
+            "description": "Free-text notes about the trailer (plain text)."
+          },
+          "eld_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eld Id",
+            "description": "Telematics/ELD device identifier associated with this trailer, if any."
+          },
+          "eld_serial_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eld Serial Number",
+            "description": "Telematics/ELD device serial number, if any."
+          },
+          "eld_device_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eld Device Type",
+            "description": "Telematics/ELD device type or model family (vendor-specific)."
+          },
+          "eld_product_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eld Product Id",
+            "description": "Telematics/ELD vendor product identifier (catalog/model code)."
+          },
+          "total_axles": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Axles",
+            "description": "Total number of axles on the trailer."
+          },
+          "external_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Id",
+            "description": "External trailer identifier as known in the TSP or customer's system."
+          },
+          "trailer_length": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trailer Length",
+            "description": "Length of the trailer (numeric; unit per source, e.g., feet or meters)."
+          },
+          "trailer_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trailer Type",
+            "description": "Body type/classification (e.g., Dry Van, Reefer, Flatbed, Tanker, Chassis)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "connection_id"
+        ],
+        "title": "TrailerCreate",
+        "description": "Trailer model for creating new records"
       },
       "TrailerLiveLocation": {
         "properties": {
@@ -23053,6 +25114,26 @@
             ],
             "title": "H3 Index 11",
             "description": "H3 geospatial index (resolution 11) derived from the location."
+          },
+          "battery_voltage_unit": {
+            "$ref": "#/components/schemas/VoltageUnit",
+            "description": "Unit for battery_voltage.",
+            "default": "V"
+          },
+          "ambient_temperature_unit": {
+            "$ref": "#/components/schemas/TemperatureUnit",
+            "description": "Unit for ambient_temperature.",
+            "default": "K"
+          },
+          "zones_temperature_unit": {
+            "$ref": "#/components/schemas/TemperatureUnit",
+            "description": "Unit for temperatures under zones.",
+            "default": "K"
+          },
+          "remote_probe_statuses_temperature_unit": {
+            "$ref": "#/components/schemas/TemperatureUnit",
+            "description": "Unit for temperatures under remote_probe_statuses.",
+            "default": "K"
           }
         },
         "type": "object",
@@ -23207,6 +25288,250 @@
         ],
         "title": "TrailerSummary",
         "description": "Trailer profile with identification and latest location data.\n\nUse this to build trailer inventories or track trailer locations across your fleet."
+      },
+      "TrailerUpdate": {
+        "properties": {
+          "connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Connection Id",
+            "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
+          },
+          "trailer_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trailer Name",
+            "description": "Display name or unit number for the trailer."
+          },
+          "oem": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oem",
+            "description": "Manufacturer (OEM) of the trailer."
+          },
+          "model_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Type",
+            "description": "Manufacturer model or type designation (e.g., '53ft Dry Van', 'Reefer')."
+          },
+          "model_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Year",
+            "description": "Model year (four-digit, e.g., 2022)."
+          },
+          "vin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vin",
+            "description": "Vehicle Identification Number (VIN), typically 17 characters; if available."
+          },
+          "license_plate_region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Plate Region",
+            "description": "Plate region/subdivision (state/province code, e.g., 'CA', 'ON')."
+          },
+          "license_plate_country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Plate Country",
+            "description": "Plate country code (ISO-3166-1 alpha-2, e.g., 'US', 'CA')."
+          },
+          "license_plate_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Plate Number",
+            "description": "License plate number (e.g., 'HMT-3570')."
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active",
+            "description": "Indicates whether this trailer is currently active/in service."
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status",
+            "description": "Operational status label (e.g., 'IN_SERVICE', 'OUT_OF_SERVICE', 'MAINTENANCE')."
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes",
+            "description": "Free-text notes about the trailer (plain text)."
+          },
+          "eld_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eld Id",
+            "description": "Telematics/ELD device identifier associated with this trailer, if any."
+          },
+          "eld_serial_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eld Serial Number",
+            "description": "Telematics/ELD device serial number, if any."
+          },
+          "eld_device_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eld Device Type",
+            "description": "Telematics/ELD device type or model family (vendor-specific)."
+          },
+          "eld_product_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eld Product Id",
+            "description": "Telematics/ELD vendor product identifier (catalog/model code)."
+          },
+          "total_axles": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Axles",
+            "description": "Total number of axles on the trailer."
+          },
+          "external_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Id",
+            "description": "External trailer identifier as known in the TSP or customer's system."
+          },
+          "trailer_length": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trailer Length",
+            "description": "Length of the trailer (numeric; unit per source, e.g., feet or meters)."
+          },
+          "trailer_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trailer Type",
+            "description": "Body type/classification (e.g., Dry Van, Reefer, Flatbed, Tanker, Chassis)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "connection_id"
+        ],
+        "title": "TrailerUpdate",
+        "description": "Trailer model for updating existing records"
       },
       "TrailerVehicleAssociationRead": {
         "properties": {
@@ -23781,18 +26106,6 @@
             "format": "uuid",
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
-          },
-          "fleet_ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fleet Ref",
-            "description": "External fleet reference in the partner system."
           },
           "username": {
             "anyOf": [
@@ -24684,18 +26997,6 @@
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
           },
-          "fleet_ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fleet Ref",
-            "description": "External fleet reference in the partner system."
-          },
           "username": {
             "anyOf": [
               {
@@ -25025,18 +27326,6 @@
             "format": "uuid",
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
-          },
-          "fleet_ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fleet Ref",
-            "description": "External fleet reference in the partner system."
           },
           "vehicle_name": {
             "anyOf": [
@@ -25520,6 +27809,26 @@
             ],
             "title": "Location",
             "description": "Last known location as a GeoJSON Point."
+          },
+          "speed_unit": {
+            "$ref": "#/components/schemas/SpeedUnit",
+            "description": "Unit for speed.",
+            "default": "m/s"
+          },
+          "odometer_unit": {
+            "$ref": "#/components/schemas/DistanceUnit",
+            "description": "Unit for odometer.",
+            "default": "m"
+          },
+          "oil_pressure_unit": {
+            "$ref": "#/components/schemas/PressureUnit",
+            "description": "Unit for oil_pressure.",
+            "default": "Pa"
+          },
+          "coolant_temperature_unit": {
+            "$ref": "#/components/schemas/TemperatureUnit",
+            "description": "Unit for coolant_temperature.",
+            "default": "K"
           }
         },
         "type": "object",
@@ -25905,6 +28214,31 @@
               }
             ],
             "description": "Inferred city level address from latitude and longitude."
+          },
+          "speed_unit": {
+            "$ref": "#/components/schemas/SpeedUnit",
+            "description": "Unit for speed.",
+            "default": "m/s"
+          },
+          "odometer_unit": {
+            "$ref": "#/components/schemas/DistanceUnit",
+            "description": "Unit for odometer.",
+            "default": "m"
+          },
+          "fuel_value_unit": {
+            "$ref": "#/components/schemas/VolumeUnit",
+            "description": "Unit for fuel_value.",
+            "default": "m3"
+          },
+          "oil_pressure_unit": {
+            "$ref": "#/components/schemas/PressureUnit",
+            "description": "Unit for oil_pressure.",
+            "default": "Pa"
+          },
+          "coolant_temperature_unit": {
+            "$ref": "#/components/schemas/TemperatureUnit",
+            "description": "Unit for coolant_temperature.",
+            "default": "K"
           }
         },
         "type": "object",
@@ -26578,6 +28912,21 @@
             "type": "integer",
             "title": "Location Count",
             "description": "Number of location samples that belong to the segment."
+          },
+          "odometer_start_unit": {
+            "$ref": "#/components/schemas/DistanceUnit",
+            "description": "Unit for odometer_start.",
+            "default": "m"
+          },
+          "odometer_end_unit": {
+            "$ref": "#/components/schemas/DistanceUnit",
+            "description": "Unit for odometer_end.",
+            "default": "m"
+          },
+          "distance_unit": {
+            "$ref": "#/components/schemas/DistanceUnit",
+            "description": "Unit for distance.",
+            "default": "m"
           }
         },
         "type": "object",
@@ -27150,6 +29499,16 @@
             ],
             "title": "Last Speed Reading",
             "description": "Most recent speed reading (meters/second)."
+          },
+          "last_speed_reading_unit": {
+            "$ref": "#/components/schemas/SpeedUnit",
+            "description": "Unit for last_speed_reading.",
+            "default": "m/s"
+          },
+          "last_odometer_reading_unit": {
+            "$ref": "#/components/schemas/DistanceUnit",
+            "description": "Unit for last_odometer_reading.",
+            "default": "m"
           }
         },
         "type": "object",
@@ -27190,18 +29549,6 @@
             "format": "uuid",
             "title": "Connection Id",
             "description": "Unique identifier of the connection at Catena Telematics which will be used to create this resource. A connection represents a Fleet/TSP pairing."
-          },
-          "fleet_ref": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fleet Ref",
-            "description": "External fleet reference in the partner system."
           },
           "vehicle_name": {
             "anyOf": [
@@ -27485,6 +29832,22 @@
         ],
         "title": "VehicleUpdate",
         "description": "Vehicle model for updating existing records"
+      },
+      "VoltageUnit": {
+        "type": "string",
+        "enum": [
+          "V"
+        ],
+        "title": "VoltageUnit",
+        "description": "SI and common units for electrical voltage fields."
+      },
+      "VolumeUnit": {
+        "type": "string",
+        "enum": [
+          "m3"
+        ],
+        "title": "VolumeUnit",
+        "description": "SI and common units for volume fields such as fuel quantity."
       },
       "_CursorPage_DriverSafetyEventRead_": {
         "properties": {
@@ -28115,6 +30478,76 @@
           "total"
         ],
         "title": "_CursorPage[FuelTransactionRead]"
+      },
+      "_CursorPage_GroupMessageRead_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/GroupMessageRead"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "current_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Page",
+            "description": "Cursor to refetch the current page"
+          },
+          "current_page_backwards": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Page Backwards",
+            "description": "Cursor to refetch the current page starting from the last item"
+          },
+          "previous_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Page",
+            "description": "Cursor for the previous page"
+          },
+          "next_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Page",
+            "description": "Cursor for the next page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "_CursorPage[GroupMessageRead]"
       },
       "_CursorPage_HosAvailabilityRead_": {
         "properties": {

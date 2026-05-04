@@ -1923,6 +1923,10 @@ paths:
                 $ref: '#/components/schemas/InternalServerError'
           description: Internal Server Error
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationRead'
           description: Existing invitation refreshed (already exists for this fleet_ref)
       security:
       - Bearer:
@@ -4391,6 +4395,7 @@ components:
       - trailer_vehicle_association
       - trailer_location
       - trailer_status
+      - workflow
       title: ResourceEnum
       type: string
     RetryAfterDetail:

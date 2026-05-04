@@ -20,6 +20,7 @@ type WebhookCatchAllEvents string
 
 // List of WebhookCatchAllEvents
 const (
+	WEBHOOKCATCHALLEVENTS_DVIR_LOG                    WebhookCatchAllEvents = "dvir_log.*"
 	WEBHOOKCATCHALLEVENTS_DRIVER_VEHICLE_ASSOCIATION  WebhookCatchAllEvents = "driver_vehicle_association.*"
 	WEBHOOKCATCHALLEVENTS_TRAILER_VEHICLE_ASSOCIATION WebhookCatchAllEvents = "trailer_vehicle_association.*"
 	WEBHOOKCATCHALLEVENTS_INVITATION                  WebhookCatchAllEvents = "invitation.*"
@@ -40,13 +41,16 @@ const (
 	WEBHOOKCATCHALLEVENTS_HOS_VIOLATION               WebhookCatchAllEvents = "hos_violation.*"
 	WEBHOOKCATCHALLEVENTS_ENGINE_LOG                  WebhookCatchAllEvents = "engine_log.*"
 	WEBHOOKCATCHALLEVENTS_ENGINE_STATUS               WebhookCatchAllEvents = "engine_status.*"
+	WEBHOOKCATCHALLEVENTS_GROUP_MESSAGE               WebhookCatchAllEvents = "group_message.*"
 	WEBHOOKCATCHALLEVENTS_MESSAGE                     WebhookCatchAllEvents = "message.*"
 	WEBHOOKCATCHALLEVENTS_FUEL_TRANSACTION            WebhookCatchAllEvents = "fuel_transaction.*"
 	WEBHOOKCATCHALLEVENTS_RESOURCE_OPERATION          WebhookCatchAllEvents = "resource_operation.*"
+	WEBHOOKCATCHALLEVENTS_WORKFLOW                    WebhookCatchAllEvents = "workflow.*"
 )
 
 // All allowed values of WebhookCatchAllEvents enum
 var AllowedWebhookCatchAllEventsEnumValues = []WebhookCatchAllEvents{
+	"dvir_log.*",
 	"driver_vehicle_association.*",
 	"trailer_vehicle_association.*",
 	"invitation.*",
@@ -67,9 +71,11 @@ var AllowedWebhookCatchAllEventsEnumValues = []WebhookCatchAllEvents{
 	"hos_violation.*",
 	"engine_log.*",
 	"engine_status.*",
+	"group_message.*",
 	"message.*",
 	"fuel_transaction.*",
 	"resource_operation.*",
+	"workflow.*",
 }
 
 func (v *WebhookCatchAllEvents) UnmarshalJSON(src []byte) error {

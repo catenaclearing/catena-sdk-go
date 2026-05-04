@@ -53,6 +53,7 @@ const (
 	DVIRDEFECTENUM_FIFTH_WHEEL            DvirDefectEnum = "fifth_wheel"
 	DVIRDEFECTENUM_LANDING_GEAR           DvirDefectEnum = "landing_gear"
 	DVIRDEFECTENUM_SUSPENSION             DvirDefectEnum = "suspension"
+	DVIRDEFECTENUM_ALIGNMENT              DvirDefectEnum = "alignment"
 	DVIRDEFECTENUM_RIMS                   DvirDefectEnum = "rims"
 	DVIRDEFECTENUM_TIRES                  DvirDefectEnum = "tires"
 	DVIRDEFECTENUM_TIRE_CHAINS            DvirDefectEnum = "tire_chains"
@@ -62,6 +63,7 @@ const (
 	DVIRDEFECTENUM_WHEELS                 DvirDefectEnum = "wheels"
 	DVIRDEFECTENUM_WHEELS_RIMS            DvirDefectEnum = "wheels_rims"
 	DVIRDEFECTENUM_SUSPENSION_UNDER       DvirDefectEnum = "suspension_under"
+	DVIRDEFECTENUM_SCRATCHES              DvirDefectEnum = "scratches"
 	DVIRDEFECTENUM_AIR_COMPRESSOR         DvirDefectEnum = "air_compressor"
 	DVIRDEFECTENUM_AIR_LINES              DvirDefectEnum = "air_lines"
 	DVIRDEFECTENUM_BRAKE_CONNECTIONS      DvirDefectEnum = "brake_connections"
@@ -115,6 +117,7 @@ var AllowedDvirDefectEnumEnumValues = []DvirDefectEnum{
 	"fifth_wheel",
 	"landing_gear",
 	"suspension",
+	"alignment",
 	"rims",
 	"tires",
 	"tire_chains",
@@ -124,6 +127,7 @@ var AllowedDvirDefectEnumEnumValues = []DvirDefectEnum{
 	"wheels",
 	"wheels_rims",
 	"suspension_under",
+	"scratches",
 	"air_compressor",
 	"air_lines",
 	"brake_connections",

@@ -20,6 +20,9 @@ type WebhookEventNameEnum string
 
 // List of WebhookEventNameEnum
 const (
+	WEBHOOKEVENTNAMEENUM_DVIR_LOG_ADDED                       WebhookEventNameEnum = "dvir_log.added"
+	WEBHOOKEVENTNAMEENUM_DVIR_LOG_MODIFIED                    WebhookEventNameEnum = "dvir_log.modified"
+	WEBHOOKEVENTNAMEENUM_DVIR_LOG_REMOVED                     WebhookEventNameEnum = "dvir_log.removed"
 	WEBHOOKEVENTNAMEENUM_DRIVER_VEHICLE_ASSOCIATION_ADDED     WebhookEventNameEnum = "driver_vehicle_association.added"
 	WEBHOOKEVENTNAMEENUM_DRIVER_VEHICLE_ASSOCIATION_MODIFIED  WebhookEventNameEnum = "driver_vehicle_association.modified"
 	WEBHOOKEVENTNAMEENUM_TRAILER_VEHICLE_ASSOCIATION_ADDED    WebhookEventNameEnum = "trailer_vehicle_association.added"
@@ -49,6 +52,10 @@ const (
 	WEBHOOKEVENTNAMEENUM_WEBHOOK_ACTIVATED                    WebhookEventNameEnum = "webhook.activated"
 	WEBHOOKEVENTNAMEENUM_WEBHOOK_PAUSED                       WebhookEventNameEnum = "webhook.paused"
 	WEBHOOKEVENTNAMEENUM_WEBHOOK                              WebhookEventNameEnum = "webhook.*"
+	WEBHOOKEVENTNAMEENUM_WORKFLOW_ADDED                       WebhookEventNameEnum = "workflow.added"
+	WEBHOOKEVENTNAMEENUM_WORKFLOW_MODIFIED                    WebhookEventNameEnum = "workflow.modified"
+	WEBHOOKEVENTNAMEENUM_WORKFLOW_REMOVED                     WebhookEventNameEnum = "workflow.removed"
+	WEBHOOKEVENTNAMEENUM_WORKFLOW                             WebhookEventNameEnum = "workflow.*"
 	WEBHOOKEVENTNAMEENUM_TSP_CREATED                          WebhookEventNameEnum = "tsp.created"
 	WEBHOOKEVENTNAMEENUM_TSP_REQUESTED                        WebhookEventNameEnum = "tsp.requested"
 	WEBHOOKEVENTNAMEENUM_VEHICLE_ADDED                        WebhookEventNameEnum = "vehicle.added"
@@ -102,6 +109,8 @@ const (
 	WEBHOOKEVENTNAMEENUM_ENGINE_LOG                           WebhookEventNameEnum = "engine_log.*"
 	WEBHOOKEVENTNAMEENUM_ENGINE_STATUS_ADDED                  WebhookEventNameEnum = "engine_status.added"
 	WEBHOOKEVENTNAMEENUM_ENGINE_STATUS_MODIFIED               WebhookEventNameEnum = "engine_status.modified"
+	WEBHOOKEVENTNAMEENUM_GROUP_MESSAGE_ADDED                  WebhookEventNameEnum = "group_message.added"
+	WEBHOOKEVENTNAMEENUM_GROUP_MESSAGE_MODIFIED               WebhookEventNameEnum = "group_message.modified"
 	WEBHOOKEVENTNAMEENUM_MESSAGE_ADDED                        WebhookEventNameEnum = "message.added"
 	WEBHOOKEVENTNAMEENUM_MESSAGE_MODIFIED                     WebhookEventNameEnum = "message.modified"
 	WEBHOOKEVENTNAMEENUM_FUEL_TRANSACTION_ADDED               WebhookEventNameEnum = "fuel_transaction.added"
@@ -114,6 +123,9 @@ const (
 
 // All allowed values of WebhookEventNameEnum enum
 var AllowedWebhookEventNameEnumEnumValues = []WebhookEventNameEnum{
+	"dvir_log.added",
+	"dvir_log.modified",
+	"dvir_log.removed",
 	"driver_vehicle_association.added",
 	"driver_vehicle_association.modified",
 	"trailer_vehicle_association.added",
@@ -143,6 +155,10 @@ var AllowedWebhookEventNameEnumEnumValues = []WebhookEventNameEnum{
 	"webhook.activated",
 	"webhook.paused",
 	"webhook.*",
+	"workflow.added",
+	"workflow.modified",
+	"workflow.removed",
+	"workflow.*",
 	"tsp.created",
 	"tsp.requested",
 	"vehicle.added",
@@ -196,6 +212,8 @@ var AllowedWebhookEventNameEnumEnumValues = []WebhookEventNameEnum{
 	"engine_log.*",
 	"engine_status.added",
 	"engine_status.modified",
+	"group_message.added",
+	"group_message.modified",
 	"message.added",
 	"message.modified",
 	"fuel_transaction.added",

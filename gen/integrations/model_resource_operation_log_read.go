@@ -33,6 +33,8 @@ type ResourceOperationLogRead struct {
 	Status               ResourceOperationLogStatusEnum         `json:"status"`
 	ErrorType            NullableResourceOperationErrorTypeEnum `json:"error_type,omitempty"`
 	ErrorDetails         NullableString                         `json:"error_details,omitempty"`
+	ResponseStatusCode   NullableInt32                          `json:"response_status_code,omitempty"`
+	ResponseHeaders      map[string]string                      `json:"response_headers,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -266,6 +268,82 @@ func (o *ResourceOperationLogRead) UnsetErrorDetails() {
 	o.ErrorDetails.Unset()
 }
 
+// GetResponseStatusCode returns the ResponseStatusCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResourceOperationLogRead) GetResponseStatusCode() int32 {
+	if o == nil || IsNil(o.ResponseStatusCode.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.ResponseStatusCode.Get()
+}
+
+// GetResponseStatusCodeOk returns a tuple with the ResponseStatusCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResourceOperationLogRead) GetResponseStatusCodeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResponseStatusCode.Get(), o.ResponseStatusCode.IsSet()
+}
+
+// HasResponseStatusCode returns a boolean if a field has been set.
+func (o *ResourceOperationLogRead) HasResponseStatusCode() bool {
+	if o != nil && o.ResponseStatusCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseStatusCode gets a reference to the given NullableInt32 and assigns it to the ResponseStatusCode field.
+func (o *ResourceOperationLogRead) SetResponseStatusCode(v int32) {
+	o.ResponseStatusCode.Set(&v)
+}
+
+// SetResponseStatusCodeNil sets the value for ResponseStatusCode to be an explicit nil
+func (o *ResourceOperationLogRead) SetResponseStatusCodeNil() {
+	o.ResponseStatusCode.Set(nil)
+}
+
+// UnsetResponseStatusCode ensures that no value is present for ResponseStatusCode, not even an explicit nil
+func (o *ResourceOperationLogRead) UnsetResponseStatusCode() {
+	o.ResponseStatusCode.Unset()
+}
+
+// GetResponseHeaders returns the ResponseHeaders field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ResourceOperationLogRead) GetResponseHeaders() map[string]string {
+	if o == nil {
+		var ret map[string]string
+		return ret
+	}
+	return o.ResponseHeaders
+}
+
+// GetResponseHeadersOk returns a tuple with the ResponseHeaders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ResourceOperationLogRead) GetResponseHeadersOk() (map[string]string, bool) {
+	if o == nil || IsNil(o.ResponseHeaders) {
+		return map[string]string{}, false
+	}
+	return o.ResponseHeaders, true
+}
+
+// HasResponseHeaders returns a boolean if a field has been set.
+func (o *ResourceOperationLogRead) HasResponseHeaders() bool {
+	if o != nil && !IsNil(o.ResponseHeaders) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseHeaders gets a reference to the given map[string]string and assigns it to the ResponseHeaders field.
+func (o *ResourceOperationLogRead) SetResponseHeaders(v map[string]string) {
+	o.ResponseHeaders = v
+}
+
 func (o ResourceOperationLogRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -286,6 +364,12 @@ func (o ResourceOperationLogRead) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ErrorDetails.IsSet() {
 		toSerialize["error_details"] = o.ErrorDetails.Get()
+	}
+	if o.ResponseStatusCode.IsSet() {
+		toSerialize["response_status_code"] = o.ResponseStatusCode.Get()
+	}
+	if o.ResponseHeaders != nil {
+		toSerialize["response_headers"] = o.ResponseHeaders
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -341,6 +425,8 @@ func (o *ResourceOperationLogRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "error_type")
 		delete(additionalProperties, "error_details")
+		delete(additionalProperties, "response_status_code")
+		delete(additionalProperties, "response_headers")
 		o.AdditionalProperties = additionalProperties
 	}
 

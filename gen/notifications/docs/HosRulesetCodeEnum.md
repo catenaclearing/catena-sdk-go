@@ -139,6 +139,10 @@
 
 * `US_NE_INTRA_PROP_80_8` (value: `"US_NE_INTRA_PROP_80_8"`)
 
+* `US_NC_INTRA_PROP_70_7` (value: `"US_NC_INTRA_PROP_70_7"`)
+
+* `US_NC_INTRA_PROP_80_8` (value: `"US_NC_INTRA_PROP_80_8"`)
+
 * `US_ND_INTRA_PROP_70_7` (value: `"US_ND_INTRA_PROP_70_7"`)
 
 * `US_ND_INTRA_SH_70_7` (value: `"US_ND_INTRA_SH_70_7"`)
@@ -150,6 +154,10 @@
 * `US_WA_INTRA_PROP_70_7` (value: `"US_WA_INTRA_PROP_70_7"`)
 
 * `US_WA_INTRA_PROP_80_8` (value: `"US_WA_INTRA_PROP_80_8"`)
+
+* `US_WI_INTRA_PROP_70_7` (value: `"US_WI_INTRA_PROP_70_7"`)
+
+* `US_WI_INTRA_PROP_80_8` (value: `"US_WI_INTRA_PROP_80_8"`)
 
 * `CA_FED_C1_70_7` (value: `"CA_FED_C1_70_7"`)
 

@@ -45,6 +45,10 @@ Name | Type | Description | Notes
 **ActiveAlarms** | Pointer to [**[]TrailerAlarm**](TrailerAlarm.md) |  | [optional] 
 **Location** | Pointer to [**NullableLocation5**](Location5.md) |  | [optional] 
 **H3Index11** | Pointer to **NullableInt32** |  | [optional] 
+**BatteryVoltageUnit** | Pointer to [**VoltageUnit**](VoltageUnit.md) | Unit for battery_voltage. | [optional] 
+**AmbientTemperatureUnit** | Pointer to [**TemperatureUnit**](TemperatureUnit.md) | Unit for ambient_temperature. | [optional] 
+**ZonesTemperatureUnit** | Pointer to [**TemperatureUnit**](TemperatureUnit.md) | Unit for temperatures under zones. | [optional] 
+**RemoteProbeStatusesTemperatureUnit** | Pointer to [**TemperatureUnit**](TemperatureUnit.md) | Unit for temperatures under remote_probe_statuses. | [optional] 
 
 ## Methods
 
@@ -1380,6 +1384,106 @@ HasH3Index11 returns a boolean if a field has been set.
 `func (o *TrailerStatusRead) UnsetH3Index11()`
 
 UnsetH3Index11 ensures that no value is present for H3Index11, not even an explicit nil
+### GetBatteryVoltageUnit
+
+`func (o *TrailerStatusRead) GetBatteryVoltageUnit() VoltageUnit`
+
+GetBatteryVoltageUnit returns the BatteryVoltageUnit field if non-nil, zero value otherwise.
+
+### GetBatteryVoltageUnitOk
+
+`func (o *TrailerStatusRead) GetBatteryVoltageUnitOk() (*VoltageUnit, bool)`
+
+GetBatteryVoltageUnitOk returns a tuple with the BatteryVoltageUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBatteryVoltageUnit
+
+`func (o *TrailerStatusRead) SetBatteryVoltageUnit(v VoltageUnit)`
+
+SetBatteryVoltageUnit sets BatteryVoltageUnit field to given value.
+
+### HasBatteryVoltageUnit
+
+`func (o *TrailerStatusRead) HasBatteryVoltageUnit() bool`
+
+HasBatteryVoltageUnit returns a boolean if a field has been set.
+
+### GetAmbientTemperatureUnit
+
+`func (o *TrailerStatusRead) GetAmbientTemperatureUnit() TemperatureUnit`
+
+GetAmbientTemperatureUnit returns the AmbientTemperatureUnit field if non-nil, zero value otherwise.
+
+### GetAmbientTemperatureUnitOk
+
+`func (o *TrailerStatusRead) GetAmbientTemperatureUnitOk() (*TemperatureUnit, bool)`
+
+GetAmbientTemperatureUnitOk returns a tuple with the AmbientTemperatureUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmbientTemperatureUnit
+
+`func (o *TrailerStatusRead) SetAmbientTemperatureUnit(v TemperatureUnit)`
+
+SetAmbientTemperatureUnit sets AmbientTemperatureUnit field to given value.
+
+### HasAmbientTemperatureUnit
+
+`func (o *TrailerStatusRead) HasAmbientTemperatureUnit() bool`
+
+HasAmbientTemperatureUnit returns a boolean if a field has been set.
+
+### GetZonesTemperatureUnit
+
+`func (o *TrailerStatusRead) GetZonesTemperatureUnit() TemperatureUnit`
+
+GetZonesTemperatureUnit returns the ZonesTemperatureUnit field if non-nil, zero value otherwise.
+
+### GetZonesTemperatureUnitOk
+
+`func (o *TrailerStatusRead) GetZonesTemperatureUnitOk() (*TemperatureUnit, bool)`
+
+GetZonesTemperatureUnitOk returns a tuple with the ZonesTemperatureUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZonesTemperatureUnit
+
+`func (o *TrailerStatusRead) SetZonesTemperatureUnit(v TemperatureUnit)`
+
+SetZonesTemperatureUnit sets ZonesTemperatureUnit field to given value.
+
+### HasZonesTemperatureUnit
+
+`func (o *TrailerStatusRead) HasZonesTemperatureUnit() bool`
+
+HasZonesTemperatureUnit returns a boolean if a field has been set.
+
+### GetRemoteProbeStatusesTemperatureUnit
+
+`func (o *TrailerStatusRead) GetRemoteProbeStatusesTemperatureUnit() TemperatureUnit`
+
+GetRemoteProbeStatusesTemperatureUnit returns the RemoteProbeStatusesTemperatureUnit field if non-nil, zero value otherwise.
+
+### GetRemoteProbeStatusesTemperatureUnitOk
+
+`func (o *TrailerStatusRead) GetRemoteProbeStatusesTemperatureUnitOk() (*TemperatureUnit, bool)`
+
+GetRemoteProbeStatusesTemperatureUnitOk returns a tuple with the RemoteProbeStatusesTemperatureUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemoteProbeStatusesTemperatureUnit
+
+`func (o *TrailerStatusRead) SetRemoteProbeStatusesTemperatureUnit(v TemperatureUnit)`
+
+SetRemoteProbeStatusesTemperatureUnit sets RemoteProbeStatusesTemperatureUnit field to given value.
+
+### HasRemoteProbeStatusesTemperatureUnit
+
+`func (o *TrailerStatusRead) HasRemoteProbeStatusesTemperatureUnit() bool`
+
+HasRemoteProbeStatusesTemperatureUnit returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

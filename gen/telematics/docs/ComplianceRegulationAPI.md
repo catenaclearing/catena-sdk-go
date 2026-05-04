@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## CreateDvirLog
 
-> ResourceOperationAccept CreateDvirLog(ctx).DvirLogCreate(dvirLogCreate).Execute()
+> ResourceOperation CreateDvirLog(ctx).DvirLogCreate(dvirLogCreate).IsSync(isSync).Execute()
 
 Create Dvir Log
 
@@ -38,16 +38,17 @@ import (
 )
 
 func main() {
-	dvirLogCreate := *openapiclient.NewDvirLogCreate("ConnectionId_example") // DvirLogCreate | 
+	dvirLogCreate := *openapiclient.NewDvirLogCreate("ConnectionId_example", "DriverId_example") // DvirLogCreate | 
+	isSync := true // bool | Whether to process the request synchronously. If `true`, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If `false` (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ComplianceRegulationAPI.CreateDvirLog(context.Background()).DvirLogCreate(dvirLogCreate).Execute()
+	resp, r, err := apiClient.ComplianceRegulationAPI.CreateDvirLog(context.Background()).DvirLogCreate(dvirLogCreate).IsSync(isSync).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ComplianceRegulationAPI.CreateDvirLog``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateDvirLog`: ResourceOperationAccept
+	// response from `CreateDvirLog`: ResourceOperation
 	fmt.Fprintf(os.Stdout, "Response from `ComplianceRegulationAPI.CreateDvirLog`: %v\n", resp)
 }
 ```
@@ -64,10 +65,11 @@ Other parameters are passed through a pointer to a apiCreateDvirLogRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dvirLogCreate** | [**DvirLogCreate**](DvirLogCreate.md) |  | 
+ **isSync** | **bool** | Whether to process the request synchronously. If &#x60;true&#x60;, Catena will attempt to create or update the resource immediately with the TSP and return the result in the response. When performing synchronous operations, you are responsible for handling any necessary retries in case of transient failures.If &#x60;false&#x60; (default), Catena will create an asynchronous operation, and you can check the status of the operation using the returned operation ID. | [default to false]
 
 ### Return type
 
-[**ResourceOperationAccept**](ResourceOperationAccept.md)
+[**ResourceOperation**](ResourceOperation.md)
 
 ### Authorization
 

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **MaxConcurrentExecutions** | Pointer to **NullableInt32** |  | [optional] 
 **NextExecutionAt** | Pointer to **NullableTime** |  | [optional] 
 **Cursor** | Pointer to **NullableString** |  | [optional] 
+**LastDataAt** | Pointer to **NullableTime** |  | [optional] 
 
 ## Methods
 
@@ -276,6 +277,41 @@ HasCursor returns a boolean if a field has been set.
 `func (o *ScheduleUpdate) UnsetCursor()`
 
 UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
+### GetLastDataAt
+
+`func (o *ScheduleUpdate) GetLastDataAt() time.Time`
+
+GetLastDataAt returns the LastDataAt field if non-nil, zero value otherwise.
+
+### GetLastDataAtOk
+
+`func (o *ScheduleUpdate) GetLastDataAtOk() (*time.Time, bool)`
+
+GetLastDataAtOk returns a tuple with the LastDataAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastDataAt
+
+`func (o *ScheduleUpdate) SetLastDataAt(v time.Time)`
+
+SetLastDataAt sets LastDataAt field to given value.
+
+### HasLastDataAt
+
+`func (o *ScheduleUpdate) HasLastDataAt() bool`
+
+HasLastDataAt returns a boolean if a field has been set.
+
+### SetLastDataAtNil
+
+`func (o *ScheduleUpdate) SetLastDataAtNil(b bool)`
+
+ SetLastDataAtNil sets the value for LastDataAt to be an explicit nil
+
+### UnsetLastDataAt
+`func (o *ScheduleUpdate) UnsetLastDataAt()`
+
+UnsetLastDataAt ensures that no value is present for LastDataAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

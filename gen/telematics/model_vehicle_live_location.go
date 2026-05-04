@@ -38,9 +38,17 @@ type VehicleLiveLocation struct {
 	OilPressure        NullableFloat32 `json:"oil_pressure"`
 	CoolantTemperature NullableFloat32 `json:"coolant_temperature"`
 	// Timestamp (UTC) when this telemetry data was recorded by the vehicle.
-	OccurredAt           time.Time         `json:"occurred_at"`
-	Location             NullableLocation7 `json:"location"`
-	AdditionalProperties map[string]interface{}
+	OccurredAt time.Time         `json:"occurred_at"`
+	Location   NullableLocation7 `json:"location"`
+	// Unit for speed.
+	SpeedUnit *SpeedUnit `json:"speed_unit,omitempty"`
+	// Unit for odometer.
+	OdometerUnit *DistanceUnit `json:"odometer_unit,omitempty"`
+	// Unit for oil_pressure.
+	OilPressureUnit *PressureUnit `json:"oil_pressure_unit,omitempty"`
+	// Unit for coolant_temperature.
+	CoolantTemperatureUnit *TemperatureUnit `json:"coolant_temperature_unit,omitempty"`
+	AdditionalProperties   map[string]interface{}
 }
 
 type _VehicleLiveLocation VehicleLiveLocation
@@ -517,6 +525,134 @@ func (o *VehicleLiveLocation) SetLocation(v Location7) {
 	o.Location.Set(&v)
 }
 
+// GetSpeedUnit returns the SpeedUnit field value if set, zero value otherwise.
+func (o *VehicleLiveLocation) GetSpeedUnit() SpeedUnit {
+	if o == nil || IsNil(o.SpeedUnit) {
+		var ret SpeedUnit
+		return ret
+	}
+	return *o.SpeedUnit
+}
+
+// GetSpeedUnitOk returns a tuple with the SpeedUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLiveLocation) GetSpeedUnitOk() (*SpeedUnit, bool) {
+	if o == nil || IsNil(o.SpeedUnit) {
+		return nil, false
+	}
+	return o.SpeedUnit, true
+}
+
+// HasSpeedUnit returns a boolean if a field has been set.
+func (o *VehicleLiveLocation) HasSpeedUnit() bool {
+	if o != nil && !IsNil(o.SpeedUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetSpeedUnit gets a reference to the given SpeedUnit and assigns it to the SpeedUnit field.
+func (o *VehicleLiveLocation) SetSpeedUnit(v SpeedUnit) {
+	o.SpeedUnit = &v
+}
+
+// GetOdometerUnit returns the OdometerUnit field value if set, zero value otherwise.
+func (o *VehicleLiveLocation) GetOdometerUnit() DistanceUnit {
+	if o == nil || IsNil(o.OdometerUnit) {
+		var ret DistanceUnit
+		return ret
+	}
+	return *o.OdometerUnit
+}
+
+// GetOdometerUnitOk returns a tuple with the OdometerUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLiveLocation) GetOdometerUnitOk() (*DistanceUnit, bool) {
+	if o == nil || IsNil(o.OdometerUnit) {
+		return nil, false
+	}
+	return o.OdometerUnit, true
+}
+
+// HasOdometerUnit returns a boolean if a field has been set.
+func (o *VehicleLiveLocation) HasOdometerUnit() bool {
+	if o != nil && !IsNil(o.OdometerUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetOdometerUnit gets a reference to the given DistanceUnit and assigns it to the OdometerUnit field.
+func (o *VehicleLiveLocation) SetOdometerUnit(v DistanceUnit) {
+	o.OdometerUnit = &v
+}
+
+// GetOilPressureUnit returns the OilPressureUnit field value if set, zero value otherwise.
+func (o *VehicleLiveLocation) GetOilPressureUnit() PressureUnit {
+	if o == nil || IsNil(o.OilPressureUnit) {
+		var ret PressureUnit
+		return ret
+	}
+	return *o.OilPressureUnit
+}
+
+// GetOilPressureUnitOk returns a tuple with the OilPressureUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLiveLocation) GetOilPressureUnitOk() (*PressureUnit, bool) {
+	if o == nil || IsNil(o.OilPressureUnit) {
+		return nil, false
+	}
+	return o.OilPressureUnit, true
+}
+
+// HasOilPressureUnit returns a boolean if a field has been set.
+func (o *VehicleLiveLocation) HasOilPressureUnit() bool {
+	if o != nil && !IsNil(o.OilPressureUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetOilPressureUnit gets a reference to the given PressureUnit and assigns it to the OilPressureUnit field.
+func (o *VehicleLiveLocation) SetOilPressureUnit(v PressureUnit) {
+	o.OilPressureUnit = &v
+}
+
+// GetCoolantTemperatureUnit returns the CoolantTemperatureUnit field value if set, zero value otherwise.
+func (o *VehicleLiveLocation) GetCoolantTemperatureUnit() TemperatureUnit {
+	if o == nil || IsNil(o.CoolantTemperatureUnit) {
+		var ret TemperatureUnit
+		return ret
+	}
+	return *o.CoolantTemperatureUnit
+}
+
+// GetCoolantTemperatureUnitOk returns a tuple with the CoolantTemperatureUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VehicleLiveLocation) GetCoolantTemperatureUnitOk() (*TemperatureUnit, bool) {
+	if o == nil || IsNil(o.CoolantTemperatureUnit) {
+		return nil, false
+	}
+	return o.CoolantTemperatureUnit, true
+}
+
+// HasCoolantTemperatureUnit returns a boolean if a field has been set.
+func (o *VehicleLiveLocation) HasCoolantTemperatureUnit() bool {
+	if o != nil && !IsNil(o.CoolantTemperatureUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoolantTemperatureUnit gets a reference to the given TemperatureUnit and assigns it to the CoolantTemperatureUnit field.
+func (o *VehicleLiveLocation) SetCoolantTemperatureUnit(v TemperatureUnit) {
+	o.CoolantTemperatureUnit = &v
+}
+
 func (o VehicleLiveLocation) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -544,6 +680,18 @@ func (o VehicleLiveLocation) ToMap() (map[string]interface{}, error) {
 	toSerialize["coolant_temperature"] = o.CoolantTemperature.Get()
 	toSerialize["occurred_at"] = o.OccurredAt
 	toSerialize["location"] = o.Location.Get()
+	if !IsNil(o.SpeedUnit) {
+		toSerialize["speed_unit"] = o.SpeedUnit
+	}
+	if !IsNil(o.OdometerUnit) {
+		toSerialize["odometer_unit"] = o.OdometerUnit
+	}
+	if !IsNil(o.OilPressureUnit) {
+		toSerialize["oil_pressure_unit"] = o.OilPressureUnit
+	}
+	if !IsNil(o.CoolantTemperatureUnit) {
+		toSerialize["coolant_temperature_unit"] = o.CoolantTemperatureUnit
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -620,6 +768,10 @@ func (o *VehicleLiveLocation) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "coolant_temperature")
 		delete(additionalProperties, "occurred_at")
 		delete(additionalProperties, "location")
+		delete(additionalProperties, "speed_unit")
+		delete(additionalProperties, "odometer_unit")
+		delete(additionalProperties, "oil_pressure_unit")
+		delete(additionalProperties, "coolant_temperature_unit")
 		o.AdditionalProperties = additionalProperties
 	}
 

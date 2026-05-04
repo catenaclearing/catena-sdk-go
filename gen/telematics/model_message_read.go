@@ -58,7 +58,9 @@ type MessageRead struct {
 	SentByDriver           NullableBool              `json:"sent_by_driver,omitempty"`
 	SenderName             NullableString            `json:"sender_name,omitempty"`
 	RecipientName          NullableString            `json:"recipient_name,omitempty"`
+	ThreadId               NullableString            `json:"thread_id,omitempty"`
 	SourceThreadId         NullableString            `json:"source_thread_id,omitempty"`
+	ReplyToMessageId       NullableString            `json:"reply_to_message_id,omitempty"`
 	SourceReplyToMessageId NullableString            `json:"source_reply_to_message_id,omitempty"`
 	AdditionalProperties   map[string]interface{}
 }
@@ -1166,6 +1168,49 @@ func (o *MessageRead) UnsetRecipientName() {
 	o.RecipientName.Unset()
 }
 
+// GetThreadId returns the ThreadId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MessageRead) GetThreadId() string {
+	if o == nil || IsNil(o.ThreadId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ThreadId.Get()
+}
+
+// GetThreadIdOk returns a tuple with the ThreadId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MessageRead) GetThreadIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ThreadId.Get(), o.ThreadId.IsSet()
+}
+
+// HasThreadId returns a boolean if a field has been set.
+func (o *MessageRead) HasThreadId() bool {
+	if o != nil && o.ThreadId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetThreadId gets a reference to the given NullableString and assigns it to the ThreadId field.
+func (o *MessageRead) SetThreadId(v string) {
+	o.ThreadId.Set(&v)
+}
+
+// SetThreadIdNil sets the value for ThreadId to be an explicit nil
+func (o *MessageRead) SetThreadIdNil() {
+	o.ThreadId.Set(nil)
+}
+
+// UnsetThreadId ensures that no value is present for ThreadId, not even an explicit nil
+func (o *MessageRead) UnsetThreadId() {
+	o.ThreadId.Unset()
+}
+
 // GetSourceThreadId returns the SourceThreadId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MessageRead) GetSourceThreadId() string {
 	if o == nil || IsNil(o.SourceThreadId.Get()) {
@@ -1207,6 +1252,49 @@ func (o *MessageRead) SetSourceThreadIdNil() {
 // UnsetSourceThreadId ensures that no value is present for SourceThreadId, not even an explicit nil
 func (o *MessageRead) UnsetSourceThreadId() {
 	o.SourceThreadId.Unset()
+}
+
+// GetReplyToMessageId returns the ReplyToMessageId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MessageRead) GetReplyToMessageId() string {
+	if o == nil || IsNil(o.ReplyToMessageId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReplyToMessageId.Get()
+}
+
+// GetReplyToMessageIdOk returns a tuple with the ReplyToMessageId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MessageRead) GetReplyToMessageIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReplyToMessageId.Get(), o.ReplyToMessageId.IsSet()
+}
+
+// HasReplyToMessageId returns a boolean if a field has been set.
+func (o *MessageRead) HasReplyToMessageId() bool {
+	if o != nil && o.ReplyToMessageId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReplyToMessageId gets a reference to the given NullableString and assigns it to the ReplyToMessageId field.
+func (o *MessageRead) SetReplyToMessageId(v string) {
+	o.ReplyToMessageId.Set(&v)
+}
+
+// SetReplyToMessageIdNil sets the value for ReplyToMessageId to be an explicit nil
+func (o *MessageRead) SetReplyToMessageIdNil() {
+	o.ReplyToMessageId.Set(nil)
+}
+
+// UnsetReplyToMessageId ensures that no value is present for ReplyToMessageId, not even an explicit nil
+func (o *MessageRead) UnsetReplyToMessageId() {
+	o.ReplyToMessageId.Unset()
 }
 
 // GetSourceReplyToMessageId returns the SourceReplyToMessageId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1333,8 +1421,14 @@ func (o MessageRead) ToMap() (map[string]interface{}, error) {
 	if o.RecipientName.IsSet() {
 		toSerialize["recipient_name"] = o.RecipientName.Get()
 	}
+	if o.ThreadId.IsSet() {
+		toSerialize["thread_id"] = o.ThreadId.Get()
+	}
 	if o.SourceThreadId.IsSet() {
 		toSerialize["source_thread_id"] = o.SourceThreadId.Get()
+	}
+	if o.ReplyToMessageId.IsSet() {
+		toSerialize["reply_to_message_id"] = o.ReplyToMessageId.Get()
 	}
 	if o.SourceReplyToMessageId.IsSet() {
 		toSerialize["source_reply_to_message_id"] = o.SourceReplyToMessageId.Get()
@@ -1418,7 +1512,9 @@ func (o *MessageRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sent_by_driver")
 		delete(additionalProperties, "sender_name")
 		delete(additionalProperties, "recipient_name")
+		delete(additionalProperties, "thread_id")
 		delete(additionalProperties, "source_thread_id")
+		delete(additionalProperties, "reply_to_message_id")
 		delete(additionalProperties, "source_reply_to_message_id")
 		o.AdditionalProperties = additionalProperties
 	}

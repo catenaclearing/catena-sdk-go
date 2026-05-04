@@ -41,6 +41,7 @@ type ExecutionRead struct {
 	Resource             ResourceEnum           `json:"resource"`
 	Cursor               NullableString         `json:"cursor,omitempty"`
 	Response             map[string]interface{} `json:"response,omitempty"`
+	LastDataAt           NullableTime           `json:"last_data_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -364,6 +365,49 @@ func (o *ExecutionRead) SetResponse(v map[string]interface{}) {
 	o.Response = v
 }
 
+// GetLastDataAt returns the LastDataAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ExecutionRead) GetLastDataAt() time.Time {
+	if o == nil || IsNil(o.LastDataAt.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastDataAt.Get()
+}
+
+// GetLastDataAtOk returns a tuple with the LastDataAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ExecutionRead) GetLastDataAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LastDataAt.Get(), o.LastDataAt.IsSet()
+}
+
+// HasLastDataAt returns a boolean if a field has been set.
+func (o *ExecutionRead) HasLastDataAt() bool {
+	if o != nil && o.LastDataAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLastDataAt gets a reference to the given NullableTime and assigns it to the LastDataAt field.
+func (o *ExecutionRead) SetLastDataAt(v time.Time) {
+	o.LastDataAt.Set(&v)
+}
+
+// SetLastDataAtNil sets the value for LastDataAt to be an explicit nil
+func (o *ExecutionRead) SetLastDataAtNil() {
+	o.LastDataAt.Set(nil)
+}
+
+// UnsetLastDataAt ensures that no value is present for LastDataAt, not even an explicit nil
+func (o *ExecutionRead) UnsetLastDataAt() {
+	o.LastDataAt.Unset()
+}
+
 func (o ExecutionRead) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -388,6 +432,9 @@ func (o ExecutionRead) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Response != nil {
 		toSerialize["response"] = o.Response
+	}
+	if o.LastDataAt.IsSet() {
+		toSerialize["last_data_at"] = o.LastDataAt.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -451,6 +498,7 @@ func (o *ExecutionRead) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "resource")
 		delete(additionalProperties, "cursor")
 		delete(additionalProperties, "response")
+		delete(additionalProperties, "last_data_at")
 		o.AdditionalProperties = additionalProperties
 	}
 

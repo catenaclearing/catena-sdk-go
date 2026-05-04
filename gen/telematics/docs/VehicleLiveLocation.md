@@ -21,6 +21,10 @@ Name | Type | Description | Notes
 **CoolantTemperature** | **NullableFloat32** |  | 
 **OccurredAt** | **time.Time** | Timestamp (UTC) when this telemetry data was recorded by the vehicle. | 
 **Location** | [**NullableLocation7**](Location7.md) |  | 
+**SpeedUnit** | Pointer to [**SpeedUnit**](SpeedUnit.md) | Unit for speed. | [optional] 
+**OdometerUnit** | Pointer to [**DistanceUnit**](DistanceUnit.md) | Unit for odometer. | [optional] 
+**OilPressureUnit** | Pointer to [**PressureUnit**](PressureUnit.md) | Unit for oil_pressure. | [optional] 
+**CoolantTemperatureUnit** | Pointer to [**TemperatureUnit**](TemperatureUnit.md) | Unit for coolant_temperature. | [optional] 
 
 ## Methods
 
@@ -531,6 +535,106 @@ SetLocation sets Location field to given value.
 `func (o *VehicleLiveLocation) UnsetLocation()`
 
 UnsetLocation ensures that no value is present for Location, not even an explicit nil
+### GetSpeedUnit
+
+`func (o *VehicleLiveLocation) GetSpeedUnit() SpeedUnit`
+
+GetSpeedUnit returns the SpeedUnit field if non-nil, zero value otherwise.
+
+### GetSpeedUnitOk
+
+`func (o *VehicleLiveLocation) GetSpeedUnitOk() (*SpeedUnit, bool)`
+
+GetSpeedUnitOk returns a tuple with the SpeedUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpeedUnit
+
+`func (o *VehicleLiveLocation) SetSpeedUnit(v SpeedUnit)`
+
+SetSpeedUnit sets SpeedUnit field to given value.
+
+### HasSpeedUnit
+
+`func (o *VehicleLiveLocation) HasSpeedUnit() bool`
+
+HasSpeedUnit returns a boolean if a field has been set.
+
+### GetOdometerUnit
+
+`func (o *VehicleLiveLocation) GetOdometerUnit() DistanceUnit`
+
+GetOdometerUnit returns the OdometerUnit field if non-nil, zero value otherwise.
+
+### GetOdometerUnitOk
+
+`func (o *VehicleLiveLocation) GetOdometerUnitOk() (*DistanceUnit, bool)`
+
+GetOdometerUnitOk returns a tuple with the OdometerUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdometerUnit
+
+`func (o *VehicleLiveLocation) SetOdometerUnit(v DistanceUnit)`
+
+SetOdometerUnit sets OdometerUnit field to given value.
+
+### HasOdometerUnit
+
+`func (o *VehicleLiveLocation) HasOdometerUnit() bool`
+
+HasOdometerUnit returns a boolean if a field has been set.
+
+### GetOilPressureUnit
+
+`func (o *VehicleLiveLocation) GetOilPressureUnit() PressureUnit`
+
+GetOilPressureUnit returns the OilPressureUnit field if non-nil, zero value otherwise.
+
+### GetOilPressureUnitOk
+
+`func (o *VehicleLiveLocation) GetOilPressureUnitOk() (*PressureUnit, bool)`
+
+GetOilPressureUnitOk returns a tuple with the OilPressureUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOilPressureUnit
+
+`func (o *VehicleLiveLocation) SetOilPressureUnit(v PressureUnit)`
+
+SetOilPressureUnit sets OilPressureUnit field to given value.
+
+### HasOilPressureUnit
+
+`func (o *VehicleLiveLocation) HasOilPressureUnit() bool`
+
+HasOilPressureUnit returns a boolean if a field has been set.
+
+### GetCoolantTemperatureUnit
+
+`func (o *VehicleLiveLocation) GetCoolantTemperatureUnit() TemperatureUnit`
+
+GetCoolantTemperatureUnit returns the CoolantTemperatureUnit field if non-nil, zero value otherwise.
+
+### GetCoolantTemperatureUnitOk
+
+`func (o *VehicleLiveLocation) GetCoolantTemperatureUnitOk() (*TemperatureUnit, bool)`
+
+GetCoolantTemperatureUnitOk returns a tuple with the CoolantTemperatureUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCoolantTemperatureUnit
+
+`func (o *VehicleLiveLocation) SetCoolantTemperatureUnit(v TemperatureUnit)`
+
+SetCoolantTemperatureUnit sets CoolantTemperatureUnit field to given value.
+
+### HasCoolantTemperatureUnit
+
+`func (o *VehicleLiveLocation) HasCoolantTemperatureUnit() bool`
+
+HasCoolantTemperatureUnit returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

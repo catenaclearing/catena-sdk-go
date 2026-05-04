@@ -3,6 +3,12 @@
 ## Enum
 
 
+* `DVIR_LOG_ADDED` (value: `"dvir_log.added"`)
+
+* `DVIR_LOG_MODIFIED` (value: `"dvir_log.modified"`)
+
+* `DVIR_LOG_REMOVED` (value: `"dvir_log.removed"`)
+
 * `DRIVER_VEHICLE_ASSOCIATION_ADDED` (value: `"driver_vehicle_association.added"`)
 
 * `DRIVER_VEHICLE_ASSOCIATION_MODIFIED` (value: `"driver_vehicle_association.modified"`)
@@ -60,6 +66,14 @@
 * `WEBHOOK_PAUSED` (value: `"webhook.paused"`)
 
 * `WEBHOOK` (value: `"webhook.*"`)
+
+* `WORKFLOW_ADDED` (value: `"workflow.added"`)
+
+* `WORKFLOW_MODIFIED` (value: `"workflow.modified"`)
+
+* `WORKFLOW_REMOVED` (value: `"workflow.removed"`)
+
+* `WORKFLOW` (value: `"workflow.*"`)
 
 * `TSP_CREATED` (value: `"tsp.created"`)
 
@@ -166,6 +180,10 @@
 * `ENGINE_STATUS_ADDED` (value: `"engine_status.added"`)
 
 * `ENGINE_STATUS_MODIFIED` (value: `"engine_status.modified"`)
+
+* `GROUP_MESSAGE_ADDED` (value: `"group_message.added"`)
+
+* `GROUP_MESSAGE_MODIFIED` (value: `"group_message.modified"`)
 
 * `MESSAGE_ADDED` (value: `"message.added"`)
 
