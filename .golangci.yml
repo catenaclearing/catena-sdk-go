@@ -1,39 +1,51 @@
+version: "2"
 run:
-  timeout: 5m
   tests: true
-
 linters:
   enable:
-    - errcheck
-    - gosimple
-    - govet
-    - ineffassign
-    - staticcheck
-    - unused
-    - revive
-    - gocritic
     - bodyclose
-    - unconvert
+    - gocritic
     - misspell
-    - gofmt
-    - goimports
-
-linters-settings:
-  goimports:
-    local-prefixes: github.com/catenaclearing/catena-sdk-go
-  revive:
+    - revive
+    - unconvert
+  settings:
+    revive:
+      rules:
+        - name: var-naming
+          disabled: true
+        - name: exported
+          disabled: true
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
     rules:
-      - name: var-naming
-        disabled: true
-      - name: exported
-        disabled: true
-
+      - linters:
+          - errcheck
+        path: _test\.go
+    paths:
+      - gen
+      - third_party$
+      - builtin$
+      - examples$
 issues:
-  exclude-dirs:
-    - gen
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - errcheck
   max-issues-per-linter: 0
   max-same-issues: 0
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/catenaclearing/catena-sdk-go
+  exclusions:
+    generated: lax
+    paths:
+      - gen
+      - third_party$
+      - builtin$
+      - examples$
